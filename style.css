@@ -276,7 +276,7 @@ main.main > article.content .fonts {
   padding: 10px 0;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   color: #6b7280;
   gap: 20px;
   position: sticky;
@@ -284,11 +284,15 @@ main.main > article.content .fonts {
   background-color: #fcfcfc;
 }
 
-main.main > article.content .fonts.sticky {
-  border-bottom: 1px solid #1f293725;
+main.main > article.content .fonts > .options {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: #6b7280;
+  gap: 20px;
 }
 
-main.main>article.content .fonts * {
+main.main > article.content .fonts .options * {
   transition: all 300ms ease-in-out;
   -webkit-transition: all 300ms ease-in-out;
   -moz-transition: all 300ms ease-in-out;
@@ -296,7 +300,12 @@ main.main>article.content .fonts * {
   -o-transition: all 300ms ease-in-out;
 }
 
-main.main > article.content .fonts > span.font {
+
+main.main > article.content .fonts.sticky {
+  border-bottom: 1px solid #1f293725;
+}
+
+main.main > article.content .fonts .options > span.font {
   display: inline-block;
   padding: 4px 15px;
   cursor: pointer;
@@ -309,23 +318,94 @@ main.main > article.content .fonts > span.font {
   -o-border-radius: 50px;
 }
 
-main.main > article.content .fonts > span.font.mono {
+main.main > article.content .fonts .options > span.font.mono {
   font-family: var(--font-mono);
   font-size: 0.9rem;
 }
 
-main.main > article.content .fonts > span.font.serif {
+main.main > article.content .fonts .options > span.font.serif {
   font-family: 'Times New Roman', Times, serif;
 }
 
-main.main > article.content .fonts > span.font.active {
+main.main > article.content .fonts .options > span.font.active {
   border-color: #21d02abe;
   background-color: #f3fff4;
 }
 
-main.main > article.content .fonts > span.font:hover {
+main.main > article.content .fonts .options > span.font:hover {
   border-color: #21d02abe;
   background-color: #f3fff4;
+}
+
+main.main > article.content .fonts > .image-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  color: #6b7280;
+  gap: 20px;
+  padding: 0 8px;
+  border: 1px solid #6b72805d;
+  position: relative;
+  height: 30px;
+  width: 90px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.main > article.content .fonts > .image-option span.option {
+  /* border: 1px solid red; */
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main.main > article.content .fonts > .image-option.image span.option.image,
+main.main > article.content .fonts > .image-option.text span.option.text {
+  z-index: 2;
+  color: #ffffff;
+}
+
+main.main > article.content .fonts > .image-option span.status {
+  /* border: 2px solid #21d02abe; */
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 45px;
+  display: inline-block;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.main > article.content .fonts > .image-option span.status {
+  transition: all 600ms ease-in-out;
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -ms-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out;
+}
+
+main.main > article.content .fonts > .image-option.text span.status {
+  left: 0;
+}
+
+main.main > article.content .fonts > .image-option.image span.status {
+  left: 45px;
+}
+
+main.main > article.content .fonts > .image-option span svg {
+  margin: 0 0 -1px 0;
 }
 
 main.main > article.content #content.content {
