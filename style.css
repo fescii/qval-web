@@ -345,7 +345,7 @@ main.main > article.content .fonts > .image-option {
   color: #6b7280;
   gap: 20px;
   padding: 0 8px;
-  border: 1px solid #6b72805d;
+  border: 1px solid #6b728021;
   position: relative;
   height: 30px;
   width: 90px;
@@ -388,12 +388,12 @@ main.main > article.content .fonts > .image-option span.status {
   -o-border-radius: 50px;
 }
 
-main.main > article.content .fonts > .image-option span.status {
-  transition: all 600ms ease-in-out;
-  -webkit-transition: all 600ms ease-in-out;
-  -moz-transition: all 600ms ease-in-out;
-  -ms-transition: all 600ms ease-in-out;
-  -o-transition: all 600ms ease-in-out;
+main.main > article.content .fonts > .image-option * {
+  transition: all 500ms ease-in-out;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
 }
 
 main.main > article.content .fonts > .image-option.text span.status {
