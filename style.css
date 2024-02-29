@@ -518,11 +518,14 @@ main.main > article.content #content.content ol a:hover {
 /*  Side bar */
 main.main > section.side {
   /* border-left: thin solid #4b5563bd; */
-  padding: 30px 10px 30px 10px;
+  padding: 20px 10px 30px 10px;
   width: 33%;
+  height: max-content;
   display: flex;
   flex-flow: column;
   gap: 10px;
+  position: sticky;
+  top: 70px;
 }
 
 main.main > section.side .head {
@@ -593,6 +596,59 @@ main.main > section.side .head > .author > .name .occupation {
   color: #6b7280;
   font-size: 0.95rem;
 }
+
+main.main > section.side .on-this {
+  /* border: thin solid #4b5563bd; */
+  margin: 20px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+}
+
+main.main > section.side .on-this > .topics {
+  /* border: thin solid #4b5563bd; */
+  padding: 0 10px 0 0;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+main.main > section.side .on-this > .topics a.topic {
+  text-decoration: none;
+  padding: 4px 15px;
+  color: #808080;
+  background-color: rgba(57, 56, 56, 0.087);
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.main > section.side .on-this > .topics a.topic:hover {
+  color: #ffffff;
+  background-color: #08b86f;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  -webkit-animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 
 
