@@ -654,7 +654,7 @@ main.main > section.side .on-this > .topics a.topic:hover {
 
 main.main > section.side .on-this > .table-of-content {
   /* border: thin solid #4b5563bd; */
-  margin: 10px 0 0 0;
+  margin: 5px 0 0 0;
   display: flex;
   flex-flow: column;
   gap: 10px;
@@ -664,7 +664,8 @@ main.main > section.side .on-this > .table-of-content p.title {
   margin: 0;
   color: #1f2937;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  /* text-transform: uppercase; */
 }
 
 main.main > section.side .on-this > .table-of-content p.title {
