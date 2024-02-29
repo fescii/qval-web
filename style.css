@@ -804,6 +804,7 @@ main.main > section.side .related .related-stories .story > .info > .author {
   padding: 0;
   display: flex;
   align-items: center;
+  /* justify-content: center; */
   gap: 5px;
 }
 
@@ -814,8 +815,8 @@ main.main > section.side .related .related-stories .story > .info > .author .ima
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
