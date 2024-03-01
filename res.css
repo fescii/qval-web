@@ -1,0 +1,98 @@
+@media screen and (max-width: 1092px) {
+  html {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  body {
+    border: 1px solid blue;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width:800px) {
+  footer.footer {
+    padding: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 25px;
+  }
+
+  footer.footer>section.newsletter {
+    /* border: 1px solid #808080; */
+    grid-column: 1/4;
+    grid-row: 2/3;
+    display: flex;
+    flex-flow: column;
+  }
+
+  footer.footer>.copy {
+    grid-column: 1/4;
+    grid-row: 3;
+  }
+}
+
+@media screen and (max-width:660px) {
+  main.main {
+    border: 1px solid red;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+
+
+  main.main > article.content {
+    border: 1px solid #000000;
+    padding: 30px 0;
+    width: 100%;
+  }
+
+  main.main > section.side {
+    border-top: thin solid #4b5563bd;
+    background-color: #ffffff;
+    padding: 20px 15px;
+    width: 100%;
+    z-index: 5;
+    height: max-content;
+    display: none;
+    flex-flow: column;
+    gap: 10px;
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  footer.footer>.copy {
+    flex-flow: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width:600px) {
+  footer.footer {
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
+  }
+
+  a {
+    cursor: default !important;
+  }
+}
+
+@media screen and (max-width:500px) {
+  footer.footer {
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
+  }
+
+  a {
+    cursor: default !important;
+  }
+}
