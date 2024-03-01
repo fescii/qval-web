@@ -5,7 +5,7 @@
   }
 
   body {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     padding: 0 15px;
     width: 100%;
     max-width: 100%;
@@ -35,7 +35,7 @@
 
 @media screen and (max-width:660px) {
   main.main {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     display: flex;
     flex-flow: column;
@@ -44,7 +44,7 @@
 
 
   main.main > article.content {
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     padding: 30px 0;
     width: 100%;
   }
@@ -74,6 +74,46 @@
 }
 
 @media screen and (max-width:600px) {
+  body {
+    /* border: 1px solid blue; */
+    padding: 0 10px;
+  }
+  header.header {
+    /* border: 1px solid red; */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header.header > h2.site-name {
+    position: unset;
+    margin: 0;
+  }
+
+  header.header > ul.left {
+    /* border: 1px solid red; */
+    background-color: #ffffff;
+    position: fixed;
+    left: calc(100% + 15px);
+    flex-flow: column;
+    top: 70px;
+    bottom: 0;
+    width: 100%;
+    align-items: start;
+    padding: 10px 15px;
+    transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+  }
+
+  header.header .nav {
+    display: flex;
+  }
+
+
   footer.footer {
     padding: 10px;
     display: flex;

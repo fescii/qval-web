@@ -20,7 +20,7 @@
 <body>
   <header class="header">
     <div class="nav">
-      <input type="checkbox" />
+      <input class="nav-input" type="checkbox" />
       <svg>
         <use xlink:href="#menu" />
         <use xlink:href="#menu" />
@@ -537,6 +537,23 @@
           }
         }
       })
+
+
+      // Mobile Switcher
+      const mobileCheckbox = document.querySelector('header.header .nav input.nav-input');
+      const mobileOptions= document.querySelector('header.header ul.left');
+
+      if (mobileCheckbox && mobileOptions) {
+        mobileCheckbox.addEventListener('change', (event) => {
+          if (event.currentTarget.checked) {
+            // console.log(mobileOptions);
+            mobileOptions.style.setProperty('left', 0);
+          }
+          else {
+            mobileOptions.style.setProperty('left', '-115%');
+          }
+        })
+      }
 
       // Get Image text switcher
 

@@ -128,6 +128,7 @@ Typography End
 
 header.header {
   /* border: 1px solid red; */
+  padding: 0 0 0 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -140,7 +141,9 @@ header.header {
   background-color: #fcfcfc;
 }
 
-header.header>h2.site-name {
+header.header > h2.site-name {
+  position: absolute;
+  left: 0;
   margin: 0 30px 0 0;
   color: #1f2937;
   font-weight: 700;
@@ -155,16 +158,18 @@ header.header>h2.site-name {
 header.header .nav {
   --color: #53595f;
   /* border: 1px solid black; */
+  z-index: inherit;
   background: none;
-  min-width: 100px;
-  height: 40px;
+  max-width: 50px;
+  max-height: 40px;
   position: relative;
   display: none;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
 
   svg {
     fill: none;
+    height: 40px;
     stroke: var(--color);
     stroke-width: 7px;
     stroke-linecap: round;
@@ -184,7 +189,7 @@ header.header .nav {
     }
   }
 
-  input {
+  input.nav-input {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -445,7 +450,7 @@ main.main > article.content .fonts .options > span.font:hover {
 }
 
 main.main > article.content .fonts > .image-option {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   width: max-content;
