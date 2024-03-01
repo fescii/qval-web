@@ -255,7 +255,7 @@ header.header .nav {
   }
 }
 
-header.header>ul {
+header.header > ul {
   /* border: 1px solid black; */
   display: flex;
   align-items: center;
