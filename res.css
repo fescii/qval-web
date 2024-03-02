@@ -143,6 +143,12 @@
     /* font-family: var(--font-mono); */
   }
 
+  header.header > ul > li.link span.link-item svg,
+  header.header > ul > li.link.active > a > svg,
+  header.header > ul > li.link:hover  > a > svg {
+    color: #1f2937;
+  }
+
   header.header > ul > li.link span.link-item {
     /* border: 3px solid #ff00ff; */
     display: flex;
