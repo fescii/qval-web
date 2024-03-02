@@ -896,12 +896,25 @@
             // const options = link.querySelector('div.drop-down');
             link.addEventListener('click', event => {
               event.preventDefault();
+
               if (activeLink) {
-                activeLink.classList.toggle('active');
+                activeLink.classList.remove('active');
               }
-              activeLink = link;
+
               link.classList.toggle('active');
-              // console.log(options);
+
+              let isActive = event.target.classList.contains('active');
+
+              // console.log(isActive);
+
+              if (isActive) {
+                link.classList.remove('active');
+              }
+              // else {
+              //   link.classList.add('active');
+              // }
+
+              activeLink = link;
             })
           });
         }
