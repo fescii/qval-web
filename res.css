@@ -121,6 +121,41 @@
     -o-transition: all 500ms ease-in-out;
   }
 
+  header.header > ul.left > .account {
+    /* border: 1px solid #ff00ff; */
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    padding: 10px 0 20px 0;
+    gap: 15px;
+  }
+
+  header.header > ul.left > .account > a {
+    border: 1px solid #ff00ff;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+
+  header.header > ul.left > .account > a.login {
+    border: 0.002rem solid #6b72808f;
+    color: #1f2937;
+  }
+
+  header.header > ul.left > .account > a.signup {
+    border: none;
+    color: #ffffff;
+    background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  }
+
   header.header > ul.left > li.link {
     /* border: 3px solid #ff00ff; */
     border-bottom: 0.002rem solid #6b7280a9;

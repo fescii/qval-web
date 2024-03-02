@@ -273,6 +273,10 @@ header.header > ul.left {
   position: relative
 }
 
+header.header > ul.left > .account {
+  display: none;
+}
+
 header.header > ul > li.link {
   /* border: 1px solid black; */
   /* font-family: var(--font-mono); */
