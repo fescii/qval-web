@@ -262,6 +262,7 @@ header.header .nav {
 
 header.header > ul {
   /* border: 1px solid black; */
+  height: 100%;
   display: flex;
   align-items: center;
   gap: 25px;
@@ -276,6 +277,7 @@ header.header > ul > li.link {
   /* border: 1px solid black; */
   /* font-family: var(--font-mono); */
   color: #6b7280;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,18 +296,22 @@ header.header > ul > li.link:hover {
   /* font-family: var(--font-mono); */
 }
 
+header.header > ul > li.link span.link-item,
 header.header > ul > li.link a {
   /* border: 1px solid black; */
   color: inherit;
+  cursor: pointer;
   font-family: inherit;
 }
 
+header.header > ul > li.link span.link-item svg,
 header.header > ul > li.link a svg {
   margin: 0 0 -2px 0;
   width: 15px;
   height: 15px;
 }
 
+header.header > ul > li.link span.link-item svg,
 header.header > ul > li.link a svg {
   transition: all 300ms ease-in-out;
   -webkit-transition: all 300ms ease-in-out;
@@ -314,10 +320,12 @@ header.header > ul > li.link a svg {
   -o-transition: all 300ms ease-in-out;
 }
 
+header.header > ul > li.link span.link-item svg,
 header.header > ul > li.link.active > a > svg,
 header.header > ul > li.link:hover  > a > svg {
   color: #18A565;
 }
+
 
 header.header > ul > li.link.icon a svg {
   margin: 0 0 -5px 0;
@@ -345,7 +353,7 @@ header.header > ul > li.link > div.drop-down {
   padding: 15px 0;
   position: absolute;
   left: -50px;
-  top: 32px;
+  top: 60px;
   width: 530px;
   color: #6b7280;
   display: none;
@@ -372,6 +380,7 @@ header.header > ul > li.link.active > div.drop-down {
   -o-transition: all 300ms ease-in-out;
 }
 
+header.header > ul > li.link span.link-item svg,
 header.header > ul > li.link:hover > a > svg,
 header.header > ul > li.link.active > a > svg {
   rotate: 180deg;
@@ -405,7 +414,7 @@ header.header > ul > li.link.resources > div.drop-down > span.arrow {
   left: 250px;
 }
 
-header.header > ul > li.link > div.drop-down ul {
+header.header > ul > li.link > div.drop-down > ul.main {
   /* border: 1px solid red; */
   width: 100%;
   margin: 0;
@@ -427,7 +436,7 @@ header.header > ul > li.link > div.drop-down ul * {
 
 header.header > ul > li.link > div.drop-down ul:last-of-type {
   border-top: 0.002rem solid #6b72802f;
-  padding: 15px 0 0 0;
+  padding: 15px 10px 0 10px;
 }
 
 
