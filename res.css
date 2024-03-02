@@ -111,6 +111,12 @@
 
   header.header .nav {
     display: flex;
+    cursor: default !important;
+  }
+
+  header.header .nav * {
+    display: flex;
+    cursor: auto !important;
   }
 
 
