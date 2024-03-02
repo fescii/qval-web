@@ -379,9 +379,14 @@ main.main > article.content .head > span.stats {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 25px;
   color: #6b7280;
   font-family: var(--font-mono);
   font-size: 0.9rem;
+}
+
+main.main > article.content .head > span.stats span.dot {
+  display: none;
 }
 
 main.main > article.content .fonts {
