@@ -380,7 +380,7 @@ header.header > ul > li.link.active > div.drop-down {
   -o-transition: all 300ms ease-in-out;
 }
 
-header.header > ul > li.link span.link-item svg,
+header.header > ul > li.link:hover span.link-item svg,
 header.header > ul > li.link:hover > a > svg,
 header.header > ul > li.link.active > a > svg {
   rotate: 180deg;
