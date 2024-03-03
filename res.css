@@ -64,7 +64,7 @@
     gap: 10px;
     position: fixed;
     overflow-y: scroll;
-    top: calc(100vh - 50px);
+    top: calc(var(--vh-height, 100vh) - 50px);
     bottom: 0;
     left: 0;
     right: 0;

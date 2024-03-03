@@ -28,6 +28,7 @@ Author URL: https://femar.co.ke
   --font-main: "Inter", sans-serif;
   --font-mono: 'Jetbrains Mono';
   --background: #ffffff;
+  --vh-height: 100dvh;
 }
 
 *,
@@ -79,7 +80,7 @@ body {
   /* width: 85%; */
   width: 1058px;
   max-width: 1058px;
-  min-height: 100vh;
+  min-height: var(--vh-height, 100vh);
   font-family: var(--font-main), sans-serif;
 }
 
