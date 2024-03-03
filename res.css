@@ -313,7 +313,7 @@
     /* border: 1px solid black; */
     /* color: #4b5563; */
     color: #1f2937;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     font-family: inherit;
   }
@@ -393,7 +393,7 @@
   header.header > ul.left > li.link > div.drop-down ul.main > li > a {
     /* border: 0.002rem solid #6b72809a; */
     color: #1f2937;
-    padding: 2px 5px 2px 10px;
+    padding: 4px 5px 2px 10px;
     min-height: 40px;
     height: 40px;
     display: flex;
@@ -425,9 +425,18 @@
 
   header.header > ul > li.link > div.drop-down ul > li.supabase svg {
     /* border: 1px solid red; */
-    width: 30px;
-    height: 30px;
+    margin-bottom: -5px;
     padding: 4px;
+  }
+
+  header.header > ul > li.link > div.drop-down ul > li.bulk svg {
+    /* border: 1px solid red; */
+    margin-bottom: -5px;
+  }
+
+  header.header > ul > li.link > div.drop-down ul > li.authors svg {
+    /* border: 1px solid red; */
+    margin-bottom: -10px;
   }
 
   header.header > ul > li.link > div.drop-down ul > li.icon svg {
@@ -435,6 +444,11 @@
     width: 30px;
     height: 30px;
     padding: 4px;
+  }
+
+  header.header > ul > li.link > div.drop-down ul > li.create svg {
+    /* border: 1px solid red; */
+    padding: 2px;
   }
 
   header.header > ul > li.link > div.drop-down ul > li a span.content {
