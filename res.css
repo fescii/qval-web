@@ -35,7 +35,7 @@
 
 @media screen and (max-width:660px) {
   header.header > ul > li.link.theme > .options {
-    border: 1px solid #6b7280c7;
+    border: 1px solid #057232a9;
   }
 
   main.main {
@@ -236,7 +236,7 @@
   }
 
   header.header > ul.left > li.link > div.drop-down {
-    /* border: 2px solid #0059ff; */
+    /* border: 1px solid #0059ff; */
     border: none;
     display: none;
     padding: 10px 0 0 0;
@@ -296,6 +296,14 @@
     display: none;
   }
 
+  header.header > ul > li.link > div.drop-down ul > li {
+    /* border: 1px solid #057232; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
   header.header > ul > li.link > div.drop-down ul > li:hover {
     background-color: unset;
   }
@@ -303,28 +311,34 @@
   header.header > ul > li.link > div.drop-down ul > li svg {
     /* border: 1px solid red; */
     color: #6b7280;
-    width: 26px;
-    height: 26px;
-    margin-left: -12px;
+    width: 30px;
+    height: 30px;
+    margin: -2px 0 0 -8px;
   }
 
   header.header > ul > li.link > div.drop-down ul > li.supabase svg {
     /* border: 1px solid red; */
-    width: 26px;
-    height: 26px;
-    padding: 2px;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
   }
 
   header.header > ul > li.link > div.drop-down ul > li.icon svg {
     /* border: 1px solid red; */
-    width: 26px;
-    height: 26px;
-    padding: 2px;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+  }
+
+  header.header > ul > li.link > div.drop-down ul > li a span.content {
+    margin: 0 0 0 0px;
   }
 
   header.header > ul > li.link > div.drop-down ul > li a span.content h5 {
-    font-weight: 400;
+    /* border: 1px solid red; */
+    font-weight: 500;
     font-size: 1rem;
+    line-height: 1.5;
     color: #6b7280;
   }
 

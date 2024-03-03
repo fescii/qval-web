@@ -416,7 +416,7 @@ header.header > ul > li.link.theme > .options span.status {
   -o-border-radius: 50px;
 }
 
-header.header > ul > li.link.theme > .options * {
+header.header > ul > li.link.theme * {
   transition: all 500ms ease-in-out;
   -webkit-transition: all 500ms ease-in-out;
   -moz-transition: all 500ms ease-in-out;
