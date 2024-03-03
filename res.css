@@ -222,6 +222,10 @@
     justify-content: space-between;
   }
 
+  header.header > ul.left > li.logout > a {
+    border: 0.002rem solid #c56139a1;
+  }
+
   header.header > ul.left > .account > a.donate > svg,
   header.header > ul.left > li.logout > a svg,
   header.header > ul.left > .account > a.settings svg {
@@ -260,6 +264,12 @@
     font-weight: 600;
     color: #1f2937;
     text-align: center;
+  }
+
+  header.header > ul.left > li.logout > a > span.text,
+  header.header > ul.left > li.logout > a > svg,
+  header.header > ul.left > li.logout > a {
+    color: #c56139 !important;
   }
 
 
