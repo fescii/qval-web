@@ -38,7 +38,7 @@
         <a href="" class="login">Login</a>
         <a href="" class="signup">Sign Up</a>
       </div>
-      <li class="link options-link">
+      <li data-name="all" class="link options-link">
         <span class="link-item">
           <span class="text">All</span>
           <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" aria-hidden="true">
@@ -170,7 +170,7 @@
           </ul>
         </div>
       </li>
-      <li class="link articles options-link">
+      <li data-name="articles" class="link articles options-link">
         <span class="link-item">
           <span class="text">Articles</span>
           <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" aria-hidden="true">
@@ -268,7 +268,7 @@
           </ul>
         </div>
       </li>
-      <li class="link options-link resources">
+      <li data-name="resources" class="link options-link resources">
         <span class="link-item">
           <span class="text">Resources</span>
           <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" aria-hidden="true">
@@ -887,22 +887,15 @@
               event.preventDefault();
 
               if (activeLink) {
-                activeLink.classList.remove('active');
+                if (activeLink.dataset.name !== link.dataset.name) {
+                  activeLink.classList.remove('active');
+                }
               }
-
-              link.classList.toggle('active');
 
               let isActive = event.target.classList.contains('active');
 
               // console.log(isActive);
-
-              if (isActive) {
-                link.classList.remove('active');
-              }
-              // else {
-              //   link.classList.add('active');
-              // }
-
+              link.classList.toggle('active');
               activeLink = link;
             })
           });
