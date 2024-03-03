@@ -49,21 +49,28 @@
     width: 100%;
   }
 
+  /* Side */
   main.main > section.side {
-    border-top: thin solid #4b5563bd;
+    border-top: thin solid #6b7280c2;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background-color: #ffffff;
-    padding: 20px 15px;
+    padding: 0 15px;
     width: 100%;
     z-index: 5;
     height: max-content;
-    display: none;
+    display: flex;
     flex-flow: column;
     gap: 10px;
     position: fixed;
-    top: 70px;
+    top: calc(100vh - 50px);
     bottom: 0;
     left: 0;
     right: 0;
+  }
+
+  main.main > section.side > span.open-details-mobile {
+    display: flex;
   }
 
   footer.footer>.copy {
