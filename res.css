@@ -34,6 +34,10 @@
 }
 
 @media screen and (max-width:660px) {
+  header.header > ul > li.link.theme > .options {
+    border: 1px solid #6b7280c7;
+  }
+
   main.main {
     /* border: 1px solid red; */
     width: 100%;
@@ -41,7 +45,6 @@
     flex-flow: column;
     justify-content: center;
   }
-
 
   main.main > article.content {
     /* border: 1px solid #000000; */
@@ -358,6 +361,7 @@
     flex-flow: column;
   }
 
+  header.header > ul > li.link.theme > .options span.option,
   header.header>ul>li.link span.link-item,
   a {
     cursor: default !important;
