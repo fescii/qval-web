@@ -291,7 +291,7 @@ header.header > ul > li.link {
   font-weight: 500;
 }
 
-header.header > ul > li.link.logout {
+header.header > ul > li.logout {
   display: none;
 }
 
