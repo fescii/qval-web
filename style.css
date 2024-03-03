@@ -29,6 +29,18 @@ Author URL: https://femar.co.ke
   --font-mono: 'Jetbrains Mono';
   --background: #ffffff;
   --vh-height: 100dvh;
+  --fade-linear-gradient: linear-gradient(
+    180deg, #ffffff02,
+    #ffffff1a,
+    #ffffff2d,
+    #ffffff49,
+    #ffffff63,
+    #ffffffb4,
+    #ffffffd2,
+    #ffffffe0,
+    #fffffff6,
+    #ffffff
+  );
 }
 
 *,
@@ -68,7 +80,7 @@ html {
   background-position: 100%;
   background-size: cover;
   background-size: 1rem 1rem;
-  background-color: #fcfcfc;
+  background-color: var(--background);
   /* background-color: #f3f4f9; */
   /* background-image: radial-gradient(circle, rgb(209, 209, 209) 1px, rgba(0, 0, 0, 0) 1px); */
 }
@@ -139,7 +151,7 @@ header.header {
   position: sticky;
   z-index: 5;
   top: 0;
-  background-color: #fcfcfc;
+  background-color: var(--background);
 }
 
 header.header > h2.site-name {
@@ -674,7 +686,7 @@ main.main > article.content .fonts {
   gap: 20px;
   position: sticky;
   top: 70px;
-  background-color: #fcfcfc;
+  background-color: var(--background);
 }
 
 main.main > article.content .fonts > .options {
@@ -887,11 +899,13 @@ main.main > article.content .next-article > a > span.title {
 main.main > section.side {
   /* border-left: thin solid #4b5563bd; */
   padding: 20px 10px 30px 10px;
+  margin: 0;
+  background-color: transparent;
   width: 33%;
   height: max-content;
   display: flex;
   flex-flow: column;
-  gap: 10px;
+  gap: 0;
   position: sticky;
   top: 70px;
 }
@@ -899,8 +913,10 @@ main.main > section.side {
 main.main > section.side > span.open-details-mobile {
   /* font-family: var(--font-mono); */
   color: #6b7280;
-  min-height: 50px;
-  height: 50px;
+  padding: 15px 0 10px 0;
+  margin: 0;
+  background: var(--fade-linear-gradient);
+  height: max-content;
   width: 100%;
   display: none;
   flex-flow: column;
@@ -913,10 +929,13 @@ main.main > section.side > span.open-details-mobile {
 
 main.main > section.side > span.open-details-mobile svg {
   rotate: 180deg;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 main.main > section.side .head {
   /* border: thin solid #4b5563bd; */
+  background-color: var(--background);
   padding: 0;
   display: flex;
   flex-flow: column;
@@ -986,8 +1005,9 @@ main.main > section.side .head > .author > .name .occupation {
 
 main.main > section.side .on-this {
   /* border: thin solid #4b5563bd; */
-  margin: 20px 0 0 0;
-  padding: 0;
+  background-color: var(--background);
+  padding: 20px 0 0 0;
+  margin: 0;
   display: flex;
   flex-flow: column;
   gap: 22px;
@@ -1086,7 +1106,9 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 
 main.main > section.side .related {
   /* border: thin solid #4b5563bd; */
-  margin: 20px 0 0 0;
+  background-color: var(--background);
+  padding: 20px 0 30px 0;
+  margin: 0;
   display: flex;
   flex-flow: column;
   gap: 10px;
