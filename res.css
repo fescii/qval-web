@@ -63,14 +63,29 @@
     flex-flow: column;
     gap: 10px;
     position: fixed;
+    overflow-y: scroll;
     top: calc(100vh - 50px);
     bottom: 0;
     left: 0;
     right: 0;
+
+    transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+  }
+
+  main.main > section.side.opened {
+    top: 70px;
   }
 
   main.main > section.side > span.open-details-mobile {
     display: flex;
+  }
+
+  main.main > section.side.opened > span.open-details-mobile svg {
+    rotate: unset;
   }
 
   footer.footer>.copy {

@@ -907,10 +907,28 @@
             })
           });
         }
-      }
-      else {
-      }
 
+        const articleInfo = document.querySelector('main.main > section.side');
+        const footerBtn = document.querySelector(' main.main > section.side > span.open-details-mobile');
+
+        if (articleInfo && footerBtn) {
+          const btnTextContent = footerBtn.querySelector('span.text');
+          footerBtn.addEventListener('click', event => {
+            event.preventDefault();
+
+            const isOpened = articleInfo.classList.contains('opened');
+
+            if (isOpened) {
+              btnTextContent.textContent = 'View details'
+              articleInfo.classList.remove('opened');
+            }
+            else {
+              btnTextContent.textContent = 'Hide details'
+              articleInfo.classList.add('opened');
+            }
+          })
+        }
+      }
 
       // Get Image text switcher
 
