@@ -58,7 +58,7 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     /* background-color: var(--background); */
-    padding: 0 15px;
+    padding: 0;
     width: 100%;
     z-index: 5;
     height: max-content;
@@ -68,6 +68,7 @@
     position: fixed;
     overflow-y: scroll;
     top: calc(var(--vh-height, 100vh) - 100px);
+    min-height: calc(var(--vh-height, 100vh) - 20px);
     bottom: 0;
     left: 0;
     right: 0;
@@ -80,7 +81,7 @@
   }
 
   main.main > section.side.opened {
-    top: 70px;
+    top: 30px;
   }
 
   main.main > section.side > span.open-details-mobile {

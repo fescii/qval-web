@@ -31,12 +31,12 @@ Author URL: https://femar.co.ke
   --vh-height: 100dvh;
   --fade-linear-gradient: linear-gradient(
     180deg, #ffffff02,
-    #ffffff1a,
-    #ffffff2d,
-    #ffffff49,
-    #ffffff63,
-    #ffffffb4,
-    #ffffffd2,
+    #ffffff2a,
+    #ffffff4d,
+    #ffffff69,
+    #ffffff83,
+    #ffffffa4,
+    #ffffffc2,
     #ffffffe0,
     #fffffff6,
     #ffffff
@@ -898,7 +898,7 @@ main.main > article.content .next-article > a > span.title {
 /*  Side bar */
 main.main > section.side {
   /* border-left: thin solid #4b5563bd; */
-  padding: 20px 10px 30px 10px;
+  padding: 20px 0 30px 0;
   margin: 0;
   background-color: transparent;
   width: 33%;
@@ -913,7 +913,7 @@ main.main > section.side {
 main.main > section.side > span.open-details-mobile {
   /* font-family: var(--font-mono); */
   color: #6b7280;
-  padding: 15px 0 10px 0;
+  padding: 40px 0 5px 0;
   margin: 0;
   background: var(--fade-linear-gradient);
   height: max-content;
@@ -924,7 +924,7 @@ main.main > section.side > span.open-details-mobile {
   justify-content: center;
   list-style-type: none;
   gap: 3px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 main.main > section.side > span.open-details-mobile svg {
@@ -936,7 +936,7 @@ main.main > section.side > span.open-details-mobile svg {
 main.main > section.side .head {
   /* border: thin solid #4b5563bd; */
   background-color: var(--background);
-  padding: 0;
+  padding: 10px 15px 0 15px;
   display: flex;
   flex-flow: column;
   gap: 15px;
@@ -1006,7 +1006,7 @@ main.main > section.side .head > .author > .name .occupation {
 main.main > section.side .on-this {
   /* border: thin solid #4b5563bd; */
   background-color: var(--background);
-  padding: 20px 0 0 0;
+  padding: 20px 15px 0 15px;
   margin: 0;
   display: flex;
   flex-flow: column;
@@ -1096,7 +1096,7 @@ main.main > section.side .on-this > .table-of-content ul.inner-list {
 
 main.main > section.side .on-this > .table-of-content ul > li {
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 main.main > section.side .on-this > .table-of-content ul > li > a:hover {
@@ -1107,7 +1107,7 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 main.main > section.side .related {
   /* border: thin solid #4b5563bd; */
   background-color: var(--background);
-  padding: 20px 0 30px 0;
+  padding: 20px 15px 30px 15px;
   margin: 0;
   display: flex;
   flex-flow: column;
