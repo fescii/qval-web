@@ -162,9 +162,10 @@
     gap: 0;
   }
 
+
   header.header > ul.left > li.logout > a,
   header.header > ul.left > .account > a {
-    border: 1px solid #ff00ff;
+    /* border: 1px solid #ff00ff; */
     display: flex;
     flex-flow: column;
     margin: 8px 0;
@@ -194,6 +195,7 @@
 
   header.header > ul.left > li.logout {
     list-style-type: none;
+    display: flex;
     position: absolute;
     bottom: 20px;
     left: 15px;
@@ -205,6 +207,7 @@
     bottom: -100px;
   }
 
+  header.header > ul.left > .account > a.donate,
   header.header > ul.left > li.logout > a,
   header.header > ul.left > .account > a.settings,
   header.header > ul.left > .account > a.profile {
@@ -219,6 +222,7 @@
     justify-content: space-between;
   }
 
+  header.header > ul.left > .account > a.donate > svg,
   header.header > ul.left > li.logout > a svg,
   header.header > ul.left > .account > a.settings svg {
     color: #6b7280;
