@@ -106,6 +106,7 @@
 
   header.header {
     /* border: 1px solid red; */
+    z-index: 10;
     padding: 0;
     display: flex;
     align-items: center;
@@ -134,9 +135,11 @@
     position: fixed;
     left: calc(100% + 15px);
     flex-flow: column;
+    z-index: 5;
     top: 70px;
     bottom: 0;
     width: 100%;
+    height: calc(var(--vh-height, 100vh) - 70px);
     align-items: stretch;
     justify-content: start;
     gap: 0;
@@ -153,17 +156,17 @@
     display: flex;
     flex-flow: column;
     width: 100%;
-    padding: 10px 0 20px 0;
-    gap: 15px;
+    padding: 0;
+    gap: 0;
   }
 
+  header.header > ul.left > li.logout > a,
   header.header > ul.left > .account > a {
     border: 1px solid #ff00ff;
     display: flex;
     flex-flow: column;
+    margin: 8px 0;
     width: 100%;
-    padding: 10px 0;
-    text-align: center;
     font-weight: 500;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -174,27 +177,99 @@
 
   header.header > ul.left > .account > a.login {
     border: 0.002rem solid #6b72808f;
+    padding: 10px 0;
     color: #1f2937;
+    text-align: center;
   }
 
   header.header > ul.left > .account > a.signup {
     border: none;
+    padding: 10px 0;
     color: #ffffff;
+    text-align: center;
     background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   }
 
+  header.header > ul.left > li.logout {
+    list-style-type: none;
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+    font-weight: 600;
+  }
+
+  header.header > ul.left > li.logout > a,
+  header.header > ul.left > .account > a.settings,
+  header.header > ul.left > .account > a.profile {
+    border: 0.002rem solid #6b72809a;
+    color: #1f2937;
+    padding: 2px 5px 2px 10px;
+    min-height: 40px;
+    height: 40px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header.header > ul.left > li.logout > a svg,
+  header.header > ul.left > .account > a.settings svg {
+    color: #6b7280;
+    width: 28px;
+    height: 28px;
+  }
+  header.header > ul.left > .account > a.profile span.image {
+    /* border: 0.002rem solid #6b72808f; */
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+  }
+
+  header.header > ul.left > .account > a.profile span.image img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+  }
+
+  header.header > ul.left > li.logout > a > span.text,
+  header.header > ul.left > .account > a > span.text {
+    /* border: 0.002rem solid #6b72808f; */
+    font-weight: 600;
+    color: #1f2937;
+    text-align: center;
+  }
+
+
   header.header > ul.left > li.link {
-    /* border: 3px solid #ff00ff; */
-    border-bottom: 0.002rem solid #6b7280a9;
+    /*border: 3px solid #ff00ff;*/
+    border: 0.002rem solid #6b7280a9;
     min-width: 100%;
     width: 100%;
-    padding: 10px 0;
+    margin: 8px 0;
+    padding: 10px 5px 10px 10px;
     height: max-content;
     display: flex;
     flex-flow: column;
     align-items: stretch;
     justify-content: space-between;
-  }
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
 
 
   header.header > ul > li.link.active,
@@ -229,7 +304,8 @@
   header.header > ul > li.link span.link-item > span.text,
   header.header > ul > li.link a {
     /* border: 1px solid black; */
-    color: #4b5563;
+    /* color: #4b5563; */
+    color: #1f2937;
     font-weight: 500;
     cursor: pointer;
     font-family: inherit;

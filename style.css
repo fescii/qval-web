@@ -291,6 +291,10 @@ header.header > ul > li.link {
   font-weight: 500;
 }
 
+header.header > ul > li.link.logout {
+  display: none;
+}
+
 header.header > ul > li.link.active,
 header.header > ul > li.link:hover {
   /* font-weight: 600; */
