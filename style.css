@@ -338,11 +338,90 @@ header.header > ul > li.link.icon a svg {
   height: 20px;
 }
 
-header.header > ul > li.link.moon a svg {
+header.header > ul > li.link.theme {
+  /* border: 1px solid #124ec5; */
   margin: 0 0 -5px 0;
   /* rotate: 15deg; */
-  width: 17px;
-  height: 17px;
+  width: max-content;
+  height: 30px;
+}
+
+header.header > ul > li.link.theme > .options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  color: #6b7280;
+  gap: 0;
+  padding: 0;
+  border: 1px solid #6b728021;
+  position: relative;
+  height: 30px;
+  min-width: 90px;
+  width: 90px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+header.header > ul > li.link.theme > .options span.option {
+  /* border: 1px solid red; */
+  cursor: pointer;
+  min-width: 50%;
+  width: 45px;
+  z-index: 2;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header.header > ul > li.link.theme > .options span.option.active {
+  color: #ffffff;
+}
+
+header.header > ul > li.link.theme > .options span.option svg {
+  width: 18px;
+  height: 18px;
+}
+
+header.header > ul > li.link.theme > .options span.status {
+  /* border: 2px solid #21d02abe; */
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 45px;
+  display: inline-block;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+header.header > ul > li.link.theme > .options * {
+  transition: all 500ms ease-in-out;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+}
+
+header.header > ul > li.link.theme > .options.text span.status {
+  left: 0;
+}
+
+header.header > ul > li.link.theme > .options.image span.status {
+  left: 45px;
+}
+
+header.header > ul > li.link.theme > .options span svg {
+  margin: 0 0 -1px 0;
 }
 
 
@@ -635,76 +714,6 @@ main.main > article.content .fonts .options > span.font:hover {
   background-color: #f3fff4;
 }
 
-main.main > article.content .fonts > .image-option {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: max-content;
-  color: #6b7280;
-  gap: 20px;
-  padding: 0 8px;
-  border: 1px solid #6b728021;
-  position: relative;
-  height: 30px;
-  width: 90px;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-main.main > article.content .fonts > .image-option span.option {
-  /* border: 1px solid red; */
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-main.main > article.content .fonts > .image-option.image span.option.image,
-main.main > article.content .fonts > .image-option.text span.option.text {
-  z-index: 2;
-  color: #ffffff;
-}
-
-main.main > article.content .fonts > .image-option span.status {
-  /* border: 2px solid #21d02abe; */
-  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  height: 100%;
-  width: 45px;
-  display: inline-block;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-main.main > article.content .fonts > .image-option * {
-  transition: all 500ms ease-in-out;
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-  -ms-transition: all 500ms ease-in-out;
-  -o-transition: all 500ms ease-in-out;
-}
-
-main.main > article.content .fonts > .image-option.text span.status {
-  left: 0;
-}
-
-main.main > article.content .fonts > .image-option.image span.status {
-  left: 45px;
-}
-
-main.main > article.content .fonts > .image-option span svg {
-  margin: 0 0 -1px 0;
-}
 
 main.main > article.content #content.content {
   /* border: 1px solid #000000; */
