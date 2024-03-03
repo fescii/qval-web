@@ -370,6 +370,7 @@ header.header > ul > li.link.theme > .options span.option {
   /* border: 1px solid red; */
   cursor: pointer;
   min-width: 50%;
+  color: #6b7280;
   width: 45px;
   z-index: 2;
   padding: 0;
@@ -378,13 +379,24 @@ header.header > ul > li.link.theme > .options span.option {
   justify-content: center;
 }
 
-header.header > ul > li.link.theme > .options span.option.active {
+header.header > ul > li.link.theme > .options.light span.option.light-icon,
+header.header > ul > li.link.theme > .options.dark span.option.dark-icon {
   color: #ffffff;
 }
 
 header.header > ul > li.link.theme > .options span.option svg {
   width: 18px;
   height: 18px;
+  color: inherit;
+}
+
+header.header > ul > li.link.theme > .options.light span.option.light-icon svg,
+header.header > ul > li.link.theme > .options.dark span.option.dark-icon svg{
+  rotate: 360deg;
+}
+
+header.header > ul > li.link.theme > .options span.option.dark-icon svg {
+  margin: -2px 0 0 0;
 }
 
 header.header > ul > li.link.theme > .options span.status {
@@ -412,11 +424,11 @@ header.header > ul > li.link.theme > .options * {
   -o-transition: all 500ms ease-in-out;
 }
 
-header.header > ul > li.link.theme > .options.text span.status {
+header.header > ul > li.link.theme > .options.light span.status {
   left: 0;
 }
 
-header.header > ul > li.link.theme > .options.image span.status {
+header.header > ul > li.link.theme > .options.dark span.status {
   left: 45px;
 }
 
