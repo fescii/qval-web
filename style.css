@@ -1147,33 +1147,6 @@ main.main > section.side .related .related-stories .story > .info > .author {
   gap: 5px;
 }
 
-main.main > section.side .related .related-stories .story > .info > .author .image {
-  /* border: thin solid #4b5563bd; */
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 18px;
-  height: 18px;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-main.main > section.side .related .related-stories .story > .info > .author .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
 main.main > section.side .related .related-stories .story > .info > .author > .name {
   /* border: thin solid #4b5563bd; */
   margin: 0;
@@ -1188,8 +1161,16 @@ main.main > section.side .related .related-stories .story > .info > .author > .n
 }
 
 main.main > section.side .related .related-stories .story > .info > .author > .name a {
-  /* font-weight: 500; */
+  font-weight: 500;
   color: #6b7280;
+}
+
+main.main > section.side .related .related-stories .story > .info > .author > .name a:hover {
+  /* color: #08b86f; */
+  color: transparent;
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 main.main > section.side .related .related-stories .story > .info > span.stats {
@@ -1218,20 +1199,20 @@ footer.footer {
   padding-bottom: 30px;
 }
 
-footer.footer>section {
+footer.footer > section {
   display: flex;
   flex-flow: column;
   /* align-items: center; */
   gap: 10px;
 }
 
-footer.footer>section>.title {
+footer.footer > section >.title {
   color: #53595f;
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-footer.footer>section>ul.footer-list {
+footer.footer > section > ul.footer-list {
   padding: 0%;
   margin: 0%;
   list-style-type: none;
@@ -1239,10 +1220,10 @@ footer.footer>section>ul.footer-list {
   display: flex;
   flex-flow: column;
   /* align-items: center; */
-  gap: 10px;
+  gap: 8px;
 }
 
-footer.footer>section>ul.footer-list>li.item {
+footer.footer > section > ul.footer-list > li.item {
   margin: 0%;
   padding: 0%;
   width: max-content;
@@ -1250,7 +1231,7 @@ footer.footer>section>ul.footer-list>li.item {
   /* border: 1px solid #808080; */
 }
 
-footer.footer>section>ul.footer-list>li.item>.dot {
+footer.footer > section > ul.footer-list > li.item > .dot {
   display: inline-block;
   background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   width: 5px;
@@ -1265,13 +1246,15 @@ footer.footer>section>ul.footer-list>li.item>.dot {
   -o-border-radius: 5px;
 }
 
-footer.footer>section>ul.footer-list>li.item>a.item-link {
+footer.footer >section > ul.footer-list > li.item > a.item-link {
   color: #6b7280;
   /* font-size: 0.98rem; */
   text-decoration: none;
+  font-weight: 400;
+  font-size: 0.9rem;
 }
 
-footer.footer>section>ul.footer-list>li.item>a.item-link:hover {
+footer.footer > section > ul.footer-list > li.item > a.item-link:hover {
   /* color: #08b86f; */
   color: transparent;
   background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
@@ -1280,24 +1263,24 @@ footer.footer>section>ul.footer-list>li.item>a.item-link:hover {
   border-bottom: 1px solid #08b86f;
 }
 
-footer.footer>section.newsletter {
+footer.footer > section.newsletter {
   display: flex;
   flex-flow: column;
 }
 
-footer.footer>section.newsletter>.text {
+footer.footer > section.newsletter > .text {
   padding-left: 3px;
   line-height: 1.3;
   color: #53595f;
 }
 
-footer.footer>section.newsletter>form {
+footer.footer > section.newsletter > form {
   padding: 5px;
   width: 100%;
   position: relative;
 }
 
-footer.footer>section.newsletter>form>input[type="email"] {
+footer.footer > section.newsletter > form > input[type="email"] {
   width: 100%;
   outline: none;
   color: #53595f;
