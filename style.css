@@ -1080,11 +1080,24 @@ section.responses > .response > .stats span.no {
 section.responses > .response > .stats > .stat.write {
   /* border: 1px solid #6b72803a; */
   /* background-color: #39383816; */
+  position: relative;
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;
   -o-border-radius: 50px;
+}
+
+section.responses > .response > .stats > .stat.write span.line {
+  border-left: 2px solid #6b72803a;
+  border-bottom: 2px solid #6b72803a;
+  border-bottom-left-radius: 8px;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  display: inline-block;
+  width: 10px;
+  height: 35px;
 }
 
 section.responses > .response > .stats > .stat:hover {
@@ -1110,22 +1123,48 @@ section.responses > .response > .stats > .stat.write:hover svg {
 
 section.responses > .response > form.reply {
   /* border: 1px solid #6b7280; */
-  padding: 0;
-  margin: 0;
+  padding: 0 0 0 25px;
+  margin: 10px 0 0 0;
   display: flex;
-  flex-flow: column;
-  gap: 5px;
+  gap: 10px;
   font-size: 1rem;
   font-weight: 400;
   color: #6b7280;
   position: relative;
 }
 
+section.responses > .response > form.reply .image {
+  /* border: thin solid #4b5563bd; */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 38px;
+  height: 38px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+section.responses > .response > form.reply .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
 section.responses > .response > form.reply > textarea {
   border: 1px solid #6b72805e;
   padding: 10px 10px 5px 10px;
   margin: 0;
-  width: 100%;
+  width: calc(100% - 48px);
   resize: none;
   height: 38px;
   /* max-height: 100px !important; */
