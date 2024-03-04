@@ -1080,7 +1080,7 @@ section.responses > .response > .stats > .stat.write span.line {
   left: 10px;
   display: inline-block;
   width: 10px;
-  height: 35px;
+  height: 32px;
 }
 
 section.responses > .response > .stats > .stat:hover {
@@ -1122,9 +1122,10 @@ section.responses > .response > form.reply .image {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   overflow: hidden;
-  width: 38px;
-  height: 38px;
+  width: 35px;
+  height: 35px;
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
@@ -1175,7 +1176,7 @@ section.responses > .response > form.reply > button {
   /* border: 1px solid #6b7280; */
   position: absolute;
   background-color: var(--background);
-  right: 10px;
+  right: 8px;
   bottom: 3px;
   height: 30px;
   width: 30px;
