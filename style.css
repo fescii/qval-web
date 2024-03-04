@@ -1108,8 +1108,8 @@ section.responses > .response > .stats > .stat.write:hover svg {
   color: #18A565;
 }
 
-section.responses > .response > form.respond {
-  border: 1px solid #6b7280;
+section.responses > .response > form.reply {
+  /* border: 1px solid #6b7280; */
   padding: 0;
   margin: 0;
   display: flex;
@@ -1118,18 +1118,58 @@ section.responses > .response > form.respond {
   font-size: 1rem;
   font-weight: 400;
   color: #6b7280;
+  position: relative;
 }
 
-section.responses > .response > form.respond > textarea {
-  border: 1px solid #0841b3;
-  padding: 0;
+section.responses > .response > form.reply > textarea {
+  border: 1px solid #6b72805e;
+  padding: 10px 10px 5px 10px;
   margin: 0;
+  width: 100%;
+  resize: none;
+  height: 38px;
+  /* max-height: 100px !important; */
   display: flex;
   flex-flow: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   font-size: 1rem;
   font-weight: 400;
   color: #6b7280;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+section.responses > .response > form.reply > button {
+  border: none;
+  /* border: 1px solid #6b7280; */
+  position: absolute;
+  background-color: var(--background);
+  right: 10px;
+  bottom: 3px;
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+section.responses > .response > form.reply > button svg {
+  color: #18A565;
+  width: 24px;
+  height: 26px;
 }
 
 
