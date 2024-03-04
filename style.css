@@ -910,12 +910,14 @@ section.responses > .response {
 }
 
 section.responses > .response > .head {
-  /* border: 1px solid #6b7280; */
-  padding: 0;
+  /* background-color: #75757516;
+  padding: 5px 10px; */
+  padding: 0 0 3px 0;
   display: flex;
   flex-flow: column;
   gap: 0;
   color: #53595f;
+  /* border-radius: 10px; */
 }
 
 section.responses > .response > .head > span.info {
@@ -1000,6 +1002,9 @@ section.responses > .response > #content {
   gap: 0;
   margin: 0;
   padding: 0;
+  /* background-color: #75757516;
+  padding: 5px 10px;
+  border-radius: 10px; */
 }
 
 section.responses > .response > #content.content p {
@@ -1162,7 +1167,7 @@ section.responses > .response > form.reply .image img {
 
 section.responses > .response > form.reply > textarea {
   border: 1px solid #6b72805e;
-  padding: 10px 10px 5px 10px;
+  padding: 10px !important;
   margin: 0;
   width: calc(100% - 48px);
   resize: none;
@@ -1181,6 +1186,10 @@ section.responses > .response > form.reply > textarea {
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+
+section.responses > .response > form.reply > textarea:focus {
+  border: 1px solid #18a5669a;
 }
 
 section.responses > .response > form.reply > button {

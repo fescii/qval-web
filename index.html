@@ -993,8 +993,12 @@
       const replyTextarea = document.querySelector('textarea#reply');
       replyTextarea.addEventListener('input', () => {
         replyTextarea.style.height = 'auto';
-        if (replyTextarea.scrollHeight <= 100) {
-          replyTextarea.style.height = `${replyTextarea.scrollHeight}px`;
+        const height = replyTextarea.scrollHeight;
+        if(height <= 60) {
+          replyTextarea.style.height = `38px`;
+        }
+        else if (height <= 100) {
+          replyTextarea.style.height = `${height + 10}px`;
         }
         else {
           replyTextarea.style.height = `100px`;
