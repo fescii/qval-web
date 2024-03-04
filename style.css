@@ -1048,6 +1048,65 @@ section.responses > .response > #content.content ol a:hover {
   -moz-text-decoration-color: #4b5563bd !important;
 }
 
+section.responses > .response > .stats {
+  /* border: 1px solid #6b7280; */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+section.responses > .response > .stats > .stat {
+  /* border: 1px solid #6b7280; */
+  padding: 3px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+section.responses > .response > .stats * {
+  font-family: var(--font-one);
+}
+
+section.responses > .response > .stats span.no {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+section.responses > .response > .stats > .stat.write {
+  /* border: 1px solid #6b72803a; */
+  /* background-color: #39383816; */
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+section.responses > .response > .stats > .stat:hover {
+  color: transparent;
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+section.responses > .response > .stats > .stat.write svg {
+  width: 20px;
+  height: 20px;
+}
+
+section.responses > .response > .stats > .stat.discuss svg {
+  width: 18px;
+  height: 18px;
+}
+
+section.responses > .response > .stats > .stat:hover svg {
+  color: #18A565;
+}
 
 
 
@@ -1183,7 +1242,7 @@ main.main > section.side .on-this > .topics a.topic {
   font-size: 0.8rem;
   padding: 4px 15px;
   color: #808080;
-  background-color: rgba(57, 56, 56, 0.087);
+  background-color: #39383816;
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
