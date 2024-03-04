@@ -921,7 +921,7 @@ section.responses > .response > .head {
 section.responses > .response > .head > span.info {
   /* border: 1px solid #6b7280; */
   color: inherit;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   width: max-content;
   display: flex;
   gap: 10px;
@@ -931,7 +931,7 @@ section.responses > .response > .head > span.info {
 
 section.responses > .response > .head > span.info > a {
   /* border: 1px solid #6b7280; */
-  line-height: inherit;
+  /* line-height: inherit; */
   padding: 0;
   display: flex;
   flex-flow: column;
@@ -1063,7 +1063,7 @@ section.responses > .response > .stats > .stat {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   color: #6b7280;
 }
@@ -1095,17 +1095,41 @@ section.responses > .response > .stats > .stat:hover {
 }
 
 section.responses > .response > .stats > .stat.write svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 
 section.responses > .response > .stats > .stat.discuss svg {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
 }
 
-section.responses > .response > .stats > .stat:hover svg {
+section.responses > .response > .stats > .stat.write:hover svg {
   color: #18A565;
+}
+
+section.responses > .response > form.respond {
+  border: 1px solid #6b7280;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+section.responses > .response > form.respond > textarea {
+  border: 1px solid #0841b3;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
 }
 
 
