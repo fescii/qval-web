@@ -422,9 +422,9 @@
     -o-border-radius: 10px;
   }
 
-   header.header > ul.left > li.link > div.drop-down ul.main > li:nth-of-type(odd) > a {
+  header.header > ul.left > li.link > div.drop-down ul.main > li:nth-of-type(odd) > a {
     background-color: #6b728021;
-   }
+  }
 
   header.header > ul > li.link > div.drop-down ul > li:hover {
     background-color: unset;

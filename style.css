@@ -892,6 +892,104 @@ main.main > article.content .next-article > a > span.title {
   font-size: 0.8rem;
 }
 
+/* Responses */
+
+main.main > article.content section.responses {
+  /* border: 1px solid #000000; */
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+}
+
+section.responses > .response {
+  /* border: 1px solid #6b7280; */
+  padding: 15px 0;
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+}
+
+section.responses > .response > .head {
+  /* border: 1px solid #6b7280; */
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  color: #53595f;
+}
+
+section.responses > .response > .head > span.info {
+  /* border: 1px solid #6b7280; */
+  color: inherit;
+  line-height: 1.5;
+  width: max-content;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+section.responses > .response > .head > span.info > a {
+  /* border: 1px solid #6b7280; */
+  line-height: inherit;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  color: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+section.responses > .response > .head > span.info > a:hover {
+  /* color: #08b86f; */
+  color: transparent;
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+section.responses > .response > .head > span.info > span.dot {
+  display: inline-block;
+  margin: 2px 0 0 0;
+  width: 5px;
+  height: 5px;
+  background-color: #6b7280c9;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+section.responses > .response > .head > span.info > span.profile {
+  /* border: 1px solid #6b7280; */
+  line-height: inherit;
+  color: #6b7280;
+  padding: 0;
+  display: flex;
+  flex-flow: row-reverse;
+  align-items: center;
+  gap: 0;
+  color: inherit;
+  /* font-weight: 500; */
+  cursor: pointer;
+}
+
+section.responses > .response > .head > span.info > span.profile svg {
+  margin: 0 0 -3px 0;
+  width: 18px;
+  height: 18px;
+}
+
+section.responses > .response > .head > span.date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #6b7280;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
 
 
 
