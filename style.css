@@ -90,8 +90,8 @@ body {
   padding: 0;
   margin: 0;
   /* width: 85%; */
-  width: 1058px;
-  max-width: 1058px;
+  width: 1100px;
+  max-width: 1100px;
   min-height: var(--vh-height, 100vh);
   font-family: var(--font-main), sans-serif;
 }
@@ -684,6 +684,7 @@ main.main > article.content .fonts {
   justify-content: space-between;
   color: #6b7280;
   gap: 20px;
+  z-index: 5;
   position: sticky;
   top: 70px;
   background-color: var(--background);
@@ -1083,7 +1084,7 @@ section.responses > .response > .stats > .stat.write span.line {
   height: 32px;
 }
 
-section.responses > .response > .stats > .stat:hover {
+section.responses > .response > .stats > .stat.write:hover {
   color: transparent;
   background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   background-clip: text;
@@ -1096,6 +1097,7 @@ section.responses > .response > .stats > .stat.write svg {
 }
 
 section.responses > .response > .stats > .stat.discuss svg {
+  color: #6b7280;
   width: 19px;
   height: 19px;
 }
@@ -1146,7 +1148,7 @@ section.responses > .response > form.reply .image img {
 
 section.responses > .response > form.reply > textarea {
   border: 1px solid #6b72805e;
-  padding: 10px !important;
+  padding: 8px !important;
   margin: 0;
   width: calc(100% - 48px);
   resize: none;
@@ -1161,10 +1163,13 @@ section.responses > .response > form.reply > textarea {
   font-weight: 400;
   color: #6b7280;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.quick-info>.images>.image-options .images::-webkit-scrollbar {
+  display: none !important;
+  visibility: hidden;
 }
 
 section.responses > .response > form.reply > textarea:focus {
