@@ -51,7 +51,11 @@ export default class OpinionWrapper extends HTMLElement {
 
     let output = ``
     contents.forEach(content => {
-      output += `<p>${content}</p>`
+      let trimContent = content.trim();
+      if (trimContent.length !== '' && trimContent.length >= 1) {
+        // console.log(trimContent);
+        output += `<p>${trimContent}</p>`
+      }
     })
 
     return `
@@ -184,12 +188,14 @@ export default class OpinionWrapper extends HTMLElement {
         padding: 15px 0;
         display: flex;
         flex-flow: column;
-        gap: 5px;
+        gap: 0;
         font-family: var(--font-one);
       }
 
       .head {
+        /*border: 1px solid #6b7280;*/
         padding: 0 0 3px 0;
+        margin: 0;
         display: flex;
         flex-flow: column;
         gap: 0;
@@ -248,7 +254,7 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       #content {
-        /* border: 1px solid #6b7280; */
+        /*border: 1px solid #6b7280;*/
         display: flex;
         flex-flow: column;
         color: #53595f;
@@ -259,7 +265,7 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       #content.content p {
-        /* border: 1px solid #0b49c7; */
+        /*border: 1px solid #0b49c7;*/
         margin: 0 0 5px 0;
         padding: 0;
         line-height: 1.5;
