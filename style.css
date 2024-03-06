@@ -903,9 +903,8 @@ main.main > article.content section.responses {
 }
 
 section.responses > .head {
-  border: 1px solid #6b72805e;
-  border-left: none;
-  border-right: none;
+  /* border-top: 1px solid #6b72805e; */
+  margin: 20px 0;
   padding: 10px 0;
   display: flex;
   flex-flow: column;
@@ -1014,6 +1013,24 @@ section.responses > .head > form.opinion  > button svg {
   width: 24px;
   height: 26px;
 }
+
+section.responses > .head > .title {
+  /* border: 1px solid #6b72805e; */
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+}
+
+section.responses > .head > .title > h2 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.5;
+  font-size: 1.3rem;
+  color: #53595f;
+}
+
 
 section.responses > .response {
   border-top: 1px solid #6b728038;
