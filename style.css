@@ -684,7 +684,7 @@ main.main > article.content .fonts {
   justify-content: space-between;
   color: #6b7280;
   gap: 20px;
-  z-index: 5;
+  z-index: 2;
   position: sticky;
   top: 70px;
   background-color: var(--background);
