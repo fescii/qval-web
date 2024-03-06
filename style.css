@@ -904,15 +904,15 @@ main.main > article.content section.responses {
 
 section.responses > .head {
   /* border-top: 1px solid #6b72805e; */
-  margin: 20px 0;
+  margin: 20px 0 0 0;
   padding: 10px 0;
   display: flex;
-  flex-flow: column;
+  flex-flow: column-reverse;
   gap: 0;
 }
 
 section.responses > .head > form.opinion {
-  border-bottom: 1px solid #6b72805d;
+  /* border-bottom: 1px solid #6b72805d; */
   /* border: 1px solid #000000; */
   padding: 10px 0 10px 0;
   margin: 0 0;
@@ -1016,7 +1016,7 @@ section.responses > .head > form.opinion  > button svg {
 
 section.responses > .head > .title {
   /* border: 1px solid #6b72805e; */
-  padding: 10px 0;
+  padding: 0 10px 20px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
