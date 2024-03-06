@@ -1083,7 +1083,7 @@ section.responses > .response > .stats > .stat.write span.line {
   height: 32px;
 }
 
-section.responses > .response > .stats > .stat:hover {
+section.responses > .response > .stats > .stat.write:hover {
   color: transparent;
   background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   background-clip: text;
@@ -1096,6 +1096,7 @@ section.responses > .response > .stats > .stat.write svg {
 }
 
 section.responses > .response > .stats > .stat.discuss svg {
+  color: #6b7280;
   width: 19px;
   height: 19px;
 }
