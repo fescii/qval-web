@@ -16,11 +16,33 @@ export default class OpinionWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    // this.openDetails();
+    this.openForm();
   }
 
-  openDetails() {
-   
+  openForm = () => {
+    const writeContainer = this.shadowObj.querySelector('div.stats');
+    const formContainer = this.shadowObj.querySelector('div.form-container');
+    if (writeContainer && formContainer) {
+      const writeBtn = writeContainer.querySelector('span.stat.write');
+      const formElement = this.getForm();
+
+      writeBtn.addEventListener('click',event => {
+        event.preventDefault();
+
+        // console.log(writeContainer);
+        // console.log(formElement);
+
+        // writeContainer.classList.toggle('active');
+        if (writeContainer.classList.contains('active')) {
+          writeContainer.classList.remove('active');
+          formContainer.innerHTML = '';
+        }
+        else {
+          writeContainer.classList.add('active');
+          formContainer.insertAdjacentHTML('beforeend', formElement);
+        }
+      })
+    }
   }
 
   formatDateToLocale(isoDate) {
@@ -128,6 +150,7 @@ export default class OpinionWrapper extends HTMLElement {
       ${this.getHeader()}
       ${this.getContent()}
       ${this.getStats()}
+      <div class="form-container"></div>
     `;
   }
 
@@ -362,6 +385,13 @@ export default class OpinionWrapper extends HTMLElement {
         height: 32px;
       }
 
+      .stats.active > .stat.write span.line {
+        border-left: 2px solid #18A5653a;
+        border-bottom: 2px solid #18A5653a;
+        display: inline-block;
+      }
+
+      .stats.active > .stat.write,
       .stats > .stat.write:hover {
         color: transparent;
         background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
@@ -380,6 +410,7 @@ export default class OpinionWrapper extends HTMLElement {
         height: 19px;
       }
 
+      .stats.active > .stat.write svg,
       .stats > .stat.write:hover svg {
         color: #18A565;
       }
