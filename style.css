@@ -897,7 +897,6 @@ main.main > article.content .next-article > a > span.title {
 /* Opinion */
 section.opinion {
   /* border-top: 1px solid #6b72805e; */
-  margin: 20px 0 0 0;
   background-color: var(--background);
   padding: 10px 0;
   display: flex;
@@ -906,6 +905,10 @@ section.opinion {
   z-index: 2;
   position: sticky;
   top: 70px;
+}
+
+section.opinion.sticky {
+  border-bottom: 1px solid #6b72805e;
 }
 
 section.opinion > form.opinion {
@@ -921,6 +924,11 @@ section.opinion > form.opinion {
   color: #6b7280;
   position: relative;
 }
+
+section.opinion > form.opinion {
+  padding: 0 0 5px 0;
+}
+
 
 section.opinion > form.opinion .image {
   /* border: thin solid #4b5563bd; */
@@ -955,9 +963,9 @@ section.opinion > form.opinion > textarea {
   border: none;
   padding: 8px !important;
   margin: 0;
-  width: calc(100% - 48px);
+  width: calc(100% - 35px);
   resize: none;
-  height: 48px;
+  height: 40px;
   /* max-height: 100px !important; */
   display: flex;
   flex-flow: column;
@@ -988,7 +996,7 @@ section.opinion > form.opinion > button {
   background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   position: absolute;
   right: 8px;
-  top: calc(50% - 15px);
+  top: calc(50% - 18px);
   height: 30px;
   width: 60px;
   padding: 0;
@@ -1021,6 +1029,10 @@ section.opinion > .title {
   color: #6b7280;
 }
 
+section.opinion.sticky > .title {
+  display: none;
+}
+
 section.opinion > .title > h2 {
   margin: 0;
   font-weight: 600;
@@ -1040,307 +1052,6 @@ main.main > article.content section.responses {
   gap: 0;
 }
 
-section.responses > .response {
-  border-top: 1px solid #6b728038;
-  padding: 15px 0;
-  display: flex;
-  flex-flow: column;
-  gap: 5px;
-}
-
-section.responses > .response > .head {
-  /* background-color: #75757516;
-  padding: 5px 10px; */
-  padding: 0 0 3px 0;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-  color: #53595f;
-  /* border-radius: 10px; */
-}
-
-section.responses > .response > .head > span.info {
-  /* border: 1px solid #6b7280; */
-  color: inherit;
-  line-height: 1.5;
-  width: max-content;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-}
-
-section.responses > .response > .head > span.info > a {
-  /* border: 1px solid #6b7280; */
-  line-height: inherit;
-  padding: 0;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-  color: inherit;
-  font-weight: 500;
-  cursor: pointer;
-  color: transparent;
-  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-section.responses > .response > .head > span.info > span.dot {
-  display: inline-block;
-  margin: 1px 0 0 0;
-  width: 5px;
-  height: 5px;
-  background-color: #6b7280c9;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-section.responses > .response > .head span.info > span.date {
-  display: flex;
-  line-height: inherit;
-  align-items: center;
-  justify-content: space-between;
-  color: #6b7280;
-  font-weight: 500;
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-}
-
-section.responses > .response > #content {
-  /* border: 1px solid #6b7280; */
-  display: flex;
-  flex-flow: column;
-  color: #53595f;
-  line-height: 1.5;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  /* background-color: #75757516;
-  padding: 5px 10px;
-  border-radius: 10px; */
-}
-
-section.responses > .response > #content.content p {
-  /* border: 1px solid #0b49c7; */
-  margin: 0 0 5px 0;
-  padding: 0;
-  line-height: 1.5;
-}
-
-section.responses > .response > #content.content a {
-  /* color: #1da1f2; */
-  cursor: pointer;
-  color: transparent;
-  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-section.responses > .response > #content.content a:hover {
-  text-decoration-color: #21D029 !important;
-  text-decoration: underline;
-  -moz-text-decoration-color: #21D029 !important;
-}
-
-section.responses > .response > #content.content ul,
-section.responses > .response > #content.content ol {
-  margin: 10px 0 0 20px;
-  line-height: 1.4;
-  color: #1f2937;
-}
-
-section.responses > .response > #content.content ul a,
-section.responses > .response > #content.content ol a {
-  color: transparent;
-  background: unset;
-  color: #1f2937;
-  font-weight: 500;
-  text-decoration-color: #4b556321 !important;
-  text-decoration: underline;
-  -moz-text-decoration-color: #4b556321 !important;
-}
-
-section.responses > .response > #content.content ul a:hover,
-section.responses > .response > #content.content ol a:hover {
-  text-decoration-color: #4b5563bd !important;
-  -moz-text-decoration-color: #4b5563bd !important;
-}
-
-section.responses > .response > .stats {
-  /* border: 1px solid #6b7280; */
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-section.responses > .response > .stats > .stat {
-  /* border: 1px solid #6b7280; */
-  padding: 3px 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #6b7280;
-}
-
-section.responses > .response > .stats * {
-  font-family: var(--font-one);
-}
-
-section.responses > .response > .stats span.no {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-}
-
-section.responses > .response > .stats > .stat.write {
-  /* border: 1px solid #6b72803a; */
-  /* background-color: #39383816; */
-  position: relative;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-section.responses > .response > .stats > .stat.write span.line {
-  border-left: 2px solid #6b72803a;
-  border-bottom: 2px solid #6b72803a;
-  border-bottom-left-radius: 8px;
-  position: absolute;
-  top: 30px;
-  left: 10px;
-  display: inline-block;
-  width: 10px;
-  height: 32px;
-}
-
-section.responses > .response > .stats > .stat.write:hover {
-  color: transparent;
-  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-section.responses > .response > .stats > .stat.write svg {
-  width: 22px;
-  height: 22px;
-}
-
-section.responses > .response > .stats > .stat.discuss svg {
-  color: #6b7280;
-  width: 19px;
-  height: 19px;
-}
-
-section.responses > .response > .stats > .stat.write:hover svg {
-  color: #18A565;
-}
-
-section.responses > .response > form.reply {
-  /* border: 1px solid #6b7280; */
-  padding: 0 0 0 25px;
-  margin: 10px 0 0 0;
-  display: flex;
-  gap: 10px;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #6b7280;
-  position: relative;
-}
-
-section.responses > .response > form.reply .image {
-  /* border: thin solid #4b5563bd; */
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  overflow: hidden;
-  width: 35px;
-  height: 35px;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-section.responses > .response > form.reply .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-section.responses > .response > form.reply > textarea {
-  border: 1px solid #6b72805e;
-  padding: 8px !important;
-  margin: 0;
-  width: calc(100% - 48px);
-  resize: none;
-  height: 38px;
-  /* max-height: 100px !important; */
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #6b7280;
-  border-radius: 10px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-section.responses > .response > form.reply > textarea::-webkit-scrollbar {
-  display: none !important;
-  visibility: hidden;
-}
-
-section.responses > .response > form.reply > textarea:focus {
-  border: 1px solid #18a5669a;
-}
-
-section.responses > .response > form.reply > button {
-  border: none;
-  /* border: 1px solid #6b7280; */
-  position: absolute;
-  background-color: var(--background);
-  right: 8px;
-  bottom: 3px;
-  height: 30px;
-  width: 30px;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-}
-
-section.responses > .response > form.reply > button svg {
-  color: #18A565;
-  width: 24px;
-  height: 26px;
-}
 
 
 
