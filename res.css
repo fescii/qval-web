@@ -13,23 +13,8 @@
 }
 
 @media screen and (max-width:800px) {
-  footer.footer {
-    padding: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 25px;
-  }
-
-  footer.footer>section.newsletter {
-    /* border: 1px solid #808080; */
-    grid-column: 1/4;
-    grid-row: 2/3;
-    display: flex;
-    flex-flow: column;
-  }
-
-  footer.footer>.copy {
-    grid-column: 1/4;
-    grid-row: 3;
+  header.header > ul > li.link.theme > .options {
+    border: 1px solid #057232a9;
   }
 }
 

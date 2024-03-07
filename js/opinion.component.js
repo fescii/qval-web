@@ -89,10 +89,13 @@ export default class OpinionWrapper extends HTMLElement {
 
   getHeader = () => {
     const date = this.formatDateToLocale(this.getAttribute('date'));
+    const discussId = this.getAttribute('id').trim();
+    let classicId = `${discussId.substring(0,1)}<span class="sub">${discussId.charAt(1)}</span>${discussId.substring(2)} `
+
     return `
       <div class="head">
         <span class="info">
-          <a href="${this.getAttribute('url')}" class="code">#${this.getAttribute('id')}</a>
+          <a href="${this.getAttribute('url')}" class="code">#${classicId}</a>
           <span class="dot"></span>
           <span class="date">${date}</span>
         </span>
@@ -241,7 +244,7 @@ export default class OpinionWrapper extends HTMLElement {
         line-height: inherit;
         padding: 0;
         display: flex;
-        flex-flow: column;
+        flex-flow: row;
         gap: 0;
         color: inherit;
         font-weight: 500;
@@ -250,6 +253,14 @@ export default class OpinionWrapper extends HTMLElement {
         background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
         background-clip: text;
         -webkit-background-clip: text;
+      }
+
+      .head > span.info > a > span.sub {
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        align-self: center;
+        /*align-self: flex-end;
+        margin: 0 0 2px 0; */
       }
 
       .head > span.info > span.dot {

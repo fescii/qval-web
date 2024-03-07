@@ -29,6 +29,7 @@ Author URL: https://femar.co.ke
   --font-mono: 'Jetbrains Mono';
   --background: #ffffff;
   --vh-height: 100dvh;
+  --color-alt: #ff932f;
   --fade-linear-gradient: linear-gradient(
     180deg, #ffffff02,
     #ffffff2a,
@@ -1271,20 +1272,22 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 
 /*Footer*/
 footer.footer {
+  border-top: thin solid #4b5563bd;
   padding-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr;
-  column-gap: 20px;
-  row-gap: 20px;
-  margin-top: 50px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 20px;
   padding-bottom: 30px;
 }
 
 footer.footer > section {
+  /* border: 1px solid #1f2937; */
   display: flex;
   flex-flow: column;
-  /* align-items: center; */
+  align-items: center;
   gap: 10px;
+  max-width: 500px;
 }
 
 footer.footer > section >.title {
@@ -1294,19 +1297,22 @@ footer.footer > section >.title {
 }
 
 footer.footer > section > ul.footer-list {
+  /* border: 1px solid #1f2937; */
   padding: 0%;
   margin: 0%;
   list-style-type: none;
   padding-left: 1px;
   display: flex;
-  flex-flow: column;
-  /* align-items: center; */
-  gap: 8px;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 footer.footer > section > ul.footer-list > li.item {
-  margin: 0%;
-  padding: 0%;
+  margin: 0 10px 0 0;
+  padding: 0;
   width: max-content;
   position: relative;
   /* border: 1px solid #808080; */
@@ -1345,13 +1351,17 @@ footer.footer > section > ul.footer-list > li.item > a.item-link:hover {
 }
 
 footer.footer > section.newsletter {
+  /* border: 1px solid #1f2937; */
   display: flex;
   flex-flow: column;
+  align-items: center;
+  max-width: 500px;
 }
 
 footer.footer > section.newsletter > .text {
   padding-left: 3px;
   line-height: 1.3;
+  text-align: center;
   color: #53595f;
 }
 
@@ -1403,91 +1413,9 @@ footer.footer>section.newsletter>form>input[type="submit"] {
   -o-border-radius: 50px;
 }
 
-.footer-social-box {
-  margin-top: 15px;
-  margin-left: 8px;
-  width: 120px;
-  display: -ms-grid;
-  display: grid;
-  justify-items: start;
-  grid-auto-flow: column;
-  grid-auto-columns: auto;
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  -ms-grid-columns: auto;
-  grid-template-columns: auto;
-  -ms-grid-rows: auto;
-  grid-template-rows: auto;
-}
-
-.footer-social-url {
-  position: relative;
-  z-index: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: #6b7280;
-}
-
-.svg {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-}
-
-.fs-url-tooltip {
-  position: absolute;
-  left: -100%;
-  top: -50px;
-  /* bottom: 150%; */
-  z-index: 1000;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: #53595f;
-  color: #ffffff;
-  display: none;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  transform: translate3d(0px, 16px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
-  transform-style: preserve-3d;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-}
-
 footer.footer>.copy {
   border-top: 1px solid #6b728037;
-  padding-top: 10px;
+  padding: 8px 10px;
   grid-column: 1/5;
   display: flex;
   align-items: center;
