@@ -250,6 +250,7 @@ export default class OpinionWrapper extends HTMLElement {
         font-weight: 500;
         cursor: pointer;
         color: transparent;
+        font-family: var(--font-mono);
         background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
         background-clip: text;
         -webkit-background-clip: text;
@@ -257,7 +258,7 @@ export default class OpinionWrapper extends HTMLElement {
 
       .head > span.info > a > span.sub {
         font-family: var(--font-mono);
-        font-size: 0.9rem;
+        font-size: 1rem;
         align-self: center;
         /*align-self: flex-end;
         margin: 0 0 2px 0; */
@@ -284,7 +285,7 @@ export default class OpinionWrapper extends HTMLElement {
         color: #6b7280;
         font-weight: 500;
         font-family: var(--font-mono);
-        font-size: 0.9rem;
+        font-size: 0.94rem;
       }
 
       #content {
