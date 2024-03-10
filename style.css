@@ -1723,6 +1723,7 @@ main.home > section.feeds > div.stories.new > .story > .meta  .profile {
   background-color: var(--background);
   display: flex;
   flex-flow: column;
+  gap: 0;
   width: 300px;
   border-radius: 12px;
   -webkit-border-radius: 12px;
@@ -1830,6 +1831,7 @@ main.home > section.feeds > div.stories.new > .story > .meta .info a.followers >
 
 main.home > section.feeds > div.stories.new > .story > .meta .data {
   /* border: 1px solid #000000; */
+  margin: 5px 0;
   display: flex;
   flex-flow: column;
   /* align-items: center; */
