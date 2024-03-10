@@ -1274,7 +1274,7 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 main.home {
   /* border: 1px solid red; */
   display: flex;
-  padding: 20px 0 0 0;
+  padding: 10px 0 0 0;
   flex-flow: column;
   gap: 0;
   justify-content: space-between;
@@ -1290,8 +1290,9 @@ main.home .head {
 
 main.home > section.popular {
   /* border: thin solid #4b5563bd; */
-  display: flex;
-  flex-flow: row;
+  margin: 15px 0;
+  display: grid;
+  grid-template-columns: 5fr 3fr;
   justify-content: space-between;
   gap: 20px;
 }
@@ -1299,15 +1300,14 @@ main.home > section.popular {
 main.home > section.popular > div.stories {
   /* border: 1px solid #000000; */
   padding: 0;
-  width: 60%;
-  min-width: 60%;
+  width: 100%;
   display: flex;
   flex-flow: column;
   gap: 0;
 }
 
 main.home > section.popular > div.stories > a.trending-story {
-  border: thin sol/id #6b728032;
+  /* border: thin solid #6b728032; */
   text-decoration: none;
   height: max-content;
   padding: 0;
@@ -1520,11 +1520,10 @@ main.home > section.popular > div.stories > .trending > a.trending-story > .info
 main.home > section.popular > div.side {
   /* border: 1px solid #ff0000; */
   padding: 0;
-  width: 35%;
-  min-width: 35%;
+  width: 100%;
   display: flex;
   flex-flow: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 main.home > section.popular > div.side > .donate-card {
@@ -1546,7 +1545,8 @@ main.home > section.popular > div.side > .donate-card h2 {
   margin: 0;
   color: #1f2937;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--font-alt);
 }
 
 main.home > section.popular > div.side > .donate-card p {
@@ -1561,8 +1561,8 @@ main.home > section.popular > div.side > .donate-card a {
   width: max-content;
   color: #ffffff;
   margin: 5px 0;
-  padding: 4px 15px;
-  font-weight: 500;
+  padding: 4px 10px;
+  font-weight: 400;
   background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   /* background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20)); */
   border-radius: 50px;
@@ -1572,6 +1572,92 @@ main.home > section.popular > div.side > .donate-card a {
   -o-border-radius: 50px;
 }
 
+main.home > section.popular > div.side > ul.topics {
+  /* border: thin solid #4b5563bd; */
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+main.home > section.popular > div.side > ul.topics > h2.title {
+  /* border: thin solid #4b5563bd; */
+  margin: 0 0 5px;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  color: #1f2937;
+  font-weight: 700;
+  font-family: var(--font-alt);
+}
+
+main.home > section.popular > div.side > ul.topics > li.topic {
+  /* border: thin solid #4b5563bd; */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  width: max-content;
+}
+
+
+main.home > section.popular > div.side > ul.topics > li.topic a.link {
+  border: thin solid #6b728094;
+  margin: 0;
+  text-decoration: none;
+  color: #6b7280;
+  padding: 4px 10px;
+  display: flex;
+  gap: 5px;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  width: max-content;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.home > section.popular > div.side > ul.topics > li.topic a.link > span.no {
+  font-family: var(--font-mono);
+  font-size: 0.93rem;
+}
+
+main.home > section.popular > div.side > ul.topics > li.topic a.link:hover {
+  color: transparent;
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  border-color: #21D029af;
+}
+
+
+main.home > section.feeds {
+  border: thin solid #4b5563bd;
+  margin: 15px 0;
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+main.home > section.feeds > div.stories.new {
+  border: 1px solid #000000;
+  padding: 0;
+  width: 100%;
+  min-width: 60%;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+}
 
 
 
