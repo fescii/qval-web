@@ -1858,9 +1858,8 @@ main.home > section.feeds > div.stories.new > .story > .meta .data > span.bio {
 main.home > section.feeds > div.stories.new > .story > .meta span.action {
   border: 1px solid #6b72808e;
   margin: 10px 0 5px;
-  padding: 5px 15px;
-  /*color: #53595f;
-  */font-weight: 500;
+  padding: 6px 15px;
+  font-weight: 500;
   font-family: var(--font-main);
   font-size: 0.9rem;
   cursor: pointer;
@@ -1875,11 +1874,12 @@ main.home > section.feeds > div.stories.new > .story > .meta span.action {
   -o-border-radius: 8px;
 }
 
-main.home > section.feeds > div.stories.new > .story > .meta span.action.following {
+main.home > section.feeds > div.stories.new > .story > .meta span.action.follow {
   border: none;
   text-decoration: none;
   color: #ffffff;
-  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  background-color: #1d2c38;
+  /* background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%); */
 }
 
 
