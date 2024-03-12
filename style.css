@@ -2430,7 +2430,14 @@ main.home > section.feeds > div.people .person > .head > .name h4.uid {
   color: #53595f;
   font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
+}
+
+main.home > section.feeds > div.people .person > .head > .name h4.uid:hover > a {
+  color: transparent;
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 main.home > section.feeds > div.people .person > .head > .name h4.uid a {
@@ -2454,7 +2461,7 @@ main.home > section.feeds > div.people .person > .head > .name span.followers > 
 main.home > section.feeds > div.people .person > .action {
   border: 1px solid #6b72803f;
   color: #6b7280;
-  padding: 3px 12px;
+  padding: 5px 25px;
   width: max-content;
   display: flex;
   flex-flow: row;
@@ -2462,15 +2469,16 @@ main.home > section.feeds > div.people .person > .action {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 main.home > section.feeds > div.people .person > .action.follow {
   border: none;
+  /* background-color: #1d2c38d2; */
   background-color: #1d2c38;
   /* background: linear-gradient(#53595f, #627ea0); */
   /* background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%); */
@@ -2480,7 +2488,7 @@ main.home > section.feeds > div.people .person > .action.follow {
 }
 
 main.home > section.feeds > div.people .more {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   margin: 15px 0 0 0;
   padding: 10px 0;
   display: flex;
@@ -2495,6 +2503,21 @@ main.home > section.feeds > div.people .more p {
   padding: 0;
   text-align: center;
   color: #53595f;
+}
+
+main.home > section.feeds > div.people .more a {
+  text-decoration: none;
+  border: none;
+  background-color: #1d2c38d2;
+  padding: 5px 20px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 
