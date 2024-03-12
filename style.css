@@ -2155,28 +2155,50 @@ main.home > section.feeds > div.people {
   padding: 0;
   display: flex;
   flex-flow: column;
-  gap: 0;
+  gap: 20px;
+  position: sticky;
+  top: 70px;
 }
 
-main.home > section.feeds > div.people > .person {
-  border: 1px solid #000000;
+main.home > section.feeds > div.people > .title {
+  /* border: 1px solid #000000; */
   padding: 0;
   display: flex;
   flex-flow: column;
   gap: 0;
+  position: sticky;
+  top: 70px;
+}
+
+main.home > section.feeds > div.people > .title h4 {
+  color: #1f2937;
+  font-size: 1.3rem;
+}
+
+main.home > section.feeds > div.people > .person {
+  border-right: 1px solid #6b728034;
+  background-color: #e6e6e616;
+  padding: 8px 10px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  /* border-radius: 10px; */
 }
 
 main.home > section.feeds > div.people > .person > .head {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   padding: 0;
+  margin: 0;
   display: flex;
   flex-flow: row;
   flex-wrap: nowrap;
-  gap: 5px;
+  gap: 10px;
 }
 
 main.home > section.feeds > div.people > .person > .head > .image {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   padding: 0;
   display: flex;
   align-items: center;
@@ -2203,12 +2225,189 @@ main.home > section.feeds > div.people > .person > .head > .image img {
 }
 
 main.home > section.feeds > div.people > .person > .head > .name {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   padding: 0;
   display: flex;
   flex-flow: column;
   flex-wrap: nowrap;
   gap:  0;
+  position: relative;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid  .profile {
+  border: 1px solid #83858442;
+  box-shadow: 0 12px 48px #6d758d33;
+  padding: 0px 10px 10px;
+  z-index: 2;
+  position: absolute;
+  top: 25px;
+  left: -55px;
+  background-color: var(--background);
+  display: none;
+  flex-flow: column;
+  font-weight: 400;
+  gap: 0;
+  width: 300px;
+  border-radius: 12px;
+  transition: all 100ms ease-out;
+  -webkit-transition: all 100ms ease-out;
+  -moz-transition: all 100ms ease-out;
+  -ms-transition: all 100ms ease-out;
+  -o-transition: all 100ms ease-out;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid:hover .profile {
+  display: flex;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid .profile > span.pointer {
+  border: 1px solid #83858442;
+  border-bottom: none;
+  border-right: none;
+  position: absolute;
+  top: -5px;
+  left: 100px;
+  background-color: var(--background);
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  rotate: 45deg;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  -ms-border-radius: 1px;
+  -o-border-radius: 1px;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid .profile > .head {
+  /* border: 1px solid #000000; */
+  background-color: var(--background);
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  gap: 10px;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid .profile > .head > .image {
+  /* border: 1px solid #000000; */
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid .profile > .head > .image img {
+  /* border: 1px solid #000000; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .info {
+  /* border: 1px solid #000000; */
+  display: flex;
+  flex-flow: column;
+  /* align-items: center; */
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .info p.name {
+  /* border: 1px solid #000000; */
+  margin: 0;
+  color: #53595f;
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .info p.name svg {
+  /* border: 1px solid #000000; */
+  margin: -2px 0 0;
+  color: #08b86f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .info a.followers {
+  /* border: 1px solid #000000; */
+  text-decoration: none;
+  margin: 0;
+  color: #6b7280;
+  background: unset;
+  font-family: var(--font-main);
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 5px;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .info a.followers > span.no {
+  font-family: var(--font-mono);
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .data {
+  /* border: 1px solid #000000; */
+  margin: 5px 0;
+  display: flex;
+  flex-flow: column;
+  /* align-items: center; */
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .data > p.name {
+  /* border: 1px solid #000000; */
+  margin: 0;
+  color: #53595f;
+  font-weight: 500;
+  font-family: var(--font-main);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile .data > span.bio {
+  /* border: 1px solid #000000; */
+  margin: 0;
+  color: #6b7280;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile span.action {
+  border: 1px solid #6b72808e;
+  margin: 10px 0 5px;
+  padding: 6px 15px;
+  font-weight: 500;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+main.home > section.feeds > div.people > .person > .head > .name h4.uid > .profile span.action.follow {
+  border: none;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #1d2c38;
+  /* background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%); */
 }
 
 main.home > section.feeds > div.people > .person > .head > .name h4.uid {
@@ -2235,21 +2434,11 @@ main.home > section.feeds > div.people > .person > .head > .name span.followers 
   font-family: var(--font-mono);
 }
 
-main.home > section.feeds > div.people > .person > .actions {
-  border: 1px solid #6b7280;
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-flow: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
 
-main.home > section.feeds > div.people > .person > .actions > .action {
+main.home > section.feeds > div.people > .person > .action {
   border: 1px solid #6b72803f;
-  padding: 4px 15px;
+  color: #6b7280;
+  padding: 3px 12px;
   width: max-content;
   display: flex;
   flex-flow: row;
@@ -2262,6 +2451,16 @@ main.home > section.feeds > div.people > .person > .actions > .action {
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+
+main.home > section.feeds > div.people > .person > .action.follow {
+  border: none;
+  background-color: #1d2c38;
+  /* background: linear-gradient(#53595f, #627ea0); */
+  /* background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%); */
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 
