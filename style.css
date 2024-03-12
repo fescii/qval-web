@@ -2235,6 +2235,35 @@ main.home > section.feeds > div.people > .person > .head > .name span.followers 
   font-family: var(--font-mono);
 }
 
+main.home > section.feeds > div.people > .person > .actions {
+  border: 1px solid #6b7280;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+main.home > section.feeds > div.people > .person > .actions > .action {
+  border: 1px solid #6b72803f;
+  padding: 4px 15px;
+  width: max-content;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
 
 
 
