@@ -1019,11 +1019,6 @@ section.opinion > form.opinion > button {
   -o-border-radius: 50px;
 }
 
-section.opinion > form.opinion  > button svg {
-  color: #18A565;
-  width: 24px;
-  height: 26px;
-}
 
 section.opinion > .title {
   /* border: 1px solid #6b72805e; */
@@ -1446,7 +1441,6 @@ main.home > section.popular > div.stories > .trending > a.trending-story > span.
   font-size: 1.2rem;
   font-family: var(--font-mono);
   /* color: #ffffff; */
-  /* text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); */
   color: transparent;
   /* background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20)); */
   background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
@@ -1462,13 +1456,10 @@ main.home > section.popular > div.stories > .trending > a.trending-story > span.
 main.home > section.popular > div.stories > .trending > a.trending-story > .info {
   /* border: thin solid #00ff00; */
   width: 100%;
-  /* overflow: hidden; */
-  /* background: var(--fade-picture-gradient); */
   z-index: 1;
   display: flex;
   flex-flow: column;
   padding: 15px 0 0 0;
-  /* padding: 30px 15px 10px; */
 }
 
 main.home > section.popular > div.stories > .trending > a.trending-story > .info > span.topic {
@@ -1653,6 +1644,7 @@ main.home > section.feeds > div.stories.new {
 main.home > section.feeds > div.stories.new > .story {
   border-top: thin solid #6b72801a;
   padding: 15px 0;
+  margin: 0;
   width: 100%;
   display: flex;
   flex-flow: column;
@@ -1664,6 +1656,10 @@ main.home > section.feeds > div.stories.new > .story .read-time {
   color: #6b7280;
   font-size: 0.9rem;
   font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* justify-content: center; */
 }
 
 main.home > section.feeds > div.stories.new > .story h3.title {
@@ -1962,6 +1958,182 @@ main.home > section.feeds > div.stories.new > .story > .content ul a:hover,
 main.home > section.feeds > div.stories.new > .story > .content ol a:hover {
   text-decoration-color: #4b5563bd !important;
   -moz-text-decoration-color: #4b5563bd !important;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats {
+  /* border: 1px solid #6b7280; */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats > .stat {
+  /* border: 1px solid #6b7280; */
+  padding: 3px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats * {
+  font-family: var(--font-one);
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats span.no {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats > .stat.write {
+  /* border: 1px solid #6b72803a; */
+  /* background-color: #39383816; */
+  position: relative;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats > .stat.write span.line {
+  border-left: 2px solid #6b72803a;
+  border-bottom: 2px solid #6b72803a;
+  border-bottom-left-radius: 8px;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  display: none;
+  width: 10px;
+  height: 32px;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats.active > .stat.write span.line {
+  border-left: 2px solid #18A5653a;
+  border-bottom: 2px solid #18A5653a;
+  display: inline-block;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats.active > .stat.write,
+main.home > section.feeds > div.stories.new > .story > .stats > .stat.write:hover {
+  color: transparent;
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats > .stat.write svg {
+  color: inherit;
+  width: 22px;
+  height: 22px;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats > .stat.discuss svg {
+  color: inherit;
+  width: 19px;
+  height: 19px;
+}
+
+main.home > section.feeds > div.stories.new > .story > .stats > .stat.write svg {
+  color: #6b7280;
+}
+main.home > section.feeds > div.stories.new > .story > .stats > .stat.write:hover svg {
+  color: #18A565;
+}
+
+main.home > section.feeds > div.stories.new > .story form.reply {
+  /* border: 1px solid #6b7280; */
+  padding: 0 0 0 25px;
+  margin: 10px 0 0 0;
+  display: none;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+  position: relative;
+}
+
+main.home > section.feeds > div.stories.new > .story form.reply .image {
+  /* border: thin solid #4b5563bd; */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  overflow: hidden;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.home > section.feeds > div.stories.new > .story form.reply .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+main.home > section.feeds > div.stories.new > .story form.reply > textarea {
+  border: 1px solid #6b72805e;
+  padding: 8px !important;
+  margin: 0;
+  width: calc(100% - 48px);
+  resize: none;
+  height: 38px;
+  /* max-height: 100px !important; */
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+  border-radius: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+main.home > section.feeds > div.stories.new > .story > form.reply > textarea::-webkit-scrollbar {
+  display: none !important;
+  visibility: hidden;
+}
+
+main.home > section.feeds > div.stories.new > .story form.reply > textarea:focus {
+  border: 1px solid #18a5669a;
+}
+
+main.home > section.feeds > div.stories.new > .story form.reply > button {
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+  position: absolute;
+  right: 8px;
+  top: calc(50% - 15px);
+  height: 30px;
+  width: 60px;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
 }
 
 
