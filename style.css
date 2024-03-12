@@ -1565,20 +1565,32 @@ main.home > section.popular > div.side > ul.topics {
   flex-flow: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   gap: 10px;
   width: 100%;
 }
 
-main.home > section.popular > div.side > ul.topics > h2.title {
+main.home > section.popular > div.side > ul.topics > .title {
   /* border: thin solid #4b5563bd; */
   margin: 0 0 5px;
   padding: 0;
   width: 100%;
-  text-align: center;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+}
+
+main.home > section.popular > div.side > ul.topics > .title h4 {
   color: #1f2937;
-  font-weight: 700;
-  font-family: var(--font-alt);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+main.home > section.popular > div.side > ul.topics > .title > span {
+  color: #6b7280;
+  font-size: 0.85rem;
 }
 
 main.home > section.popular > div.side > ul.topics > li.topic {
