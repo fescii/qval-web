@@ -215,7 +215,7 @@ export default class OpinionWrapper extends HTMLElement {
         display: flex;
         flex-flow: column;
         gap: 0;
-        font-family: var(--font-one);
+        font-family: var(--font-main);
       }
 
       .head {
