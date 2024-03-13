@@ -3,7 +3,7 @@ export default class OpinionWrapper extends HTMLElement {
     // We are not even going to touch this.
     super();
 
-    // lets create our shadow root
+    // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
     this.render();
@@ -74,7 +74,7 @@ export default class OpinionWrapper extends HTMLElement {
     let output = ``
     contents.forEach(content => {
       let trimContent = content.trim();
-      if (trimContent.length !== '' && trimContent.length >= 1) {
+      if (trimContent !== '' && trimContent.length >= 1) {
         // console.log(trimContent);
         output += `<p>${trimContent}</p>`
       }
@@ -165,7 +165,6 @@ export default class OpinionWrapper extends HTMLElement {
       *:before {
         box-sizing: border-box !important;
         font-family: inherit;
-        -webkit-box-sizing: border-box !important;
       }
 
       *:focus {
@@ -215,7 +214,7 @@ export default class OpinionWrapper extends HTMLElement {
         display: flex;
         flex-flow: column;
         gap: 0;
-        font-family: var(--font-main);
+        font-family: var(--font-main),sans-serif;
       }
 
       .head {
@@ -246,18 +245,17 @@ export default class OpinionWrapper extends HTMLElement {
         display: flex;
         flex-flow: row;
         gap: 0;
-        color: inherit;
         font-weight: 500;
         cursor: pointer;
         color: transparent;
-        font-family: var(--font-mono);
+        font-family: var(--font-mono),monospace;
         background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
         background-clip: text;
         -webkit-background-clip: text;
       }
 
       .head > span.info > a > span.sub {
-        font-family: var(--font-mono);
+        font-family: var(--font-mono),monospace;
         font-size: 1rem;
         align-self: center;
         /*align-self: flex-end;
@@ -273,8 +271,6 @@ export default class OpinionWrapper extends HTMLElement {
         border-radius: 50px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
       }
 
       .head span.info > span.date {
@@ -284,7 +280,7 @@ export default class OpinionWrapper extends HTMLElement {
         justify-content: space-between;
         color: #6b7280;
         font-weight: 500;
-        font-family: var(--font-mono);
+        font-family: var(--font-mono),monospace;
         font-size: 0.94rem;
       }
 
@@ -330,7 +326,6 @@ export default class OpinionWrapper extends HTMLElement {
 
       #content.content ul a,
       #content.content ol a {
-        color: transparent;
         background: unset;
         color: #1f2937;
         font-weight: 500;
@@ -366,11 +361,11 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats * {
-        font-family: var(--font-one);
+        font-family: var(--font-main),sans-serif;
       }
 
       .stats span.no {
-        font-family: var(--font-mono);
+        font-family: var(--font-mono),monospace;
         font-size: 1rem;
       }
 
@@ -381,8 +376,6 @@ export default class OpinionWrapper extends HTMLElement {
         border-radius: 50px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
       }
 
       .stats > .stat.write span.line {
@@ -452,8 +445,6 @@ export default class OpinionWrapper extends HTMLElement {
         border-radius: 50px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
       }
 
       form.reply .image img {
@@ -463,8 +454,6 @@ export default class OpinionWrapper extends HTMLElement {
         border-radius: 50px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
       }
 
       form.reply > textarea {
@@ -515,8 +504,6 @@ export default class OpinionWrapper extends HTMLElement {
         border-radius: 50px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
       }
 
       form.reply > button svg {
