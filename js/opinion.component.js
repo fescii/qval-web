@@ -176,12 +176,12 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       *::-webkit-scrollbar-track {
-        background: #DDDDD7;
+        background: var(--scroll-bar-background);
       }
 
       *::-webkit-scrollbar-thumb {
         width: 3px;
-        background: linear-gradient(#53595f, #627ea0);
+        background: var(--scroll-bar-linear);
         border-radius: 50px;
       }
 
@@ -209,7 +209,7 @@ export default class OpinionWrapper extends HTMLElement {
 
 
       :host {
-        border-top: 1px solid #6b728038;
+        border-top: var(--story-border);
         padding: 15px 0;
         display: flex;
         flex-flow: column;
@@ -218,17 +218,15 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .head {
-        /*border: 1px solid #6b7280;*/
         padding: 0 0 3px 0;
         margin: 0;
         display: flex;
         flex-flow: column;
         gap: 0;
-        color: #53595f;
+        color: var(--text-color);
       }
 
       .head > span.info {
-        /* border: 1px solid #6b7280; */
         color: inherit;
         line-height: 1.5;
         width: max-content;
@@ -239,7 +237,6 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .head > span.info > a {
-        /* border: 1px solid #6b7280; */
         line-height: inherit;
         padding: 0;
         display: flex;
@@ -249,7 +246,7 @@ export default class OpinionWrapper extends HTMLElement {
         cursor: pointer;
         color: transparent;
         font-family: var(--font-mono),monospace;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
@@ -258,8 +255,6 @@ export default class OpinionWrapper extends HTMLElement {
         font-family: var(--font-mono),monospace;
         font-size: 1rem;
         align-self: center;
-        /*align-self: flex-end;
-        margin: 0 0 2px 0; */
       }
 
       .head > span.info > span.dot {
@@ -267,7 +262,7 @@ export default class OpinionWrapper extends HTMLElement {
         margin: 1px 0 0 0;
         width: 5px;
         height: 5px;
-        background-color: #6b7280c9;
+        background-color: var(--dot-background);
         border-radius: 50px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
@@ -278,17 +273,16 @@ export default class OpinionWrapper extends HTMLElement {
         line-height: inherit;
         align-items: center;
         justify-content: space-between;
-        color: #6b7280;
+        color: var(--gray-color);
         font-weight: 500;
         font-family: var(--font-mono),monospace;
         font-size: 0.94rem;
       }
 
       #content {
-        /*border: 1px solid #6b7280;*/
         display: flex;
         flex-flow: column;
-        color: #53595f;
+        color: var(--text-color);
         line-height: 1.5;
         gap: 0;
         margin: 0;
@@ -296,25 +290,23 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       #content.content p {
-        /*border: 1px solid #0b49c7;*/
         margin: 0 0 5px 0;
         padding: 0;
         line-height: 1.5;
       }
 
       #content.content a {
-        /* color: #1da1f2; */
         cursor: pointer;
         color: transparent;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
 
       #content.content a:hover {
-        text-decoration-color: #21D029 !important;
+        text-decoration-color: var(--anchor-active) !important;
         text-decoration: underline;
-        -moz-text-decoration-color: #21D029 !important;
+        -moz-text-decoration-color: var(--anchor-active) !important;
       }
 
       #content.content ul,
@@ -329,9 +321,9 @@ export default class OpinionWrapper extends HTMLElement {
         background: unset;
         color: #1f2937;
         font-weight: 500;
-        text-decoration-color: #4b556321 !important;
+        text-decoration-color: var(--anchor) !important;
         text-decoration: underline;
-        -moz-text-decoration-color: #4b556321 !important;
+        -moz-text-decoration-color: var(--anchor) !important;
       }
 
       #content.content ul a:hover,
@@ -341,7 +333,6 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats {
-        /* border: 1px solid #6b7280; */
         padding: 0;
         display: flex;
         align-items: center;
@@ -349,7 +340,6 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats > .stat {
-        /* border: 1px solid #6b7280; */
         padding: 3px 0;
         cursor: pointer;
         display: flex;
@@ -357,7 +347,7 @@ export default class OpinionWrapper extends HTMLElement {
         gap: 5px;
         font-size: 1rem;
         font-weight: 400;
-        color: #6b7280;
+        color: var(--gray-color);
       }
 
       .stats * {
@@ -370,8 +360,6 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats > .stat.write {
-        /* border: 1px solid #6b72803a; */
-        /* background-color: #39383816; */
         position: relative;
         border-radius: 50px;
         -webkit-border-radius: 50px;
@@ -379,8 +367,8 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats > .stat.write span.line {
-        border-left: 2px solid #6b72803a;
-        border-bottom: 2px solid #6b72803a;
+        border-left: var(--close-line);
+        border-bottom: var(--close-line);
         border-bottom-left-radius: 8px;
         position: absolute;
         top: 30px;
@@ -391,15 +379,15 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats.active > .stat.write span.line {
-        border-left: 2px solid #18A5653a;
-        border-bottom: 2px solid #18A5653a;
+        border-left: var(--open-line);
+        border-bottom: var(--open-line);
         display: inline-block;
       }
 
       .stats.active > .stat.write,
       .stats > .stat.write:hover {
         color: transparent;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
@@ -410,30 +398,28 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats > .stat.discuss svg {
-        color: #6b7280;
+        color: var(--gray-color);
         width: 19px;
         height: 19px;
       }
 
       .stats.active > .stat.write svg,
       .stats > .stat.write:hover svg {
-        color: #18A565;
+        color: var(--accent-color);
       }
 
       form.reply {
-        /* border: 1px solid #6b7280; */
         padding: 0 0 0 25px;
         margin: 10px 0 0 0;
         display: flex;
         gap: 10px;
         font-size: 1rem;
         font-weight: 400;
-        color: #6b7280;
+        color: var(--gray-color);
         position: relative;
       }
 
       form.reply .image {
-        /* border: thin solid #4b5563bd; */
         padding: 0;
         display: flex;
         align-items: center;
@@ -457,7 +443,7 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       form.reply > textarea {
-        border: 1px solid #6b72805e;
+        border: var(--input-border);
         padding: 8px !important;
         margin: 0;
         width: calc(100% - 48px);
@@ -471,7 +457,7 @@ export default class OpinionWrapper extends HTMLElement {
         gap: 5px;
         font-size: 1rem;
         font-weight: 400;
-        color: #6b7280;
+        color: var(--gray-color);
         border-radius: 10px;
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -483,12 +469,11 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       form.reply > textarea:focus {
-        border: 1px solid #18a5669a;
+        border: var(--input-border-focus);
       }
 
       form.reply > button {
         border: none;
-        /* border: 1px solid #6b7280; */
         position: absolute;
         background-color: var(--background);
         right: 8px;
@@ -507,7 +492,7 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       form.reply > button svg {
-        color: #18A565;
+        color: var(--accent-color);
         width: 24px;
         height: 26px;
       }

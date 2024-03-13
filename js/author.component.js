@@ -141,12 +141,12 @@ export default class PersonWrapper extends HTMLElement {
       }
 
       *::-webkit-scrollbar-track {
-        background: #DDDDD7;
+        background: var(--scroll-bar-background);
       }
 
       *::-webkit-scrollbar-thumb {
         width: 3px;
-        background: linear-gradient(#53595f, #627ea0);
+        background: var(--scroll-bar-linear);
         border-radius: 50px;
       }
 
@@ -174,8 +174,8 @@ export default class PersonWrapper extends HTMLElement {
 
       :host {
         font-family: var(--font-main),sans-serif;
-        border-right: 1px solid #6b728034;
-        background-color: #e6e6e616;
+        border-right: var(--story-border);
+        background-color: var(--author-background);
         padding: 8px 10px 8px 0;
         display: flex;
         flex-flow: row;
@@ -185,7 +185,6 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head {
-        /* border: 1px solid #6b7280; */
         padding: 0;
         margin: 0;
         display: flex;
@@ -195,7 +194,6 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .image {
-        /* border: 1px solid #6b7280; */
         padding: 0;
         display: flex;
         align-items: center;
@@ -218,7 +216,6 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name {
-        /* border: 1px solid #6b7280; */
         padding: 0;
         display: flex;
         flex-flow: column;
@@ -228,8 +225,8 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid  .profile {
-        border: 1px solid #83858442;
-        box-shadow: 0 12px 48px #6d758d33;
+        border: var(--modal-border);
+        box-shadow: var(--modal-shadow);
         padding: 10px 10px;
         z-index: 2;
         position: absolute;
@@ -254,7 +251,7 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid .profile > span.pointer {
-        border: 1px solid #83858442;
+        border: var(--modal-border);
         border-bottom: none;
         border-right: none;
         position: absolute;
@@ -271,7 +268,6 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid .profile > .head {
-        /* border: 1px solid #000000; */
         background-color: var(--background);
         display: flex;
         flex-wrap: nowrap;
@@ -280,7 +276,6 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid .profile > .head > .image {
-        /* border: 1px solid #000000; */
         width: 40px;
         height: 40px;
         overflow: hidden;
@@ -290,7 +285,6 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid .profile > .head > .image img {
-        /* border: 1px solid #000000; */
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -301,16 +295,13 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid > .profile .info {
-        /* border: 1px solid #000000; */
         display: flex;
         flex-flow: column;
-        /* align-items: center; */
       }
       
       .head > .name h4.uid > .profile .info p.name {
-        /* border: 1px solid #000000; */
         margin: 0;
-        color: #53595f;
+        color: var(--text-color);
         font-weight: 500;
         font-size: 1rem;
         display: flex;
@@ -319,24 +310,21 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid > .profile .info p.name svg {
-        /* border: 1px solid #000000; */
         margin: -2px 0 0;
-        color: #08b86f;
+        color: var(--accent-color);
         display: flex;
         align-items: center;
         justify-content: center;
       }
       
       .head > .name h4.uid > .profile .info a.followers {
-        /* border: 1px solid #000000; */
         text-decoration: none;
         margin: 0;
-        color: #6b7280;
+        color: var(--gray-color);
         background: unset;
         font-family: var(--font-main),sans-serif;
         display: flex;
         align-items: center;
-        /* justify-content: center; */
         gap: 5px;
       }
       
@@ -345,17 +333,14 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid > .profile .data {
-        /* border: 1px solid #000000; */
         margin: 5px 0;
         display: flex;
         flex-flow: column;
-        /* align-items: center; */
       }
       
       .head > .name h4.uid > .profile .data > p.name {
-        /* border: 1px solid #000000; */
         margin: 0;
-        color: #53595f;
+        color: var(--text-color);
         font-weight: 500;
         font-family: var(--font-main),sans-serif;
         font-size: 1.2rem;
@@ -363,17 +348,17 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .head > .name h4.uid > .profile .data > span.bio {
-        /* border: 1px solid #000000; */
         margin: 0;
-        color: #6b7280;
+        color: var(--gray-color);
         font-family: var(--font-main),sans-serif;
         font-size: 0.9rem;
       }
       
       .head > .name h4.uid > .profile span.action {
-        border: 1px solid #6b72808e;
+        border: var(--action-border);
         margin: 10px 0 5px;
         padding: 6px 15px;
+        width: 100%;
         font-weight: 500;
         font-family: var(--font-main),sans-serif;
         font-size: 0.9rem;
@@ -390,12 +375,12 @@ export default class PersonWrapper extends HTMLElement {
       .head > .name h4.uid > .profile span.action.follow {
         border: none;
         text-decoration: none;
-        color: #ffffff;
-        background-color: #1d2c38;
+        color: var(--white-color);
+        background-color: var(--action-color);
       }
       
       .head > .name h4.uid {
-        color: #53595f;
+        color: var(--text-color);
         font-family: var(--font-mono),monospace;
         font-weight: 500;
         font-size: 0.9rem;
@@ -403,7 +388,7 @@ export default class PersonWrapper extends HTMLElement {
       
       .head > .name h4.uid:hover > a {
         color: transparent;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
@@ -417,7 +402,7 @@ export default class PersonWrapper extends HTMLElement {
         display: flex;
         align-items: center;
         gap: 5px;
-        color: #6b7280;
+        color: var(--gray-color);
         font-size: 0.9rem;
       }
       
@@ -426,8 +411,8 @@ export default class PersonWrapper extends HTMLElement {
       }
       
       .action {
-        border: 1px solid #6b72803f;
-        color: #6b7280;
+        border: var(--action-border);
+        color: var(--gray-color);
         padding: 5px 25px;
         width: max-content;
         display: flex;
@@ -443,8 +428,8 @@ export default class PersonWrapper extends HTMLElement {
 
       .action.follow {
         border: none;
-        background-color: #1d2c38;
-        color: #ffffff;
+        background-color: var(--action-color);
+        color: var(--white-color);
         font-size: 0.9rem;
         font-weight: 500;
       }

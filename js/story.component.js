@@ -254,12 +254,12 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       *::-webkit-scrollbar-track {
-        background: #DDDDD7;
+        background: var(--scroll-bar-background);
       }
 
       *::-webkit-scrollbar-thumb {
         width: 3px;
-        background: linear-gradient(#53595f, #627ea0);
+        background: var(--scroll-bar-linear);
         border-radius: 50px;
       }
 
@@ -287,7 +287,7 @@ export default class StoryWrapper extends HTMLElement {
 
 
       :host {
-        border-top: thin solid #6b72801a;
+        border-top: var(--story-border);
         font-family: var(--font-main),sans-serif;
         padding: 15px 0;
         margin: 0;
@@ -298,7 +298,7 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .read-time {
-        color: #6b7280;
+        color: var(--gray-color);
         font-size: 0.9rem;
         font-family: var(--font-mono),sans-serif;
         display: flex;
@@ -312,7 +312,7 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       h3.title {
-        color: #53595f;
+        color: var(--text-color);
         margin: 0;
         padding: 0;
         font-weight: 500;
@@ -325,12 +325,10 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta {
-        /* border: 1px solid #000000; */
         height: 25px;
         display: flex;
         position: relative;
-        /* color: #f5f5f5; */
-        color: #6b7280;
+        color: var(--gray-color);
         align-items: center;
         font-family: var(--font-mono),monospace;
         gap: 5px;
@@ -338,25 +336,21 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta > .author {
-        /* border: 1px solid #000000; */
         height: 100%;
         display: flex;
-        /* cursor: pointer; */
         align-items: center;
         gap: 5px;
       }
       
       .meta div.author-name {
-        /* border: 1px solid #000000; */
         display: flex;
         align-items: center;
-        /* cursor: pointer; */
       }
       
       .meta div.author-name > a {
         text-decoration: none;
         color: transparent;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
@@ -364,14 +358,14 @@ export default class StoryWrapper extends HTMLElement {
       .meta a.opinion-link {
         text-decoration: none;
         color: transparent;
-        background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20));
+        background-image: var(--alt-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
       
       .meta  .profile {
-        border: 1px solid #83858442;
-        box-shadow: 0 12px 48px #6d758d33;
+        border: var(--modal-border);
+        box-shadow: var(--modal-shadow);
         padding: 10px 10px;
         z-index: 2;
         position: absolute;
@@ -395,7 +389,7 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta  .profile > span.pointer {
-        border: 1px solid #83858442;
+        border: var(--modal-border);
         border-bottom: none;
         border-right: none;
         position: absolute;
@@ -417,7 +411,6 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta  .profile > .head {
-        /* border: 1px solid #000000; */
         background-color: var(--background);
         display: flex;
         flex-wrap: nowrap;
@@ -426,7 +419,6 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta  .profile > .head > .image {
-        /* border: 1px solid #000000; */
         width: 40px;
         height: 40px;
         overflow: hidden;
@@ -436,7 +428,6 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta  .profile > .head > .image img {
-        /* border: 1px solid #000000; */
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -447,16 +438,13 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta .info {
-        /* border: 1px solid #000000; */
         display: flex;
         flex-flow: column;
-        /* align-items: center; */
       }
       
       .meta .info p.name {
-        /* border: 1px solid #000000; */
         margin: 0;
-        color: #53595f;
+        color: var(--text-color);
         font-weight: 500;
         font-size: 1rem;
         display: flex;
@@ -465,24 +453,21 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta .info p.name svg {
-        /* border: 1px solid #000000; */
         margin: -2px 0 0;
-        color: #08b86f;
+        color: var(--accent-color);
         display: flex;
         align-items: center;
         justify-content: center;
       }
       
       .meta .info a.followers {
-        /* border: 1px solid #000000; */
         text-decoration: none;
         margin: 0;
-        color: #6b7280;
+        color: var(--gray-color);
         background: unset;
         font-family: var(--font-main),sans-serif;
         display: flex;
         align-items: center;
-        /* justify-content: center; */
         gap: 5px;
       }
       
@@ -491,17 +476,14 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta .data {
-        /* border: 1px solid #000000; */
         margin: 5px 0;
         display: flex;
         flex-flow: column;
-        /* align-items: center; */
       }
       
       .meta .data > p.name {
-        /* border: 1px solid #000000; */
         margin: 0;
-        color: #53595f;
+        color: var(--text-color);
         font-weight: 500;
         font-family: var(--font-main),sans-serif;
         font-size: 1.2rem;
@@ -509,15 +491,14 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .meta .data > span.bio {
-        /* border: 1px solid #000000; */
         margin: 0;
-        color: #6b7280;
+        color: var(--gray-color);
         font-family: var(--font-main),sans-serif;
         font-size: 0.9rem;
       }
       
       .meta span.action {
-        border: 1px solid #6b72808e;
+        border: var(--action-border);
         margin: 10px 0 5px;
         padding: 6px 15px;
         font-weight: 500;
@@ -535,15 +516,13 @@ export default class StoryWrapper extends HTMLElement {
       .meta span.action.follow {
         border: none;
         text-decoration: none;
-        color: #ffffff;
-        background-color: #1d2c38;
-        /* background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%); */
+        color: var(--white-color);
+        background-color: var(--action-color);
       }
       .content {
-        /*border: 1px solid #6b7280;*/
         display: flex;
         flex-flow: column;
-        color: #53595f;
+        color: var(--text-color);
         line-height: 1.5;
         gap: 0;
         margin: 0;
@@ -551,25 +530,23 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .content p {
-        /*border: 1px solid #0b49c7;*/
         margin: 0 0 5px 0;
         padding: 0;
         line-height: 1.5;
       }
       
       .content a {
-        /* color: #1da1f2; */
         cursor: pointer;
         color: transparent;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
       
       .content a:hover {
-        text-decoration-color: #21D029 !important;
+        text-decoration-color: var(--anchor-active) !important;
         text-decoration: underline;
-        -moz-text-decoration-color: #21D029 !important;
+        -moz-text-decoration-color: var(--anchor-active) !important;
       }
       
       .content ul,
@@ -584,9 +561,9 @@ export default class StoryWrapper extends HTMLElement {
         background: unset;
         color: #1f2937;
         font-weight: 500;
-        text-decoration-color: #4b556321 !important;
+        text-decoration-color: var(--anchor) !important;
         text-decoration: underline;
-        -moz-text-decoration-color: #4b556321 !important;
+        -moz-text-decoration-color: var(--anchor) !important;
       }
       
       .content ul a:hover,
@@ -596,7 +573,6 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .stats {
-        /* border: 1px solid #6b7280; */
         padding: 0;
         margin: 0;
         display: flex;
@@ -605,7 +581,6 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .stats > .stat {
-        /* border: 1px solid #6b7280; */
         padding: 3px 0;
         cursor: pointer;
         display: flex;
@@ -614,7 +589,7 @@ export default class StoryWrapper extends HTMLElement {
         gap: 5px;
         font-size: 1rem;
         font-weight: 400;
-        color: #6b7280;
+        color: var(--gray-color);
       }
       
       .stats * {
@@ -627,14 +602,12 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .stats > .stat.write {
-        /* border: 1px solid #6b72803a; */
-        /* background-color: #39383816; */
         position: relative;
       }
       
       .stats > .stat.write span.line {
-        border-left: 2px solid #6b72803a;
-        border-bottom: 2px solid #6b72803a;
+        border-left: var(--close-line);
+        border-bottom: var(--close-line);
         border-bottom-left-radius: 8px;
         position: absolute;
         top: 30px;
@@ -645,20 +618,20 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .stats.active > .stat.write span.line {
-        border-left: 2px solid #18A5653a;
-        border-bottom: 2px solid #18A5653a;
+        border-left: var(--open-line)
+        border-bottom: var(--open-line)
         display: inline-block;
       }
       
       .stats.active > .stat.write,
       .stats > .stat.write:hover {
         color: transparent;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
       
-      > .stats > .stat.write svg {
+      .stats > .stat.write svg {
         color: inherit;
         width: 22px;
         height: 22px;
@@ -671,26 +644,25 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       .stats > .stat.write svg {
-        color: #6b7280;
+        color: var(--gray-color);
       }
+    
       .stats > .stat.write:hover svg {
-        color: #18A565;
+        color: var(--accent-color);
       }
       
       form.reply {
-        /* border: 1px solid #6b7280; */
         padding: 0 0 0 25px;
         margin: 10px 0 0 0;
         display: none;
         gap: 10px;
         font-size: 1rem;
         font-weight: 400;
-        color: #6b7280;
+        color: var(--gray-color);
         position: relative;
       }
       
       form.reply .image {
-        /* border: thin solid #4b5563bd; */
         padding: 0;
         display: flex;
         align-items: center;
@@ -714,7 +686,7 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       form.reply > textarea {
-        border: 1px solid #6b72805e;
+        border: var(--input-border);
         padding: 8px !important;
         margin: 0;
         width: calc(100% - 48px);
@@ -727,7 +699,7 @@ export default class StoryWrapper extends HTMLElement {
         gap: 5px;
         font-size: 1rem;
         font-weight: 400;
-        color: #6b7280;
+        color: var(--gray-color);
         border-radius: 10px;
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -739,14 +711,14 @@ export default class StoryWrapper extends HTMLElement {
       }
       
       form.reply > textarea:focus {
-        border: 1px solid #18a5669a;
+        border: var(--input-border-focus);
       }
       
       form.reply > button {
         border: none;
         cursor: pointer;
-        color: #ffffff;
-        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+        color: var(--white-color);
+        background: var(--accent-linear);
         position: absolute;
         right: 8px;
         top: calc(50% - 15px);

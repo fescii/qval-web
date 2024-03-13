@@ -174,9 +174,9 @@
   header.header > ul.left > .account > a.signup {
     border: none;
     padding: 10px 0;
-    color: #ffffff;
+    color: var(--white-color);
     text-align: center;
-    background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+    background: var(--accent-linear);
   }
 
   header.header > ul.left > li.logout {
@@ -215,7 +215,7 @@
   header.header > ul.left > .account > a.donate > svg,
   header.header > ul.left > li.logout > a svg,
   header.header > ul.left > .account > a.settings svg {
-    color: #6b7280;
+    color: var(--gray-color);
     width: 28px;
     height: 28px;
   }
@@ -303,7 +303,7 @@
   }
 
   header.header > ul.left > li.link a {
-    color: #6b7280;
+    color: var(--gray-color);
     cursor: pointer;
     font-family: inherit;
   }
@@ -329,7 +329,7 @@
     left: unset;
     top: unset;
     width: unset;
-    color: #6b7280;
+    color: var(--gray-color);
     align-items: center;
     flex-flow: column;
     gap: 0;
@@ -417,7 +417,7 @@
 
   header.header > ul > li.link > div.drop-down ul > li svg {
     /* border: 1px solid red; */
-    color: #6b7280;
+    color: var(--gray-color);
     width: 30px;
     height: 30px;
     margin: -2px 0 0 -8px;
@@ -460,7 +460,7 @@
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.5;
-    color: #6b7280;
+    color: var(--gray-color);
   }
 
   header.header > ul > li.link > div.drop-down ul > li a span.content span.text {
