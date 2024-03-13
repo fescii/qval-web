@@ -145,7 +145,7 @@ export default class StoryWrapper extends HTMLElement {
 	checkFollowing = (following) => {
 		if (following === 'true') {
 			return `
-			  <span class="action following">Follow</span>
+			  <span class="action following">Following</span>
 			`
 		}
 		else {
