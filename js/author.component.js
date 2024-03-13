@@ -1,4 +1,4 @@
-export default class StoryWrapper extends HTMLElement {
+export default class PersonWrapper extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -230,7 +230,7 @@ export default class StoryWrapper extends HTMLElement {
       .head > .name h4.uid  .profile {
         border: 1px solid #83858442;
         box-shadow: 0 12px 48px #6d758d33;
-        padding: 0 10px 10px;
+        padding: 10px 10px;
         z-index: 2;
         position: absolute;
         top: 25px;
