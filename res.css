@@ -13,23 +13,8 @@
 }
 
 @media screen and (max-width:800px) {
-  footer.footer {
-    padding: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 25px;
-  }
-
-  footer.footer>section.newsletter {
-    /* border: 1px solid #808080; */
-    grid-column: 1/4;
-    grid-row: 2/3;
-    display: flex;
-    flex-flow: column;
-  }
-
-  footer.footer>.copy {
-    grid-column: 1/4;
-    grid-row: 3;
+  header.header > ul > li.link.theme > .options {
+    border: 1px solid #057232a9;
   }
 }
 
@@ -189,9 +174,9 @@
   header.header > ul.left > .account > a.signup {
     border: none;
     padding: 10px 0;
-    color: #ffffff;
+    color: var(--white-color);
     text-align: center;
-    background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
+    background: var(--accent-linear);
   }
 
   header.header > ul.left > li.logout {
@@ -230,7 +215,7 @@
   header.header > ul.left > .account > a.donate > svg,
   header.header > ul.left > li.logout > a svg,
   header.header > ul.left > .account > a.settings svg {
-    color: #6b7280;
+    color: var(--gray-color);
     width: 28px;
     height: 28px;
   }
@@ -318,7 +303,7 @@
   }
 
   header.header > ul.left > li.link a {
-    color: #6b7280;
+    color: var(--gray-color);
     cursor: pointer;
     font-family: inherit;
   }
@@ -344,7 +329,7 @@
     left: unset;
     top: unset;
     width: unset;
-    color: #6b7280;
+    color: var(--gray-color);
     align-items: center;
     flex-flow: column;
     gap: 0;
@@ -432,7 +417,7 @@
 
   header.header > ul > li.link > div.drop-down ul > li svg {
     /* border: 1px solid red; */
-    color: #6b7280;
+    color: var(--gray-color);
     width: 30px;
     height: 30px;
     margin: -2px 0 0 -8px;
@@ -475,7 +460,7 @@
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.5;
-    color: #6b7280;
+    color: var(--gray-color);
   }
 
   header.header > ul > li.link > div.drop-down ul > li a span.content span.text {
