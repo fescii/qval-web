@@ -20,10 +20,18 @@
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
 		import PersonWrapper from "./js/author.component.js";
+		import StoryLoader from "./js/loaders/story.loader.js";
+		import PeopleLoader from "./js/loaders/people.loader.js";
+		import StoryFeed from "./js/feeds/stories.feed.js";
+		import PeopleContainer from "./js/containers/people.container.js";
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
 		customElements.define('person-wrapper', PersonWrapper);
+		customElements.define('story-loader', StoryLoader);
+		customElements.define('people-loader', PeopleLoader);
+		customElements.define('stories-feed', StoryFeed);
+		customElements.define('people-container', PeopleContainer)
   </script>
 </head>
 
@@ -452,9 +460,6 @@
   </header>
 
   <main class="home">
-    <div class="head">
-      <h2 class="title">Popular</h2>
-    </div>
     <section class="popular">
       <div class="stories">
         <a class="trending-story"
@@ -562,203 +567,85 @@
             <h4 class="title">Topics</h4>
             <span class="text">Trending topics now</span>
           </div>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">63</span>
-              <span class="text">Health Care</span>
-            </a>
-            </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">1.03k</span>
-              <span class="text">Spotify</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">3</span>
-              <span class="text">Good morning</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">117</span>
-              <span class="text">Sora</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">71</span>
-              <span class="text">Video Tape</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">44</span>
-              <span class="text">Kendrick Lamar</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">9</span>
-              <span class="text">World War III</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">13</span>
-              <span class="text">Christian</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">5</span>
-              <span class="text">Nato</span>
-            </a>
-          </li>
-          <li class="topic">
-            <a href="" class="link">
-              <span class="no">73</span>
-              <span class="text">Programming</span>
-            </a>
-          </li>
+	        <li class="topics-loader">
+		        <span class="topic one skeleton"></span>
+		        <span class="topic two skeleton"></span>
+		        <span class="topic three skeleton"></span>
+		        <span class="topic four skeleton"></span>
+		        <span class="topic five skeleton"></span>
+		        <span class="topic six skeleton"></span>
+		        <span class="topic seven skeleton"></span>
+		        <span class="topic eight skeleton"></span>
+		        <span class="topic nine skeleton"></span>
+		        <span class="topic ten skeleton"></span>
+		        <span class="topic eleven skeleton"></span>
+	        </li>
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">63</span>-->
+<!--              <span class="text">Health Care</span>-->
+<!--            </a>-->
+<!--            </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">1.03k</span>-->
+<!--              <span class="text">Spotify</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">3</span>-->
+<!--              <span class="text">Good morning</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">117</span>-->
+<!--              <span class="text">Sora</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">71</span>-->
+<!--              <span class="text">Video Tape</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">44</span>-->
+<!--              <span class="text">Kendrick Lamar</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">9</span>-->
+<!--              <span class="text">World War III</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">13</span>-->
+<!--              <span class="text">Christian</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">5</span>-->
+<!--              <span class="text">Nato</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="topic">-->
+<!--            <a href="" class="link">-->
+<!--              <span class="no">73</span>-->
+<!--              <span class="text">Programming</span>-->
+<!--            </a>-->
+<!--          </li>-->
         </ul>
       </div>
     </section>
     <section class="feeds">
-      <div class="stories new">
-	      <div class="stories-loader">
-		      <div class="loader">
-			      <div class="body skeleton"></div>
-			      <span class="foot">
-							<span class="start skeleton"></span>
-							<span class="dot skeleton"></span>
-							<span class="end skeleton"></span>
-						</span>
-		      </div>
-		      <div class="loader">
-			      <span class="head">
-							<span class="start skeleton"></span>
-							<span class="dot skeleton"></span>
-							<span class="end skeleton"></span>
-						</span>
-			      <div class="body skeleton"></div>
-		      </div>
-		      <div class="loader">
-			      <div class="body skeleton"></div>
-			      <span class="foot">
-							<span class="start skeleton"></span>
-							<span class="dot skeleton"></span>
-							<span class="end skeleton"></span>
-						</span>
-		      </div>
-		      <div class="loader">
-			      <span class="head">
-							<span class="start skeleton"></span>
-							<span class="dot skeleton"></span>
-							<span class="end skeleton"></span>
-						</span>
-			      <div class="body skeleton"></div>
-		      </div>
-		      <div class="loader">
-			      <div class="body skeleton"></div>
-			      <span class="foot">
-							<span class="start skeleton"></span>
-							<span class="dot skeleton"></span>
-							<span class="end skeleton"></span>
-						</span>
-		      </div>
-	      </div>
-	      
-		    <story-wrapper story="story" id="Q0A43PBA" views="609" time="2024-03-13T13:00:00+03:00"
-	          title="The US Senate called on the law markers"
-	          read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
-	          author-verified="true" author-name="Fredrick Ochieng"
-	          author-bio="Student At The East African University"
-	          author-followers="23" following="false">
-		    </story-wrapper>
-		    <story-wrapper story="opinion" id="Q0A43PBA"
-		      views="609" time="2022-01-03T13:00:00+03:00"
-		      title="The US Senate called on the law markers"
-		      read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
-		      author-verified="true" author-name="Fredrick Ochieng"
-		      author-bio="Student At The East African University"
-		      author-followers="23" following="true">
-			    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
-			    Facilis nulla optio quas quod veniam nam voluptas!
-		    </story-wrapper>
-	      <story-wrapper story="story" id="Q0A43PBA"
-	        views="609" time="2022-01-03T13:00:00+03:00" title="The US Senate called on the law markers"
-	        read-time="6" author-id="U0A43PBA" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
-	        author-bio="Student At The East African University" author-followers="23" following="false">
-	      </story-wrapper>
-	      <story-wrapper story="opinion" id="Q0A43PBA"
-	        views="609" time="2022-01-03T13:00:00+03:00" title="The US Senate called on the law markers"
-	        read-time="6" author-id="U0A43PBA" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
-	        author-bio="Student At The East African University" author-followers="23" following="true">
-		      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
-		      Facilis nulla optio quas quod veniam nam voluptas!
-	      </story-wrapper>
-	      <story-wrapper story="story" id="Q0A43PBA"
-	        views="609" time="2022-01-03T13:00:00+03:00" title="The US Senate called on the law markers"
-	        read-time="6" author-id="U0A43PBA" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
-	        author-bio="Student At The East African University" author-followers="23" following="false">
-	      </story-wrapper>
-	      <story-wrapper story="opinion" id="Q0A43PBA" views="609" time="2022-01-03T13:00:00+03:00"
-	        title="The US Senate called on the law markers" read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
-	        author-verified="true" author-name="Fredrick Ochieng"
-	        author-bio="Student At The East African University" author-followers="23" following="true">
-		      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
-		      Facilis nulla optio quas quod veniam nam voluptas!
-	      </story-wrapper>
-	      <story-wrapper story="story" id="Q0A43PBA"
-					views="609" time="2024-01-03T13:00:00+03:00" title="The US Senate called on the law markers"
-	        read-time="6" author-id="U0A43PBA" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
-	        author-bio="Student At The East African University" author-followers="23" following="false">
-	      </story-wrapper>
-	      <story-wrapper story="story" id="Q0A43PBA"
-	        views="609" time="2021-01-03T13:00:00+03:00" title="The US Senate called on the law markers"
-	        read-time="6" author-id="U0A43PBA" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
-	        author-bio="Student At The East African University" author-followers="23" following="false">
-	      </story-wrapper>
-      </div>
-      <div class="people">
-        <div class="people-list">
-          <div class="title">
-            <h4 class="title">People</h4>
-            <span class="desc">Discover authors on avalQ</span>
-          </div>
-	        <person-wrapper id="U0A43PBA" img="img/img.jpg"
-	          verified="true" name="Fredrick Ochieng"
-	          bio="Student At The East African University"
-	          followers="23" following="true">
-	        </person-wrapper>
-	        <person-wrapper id="U0A43PBA" img="img/img.jpg"
-	                        verified="true" name="Fredrick Ochieng"
-	                        bio="Student At The East African University"
-	                        followers="23" following="false">
-	        </person-wrapper>
-	        <person-wrapper id="U0A43PBA" img="img/img.jpg"
-	                        verified="true" name="Fredrick Ochieng"
-	                        bio="Student At The East African University"
-	                        followers="23" following="false">
-	        </person-wrapper>
-	        <person-wrapper id="U0A43PBA" img="img/img.jpg"
-	                        verified="true" name="Fredrick Ochieng"
-	                        bio="Student At The East African University"
-	                        followers="23" following="false">
-	        </person-wrapper>
-	        <person-wrapper id="U0A43PBA" img="img/img.jpg"
-	                        verified="true" name="Fredrick Ochieng"
-	                        bio="Student At The East African University"
-	                        followers="23" following="false">
-	        </person-wrapper>
-          <div class="more">
-            <p>Discover authors and follow authors. Interact, support and engage with authors.</p>
-            <a href="" class="link">Discover</a>
-          </div>
-        </div>
-      </div>
+	    <people-container url="/people/popular"></people-container>
+      <stories-feed url="/stories/feed"></stories-feed>
     </section>
   </main>
   <footer class="footer">

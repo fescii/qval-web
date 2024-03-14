@@ -72,8 +72,8 @@ Author URL: https://femar.co.ke
     #ffffff
   );
   --fade-picture-gradient: linear-gradient(180deg,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.8)
+  rgba(0, 0, 0, 0),
+  rgba(0, 0, 0, 0.8)
   );
 }
 
@@ -1270,14 +1270,6 @@ main.home {
   justify-content: space-between;
 }
 
-main.home .head {
-  /* border: thin solid #4b5563bd; */
-  display: flex;
-  gap: 0;
-  margin: 10px 0;
-  color: #1f2937;
-}
-
 main.home > section.popular {
   /* border: thin solid #4b5563bd; */
   margin: 15px 0;
@@ -1505,15 +1497,13 @@ main.home > section.popular > div.side {
 
 main.home > section.popular > div.side > .donate-card {
   /* border: 1px solid #ff0000; */
-  background-color: #39383816;
-  padding: 8px 15px;
+  /*background-color: #39383816;*/
+  padding: 10px 0;
   width: 100%;
   display: flex;
   flex-flow: column;
   gap: 5px;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
+  /*border-radius: 10px;*/
 }
 
 main.home > section.popular > div.side > .donate-card h2 {
@@ -1631,90 +1621,6 @@ main.home > section.feeds {
   justify-content: space-between;
   gap: 30px;
 }
-
-main.home > section.feeds > div.stories.new {
-  /* border: 1px solid #000000; */
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-}
-
-
-main.home > section.feeds > div.people {
-  /* border: 1px solid #000000; */
-  background-color: var(--background);
-  padding: 0;
-  display: flex;
-  flex-flow: column;
-  gap: 20px;
-}
-
-main.home > section.feeds > div.people > .people-list {
-  /* border: 1px solid #000000; */
-  background-color: var(--background);
-  padding: 0;
-  display: flex;
-  flex-flow: column;
-  gap: 20px;
-  position: sticky;
-  top: 70px;
-}
-
-main.home > section.feeds > div.people > .people-list .title {
-  /* border: 1px solid #000000; */
-  padding: 0;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-}
-
-main.home > section.feeds > div.people > .people-list .title h4 {
-  color: #1f2937;
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-main.home > section.feeds > div.people > .people-list .title > span {
-  color: var(--gray-color);
-  font-size: 0.85rem;
-}
-
-main.home > section.feeds > div.people .more {
-  /* border: 1px solid #6b7280; */
-  margin: 15px 0 0 0;
-  padding: 10px 0;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-main.home > section.feeds > div.people .more p {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  color: var(--text-color);
-}
-
-main.home > section.feeds > div.people .more a {
-  text-decoration: none;
-  border: none;
-  background-color: #1d2c38d2;
-  padding: 5px 20px;
-  color: var(--white-color);
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-}
-
-
-
-
 
 
 /*Footer*/
@@ -1923,109 +1829,58 @@ footer.footer>.copy>.legal>a:hover {
 }
 
 
-
-
-
-
-.stories-loader {
-  /*border: var(--input-border);*/
-  display: flex;
-  flex-flow: column;
-  gap: 5px;
-  width: 100%;
+.topics-loader {
+	/*border: 1px solid #80808040;*/
+	padding: 8px 0 0;
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+	gap: 15px;
+	width: 100%;
 }
 
-.stories-loader > .loader {
-  /*border: var(--input-border);*/
-  padding: 10px 0;
-  display: flex;
-  flex-flow: column;
-  gap: 5px;
-  /*max-width: 400px;*/
-  width: 90%;
-  max-width: 100%;
+.topics-loader > .topic {
+	/*padding: 0 10px 0 0;*/
+	display: inline-block;
+	width: 25%;
+	height: 20px;
+	border-radius: 50px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
 }
 
-.stories-loader > .loader .skeleton {
-  background: var(--loader-gradient);
-  background-size: 500% 500%;
-  -webkit-animation: Gradient 2.25s ease infinite;
-  -moz-animation: Gradient 2.25s ease infinite;
-  animation: Gradient 2.25s ease infinite;
+.topics-loader > .topic:nth-of-type(odd) {
+	width: 20%;
 }
 
-.stories-loader > .loader > .foot,
-.stories-loader > .loader > .head{
-  /*border: var(--input-border);*/
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 10px;
-  width: 70%;
-  max-width: 100%;
-}
-.stories-loader > .loader  span.end,
-.stories-loader > .loader  span.start {
-  display: inline-block;
-  height: 15px;
-  /*background-color: #6b728050;*/
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
+.topics-loader > .topic.seven,
+.topics-loader > .topic.five {
+	width: 40%;
 }
 
-.stories-loader > .loader > .foot >  span.start,
-.stories-loader > .loader > .head >  span.end {
-  min-width: 65%;
-}
-
-.stories-loader > .loader > .foot >  span.end,
-.stories-loader > .loader > .head >  span.start {
-  min-width: 25%;
-}
-
-.stories-loader > .loader  span.dot {
-  display: inline-block;
-  min-width: 20px;
-  height: 10px;
-  /*background-color: #6b728050;*/
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-}
-
-.stories-loader > .loader > .body {
-  /*border: var(--input-border);*/
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 30px;
-  /*background-color: #6b728050;*/
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
+.topics-loader .skeleton {
+	background: var(--loader-gradient);
+	background-size: 500% 500%;
+	-webkit-animation: Gradient 2.25s ease infinite;
+	-moz-animation: Gradient 2.25s ease infinite;
+	animation: Gradient 2.25s ease infinite;
 }
 
 @keyframes Gradient {
-  0% {
-    background-position: 0 25%;
-    /*opacity: 0.5;*/
-  }
-  50% {
-    background-position: 25% 50%;
-    /*opacity: 0.75;*/
-  }
-  75% {
-    background-position: 50% 75%;
-    /*opacity: 0.75;*/
-  }
-  100% {
-    background-position: 75% 100%;
-    /*opacity: 1;*/
-  }
+	0% {
+		background-position: 0 25%;
+		/*opacity: 0.5;*/
+	}
+	50% {
+		background-position: 25% 50%;
+		/*opacity: 0.75;*/
+	}
+	75% {
+		background-position: 50% 75%;
+		/*opacity: 0.75;*/
+	}
+	100% {
+		background-position: 75% 100%;
+		/*opacity: 1;*/
+	}
 }
-
-
