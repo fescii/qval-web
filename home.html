@@ -641,19 +641,22 @@
       })
 
       const replyTextarea = document.querySelector('textarea#reply');
-      replyTextarea.addEventListener('input', () => {
-        replyTextarea.style.height = 'auto';
-        const height = replyTextarea.scrollHeight;
-        if(height <= 60) {
-          replyTextarea.style.height = `38px`;
-        }
-        else if (height <= 100) {
-          replyTextarea.style.height = `${height + 10}px`;
-        }
-        else {
-          replyTextarea.style.height = `100px`;
-        }
-      });
+      if (replyTextarea) {
+        replyTextarea.addEventListener('input', () => {
+          replyTextarea.style.height = 'auto';
+          const height = replyTextarea.scrollHeight;
+          if (height <= 60) {
+            replyTextarea.style.height = `38px`;
+          }
+          else if (height <= 100) {
+            replyTextarea.style.height = `${height + 10}px`;
+          }
+          else {
+            replyTextarea.style.height = `100px`;
+          }
+        });
+      }
+  
 
 
       // Mobile Switcher
