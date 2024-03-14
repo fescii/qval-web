@@ -50,7 +50,6 @@ Author URL: https://femar.co.ke
   --anchor: #4b556321;
   --anchor-active: #21D029;
 
-
   --open-line: 2px solid #08b86f32;
   --close-line: 2px solid #6b72803a;
 
@@ -59,6 +58,7 @@ Author URL: https://femar.co.ke
 
   --accent-linear: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   --alt-linear: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20));
+  --loader-gradient: linear-gradient(-45deg, #ececec, #f8f8f8, #DDDDDD, #f8f8f8, #ececec);
   --fade-linear-gradient: linear-gradient(
     180deg, #ffffff02,
     #ffffff2a,
@@ -1931,23 +1931,24 @@ footer.footer>.copy>.legal>a:hover {
   /*border: var(--input-border);*/
   display: flex;
   flex-flow: column;
-  gap: 0;
+  gap: 5px;
   width: 100%;
 }
 
 .stories-loader > .loader {
-  border: var(--input-border);
+  /*border: var(--input-border);*/
   padding: 10px 0;
   display: flex;
   flex-flow: column;
   gap: 5px;
-  max-width: 400px;
-  /*max-width: 100%;*/
+  /*max-width: 400px;*/
+  width: 90%;
+  max-width: 100%;
 }
 
 .stories-loader > .loader .skeleton {
-  background: linear-gradient(-45deg, #DDDDDD, #F0F0F0, #DDDDDD, #F0F0F0);
-  background-size: 400% 400%;
+  background: var(--loader-gradient);
+  background-size: 500% 500%;
   -webkit-animation: Gradient 2.25s ease infinite;
   -moz-animation: Gradient 2.25s ease infinite;
   animation: Gradient 2.25s ease infinite;
@@ -1963,7 +1964,7 @@ footer.footer>.copy>.legal>a:hover {
   align-items: center;
   flex-wrap: nowrap;
   gap: 10px;
-  width: 100%;
+  width: 70%;
   max-width: 100%;
 }
 .stories-loader > .loader  span.end,
@@ -2001,54 +2002,30 @@ footer.footer>.copy>.legal>a:hover {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 40px;
+  height: 30px;
   /*background-color: #6b728050;*/
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
 }
 
-@-webkit-keyframes Gradient {
-  0% {
-    background-position: 0 50%;
-    opacity: 1;
-  }
-  50% {
-    background-position: 100% 50%;
-    opacity: 0.5;
-  }
-  100% {
-    background-position: 0 50%;
-    opacity: 1;
-  }
-}
-
-@-moz-keyframes Gradient {
-  0% {
-    background-position: 0 50%;
-    opacity: 1;
-  }
-  50% {
-    background-position: 100% 50%;
-    opacity: 0.5;
-  }
-  100% {
-    background-position: 0 50%;
-    opacity: 1;
-  }
-}
-
 @keyframes Gradient {
   0% {
-    background-position: 0 50%;
-    opacity: 1;
+    background-position: 0 25%;
+    /*opacity: 0.5;*/
   }
   50% {
-    background-position: 100% 50%;
-    opacity: 0.5;
+    background-position: 25% 50%;
+    /*opacity: 0.75;*/
+  }
+  75% {
+    background-position: 50% 75%;
+    /*opacity: 0.75;*/
   }
   100% {
-    background-position: 0 50%;
-    opacity: 1;
+    background-position: 75% 100%;
+    /*opacity: 1;*/
   }
 }
+
+
