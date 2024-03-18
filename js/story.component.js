@@ -16,8 +16,61 @@ export default class StoryWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    this.upVote()
-    this.openForm()
+    this.upVote();
+    this.openForm();
+    this.openProfile();
+  }
+
+  disableScroll() {
+    // Get the current page scroll position
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
+    let scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+    document.body.classList.add("stop-scrolling");
+
+    // if any scroll is attempted, set this to the previous value
+    window.onscroll = function () {
+      window.scrollTo(scrollLeft, scrollTop);
+    };
+  }
+
+  enableScroll() {
+    document.body.classList.remove("stop-scrolling");
+    window.onscroll = function () { };
+  }
+
+  openProfile = () => {
+    const outerThis = this;
+    const mql = window.matchMedia('(max-width: 660px)');
+    const metaElement = this.shadowObj.querySelector(".meta");
+
+    console.log(metaElement);
+
+    if (mql.matches) {
+      if (metaElement) {
+        const link = metaElement.querySelector("a.action-link");
+        const content = metaElement.querySelector("div.user-container");
+        const pointer = metaElement.querySelector('.pointer');
+
+        console.log(content);
+
+        if (link && content && pointer) {
+          link.addEventListener("click", ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            content.style.setProperty("display", "flex");
+            outerThis.disableScroll()
+          })
+
+          pointer.addEventListener("click", e => {
+            e.preventDefault();
+
+            content.style.setProperty("display", "none");
+            outerThis.enableScroll()
+          })
+        }
+      }
+    }
   }
 
 	formatDateWithRelativeTime = (isoDateStr) => {
@@ -205,7 +258,7 @@ export default class StoryWrapper extends HTMLElement {
           <div class="author">
             <span class="sp">by</span>
             <div class="author-name">
-              <a href="" class="link">${this.getAttribute('author-id')}</a>
+              <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
               ${this.getAuthor()}
             </div>
           </div>
@@ -225,7 +278,7 @@ export default class StoryWrapper extends HTMLElement {
 
   getAuthor = () => {
     return `
-      <div class="profile">
+      <div class="profile user-container">
         <span class="pointer"></span>
         <div class="cover">
           <div class="head">
@@ -336,7 +389,7 @@ export default class StoryWrapper extends HTMLElement {
           <div class="author">
             <span class="sp">by</span>
             <div class="author-name">
-              <a href="" class="link">${this.getAttribute('author-id')}</a>
+              <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
               ${this.getAuthor()}
             </div>
           </div>
@@ -504,6 +557,8 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .meta  .profile {
+        border: var(--modal-border);
+        background-color: var(--background);
         padding: 0;
         z-index: 2;
         position: absolute;
@@ -518,7 +573,6 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .meta  .profile > .cover {
-        border: var(--modal-border);
         box-shadow: var(--modal-shadow);
         padding: 10px 10px;
         z-index: 2;
@@ -964,7 +1018,10 @@ export default class StoryWrapper extends HTMLElement {
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
       }
-      @media screen and (max-width:660px) {
+      @media screen and (max-width:600px) {
+        .meta a.opinion-link,
+        .meta div.author-name > a,
+        a,
         .stats > .stat {
           cursor: default !important;
         }
@@ -1001,13 +1058,17 @@ export default class StoryWrapper extends HTMLElement {
           left: 0;
           right: 0;
           background-color: transparent;
-          display: flex;
+          display: none;
           flex-flow: column;
           justify-content: end;
           gap: 0;
           width: 100%;
           height: 100%;
           border-radius: unset;
+        }
+
+        .meta.opened .profile {
+          display: flex;
         }
 
         .meta  .profile > .cover {
@@ -1038,6 +1099,7 @@ export default class StoryWrapper extends HTMLElement {
           display: none;
         }
 
+        .meta.opinion .profile > span.pointer,
         .meta  .profile > span.pointer {
           border: var(--modal-border);
           border-bottom: none;
@@ -1049,8 +1111,8 @@ export default class StoryWrapper extends HTMLElement {
           bottom: 0;
           background-color: var(--modal-overlay);
           display: inline-block;
-          width: 100%;
-          height: 100dvh;
+          min-width: 100%;
+          height: 100%;
           rotate: unset;
           border-radius: 0;
         }

@@ -132,6 +132,11 @@ body {
   font-family: var(--font-main), sans-serif;
 }
 
+body.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
 
 
 /*
