@@ -50,11 +50,14 @@ Author URL: https://femar.co.ke
   --anchor: #4b556321;
   --anchor-active: #21D029;
 
-  --open-line: 2px solid #08b86f32;
+  --open-line: 2px solid #08b86f7a;
   --close-line: 2px solid #6b72803a;
 
   --modal-shadow: 0 12px 48px #6d758d33;
   --modal-border: 1px solid #83858442;
+  --modal-overlay: #1d2534b3;
+
+  --second-linear: linear-gradient(0deg,#df791a 0%, #f09c4e 100%);
 
   --accent-linear: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
   --alt-linear: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20));
@@ -127,6 +130,11 @@ body {
   max-width: 1100px;
   min-height: var(--vh-height, 100vh);
   font-family: var(--font-main), sans-serif;
+}
+
+body.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }
 
 
