@@ -34,6 +34,9 @@ Author URL: https://femar.co.ke
   --input-border-focus: 1px solid #18a5669a;
   --action-border: 1px solid #6b72803f;
   --story-border: thin solid #6b72801a;
+
+  --story-border-mobile: thin solid #6b728046;
+
   --font-mono: 'Jetbrains Mono';
   --background: #ffffff;
   --vh-height: 100dvh;

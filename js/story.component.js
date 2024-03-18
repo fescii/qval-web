@@ -1018,7 +1018,11 @@ export default class StoryWrapper extends HTMLElement {
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
       }
-      @media screen and (max-width:600px) {
+      @media screen and (max-width:660px) {
+        :host {
+          border-top: var(--story-border-mobile);
+        }
+
         .meta a.opinion-link,
         .meta div.author-name > a,
         a,
