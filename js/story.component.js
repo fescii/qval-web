@@ -96,33 +96,75 @@ export default class StoryWrapper extends HTMLElement {
         top: outerNum.scrollHeight + 10,
         behavior: "smooth"
       })
+
       container.addEventListener('click', (event) => {
         event.preventDefault();
 
-        container.classList.add("active");
+        const upvoted = outerThis.getAttribute("upvoted") || "false";
+        // console.log(upvoted);
 
         let numb = container.querySelector(".numb_list");
-        numb.style.setProperty("padding", "0");
         let num = numb.querySelector(`#u-${outerThis.getAttribute('upvotes')}`);
-        console.log(num);
+        // console.log(num);
         let numHolder = num.textContent;
 
-        try {
-          numHolder = parseInt(numHolder) + 1;
-        }
-        catch (error) {
-          console.error(error);
-        }
+        if (upvoted === "false") {
+          container.classList.add("active");
+          try {
+            numHolder = parseInt(numHolder) + 1;
+          }
+          catch (error) {
+            console.error(error);
+          }
 
-        let newNum = document.createElement("span");
-        newNum.setAttribute("id", `u-${numHolder}`)
-        newNum.innerText = numHolder;
-        outerThis.setAttribute("upvotes", numHolder);
-        numb.appendChild(newNum);
-        numb.scrollBy({
-          top: num.scrollHeight + 10,
-          behavior: "smooth"
-        })
+          let newNum = document.createElement("span");
+          newNum.setAttribute("id", `u-${numHolder}`)
+          newNum.innerText = numHolder;
+
+          outerThis.setAttribute("upvotes", numHolder);
+          outerThis.setAttribute("upvoted", 'true');
+
+          numb.appendChild(newNum);
+          numb.scrollBy({
+            top: num.scrollHeight + 100,
+            behavior: "smooth"
+          })
+        }
+        else {
+          container.classList.remove("active");
+          container.classList.remove("true");
+
+          try {
+            numHolder = parseInt(numHolder) - 1;
+
+            if (typeof numHolder === "number") {
+              if (numHolder < 1) {
+                numHolder = 0
+              }
+            }
+          }
+          catch (error) {
+            console.error(error);
+          }
+
+          let allNum = numb.querySelectorAll('span');
+          let removeNum = numb.querySelector(`#u-${outerThis.getAttribute('upvotes')}`);
+
+          if (allNum.length > 1) {
+            removeNum.remove()
+          }
+          else {
+            removeNum.textContent = numHolder;
+            removeNum.setAttribute("id", `u-${numHolder}`)
+          }
+          outerThis.setAttribute("upvotes", numHolder);
+          outerThis.setAttribute("upvoted", 'false');
+
+          numb.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          })
+        }
       })
     }
   }
@@ -258,7 +300,6 @@ export default class StoryWrapper extends HTMLElement {
               <path d="M12 22.0001C4.617 22.0001 2 19.3831 2 12.0001C2 4.61712 4.617 2.00012 12 2.00012C12.414 2.00012 12.75 2.33612 12.75 2.75012C12.75 3.16412 12.414 3.50012 12 3.50012C5.486 3.50012 3.5 5.48612 3.5 12.0001C3.5 18.5141 5.486 20.5001 12 20.5001C18.514 20.5001 20.5 18.5141 20.5 12.0001C20.5 11.5861 20.836 11.2501 21.25 11.2501C21.664 11.2501 22 11.5861 22 12.0001C22 19.3831 19.383 22.0001 12 22.0001Z" fill="currentColor"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M19.2365 9.38606L20.2952 8.19072C21.4472 6.88972 21.3252 4.89472 20.0252 3.74172C19.3952 3.18372 18.5812 2.90372 17.7452 2.95572C16.9052 3.00672 16.1352 3.38272 15.5772 4.01272L9.6932 10.6607C7.8692 12.7187 9.1172 15.4397 9.1712 15.5547C9.2602 15.7437 9.4242 15.8877 9.6232 15.9497C9.6802 15.9687 10.3442 16.1717 11.2192 16.1717C12.2042 16.1717 13.4572 15.9127 14.4092 14.8367L19.0774 9.56571C19.1082 9.54045 19.1374 9.51238 19.1646 9.4815C19.1915 9.45118 19.2155 9.41925 19.2365 9.38606ZM10.4082 14.5957C11.0352 14.7097 12.4192 14.8217 13.2862 13.8427L17.5371 9.04299L15.0656 6.85411L10.8172 11.6557C9.9292 12.6567 10.2122 13.9917 10.4082 14.5957ZM16.0596 5.73076L18.5322 7.91938L19.1722 7.19672C19.7752 6.51472 19.7122 5.46872 19.0312 4.86572C18.7002 4.57372 18.2712 4.42472 17.8362 4.45272C17.3962 4.48072 16.9932 4.67672 16.7002 5.00672L16.0596 5.73076Z" fill="currentColor"/>
             </svg>
-
             <span class="line"></span>
           </span>
           <span class="stat discuss">
@@ -271,7 +312,7 @@ export default class StoryWrapper extends HTMLElement {
             </svg>
             <span class="no">98</span>
           </span>
-          <span class="stat upvote">
+          <span class="stat upvote ${this.getAttribute('upvoted')}">
             <!--<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 384 512">
               <path  d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
             </svg>-->
@@ -707,7 +748,6 @@ export default class StoryWrapper extends HTMLElement {
         font-size: 1rem;
         font-weight: 400;
         color: var(--gray-color);
-        border-radius: 50px;
       }
 
       .stats > .stat.upvote > .numb_list {
@@ -747,6 +787,11 @@ export default class StoryWrapper extends HTMLElement {
         font-size: 1rem;
       }
 
+      .stats > .stat.upvote.active > .numb_list > span {
+        padding: 0 0 1px 0;
+      }
+
+      .stats > .stat.upvote.true > .numb_list > span,
       .stats > .stat.upvote.active > .numb_list > span {
         color: transparent;
         background: var(--second-linear);
@@ -790,7 +835,7 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.discuss svg {
-        margin: -3px 0 0 0;
+        margin: -1px 0 0 0;
         color: inherit;
         width: 18px;
         height: 18px;
@@ -802,6 +847,7 @@ export default class StoryWrapper extends HTMLElement {
         height: 14.5px;
       }
 
+      .stats > .stat.upvote.true svg,
       .stats > .stat.upvote.active svg {
         color: var(--color-alt);
       }
@@ -901,6 +947,21 @@ export default class StoryWrapper extends HTMLElement {
       @media screen and (max-width:660px) {
         .stats > .stat {
           cursor: default !important;
+        }
+
+        .stats > .stat.upvote > .numb_list > span {
+          line-height: 1;
+          padding: 0px 0 1.5px 0;
+          font-family: var(--font-main),san-serif;
+          font-size: 1rem;
+        }
+
+        .stats > .stat.upvote.true > .numb_list > span {
+          padding: 0 0 1.5px 0;
+        }
+
+        .stats > .stat.upvote.active > .numb_list > span {
+          padding: 0 0 1px 0;
         }
         .stats > .stat.upvote svg {
           margin: 0 0 0 0;
