@@ -17,6 +17,7 @@ export default class StoryWrapper extends HTMLElement {
     // console.log('We are inside connectedCallback');
 
     this.upVote()
+    this.openForm()
   }
 
 	formatDateWithRelativeTime = (isoDateStr) => {
@@ -59,6 +60,32 @@ export default class StoryWrapper extends HTMLElement {
 			return `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} (${years}y ago)`;
 		}
 	}
+
+  openForm = () => {
+    const writeContainer = this.shadowObj.querySelector('.stats');
+    const formContainer = this.shadowObj.querySelector('div.form-container');
+    if (writeContainer && formContainer) {
+      const writeBtn = writeContainer.querySelector('span.stat.write');
+      const formElement = this.getForm();
+
+      writeBtn.addEventListener('click', event => {
+        event.preventDefault();
+
+        console.log(writeContainer);
+        console.log(formElement);
+
+        // writeContainer.classList.toggle('active');
+        if (writeContainer.classList.contains('active')) {
+          writeContainer.classList.remove('active');
+          formContainer.innerHTML = '';
+        }
+        else {
+          writeContainer.classList.add('active');
+          formContainer.insertAdjacentHTML('beforeend', formElement);
+        }
+      })
+    }
+  }
 
   upVote() {
     const outerThis = this;
@@ -277,6 +304,20 @@ export default class StoryWrapper extends HTMLElement {
         </div>
 			`
     }
+  }
+
+  getForm = () => {
+    return `
+      <form action="" class="reply">
+        <div class="image">
+          <img src="${this.getAttribute('author-img')}" alt="Profile picture">
+        </div>
+        <textarea name="reply" placeholder="Discuss opinion #${this.getAttribute('id')}"  id="reply"></textarea>
+        <button type="submit">
+          <span class="text">Reply</span>
+        </button>
+      </form>
+    `
   }
 
   getBody() {
@@ -730,13 +771,12 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats.active > .stat.write span.line {
-        border-left: var(--open-line)
-        border-bottom: var(--open-line)
+        border-left: var(--open-line);
+        border-bottom: var(--open-line);
         display: inline-block;
       }
 
-      .stats.active > .stat.write,
-      .stats > .stat.write:hover {
+      .stats.active > .stat.write {
         color: transparent;
         background: var(--accent-linear);
         background-clip: text;
@@ -770,14 +810,14 @@ export default class StoryWrapper extends HTMLElement {
         color: var(--gray-color);
       }
 
-      .stats > .stat.write:hover svg {
+      .stats.active > .stat.write svg {
         color: var(--accent-color);
       }
 
       form.reply {
         padding: 0 0 0 25px;
         margin: 10px 0 0 0;
-        display: none;
+        display: flex;
         gap: 10px;
         font-size: 1rem;
         font-weight: 400;
@@ -785,7 +825,7 @@ export default class StoryWrapper extends HTMLElement {
         position: relative;
       }
 
-      form.reply .image {
+      form.reply > .image {
         padding: 0;
         display: flex;
         align-items: center;
@@ -799,7 +839,7 @@ export default class StoryWrapper extends HTMLElement {
         -moz-border-radius: 50px;
       }
 
-      form.reply .image img {
+      form.reply > .image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
