@@ -246,6 +246,8 @@ export default class StoryWrapper extends HTMLElement {
           <div class="data">
             <p class="name">${this.getAttribute('author-name')}</p>
             <span class="bio">${this.getAttribute('author-bio')}</span>
+            <p class="about-info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
+            Facilis nulla optio quas quod veniam nam voluptas!</p>
           </div>
           ${this.checkFollowing(this.getAttribute('following'))}
         </div>
@@ -531,6 +533,11 @@ export default class StoryWrapper extends HTMLElement {
         -moz-transition: all 100ms ease-out;
         -ms-transition: all 100ms ease-out;
         -o-transition: all 100ms ease-out;
+      }
+
+      .meta  .profile > .cover p.about-info {
+        display: none;
+        font-family: var(--font-main), san-serif;
       }
 
       .meta > .author:hover .profile {
@@ -1007,15 +1014,24 @@ export default class StoryWrapper extends HTMLElement {
           border-top: var(--modal-border);
           box-shadow: unset;
           padding: 20px 10px;
-          z-index: 2;
+          z-index: 3;
           background-color: var(--background);
           display: flex;
           flex-flow: column;
-          gap: 0;
+          gap: 5px;
           width: 100%;
           border-radius: unset;
-          border-top-left-radius: 20px;
-          border-top-right-radius: 20px;
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+        }
+
+        .meta  .profile > .cover p.about-info {
+          display: block;
+          line-height: 1.4;
+          padding: 0;
+          font-size: 1rem;
+          color: var(--text-color);
+          margin: 10px 0 0 0;
         }
 
         .meta > .author:hover .profile {
@@ -1075,7 +1091,7 @@ export default class StoryWrapper extends HTMLElement {
           padding: 10px 15px;
           font-weight: 500;
           font-family: var(--font-main),sans-serif;
-          font-size: 0.9rem;
+          font-size: 1.1rem;
           cursor: pointer;
           display: flex;
           align-items: center;
