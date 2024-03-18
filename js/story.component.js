@@ -227,26 +227,28 @@ export default class StoryWrapper extends HTMLElement {
     return `
       <div class="profile">
         <span class="pointer"></span>
-        <div class="head">
-          <div class="image">
-            <img src="${this.getAttribute('author-img')}" alt="User profile">
+        <div class="cover">
+          <div class="head">
+            <div class="image">
+              <img src="${this.getAttribute('author-img')}" alt="User profile">
+            </div>
+            <div class="info">
+              <p class="name">
+                <span class="text">${this.getAttribute('author-id')}</span>
+                ${this.checkVerified(this.getAttribute('author-verified'))}
+              </p>
+              <a href="" class="followers">
+                <span class="no">${this.getAttribute('author-followers')}</span>
+                <span class="text">followers</span>
+              </a>
+            </div>
           </div>
-          <div class="info">
-            <p class="name">
-              <span class="text">${this.getAttribute('author-id')}</span>
-              ${this.checkVerified(this.getAttribute('author-verified'))}
-            </p>
-            <a href="" class="followers">
-              <span class="no">${this.getAttribute('author-followers')}</span>
-              <span class="text">followers</span>
-            </a>
+          <div class="data">
+            <p class="name">${this.getAttribute('author-name')}</p>
+            <span class="bio">${this.getAttribute('author-bio')}</span>
           </div>
+          ${this.checkFollowing(this.getAttribute('following'))}
         </div>
-        <div class="data">
-          <p class="name">${this.getAttribute('author-name')}</p>
-          <span class="bio">${this.getAttribute('author-bio')}</span>
-        </div>
-        ${this.checkFollowing(this.getAttribute('following'))}
       </div>
     `
   }
@@ -500,15 +502,26 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .meta  .profile {
-        border: var(--modal-border);
-        box-shadow: var(--modal-shadow);
-        padding: 10px 10px;
+        padding: 0;
         z-index: 2;
         position: absolute;
         top: 30px;
         left: 0;
-        background-color: var(--background);
         display: none;
+        flex-flow: column;
+        gap: 0;
+        width: 300px;
+        height: max-content;
+        border-radius: 12px;
+      }
+
+      .meta  .profile > .cover {
+        border: var(--modal-border);
+        box-shadow: var(--modal-shadow);
+        padding: 10px 10px;
+        z-index: 2;
+        background-color: var(--background);
+        display: flex;
         flex-flow: column;
         gap: 0;
         width: 300px;
@@ -546,7 +559,7 @@ export default class StoryWrapper extends HTMLElement {
         right: 50%;
       }
 
-      .meta  .profile > .head {
+      .meta  .profile > .cover>  .head {
         background-color: var(--background);
         display: flex;
         flex-wrap: nowrap;
@@ -554,7 +567,7 @@ export default class StoryWrapper extends HTMLElement {
         gap: 10px;
       }
 
-      .meta  .profile > .head > .image {
+      .meta  .profile > .cover>  .head > .image {
         width: 40px;
         height: 40px;
         overflow: hidden;
@@ -563,7 +576,7 @@ export default class StoryWrapper extends HTMLElement {
         -moz-border-radius: 50px;
       }
 
-      .meta  .profile > .head > .image img {
+      .meta  .profile > .cover>  .head > .image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -963,10 +976,120 @@ export default class StoryWrapper extends HTMLElement {
         .stats > .stat.upvote.active > .numb_list > span {
           padding: 0 0 1px 0;
         }
+
         .stats > .stat.upvote svg {
           margin: 0 0 0 0;
           width: 14.5px;
           height: 14.5px;
+        }
+
+        .meta .profile {
+          border: unset;
+          box-shadow: unset;
+          padding: 0;
+          z-index: 10;
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: transparent;
+          display: flex;
+          flex-flow: column;
+          justify-content: end;
+          gap: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: unset;
+        }
+
+        .meta  .profile > .cover {
+          border-top: var(--modal-border);
+          box-shadow: unset;
+          padding: 20px 10px;
+          z-index: 2;
+          background-color: var(--background);
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+          width: 100%;
+          border-radius: unset;
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+        }
+
+        .meta > .author:hover .profile {
+          display: none;
+        }
+
+        .meta  .profile > span.pointer {
+          border: var(--modal-border);
+          border-bottom: none;
+          border-right: none;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: var(--modal-overlay);
+          display: inline-block;
+          width: 100%;
+          height: 100dvh;
+          rotate: unset;
+          border-radius: 0;
+        }
+
+        .meta  .profile > .cover > .head {
+          display: flex;
+          flex-wrap: nowrap;
+          width: 100%;
+          gap: 10px;
+          z-index: 2;
+        }
+
+        .meta .data {
+          margin: 5px 0;
+          display: flex;
+          flex-flow: column;
+        }
+
+        .meta .data > p.name {
+          margin: 0;
+          color: var(--text-color);
+          font-weight: 500;
+          font-family: var(--font-main),sans-serif;
+          font-size: 1.2rem;
+          line-height: 1.5;
+        }
+
+        .meta .data > span.bio {
+          margin: 0;
+          color: var(--gray-color);
+          font-family: var(--font-main),sans-serif;
+          font-size: 0.9rem;
+        }
+
+        .meta span.action {
+          border: var(--action-border);
+          margin: 10px 0 5px;
+          padding: 10px 15px;
+          font-weight: 500;
+          font-family: var(--font-main),sans-serif;
+          font-size: 0.9rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+        }
+        .meta span.action.follow {
+          border: none;
+          text-decoration: none;
+          color: var(--white-color);
+          background-color: var(--action-color);
         }
       }
     </style>

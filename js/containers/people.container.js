@@ -155,13 +155,13 @@ export default class PeopleContainer extends HTMLElement {
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
-				  gap: 20px;
+				  gap: 0px;
 				  position: sticky;
 				  top: 70px;
 				}
 				
 				.people-list .title {
-				  padding: 0;
+				  padding: 0 0 10px 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 0;

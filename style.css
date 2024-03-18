@@ -55,6 +55,7 @@ Author URL: https://femar.co.ke
 
   --modal-shadow: 0 12px 48px #6d758d33;
   --modal-border: 1px solid #83858442;
+  --modal-overlay: #1d2534b3;
 
   --second-linear: linear-gradient(0deg,#df791a 0%, #f09c4e 100%);
 
