@@ -443,17 +443,7 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       *::-webkit-scrollbar {
-        width: 3px;
-      }
-
-      *::-webkit-scrollbar-track {
-        background: var(--scroll-bar-background);
-      }
-
-      *::-webkit-scrollbar-thumb {
-        width: 3px;
-        background: var(--scroll-bar-linear);
-        border-radius: 50px;
+        -webkit-appearance: none;
       }
 
       h1,
@@ -1021,6 +1011,10 @@ export default class StoryWrapper extends HTMLElement {
       @media screen and (max-width:660px) {
         :host {
           border-top: var(--story-border-mobile);
+        }
+
+        ::-webkit-scrollbar {
+          -webkit-appearance: none;
         }
 
         .meta a.opinion-link,
