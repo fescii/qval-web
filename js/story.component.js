@@ -826,7 +826,7 @@ export default class StoryWrapper extends HTMLElement {
         justify-content: start;
         flex-flow: column;
         transform: translateY(calc(-100% + 21px));
-        transition: transform 0.2s linear;
+        transition: transform 0.5s linear;
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
@@ -837,11 +837,11 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote > .numb_list{
-        transition: all 300ms ease-in-out;
-        -webkit-transition: all 300ms ease-in-out;
-        -moz-transition: all 300ms ease-in-out;
-        -ms-transition: all 300ms ease-in-out;
-        -o-transition: all 300ms ease-in-out;
+        transition: all 500ms ease-in-out;
+        -webkit-transition: all 500ms ease-in-out;
+        -moz-transition: all 500ms ease-in-out;
+        -ms-transition: all 500ms ease-in-out;
+        -o-transition: all 500ms ease-in-out;
       }
 
       .stats > .stat.upvote > .numb_list > span {
