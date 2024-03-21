@@ -17,6 +17,7 @@
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
 
   <script type="module">
+    import AppHome from "./js/apps/home.app.js";
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
 		import PersonWrapper from "./js/author.component.js";
@@ -27,6 +28,9 @@
 		import PeopleContainer from "./js/containers/people.container.js";
     import StoriesContainer from "./js/containers/stories-container.js"
 		import TopicsContainer from "./js/containers/topics.container.js";
+
+
+    customElements.define('app-home', AppHome);
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
@@ -465,21 +469,8 @@
     </ul>
   </header>
 
-  <main class="home">
-    <div class="feeds">
-      <stories-container stories="new" url="/stories/new"></stories-container>
-      <stories-feed url="/stories/feed"></stories-feed>
-    </div>
-    <div class="side">
-      <div class="donate-card">
-        <h2 class="title">Support us</h2>
-        <p class="info">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</p>
-        <a href="" class="link">Learn more</a>
-      </div>
-      <topics-container url="/topics/popular"></topics-container>
-      <people-container url="/people/popular"></people-container>
-    </div>
-  </main>
+  <app-home url="app/home"></app-home>
+
   <footer class="footer">
     <section class="newsletter">
       <div class="title">Join Our Newsletter</div>

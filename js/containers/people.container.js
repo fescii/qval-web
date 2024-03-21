@@ -212,7 +212,8 @@ export default class PeopleContainer extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
-						border-top: var(--story-border-mobile);
+						padding: 15px 0;
+						position: static;
 					}
 
 					::-webkit-scrollbar {
