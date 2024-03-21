@@ -496,6 +496,7 @@ export default class StoryWrapper extends HTMLElement {
 
       h3.title {
         color: var(--text-color);
+        font-family: var(--font-text), sans-serif;
         margin: 0;
         padding: 0;
         font-weight: 500;
@@ -733,6 +734,7 @@ export default class StoryWrapper extends HTMLElement {
         margin: 0 0 5px 0;
         padding: 0;
         line-height: 1.5;
+        font-family: var(--font-text), sans-serif;
       }
 
       .content a {
@@ -754,6 +756,7 @@ export default class StoryWrapper extends HTMLElement {
         margin: 10px 0 0 20px;
         line-height: 1.4;
         color: #1f2937;
+        font-family: var(--font-text), sans-serif;
       }
 
       .content ul a,
@@ -960,6 +963,7 @@ export default class StoryWrapper extends HTMLElement {
 
       form.reply > textarea {
         border: var(--input-border);
+        font-family: var(--font-text), sans-serif;
         padding: 8px !important;
         margin: 0;
         width: calc(100% - 48px);
@@ -1022,6 +1026,20 @@ export default class StoryWrapper extends HTMLElement {
         a,
         .stats > .stat {
           cursor: default !important;
+        }
+
+        h3.title {
+          color: var(--text-color);
+          margin: 0;
+          padding: 0;
+          font-size: 1rem;
+          font-weight: 600;
+          line-height: 1.5;
+        }
+
+        h3.title > a {
+          text-decoration: none;
+          color: inherit;
         }
 
         .stats > .stat.upvote > .numb_list > span {

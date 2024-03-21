@@ -91,7 +91,7 @@ export default class PeopleContainer extends HTMLElement {
 	}
 
 	getStyles() {
-		return `
+		return /* css */`
 	    <style>
 	      *,
 	      *:after,
@@ -100,25 +100,25 @@ export default class PeopleContainer extends HTMLElement {
 	        font-family: inherit;
 	        -webkit-box-sizing: border-box !important;
 	      }
-	
+
 	      *:focus {
 	        outline: inherit !important;
 	      }
-	
+
 	      *::-webkit-scrollbar {
 	        width: 3px;
 	      }
-	
+
 	      *::-webkit-scrollbar-track {
 	        background: var(--scroll-bar-background);
 	      }
-	
+
 	      *::-webkit-scrollbar-thumb {
 	        width: 3px;
 	        background: var(--scroll-bar-linear);
 	        border-radius: 50px;
 	      }
-	
+
 	      h1,
 	      h2,
 	      h3,
@@ -129,18 +129,18 @@ export default class PeopleContainer extends HTMLElement {
 	        margin: 0;
 	        font-family: inherit;
 	      }
-	
+
 	      p,
 	      ul,
 	      ol {
 	        padding: 0;
 	        margin: 0;
 	      }
-	
+
 	      a {
 	        text-decoration: none;
 	      }
-	
+
 	      :host {
 					grid-column: 2/3;
 				  background-color: var(--background);
@@ -149,35 +149,35 @@ export default class PeopleContainer extends HTMLElement {
 				  flex-flow: column;
 				  gap: 20px;
 				}
-				
+
 				.people-list {
 				  background-color: var(--background);
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
-				  gap: 0px;
+				  gap: 0;
 				  position: sticky;
 				  top: 70px;
 				}
-				
+
 				.people-list .title {
 				  padding: 0 0 10px 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 0;
 				}
-				
+
 				.people-list .title h4 {
 				  color: #1f2937;
 				  font-size: 1.3rem;
 				  font-weight: 500;
 				}
-				
+
 				.people-list .title > span {
 				  color: var(--gray-color);
 				  font-size: 0.85rem;
 				}
-				
+
 				.more {
 				  margin: 15px 0 0 0;
 				  padding: 10px 0;
@@ -187,14 +187,14 @@ export default class PeopleContainer extends HTMLElement {
 				  justify-content: center;
 				  gap: 10px;
 				}
-				
+
 				.more p {
 				  margin: 0;
 				  padding: 0;
 				  text-align: center;
 				  color: var(--text-color);
 				}
-				
+
 				.more a {
 				  text-decoration: none;
 				  border: none;
@@ -206,6 +206,23 @@ export default class PeopleContainer extends HTMLElement {
 				  border-radius: 10px;
 				  -webkit-border-radius: 10px;
 				  -moz-border-radius: 10px;
+				}
+
+				@media screen and (max-width:660px) {
+					:host {
+						border-top: var(--story-border-mobile);
+					}
+
+					::-webkit-scrollbar {
+						-webkit-appearance: none;
+					}
+					a {
+						cursor: default !important;
+					}
+					.people-list {
+						gap: 10px;
+						position: static;
+					}
 				}
 	    </style>
     `;
