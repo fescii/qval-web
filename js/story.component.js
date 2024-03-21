@@ -1029,7 +1029,7 @@ export default class StoryWrapper extends HTMLElement {
       }
       @media screen and (max-width:660px) {
         :host {
-          border-top: var(--story-border-mobile);
+          border-bottom: var(--story-border-mobile);
         }
 
         ::-webkit-scrollbar {

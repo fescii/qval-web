@@ -51,7 +51,6 @@ export default class AppHome extends HTMLElement {
         <topics-container url="/topics/popular"></topics-container>
         <stories-container stories="recent" url="/stories/recent"></stories-container>
         <people-container url="/people/popular"></people-container>
-        ${this.getDonateCard()}
         <stories-feed stories="all" url="/stories/feed"></stories-feed>
       `;
     }

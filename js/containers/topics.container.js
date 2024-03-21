@@ -45,7 +45,7 @@ export default class TopicsContainer extends HTMLElement {
 
 	getBody = () => {
 		// language=HTML
-		return `
+		return /* html */`
 			<div class="title">
 				<h4 class="title">Topics</h4>
 				<span class="text">Trending topics now</span>
@@ -57,7 +57,7 @@ export default class TopicsContainer extends HTMLElement {
 	}
 
 	getTopics = () => {
-		return `
+		return /* html */`
 			<li class="topic">
         <a href="" class="link">
           <span class="no">63</span>
@@ -122,7 +122,7 @@ export default class TopicsContainer extends HTMLElement {
 	}
 
 	getStyles() {
-		return `
+		return /* css */`
 	    <style>
 	      *,
 	      *:after,
@@ -131,25 +131,25 @@ export default class TopicsContainer extends HTMLElement {
 	        font-family: inherit;
 	        -webkit-box-sizing: border-box !important;
 	      }
-	
+
 	      *:focus {
 	        outline: inherit !important;
 	      }
-	
+
 	      *::-webkit-scrollbar {
 	        width: 3px;
 	      }
-	
+
 	      *::-webkit-scrollbar-track {
 	        background: var(--scroll-bar-background);
 	      }
-	
+
 	      *::-webkit-scrollbar-thumb {
 	        width: 3px;
 	        background: var(--scroll-bar-linear);
 	        border-radius: 50px;
 	      }
-	
+
 	      h1,
 	      h2,
 	      h3,
@@ -160,18 +160,18 @@ export default class TopicsContainer extends HTMLElement {
 	        margin: 0;
 	        font-family: inherit;
 	      }
-	
+
 	      p,
 	      ul,
 	      ol {
 	        padding: 0;
 	        margin: 0;
 	      }
-	
+
 	      a {
 	        text-decoration: none;
 	      }
-	
+
 	      :host {
 					margin: 0;
 				  padding: 0;
@@ -179,7 +179,7 @@ export default class TopicsContainer extends HTMLElement {
 				  flex-flow: column;
 				  gap: 10px;
 				}
-				
+
 				ul.topics {
 				  margin: 0;
 				  padding: 0;
@@ -192,7 +192,7 @@ export default class TopicsContainer extends HTMLElement {
 				  gap: 10px;
 				  width: 100%;
 				}
-				
+
 				.title {
 				  margin: 0 0 5px;
 				  padding: 0;
@@ -201,19 +201,19 @@ export default class TopicsContainer extends HTMLElement {
 				  flex-flow: column;
 				  gap: 0;
 				}
-				
+
 				.title h4 {
 				  color: #1f2937;
 				  font-size: 1.3rem;
 				  font-weight: 600;
 				  line-height: 1.4;
 				}
-				
+
 				.title > span {
 				  color: var(--gray-color);
 				  font-size: 0.85rem;
 				}
-				
+
 				ul.topics > li.topic {
 				  margin: 0;
 				  padding: 0;
@@ -222,7 +222,7 @@ export default class TopicsContainer extends HTMLElement {
 				  flex-wrap: nowrap;
 				  width: max-content;
 				}
-				
+
 				ul.topics > li.topic a.link {
 				  border: thin solid #6b728094;
 				  margin: 0;
@@ -238,18 +238,31 @@ export default class TopicsContainer extends HTMLElement {
 				  -webkit-border-radius: 50px;
 				  -moz-border-radius: 50px;
 				}
-				
+
 				ul.topics > li.topic a.link > span.no {
 				  font-family: var(--font-mono),monospace;
 				  font-size: 0.92rem;
 				}
-				
+
 				ul.topics > li.topic a.link:hover {
 				  color: transparent;
 				  background: var(--accent-linear);
 				  background-clip: text;
 				  -webkit-background-clip: text;
 				  border-color: #21D029af;
+				}
+				@media screen and (max-width:660px) {
+					:host {
+						padding: 15px 0;
+					}
+
+					::-webkit-scrollbar {
+						-webkit-appearance: none;
+					}
+
+					a {
+						cursor: default !important;
+					}
 				}
 	    </style>
     `;
