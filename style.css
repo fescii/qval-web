@@ -1273,7 +1273,7 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 
 /* Home */
 main.home {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding: 0;
   margin: 0;
   display: flex;
@@ -1383,13 +1383,13 @@ main.home .trending-story > .info > .meta {
 }
 
 main.home div.side {
-  border: 1px solid #ff0000;
+  /* border: 1px solid #ff0000; */
   padding: 0;
   width: 35%;
   display: flex;
   flex-flow: column;
   gap: 20px;
-  height: 100%;
+  /* height: max-content; */
 }
 
 main.home div.side > .donate-card {

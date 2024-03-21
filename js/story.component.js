@@ -470,7 +470,7 @@ export default class StoryWrapper extends HTMLElement {
 
 
       :host {
-        border-top: var(--story-border);
+        border-bottom: var(--story-border);
         font-family: var(--font-main), sans-serif;
         padding: 15px 0;
         margin: 0;
