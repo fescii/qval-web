@@ -46,12 +46,16 @@ export default class PeopleContainer extends HTMLElement {
 	getBody = () => {
 		// language=HTML
 		return `
+			<div class="title">
+				<h4 class="title">People</h4>
+				<span class="desc">Discover authors on avalQ</span>
+			</div>
 			<div class="people-list">
-				<div class="title">
-					<h4 class="title">People</h4>
-					<span class="desc">Discover authors on avalQ</span>
-				</div>
 				${this.getLoader()}
+			</div>
+			<div class="more">
+				<p>Discover authors and follow authors. Interact, support and engage with authors.</p>
+				<a href="" class="link">Discover</a>
 			</div>
     `;
 	}
@@ -83,10 +87,6 @@ export default class PeopleContainer extends HTMLElement {
       bio="Student At The East African University"
       followers="23" following="false">
     </person-wrapper>
-    <div class="more">
-      <p>Discover authors and follow authors. Interact, support and engage with authors.</p>
-      <a href="" class="link">Discover</a>
-    </div>
 		`
 	}
 
@@ -146,7 +146,7 @@ export default class PeopleContainer extends HTMLElement {
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
-				  gap: 20px;
+				  gap: 0;
 					position: sticky;
   				top: 70px;
 				}
@@ -159,7 +159,7 @@ export default class PeopleContainer extends HTMLElement {
 				  gap: 5px;
 				}
 
-				.people-list .title {
+				.title {
 					/* border: 1px solid red; */
 				  padding: 0 0 10px 0;
 				  display: flex;
@@ -167,7 +167,7 @@ export default class PeopleContainer extends HTMLElement {
 				  gap: 0;
 				}
 
-				.people-list .title h4 {
+				.title h4 {
 				  color: #1f2937;
 				  font-size: 1.3rem;
 				  font-weight: 500;
@@ -175,7 +175,7 @@ export default class PeopleContainer extends HTMLElement {
 					margin: 0;
 				}
 
-				.people-list .title > span {
+				.title > span {
 				  color: var(--gray-color);
 				  font-size: 0.85rem;
 				}
@@ -216,15 +216,26 @@ export default class PeopleContainer extends HTMLElement {
 						position: static;
 					}
 
-					::-webkit-scrollbar {
-						-webkit-appearance: none;
-					}
 					a {
 						cursor: default !important;
 					}
+
 					.people-list {
-						gap: 10px;
-						position: static;
+						background-color: var(--background);
+						padding: 0;
+						display: flex;
+						flex-flow: row;
+						gap: 20px;
+						width: 100%;
+						overflow-x: scroll;
+					  -ms-overflow-style: none;
+						scrollbar-width: none;
+					}
+
+					.people-list::-webkit-scrollbar {
+						display: none !important;
+						visibility: hidden;
+						-webkit-appearance: none;
 					}
 				}
 	    </style>

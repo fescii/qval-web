@@ -122,7 +122,7 @@ export default class PersonWrapper extends HTMLElement {
 
 
   getStyles() {
-    return `
+    return /* css */`
     <style>
       *,
       *:after,
@@ -183,7 +183,7 @@ export default class PersonWrapper extends HTMLElement {
         justify-content: space-between;
         gap: 10px
       }
-      
+
       .head {
         padding: 0;
         margin: 0;
@@ -192,7 +192,7 @@ export default class PersonWrapper extends HTMLElement {
         flex-wrap: nowrap;
         gap: 10px;
       }
-      
+
       .head > .image {
         padding: 0;
         display: flex;
@@ -205,7 +205,7 @@ export default class PersonWrapper extends HTMLElement {
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
       }
-      
+
       .head > .image img {
         width: 100%;
         height: 100%;
@@ -214,7 +214,7 @@ export default class PersonWrapper extends HTMLElement {
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
       }
-      
+
       .head > .name {
         padding: 0;
         display: flex;
@@ -223,7 +223,7 @@ export default class PersonWrapper extends HTMLElement {
         gap:  0;
         position: relative;
       }
-      
+
       .head > .name h4.uid  .profile {
         border: var(--modal-border);
         box-shadow: var(--modal-shadow);
@@ -245,11 +245,11 @@ export default class PersonWrapper extends HTMLElement {
         -ms-transition: all 100ms ease-out;
         -o-transition: all 100ms ease-out;
       }
-      
+
       .head > .name h4.uid:hover .profile {
         display: flex;
       }
-      
+
       .head > .name h4.uid .profile > span.pointer {
         border: var(--modal-border);
         border-bottom: none;
@@ -266,7 +266,7 @@ export default class PersonWrapper extends HTMLElement {
         -webkit-border-radius: 1px;
         -moz-border-radius: 1px;
       }
-      
+
       .head > .name h4.uid .profile > .head {
         background-color: var(--background);
         display: flex;
@@ -274,7 +274,7 @@ export default class PersonWrapper extends HTMLElement {
         width: 100%;
         gap: 10px;
       }
-      
+
       .head > .name h4.uid .profile > .head > .image {
         width: 40px;
         height: 40px;
@@ -283,7 +283,7 @@ export default class PersonWrapper extends HTMLElement {
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
       }
-      
+
       .head > .name h4.uid .profile > .head > .image img {
         width: 100%;
         height: 100%;
@@ -293,12 +293,12 @@ export default class PersonWrapper extends HTMLElement {
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
       }
-      
+
       .head > .name h4.uid > .profile .info {
         display: flex;
         flex-flow: column;
       }
-      
+
       .head > .name h4.uid > .profile .info p.name {
         margin: 0;
         color: var(--text-color);
@@ -308,7 +308,7 @@ export default class PersonWrapper extends HTMLElement {
         align-items: center;
         gap: 5px;
       }
-      
+
       .head > .name h4.uid > .profile .info p.name svg {
         margin: -2px 0 0;
         color: var(--accent-color);
@@ -316,7 +316,7 @@ export default class PersonWrapper extends HTMLElement {
         align-items: center;
         justify-content: center;
       }
-      
+
       .head > .name h4.uid > .profile .info a.followers {
         text-decoration: none;
         margin: 0;
@@ -327,17 +327,17 @@ export default class PersonWrapper extends HTMLElement {
         align-items: center;
         gap: 5px;
       }
-      
+
       .head > .name h4.uid > .profile .info a.followers > span.no {
         font-family: var(--font-mono),monospace;
       }
-      
+
       .head > .name h4.uid > .profile .data {
         margin: 5px 0;
         display: flex;
         flex-flow: column;
       }
-      
+
       .head > .name h4.uid > .profile .data > p.name {
         margin: 0;
         color: var(--text-color);
@@ -346,14 +346,14 @@ export default class PersonWrapper extends HTMLElement {
         font-size: 1.2rem;
         line-height: 1.5;
       }
-      
+
       .head > .name h4.uid > .profile .data > span.bio {
         margin: 0;
         color: var(--gray-color);
         font-family: var(--font-main),sans-serif;
         font-size: 0.9rem;
       }
-      
+
       .head > .name h4.uid > .profile span.action {
         border: var(--action-border);
         margin: 10px 0 5px;
@@ -371,33 +371,33 @@ export default class PersonWrapper extends HTMLElement {
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
       }
-      
+
       .head > .name h4.uid > .profile span.action.follow {
         border: none;
         text-decoration: none;
         color: var(--white-color);
         background-color: var(--action-color);
       }
-      
+
       .head > .name h4.uid {
         color: var(--text-color);
         font-family: var(--font-mono),monospace;
         font-weight: 500;
         font-size: 0.9rem;
       }
-      
+
       .head > .name h4.uid:hover > a {
         color: transparent;
         background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
-      
+
       .head > .name h4.uid a {
         color: inherit;
         text-decoration: none;
       }
-      
+
       .head > .name span.followers {
         display: flex;
         align-items: center;
@@ -405,11 +405,11 @@ export default class PersonWrapper extends HTMLElement {
         color: var(--gray-color);
         font-size: 0.9rem;
       }
-      
+
       .head > .name span.followers > span.no {
         font-family: var(--font-mono),monospace;
       }
-      
+
       .action {
         border: var(--action-border);
         color: var(--gray-color);
@@ -433,6 +433,41 @@ export default class PersonWrapper extends HTMLElement {
         font-size: 0.9rem;
         font-weight: 500;
       }
+      @media screen and (max-width:660px) {
+        :host {
+          border: var(--story-border-mobile);
+          padding: 8px 10px 8px 0;
+          width: 200px;
+          min-width: 200px;
+          height: max-content;
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          justify-content: center;
+          gap: 30px;
+          border-radius: 10px;
+        }
+
+        .head {
+          display: flex;
+          flex-flow: column;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .head > .name {
+          padding: 0;
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: nowrap;
+          gap:  0;
+          position: relative;
+        }
+			}
     </style>
     `;
   }
