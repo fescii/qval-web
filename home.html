@@ -25,6 +25,7 @@
 		import TopicsLoader from "./js/loaders/topics.loader.js";
 		import StoryFeed from "./js/feeds/stories.feed.js";
 		import PeopleContainer from "./js/containers/people.container.js";
+    import StoriesContainer from "./js/containers/stories-container.js"
 		import TopicsContainer from "./js/containers/topics.container.js";
 
     customElements.define('opinion-wrapper', OpinionWrapper);
@@ -35,6 +36,7 @@
 		customElements.define('topics-loader', TopicsLoader);
 		customElements.define('stories-feed', StoryFeed);
 		customElements.define('people-container', PeopleContainer);
+    customElements.define('stories-container', StoriesContainer);
 		customElements.define('topics-container', TopicsContainer);
   </script>
 </head>
@@ -570,6 +572,7 @@
       </div>
     </section>
     <section class="feeds">
+      <stories-container stories="new" url="/stories/new"></stories-container>
 	    <people-container url="/people/popular"></people-container>
       <stories-feed url="/stories/feed"></stories-feed>
     </section>
