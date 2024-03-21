@@ -1568,6 +1568,7 @@ footer.footer {
   align-items: center;
   gap: 20px;
   padding-bottom: 30px;
+  font-family: var(--font-text), sans-serif;
 }
 
 footer.footer > section {
@@ -1581,6 +1582,7 @@ footer.footer > section {
 
 footer.footer > section >.title {
   color: var(--text-color);
+  font-family: var(--font-text), sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
 }
