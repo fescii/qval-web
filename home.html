@@ -17,6 +17,7 @@
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
 
   <script type="module">
+    import AppHome from "./js/apps/home.app.js";
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
 		import PersonWrapper from "./js/author.component.js";
@@ -25,7 +26,11 @@
 		import TopicsLoader from "./js/loaders/topics.loader.js";
 		import StoryFeed from "./js/feeds/stories.feed.js";
 		import PeopleContainer from "./js/containers/people.container.js";
+    import StoriesContainer from "./js/containers/stories-container.js"
 		import TopicsContainer from "./js/containers/topics.container.js";
+
+
+    customElements.define('app-home', AppHome);
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
@@ -35,6 +40,7 @@
 		customElements.define('topics-loader', TopicsLoader);
 		customElements.define('stories-feed', StoryFeed);
 		customElements.define('people-container', PeopleContainer);
+    customElements.define('stories-container', StoriesContainer);
 		customElements.define('topics-container', TopicsContainer);
   </script>
 </head>
@@ -463,117 +469,8 @@
     </ul>
   </header>
 
-  <main class="home">
-    <section class="popular">
-      <div class="stories">
-        <a class="trending-story"
-          href="https://fescii.blogspot.com/2022/01/how-rust-is-programming-language-of.html">
-          <span class="no">01</span>
-          <div class="info">
-            <span class="topic">Programming</span>
-            <h2 class="trending-title">How Rust is the Programming Language of Web3 in 2022</h2>
-            <div class="meta">
-              <span class="author">
-                <span class="sp">by</span>
-                <span class="author-name">U0A43PBA</span>
-              </span>
-              <span class="time">
-                <span class="sp">•</span>
-                <time class="published" datetime="2022-01-03T13:00:00+03:00">Jun 23, 2021 (3y ago)</time>
-              </span>
-            </div>
-          </div>
-        </a>
+  <app-home url="app/home"></app-home>
 
-        <div class="trending">
-          <a class="trending-story" href="https://fescii.blogspot.com/2022/01/how-rust-is-programming-language-of.html"
-            title="How Rust is the Programming Language of Web3 in 2022">
-            <span class="no">02</span>
-            <div class="info">
-              <span class="topic">Programming</span>
-              <h2 class="trending-title">How Rust is the Programming Language of Web3 in 2022</h2>
-              <div class="meta">
-                <span class="author">
-                  <span class="sp">by</span>
-                  <span class="author-name">U0A43PBA</span>
-                </span>
-                <span class="time">
-                  <span class="sp">•</span>
-                  <time class="published" datetime="2022-01-03T13:00:00+03:00">Jun 23, 2021 (3y ago)</time>
-                </span>
-              </div>
-            </div>
-          </a>
-          <a class="trending-story" href="https://fescii.blogspot.com/2022/01/how-rust-is-programming-language-of.html"
-            title="Complexity is killing software developers">
-            <span class="no">03</span>
-            <div class="info">
-              <span class="topic">Developers</span>
-              <h2 class="trending-title">Complexity is killing software developers</h2>
-              <div class="meta">
-                <span class="author">
-                  <span class="sp">by</span>
-                  <span class="author-name">U0A43PBA</span>
-                </span>
-                <span class="time">
-                  <span class="sp">•</span>
-                  <time class="published" datetime="2022-01-03T13:00:00+03:00">Jun 23, 2021 (3y ago)</time>
-                </span>
-              </div>
-            </div>
-          </a>
-          <a class="trending-story" href="https://fescii.blogspot.com/2022/01/how-rust-is-programming-language-of.html"
-            title="The linux command lines you should know">
-            <span class="no">04</span>
-            <div class="info">
-              <span class="topic">Linux</span>
-              <h2 class="trending-title">The linux command lines you should know</h2>
-              <div class="meta">
-                <span class="author">
-                  <span class="sp">by</span>
-                  <span class="author-name">U0A43PBA</span>
-                </span>
-                <span class="time">
-                  <span class="sp">•</span>
-                  <time class="published" datetime="2022-01-03T13:00:00+03:00">Jun 23, 2021 (3y ago)</time>
-                </span>
-              </div>
-            </div>
-          </a>
-          <a class="trending-story" href="https://fescii.blogspot.com/2022/01/how-rust-is-programming-language-of.html"
-            title="How Rust is the Programming Language of Web3 in 2022">
-            <span class="no">05</span>
-            <div class="info">
-              <span class="topic">Programming</span>
-              <h2 class="trending-title">How Rust is the Programming Language of Web3 in 2022</h2>
-              <div class="meta">
-                <span class="author">
-                  <span class="sp">by</span>
-                  <span class="author-name">U0A43PBA</span>
-                </span>
-                <span class="time">
-                  <span class="sp">•</span>
-                  <time class="published" datetime="2022-01-03T13:00:00+03:00">Jun 23, 2021 (3y ago)</time>
-                </span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="side">
-        <div class="donate-card">
-          <h2 class="title">Support us</h2>
-          <p class="info">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</p>
-          <a href="" class="link">Learn more</a>
-        </div>
-        <topics-container url="/topics/popular"></topics-container>
-      </div>
-    </section>
-    <section class="feeds">
-	    <people-container url="/people/popular"></people-container>
-      <stories-feed url="/stories/feed"></stories-feed>
-    </section>
-  </main>
   <footer class="footer">
     <section class="newsletter">
       <div class="title">Join Our Newsletter</div>
@@ -656,7 +553,6 @@
           }
         });
       }
-  
 
 
       // Mobile Switcher

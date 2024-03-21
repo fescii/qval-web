@@ -43,7 +43,7 @@ export default class StoryWrapper extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     const metaElement = this.shadowObj.querySelector(".meta");
 
-    console.log(metaElement);
+    // console.log(metaElement);
 
     if (mql.matches) {
       if (metaElement) {
@@ -51,7 +51,7 @@ export default class StoryWrapper extends HTMLElement {
         const content = metaElement.querySelector("div.user-container");
         const pointer = metaElement.querySelector('.pointer');
 
-        console.log(content);
+        // console.log(content);
 
         if (link && content && pointer) {
           link.addEventListener("click", ev => {
@@ -342,7 +342,7 @@ export default class StoryWrapper extends HTMLElement {
 		else {
 			return `
 			  <h3 class="title">
-          <a href="" class="link">${this.getAttribute('title')}</a>
+          <a href="" class="link">${this.getAttribute('story-title')}</a>
         </h3>
 			`;
 	  }
@@ -470,8 +470,8 @@ export default class StoryWrapper extends HTMLElement {
 
 
       :host {
-        border-top: var(--story-border);
-        font-family: var(--font-main),sans-serif;
+        border-bottom: var(--story-border);
+        font-family: var(--font-main), sans-serif;
         padding: 15px 0;
         margin: 0;
         width: 100%;
@@ -496,8 +496,10 @@ export default class StoryWrapper extends HTMLElement {
 
       h3.title {
         color: var(--text-color);
+        font-family: var(--font-text), sans-serif;
         margin: 0;
         padding: 0;
+        font-size: 1rem;
         font-weight: 500;
         line-height: 1.5;
       }
@@ -733,6 +735,7 @@ export default class StoryWrapper extends HTMLElement {
         margin: 0 0 5px 0;
         padding: 0;
         line-height: 1.5;
+        font-family: var(--font-text), sans-serif;
       }
 
       .content a {
@@ -754,6 +757,7 @@ export default class StoryWrapper extends HTMLElement {
         margin: 10px 0 0 20px;
         line-height: 1.4;
         color: #1f2937;
+        font-family: var(--font-text), sans-serif;
       }
 
       .content ul a,
@@ -803,7 +807,7 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote {
-        /* border: var(--input-border); */
+        /*border: var(--input-border);*/
         padding: 0;
         display: flex;
         align-items: center;
@@ -815,9 +819,12 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote > .numb_list {
-        /* border: var(--action-border); */
-        max-height: 21px;
-        padding: 0 0 1px 0;
+        /*border: var(--action-border);*/
+        height: 21px;
+        min-height: 21px;
+        padding: 0;
+        margin: 0;
+        margin-bottom: calc(16px / -3);
         display: flex;
         overflow-y: scroll;
         display: flex;
@@ -845,14 +852,16 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote > .numb_list > span {
+        /*border: 1px solid red;*/
         line-height: 1;
-        padding: 0px 0 2px 0;
-        font-family: var(--font-main),san-serif;
+        display: inline-block;
+        text-align: start;
+        height: 21px;
+        min-height: 21px;
+        padding: 0;
+        margin: 0;
+        font-family: var(--font-main), san-serif;
         font-size: 1rem;
-      }
-
-      .stats > .stat.upvote.active > .numb_list > span {
-        padding: 0 0 1px 0;
       }
 
       .stats > .stat.upvote.true > .numb_list > span,
@@ -861,6 +870,15 @@ export default class StoryWrapper extends HTMLElement {
         background: var(--second-linear);
         background-clip: text;
         -webkit-background-clip: text;
+      }
+
+      .stats > .stat.upvote.true > .numb_list > span {
+        padding: 0;
+      }
+
+      .stats > .stat.upvote.active > .numb_list > span {
+        padding: 0;
+        margin: 0;
       }
 
       .stats > .stat.write {
@@ -906,9 +924,9 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote svg {
-        margin: 0 0 -1px 0;
-        width: 14.5px;
-        height: 14.5px;
+        margin: 0;
+        width: 15px;
+        height: 15px;
       }
 
       .stats > .stat.upvote.true svg,
@@ -960,6 +978,7 @@ export default class StoryWrapper extends HTMLElement {
 
       form.reply > textarea {
         border: var(--input-border);
+        font-family: var(--font-text), sans-serif;
         padding: 8px !important;
         margin: 0;
         width: calc(100% - 48px);
@@ -1010,7 +1029,7 @@ export default class StoryWrapper extends HTMLElement {
       }
       @media screen and (max-width:660px) {
         :host {
-          border-top: var(--story-border-mobile);
+          border-bottom: var(--story-border-mobile);
         }
 
         ::-webkit-scrollbar {
@@ -1024,19 +1043,40 @@ export default class StoryWrapper extends HTMLElement {
           cursor: default !important;
         }
 
-        .stats > .stat.upvote > .numb_list > span {
-          line-height: 1;
-          padding: 0px 0 1.5px 0;
-          font-family: var(--font-main),san-serif;
+        h3.title {
+          color: var(--text-color);
+          margin: 0;
+          padding: 0;
           font-size: 1rem;
+          font-weight: 600;
+          line-height: 1.5;
+        }
+
+        h3.title > a {
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .stats > .stat.upvote > .numb_list {
+        /*border: var(--action-border);*/
+          margin-bottom: -1.8px;
+        }
+
+        .stats > .stat.upvote > .numb_list > span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          line-height: 1;
+          padding: 0;
         }
 
         .stats > .stat.upvote.true > .numb_list > span {
-          padding: 0 0 1.5px 0;
+          padding: 0;
         }
 
         .stats > .stat.upvote.active > .numb_list > span {
-          padding: 0 0 1px 0;
+          padding: 0;
         }
 
         .stats > .stat.upvote svg {

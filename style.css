@@ -14,7 +14,7 @@ Author URL: https://femar.co.ke
 
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Sen:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
@@ -25,8 +25,9 @@ Author URL: https://femar.co.ke
 
 */
 :root {
-  --font-main: "Inter", sans-serif;
-  --font-alt: "Sen", sans-serif;
+  --font-main: "Inter";
+  --font-text: "DM Sans";
+  --font-mono: 'Jetbrains Mono';
   --scroll-bar-background: #DDDDD7;
   --scroll-bar-linear: linear-gradient(#53595f, #627ea0);
 
@@ -37,7 +38,6 @@ Author URL: https://femar.co.ke
 
   --story-border-mobile: thin solid #6b728046;
 
-  --font-mono: 'Jetbrains Mono';
   --background: #ffffff;
   --vh-height: 100dvh;
 
@@ -1271,292 +1271,6 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 }
 
 
-/* Home */
-main.home {
-  /* border: 1px solid red; */
-  display: flex;
-  padding: 10px 0 0 0;
-  flex-flow: column;
-  gap: 0;
-  justify-content: space-between;
-}
-
-main.home > section.popular {
-  /* border: thin solid #4b5563bd; */
-  margin: 15px 0;
-  display: grid;
-  grid-template-columns: 5fr 3fr;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-main.home > section.popular > div.stories {
-  /* border: 1px solid #000000; */
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-}
-
-main.home > section.popular > div.stories > a.trending-story {
-  /* border: thin solid #6b728032; */
-  text-decoration: none;
-  height: max-content;
-  padding: 0;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, .1); */
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: hidden;
-  /* background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20)); */
-  /* background: var(--accent-linear);
-  background-color: var(--accent-color);
-  background: linear-gradient(-45deg, #23a6d5, #21D029, #18A565, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 5s ease infinite;
-  -webkit-animation: gradient 5s ease infinite; */
-}
-
-main.home > section.popular > div.stories > a.trending-story > span.no {
-  /* border: thin solid #00ff00; */
-  position: absolute;
-  right: 10px;
-  /* z-index: 3; */
-  top: 10px;
-  height: 38px;
-  width: 38px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  font-family: var(--font-mono);
-  /* color: var(--white-color); */
-  /* text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); */
-  color: transparent;
-  background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20));
-  /* background: var(--accent-linear); */
-  background-clip: text;
-  -webkit-background-clip: text;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 50px;
-}
-
-
-main.home > section.popular > div.stories > a.trending-story > .info {
-  /* border: thin solid #00ff00; */
-  width: 100%;
-  /* overflow: hidden; */
-  /* background: var(--fade-picture-gradient); */
-  z-index: 1;
-  display: flex;
-  flex-flow: column;
-  /* padding: 15px 15px 15px; */
-  padding: 15px 0;
-}
-
-main.home > section.popular > div.stories > a.trending-story > .info > span.topic {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: max-content;
-  height: max-content;
-  /* color: #808080; */
-  color: transparent;
-  background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20));
-  /* background: var(--accent-linear); */
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: 1rem;
-  padding: 0;
-  margin: 0 0 8px;
-  font-weight: 400;
-  font-family: var(--font-mono);
-  border-radius: 20px;
-}
-
-main.home > section.popular > div.stories > a.trending-story > .info > h2.trending-title {
-  font-size: 1.2rem;
-  /* text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); */
-  font-family: var(--font-main) !important;
-  /* color: var(--white-color); */
-  color: var(--text-color);
-  font-weight: 500;
-  line-height: 1.4;
-  margin: 0 0 10px;
-}
-
-main.home > section.popular > div.stories > a.trending-story > .info > .meta {
-  display: flex;
-  /* color: #f5f5f5; */
-  color: var(--gray-color);
-  align-items: center;
-  font-family: var(--font-mono);
-  gap: 5px;
-  font-size: 0.8rem;
-}
-
-main.home > section.popular > div.stories > .trending {
-  margin: 10px 0;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-main.home > section.popular > div.stories > .trending > a.trending-story {
-  /* border: thin solid #6b7280; */
-  text-decoration: none;
-  height: max-content;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, .1); */
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: hidden;
-  background-position: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-main.home > section.popular > div.stories > .trending > a.trending-story > span.no {
-  /* border: thin solid #00ff00; */
-  position: absolute;
-  right: 10px;
-  /* z-index: 3; */
-  top: 10px;
-  height: 38px;
-  width: 38px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  font-family: var(--font-mono);
-  /* color: var(--white-color); */
-  color: transparent;
-  /* background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20)); */
-  background: var(--accent-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 50px;
-}
-
-main.home > section.popular > div.stories > .trending > a.trending-story > .info {
-  /* border: thin solid #00ff00; */
-  width: 100%;
-  z-index: 1;
-  display: flex;
-  flex-flow: column;
-  padding: 15px 0 0 0;
-}
-
-main.home > section.popular > div.stories > .trending > a.trending-story > .info > span.topic {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: max-content;
-  height: max-content;
-  color: transparent;
-  background: var(--accent-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: 1rem;
-  line-height: inherit;
-  padding: 0;
-  margin: 0 0 8px;
-  font-weight: 500;
-  font-family: var(--font-alt);
-}
-
-main.home > section.popular > div.stories > .trending > a.trending-story > .info > h2.trending-title {
-  font-family: var(--font-main) !important;
-  color: var(--text-color);
-  font-size: 1.1rem;
-  font-weight: 500;
-  line-height: 1.4;
-  margin: 0 0 5px;
-}
-
-main.home > section.popular > div.stories > .trending > a.trending-story > .info > .meta {
-  /* border: 1px solid #000000; */
-  display: flex;
-  color: var(--gray-color);
-  align-items: center;
-  font-family: var(--font-mono);
-  gap: 5px;
-  font-size: 0.8rem;
-}
-
-main.home > section.popular > div.side {
-  /* border: 1px solid #ff0000; */
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 20px;
-}
-
-main.home > section.popular > div.side > .donate-card {
-  /* border: 1px solid #ff0000; */
-  /*background-color: #39383816;*/
-  padding: 10px 0;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 5px;
-  /*border-radius: 10px;*/
-}
-
-main.home > section.popular > div.side > .donate-card h2 {
-  margin: 0;
-  color: #1f2937;
-  line-height: 1.4;
-  font-weight: 600;
-  font-family: var(--font-alt);
-}
-
-main.home > section.popular > div.side > .donate-card p {
-  margin: 0;
-  color: var(--text-color);
-  line-height: 1.4;
-}
-
-main.home > section.popular > div.side > .donate-card a {
-  text-decoration: none;
-  line-height: 1.4;
-  width: max-content;
-  color: var(--white-color);
-  margin: 5px 0;
-  padding: 4px 10px;
-  font-weight: 400;
-  background: var(--accent-linear);
-  /* background-image: linear-gradient(78deg, rgb(31, 6, 71) -50%, rgb(48, 0, 130) 28.67%, rgb(143, 0, 153) 57.79%, rgba(238, 0, 176, 0.85) 76.05%, rgb(247, 95, 98) 88.54%, rgb(255, 190, 20)); */
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-
-main.home > section.feeds {
-  /* border: 1px solid #000000; */
-  padding: 0;
-  margin: 15px 0;
-  display: grid;
-  grid-template-columns: 5fr 3fr;
-  justify-content: space-between;
-  gap: 30px;
-}
-
 
 /*Footer*/
 footer.footer {
@@ -1567,6 +1281,7 @@ footer.footer {
   align-items: center;
   gap: 20px;
   padding-bottom: 30px;
+  font-family: var(--font-text), sans-serif;
 }
 
 footer.footer > section {
@@ -1580,6 +1295,7 @@ footer.footer > section {
 
 footer.footer > section >.title {
   color: var(--text-color);
+  font-family: var(--font-text), sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
 }

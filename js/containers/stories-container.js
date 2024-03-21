@@ -1,59 +1,59 @@
-export default class StoryFeed extends HTMLElement {
-	constructor() {
-		// We are not even going to touch this.
-		super();
+export default class StoriesContainer extends HTMLElement {
+  constructor() {
+    // We are not even going to touch this.
+    super();
 
-		// let's create our shadow root
-		this.shadowObj = this.attachShadow({ mode: "open" });
+    // let's create our shadow root
+    this.shadowObj = this.attachShadow({ mode: "open" });
 
-		this.render();
-	}
+    this.render();
+  }
 
-	render() {
-		this.shadowObj.innerHTML = this.getTemplate();
-	}
+  render() {
+    this.shadowObj.innerHTML = this.getTemplate();
+  }
 
-	connectedCallback() {
-		// console.log('We are inside connectedCallback');
-		const contentContainer = this.shadowObj.querySelector('.stories');
+  connectedCallback() {
+    // console.log('We are inside connectedCallback');
+    const contentContainer = this.shadowObj.querySelector('.stories');
 
-		this.fetchStories(contentContainer);
-	}
+    this.fetchStories(contentContainer);
+  }
 
-	fetchStories = (contentContainer) => {
-		const storyLoader = this.shadowObj.querySelector('story-loader');
-		const content = this.getStories();
-		setTimeout(() => {
-			storyLoader.remove();
-			contentContainer.insertAdjacentHTML('beforeend', content);
-		}, 2000)
-	}
+  fetchStories = (contentContainer) => {
+    const storyLoader = this.shadowObj.querySelector('story-loader');
+    const content = this.getStories();
+    setTimeout(() => {
+      storyLoader.remove();
+      contentContainer.insertAdjacentHTML('beforeend', content);
+    }, 2000)
+  }
 
-	getTemplate = () => {
-		// Show HTML Here
-		return `
+  getTemplate = () => {
+    // Show HTML Here
+    return `
       ${this.getBody()}
       ${this.getStyles()}
     `;
-	}
+  }
 
-	getLoader = () => {
-		return `
+  getLoader = () => {
+    return `
 			<story-loader speed="300"></story-loader>
 		`
-	}
+  }
 
-	getBody = () => {
-		// language=HTML
-		return `
+  getBody = () => {
+    // language=HTML
+    return `
 			<div class="stories new">
 				${this.getLoader()}
       </div>
     `;
-	}
+  }
 
-	getStories = () => {
-		return /* html */`
+  getStories = () => {
+    return /* html */`
 			<story-wrapper story="story" id="Q0A43PBA" views="609" time="2024-03-13T13:00:00+03:00"
         story-title="The US Senate called on the law markers"
         read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
@@ -106,10 +106,10 @@ export default class StoryFeed extends HTMLElement {
         author-bio="Student At The East African University" author-followers="23" following="false">
       </story-wrapper>
 		`
-	}
+  }
 
-	getStyles() {
-		return /* css */`
+  getStyles() {
+    return /* css */`
     <style>
       *,
       *:after,
@@ -171,7 +171,8 @@ export default class StoryFeed extends HTMLElement {
 			  flex-flow: column;
 			  gap: 0;
 			}
+
     </style>
     `;
-	}
+  }
 }
