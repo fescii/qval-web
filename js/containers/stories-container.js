@@ -109,7 +109,7 @@ export default class StoriesContainer extends HTMLElement {
   }
 
   getStyles() {
-    return `
+    return /* css */`
     <style>
       *,
       *:after,
@@ -161,7 +161,7 @@ export default class StoriesContainer extends HTMLElement {
 
       :host {
         grid-column: 1/2;
-				grid-row: 1;
+				grid-row: 2;
 				width: 100%;
       }
 

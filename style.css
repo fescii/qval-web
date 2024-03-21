@@ -25,9 +25,10 @@ Author URL: https://femar.co.ke
 
 */
 :root {
-  --font-main: "Inter", sans-serif;
-  --font-text: "DM Sans", sans-serif;
-  --font-alt: "Sen", sans-serif;
+  --font-main: "Inter";
+  --font-text: "DM Sans";
+  --font-alt: "Sen";
+    --font-mono: 'Jetbrains Mono';
   --scroll-bar-background: #DDDDD7;
   --scroll-bar-linear: linear-gradient(#53595f, #627ea0);
 
@@ -38,7 +39,6 @@ Author URL: https://femar.co.ke
 
   --story-border-mobile: thin solid #6b728046;
 
-  --font-mono: 'Jetbrains Mono';
   --background: #ffffff;
   --vh-height: 100dvh;
 
@@ -1551,11 +1551,12 @@ main.home > section.popular > div.side > .donate-card a {
 main.home > section.feeds {
   /* border: 1px solid #000000; */
   padding: 0;
-  margin: 15px 0;
+  margin: 0;
   display: grid;
   grid-template-columns: 5fr 3fr;
   justify-content: space-between;
-  gap: 30px;
+  row-gap: 0;
+  column-gap: 30px;
 }
 
 

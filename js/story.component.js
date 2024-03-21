@@ -43,7 +43,7 @@ export default class StoryWrapper extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     const metaElement = this.shadowObj.querySelector(".meta");
 
-    console.log(metaElement);
+    // console.log(metaElement);
 
     if (mql.matches) {
       if (metaElement) {
@@ -51,7 +51,7 @@ export default class StoryWrapper extends HTMLElement {
         const content = metaElement.querySelector("div.user-container");
         const pointer = metaElement.querySelector('.pointer');
 
-        console.log(content);
+        // console.log(content);
 
         if (link && content && pointer) {
           link.addEventListener("click", ev => {
@@ -471,7 +471,7 @@ export default class StoryWrapper extends HTMLElement {
 
       :host {
         border-top: var(--story-border);
-        font-family: var(--font-main),sans-serif;
+        font-family: var(--font-main), sans-serif;
         padding: 15px 0;
         margin: 0;
         width: 100%;
@@ -806,7 +806,7 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote {
-        /* border: var(--input-border); */
+        /*border: var(--input-border);*/
         padding: 0;
         display: flex;
         align-items: center;
@@ -818,9 +818,12 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote > .numb_list {
-        /* border: var(--action-border); */
-        max-height: 21px;
-        padding: 0 0 1px 0;
+        /*border: var(--action-border);*/
+        height: 21px;
+        min-height: 21px;
+        padding: 0;
+        margin: 0;
+        margin-bottom: calc(16px / -3);
         display: flex;
         overflow-y: scroll;
         display: flex;
@@ -848,14 +851,16 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote > .numb_list > span {
+        /*border: 1px solid red;*/
         line-height: 1;
-        padding: 0px 0 2px 0;
-        font-family: var(--font-main),san-serif;
+        display: inline-block;
+        text-align: start;
+        height: 21px;
+        min-height: 21px;
+        padding: 0;
+        margin: 0;
+        font-family: var(--font-main), san-serif;
         font-size: 1rem;
-      }
-
-      .stats > .stat.upvote.active > .numb_list > span {
-        padding: 0 0 1px 0;
       }
 
       .stats > .stat.upvote.true > .numb_list > span,
@@ -864,6 +869,15 @@ export default class StoryWrapper extends HTMLElement {
         background: var(--second-linear);
         background-clip: text;
         -webkit-background-clip: text;
+      }
+
+      .stats > .stat.upvote.true > .numb_list > span {
+        padding: 0;
+      }
+
+      .stats > .stat.upvote.active > .numb_list > span {
+        padding: 0;
+        margin: 0;
       }
 
       .stats > .stat.write {
@@ -909,9 +923,9 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .stats > .stat.upvote svg {
-        margin: 0 0 -1px 0;
-        width: 14.5px;
-        height: 14.5px;
+        margin: 0;
+        width: 15px;
+        height: 15px;
       }
 
       .stats > .stat.upvote.true svg,
@@ -1042,19 +1056,26 @@ export default class StoryWrapper extends HTMLElement {
           color: inherit;
         }
 
+        .stats > .stat.upvote > .numb_list {
+        /*border: var(--action-border);*/
+          margin-bottom: -1.8px;
+        }
+
         .stats > .stat.upvote > .numb_list > span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
           line-height: 1;
-          padding: 0px 0 1.5px 0;
-          font-family: var(--font-main),san-serif;
-          font-size: 1rem;
+          padding: 0;
         }
 
         .stats > .stat.upvote.true > .numb_list > span {
-          padding: 0 0 1.5px 0;
+          padding: 0;
         }
 
         .stats > .stat.upvote.active > .numb_list > span {
-          padding: 0 0 1px 0;
+          padding: 0;
         }
 
         .stats > .stat.upvote svg {
