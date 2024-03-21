@@ -142,12 +142,13 @@ export default class PeopleContainer extends HTMLElement {
 	      }
 
 	      :host {
-					border: 1px solid #000000;
 				  background-color: var(--background);
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 20px;
+					position: sticky;
+  				top: 70px;
 				}
 
 				.people-list {
