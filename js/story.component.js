@@ -499,6 +499,7 @@ export default class StoryWrapper extends HTMLElement {
         font-family: var(--font-text), sans-serif;
         margin: 0;
         padding: 0;
+        font-size: 1rem;
         font-weight: 500;
         line-height: 1.5;
       }

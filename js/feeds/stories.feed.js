@@ -109,7 +109,7 @@ export default class StoryFeed extends HTMLElement {
 	}
 
 	getStyles() {
-		return `
+		return /* css */`
     <style>
       *,
       *:after,
@@ -160,11 +160,9 @@ export default class StoryFeed extends HTMLElement {
       }
 
       :host {
-        grid-column: 1/2;
-				grid-row: 1;
 				width: 100%;
       }
-      
+
 			div.stories {
 			  /* border: 1px solid #000000; */
 			  padding: 0;
@@ -173,7 +171,6 @@ export default class StoryFeed extends HTMLElement {
 			  flex-flow: column;
 			  gap: 0;
 			}
-      
     </style>
     `;
 	}

@@ -142,8 +142,7 @@ export default class PeopleContainer extends HTMLElement {
 	      }
 
 	      :host {
-					grid-column: 2/3;
-					grid-row: 1/3;
+					border: 1px solid #000000;
 				  background-color: var(--background);
 				  padding: 0;
 				  display: flex;
@@ -157,8 +156,6 @@ export default class PeopleContainer extends HTMLElement {
 				  display: flex;
 				  flex-flow: column;
 				  gap: 5px;
-				  position: sticky;
-				  top: 70px;
 				}
 
 				.people-list .title {

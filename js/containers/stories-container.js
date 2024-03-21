@@ -160,8 +160,7 @@ export default class StoriesContainer extends HTMLElement {
       }
 
       :host {
-        grid-column: 1/2;
-				grid-row: 2;
+        border: 1px solid #000000;
 				width: 100%;
       }
 

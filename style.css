@@ -1273,38 +1273,28 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 
 /* Home */
 main.home {
-  /* border: 1px solid red; */
-  display: flex;
-  padding: 10px 0 0 0;
-  flex-flow: column;
-  gap: 0;
-  justify-content: space-between;
-}
-
-main.home > section.popular {
-  /* border: thin solid #4b5563bd; */
-  margin: 15px 0;
-  display: grid;
-  grid-template-columns: 5fr 3fr;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-main.home > section.popular > div.stories {
-  /* border: 1px solid #000000; */
+  border: 1px solid red;
   padding: 0;
-  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+main.home > .feeds {
   display: flex;
   flex-flow: column;
   gap: 0;
+  width: 63%;
 }
 
-main.home > section.popular > div.stories > .trending-story {
-  /* border: thin solid #6b728032; */
+main.home .trending-story {
+  border: 1px solid #000000;
+  grid-column: 1/2;
+  grid-row: 1;
   text-decoration: none;
   height: max-content;
   padding: 0;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, .1); */
   width: 100%;
   position: relative;
   display: flex;
@@ -1314,7 +1304,7 @@ main.home > section.popular > div.stories > .trending-story {
   gap: 5px;
 }
 
-main.home > section.popular > div.stories > .trending-story > span.no {
+main.home .trending-story > span.no {
   /* border: thin solid #00ff00; */
   position: absolute;
   right: 10px;
@@ -1340,7 +1330,7 @@ main.home > section.popular > div.stories > .trending-story > span.no {
 }
 
 
-main.home > section.popular > div.stories > .trending-story > .info {
+main.home .trending-story > .info {
   /* border: thin solid #00ff00; */
   width: 100%;
   /* overflow: hidden; */
@@ -1352,7 +1342,7 @@ main.home > section.popular > div.stories > .trending-story > .info {
   padding: 15px 0;
 }
 
-main.home > section.popular > div.stories > .trending-story > .info > span.topic {
+main.home .trending-story > .info > span.topic {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1373,22 +1363,22 @@ main.home > section.popular > div.stories > .trending-story > .info > span.topic
   border-radius: 20px;
 }
 
-main.home > section.popular > div.stories > .trending-story > .info > h2.trending-title {
-  font-size: 1.2rem;
+main.home .trending-story > .info > h2.trending-title {
+  font-size: 1rem;
   margin: 0;
   font-family: var(--font-text) !important;
   /* color: var(--white-color); */
   color: var(--text-color);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.4;
 }
 
-main.home > section.popular > div.stories > .trending-story > .info > h2.trending-title a {
+main.home .trending-story > .info > h2.trending-title a {
   text-decoration: none;
   color: inherit;
 }
 
-main.home > section.popular > div.stories > .trending-story > .info > .meta {
+main.home .trending-story > .info > .meta {
   display: flex;
   /* color: #f5f5f5; */
   color: var(--gray-color);
@@ -1398,117 +1388,19 @@ main.home > section.popular > div.stories > .trending-story > .info > .meta {
   font-size: 0.8rem;
 }
 
-main.home > section.popular > div.stories > .trending {
-  margin: 10px 0;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: end;
-}
-
-main.home > section.popular > div.stories > .trending > .trending-story {
-  /* border: thin solid #6b7280; */
-  text-decoration: none;
-  height: max-content;
-  padding: 10px 0 0 0;
-  height: max-content;
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  gap: 5px;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: hidden;
-  background-position: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-main.home > section.popular > div.stories > .trending > .trending-story > span.no {
-  /* border: thin solid #00ff00; */
-  position: absolute;
-  right: 10px;
-  top: 0px;
-  height: 38px;
-  width: 38px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  font-family: var(--font-mono);
-  color: transparent;
-  background: var(--accent-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 50px;
-}
-
-main.home > section.popular > div.stories > .trending > .trending-story > .info {
-  /* border: thin solid #00ff00; */
-  width: 100%;
-  z-index: 1;
-  display: flex;
-  flex-flow: column;
+main.home div.side {
+  border: 1px solid #ff0000;
   padding: 0;
-}
-
-main.home > section.popular > div.stories > .trending > .trending-story > .info > span.topic {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: max-content;
-  height: max-content;
-  color: transparent;
-  background: var(--accent-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: 1rem;
-  line-height: inherit;
-  padding: 0;
-  margin: 0;
-  font-weight: 500;
-  font-family: var(--font-text), sans-serif;
-}
-
-main.home > section.popular > div.stories > .trending > .trending-story > .info > h2.trending-title {
-  font-family: var(--font-text), sans-serif;
-  color: var(--text-color);
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.4;
-  margin: 0;
-}
-
-main.home > section.popular > div.stories > .trending > .trending-story > .info > h2.trending-title a {
-  text-decoration: none;
-  color: inherit;
-}
-
-main.home > section.popular > div.stories > .trending > .trending-story > .info > .meta {
-  /* border: 1px solid #000000; */
-  display: flex;
-  color: var(--gray-color);
-  align-items: center;
-  font-family: var(--font-mono);
-  gap: 5px;
-  font-size: 0.8rem;
-}
-
-main.home > section.popular > div.side {
-  /* border: 1px solid #ff0000; */
-  padding: 0;
-  width: 100%;
+  width: 35%;
   display: flex;
   flex-flow: column;
   gap: 20px;
+  height: max-content;
+  position: sticky;
+  top: 70px;
 }
 
-main.home > section.popular > div.side > .donate-card {
+main.home div.side > .donate-card {
   /* border: 1px solid #ff0000; */
   /*background-color: #39383816;*/
   padding: 10px 0;
@@ -1519,7 +1411,7 @@ main.home > section.popular > div.side > .donate-card {
   /*border-radius: 10px;*/
 }
 
-main.home > section.popular > div.side > .donate-card h2 {
+main.home div.side > .donate-card h2 {
   margin: 0;
   color: #1f2937;
   line-height: 1.4;
@@ -1527,13 +1419,13 @@ main.home > section.popular > div.side > .donate-card h2 {
   font-family: var(--font-text), sans-serif;
 }
 
-main.home > section.popular > div.side > .donate-card p {
+main.home div.side > .donate-card p {
   margin: 0;
   color: var(--text-color);
   line-height: 1.4;
 }
 
-main.home > section.popular > div.side > .donate-card a {
+main.home div.side > .donate-card a {
   text-decoration: none;
   line-height: 1.4;
   width: max-content;
@@ -1546,18 +1438,6 @@ main.home > section.popular > div.side > .donate-card a {
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
-}
-
-
-main.home > section.feeds {
-  /* border: 1px solid #000000; */
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 5fr 3fr;
-  justify-content: space-between;
-  row-gap: 0;
-  column-gap: 30px;
 }
 
 
