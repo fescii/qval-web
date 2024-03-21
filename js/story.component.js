@@ -342,7 +342,7 @@ export default class StoryWrapper extends HTMLElement {
 		else {
 			return `
 			  <h3 class="title">
-          <a href="" class="link">${this.getAttribute('title')}</a>
+          <a href="" class="link">${this.getAttribute('story-title')}</a>
         </h3>
 			`;
 	  }
