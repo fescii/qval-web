@@ -36,7 +36,7 @@ export default class PersonWrapper extends HTMLElement {
         <div class="name">
           <h4 class="uid">
             <a href="" class="link">${this.getAttribute('id')}</a>
-            ${this.getAuthor()} 
+            ${this.getAuthor()}
           </h4>
           <span class="followers">
             <span class="no">${this.getAttribute('followers')}</span>
