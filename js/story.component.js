@@ -115,6 +115,7 @@ export default class StoryWrapper extends HTMLElement {
 	}
 
   openForm = () => {
+    const outerThis = this;
     const writeContainer = this.shadowObj.querySelector('.stats');
     const formContainer = this.shadowObj.querySelector('div.form-container');
     if (writeContainer && formContainer) {
@@ -124,8 +125,8 @@ export default class StoryWrapper extends HTMLElement {
       writeBtn.addEventListener('click', event => {
         event.preventDefault();
 
-        console.log(writeContainer);
-        console.log(formElement);
+        // console.log(writeContainer);
+        // console.log(formElement);
 
         // writeContainer.classList.toggle('active');
         if (writeContainer.classList.contains('active')) {
@@ -135,6 +136,7 @@ export default class StoryWrapper extends HTMLElement {
         else {
           writeContainer.classList.add('active');
           formContainer.insertAdjacentHTML('beforeend', formElement);
+          outerThis.expandTextArea();
         }
       })
     }
@@ -219,6 +221,25 @@ export default class StoryWrapper extends HTMLElement {
           })
         }
       })
+    }
+  }
+
+  expandTextArea = () => {
+    const replyTextarea = this.shadowObj.querySelector('textarea');
+    if (replyTextarea) {
+      replyTextarea.addEventListener('input', () => {
+        replyTextarea.style.height = 'auto';
+        const height = replyTextarea.scrollHeight;
+        if (height <= 60) {
+          replyTextarea.style.height = `38px`;
+        }
+        else if (height <= 100) {
+          replyTextarea.style.height = `${height + 10}px`;
+        }
+        else {
+          replyTextarea.style.height = `100px`;
+        }
+      });
     }
   }
 
@@ -958,7 +979,7 @@ export default class StoryWrapper extends HTMLElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        align-self: center;
+        align-self: start;
         overflow: hidden;
         width: 35px;
         height: 35px;
@@ -1013,7 +1034,7 @@ export default class StoryWrapper extends HTMLElement {
         background: var(--accent-linear);
         position: absolute;
         right: 8px;
-        top: calc(50% - 15px);
+        bottom: 5px;
         height: 30px;
         width: 60px;
         padding: 0;
