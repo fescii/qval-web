@@ -100,11 +100,31 @@ export default class StoriesContainer extends HTMLElement {
         read-time="6" author-id="U0A43PBA" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
         author-bio="Student At The East African University" author-followers="23" following="false">
       </story-wrapper>
+      <story-wrapper story="opinion" upvotes="9" id="Q0A43PBA" upvoted="true"
+	      views="609" time="2022-01-03T13:00:00+03:00"
+	      story-title="The US Senate called on the law markers"
+	      read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
+	      author-verified="true" author-name="Fredrick Ochieng"
+	      author-bio="Student At The East African University"
+	      author-followers="23" following="true">
+	    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
+	    Facilis nulla optio quas quod veniam nam voluptas!
+	    </story-wrapper>
       <story-wrapper story="story" id="Q0A43PBA" upvotes="89" upvoted="true"
         views="609" time="2021-01-03T13:00:00+03:00" story-title="The US Senate called on the law markers"
         read-time="6" author-id="U0A43PBA" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
         author-bio="Student At The East African University" author-followers="23" following="false">
       </story-wrapper>
+      <story-wrapper story="opinion" upvotes="9" id="Q0A43PBA" upvoted="true"
+	      views="609" time="2022-01-03T13:00:00+03:00"
+	      story-title="The US Senate called on the law markers"
+	      read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
+	      author-verified="true" author-name="Fredrick Ochieng"
+	      author-bio="Student At The East African University"
+	      author-followers="23" following="true">
+	    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
+	    Facilis nulla optio quas quod veniam nam voluptas!
+	    </story-wrapper>
 		`
   }
 

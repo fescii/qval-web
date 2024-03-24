@@ -571,6 +571,7 @@ export default class StoryWrapper extends HTMLElement {
 
       .meta  .profile {
         border: var(--modal-border);
+        box-shadow: var(--modal-shadow);
         background-color: var(--background);
         padding: 0;
         z-index: 2;
@@ -586,14 +587,11 @@ export default class StoryWrapper extends HTMLElement {
       }
 
       .meta  .profile > .cover {
-        box-shadow: var(--modal-shadow);
         padding: 10px 10px;
-        z-index: 2;
-        background-color: var(--background);
         display: flex;
         flex-flow: column;
         gap: 0;
-        width: 300px;
+        width: 100%;
         border-radius: 12px;
         transition: all 100ms ease-out;
         -webkit-transition: all 100ms ease-out;
