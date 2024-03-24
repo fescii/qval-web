@@ -200,7 +200,7 @@ export default class PeopleContainer extends HTMLElement {
 				.more a {
 				  text-decoration: none;
 				  border: none;
-				  background-color: #1d2c38d2;
+				  background-color: var(--action-background);
 				  padding: 5px 20px;
 				  color: var(--white-color);
 				  font-size: 0.9rem;
