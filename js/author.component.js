@@ -416,24 +416,25 @@ export default class PersonWrapper extends HTMLElement {
         color: var(--gray-color);
         font-family: var(--font-text), sans-serif;
         padding: 5px 25px;
-        width: max-content;
+        width: 120px;
+        cursor: pointer;
         display: flex;
         flex-flow: row;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: center;
         gap: 5px;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
+        border-radius: 12px;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
       }
 
       .action.follow {
         border: none;
+        padding: 6px 25px;
         background-color: var(--action-background);
         color: var(--white-color);
-        font-size: 0.9rem;
-        font-weight: 500;
+        font-size: 1rem;
       }
 
       @media screen and (max-width:660px) {
