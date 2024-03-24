@@ -47,7 +47,7 @@ export default class AppHome extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
-        <form-container type="story"></form-container>
+        <add-container type="story"></add-container>
         <stories-container stories="popular" url="/stories/popular"></stories-container>
         <topics-container url="/topics/popular"></topics-container>
         <stories-container stories="recent" url="/stories/recent"></stories-container>
@@ -58,7 +58,7 @@ export default class AppHome extends HTMLElement {
     else {
       return /* html */`
         <div class="feeds">
-          <form-container type="story"></form-container>
+          <add-container type="story"></add-container>
           <stories-container stories="popular" url="/stories/popular"></stories-container>
           <stories-feed stories="all" url="/stories/feed"></stories-feed>
         </div>

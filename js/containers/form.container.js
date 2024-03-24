@@ -15,18 +15,6 @@ export default class FormContainer extends HTMLElement {
 
 	connectedCallback() {
 		// console.log('We are inside connectedCallback');
-		const contentContainer = this.shadowObj.querySelector('.people-list');
-
-		this.fetchStories(contentContainer);
-	}
-
-	fetchStories = (contentContainer) => {
-		const peopleLoader = this.shadowObj.querySelector('people-loader');
-		const content = this.getPeople();
-		setTimeout(() => {
-			peopleLoader.remove();
-			contentContainer.insertAdjacentHTML('beforeend', content);
-		}, 2000)
 	}
 
 	getTemplate = () => {
@@ -38,9 +26,8 @@ export default class FormContainer extends HTMLElement {
 	}
 
 	getBody = () => {
-		// language=HTML
-		return `
-			<form action="" class="opinion">
+		return /* html */`
+      <form action="" class="opinion">
         <div class="image">
           <img src="img/img.jpg" alt="Fredrick Ochieng" srcset="">
         </div>
@@ -103,12 +90,12 @@ export default class FormContainer extends HTMLElement {
 	      }
 
 	      :host {
-          /* border: var(--input-border); */
+          border-bottom: var(--story-border);
           background-color: var(--background);
-          padding: 0;
+          padding: 10px 0;
           display: flex;
           flex-flow: column;
-          gap: 0;
+          gap: 5px;
         }
 
         form.opinion {
@@ -196,8 +183,12 @@ export default class FormContainer extends HTMLElement {
 				@media screen and (max-width:660px) {
 					:host {
 						padding: 10px 0;
-						position: static;
+            border-bottom: var(--story-border-mobile);
 					}
+
+          div.options > span {
+            border: var(--story-border-mobile);
+          }
 				}
 	    </style>
     `;
