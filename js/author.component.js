@@ -174,14 +174,15 @@ export default class PersonWrapper extends HTMLElement {
 
       :host {
         font-family: var(--font-main),sans-serif;
-        border-right: var(--story-border);
+        /* border-right: var(--story-border); */
         background-color: var(--author-background);
-        padding: 8px 10px 8px 0;
+        padding: 8px 10px;
         display: flex;
         flex-flow: row;
         align-items: center;
         justify-content: space-between;
-        gap: 10px
+        gap: 10px;
+        border-radius: 10px;
       }
 
       .head {
@@ -322,7 +323,7 @@ export default class PersonWrapper extends HTMLElement {
         margin: 0;
         color: var(--gray-color);
         background: unset;
-        font-family: var(--font-main),sans-serif;
+        font-family: var(--font-text), sans-serif;
         display: flex;
         align-items: center;
         gap: 5px;
@@ -413,6 +414,7 @@ export default class PersonWrapper extends HTMLElement {
       .action {
         border: var(--action-border);
         color: var(--gray-color);
+        font-family: var(--font-text), sans-serif;
         padding: 5px 25px;
         width: max-content;
         display: flex;
