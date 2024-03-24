@@ -175,7 +175,7 @@ export default class PersonWrapper extends HTMLElement {
       :host {
         font-family: var(--font-main),sans-serif;
         /* border-right: var(--story-border); */
-        background-color: var(--author-background);
+        background-color: var(--user-background);
         padding: 8px 10px;
         display: flex;
         flex-flow: row;
@@ -382,7 +382,7 @@ export default class PersonWrapper extends HTMLElement {
 
       .head > .name h4.uid {
         color: var(--text-color);
-        font-family: var(--font-mono),monospace;
+        font-family: var(--font-mono), monospace;
         font-weight: 500;
         font-size: 0.9rem;
       }

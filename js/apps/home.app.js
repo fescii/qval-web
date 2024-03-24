@@ -47,6 +47,7 @@ export default class AppHome extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
+        <form-container type="story"></form-container>
         <stories-container stories="popular" url="/stories/popular"></stories-container>
         <topics-container url="/topics/popular"></topics-container>
         <stories-container stories="recent" url="/stories/recent"></stories-container>
@@ -57,15 +58,7 @@ export default class AppHome extends HTMLElement {
     else {
       return /* html */`
         <div class="feeds">
-          <section class="opinion" id="sticky-position">
-            <form action="" class="opinion">
-              <div class="image">
-                <img src="img/img.jpg" alt="Fredrick Ochieng" srcset="">
-              </div>
-              <textarea name="reply" placeholder="What's your opinion?" id="reply"></textarea>
-              <button type="submit">Post</button>
-            </form>
-          </section>
+          <form-container type="story"></form-container>
           <stories-container stories="popular" url="/stories/popular"></stories-container>
           <stories-feed stories="all" url="/stories/feed"></stories-feed>
         </div>
@@ -116,118 +109,6 @@ export default class AppHome extends HTMLElement {
 	        background: var(--scroll-bar-linear);
 	        border-radius: 50px;
 	      }
-
-        section.opinion {
-        /* border-top: var(--input-border); */
-        background-color: var(--background);
-        padding: 10px 0;
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        z-index: 2;
-        position: sticky;
-        top: 70px;
-      }
-
-      section.opinion.sticky {
-        border-bottom: var(--input-border);
-      }
-
-      section.opinion > form.opinion {
-        /* border-bottom: 1px solid #6b72805d; */
-        /* border: 1px solid #000000; */
-        padding: 10px 0 10px 0;
-        margin: 0 0;
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        font-size: 1rem;
-        font-weight: 400;
-        color: var(--gray-color);
-        position: relative;
-      }
-
-      section.opinion > form.opinion {
-        padding: 0 0 5px 0;
-      }
-
-
-      section.opinion > form.opinion .image {
-        /* border: thin solid #4b5563bd; */
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* align-self: center; */
-        overflow: hidden;
-        width: 35px;
-        height: 35px;
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-      }
-
-      section.opinion > form.opinion .image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-      }
-
-      section.opinion > form.opinion > textarea {
-        /* border: var(--input-border); */
-        border: none;
-        padding: 8px !important;
-        margin: 0;
-        width: calc(100% - 35px);
-        resize: none;
-        height: 40px;
-        /* max-height: 100px !important; */
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        font-size: 1rem;
-        font-weight: 400;
-        color: var(--gray-color);
-        border-radius: 10px;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-
-      section.opinion > form.opinion > textarea::-webkit-scrollbar {
-        display: none !important;
-        visibility: hidden;
-      }
-
-      section.opinion > form.opinion > textarea:focus {
-        border: var(--input-border-focus);
-      }
-
-      section.opinion > form.opinion > button {
-        border: none;
-        cursor: pointer;
-        color: var(--white-color);
-        background: var(--accent-linear);
-        position: absolute;
-        right: 8px;
-        top: calc(50% - 18px);
-        height: 30px;
-        width: 60px;
-        padding: 0;
-        font-size: 0.9rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0;
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-      }
 
 	      h1,
 	      h2,
