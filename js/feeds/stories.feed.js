@@ -171,6 +171,7 @@ export default class StoryFeed extends HTMLElement {
 
       :host {
 				width: 100%;
+        padding: 0 0 30px;
       }
 
 			div.stories {
