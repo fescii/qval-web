@@ -435,17 +435,19 @@ export default class PersonWrapper extends HTMLElement {
       }
       @media screen and (max-width:660px) {
         :host {
-          border: var(--story-border-mobile);
-          padding: 8px 10px 8px 0;
-          width: 200px;
-          min-width: 200px;
-          height: max-content;
+          border: none;
+          background-color: var(--author-background);
+          padding: 14px;
+          width: 156px;
+          min-width: 156px;
+          height: 204px;
+          max-height: 204px;
           display: flex;
           flex-flow: column;
           align-items: center;
-          justify-content: center;
-          gap: 30px;
-          border-radius: 10px;
+          justify-content: space-between;
+          gap: 0;
+          border-radius: 16px;
         }
 
         .head {
@@ -455,6 +457,15 @@ export default class PersonWrapper extends HTMLElement {
           align-items: center;
           justify-content: center;
           gap: 10px;
+        }
+
+        .head > .image {
+          width: 80px;
+          height: 80px;
+          overflow: hidden;
+          border-radius: 50px;
+          -webkit-border-radius: 50px;
+          -moz-border-radius: 50px;
         }
 
         .head > .name {

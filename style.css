@@ -24,6 +24,7 @@ Author URL: https://femar.co.ke
   =========
 
 */
+
 :root {
   --font-main: "Inter";
   --font-text: "DM Sans";
@@ -41,7 +42,7 @@ Author URL: https://femar.co.ke
   --background: #ffffff;
   --vh-height: 100dvh;
 
-  --author-background: #e6e6e616;
+  --author-background: #f1f3f4;
   --dot-background: #6b7280c9;
 
   --accent-color: #08b86f;

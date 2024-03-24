@@ -775,14 +775,14 @@ export default class StoryWrapper extends HTMLElement {
       .content ol {
         margin: 10px 0 0 20px;
         line-height: 1.4;
-        color: #1f2937;
+        color: var(--font-text);
         font-family: var(--font-text), sans-serif;
       }
 
       .content ul a,
       .content ol a {
         background: unset;
-        color: #1f2937;
+        color:var(--font-text);
         font-weight: 500;
         text-decoration-color: var(--anchor) !important;
         text-decoration: underline;
