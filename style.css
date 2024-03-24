@@ -24,6 +24,7 @@ Author URL: https://femar.co.ke
   =========
 
 */
+
 :root {
   --font-main: "Inter";
   --font-text: "DM Sans";
@@ -37,11 +38,15 @@ Author URL: https://femar.co.ke
   --story-border: thin solid #6b72801a;
 
   --story-border-mobile: thin solid #6b728046;
+  --border-mobile: thin solid #6b728088;
 
   --background: #ffffff;
   --vh-height: 100dvh;
 
-  --author-background: #e6e6e616;
+  --action-background: #1d2c38d2;
+
+  --author-background: #f1f3f4;
+  --user-background: #f8f8f8;
   --dot-background: #6b7280c9;
 
   --accent-color: #08b86f;
@@ -59,6 +64,8 @@ Author URL: https://femar.co.ke
   --modal-shadow: 0 12px 48px #6d758d33;
   --modal-border: 1px solid #83858442;
   --modal-overlay: #1d2534b3;
+
+  /* --option-background: linear-gradient(#53595f71, #627ea034); */
 
   --second-linear: linear-gradient(0deg,#df791a 0%, #f09c4e 100%);
 
@@ -560,6 +567,10 @@ header.header > ul > li.link.resources > div.drop-down > span.arrow {
   left: 250px;
 }
 
+header.header > ul > li.link a span.text {
+  font-family: inherit;
+}
+
 header.header > ul > li.link > div.drop-down > ul.main {
   /* border: 1px solid red; */
   width: 100%;
@@ -571,6 +582,7 @@ header.header > ul > li.link > div.drop-down > ul.main {
   column-gap: 0;
   row-gap: 10px;
 }
+
 
 header.header > ul > li.link > div.drop-down ul * {
   transition: all 300ms ease-in-out;

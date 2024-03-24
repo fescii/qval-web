@@ -227,6 +227,7 @@ export default class TopicsContainer extends HTMLElement {
 				  border: thin solid #6b728094;
 				  margin: 0;
 				  text-decoration: none;
+					font-family: var(--font-text), sans-serif;
 				  color: var(--gray-color);
 				  padding: 4px 10px;
 				  display: flex;

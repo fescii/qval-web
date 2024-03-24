@@ -174,14 +174,15 @@ export default class PersonWrapper extends HTMLElement {
 
       :host {
         font-family: var(--font-main),sans-serif;
-        border-right: var(--story-border);
-        background-color: var(--author-background);
-        padding: 8px 10px 8px 0;
+        /* border-right: var(--story-border); */
+        background-color: var(--user-background);
+        padding: 8px 10px;
         display: flex;
         flex-flow: row;
         align-items: center;
         justify-content: space-between;
-        gap: 10px
+        gap: 10px;
+        border-radius: 10px;
       }
 
       .head {
@@ -322,7 +323,7 @@ export default class PersonWrapper extends HTMLElement {
         margin: 0;
         color: var(--gray-color);
         background: unset;
-        font-family: var(--font-main),sans-serif;
+        font-family: var(--font-text), sans-serif;
         display: flex;
         align-items: center;
         gap: 5px;
@@ -381,7 +382,7 @@ export default class PersonWrapper extends HTMLElement {
 
       .head > .name h4.uid {
         color: var(--text-color);
-        font-family: var(--font-mono),monospace;
+        font-family: var(--font-mono), monospace;
         font-weight: 500;
         font-size: 0.9rem;
       }
@@ -413,39 +414,44 @@ export default class PersonWrapper extends HTMLElement {
       .action {
         border: var(--action-border);
         color: var(--gray-color);
+        font-family: var(--font-text), sans-serif;
         padding: 5px 25px;
-        width: max-content;
+        width: 120px;
+        cursor: pointer;
         display: flex;
         flex-flow: row;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: center;
         gap: 5px;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
+        border-radius: 12px;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
       }
 
       .action.follow {
         border: none;
-        background-color: var(--action-color);
+        padding: 6px 25px;
+        background-color: var(--action-background);
         color: var(--white-color);
-        font-size: 0.9rem;
-        font-weight: 500;
+        font-size: 1rem;
       }
+
       @media screen and (max-width:660px) {
         :host {
-          border: var(--story-border-mobile);
-          padding: 8px 10px 8px 0;
-          width: 200px;
-          min-width: 200px;
-          height: max-content;
+          border: none;
+          background-color: var(--author-background);
+          padding: 14px;
+          width: 156px;
+          min-width: 156px;
+          height: 204px;
+          max-height: 204px;
           display: flex;
           flex-flow: column;
           align-items: center;
-          justify-content: center;
-          gap: 30px;
-          border-radius: 10px;
+          justify-content: space-between;
+          gap: 0;
+          border-radius: 16px;
         }
 
         .head {
@@ -457,6 +463,15 @@ export default class PersonWrapper extends HTMLElement {
           gap: 10px;
         }
 
+        .head > .image {
+          width: 80px;
+          height: 80px;
+          overflow: hidden;
+          border-radius: 50px;
+          -webkit-border-radius: 50px;
+          -moz-border-radius: 50px;
+        }
+
         .head > .name {
           padding: 0;
           display: flex;
@@ -466,6 +481,25 @@ export default class PersonWrapper extends HTMLElement {
           flex-wrap: nowrap;
           gap:  0;
           position: relative;
+        }
+
+        .action {
+          padding: 5px 25px;
+          width: 100%;
+          font-family: var(--font-text), sans-serif;
+          gap: 5px;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+        }
+
+        .action.follow {
+          border: none;
+          background-color: var(--action-background);
+          color: var(--white-color);
+          font-family: var(--font-text), sans-serif;
+          font-size: 1rem;
+          font-weight: 400;
         }
 			}
     </style>
