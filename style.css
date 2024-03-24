@@ -567,6 +567,10 @@ header.header > ul > li.link.resources > div.drop-down > span.arrow {
   left: 250px;
 }
 
+header.header > ul > li.link a span.text {
+  font-family: inherit;
+}
+
 header.header > ul > li.link > div.drop-down > ul.main {
   /* border: 1px solid red; */
   width: 100%;
@@ -578,6 +582,7 @@ header.header > ul > li.link > div.drop-down > ul.main {
   column-gap: 0;
   row-gap: 10px;
 }
+
 
 header.header > ul > li.link > div.drop-down ul * {
   transition: all 300ms ease-in-out;
