@@ -53,12 +53,22 @@
     border: 1px solid #057232a9;
   }
 
+  main.post,
   main.main {
     /* border: 1px solid red; */
     width: 100%;
     display: flex;
     flex-flow: column;
     justify-content: center;
+  }
+
+  main.post>.side,
+  main.post>.feeds {
+    width: 100%;
+  }
+
+  .stats>.stat.write span.line {
+    border-left: var(--open-line-mobile);
   }
 
   main.home > section.popular > div.stories > .trending {
