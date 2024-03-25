@@ -1602,7 +1602,7 @@ main.post > .feeds > .post .meta > .views > .no {
 .stats {
   /* border: var(--input-border); */
   padding: 0;
-  margin: 5px 0 0 0;
+  margin: 5px 0 20px 0;
   display: flex;
   align-items: center;
   gap: 23px;

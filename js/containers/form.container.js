@@ -90,12 +90,12 @@ export default class FormContainer extends HTMLElement {
 	      }
 
 	      :host {
-          border-bottom: var(--story-border);
+          border: var(--story-border);
           background-color: var(--background);
-          padding: 10px 0;
+          padding: 0;
           display: flex;
           flex-flow: column;
-          gap: 5px;
+          gap: 0;
         }
 
         form.opinion {
@@ -112,7 +112,7 @@ export default class FormContainer extends HTMLElement {
 
         form.opinion .image {
           padding: 0;
-          display: flex;
+          display: none;
           align-items: center;
           justify-content: center;
           overflow: hidden;
