@@ -1283,6 +1283,11 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 }
 
 
+
+
+
+
+
 main.post {
   /* border: 1px solid red; */
   padding: 0;
@@ -1303,7 +1308,7 @@ main.post > .feeds {
 }
 
 main.post > .feeds > .post {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   display: flex;
   flex-flow: column;
   gap: 0;
@@ -1533,7 +1538,7 @@ main.post > .feeds > .post .content {
 }
 
 main.post > .feeds > .post .content p {
-  margin: 0 0 5px 0;
+  margin: 5px 0 0 0;
   padding: 0;
   line-height: 1.5;
   font-size: 1.02rem;
@@ -1594,7 +1599,37 @@ main.post > .feeds > .post .meta > .views > .no {
 }
 
 
-.meta > .stat.upvote {
+.stats {
+  /* border: var(--input-border); */
+  padding: 0;
+  margin: 5px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+}
+
+.stats>.stat {
+  padding: 3px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--gray-color);
+}
+
+.stats span.no {
+  font-family: var(--font-main), sans-serif;
+  font-size: 1rem;
+}
+
+.stats * {
+  font-family: var(--font-main), sans-serif;
+}
+
+.stats>.stat.upvote {
   /*border: var(--input-border);*/
   padding: 0;
   display: flex;
@@ -1606,7 +1641,7 @@ main.post > .feeds > .post .meta > .views > .no {
   color: var(--gray-color);
 }
 
-.meta > .stat.upvote > .numb_list {
+.stats>.stat.upvote>.numb_list {
   /*border: var(--action-border);*/
   height: 21px;
   min-height: 21px;
@@ -1626,12 +1661,12 @@ main.post > .feeds > .post .meta > .views > .no {
   scrollbar-width: none;
 }
 
-.meta > .stat.upvote > .numb_list > .numb_list::-webkit-scrollbar {
+.stats>.stat.upvote>.numb_list>.numb_list::-webkit-scrollbar {
   display: none !important;
   visibility: hidden;
 }
 
-.meta > .stat.upvote > .numb_list {
+.stats>.stat.upvote>.numb_list {
   transition: all 500ms ease-in-out;
   -webkit-transition: all 500ms ease-in-out;
   -moz-transition: all 500ms ease-in-out;
@@ -1639,7 +1674,7 @@ main.post > .feeds > .post .meta > .views > .no {
   -o-transition: all 500ms ease-in-out;
 }
 
-.meta > .stat.upvote > .numb_list > span {
+.stats>.stat.upvote>.numb_list>span {
   /*border: 1px solid red;*/
   line-height: 1;
   display: inline-block;
@@ -1652,48 +1687,82 @@ main.post > .feeds > .post .meta > .views > .no {
   font-size: 1rem;
 }
 
-.meta > .stat.upvote.true > .numb_list > span,
-.meta > .stat.upvote.active > .numb_list > span {
+.stats>.stat.upvote.true>.numb_list>span,
+.stats>.stat.upvote.active>.numb_list>span {
   color: transparent;
   background: var(--second-linear);
   background-clip: text;
   -webkit-background-clip: text;
 }
 
-.meta > .stat.upvote.true > .numb_list > span {
+.stats>.stat.upvote.true>.numb_list>span {
   padding: 0;
 }
 
-.meta > .stat.upvote.active > .numb_list > span {
+.stats>.stat.upvote.active>.numb_list>span {
   padding: 0;
   margin: 0;
 }
 
-.meta > .stat.write {
+.stats>.stat.write {
   position: relative;
 }
 
-.meta > .stat.write span.line {
+.stats>.stat.write span.line {
   border-left: var(--close-line);
   border-bottom: var(--close-line);
   border-bottom-left-radius: 8px;
   position: absolute;
   top: 30px;
   left: 10px;
-  display: none;
+  display: flex;
   width: 10px;
-  height: 32px;
+  height: 25px;
 }
 
-.meta > .stat.upvote svg {
+.stats.active>.stat.write span.line {
+  border-left: var(--open-line);
+  border-bottom: var(--open-line);
+  display: inline-block;
+}
+
+.stats.active>.stat.write {
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.stats>.stat.write svg {
+  color: inherit;
+  width: 22px;
+  height: 22px;
+}
+
+.stats>.stat.discuss svg {
+  margin: -1px 0 0 0;
+  color: inherit;
+  width: 18px;
+  height: 18px;
+}
+
+.stats>.stat.upvote svg {
   margin: 0;
   width: 15px;
   height: 15px;
 }
 
-.meta > .stat.upvote.true svg,
-.meta > .stat.upvote.active svg {
+.stats>.stat.upvote.true svg,
+.stats>.stat.upvote.active svg {
   color: var(--color-alt);
+}
+
+.stats>.stat.write svg {
+  color: var(--gray-color);
+}
+
+.stats.active>.stat.write svg {
+  color: var(--accent-color);
 }
 
 
