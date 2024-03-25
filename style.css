@@ -1608,7 +1608,7 @@ main.post > .feeds > .post .meta > .views > .no {
   gap: 23px;
 }
 
-.stats>.stat {
+.stats > .stat {
   padding: 3px 0;
   cursor: pointer;
   display: flex;
@@ -1710,14 +1710,14 @@ main.post > .feeds > .post .meta > .views > .no {
 
 .stats>.stat.write span.line {
   border-left: var(--close-line);
-  border-bottom: var(--close-line);
-  border-bottom-left-radius: 8px;
+  /* border-bottom: var(--close-line); */
   position: absolute;
   top: 30px;
   left: 10px;
   display: flex;
-  width: 10px;
-  height: 25px;
+  width: 5px;
+  height: 15px;
+  border-radius: 0;
 }
 
 .stats.active>.stat.write span.line {
