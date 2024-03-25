@@ -16,17 +16,136 @@ export default class OpinionWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
+    this.openProfile();
+    this.upVote();
     this.openForm();
   }
 
+  openProfile = () => {
+    const outerThis = this;
+    const mql = window.matchMedia('(max-width: 660px)');
+    const metaElement = this.shadowObj.querySelector(".meta");
+
+    // console.log(metaElement);
+
+    if (mql.matches) {
+      if (metaElement) {
+        const link = metaElement.querySelector("a.action-link");
+        const content = metaElement.querySelector("div.user-container");
+        const pointer = metaElement.querySelector('.pointer');
+
+        // console.log(content);
+
+        if (link && content && pointer) {
+          link.addEventListener("click", ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            content.style.setProperty("display", "flex");
+            outerThis.disableScroll()
+          })
+
+          pointer.addEventListener("click", e => {
+            e.preventDefault();
+
+            content.style.setProperty("display", "none");
+            outerThis.enableScroll()
+          })
+        }
+      }
+    }
+  }
+
+  upVote() {
+    const outerThis = this;
+    let container = this.shadowObj.querySelector(".stats>.stat.upvote");
+    if (container) {
+      let outerNum = container.querySelector(".numb_list");
+      outerNum.scrollBy({
+        top: outerNum.scrollHeight + 10,
+        behavior: "smooth"
+      })
+
+      container.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const upvoted = outerThis.getAttribute("upvoted") || "false";
+        // console.log(upvoted);
+
+        let numb = container.querySelector(".numb_list");
+        let num = numb.querySelector(`#u-${outerThis.getAttribute('upvotes')}`);
+        // console.log(num);
+        let numHolder = num.textContent;
+
+        if (upvoted === "false") {
+          container.classList.add("active");
+          try {
+            numHolder = parseInt(numHolder) + 1;
+          }
+          catch (error) {
+            console.error(error);
+          }
+
+          let newNum = document.createElement("span");
+          newNum.setAttribute("id", `u-${numHolder}`)
+          newNum.innerText = numHolder;
+
+          outerThis.setAttribute("upvotes", numHolder);
+          outerThis.setAttribute("upvoted", 'true');
+
+          numb.appendChild(newNum);
+          numb.scrollBy({
+            top: num.scrollHeight + 100,
+            behavior: "smooth"
+          })
+        }
+        else {
+          container.classList.remove("active");
+          container.classList.remove("true");
+
+          try {
+            numHolder = parseInt(numHolder) - 1;
+
+            if (typeof numHolder === "number") {
+              if (numHolder < 1) {
+                numHolder = 0
+              }
+            }
+          }
+          catch (error) {
+            console.error(error);
+          }
+
+          let allNum = numb.querySelectorAll('span');
+          let removeNum = numb.querySelector(`#u-${outerThis.getAttribute('upvotes')}`);
+
+          if (allNum.length > 1) {
+            removeNum.remove()
+          }
+          else {
+            removeNum.textContent = numHolder;
+            removeNum.setAttribute("id", `u-${numHolder}`)
+          }
+          outerThis.setAttribute("upvotes", numHolder);
+          outerThis.setAttribute("upvoted", 'false');
+
+          numb.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          })
+        }
+      })
+    }
+  }
+
   openForm = () => {
-    const writeContainer = this.shadowObj.querySelector('div.stats');
+    const writeContainer = this.shadowObj.querySelector('.stats');
     const formContainer = this.shadowObj.querySelector('div.form-container');
     if (writeContainer && formContainer) {
       const writeBtn = writeContainer.querySelector('span.stat.write');
       const formElement = this.getForm();
 
-      writeBtn.addEventListener('click',event => {
+      writeBtn.addEventListener('click', event => {
         event.preventDefault();
 
         // console.log(writeContainer);
@@ -43,21 +162,6 @@ export default class OpinionWrapper extends HTMLElement {
         }
       })
     }
-  }
-
-  formatDateToLocale(isoDate) {
-    // Create a Date object from the ISO date string
-    const date = new Date(isoDate);
-
-    // Options for formatting to the desired output
-    const options = {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    };
-
-    // Use toLocaleDateString to format according to browser settings
-    return date.toLocaleDateString('en-US', options);
   }
 
   getTemplate() {
@@ -192,7 +296,7 @@ export default class OpinionWrapper extends HTMLElement {
 
   getForm = () => {
     return `
-      <form-container type="post"></form-container>
+      <form-container type="opinion"></form-container>
     `
   }
 
@@ -250,7 +354,7 @@ export default class OpinionWrapper extends HTMLElement {
       :host {
         border-bottom: var(--story-border);
         font-family: var(--font-main), sans-serif;
-        padding: 15px 0;
+        padding: 15px 0 0 0;
         margin: 0;
         width: 100%;
         display: flex;
@@ -526,7 +630,7 @@ export default class OpinionWrapper extends HTMLElement {
       .stats {
         /* border: var(--input-border); */
         padding: 0;
-        margin: 0;
+        margin: 0 0 12px 0;
         display: flex;
         align-items: center;
         gap: 23px;
@@ -534,6 +638,7 @@ export default class OpinionWrapper extends HTMLElement {
 
       .stats > .stat {
         padding: 3px 0;
+        margin: 0;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -634,19 +739,16 @@ export default class OpinionWrapper extends HTMLElement {
 
       .stats > .stat.write span.line {
         border-left: var(--close-line);
-        border-bottom: var(--close-line);
-        border-bottom-left-radius: 8px;
         position: absolute;
         top: 30px;
         left: 10px;
         display: none;
-        width: 10px;
-        height: 32px;
+        width: 5px;
+        height: 12px;
       }
 
       .stats.active > .stat.write span.line {
         border-left: var(--open-line);
-        border-bottom: var(--open-line);
         display: inline-block;
       }
 

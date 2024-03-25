@@ -58,6 +58,15 @@ export default class FormContainer extends HTMLElement {
     `;
 	}
 
+  checkType = () => {
+    if (this.getAttribute('type') === 'opinion') {
+      return 'border-bottom: none;';
+    }
+    else {
+      return 'border-bottom: var(--story-border);';
+    }
+  }
+
 
 	getStyles() {
 		return /* css */`
@@ -111,7 +120,7 @@ export default class FormContainer extends HTMLElement {
 	      }
 
 	      :host {
-          border-bottom: var(--story-border);
+          ${this.checkType()}
           background-color: var(--background);
           padding: 0 0 10px 2px;
           display: flex;
