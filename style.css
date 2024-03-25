@@ -58,7 +58,8 @@ Author URL: https://femar.co.ke
   --anchor: #4b556321;
   --anchor-active: #21D029;
 
-  --open-line: 2px solid #08b86f7a;
+  --open-line: 2px solid #08b86f93;
+  --open-line-mobile: 2px solid #08b86fc5;
   --close-line: 2px solid #6b72803a;
 
   --modal-shadow: 0 12px 48px #6d758d33;
@@ -1586,14 +1587,14 @@ main.post > .feeds > .post .content ol a:hover {
 }
 
 main.post > .feeds > .post .meta {
-  height: 25px;
+  margin: 10px 0;
   display: flex;
   position: relative;
   color: var(--gray-color);
   align-items: center;
   font-family: var(--font-text), sans-serif;
   gap: 5px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 main.post > .feeds > .post .meta > .views > .no {
@@ -1604,7 +1605,7 @@ main.post > .feeds > .post .meta > .views > .no {
 .stats {
   /* border: var(--input-border); */
   padding: 0;
-  margin: 5px 0 20px 0;
+  margin: 0 0 20px 0;
   display: flex;
   align-items: center;
   gap: 23px;
@@ -1707,11 +1708,13 @@ main.post > .feeds > .post .meta > .views > .no {
 }
 
 .stats>.stat.write {
+  /* border-bottom: var(--close-line); */
+  color: var(--accent-color);
   position: relative;
 }
 
 .stats>.stat.write span.line {
-  border-left: var(--close-line);
+  border-left: var(--open-line);
   /* border-bottom: var(--close-line); */
   position: absolute;
   top: 30px;
@@ -1722,26 +1725,13 @@ main.post > .feeds > .post .meta > .views > .no {
   border-radius: 0;
 }
 
-.stats.active>.stat.write span.line {
-  border-left: var(--open-line);
-  border-bottom: var(--open-line);
-  display: inline-block;
-}
-
-.stats.active>.stat.write {
-  color: transparent;
-  background: var(--accent-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-.stats>.stat.write svg {
+.stats > .stat.write svg {
   color: inherit;
   width: 22px;
   height: 22px;
 }
 
-.stats>.stat.discuss svg {
+.stats > .stat.discuss svg {
   margin: -1px 0 0 0;
   color: inherit;
   width: 18px;
@@ -1757,14 +1747,6 @@ main.post > .feeds > .post .meta > .views > .no {
 .stats>.stat.upvote.true svg,
 .stats>.stat.upvote.active svg {
   color: var(--color-alt);
-}
-
-.stats>.stat.write svg {
-  color: var(--gray-color);
-}
-
-.stats.active>.stat.write svg {
-  color: var(--accent-color);
 }
 
 

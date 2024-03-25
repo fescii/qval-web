@@ -67,6 +67,10 @@
     width: 100%;
   }
 
+  .stats>.stat.write span.line {
+    border-left: var(--open-line-mobile);
+  }
+
   main.home > section.popular > div.stories > .trending {
     margin: 10px 0;
     width: 100%;

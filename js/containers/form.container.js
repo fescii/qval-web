@@ -15,7 +15,28 @@ export default class FormContainer extends HTMLElement {
 
 	connectedCallback() {
 		// console.log('We are inside connectedCallback');
+
+    this.expandTextArea();
 	}
+
+  expandTextArea = () => {
+    const replyTextarea = this.shadowObj.querySelector('textarea');
+    if (replyTextarea) {
+      replyTextarea.addEventListener('input', () => {
+        replyTextarea.style.height = 'auto';
+        const height = replyTextarea.scrollHeight;
+        if (height <= 60) {
+          replyTextarea.style.height = `38px`;
+        }
+        else if (height <= 100) {
+          replyTextarea.style.height = `${height + 10}px`;
+        }
+        else {
+          replyTextarea.style.height = `100px`;
+        }
+      });
+    }
+  }
 
 	getTemplate = () => {
 		// Show HTML Here
@@ -122,7 +143,7 @@ export default class FormContainer extends HTMLElement {
 	      :host {
           ${this.checkType()}
           background-color: var(--background);
-          padding: 0 0 10px 2px;
+          padding: 0 0 10px 5px;
           display: flex;
           flex-flow: column;
           gap: 0;

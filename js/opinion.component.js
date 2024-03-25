@@ -843,6 +843,10 @@ export default class OpinionWrapper extends HTMLElement {
           padding: 0;
         }
 
+        .stats > .stat.write span.line {
+          border-left: var(--open-line-mobile);
+        }
+
         .stats > .stat.upvote svg {
           margin: 0 0 0 0;
           width: 14.5px;
