@@ -1315,7 +1315,7 @@ main.post > .feeds > .post {
   width: 100%;
 }
 
-main.post > .feeds > .post .head {
+main.post > .feeds > .post > .head {
   height: 25px;
   display: flex;
   position: relative;
@@ -1326,19 +1326,19 @@ main.post > .feeds > .post .head {
   font-size: 0.9rem;
 }
 
-main.post > .feeds > .post .head > .author {
+main.post > .feeds > .post > .head > .author {
   height: 100%;
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-main.post > .feeds > .post .head div.author-name {
+main.post > .feeds > .post > .head div.author-name {
   display: flex;
   align-items: center;
 }
 
-main.post > .feeds > .post .head div.author-name>a {
+main.post > .feeds > .post > .head div.author-name>a {
   text-decoration: none;
   color: transparent;
   background: var(--accent-linear);
@@ -1346,7 +1346,7 @@ main.post > .feeds > .post .head div.author-name>a {
   -webkit-background-clip: text;
 }
 
-main.post > .feeds > .post .head a.opinion-link {
+main.post > .feeds > .post > .head a.opinion-link {
   text-decoration: none;
   color: transparent;
   background-image: var(--alt-linear);
@@ -1354,7 +1354,7 @@ main.post > .feeds > .post .head a.opinion-link {
   -webkit-background-clip: text;
 }
 
-main.post > .feeds > .post .head .profile {
+main.post > .feeds > .post > .head .profile {
   border: var(--modal-border);
   box-shadow: var(--modal-shadow);
   background-color: var(--background);
@@ -1371,11 +1371,11 @@ main.post > .feeds > .post .head .profile {
   border-radius: 12px;
 }
 
-main.post > .feeds > .post .head .profile > .cover {
+main.post > .feeds > .post > .head .profile > .cover {
   padding: 10px 10px;
   display: flex;
   flex-flow: column;
-  gap: 0;
+  gap: 5px;
   width: 100%;
   border-radius: 12px;
   transition: all 100ms ease-out;
@@ -1385,16 +1385,16 @@ main.post > .feeds > .post .head .profile > .cover {
   -o-transition: all 100ms ease-out;
 }
 
-main.post > .feeds > .post .head .profile > .cover p.about-info {
+main.post > .feeds > .post > .head .profile > .cover p.about-info {
   display: none;
   font-family: var(--font-main), san-serif;
 }
 
-main.post > .feeds > .post .head > .author:hover .profile {
+main.post > .feeds > .post > .head > .author:hover .profile {
   display: flex;
 }
 
-main.post > .feeds > .post .head .profile > span.pointer {
+main.post > .feeds > .post > .head .profile > span.pointer {
   border: var(--modal-border);
   border-bottom: none;
   border-right: none;
@@ -1411,12 +1411,12 @@ main.post > .feeds > .post .head .profile > span.pointer {
   -moz-border-radius: 1px;
 }
 
-main.post > .feeds > .post .head .opinion .profile > span.pointer {
+main.post > .feeds > .post > .head .opinion .profile > span.pointer {
   left: unset;
   right: 50%;
 }
 
-main.post > .feeds > .post .head .profile > .cover > .head {
+main.post > .feeds > .post > .head .profile > .cover > .head {
   background-color: var(--background);
   display: flex;
   flex-wrap: nowrap;
@@ -1424,7 +1424,7 @@ main.post > .feeds > .post .head .profile > .cover > .head {
   gap: 10px;
 }
 
-main.post > .feeds > .post .head .profile > .cover > .head > .image {
+main.post > .feeds > .post > .head .profile > .cover > .head > .image {
   width: 40px;
   height: 40px;
   overflow: hidden;
@@ -1433,7 +1433,7 @@ main.post > .feeds > .post .head .profile > .cover > .head > .image {
   -moz-border-radius: 50px;
 }
 
-main.post > .feeds > .post .head .profile>.cover > .head > .image img {
+main.post > .feeds > .post > .head .profile > .cover > .head > .image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1443,12 +1443,12 @@ main.post > .feeds > .post .head .profile>.cover > .head > .image img {
   -moz-border-radius: 50px;
 }
 
-main.post > .feeds > .post .head .info {
+main.post > .feeds > .post > .head > .profile > .cover  .info {
   display: flex;
   flex-flow: column;
 }
 
-main.post > .feeds > .post .head .info p.name {
+main.post > .feeds > .post > .head .profile > .cover .info p.name {
   margin: 0;
   color: var(--text-color);
   font-weight: 500;
@@ -1458,7 +1458,7 @@ main.post > .feeds > .post .head .info p.name {
   gap: 5px;
 }
 
-main.post > .feeds > .post .head .info p.name svg {
+main.post > .feeds > .post > .head .profile > .cover .info p.name svg {
   margin: -2px 0 0;
   color: var(--accent-color);
   display: flex;
@@ -1466,7 +1466,7 @@ main.post > .feeds > .post .head .info p.name svg {
   justify-content: center;
 }
 
-main.post > .feeds > .post .head .info a.followers {
+main.post > .feeds > .post > .head .profile > .cover .info a.followers {
   text-decoration: none;
   margin: 0;
   color: var(--gray-color);
@@ -1477,17 +1477,19 @@ main.post > .feeds > .post .head .info a.followers {
   gap: 5px;
 }
 
-main.post > .feeds > .post .head .info a.followers > span.no {
+main.post > .feeds > .post> .head .profile > .cover .info a.followers > span.no {
   font-family: var(--font-mono), sans-serif;
 }
 
-main.post > .feeds > .post .head .data {
-  margin: 5px 0;
+main.post > .feeds > .post > .head > .author .cover > .data {
+  /* border: var(--input-border); */
+  margin: 5px 0 0 0;
   display: flex;
   flex-flow: column;
+  gap: 0;
 }
 
-main.post > .feeds > .post .head .data > p.name {
+main.post > .feeds > .post > .head .data > p.name {
   margin: 0;
   color: var(--text-color);
   font-weight: 500;
@@ -1496,14 +1498,14 @@ main.post > .feeds > .post .head .data > p.name {
   line-height: 1.5;
 }
 
-main.post > .feeds > .post .head .data > span.bio {
+main.post > .feeds > .post > .head .data > span.bio {
   margin: 0;
   color: var(--gray-color);
   font-family: var(--font-main), sans-serif;
   font-size: 0.9rem;
 }
 
-main.post > .feeds > .post .head span.action {
+main.post > .feeds > .post > .head span.action {
   border: var(--action-border);
   margin: 10px 0 5px;
   padding: 6px 15px;
@@ -1520,7 +1522,7 @@ main.post > .feeds > .post .head span.action {
   -moz-border-radius: 8px;
 }
 
-main.post > .feeds > .post .head span.action.follow {
+main.post > .feeds > .post > .head span.action.follow {
   border: none;
   text-decoration: none;
   color: var(--white-color);
