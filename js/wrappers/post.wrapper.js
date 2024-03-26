@@ -322,13 +322,25 @@ export default class PostWrapper extends HTMLElement {
 		`
   }
 
-  getBody() {
+  getLoader = () => {
+    return `
+			<post-loader speed="300"></post-loader>
+		`
+  }
+
+  getFull() {
     return `
       ${this.getHeader()}
       ${this.getContent()}
       ${this.getMeta()}
       ${this.getStats()}
       <form-container type="post"></form-container>
+    `;
+  }
+
+  getBody() {
+    return `
+      ${this.getLoader()}
     `;
   }
 
