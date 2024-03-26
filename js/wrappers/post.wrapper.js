@@ -16,8 +16,9 @@ export default class PostWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    this.openProfile();
-    this.upVote();
+    const contentContainer = this.shadowObj.querySelector('div.content-container');
+
+    this.fetchContent(contentContainer);
   }
 
   disableScroll() {
@@ -35,6 +36,18 @@ export default class PostWrapper extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
+  }
+
+  fetchContent = (contentContainer) => {
+    const outerThis = this;
+    const storyLoader = this.shadowObj.querySelector('post-loader');
+    const content = this.getFull();
+    setTimeout(() => {
+      storyLoader.remove();
+      contentContainer.insertAdjacentHTML('beforeend', content);
+      outerThis.openProfile();
+      outerThis.upVote();
+    }, 2000)
   }
 
   formatDateWithRelativeTime = (isoDateStr) => {
@@ -340,7 +353,9 @@ export default class PostWrapper extends HTMLElement {
 
   getBody() {
     return `
-      ${this.getLoader()}
+      <div class="content-container">
+        ${this.getLoader()}
+      </div>
     `;
   }
 
@@ -388,6 +403,14 @@ export default class PostWrapper extends HTMLElement {
 
       :host {
         /* border: 1px solid #6b7280;*/
+        display: flex;
+        flex-flow: column;
+        gap: 0;
+        width: 100%;
+        height: max-content;
+      }
+
+      .content-container {
         display: flex;
         flex-flow: column;
         gap: 0;

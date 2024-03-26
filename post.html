@@ -31,6 +31,7 @@
     import PeopleLoader from "./js/loaders/people.loader.js";
     import TopicsLoader from "./js/loaders/topics.loader.js";
     import StoryFeed from "./js/feeds/stories.feed.js";
+    import OpinionFeed from "./js/feeds/opinions.feeds.js";
     import PeopleContainer from "./js/containers/people.container.js";
     import StoriesContainer from "./js/containers/stories-container.js"
     import TopicsContainer from "./js/containers/topics.container.js";
@@ -49,6 +50,7 @@
     customElements.define('people-loader', PeopleLoader);
     customElements.define('topics-loader', TopicsLoader);
     customElements.define('stories-feed', StoryFeed);
+    customElements.define('opinions-feed', OpinionFeed);
     customElements.define('people-container', PeopleContainer);
     customElements.define('stories-container', StoriesContainer);
     customElements.define('topics-container', TopicsContainer);
@@ -505,40 +507,7 @@
         Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
         Facilis nulla optio quas quod veniam nam voluptas!
       </post-wrapper>
-      <section class="opinions">
-        <opinion-wrapper story="opinion" upvotes="9" id="N0A43PBA" upvoted="true" views="609" time="2022-01-03T13:00:00+03:00"
-          author-id="U0A43PBA" author-img="img/img.jpg"
-          author-verified="true" author-name="Fredrick Ochieng" author-bio="Student At The East African University"
-          author-followers="23" following="true">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus
-          minima eum illo atque dolorum provident nisi.
-          Facilis nulla optio quas quod veniam nam voluptas!
-        </opinion-wrapper>
-        <opinion-wrapper story="opinion" id="N0A43PBA" upvotes="3" upvoted="false" views="609" time="2022-01-03T13:00:00+03:00"
-          author-id="U0A43PBA" author-img="img/img.jpg"
-          author-verified="true" author-name="Fredrick Ochieng" author-bio="Student At The East African University"
-          author-followers="23" following="true">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus
-          minima eum illo atque dolorum provident nisi.
-          Facilis nulla optio quas quod veniam nam voluptas!
-        </opinion-wrapper>
-        <opinion-wrapper story="opinion" id="N0A43PBA" upvotes="23" upvoted="false" views="609" time="2022-01-03T13:00:00+03:00"
-          author-id="U0A43PBA" author-img="img/img.jpg"
-          author-verified="true" author-name="Fredrick Ochieng" author-bio="Student At The East African University"
-          author-followers="23" following="true">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus
-          minima eum illo atque dolorum provident nisi.
-          Facilis nulla optio quas quod veniam nam voluptas!
-        </opinion-wrapper>
-        <opinion-wrapper story="opinion" upvotes="9" id="N0A43PBA" upvoted="true" views="609" time="2022-01-03T13:00:00+03:00"
-          author-id="U0A43PBA" author-img="img/img.jpg"
-          author-verified="true" author-name="Fredrick Ochieng" author-bio="Student At The East African University"
-          author-followers="23" following="true">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus
-          minima eum illo atque dolorum provident nisi.
-          Facilis nulla optio quas quod veniam nam voluptas!
-        </opinion-wrapper>
-      </section>
+      <opinions-feed opinions="all" url="/opinions"></opinions-feed>
     </div>
     <div class="side">
       <section class="author">
