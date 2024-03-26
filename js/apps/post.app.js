@@ -338,8 +338,9 @@ export default class AppPost extends HTMLElement {
           padding: 6px 25px;
           font-weight: 500;
           font-family: var(--font-text), sans-serif;
+          color: var(--text-color);
           width: max-content;
-          font-size: 1rem;
+          font-size: 1.05rem;
           cursor: pointer;
           display: flex;
           align-items: center;
