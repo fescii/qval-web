@@ -54,7 +54,7 @@ export default class OpinionFeed extends HTMLElement {
 
   getOpinions = () => {
     return /* html */`
-			  <opinion-wrapper story="opinion" upvotes="9" id="N0A43PBA" upvoted="true" views="609" time="2022-01-03T13:00:00+03:00"
+			  <opinion-wrapper story="opinion" upvotes="9" id="N0A43PBA" upvoted="true" views="609" time="2024-03-26T13:00:00+01:00"
           author-id="U0A43PBA" author-img="img/img.jpg"
           author-verified="true" author-name="Fredrick Ochieng" author-bio="Student At The East African University"
           author-followers="23" following="true">

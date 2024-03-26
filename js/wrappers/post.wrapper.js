@@ -689,7 +689,10 @@ export default class PostWrapper extends HTMLElement {
       }
 
       .meta {
-        margin: 10px 0;
+        border-bottom: var(--story-border);
+        border-top: var(--story-border);
+        margin: 8px 0;
+        padding: 12px 0;
         display: flex;
         position: relative;
         color: var(--text-color);
@@ -853,7 +856,10 @@ export default class PostWrapper extends HTMLElement {
         }
 
         .meta {
-          margin: 12px 0;
+          border-bottom: var(--story-border-mobile);
+          border-top: var(--story-border-mobile);
+          margin: 5px 0 0 0;
+          padding: 12px 0;
           display: flex;
           position: relative;
           color: var(--text-color);
@@ -861,6 +867,10 @@ export default class PostWrapper extends HTMLElement {
           font-family: var(--font-text), sans-serif;
           gap: 5px;
           font-weight: 500;
+        }
+
+        .stats {
+          padding: 10px 0;
         }
 
         a,
