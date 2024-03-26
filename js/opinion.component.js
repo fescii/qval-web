@@ -586,6 +586,7 @@ export default class OpinionWrapper extends HTMLElement {
         margin: 0 0 5px 0;
         padding: 0;
         line-height: 1.5;
+        font-size: 1.05rem;
         font-family: var(--font-text), sans-serif;
       }
 
@@ -606,6 +607,7 @@ export default class OpinionWrapper extends HTMLElement {
       .content ul,
       .content ol {
         margin: 10px 0 0 20px;
+        font-size: 1.05rem;
         line-height: 1.4;
         color: var(--font-text);
         font-family: var(--font-text), sans-serif;
