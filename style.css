@@ -1781,12 +1781,14 @@ main.post > div.side section.author p.about-info {
   font-family: var(--font-main), san-serif;
   color: var(--text-color);
   line-height: 1.4;
-  margin: 5px 0;
+  margin: 8px 0 5px 0;
 }
 
 main.post > div.side section.author > .head {
-  background-color: var(--background);
+  /* border: 1px solid gray; */
   display: flex;
+  padding: 0;
+  align-items: center;
   flex-wrap: nowrap;
   width: 100%;
   gap: 10px;
@@ -1812,8 +1814,11 @@ main.post > div.side section.author > .head > .image img {
 }
 
 main.post > div.side section.author > .head .info {
+  /* border: 1px solid gray; */
+  height: 100%;
   display: flex;
   flex-flow: column;
+  gap: 0;
 }
 
 main.post > div.side section.author > .head .info p.name {
