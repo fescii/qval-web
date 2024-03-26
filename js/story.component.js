@@ -74,14 +74,12 @@ export default class StoryWrapper extends HTMLElement {
   }
 
 	formatDateWithRelativeTime = (isoDateStr) => {
-		// 1. Convert ISO date string with timezone to local Date object
-		const date = new Date(isoDateStr); // ISO strings with timezone are automatically handled
+    const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
+    let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // userTimezone.replace('%2F', '/')
 
-		// Ensure the created date object is interpreted in the provided timezone
-		const offsetMinutes = date.getTimezoneOffset();
-
-		// Adjust by adding offset to shift to local timezone before calculations
-		date.setMinutes(date.getMinutes() + offsetMinutes);
+    // Convert posted time to the current timezone
+    const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
 
 		// 2. Calculate difference from current date in the local timezone
 		const now = new Date();
