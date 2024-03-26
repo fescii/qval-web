@@ -20,6 +20,23 @@ export default class PostWrapper extends HTMLElement {
     this.upVote();
   }
 
+  disableScroll() {
+    // Get the current page scroll position
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
+    let scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+    document.body.classList.add("stop-scrolling");
+
+    // if any scroll is attempted, set this to the previous value
+    window.onscroll = function () {
+      window.scrollTo(scrollLeft, scrollTop);
+    };
+  }
+
+  enableScroll() {
+    document.body.classList.remove("stop-scrolling");
+    window.onscroll = function () { };
+  }
+
   formatDateWithRelativeTime = (isoDateStr) => {
     // 1. Convert ISO date string with timezone to local Date object
     let date;
@@ -82,7 +99,7 @@ export default class PostWrapper extends HTMLElement {
 
   upVote() {
     const outerThis = this;
-    let container = this.shadowObj.querySelector(".stats>.stat.upvote");
+    let container = this.shadowObj.querySelector(".stats > .stat.upvote");
     if (container) {
       let outerNum = container.querySelector(".numb_list");
       outerNum.scrollBy({
@@ -293,12 +310,12 @@ export default class PostWrapper extends HTMLElement {
           </svg>
           <span class="no">98</span>
         </span>
-        <span class="stat upvote false">
+        <span class="stat upvote stat upvote ${this.getAttribute('upvoted')}">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 384 512">
             <path  d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9V456c0 13.3 10.7 24 24 24s24-10.7 24-24V115.9L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path>
           </svg>
           <span class="numb_list no">
-            <span id="u-3">3</span>
+            <span id="u-${this.getAttribute('upvotes')}">${this.getAttribute('upvotes')}</span>
           </span>
         </span>
       </div>
@@ -700,7 +717,7 @@ export default class PostWrapper extends HTMLElement {
         min-height: 21px;
         padding: 0;
         margin: 0;
-        margin-bottom: calc(16px / -3);
+        margin-bottom: calc(16px / -2.2);
         display: flex;
         overflow-y: scroll;
         display: flex;
