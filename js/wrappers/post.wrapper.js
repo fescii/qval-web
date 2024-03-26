@@ -18,7 +18,6 @@ export default class PostWrapper extends HTMLElement {
 
     this.openProfile();
     this.upVote();
-    this.openForm();
   }
 
   formatDateWithRelativeTime = (isoDateStr) => {
@@ -49,7 +48,7 @@ export default class PostWrapper extends HTMLElement {
   openProfile = () => {
     const outerThis = this;
     const mql = window.matchMedia('(max-width: 660px)');
-    const metaElement = this.shadowObj.querySelector(".meta");
+    const metaElement = this.shadowObj.querySelector(".head");
 
     // console.log(metaElement);
 
@@ -163,32 +162,6 @@ export default class PostWrapper extends HTMLElement {
     }
   }
 
-  openForm = () => {
-    const writeContainer = this.shadowObj.querySelector('.stats');
-    const formContainer = this.shadowObj.querySelector('div.form-container');
-    if (writeContainer && formContainer) {
-      const writeBtn = writeContainer.querySelector('span.stat.write');
-      const formElement = this.getForm();
-
-      writeBtn.addEventListener('click', event => {
-        event.preventDefault();
-
-        // console.log(writeContainer);
-        // console.log(formElement);
-
-        // writeContainer.classList.toggle('active');
-        if (writeContainer.classList.contains('active')) {
-          writeContainer.classList.remove('active');
-          formContainer.innerHTML = '';
-        }
-        else {
-          writeContainer.classList.add('active');
-          formContainer.insertAdjacentHTML('beforeend', formElement);
-        }
-      })
-    }
-  }
-
   getTemplate() {
     // Show HTML Here
     return `
@@ -226,6 +199,7 @@ export default class PostWrapper extends HTMLElement {
             ${this.getAuthor()}
           </div>
         </div>
+      </div>
     `
   }
 
@@ -331,19 +305,13 @@ export default class PostWrapper extends HTMLElement {
 		`
   }
 
-  getForm = () => {
-    return `
-      <form-container type="post"></form-container>
-    `
-  }
-
   getBody() {
     return `
       ${this.getHeader()}
       ${this.getContent()}
       ${this.getMeta()}
       ${this.getStats()}
-      <div class="form-container"></div>
+      <form-container type="post"></form-container>
     `;
   }
 
@@ -390,11 +358,12 @@ export default class PostWrapper extends HTMLElement {
 
 
       :host {
-        /* border: 1px solid #6b7280; */
+        /* border: 1px solid #6b7280;*/
         display: flex;
         flex-flow: column;
         gap: 0;
         width: 100%;
+        height: max-content;
       }
 
       .head.top {

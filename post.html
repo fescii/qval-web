@@ -20,6 +20,7 @@
     import AppHome from "./js/apps/home.app.js";
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
+    import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PersonWrapper from "./js/author.component.js";
     import StoryLoader from "./js/loaders/story.loader.js";
     import PeopleLoader from "./js/loaders/people.loader.js";
@@ -36,6 +37,7 @@
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
+    customElements.define('post-wrapper', PostWrapper);
     customElements.define('person-wrapper', PersonWrapper);
     customElements.define('story-loader', StoryLoader);
     customElements.define('people-loader', PeopleLoader);
@@ -487,6 +489,14 @@
   </header>
   <main class="post">
     <div class="feeds">
+      <post-wrapper upvotes="9" id="P0A43PBA" upvoted="true" views="609" time="2022-01-03T13:00:00+03:00" author-id="U0A43PBA"
+        author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
+        author-bio="Student At The East African University" author-followers="23" following="true">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
+        Facilis nulla optio quas quod veniam nam voluptas!
+        Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
+        Facilis nulla optio quas quod veniam nam voluptas!
+      </post-wrapper>
       <div class="post">
         <div class="head">
           <div class="author">
