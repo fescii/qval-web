@@ -192,6 +192,13 @@ export default class PostLoader extends HTMLElement {
 				    /*opacity: 1;*/
 				  }
 				}
+
+        @media screen and (max-width:660px) {
+          .loader {
+            width: 100%;
+            max-width: 100%;
+          }
+        }
 	    </style>
     `;
 	}

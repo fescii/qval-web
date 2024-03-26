@@ -91,7 +91,7 @@ export default class StoryLoader extends HTMLElement {
 	        font-family: inherit;
 	        -webkit-box-sizing: border-box !important;
 	      }
-	
+
 	      :host {
 				  /*border: var(--input-border);*/
 				  display: flex;
@@ -99,7 +99,7 @@ export default class StoryLoader extends HTMLElement {
 				  gap: 5px;
 				  width: 100%;
 				}
-				
+
 				.loader {
 				  /*border: var(--input-border);*/
 				  padding: 10px 0;
@@ -110,7 +110,7 @@ export default class StoryLoader extends HTMLElement {
 				  width: 90%;
 				  max-width: 100%;
 				}
-				
+
 				.loader .skeleton {
 				  background: var(--loader-gradient);
 				  background-size: 500% 500%;
@@ -118,7 +118,7 @@ export default class StoryLoader extends HTMLElement {
 				  -moz-animation: Gradient 2.25s ease infinite;
 				  animation: Gradient 2.25s ease infinite;
 				}
-				
+
 				.loader > .foot,
 				.loader > .head{
 				  /*border: var(--input-border);*/
@@ -141,17 +141,17 @@ export default class StoryLoader extends HTMLElement {
 				  -webkit-border-radius: 3px;
 				  -moz-border-radius: 3px;
 				}
-				
+
 				.loader > .foot >  span.start,
 				.loader > .head >  span.end {
 				  min-width: 65%;
 				}
-				
+
 				.loader > .foot >  span.end,
 				.loader > .head >  span.start {
 				  min-width: 25%;
 				}
-				
+
 				.loader  span.dot {
 				  display: inline-block;
 				  min-width: 15px;
@@ -160,7 +160,7 @@ export default class StoryLoader extends HTMLElement {
 				  -webkit-border-radius: 3px;
 				  -moz-border-radius: 3px;
 				}
-				
+
 				.loader > .body {
 				  /*border: var(--input-border);*/
 				  margin: 0;
@@ -171,7 +171,7 @@ export default class StoryLoader extends HTMLElement {
 				  -webkit-border-radius: 3px;
 				  -moz-border-radius: 3px;
 				}
-				
+
 				.loader > .overlap {
 				  /*border: var(--input-border);*/
 				  margin: 0;
@@ -182,7 +182,7 @@ export default class StoryLoader extends HTMLElement {
 				  -webkit-border-radius: 3px;
 				  -moz-border-radius: 3px;
 				}
-				
+
 				.loader > .full {
 				  /*border: var(--input-border);*/
 				  margin: 0;
@@ -193,11 +193,11 @@ export default class StoryLoader extends HTMLElement {
 				  -webkit-border-radius: 3px;
 				  -moz-border-radius: 3px;
 				}
-				
+
 				.loader > .body.thin {
 					height: 10px;
 				}
-				
+
 				@keyframes Gradient {
 				  0% {
 				    background-position: 0 25%;
@@ -216,6 +216,12 @@ export default class StoryLoader extends HTMLElement {
 				    /*opacity: 1;*/
 				  }
 				}
+				@media screen and (max-width:660px) {
+          .loader {
+            width: 100%;
+            max-width: 100%;
+          }
+        }
 	    </style>
     `;
 	}
