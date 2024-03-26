@@ -52,7 +52,7 @@ export default class AppPost extends HTMLElement {
           author-name="${this.getAttribute('author-name')}" author-bio="${this.getAttribute('author-bio')}" author-followers="${this.getAttribute('author-verified')}"
           following="${this.getAttribute('following')}" author-about="${this.getAttribute('author-about')}"
           >
-          "${this.getAttribute('content')}"
+          ${this.getAttribute('content')}
         </post-wrapper>
         <opinions-feed opinions="all" url="/opinions"></opinions-feed>
       `;
