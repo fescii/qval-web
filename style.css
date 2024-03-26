@@ -215,7 +215,7 @@ header.header > h2.site-name {
   background: var(--accent-linear);
   background-clip: text;
   -webkit-background-clip: text;
-  /* font-family: var(--font-mono); */
+  font-family: var(--font-text);
 }
 
 /* Nav */
