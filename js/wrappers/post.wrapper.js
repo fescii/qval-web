@@ -657,17 +657,13 @@ export default class PostWrapper extends HTMLElement {
         margin: 10px 0;
         display: flex;
         position: relative;
-        color: var(--gray-color);
+        color: var(--text-color);
         align-items: center;
         font-family: var(--font-text), sans-serif;
         gap: 5px;
         font-size: 1rem;
-      }
-
-      .meta > .views > .no {
         font-weight: 500;
       }
-
 
       .stats {
         /* border: var(--input-border); */
@@ -819,6 +815,17 @@ export default class PostWrapper extends HTMLElement {
       @media screen and (max-width:660px) {
         ::-webkit-scrollbar {
           -webkit-appearance: none;
+        }
+
+        .meta {
+          margin: 12px 0;
+          display: flex;
+          position: relative;
+          color: var(--text-color);
+          align-items: center;
+          font-family: var(--font-text), sans-serif;
+          gap: 5px;
+          font-weight: 500;
         }
 
         a,
