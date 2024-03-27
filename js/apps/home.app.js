@@ -42,7 +42,6 @@ export default class AppHome extends HTMLElement {
     `;
   }
 
-
   getBody = () => {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
