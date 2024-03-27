@@ -1291,7 +1291,7 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 
 
 
-main.post {
+main.search {
   /* border: 1px solid red; */
   padding: 0 0 30px 0;
   margin: 0;
@@ -1302,7 +1302,7 @@ main.post {
   min-height: 60vh;
 }
 
-main.post > .feeds {
+main.search > section.main {
   /* border: 1px solid #6b7280; */
   display: flex;
   flex-flow: column;
@@ -1310,159 +1310,129 @@ main.post > .feeds {
   width: 63%;
 }
 
+main.search > section.main > form.search {
+  /* border: 1px solid #6b7280; */
+  background-color: var(--background);
+  padding: 10px 0 20px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: 100%;
+}
 
-main.post> div.side {
+main.search > section.main > form.search > .contents {
+  /* border: 1px solid #6b7280; */
+  padding: 0;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: 100%;
+  position: relative;
+}
+
+main.search > section.main > form.search > .contents > input {
+  border: var(--input-border);
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  font-family: var(--font-text);
+  color: var(--text-color);
+  font-size: 1rem;
+  padding: 12px 10px 12px 35px;
+  gap: 0;
+  width: 100%;
+  border-radius: 18px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+}
+
+main.search > section.main > form.search > .contents > svg {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 10px;
+  top: calc(50% - 12px);
+  color: var(--gray-color);
+}
+
+main.search > section.main > form.search > .contents > button {
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 14px);
+  border: none;
+  cursor: pointer;
+  color: var(--white-color);
+  background: var(--accent-linear);
+  height: 28px;
+  width: max-content;
+  padding: 0 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+}
+
+
+main.search > section.side {
   /* border: 1px solid #53595f; */
   padding: 0;
   width: 35%;
   display: flex;
   flex-flow: column;
-  gap: 20px;
+  gap: 10px;
   position: sticky;
   top: 70px;
   height: max-content;
 }
 
-main.post > div.side section.author {
-  /* border: 1px solid #53595f; */
+main.search > section.side > .donate-card {
+  /* border: 1px solid #ff0000; */
+  padding: 0;
+  width: 100%;
   display: flex;
   flex-flow: column;
-  gap: 5px;
-  transition: all 100ms ease-out;
-  -webkit-transition: all 100ms ease-out;
-  -moz-transition: all 100ms ease-out;
-  -ms-transition: all 100ms ease-out;
-  -o-transition: all 100ms ease-out;
+  gap: 0;
 }
 
-main.post > div.side section.author p.about-info {
-  display: flex;
-  font-family: var(--font-main), san-serif;
+main.search > section.side > .donate-card h2 {
+  margin: 0;
+  color: #1f2937;
+  line-height: 1.5;
+  font-weight: 600;
+  font-family: var(--font-text), sans-serif;
+}
+
+main.search > section.side > .donate-card p {
+  margin: 0;
   color: var(--text-color);
   line-height: 1.4;
-  margin: 8px 0 5px 0;
 }
 
-main.post > div.side section.author > .head {
-  /* border: 1px solid gray; */
-  display: flex;
-  padding: 0;
-  align-items: center;
-  flex-wrap: nowrap;
-  width: 100%;
-  gap: 10px;
-}
-
-main.post > div.side section.author > .head > .image {
-  width: 45px;
-  height: 45px;
-  overflow: hidden;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-main.post > div.side section.author > .head > .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  overflow: hidden;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-main.post > div.side section.author > .head .info {
-  /* border: 1px solid gray; */
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-}
-
-main.post > div.side section.author > .head .info p.name {
-  margin: 0;
-  color: var(--text-color);
-  font-weight: 500;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-main.post > div.side section.author > .head .info p.name svg {
-  margin: -1px 0 0;
-  color: var(--accent-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-main.post > div.side section.author > .head .info a.followers {
+main.search > section.side > .donate-card a {
   text-decoration: none;
-  margin: 0;
-  color: var(--gray-color);
-  background: unset;
-  font-family: var(--font-main), sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-main.post > div.side section.author > .head .info a.followers > span.no {
-  font-family: var(--font-mono), sans-serif;
-}
-
-main.post > div.side section.author >.data {
-  /* border: var(--input-border); */
-  margin: 0;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-}
-
-main.post > div.side section.author > .data > p.name {
-  margin: 0;
-  color: var(--text-color);
-  font-weight: 500;
-  font-family: var(--font-main), sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.5;
-}
-
-main.post > div.side section.author > .data > span.bio {
-  margin: 0;
-  color: var(--gray-color);
-  font-family: var(--font-main), sans-serif;
-  font-size: 0.9rem;
-}
-
-main.post > div.side section.author span.action {
-  border: var(--action-border);
-  margin: 0;
-  padding: 6px 25px;
-  font-weight: 500;
-  font-family: var(--font-text), sans-serif;
+  line-height: 1.4;
   width: max-content;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 12px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  -ms-border-radius: 12px;
-  -o-border-radius: 12px;
+  color: var(--white-color);
+  margin: 5px 0;
+  padding: 4px 10px;
+  font-weight: 400;
+  background: var(--accent-linear);
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
 }
 
-main.post > div.side section.author span.action.follow {
-  border: none;
-  text-decoration: none;
-  color: var(--white-color);
-  background-color: var(--action-color);
-}
 
 
 
