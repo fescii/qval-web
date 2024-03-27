@@ -1291,7 +1291,7 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 
 
 
-main.post {
+main.search {
   /* border: 1px solid red; */
   padding: 0 0 30px 0;
   margin: 0;
@@ -1302,8 +1302,8 @@ main.post {
   min-height: 60vh;
 }
 
-main.post > .feeds {
-  /* border: 1px solid #6b7280; */
+main.search > section.main {
+  border: 1px solid #6b7280;
   display: flex;
   flex-flow: column;
   gap: 0;
@@ -1311,8 +1311,8 @@ main.post > .feeds {
 }
 
 
-main.post> div.side {
-  /* border: 1px solid #53595f; */
+main.search > section.side {
+  border: 1px solid #53595f;
   padding: 0;
   width: 35%;
   display: flex;
@@ -1323,146 +1323,6 @@ main.post> div.side {
   height: max-content;
 }
 
-main.post > div.side section.author {
-  /* border: 1px solid #53595f; */
-  display: flex;
-  flex-flow: column;
-  gap: 5px;
-  transition: all 100ms ease-out;
-  -webkit-transition: all 100ms ease-out;
-  -moz-transition: all 100ms ease-out;
-  -ms-transition: all 100ms ease-out;
-  -o-transition: all 100ms ease-out;
-}
-
-main.post > div.side section.author p.about-info {
-  display: flex;
-  font-family: var(--font-main), san-serif;
-  color: var(--text-color);
-  line-height: 1.4;
-  margin: 8px 0 5px 0;
-}
-
-main.post > div.side section.author > .head {
-  /* border: 1px solid gray; */
-  display: flex;
-  padding: 0;
-  align-items: center;
-  flex-wrap: nowrap;
-  width: 100%;
-  gap: 10px;
-}
-
-main.post > div.side section.author > .head > .image {
-  width: 45px;
-  height: 45px;
-  overflow: hidden;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-main.post > div.side section.author > .head > .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  overflow: hidden;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-main.post > div.side section.author > .head .info {
-  /* border: 1px solid gray; */
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-}
-
-main.post > div.side section.author > .head .info p.name {
-  margin: 0;
-  color: var(--text-color);
-  font-weight: 500;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-main.post > div.side section.author > .head .info p.name svg {
-  margin: -1px 0 0;
-  color: var(--accent-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-main.post > div.side section.author > .head .info a.followers {
-  text-decoration: none;
-  margin: 0;
-  color: var(--gray-color);
-  background: unset;
-  font-family: var(--font-main), sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-main.post > div.side section.author > .head .info a.followers > span.no {
-  font-family: var(--font-mono), sans-serif;
-}
-
-main.post > div.side section.author >.data {
-  /* border: var(--input-border); */
-  margin: 0;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-}
-
-main.post > div.side section.author > .data > p.name {
-  margin: 0;
-  color: var(--text-color);
-  font-weight: 500;
-  font-family: var(--font-main), sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.5;
-}
-
-main.post > div.side section.author > .data > span.bio {
-  margin: 0;
-  color: var(--gray-color);
-  font-family: var(--font-main), sans-serif;
-  font-size: 0.9rem;
-}
-
-main.post > div.side section.author span.action {
-  border: var(--action-border);
-  margin: 0;
-  padding: 6px 25px;
-  font-weight: 500;
-  font-family: var(--font-text), sans-serif;
-  width: max-content;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 12px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  -ms-border-radius: 12px;
-  -o-border-radius: 12px;
-}
-
-main.post > div.side section.author span.action.follow {
-  border: none;
-  text-decoration: none;
-  color: var(--white-color);
-  background-color: var(--action-color);
-}
 
 
 
