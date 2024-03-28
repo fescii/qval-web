@@ -1390,7 +1390,7 @@ main.search > section.side {
   width: 35%;
   display: flex;
   flex-flow: column;
-  gap: 10px;
+  gap: 20px;
   position: sticky;
   top: 70px;
   height: max-content;
