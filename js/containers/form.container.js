@@ -85,11 +85,18 @@ export default class FormContainer extends HTMLElement {
 	}
 
   checkType = () => {
+    const mql = window.matchMedia('(max-width: 660px)');
+
     if (this.getAttribute('type') === 'opinion') {
       return 'border-bottom: none;';
     }
     else {
-      return 'border-bottom: var(--story-border);';
+      if (mql.matches) {
+        return 'border-bottom: var(--story-border-mobile);';
+      }
+      else {
+        return 'border-bottom: var(--story-border);';
+      }
     }
   }
 

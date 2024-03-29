@@ -113,7 +113,6 @@ export default class StoryWrapper extends HTMLElement {
 	}
 
   openForm = () => {
-    const outerThis = this;
     const writeContainer = this.shadowObj.querySelector('.stats');
     const formContainer = this.shadowObj.querySelector('div.form-container');
     if (writeContainer && formContainer) {
@@ -134,7 +133,6 @@ export default class StoryWrapper extends HTMLElement {
         else {
           writeContainer.classList.add('active');
           formContainer.insertAdjacentHTML('beforeend', formElement);
-          outerThis.expandTextArea();
         }
       })
     }
@@ -418,15 +416,7 @@ export default class StoryWrapper extends HTMLElement {
 
   getForm = () => {
     return `
-      <form action="" class="reply">
-        <div class="image">
-          <img src="${this.getAttribute('author-img')}" alt="Profile picture">
-        </div>
-        <textarea name="reply" placeholder="Discuss opinion #${this.getAttribute('id')}"  id="reply"></textarea>
-        <button type="submit">
-          <span class="text">Reply</span>
-        </button>
-      </form>
+      <form-container type="opinion"></form-container>
     `
   }
 
@@ -437,6 +427,15 @@ export default class StoryWrapper extends HTMLElement {
       ${this.getFooter(this.getAttribute('story'))}
       <div class="form-container"></div>
     `;
+  }
+
+  checkType = () => {
+    if (this.getAttribute('story') === 'opinion') {
+      return 'padding: 15px 0 0 0;';
+    }
+    else {
+      return 'padding: 15px 0;';
+    }
   }
 
   getStyles() {
@@ -484,7 +483,7 @@ export default class StoryWrapper extends HTMLElement {
       :host {
         border-bottom: var(--story-border);
         font-family: var(--font-main), sans-serif;
-        padding: 15px 0;
+        ${this.checkType()}
         margin: 0;
         width: 100%;
         display: flex;
@@ -789,7 +788,7 @@ export default class StoryWrapper extends HTMLElement {
       .stats {
         /* border: var(--input-border); */
         padding: 0;
-        margin: 0;
+        margin: 0 0 12px 0;
         display: flex;
         align-items: center;
         gap: 23px;
