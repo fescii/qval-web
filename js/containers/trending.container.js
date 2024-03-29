@@ -48,9 +48,18 @@ export default class TrendingContainer extends HTMLElement {
     return `
 			<div class="stories new">
         <div class="title">
-          <h2>${this.getAttribute('topic')}</h2>
+          <h2>
+            <a href="/topics/${this.getAttribute('topic-name')}">
+              ${this.getAttribute('topic')}
+            </a>
+          </h2>
           <span class="info">
-            60 new stories
+            <a href="/t/${this.getAttribute('topic-id')}">
+              ${this.getAttribute('topic-id')}
+            </a>
+            <span class="sp">•</span>
+            <span class="no">${this.getAttribute('stories')}</span>
+            <span class="text">stories</span>
           </span>
         </div>
 				${this.getLoader()}
@@ -101,108 +110,146 @@ export default class TrendingContainer extends HTMLElement {
 
   getStyles() {
     return /* css */`
-    <style>
-      *,
-      *:after,
-      *:before {
-        box-sizing: border-box !important;
-        font-family: inherit;
-        -webkit-box-sizing: border-box !important;
-      }
+      <style>
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box !important;
+          font-family: inherit;
+          -webkit-box-sizing: border-box !important;
+        }
 
-      *:focus {
-        outline: inherit !important;
-      }
+        *:focus {
+          outline: inherit !important;
+        }
 
-      *::-webkit-scrollbar {
-        width: 3px;
-      }
+        *::-webkit-scrollbar {
+          width: 3px;
+        }
 
-      *::-webkit-scrollbar-track {
-        background: var(--scroll-bar-background);
-      }
+        *::-webkit-scrollbar-track {
+          background: var(--scroll-bar-background);
+        }
 
-      *::-webkit-scrollbar-thumb {
-        width: 3px;
-        background: var(--scroll-bar-linear);
-        border-radius: 50px;
-      }
+        *::-webkit-scrollbar-thumb {
+          width: 3px;
+          background: var(--scroll-bar-linear);
+          border-radius: 50px;
+        }
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-      }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
+        }
 
-      p,
-      ul,
-      ol {
-        padding: 0;
-        margin: 0;
-      }
+        p,
+        ul,
+        ol {
+          padding: 0;
+          margin: 0;
+        }
 
-      a {
-        text-decoration: none;
-      }
+        a {
+          text-decoration: none;
+        }
 
-      :host {
-				width: 100%;
-      }
+        :host {
+          width: 100%;
+        }
 
-			div.stories {
-			  /* border: 1px solid #000000; */
-			  padding: 0;
-			  width: 100%;
-			  display: flex;
-			  flex-flow: column;
-			  gap: 0;
-			}
+        div.stories {
+          /* border: 1px solid #000000; */
+          padding: 0;
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+        }
 
-      div.stories > .title {
-			  /* border: 1px solid #000000; */
-			  padding: 0;
-			  width: 100%;
-			  display: flex;
-			  flex-flow: row;
-        color: var(--text-color);
-			  gap: 2px;
-			}
+        div.stories > .title {
+          border-bottom: var(--story-border);
+          padding: 0 0 15px 0;
+          margin: 0;
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          color: var(--text-color);
+          gap: 0;
+        }
 
-      div.stories > .title > .icon {
-			  /* border: 1px solid #000000; */
-			  padding: 0;
-			  display: flex;
-        color: var(--gray-color);
-			  gap: 0;
-			}
+        div.stories > .title > .info {
+          /* border: 1px solid #000000; */
+          padding: 0;
+          display: flex;
+          color: var(--gray-color);
+          font-size: 0.9rem;
+          font-family: var(--font-mono), monospace;
+          gap: 5px;
+        }
 
-      div.stories > .title > .icon > svg {
-			  /* border: 1px solid #000000; */
-			  padding: 0;
-        margin: 0 0 -2px -3px;
-			  display: flex;
-        color: var(--gray-color);
-			  gap: 0;
-			}
+        div.stories > .title > .info > span.no {
+          /* border: 1px solid #000000; */
+          padding: 0;
+          font-size: 0.85rem;
+          font-family: var(--font-mono), monospace;
+        }
 
-      div.stories > .title > h2 {
-			  /* border: 1px solid #000000; */
-        text-transform: capitalize;
-			  padding: 0;
-        margin: 0;
-        font-weight: 500;
-        font-size: 1.5rem;
-        font-family: var(--font-main), sans-serif;
-        color: var(--text-color);
-			  gap: 0;
-			}
+        div.stories > .title > .info > a {
+          /* border: 1px solid #000000; */
+          text-decoration: none;
+          color: transparent;
+          padding: 0;
+          font-size: 0.85rem;
+          font-family: var(--font-mono), monospace;
+          background: var(--second-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
 
-    </style>
+        div.stories > .title > .info > span.text {
+          /* border: 1px solid #000000; */
+          color: var(--gray-color);
+          font-size: 0.9rem;
+          font-family: var(--font-text), sans-serif;
+        }
+
+        div.stories > .title > h2 {
+          /* border: 1px solid #000000; */
+          text-transform: capitalize;
+          padding: 0;
+          margin: 0;
+          line-height: 1.5;
+          font-weight: 500;
+          font-size: 1.3rem;
+          gap: 0;
+        }
+
+        div.stories > .title > h2 > a {
+          /* border: 1px solid #000000; */
+          text-decoration: none;
+          font-family: var(--font-text), sans-serif;
+          color: var(--text-color);
+          gap: 0;
+        }
+
+        @media screen and (max-width:660px) {
+          div.stories > .title {
+            border-bottom: var(--story-border-mobile);
+          }
+
+          a,
+          .stats > .stat {
+            cursor: default !important;
+          }
+        }
+
+      </style>
     `;
   }
 }

@@ -1387,10 +1387,10 @@ main.search > section.main > div.content-container {
   /* border: 1px solid #6b7280; */
   padding: 0;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 0;
+  gap: 15px;
   width: 100%;
 }
 

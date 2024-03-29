@@ -95,7 +95,6 @@ export default class OpinionWrapper extends HTMLElement {
     }
   }
 
-
   upVote() {
     const outerThis = this;
     let container = this.shadowObj.querySelector(".stats>.stat.upvote");
@@ -396,7 +395,7 @@ export default class OpinionWrapper extends HTMLElement {
       :host {
         border-bottom: var(--story-border);
         font-family: var(--font-main), sans-serif;
-        padding: 15px 0 0 0;
+        padding: 0 0 15px 0;
         margin: 0;
         width: 100%;
         display: flex;
