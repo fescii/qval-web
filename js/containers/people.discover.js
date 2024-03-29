@@ -46,6 +46,10 @@ export default class DiscoverPeople extends HTMLElement {
   getBody = () => {
     // language=HTML
     return `
+      <div class="title">
+				<h4 class="title">People</h4>
+				<span class="desc">Discover authors</span>
+			</div>
 			<div class="people-list">
 				${this.getLoader()}
 			</div>
@@ -135,12 +139,34 @@ export default class DiscoverPeople extends HTMLElement {
 
 	      :host {
 				  background-color: var(--background);
-				  padding: 0;
+				  padding: 0 0;
+				  display: flex;
+				  flex-flow: column;
+				  gap: 5px;
+          width: 100%;
+          max-width: 100%;
+				}
+
+        .title {
+					/* border: 1px solid red; */
+				  padding: 0 0 10px 3px;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 0;
-          width: 100%;
-          max-width: 100%;
+				}
+
+				.title h4 {
+				  color: #1f2937;
+				  font-size: 1.3rem;
+				  font-weight: 500;
+					padding: 0;
+					margin: 0;
+				}
+
+				.title > span {
+				  color: var(--gray-color);
+          font-family: var(--font-text);
+				  font-size: 0.85rem;
 				}
 
 				.people-list {

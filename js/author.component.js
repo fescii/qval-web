@@ -258,10 +258,16 @@ export default class PersonWrapper extends HTMLElement {
           font-size: 1rem;
           font-weight: 400;
         }
+
         @media screen and (max-width:660px) {
-        :host {
-          background-color: var(--author-background);
-        }
+          :host {
+            background-color: var(--author-background);
+          }
+
+          .action,
+          a {
+            cursor: default !important;
+          }
       </style>
     `;
   }

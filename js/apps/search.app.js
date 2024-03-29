@@ -190,12 +190,11 @@ export default class AppSearch extends HTMLElement {
 	      }
 
 	      :host {
-          padding: 0 0 30px 0;
+          padding: 0;
           margin: 0;
           display: flex;
           justify-content: space-between;
-          gap: 30px;
-
+          gap: 0px;
           min-height: 60vh;
         }
 
@@ -343,7 +342,6 @@ export default class AppSearch extends HTMLElement {
           border-top-left-radius: 50px;
           border-top-right-radius: 50px;
         }
-
 
         div.content-container {
           /* border: 1px solid #6b7280; */
