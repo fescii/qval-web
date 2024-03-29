@@ -6,7 +6,7 @@
 
   body {
     /* border: 1px solid blue; */
-    padding: 0 15px;
+    padding: 0 15px 30px 15px;
     width: 100%;
     max-width: 100%;
   }
@@ -15,36 +15,6 @@
 @media screen and (max-width:800px) {
   header.header > ul > li.link.theme > .options {
     border: 1px solid #057232a9;
-  }
-}
-
-@media screen and (max-width:750px) {
-  main.home {
-    /* border: 1px solid red; */
-    display: flex;
-    padding: 0;
-    flex-flow: column;
-    gap: 0;
-    justify-content: unset;
-  }
-
-  main.home > section.popular {
-    /* border: thin solid #4b5563bd; */
-    margin: 15px 0;
-    display: flex;
-    flex-flow: column;
-    justify-content: unset;
-    gap: 10px;
-  }
-
-  main.home > section.feeds {
-    /* border: 1px solid #000000; */
-    padding: 0;
-    margin: 15px 0;
-    display: flex;
-    flex-flow: column;
-    justify-content: unset;
-    gap: 10px;
   }
 }
 
@@ -136,7 +106,7 @@
 @media screen and (max-width:600px) {
   body {
     /* border: 1px solid blue; */
-    padding: 0 15px;
+    padding: 0 10px 30px 10px;
   }
 
   header.header {

@@ -23,9 +23,10 @@ export default class TrendingContainer extends HTMLElement {
   fetchStories = (contentContainer) => {
     const storyLoader = this.shadowObj.querySelector('story-loader');
     const content = this.getStories();
+    let str = this.getAttribute('topic').toLocaleLowerCase();
     const more = `
       <a class="more" href="/topic/${this.getAttribute('topic-name')}">
-        Explore all topic's stories
+        Explore more on ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}
       </a>
     `
     setTimeout(() => {
