@@ -36,6 +36,7 @@
     import OpinionFeed from "./js/feeds/opinions.feeds.js";
     import PeopleContainer from "./js/containers/people.container.js";
     import StoriesContainer from "./js/containers/stories-container.js"
+    import TrendingContainer from "./js/containers/trending.container.js"
     import TopicsContainer from "./js/containers/topics.container.js";
     import FormContainer from "./js/containers/form.container.js";
     import AddContainer from "./js/containers/add.container.js";
@@ -54,8 +55,10 @@
     customElements.define('topics-loader', TopicsLoader);
     customElements.define('stories-feed', StoryFeed);
     customElements.define('opinions-feed', OpinionFeed);
+
     customElements.define('people-container', PeopleContainer);
     customElements.define('stories-container', StoriesContainer);
+    customElements.define('trending-container', TrendingContainer);
     customElements.define('topics-container', TopicsContainer);
     customElements.define('form-container', FormContainer);
     customElements.define('add-container', AddContainer);
@@ -513,6 +516,9 @@
           <button type="submit">Search</button>
         </div>
       </form>
+      <div class="content-container">
+        <trending-container topic="Health Care" url="/trending/health-care" ></trending-container>
+      </div>
     </section>
 
     <section class="side">

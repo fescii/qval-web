@@ -1383,6 +1383,17 @@ main.search > section.main > form.search > .contents > button {
   -moz-border-radius: 50px;
 }
 
+main.search > section.main > div.content-container {
+  border: 1px solid #6b7280;
+  padding: 0;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: 100%;
+}
+
 
 main.search > section.side {
   /* border: 1px solid #53595f; */
