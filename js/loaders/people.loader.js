@@ -37,46 +37,6 @@ export default class PeopleLoader extends HTMLElement {
         </div>
         <div class="action skeleton"></div>
       </div>
-      <div class="loader">
-        <div class="head">
-          <span class="profile skeleton"></span>
-          <span class="info">
-            <span class="name skeleton"></span>
-            <span class="followers skeleton"></span>
-          </span>
-        </div>
-        <div class="action skeleton"></div>
-      </div>
-      <div class="loader">
-        <div class="head">
-          <span class="profile skeleton"></span>
-          <span class="info">
-            <span class="name skeleton"></span>
-            <span class="followers skeleton"></span>
-          </span>
-        </div>
-        <div class="action skeleton"></div>
-      </div>
-      <div class="loader">
-        <div class="head">
-          <span class="profile skeleton"></span>
-          <span class="info">
-            <span class="name skeleton"></span>
-            <span class="followers skeleton"></span>
-          </span>
-        </div>
-        <div class="action skeleton"></div>
-      </div>
-      <div class="loader">
-        <div class="head">
-          <span class="profile skeleton"></span>
-          <span class="info">
-            <span class="name skeleton"></span>
-            <span class="followers skeleton"></span>
-          </span>
-        </div>
-        <div class="action skeleton"></div>
-      </div>
     `;
 	}
 
@@ -90,23 +50,25 @@ export default class PeopleLoader extends HTMLElement {
 	        font-family: inherit;
 	        -webkit-box-sizing: border-box !important;
 	      }
-	
+
 	      :host {
 					display: flex;
 					flex-flow: column;
 					gap: 15px;
+					width: 100%;
 				}
-				
+
 				.loader {
 					padding: 0 10px 0 0;
 					display: flex;
+					width: 100%;
 					flex-flow: row !important;
 					flex-wrap: nowrap;
 					gap: 20px;
 					align-items: center;
 					justify-content: space-between;
 				}
-					
+
 				.loader .skeleton {
 					background: var(--loader-gradient);
 					background-size: 500% 500%;
@@ -114,7 +76,7 @@ export default class PeopleLoader extends HTMLElement {
 					-moz-animation: Gradient 2.25s ease infinite;
 					animation: Gradient 2.25s ease infinite;
 				}
-				
+
 				.loader > .head {
 					padding: 0;
 					margin: 0;
@@ -125,7 +87,7 @@ export default class PeopleLoader extends HTMLElement {
 					flex-wrap: nowrap;
 					gap: 10px;
 				}
-					
+
 				.loader > .head > span.profile {
 					display: inline-block;
 					height: 32px;
@@ -134,14 +96,14 @@ export default class PeopleLoader extends HTMLElement {
 					-webkit-border-radius: 50px;
 					-moz-border-radius: 50px;
 				}
-					
+
 				.loader > .head > span.info {
 					display: flex;
 					flex-flow: column;
 					gap: 8px;
 					min-width: calc(100% - 45px);
 				}
-					
+
 				.loader > .head > .info .name {
 					display: inline-block;
 					margin: 0;
@@ -152,7 +114,7 @@ export default class PeopleLoader extends HTMLElement {
 					-webkit-border-radius: 3px;
 					-moz-border-radius: 3px;
 				}
-					
+
 				.loader > .head > .info .followers {
 					display: inline-block;
 					margin: 0;
@@ -163,7 +125,7 @@ export default class PeopleLoader extends HTMLElement {
 					-webkit-border-radius: 3px;
 					-moz-border-radius: 3px;
 				}
-					
+
 				.loader > .action {
 					display: inline-block;
 					margin: 0;
@@ -174,7 +136,7 @@ export default class PeopleLoader extends HTMLElement {
 					-webkit-border-radius: 4px;
 					-moz-border-radius: 4px;
 				}
-				
+
 				@keyframes Gradient {
 				  0% {
 				    background-position: 0 25%;

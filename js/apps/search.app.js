@@ -49,7 +49,18 @@ export default class AppSearch extends HTMLElement {
 
     let html = '';
 
-    arrayOfObjects.forEach(topic => {
+    arrayOfObjects.forEach((topic, index) => {
+      if (index === 1) {
+        html += /* html */`
+          <discover-people url="/people/discover"></discover-people>
+        `
+      }
+      else if (index === 2) {
+        html += /* html */`
+          <topics-container url="/topics/popular"></topics-container>
+        `
+      }
+
       html += /* html */`
         <trending-container topic-id="${topic.id}"
           topic-name="${topic.url}" topic="${topic.name}"
@@ -99,6 +110,7 @@ export default class AppSearch extends HTMLElement {
           </svg>
           <button type="submit">Search</button>
         </div>
+        ${this.getTab()}
       </form>
     `
   }
@@ -111,6 +123,25 @@ export default class AppSearch extends HTMLElement {
         <a href="" class="link">Learn more</a>
       </div>
 		`
+  }
+
+  getTab = () => {
+    return /* html */`
+      <ul id="tab" class="tab">
+        <li data-element="Discover" class="tab-item reviews  active">
+          <span class="text">Discover</span>
+          <span class="line"></span>
+        </li>
+        <li data-element="stories" class="tab-item details">
+          <span class="text">Stories</span>
+          <span class="line"></span>
+        </li>
+        <li data-element="people" class="tab-item related">
+          <span class="text">People</span>
+          <span class="line"></span>
+        </li>
+      </ul>
+    `
   }
 
   getStyles() {
@@ -165,12 +196,11 @@ export default class AppSearch extends HTMLElement {
 	      }
 
 	      :host {
-          padding: 0 0 30px 0;
+          padding: 0;
           margin: 0;
           display: flex;
           justify-content: space-between;
-          gap: 30px;
-
+          gap: 0px;
           min-height: 60vh;
         }
 
@@ -178,6 +208,7 @@ export default class AppSearch extends HTMLElement {
           /* border: 1px solid #6b7280; */
           display: flex;
           flex-flow: column;
+          align-items: start;
           gap: 0;
           width: 63%;
         }
@@ -185,13 +216,13 @@ export default class AppSearch extends HTMLElement {
         form.search {
           border-bottom: var(--story-border);
           background: var(--background);
-          padding: 10px 0 20px;
+          padding: 10px 0 0 0;
           margin: 0 0 15px 0;
           display: flex;
-          flex-flow: row;
-          align-items: center;
+          flex-flow: column;
+          align-items: start;
           flex-wrap: nowrap;
-          gap: 0;
+          gap: 15px;
           z-index: 3;
           width: 100%;
           position: sticky;
@@ -218,7 +249,7 @@ export default class AppSearch extends HTMLElement {
           font-family: var(--font-text);
           color: var(--text-color);
           font-size: 1rem;
-          padding: 12px 10px 12px 35px;
+          padding: 10px 10px 10px 35px;
           gap: 0;
           width: 100%;
           border-radius: 18px;
@@ -257,6 +288,66 @@ export default class AppSearch extends HTMLElement {
           border-radius: 50px;
           -webkit-border-radius: 50px;
           -moz-border-radius: 50px;
+        }
+
+        ul.tab {
+          height: max-content;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          list-style-type: none;
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          max-width: 100%;
+          overflow-x: scroll;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+
+        ul.tab::-webkit-scrollbar {
+          display: none !important;
+          visibility: hidden;
+        }
+
+        ul.tab > li.tab-item {
+          position: relative;
+          color: var(--gray-color);
+          font-weight: 400;
+          padding: 6px 10px 8px 10px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          font-size: 1rem;
+        }
+
+        ul.tab > li.tab-item:hover > .text {
+          color: var(--accent-color);
+        }
+
+        ul.tab > li.active {
+          font-size: 0.95rem;
+          padding: 6px 10px 10px 10px;
+        }
+
+        ul.tab > li.active > .text {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: var(--font-text);
+        }
+
+        ul.tab > li.active > span.line {
+          position: absolute;
+          background: var(--accent-linear);
+          display: inline-block;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          min-height: 4px;
+          border-top-left-radius: 50px;
+          border-top-right-radius: 50px;
         }
 
         div.content-container {
@@ -341,14 +432,14 @@ export default class AppSearch extends HTMLElement {
           }
 
           form.search > .contents > input {
-          padding: 10px 10px 10px 35px;
-          width: 100%;
-          border-radius: 18px;
-          -webkit-border-radius: 18px;
-          -moz-border-radius: 18px;
-          -ms-border-radius: 18px;
-          -o-border-radius: 18px;
-        }
+            padding: 10px 10px 10px 35px;
+            width: 100%;
+            border-radius: 18px;
+            -webkit-border-radius: 18px;
+            -moz-border-radius: 18px;
+            -ms-border-radius: 18px;
+            -o-border-radius: 18px;
+          }
 
           .section.main {
             display: flex;
