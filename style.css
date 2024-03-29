@@ -1384,7 +1384,7 @@ main.search > section.main > form.search > .contents > button {
 }
 
 main.search > section.main > div.content-container {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   padding: 0;
   display: flex;
   flex-flow: row;
