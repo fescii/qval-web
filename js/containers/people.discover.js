@@ -139,8 +139,8 @@ export default class DiscoverPeople extends HTMLElement {
 				  display: flex;
 				  flex-flow: column;
 				  gap: 0;
-					position: sticky;
-  				top: 70px;
+          width: 100%;
+          max-width: 100%;
 				}
 
 				.people-list {
@@ -150,6 +150,7 @@ export default class DiscoverPeople extends HTMLElement {
 					flex-flow: row;
 					gap: 20px;
 					width: 100%;
+          max-width: 100%;
 					overflow-x: scroll;
 					-ms-overflow-style: none;
 					scrollbar-width: none;

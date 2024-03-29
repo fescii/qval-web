@@ -49,7 +49,12 @@ export default class AppSearch extends HTMLElement {
 
     let html = '';
 
-    arrayOfObjects.forEach(topic => {
+    arrayOfObjects.forEach((topic, index) => {
+      if (index === 1) {
+        html += /* html */`
+          <discover-people url="/people/discover"></discover-people>
+        `
+      }
       html += /* html */`
         <trending-container topic-id="${topic.id}"
           topic-name="${topic.url}" topic="${topic.name}"

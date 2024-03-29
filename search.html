@@ -29,18 +29,23 @@
     import StoryWrapper from "./js/story.component.js";
     import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PersonWrapper from "./js/author.component.js";
+
     import StoryLoader from "./js/loaders/story.loader.js";
     import PostLoader from "./js/loaders/post.loader.js";
     import PeopleLoader from "./js/loaders/people.loader.js";
     import TopicsLoader from "./js/loaders/topics.loader.js";
+
     import StoryFeed from "./js/feeds/stories.feed.js";
     import OpinionFeed from "./js/feeds/opinions.feeds.js";
+
     import PeopleContainer from "./js/containers/people.container.js";
     import StoriesContainer from "./js/containers/stories-container.js"
     import TrendingContainer from "./js/containers/trending.container.js"
     import TopicsContainer from "./js/containers/topics.container.js";
     import FormContainer from "./js/containers/form.container.js";
     import AddContainer from "./js/containers/add.container.js";
+
+    import DiscoverPeople from "./js/containers/people.discover.js"
 
 
     customElements.define('app-home', AppHome);
@@ -64,6 +69,8 @@
     customElements.define('topics-container', TopicsContainer);
     customElements.define('form-container', FormContainer);
     customElements.define('add-container', AddContainer);
+
+    customElements.define('discover-people', DiscoverPeople);
   </script>
 </head>
 
