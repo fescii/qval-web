@@ -24,7 +24,9 @@ export default class TrendingContainer extends HTMLElement {
     const storyLoader = this.shadowObj.querySelector('story-loader');
     const content = this.getStories();
     const more = `
-      <a class="more" href="/topic/${this.getAttribute('topic-name')}">Explore similar stories</span>
+      <a class="more" href="/topic/${this.getAttribute('topic-name')}">
+        Explore all topic's stories
+      </a>
     `
     setTimeout(() => {
       storyLoader.remove();

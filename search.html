@@ -23,6 +23,7 @@
   <script type="module">
     import AppHome from "./js/apps/home.app.js";
     import AppPost from "./js/apps/post.app.js";
+    import AppSearch from "./js/apps/search.app.js";
 
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
@@ -44,6 +45,7 @@
 
     customElements.define('app-home', AppHome);
     customElements.define('app-post', AppPost);
+    customElements.define('app-search', AppSearch);
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
@@ -501,42 +503,27 @@
       </li> -->
     </ul>
   </header>
-
-  <main class="search">
-    <section class="main">
-      <form action="" method="get" class="search">
-        <div class="contents">
-          <input type="text" name="query" id="query" placeholder="What's your query?">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11.7666" cy="11.7667" r="8.98856" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M18.0183 18.4853L21.5423 22.0001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-          <button type="submit">Search</button>
-        </div>
-      </form>
-      <div class="content-container">
-        <trending-container topic-id="T0A03PBA" topic-name="health-care" topic="health care" stories="60k" url="/trending/health-care" ></trending-container>
-        <trending-container topic-id="T0AB3PB8"
-          topic-name="kendrick-lamar" topic="kendrick lamar" stories="603"
-          url="/trending/kendrick-lamar">
-        </trending-container>
-        <trending-container topic-id="T0A93PB8" topic-name="programming" topic="programming" stories="1.03k"
-          url="/trending/programming">
-        </trending-container>
-      </div>
-    </section>
-
-    <section class="side">
-      <div class="donate-card">
-        <h2 class="title">Support us</h2>
-        <p class="info">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</p>
-        <a href="" class="link">Learn more</a>
-      </div>
-      <topics-container url="/topics/popular"></topics-container>
-    </section>
-  </main>
+  <app-search topics='[
+    {
+      "id": "T0A03PBA",
+      "name": "Health Care",
+      "url": "health-care",
+      "stories": "60k"
+    },
+    {
+      "id": "T0AB3P92",
+      "name": "Kendrick Lamar",
+      "url": "kendrick-lamar",
+      "stories": "603"
+    },
+    {
+      "id": "T0A83PB9",
+      "name": "Programming",
+      "url": "programming",
+      "stories": "1.03k"
+    }
+    ]'>
+  </app-search>
 </body>
 
 </html>

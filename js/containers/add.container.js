@@ -108,6 +108,7 @@ export default class FormContainer extends HTMLElement {
           display: flex;
           align-items: flex-start;
           gap: 10px;
+          padding: 0 0 5px 0;
           font-size: 1rem;
           font-weight: 400;
           color: var(--gray-color);
