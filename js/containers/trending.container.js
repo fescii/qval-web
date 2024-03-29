@@ -23,9 +23,13 @@ export default class TrendingContainer extends HTMLElement {
   fetchStories = (contentContainer) => {
     const storyLoader = this.shadowObj.querySelector('story-loader');
     const content = this.getStories();
+    const more = `
+      <a class="more" href="/topic/${this.getAttribute('topic-name')}">Explore similar stories</span>
+    `
     setTimeout(() => {
       storyLoader.remove();
       contentContainer.insertAdjacentHTML('beforeend', content);
+      contentContainer.insertAdjacentHTML('beforeend', more);
     }, 2000)
   }
 
@@ -172,6 +176,23 @@ export default class TrendingContainer extends HTMLElement {
           gap: 0;
         }
 
+        a.more {
+          border-bottom: var(--story-border);
+          padding: 10px 0;
+          text-decoration: none;
+          font-family: var(--font-text), sans-serif;
+          color: var(--gray-color);
+          gap: 0;
+        }
+
+        a.more:hover {
+          /* border: 1px solid #000000; */
+          text-decoration: underline;
+          font-family: var(--font-text), sans-serif;
+          color: var(--text-color);
+          gap: 0;
+        }
+
         div.stories > .title {
           border-bottom: var(--story-border);
           padding: 0 0 15px 0;
@@ -239,6 +260,7 @@ export default class TrendingContainer extends HTMLElement {
         }
 
         @media screen and (max-width:660px) {
+          a.more,
           div.stories > .title {
             border-bottom: var(--story-border-mobile);
           }
