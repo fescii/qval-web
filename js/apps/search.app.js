@@ -340,6 +340,16 @@ export default class AppSearch extends HTMLElement {
             border-bottom: var(--story-border-mobile);
           }
 
+          form.search > .contents > input {
+          padding: 10px 10px 10px 35px;
+          width: 100%;
+          border-radius: 18px;
+          -webkit-border-radius: 18px;
+          -moz-border-radius: 18px;
+          -ms-border-radius: 18px;
+          -o-border-radius: 18px;
+        }
+
           .section.main {
             display: flex;
             flex-flow: column;
