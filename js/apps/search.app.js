@@ -208,6 +208,7 @@ export default class AppSearch extends HTMLElement {
           /* border: 1px solid #6b7280; */
           display: flex;
           flex-flow: column;
+          align-items: start;
           gap: 0;
           width: 63%;
         }
