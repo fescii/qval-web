@@ -50,7 +50,7 @@ export default class AppHome extends HTMLElement {
         <stories-container stories="popular" url="/stories/popular"></stories-container>
         <topics-container url="/topics/popular"></topics-container>
         <stories-container stories="recent" url="/stories/recent"></stories-container>
-        <people-container url="/people/popular"></people-container>
+        <discover-people url="/people/discover"></discover-people>
         <stories-feed stories="all" url="/stories/feed"></stories-feed>
       `;
     }
@@ -64,7 +64,6 @@ export default class AppHome extends HTMLElement {
         <div class="side">
           ${this.getDonateCard()}
           <topics-container url="/topics/popular"></topics-container>
-          <people-container url="/people/popular"></people-container>
         </div>
       `;
     }
@@ -154,7 +153,9 @@ export default class AppHome extends HTMLElement {
           display: flex;
           flex-flow: column;
           gap: 20px;
-          /* height: max-content; */
+          position: sticky;
+          top: 70px;
+          height: max-content;
         }
 
         div.side > .donate-card {

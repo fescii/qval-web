@@ -55,6 +55,12 @@ export default class AppSearch extends HTMLElement {
           <discover-people url="/people/discover"></discover-people>
         `
       }
+      else if (index === 2) {
+        html += /* html */`
+          <topics-container url="/topics/popular"></topics-container>
+        `
+      }
+
       html += /* html */`
         <trending-container topic-id="${topic.id}"
           topic-name="${topic.url}" topic="${topic.name}"
@@ -306,12 +312,12 @@ export default class AppSearch extends HTMLElement {
         ul.tab > li.tab-item {
           position: relative;
           color: var(--gray-color);
-          font-weight: 500;
+          font-weight: 400;
           padding: 6px 10px 8px 10px;
           display: flex;
           align-items: center;
           cursor: pointer;
-          font-size: 1.05rem;
+          font-size: 1rem;
         }
 
         ul.tab > li.tab-item:hover > .text {
