@@ -1286,6 +1286,38 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 }
 
 
+main.profile {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+  min-height: 60vh;
+}
+
+section.main {
+  border: 1px solid #6b7280;
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  gap: 0;
+  width: 63%;
+}
+
+
+section.side {
+  /* border: 1px solid #53595f; */
+  padding: 0;
+  width: 35%;
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+  position: sticky;
+  top: 70px;
+  height: max-content;
+}
+
+
 
 /*Footer*/
 footer.footer {
