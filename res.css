@@ -141,12 +141,12 @@
     left: calc(100% + 15px);
     flex-flow: column;
     z-index: 5;
-    top: 70px;
+    top: 60px;
     bottom: 0;
     width: 100%;
-    height: calc(var(--vh-height, 100vh) - 70px);
+    height: calc(var(--vh-height, 100vh) - 60px);
     max-height: max-content;
-    min-height: calc(var(--vh-height, 100vh) - 70px);
+    min-height: calc(var(--vh-height, 100vh) - 60px);
     align-items: stretch;
     justify-content: start;
     gap: 0;

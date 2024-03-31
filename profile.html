@@ -24,11 +24,13 @@
     import AppHome from "./js/apps/home.app.js";
     import AppPost from "./js/apps/post.app.js";
     import AppSearch from "./js/apps/search.app.js";
+    import AppProfile from "./js/apps/profile.app.js"
 
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
     import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PersonWrapper from "./js/author.component.js";
+    import UserWrapper from "./js/person.component.js"
 
     import StoryLoader from "./js/loaders/story.loader.js";
     import PostLoader from "./js/loaders/post.loader.js";
@@ -36,7 +38,8 @@
     import TopicsLoader from "./js/loaders/topics.loader.js";
 
     import StoryFeed from "./js/feeds/stories.feed.js";
-    import OpinionFeed from "./js/feeds/opinions.feeds.js";
+    import OpinionFeed from "./js/feeds/opinions.feed.js";
+    import PeopleFeed from "./js/feeds/people.feed.js"
 
     import PeopleContainer from "./js/containers/people.container.js";
     import StoriesContainer from "./js/containers/stories-container.js"
@@ -51,17 +54,23 @@
     customElements.define('app-home', AppHome);
     customElements.define('app-post', AppPost);
     customElements.define('app-search', AppSearch);
+    customElements.define('app-profile', AppProfile);
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
     customElements.define('post-wrapper', PostWrapper);
     customElements.define('person-wrapper', PersonWrapper);
+    customElements.define('user-wrapper', UserWrapper);
+
+
     customElements.define('story-loader', StoryLoader);
     customElements.define('post-loader', PostLoader);
+
     customElements.define('people-loader', PeopleLoader);
     customElements.define('topics-loader', TopicsLoader);
     customElements.define('stories-feed', StoryFeed);
     customElements.define('opinions-feed', OpinionFeed);
+    customElements.define('people-feed', PeopleFeed)
 
     customElements.define('people-container', PeopleContainer);
     customElements.define('stories-container', StoriesContainer);
@@ -510,51 +519,11 @@
       </li> -->
     </ul>
   </header>
-  <main class="profile">
-    <section class="main">
-      <div class="head">
-        <div class="info">
-          <div class="data">
-            <div class="name">
-              <p>Fredrick Ochieng</p>
-              <span class="code">U0A89BA6</span>
-            </div>
-            <p class="bio">Student at The East African University</p>
-          </div>
-        </div>
-        <div class="image">
-          image
-        </div>
-      </div>
-      <div class="stats">
-        <a href="" class="stat followers">
-          <span class="no">23</span>
-          <span class="text">Followers</span>
-        </a>
-        <span class="sp">•</span>
-        <span class="stat stories">
-          <span class="no">603</span>
-          <span class="text">Stories</span>
-        </span>
-        <span class="sp">•</span>
-        <span class="stat join">
-          <span class="text">Joined</span>
-          <span class="no">3y ago</span>
-        </span>
-      </div>
-      <p class="about">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate iusto sit pariatur ipsum! Aperiam, blanditiis! Nesciunt eius officia sed corrupti fuga rerum. Minus nam facilis qui, id quod enim impedit.
-      </p>
-      <div class="actions">
-        actions-top-hidden by default
-        <br>
-        actions-tab
-      </div>
-    </section>
-    <section class="side">
-      Side
-    </section>
-  </main>
+
+  <app-profile upvotes="9" stories="609" join-date="2022-01-03T13:00:00+03:00"
+    id="U0A43PBA" img="img/img.jpg" name="Fredrick Ochieng"
+    bio="Student At The East African University" followers="23" following="206" u-follow="true">
+  </app-profile>
 </body>
 
 </html>

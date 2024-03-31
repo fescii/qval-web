@@ -128,15 +128,15 @@ export default class AppSearch extends HTMLElement {
   getTab = () => {
     return /* html */`
       <ul id="tab" class="tab">
-        <li data-element="Discover" class="tab-item reviews  active">
+        <li data-element="discover" class="tab-item discover  active">
           <span class="text">Discover</span>
           <span class="line"></span>
         </li>
-        <li data-element="stories" class="tab-item details">
+        <li data-element="stories" class="tab-item stories">
           <span class="text">Stories</span>
           <span class="line"></span>
         </li>
-        <li data-element="people" class="tab-item related">
+        <li data-element="people" class="tab-item people">
           <span class="text">People</span>
           <span class="line"></span>
         </li>
@@ -226,7 +226,7 @@ export default class AppSearch extends HTMLElement {
           z-index: 3;
           width: 100%;
           position: sticky;
-          top: 70px;
+          top: 60px;
         }
 
         form.search > .contents {
@@ -369,7 +369,7 @@ export default class AppSearch extends HTMLElement {
           flex-flow: column;
           gap: 20px;
           position: sticky;
-          top: 70px;
+          top: 60px;
           height: max-content;
         }
 
