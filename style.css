@@ -1585,6 +1585,36 @@ section.main > div.content-container {
   width: 100%;
 }
 
+section.main > .content-container > .people {
+  border: 1px solid #53595f;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  width: 100%;
+}
+
+
+section.main > .content-container > .people > .person {
+  border-bottom: var(--story-border);
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  width: 100%;
+}
+
+section.main > .content-container > .people > .person > .info {
+  border: 1px solid #53595f;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+}
+
+
+
 
 section.side {
   /* border: 1px solid #53595f; */
