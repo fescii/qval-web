@@ -37,7 +37,8 @@
     import TopicsLoader from "./js/loaders/topics.loader.js";
 
     import StoryFeed from "./js/feeds/stories.feed.js";
-    import OpinionFeed from "./js/feeds/opinions.feeds.js";
+    import OpinionFeed from "./js/feeds/opinions.feed.js";
+    import PeopleFeed from "./js/feeds/people.feed.js"
 
     import PeopleContainer from "./js/containers/people.container.js";
     import StoriesContainer from "./js/containers/stories-container.js"
@@ -62,10 +63,12 @@
 
     customElements.define('story-loader', StoryLoader);
     customElements.define('post-loader', PostLoader);
+
     customElements.define('people-loader', PeopleLoader);
     customElements.define('topics-loader', TopicsLoader);
     customElements.define('stories-feed', StoryFeed);
     customElements.define('opinions-feed', OpinionFeed);
+    customElements.define('people-feed', PeopleFeed)
 
     customElements.define('people-container', PeopleContainer);
     customElements.define('stories-container', StoriesContainer);
