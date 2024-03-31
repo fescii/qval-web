@@ -271,7 +271,7 @@ export default class AppProfile extends HTMLElement {
           width: 63%;
         }
 
-        section.main > .head {
+        .head {
           /* border: 1px solid #6b7280; */
           display: flex;
           flex-flow: row;
@@ -280,7 +280,7 @@ export default class AppProfile extends HTMLElement {
           width: 100%;
         }
 
-        section.main > .head * {
+        .head * {
           transition: all 300ms ease-in-out;
           -webkit-transition: all 300ms ease-in-out;
           -moz-transition: all 300ms ease-in-out;
@@ -288,21 +288,21 @@ export default class AppProfile extends HTMLElement {
           -o-transition: all 300ms ease-in-out;
         }
 
-        section.main > .head > .data {
+        .head > .data {
           /* border: 1px solid #6b7280; */
           display: flex;
           flex-flow: column;
           gap: 0px;
         }
 
-        section.main > .head > .data > .name {
+        .head > .data > .name {
           /* border: 1px solid #6b7280; */
           display: flex;
           flex-flow: column;
           gap: 0;
         }
 
-        section.main > .head > .data > .name > p {
+        .head > .data > .name > p {
           /* border: 1px solid #6b7280; */
           margin: 0;
           padding: 0;
@@ -313,7 +313,7 @@ export default class AppProfile extends HTMLElement {
           font-size: 1.2rem;
         }
 
-        section.main > .head > .data > .name > .user {
+        .head > .data > .name > .user {
           /* border: 1px solid #6b7280; */
           margin: 0 0 10px 0;
           padding: 0;
@@ -329,7 +329,7 @@ export default class AppProfile extends HTMLElement {
           gap: 0;
         }
 
-        section.main > .head > .data > .name > .user > span.code {
+        .head > .data > .name > .user > span.code {
           /* border: 1px solid #6b7280; */
           margin: 0 0;
           padding: 0;
@@ -341,12 +341,12 @@ export default class AppProfile extends HTMLElement {
           font-weight: 400;
         }
 
-        section.main > .head > .data > .name > .user > span.joined {
+        .head > .data > .name > .user > span.joined {
           font-size: 0.9rem;
           font-family: var(--font-text), sans-serif;
         }
 
-        section.main > .head > .data > .users {
+        .head > .data > .users {
           /* border: 1px solid #6b7280; */
           margin: 0;
           padding: 0;
@@ -360,21 +360,21 @@ export default class AppProfile extends HTMLElement {
           gap: 5px;
         }
 
-        section.main > .head > .data > .users > a {
+        .head > .data > .users > a {
           text-decoration: none;
           color: inherit;
         }
 
-        section.main > .head > .data > .users > a:hover {
+        .head > .data > .users > a:hover {
           color: var(--accent-color);
         }
 
-        section.main > .head > .data > .users > a > span.no {
+        .head > .data > .users > a > span.no {
           font-family: var(--font-mono), monospace;
           font-size: 0.9rem;
         }
 
-        section.main > .head > .image {
+        .head > .image {
           /* border: 1px solid #6b7280; */
           display: flex;
           align-items: center;
@@ -389,7 +389,7 @@ export default class AppProfile extends HTMLElement {
           -o-border-radius: 50px;
         }
 
-        section.main > .head > .image > img {
+        .head > .image > img {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -404,7 +404,7 @@ export default class AppProfile extends HTMLElement {
           -o-border-radius: 50px;
         }
 
-        section.main > p.about {
+        p.about {
           /* border: 1px solid #6b7280; */
           margin: 15px 0;
           padding: 0;
@@ -415,11 +415,11 @@ export default class AppProfile extends HTMLElement {
           font-size: 1rem;
         }
 
-        section.main > .action {
+        .action {
           border: var(--action-border);
           text-decoration: none;
           margin: 5px 0;
-          padding: 10px 15px 9px;
+          padding: 8px 15px 7px;
           width: 100%;
           font-weight: 400;
           color: var(--gray-color);
@@ -437,7 +437,7 @@ export default class AppProfile extends HTMLElement {
           -o-border-radius: 12px;
         }
 
-        section.main > .action.follow {
+        .action.follow {
           border: var(--input-border-focus);
           color: transparent;
           background: var(--accent-linear);
@@ -445,7 +445,7 @@ export default class AppProfile extends HTMLElement {
           -webkit-background-clip: text;
         }
 
-        section.main > .actions {
+        .actions {
           border-bottom: var(--story-border);
           background-color: var(--background);
           display: flex;
@@ -457,7 +457,7 @@ export default class AppProfile extends HTMLElement {
           top: 60px;
         }
 
-        section.main > .actions > .author {
+        .actions > .author {
           /* border-top: var(--story-border); */
           border-bottom: var(--story-border);
           padding: 10px 0;
@@ -470,7 +470,7 @@ export default class AppProfile extends HTMLElement {
           font-size: 0.9rem;
         }
 
-        section.main > .actions > ul.tab {
+        .actions > ul.tab {
           height: max-content;
           width: 100%;
           padding: 5px 0 0 0;
@@ -485,12 +485,12 @@ export default class AppProfile extends HTMLElement {
           scrollbar-width: none;
         }
 
-        section.main > .actions > ul.tab::-webkit-scrollbar {
+        .actions > ul.tab::-webkit-scrollbar {
           display: none !important;
           visibility: hidden;
         }
 
-        section.main > .actions > ul.tab > li.tab-item {
+        .actions > ul.tab > li.tab-item {
           position: relative;
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
@@ -504,24 +504,24 @@ export default class AppProfile extends HTMLElement {
           font-size: 0.95rem;
         }
 
-        section.main > .actions > ul.tab > li.tab-item:first-of-type {
+        .actions > ul.tab > li.tab-item:first-of-type {
           margin: 0 0 0 0;
         }
 
-        section.main > .actions > ul.tab > li.tab-item.active {
+        .actions > ul.tab > li.tab-item.active {
           padding: 6px 10px 8px 10px;
           margin: 0;
         }
-        section.main > .actions > ul.tab > li.tab-item:hover>.text {
+        .actions > ul.tab > li.tab-item:hover>.text {
           color: var(--accent-color);
         }
 
-        section.main > .actions > ul.tab > li.active {
+        .actions > ul.tab > li.active {
           font-size: 0.95rem;
           padding: 6px 10px 10px 10px;
         }
 
-        section.main > .actions > ul.tab > li.active > .text {
+        .actions > ul.tab > li.active > .text {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
@@ -529,7 +529,7 @@ export default class AppProfile extends HTMLElement {
           font-family: var(--font-text);
         }
 
-        section.main > .actions > ul.tab > li.active > span.line {
+        .actions > ul.tab > li.active > span.line {
           position: absolute;
           background: var(--accent-linear);
           display: inline-block;
@@ -541,7 +541,7 @@ export default class AppProfile extends HTMLElement {
           border-top-right-radius: 5px;
         }
 
-        section.main > div.content-container {
+        div.content-container {
           /* border: 1px solid #6b7280; */
           margin: 0;
           padding: 0;
@@ -612,9 +612,13 @@ export default class AppProfile extends HTMLElement {
             gap: 0;
 					}
 
-					::-webkit-scrollbar {
-						-webkit-appearance: none;
-					}
+          .actions > .author,
+          .actions {
+            border-bottom: var(--story-border-mobile);
+          }
+
+
+					.action,
 					a {
 						cursor: default !important;
           }
