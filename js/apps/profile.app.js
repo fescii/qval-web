@@ -15,6 +15,8 @@ export default class AppProfile extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
+
+    this.activateTab()
   }
 
   disableScroll() {
@@ -32,6 +34,49 @@ export default class AppProfile extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
+  }
+
+  activateTab = () => {
+    const outerThis = this;
+    const tab = this.shadowObj.querySelector('ul#tab');
+    const contentContainer = this.shadowObj.querySelector('.content-container');
+
+    if (tab && contentContainer) {
+      const tabItems = tab.querySelectorAll('li.tab-item');
+      let activeTab = tab.querySelector('li.tab-item.active');
+
+      tabItems.forEach(tab => {
+        tab.addEventListener('click', e => {
+          e.preventDefault()
+          e.stopPropagation()
+
+          if (tab.dataset.element === activeTab.dataset.element) {
+            return;
+          }
+          else {
+            activeTab.classList.remove('active');
+            tab.classList.add('active');
+            activeTab = tab;
+            // console.log(tab);
+            switch (tab.dataset.element) {
+              case "stories":
+                contentContainer.innerHTML = outerThis.getStories();
+                break;
+              case "opinions":
+                contentContainer.innerHTML = outerThis.getOpinions();
+                break;
+              case "people":
+                contentContainer.innerHTML = outerThis.getPeople();
+              default:
+                break;
+            }
+
+          }
+        })
+      })
+
+
+    }
   }
 
   getDate = (isoDateStr) => {
@@ -137,6 +182,12 @@ export default class AppProfile extends HTMLElement {
   getOpinions = () => {
     return `
       <opinions-feed opinions="all" url="/U0A89BA6/opinions"></opinions-feed>
+    `
+  }
+
+  getPeople = () => {
+    return `
+      <people-feed opinions="all" url="/U0A89BA6/followers"></people-feed>
     `
   }
 
@@ -617,7 +668,7 @@ export default class AppProfile extends HTMLElement {
             border-bottom: var(--story-border-mobile);
           }
 
-
+          .actions > ul.tab > li.tab-item,
 					.action,
 					a {
 						cursor: default !important;
