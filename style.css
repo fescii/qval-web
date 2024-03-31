@@ -1449,13 +1449,14 @@ section.main > p.about {
 
 section.main > .action {
   border: var(--action-border);
+  text-decoration: none;
   margin: 5px 0;
-  padding: 10px 15px;
+  padding: 10px 15px 9px;
   width: 100%;
   font-weight: 400;
   color: var(--gray-color);
-  font-family: var(--font-main), sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-text), sans-serif;
+  font-size: 1.15rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1468,11 +1469,12 @@ section.main > .action {
   -o-border-radius: 12px;
 }
 
-.meta span.action.follow {
-  border: none;
-  text-decoration: none;
-  color: var(--white-color);
-  background-color: var(--action-color);
+section.main > .action.follow {
+  border: var(--input-border-focus);
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 section.main > .actions {
