@@ -1286,7 +1286,7 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
 }
 
 main.profile {
-  padding: 0;
+  padding: 20px 0;
   margin: 0;
   display: flex;
   justify-content: space-between;
@@ -1462,7 +1462,7 @@ section.main > .actions {
 section.main > .actions > ul.tab {
   height: max-content;
   width: 100%;
-  padding: 0;
+  padding: 5px 0 0 0;
   margin: 0;
   list-style-type: none;
   display: flex;
