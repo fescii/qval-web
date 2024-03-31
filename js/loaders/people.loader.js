@@ -37,6 +37,36 @@ export default class PeopleLoader extends HTMLElement {
         </div>
         <div class="action skeleton"></div>
       </div>
+			<div class="loader">
+        <div class="head">
+          <span class="profile skeleton"></span>
+          <span class="info">
+            <span class="name skeleton"></span>
+            <span class="followers skeleton"></span>
+          </span>
+        </div>
+        <div class="action skeleton"></div>
+      </div>
+			<div class="loader">
+        <div class="head">
+          <span class="profile skeleton"></span>
+          <span class="info">
+            <span class="name skeleton"></span>
+            <span class="followers skeleton"></span>
+          </span>
+        </div>
+        <div class="action skeleton"></div>
+      </div>
+			<div class="loader">
+        <div class="head">
+          <span class="profile skeleton"></span>
+          <span class="info">
+            <span class="name skeleton"></span>
+            <span class="followers skeleton"></span>
+          </span>
+        </div>
+        <div class="action skeleton"></div>
+      </div>
     `;
 	}
 
@@ -59,7 +89,7 @@ export default class PeopleLoader extends HTMLElement {
 				}
 
 				.loader {
-					padding: 0 10px 0 0;
+					padding: 15px 10px 0 0;
 					display: flex;
 					width: 100%;
 					flex-flow: row !important;

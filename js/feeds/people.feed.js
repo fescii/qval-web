@@ -46,10 +46,6 @@ export default class PeopleFeeds extends HTMLElement {
   getBody = () => {
     // language=HTML
     return `
-      <div class="title">
-				<h4 class="title">People</h4>
-				<span class="desc">Discover authors</span>
-			</div>
 			<div class="people-list">
 				${this.getLoader()}
 			</div>
@@ -144,47 +140,16 @@ export default class PeopleFeeds extends HTMLElement {
 				  gap: 5px;
           width: 100%;
           max-width: 100%;
-				}
-
-        .title {
-					/* border: 1px solid red; */
-				  padding: 0 0 10px 3px;
-				  display: flex;
-				  flex-flow: column;
-				  gap: 0;
-				}
-
-				.title h4 {
-				  color: #1f2937;
-				  font-size: 1.3rem;
-				  font-weight: 500;
-					padding: 0;
-					margin: 0;
-				}
-
-				.title > span {
-				  color: var(--gray-color);
-          font-family: var(--font-text);
-				  font-size: 0.85rem;
-				}
+        }
 
 				.people-list {
 					background-color: var(--background);
 					padding: 0;
 					display: flex;
-					flex-flow: row;
-					gap: 20px;
+					flex-flow: column;
+					gap: 0;
 					width: 100%;
           max-width: 100%;
-					overflow-x: scroll;
-					-ms-overflow-style: none;
-					scrollbar-width: none;
-				}
-
-				.people-list::-webkit-scrollbar {
-					display: none !important;
-					visibility: hidden;
-					-webkit-appearance: none;
 				}
 
 				@media screen and (max-width:660px) {
