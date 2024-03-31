@@ -1449,6 +1449,7 @@ section.main > p.about {
 
 section.main > .actions {
   border-bottom: var(--story-border);
+  background-color: var(--background);
   display: flex;
   flex-flow: column;
   gap: 0;
@@ -1542,8 +1543,8 @@ section.main > .actions > .author {
 }
 
 section.main > div.content-container {
-  border: 1px solid #6b7280;
-  margin: 10px 0;
+  /* border: 1px solid #6b7280; */
+  margin: 0;
   padding: 0;
   display: flex;
   flex-flow: column;
