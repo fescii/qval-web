@@ -19,6 +19,45 @@ export default class UserWrapper extends HTMLElement {
     // this.openForm();
   }
 
+  getLapseTime = (isoDateStr) => {
+    const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
+    let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // userTimezone.replace('%2F', '/')
+
+    // Convert posted time to the current timezone
+    const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
+
+    // 2. Calculate difference from current date in the local timezone
+    const now = new Date();
+    const diff = now - date; // Difference in milliseconds
+
+    // 3. Determine the appropriate time unit and calculate relative value
+    if (diff < 60000) { // Less than 1 minute
+      const seconds = Math.round(diff / 1000);
+      return `${seconds}s`;
+    }
+    else if (diff < 3600000) { // Less than 1 hour
+      const minutes = Math.round(diff / 60000);
+      return `${minutes}m`;
+    }
+    else if (diff < 86400000) { // Less than 1 day
+      const hours = Math.round(diff / 3600000);
+      return `${hours}h`;
+    }
+    else if (diff < 604800000) { // Less than 1 week
+      const days = Math.round(diff / 86400000);
+      return `${days}d`;
+    }
+    else if (diff < 31536000000) { // Less than 1 year
+      const weeks = Math.round(diff / 604800000);
+      return `${weeks}w`;
+    }
+    else {  // 1 year or more
+      const years = Math.round(diff / 31536000000);
+      return `${years}y`;
+    }
+  }
+
   getTemplate() {
     // Show HTML Here
     return `
@@ -37,7 +76,7 @@ export default class UserWrapper extends HTMLElement {
           <span class="user">
             <span class="code">${this.getAttribute('id')}</span>
             <span class="sp">•</span>
-            <span class="joined">24h</span>
+            <span class="joined">${this.getLapseTime(this.getAttribute('time'))}</span>
           </span>
           <p>Fredrick Ochieng</p>
         </div>
