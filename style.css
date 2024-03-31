@@ -1451,7 +1451,7 @@ section.main > .actions {
   border-bottom: var(--story-border);
   display: flex;
   flex-flow: column;
-  gap: 5px;
+  gap: 0;
   width: 100%;
   position: sticky;
   top: 70px;
@@ -1480,6 +1480,7 @@ section.main > .actions > ul.tab::-webkit-scrollbar {
 section.main > .actions > ul.tab > li.tab-item {
   position: relative;
   color: var(--gray-color);
+  font-family: var(--font-text), sans-serif;
   font-weight: 400;
   padding: 6px 0 8px 0;
   margin: 0 10px 0 0;
@@ -1541,11 +1542,12 @@ section.main > .actions > .author {
 }
 
 section.main > div.content-container {
-  /* border: 1px solid #6b7280; */
+  border: 1px solid #6b7280;
+  margin: 10px 0;
   padding: 0;
   display: flex;
   flex-flow: column;
-  align-items: center;
+  align-items: start;
   flex-wrap: nowrap;
   gap: 15px;
   width: 100%;
