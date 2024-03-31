@@ -29,6 +29,7 @@
     import StoryWrapper from "./js/story.component.js";
     import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PersonWrapper from "./js/author.component.js";
+    import UserWrapper from "./js/person.component.js"
 
     import StoryLoader from "./js/loaders/story.loader.js";
     import PostLoader from "./js/loaders/post.loader.js";
@@ -56,6 +57,9 @@
     customElements.define('story-wrapper', StoryWrapper);
     customElements.define('post-wrapper', PostWrapper);
     customElements.define('person-wrapper', PersonWrapper);
+    customElements.define('user-wrapper', UserWrapper);
+
+
     customElements.define('story-loader', StoryLoader);
     customElements.define('post-loader', PostLoader);
     customElements.define('people-loader', PeopleLoader);
@@ -569,54 +573,18 @@
         <!-- <stories-feed stories="all" url="/stories/feed"></stories-feed> -->
         <!-- <opinions-feed opinions="all" url="/opinions"></opinions-feed> -->
         <div class="people">
-          <div class="person">
-            <div class="info">
-              <div class="image">
-                <img src="img/img.jpg" alt="User profile picture">
-              </div>
-              <div class="data">
-                <span class="user">
-                  <span class="code">U0A89BA6</span>
-                  <span class="sp">•</span>
-                  <span class="joined">3y</span>
-                </span>
-                <p>Fredrick Ochieng</p>
-              </div>
-            </div>
-            <span class="action follow">Follow</span>
-          </div>
-          <div class="person">
-            <div class="info">
-              <div class="image">
-                <img src="img/img.jpg" alt="User profile picture">
-              </div>
-              <div class="data">
-                <span class="user">
-                  <span class="code">U0A89BA6</span>
-                  <span class="sp">•</span>
-                  <span class="joined">24h</span>
-                </span>
-                <p>Fredrick Ochieng</p>
-              </div>
-            </div>
-            <span class="action following">Following</span>
-          </div>
-          <div class="person">
-            <div class="info">
-              <div class="image">
-                <img src="img/img.jpg" alt="User profile picture">
-              </div>
-              <div class="data">
-                <span class="user">
-                  <span class="code">U0A89BA6</span>
-                  <span class="sp">•</span>
-                  <span class="joined">3y</span>
-                </span>
-                <p>Fredrick Ochieng</p>
-              </div>
-            </div>
-            <span class="action follow">Follow</span>
-          </div>
+          <user-wrapper id="U0A43PBA" img="img/img.jpg" name="Fredrick Ochieng"
+             followers="23" following="true">
+          </user-wrapper>
+          <user-wrapper id="U0A43PBA" img="img/img.jpg" name="Fredrick Ochieng"
+             followers="23" following="false">
+          </user-wrapper>
+          <user-wrapper id="U0A43PBA" img="img/img.jpg" name="Fredrick Ochieng"
+             followers="23" following="false">
+          </user-wrapper>
+          <user-wrapper id="U0A43PBA" img="img/img.jpg" name="Fredrick Ochieng"
+             followers="23" following="true">
+          </user-wrapper>
         </div>
       </div>
     </section>
