@@ -1540,6 +1540,17 @@ section.main > .actions > .author {
   font-size: 0.9rem;
 }
 
+section.main > div.content-container {
+  /* border: 1px solid #6b7280; */
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 15px;
+  width: 100%;
+}
+
 
 section.side {
   /* border: 1px solid #53595f; */
