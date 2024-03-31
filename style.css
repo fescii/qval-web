@@ -200,8 +200,8 @@ header.header {
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  min-height: 70px;
-  height: 70px;
+  min-height: 60px;
+  height: 60px;
   position: sticky;
   z-index: 5;
   top: 0;
@@ -741,7 +741,7 @@ main.main > article.content > #content.content .fonts {
   gap: 20px;
   z-index: 2;
   position: sticky;
-  top: 70px;
+  top: 60px;
   background-color: var(--background);
 }
 
@@ -944,7 +944,7 @@ section.opinion {
   gap: 0;
   z-index: 2;
   position: sticky;
-  top: 70px;
+  top: 60px;
 }
 
 section.opinion.sticky {
@@ -1095,7 +1095,7 @@ main.main > section.side {
   flex-flow: column;
   gap: 0;
   position: sticky;
-  top: 70px;
+  top: 60px;
 }
 
 main.main > section.side > span.open-details-mobile {
@@ -1453,9 +1453,10 @@ section.main > .actions {
   display: flex;
   flex-flow: column;
   gap: 0;
+  z-index: 3;
   width: 100%;
   position: sticky;
-  top: 70px;
+  top: 60px;
 }
 
 section.main > .actions > ul.tab {
@@ -1563,7 +1564,7 @@ section.side {
   flex-flow: column;
   gap: 20px;
   position: sticky;
-  top: 70px;
+  top: 60px;
   height: max-content;
 }
 

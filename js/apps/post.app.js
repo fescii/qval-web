@@ -214,7 +214,7 @@ export default class AppPost extends HTMLElement {
           flex-flow: column;
           gap: 20px;
           position: sticky;
-          top: 70px;
+          top: 60px;
           height: max-content;
         }
 

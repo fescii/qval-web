@@ -226,7 +226,7 @@ export default class AppSearch extends HTMLElement {
           z-index: 3;
           width: 100%;
           position: sticky;
-          top: 70px;
+          top: 60px;
         }
 
         form.search > .contents {
@@ -369,7 +369,7 @@ export default class AppSearch extends HTMLElement {
           flex-flow: column;
           gap: 20px;
           position: sticky;
-          top: 70px;
+          top: 60px;
           height: max-content;
         }
 

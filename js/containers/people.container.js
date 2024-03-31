@@ -148,7 +148,7 @@ export default class PeopleContainer extends HTMLElement {
 				  flex-flow: column;
 				  gap: 0;
 					position: sticky;
-  				top: 70px;
+  				top: 60px;
 				}
 
 				.people-list {
