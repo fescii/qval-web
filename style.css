@@ -1447,6 +1447,96 @@ section.main > p.about {
   font-size: 1rem;
 }
 
+section.main > .actions {
+  border-bottom: var(--story-border);
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+  width: 100%;
+  position: sticky;
+  top: 70px;
+}
+
+section.main > .actions > ul.tab {
+  height: max-content;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  max-width: 100%;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+section.main > .actions > ul.tab::-webkit-scrollbar {
+  display: none !important;
+  visibility: hidden;
+}
+
+section.main > .actions > ul.tab>li.tab-item {
+  position: relative;
+  color: var(--gray-color);
+  font-weight: 400;
+  padding: 6px 0 8px 0;
+  margin: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+section.main > .actions > ul.tab>li.tab-item:last-of-type {
+  margin: 0 0 0 10px;
+}
+
+section.main > .actions > ul.tab > li.tab-item.active {
+  padding: 6px 10px 8px 10px;
+  margin: 0;
+}
+section.main > .actions > ul.tab > li.tab-item:hover>.text {
+  color: var(--accent-color);
+}
+
+section.main > .actions > ul.tab>li.active {
+  font-size: 0.95rem;
+  padding: 6px 10px 10px 10px;
+}
+
+section.main > .actions > ul.tab > li.active > .text {
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-family: var(--font-text);
+}
+
+section.main > .actions > ul.tab > li.active > span.line {
+  position: absolute;
+  background: var(--accent-linear);
+  display: inline-block;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  min-height: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+section.main > .actions > .author {
+  border: 1px solid #53595f;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 400;
+  color: var(--gray-color);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+}
+
 
 section.side {
   /* border: 1px solid #53595f; */
