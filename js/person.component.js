@@ -261,7 +261,7 @@ export default class UserWrapper extends HTMLElement {
 
         @media screen and (max-width:660px) {
           :host {
-            background-color: var(--author-background);
+            border-bottom: var(--story-border-mobile);
           }
 
           .action,
