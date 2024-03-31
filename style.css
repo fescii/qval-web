@@ -1447,6 +1447,34 @@ section.main > p.about {
   font-size: 1rem;
 }
 
+section.main > .action {
+  border: var(--action-border);
+  margin: 5px 0;
+  padding: 10px 15px;
+  width: 100%;
+  font-weight: 400;
+  color: var(--gray-color);
+  font-family: var(--font-main), sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
+
+.meta span.action.follow {
+  border: none;
+  text-decoration: none;
+  color: var(--white-color);
+  background-color: var(--action-color);
+}
+
 section.main > .actions {
   border-bottom: var(--story-border);
   background-color: var(--background);
@@ -1457,6 +1485,19 @@ section.main > .actions {
   width: 100%;
   position: sticky;
   top: 60px;
+}
+
+section.main > .actions > .author {
+  /* border-top: var(--story-border); */
+  border-bottom: var(--story-border);
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 400;
+  color: var(--gray-color);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
 }
 
 section.main > .actions > ul.tab {
@@ -1485,7 +1526,7 @@ section.main > .actions > ul.tab > li.tab-item {
   font-family: var(--font-text), sans-serif;
   font-weight: 400;
   padding: 6px 0 8px 0;
-  margin: 0 10px 0 0;
+  margin: 0 0 0 10px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -1493,8 +1534,8 @@ section.main > .actions > ul.tab > li.tab-item {
   font-size: 0.95rem;
 }
 
-section.main > .actions > ul.tab > li.tab-item:last-of-type {
-  margin: 0 0 0 10px;
+section.main > .actions > ul.tab > li.tab-item:first-of-type {
+  margin: 0 0 0 0;
 }
 
 section.main > .actions > ul.tab > li.tab-item.active {
@@ -1528,19 +1569,6 @@ section.main > .actions > ul.tab > li.active > span.line {
   min-height: 5px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-}
-
-section.main > .actions > .author {
-  border-top: var(--story-border);
-  border-bottom: var(--story-border);
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 400;
-  color: var(--gray-color);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.9rem;
 }
 
 section.main > div.content-container {
