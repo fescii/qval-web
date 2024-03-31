@@ -1586,7 +1586,7 @@ section.main > div.content-container {
 }
 
 section.main > .content-container > .people {
-  border: 1px solid #53595f;
+  /* border: 1px solid #53595f; */
   display: flex;
   flex-flow: column;
   gap: 0;
@@ -1596,6 +1596,7 @@ section.main > .content-container > .people {
 
 section.main > .content-container > .people > .person {
   border-bottom: var(--story-border);
+  padding: 15px 0;
   display: flex;
   flex-flow: row;
   align-items: center;
@@ -1605,13 +1606,103 @@ section.main > .content-container > .people > .person {
 }
 
 section.main > .content-container > .people > .person > .info {
-  border: 1px solid #53595f;
+  /* border: 1px solid #53595f; */
   display: flex;
   flex-flow: row;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
+  gap: 5px;
+}
+
+section.main > .content-container > .people > .person > .info > .image {
+  /* border: 1px solid #6b7280; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+section.main > .content-container > .people > .person > .info > .image > img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+section.main > .content-container > .people > .person > .info > .data {
+  /* border: 1px solid #53595f; */
+  display: flex;
+  flex-flow: column;
+  align-items: start;
   gap: 0;
 }
+
+section.main > .content-container > .people > .person > .info > .data > .user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 400;
+  color: var(--gray-color);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+}
+
+section.main > .content-container > .people > .person > .info > .data > p {
+  /* border: 1px solid #6b7280; */
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  font-family: var(--font-text);
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1rem;
+}
+
+section.main > .content-container > .people > .person > .action {
+  border: var(--action-border);
+  text-decoration: none;
+  margin: 5px 0;
+  padding: 4px 15px 5px;
+  width: 100px;
+  font-weight: 400;
+  color: var(--gray-color);
+  font-family: var(--font-text), sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
+
+section.main > .content-container > .people > .person > .action.follow {
+  border: var(--input-border-focus);
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
 
 
 
