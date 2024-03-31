@@ -1477,7 +1477,7 @@ section.main > .actions > ul.tab::-webkit-scrollbar {
   visibility: hidden;
 }
 
-section.main > .actions > ul.tab>li.tab-item {
+section.main > .actions > ul.tab > li.tab-item {
   position: relative;
   color: var(--gray-color);
   font-weight: 400;
@@ -1486,10 +1486,11 @@ section.main > .actions > ul.tab>li.tab-item {
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 1rem;
+  /* font-size: 1rem; */
+  font-size: 0.95rem;
 }
 
-section.main > .actions > ul.tab>li.tab-item:last-of-type {
+section.main > .actions > ul.tab > li.tab-item:last-of-type {
   margin: 0 0 0 10px;
 }
 
@@ -1501,7 +1502,7 @@ section.main > .actions > ul.tab > li.tab-item:hover>.text {
   color: var(--accent-color);
 }
 
-section.main > .actions > ul.tab>li.active {
+section.main > .actions > ul.tab > li.active {
   font-size: 0.95rem;
   padding: 6px 10px 10px 10px;
 }
@@ -1527,7 +1528,9 @@ section.main > .actions > ul.tab > li.active > span.line {
 }
 
 section.main > .actions > .author {
-  border: 1px solid #53595f;
+  border-top: var(--story-border);
+  border-bottom: var(--story-border);
+  padding: 10px 0;
   display: flex;
   align-items: center;
   gap: 5px;
