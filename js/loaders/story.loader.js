@@ -82,7 +82,7 @@ export default class StoryLoader extends HTMLElement {
 	}
 
 	getStyles() {
-		return `
+		return /* css */`
 	    <style>
 	      *,
 	      *:after,
@@ -93,7 +93,7 @@ export default class StoryLoader extends HTMLElement {
 	      }
 
 	      :host {
-				  /*border: var(--input-border);*/
+				  padding: 10px 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 5px;
@@ -101,7 +101,6 @@ export default class StoryLoader extends HTMLElement {
 				}
 
 				.loader {
-				  /*border: var(--input-border);*/
 				  padding: 10px 0;
 				  display: flex;
 				  flex-flow: column;

@@ -81,35 +81,9 @@ export default class StoryWrapper extends HTMLElement {
     // Convert posted time to the current timezone
     const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
 
-		// 2. Calculate difference from current date in the local timezone
-		const now = new Date();
-		const diff = now - date; // Difference in milliseconds
-
-		// 3. Determine the appropriate time unit and calculate relative value
-		if (diff < 60000) { // Less than 1 minute
-			const seconds = Math.round(diff / 1000);
-			return `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} (${seconds}s ago)`;
-		}
-		else if (diff < 3600000) { // Less than 1 hour
-			const minutes = Math.round(diff / 60000);
-			return `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} (${minutes}m ago)`;
-		}
-		else if (diff < 86400000) { // Less than 1 day
-			const hours = Math.round(diff / 3600000);
-			return `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} (${hours}h ago)`;
-		}
-		else if (diff < 604800000) { // Less than 1 week
-			const days = Math.round(diff / 86400000);
-			return `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} (${days}d ago)`;
-		}
-		else if (diff < 31536000000) { // Less than 1 year
-			const weeks = Math.round(diff / 604800000);
-			return `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} (${weeks}w ago)`;
-		}
-		else {  // 1 year or more
-			const years = Math.round(diff / 31536000000);
-			return `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} (${years}y ago)`;
-		}
+    return `
+      ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+    `
 	}
 
   openForm = () => {

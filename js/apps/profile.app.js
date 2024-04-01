@@ -663,6 +663,17 @@ export default class AppProfile extends HTMLElement {
             gap: 0;
 					}
 
+          .head > .data > .name > .user > span.code {
+            margin: 0 0;
+            padding: 0;
+            color: transparent;
+            background: var(--accent-linear);
+            background-clip: text;
+            -webkit-background-clip: text;
+            font-family: var(--font-mono), monospace;
+            font-weight: 600;
+          }
+
           .actions > .author,
           .actions {
             border-bottom: var(--story-border-mobile);
