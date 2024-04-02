@@ -1067,7 +1067,7 @@ main.main > section.side .related > ul.stories li.story a {
 
 main.main > section.side .related > ul.stories li.story a span.title {
   color: var(--read-color);
-  font-family: var(--font-read), sans-serif;
+  font-family: var(--font-text), sans-serif;
   font-weight: 400;
 }
 
