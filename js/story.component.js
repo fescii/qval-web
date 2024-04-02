@@ -244,8 +244,12 @@ export default class StoryWrapper extends HTMLElement {
     if (story === "opinion") {
       return `
         <div class="meta opinion">
-          <a href="" class="opinion-link">${this.getAttribute('id')}</a>
-          <span class="sp">•</span>
+          <span class="time">
+            <time class="published" datetime="${this.getAttribute('time')}">
+              ${this.formatDateWithRelativeTime(this.getAttribute('time'))}
+            </time>
+            <span class="sp">•</span>
+          </span>
           <div class="author">
             <span class="sp">by</span>
             <div class="author-name">

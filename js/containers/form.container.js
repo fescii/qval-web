@@ -109,7 +109,6 @@ export default class FormContainer extends HTMLElement {
     }
   }
 
-
 	getStyles() {
 		return /* css */`
 	    <style>
