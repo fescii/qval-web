@@ -1402,8 +1402,105 @@ section.main {
   left: 10%;
 }
 
+.foot {
+  border-bottom: var(--story-border);
+  background-color: var(--background);
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  z-index: 3;
+  width: 100%;
+  position: sticky;
+  top: 60px;
+}
+
+.foot > .author {
+  /* border-top: var(--story-border); */
+  border-bottom: var(--story-border);
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 400;
+  color: var(--gray-color);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+}
+
+.foot > ul.tab {
+  height: max-content;
+  width: 100%;
+  padding: 5px 0 0 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  max-width: 100%;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.foot > ul.tab::-webkit-scrollbar {
+  display: none !important;
+  visibility: hidden;
+}
+
+.foot > ul.tab > li.tab-item {
+  position: relative;
+  color: var(--gray-color);
+  font-family: var(--font-text), sans-serif;
+  font-weight: 400;
+  padding: 6px 0 8px 0;
+  margin: 0 0 0 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  /* font-size: 1rem; */
+  font-size: 0.95rem;
+}
+
+.foot > ul.tab > li.tab-item.active {
+  padding: 6px 10px 8px 10px;
+  margin: 0;
+}
+
+.foot > ul.tab > li.tab-item:first-of-type {
+  margin: 0 10px 0 0;
+}
+
+.foot > ul.tab > li.tab-item:hover > .text {
+  color: var(--accent-color);
+}
+
+.foot > ul.tab > li.active {
+  font-size: 0.95rem;
+  padding: 6px 10px 10px 10px;
+}
+
+.foot > ul.tab > li.active > .text {
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-family: var(--font-text);
+}
+
+.foot > ul.tab > li.active > span.line {
+  position: absolute;
+  background: var(--accent-linear);
+  display: inline-block;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  min-height: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 div.content-container {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   margin: 0;
   padding: 0;
   display: flex;
