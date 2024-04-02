@@ -53,6 +53,7 @@ Author URL: https://femar.co.ke
   --white-color: #ffffff;
   --gray-color: #6b7280;
   --text-color: #53595f;
+  --title-color: #1f2937;
   --color-alt: #ff932f;
   --action-color: #1d2c38;
   --anchor: #4b556321;
@@ -712,10 +713,10 @@ main.main > article.content .head > h1.title {
   font-weight: 700;
   font-size: 1.7rem;
   line-height: 1.5;
-  color: #1f2937;
+  color: var(--title-color);
 }
 
-main.main > article.content .head > span.meta {
+main.main > article.content .head > span.stats {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -725,9 +726,10 @@ main.main > article.content .head > span.meta {
   font-size: 0.9rem;
 }
 
-main.main > article.content .head > span.meta span.dot {
+main.main > article.content .head > span.stats span.dot {
   display: none;
 }
+
 
 
 main.main > article.content > #content.content {
