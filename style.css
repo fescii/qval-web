@@ -705,6 +705,7 @@ main.main > article.content .head > .topic {
   padding: 3px 10px 4px 10px;
   box-shadow: 0 0 0 1px #ffffff25, 0 2px 2px #0000000a, 0 8px 16px -4px #0000000a;
   background: var(--accent-linear);
+  font-family: var(--font-read), sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
   border-radius: 50px;
@@ -943,7 +944,7 @@ main.main > article.content section.responses {
 
 /*  Side bar */
 main.main > section.side {
-  /* border-left: thin solid #4b5563bd; */
+  /* border: thin solid #4b5563bd; */
   padding: 20px 0 30px 0;
   margin: 0;
   background-color: transparent;
@@ -956,33 +957,11 @@ main.main > section.side {
   top: 60px;
 }
 
-main.main > section.side > span.open-details-mobile {
-  /* font-family: var(--font-mono); */
-  color: var(--gray-color);
-  padding: 40px 0 5px 0;
-  margin: 0;
-  background: var(--fade-linear-gradient);
-  height: max-content;
-  width: 100%;
-  display: none;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  list-style-type: none;
-  gap: 3px;
-  font-weight: 700;
-}
-
-main.main > section.side > span.open-details-mobile svg {
-  rotate: 180deg;
-  min-width: 20px;
-  min-height: 20px;
-}
 
 main.main > section.side .head {
   /* border: thin solid #4b5563bd; */
   background-color: var(--background);
-  padding: 10px 15px 0 15px;
+  padding: 10px 15px 10px 0;
   display: flex;
   flex-flow: column;
   gap: 15px;
@@ -1045,103 +1024,135 @@ main.main > section.side .head > .author > .name .occupation {
   font-size: 0.95rem;
 }
 
-main.main > section.side .on-this {
+main.main > section.side .related {
   /* border: thin solid #4b5563bd; */
   background-color: var(--background);
-  padding: 20px 15px 0 15px;
+  padding: 10px 0;
   margin: 0;
   display: flex;
   flex-flow: column;
-  gap: 22px;
+  gap: 0;
 }
 
-main.main > section.side .on-this > .topics {
-  /* border: thin solid #4b5563bd; */
-  padding: 0 10px 0 0;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
 
-main.main > section.side .on-this > .topics a.topic {
-  text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  padding: 4px 15px;
-  color: #808080;
-  background-color: #39383816;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-main.main > section.side .on-this > .topics a.topic:hover {
-  color: var(--white-color);
-  background: var(--accent-color) linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 5s ease infinite;
-  -webkit-animation: gradient 5s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0 50%;
-  }
-}
-
-main.main > section.side .on-this > .table-of-content {
-  /* border: thin solid #4b5563bd; */
-  margin: 5px 0 0 0;
-  display: flex;
-  flex-flow: column;
-  gap: 10px;
-}
-
-main.main > section.side .on-this > .table-of-content p.title {
-  margin: 0;
-  color: var(--text-color);
-  font-weight: 600;
-  font-size: 1.15rem;
-  /* text-transform: uppercase; */
-}
-
-main.main > section.side .on-this > .table-of-content * {
-  font-size: 0.9rem;
+main.main > section.side .related > p.title {
   color: var(--gray-color);
-}
-
-main.main > section.side .on-this > .table-of-content ul.inner-list,
-main.main > section.side .on-this > .table-of-content ul.list {
+  padding: 0;
   margin: 0;
-  color: var(--text-color);
-  text-decoration: none;
-  list-style-type: none;
-  display: flex;
-  flex-flow: column;
-  /* gap: 5px; */
-}
-
-main.main > section.side .on-this > .table-of-content ul.inner-list {
-  padding: 0 0 0 10px;
-}
-
-main.main > section.side .on-this > .table-of-content ul > li {
-  line-height: 1.4;
   font-weight: 500;
 }
 
-main.main > section.side .on-this > .table-of-content ul > li > a:hover {
-  /* font-weight: 500; */
-  color: #1f2937;
+main.main > section.side .related > ul.stories {
+  /* border: thin solid #4b5563bd; */
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
 }
+
+main.main > section.side .related > ul.stories li.story {
+  /* border: thin solid #4b5563bd; */
+  text-decoration: none;
+  padding: 10px 0 0 0;
+  display: flex;
+}
+
+main.main > section.side .related > ul.stories li.story a {
+  text-decoration: none;
+  display: flex;
+  flex-flow: column;
+  color: var(--gray-color);
+}
+
+main.main > section.side .related > ul.stories li.story a span.title {
+  color: var(--read-color);
+  font-family: var(--font-read), sans-serif;
+  font-weight: 400;
+}
+
+main.main > section.side .related > ul.stories li.story a:hover > span.title {
+  color: var(--read-color);
+  /* font-weight: 500; */
+}
+
+
+main.main > section.side .related > ul.stories li.story a span.date {
+  color: var(--gray-color);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+}
+
+main.main > section.side > .company {
+  /* border: 1px solid #1f2937; */
+  display: flex;
+  margin: 20px 0;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+}
+
+main.main > section.side > .company >.title {
+  color: var(--text-color);
+  font-family: var(--font-text), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+main.main > section.side > .company > ul.footer-list {
+  /* border: 1px solid #1f2937; */
+  margin: 0;
+  list-style-type: none;
+  padding: 0 0 0 1px;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+main.main > section.side > .company > ul.footer-list > li.item {
+  margin: 0 10px 0 0;
+  padding: 0;
+  width: max-content;
+  position: relative;
+  /* border: 1px solid #808080; */
+}
+
+main.main > section.side > .company > ul.footer-list > li.item > .dot {
+  display: inline-block;
+  background: var(--accent-linear);
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  right: -9px;
+  top: 3px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+main.main > section.side > .company > ul.footer-list > li.item > a.item-link {
+  color: var(--gray-color);
+  /* font-size: 0.98rem; */
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+main.main > section.side > .company > ul.footer-list > li.item > a.item-link:hover {
+  /* color: var(--accent-color); */
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+  border-bottom: 1px solid var(--accent-color);
+}
+
+
+
 
 
 
