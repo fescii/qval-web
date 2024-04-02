@@ -1,4 +1,4 @@
-export default class AppProfile extends HTMLElement {
+export default class AppTopic extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -15,8 +15,6 @@ export default class AppProfile extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-
-    this.activateTab()
   }
 
   disableScroll() {
@@ -34,49 +32,6 @@ export default class AppProfile extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
-  }
-
-  activateTab = () => {
-    const outerThis = this;
-    const tab = this.shadowObj.querySelector('ul#tab');
-    const contentContainer = this.shadowObj.querySelector('.content-container');
-
-    if (tab && contentContainer) {
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
-
-      tabItems.forEach(tab => {
-        tab.addEventListener('click', e => {
-          e.preventDefault()
-          e.stopPropagation()
-
-          if (tab.dataset.element === activeTab.dataset.element) {
-            return;
-          }
-          else {
-            activeTab.classList.remove('active');
-            tab.classList.add('active');
-            activeTab = tab;
-            // console.log(tab);
-            switch (tab.dataset.element) {
-              case "stories":
-                contentContainer.innerHTML = outerThis.getStories();
-                break;
-              case "opinions":
-                contentContainer.innerHTML = outerThis.getOpinions();
-                break;
-              case "people":
-                contentContainer.innerHTML = outerThis.getPeople();
-              default:
-                break;
-            }
-
-          }
-        })
-      })
-
-
-    }
   }
 
   getDate = (isoDateStr) => {
@@ -105,7 +60,7 @@ export default class AppProfile extends HTMLElement {
     if (mql.matches) {
       return /* html */`
         ${this.getHeader()}
-        ${this.getBio()}
+         ${this.getFoot()}
         ${this.checkFollowing(this.getAttribute('u-follow'))}
         ${this.getActions()}
         <div class="content-container">
@@ -117,9 +72,7 @@ export default class AppProfile extends HTMLElement {
       return /* html */`
         <section class="main">
           ${this.getHeader()}
-          ${this.getBio()}
-          ${this.checkFollowing(this.getAttribute('u-follow'))}
-          ${this.getActions()}
+          ${this.getFoot()}
           <div class="content-container">
             ${this.getStories()}
           </div>
@@ -131,6 +84,12 @@ export default class AppProfile extends HTMLElement {
         </section>
       `;
     }
+  }
+
+  getStories = () => {
+    return `
+      <stories-feed stories="all" url="/U0A89BA6/stories"></stories-feed>
+    `
   }
 
   getHeader = () => {
@@ -146,9 +105,7 @@ export default class AppProfile extends HTMLElement {
             You can also get the stories periodically via email by subscribing to this topic.
           </div>
           <div class="actions">
-            <span class="action subscribe" id="subscribe-action">
-              <span class="text">Subscribe</span>
-            </span>
+            ${this.checkSubscribed(this.getAttribute('subscribed'))}
             <span class="action start">
               <span class="text">Start writing</span>
             </span>
@@ -170,9 +127,8 @@ export default class AppProfile extends HTMLElement {
 
   getFoot = () => {
     return `
-      <div class="actions">
+      <div class="foot">
         ${this.getAuthor()}
-        ${this.getTab()}
       </div>
     `
   }
@@ -190,15 +146,19 @@ export default class AppProfile extends HTMLElement {
     `
   }
 
-  checkFollowing = (following) => {
-    if (following === 'true') {
+  checkSubscribed = (subscribed) => {
+    if (subscribed === 'true') {
       return `
-			  <div class="action following">Following</div>
+			  <span class="action subscribed" id="subscribe-action">
+          <span class="text">Subscribed</span>
+        </span>
 			`
     }
     else {
       return `
-			  <div class="action follow">Follow</div>
+			  <span class="action subscribe" id="subscribe-action">
+          <span class="text">Subscribe</span>
+        </span>
 			`
     }
   }
