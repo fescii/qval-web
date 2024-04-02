@@ -413,11 +413,15 @@ header.header > ul.right > li.link.search a svg {
   height: 23px;
 }
 
-header.header>ul.right>li.link.actions a svg {
-  /* border: 1px solid #124ec5; */
-  margin: 0 0 -5px 0;
-  width: 24px;
-  height: 24px;
+header.header>ul.right > li.link.signin > a {
+  border: var(--story-border);
+  padding: 5px 15px;
+  font-family: var(--font-read);
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
 }
 
 header.header > ul > li.link.theme {
