@@ -1294,7 +1294,6 @@ main.profile {
   min-height: 60vh;
 }
 
-
 main.topic {
   padding: 15px 0;
   margin: 0;
@@ -1313,131 +1312,9 @@ section.main {
   width: 63%;
 }
 
-.head {
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-  padding: 0 0 20px 0;
-}
 
-.text-content {
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-  color: var(--text-color);
-}
 
-.text-content > .tag {
-  font-size: 1.5rem;
-  font-weight: 500;
-  font-family: var(--font-text);
-  margin: 0;
-  background: var(--accent-linear);
-  background-clip: text;
-  background-size: 250% 250%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient 10s ease infinite;
-  -webkit-animation: gradient 10s ease infinite;
-  -moz-animation: gradient 10s ease infinite;
-  -o-animation: gradient 10s ease infinite;
-}
 
-.text-content >.sub-text {
-  font-size: 1rem;
-  color: var(--text-color);
-  line-height: 1.5;
-  font-family: var(--font-main);
-}
-
-.text-content > .actions {
-  /* border: 1px solid red; */
-  display: flex;
-  flex-flow: row;
-  gap: 50px;
-  margin-top: 10px;
-}
-
-.text-content > .actions > .action {
-  text-decoration: none;
-  border: var(--input-border-focus);
-  color: transparent;
-  background: var(--accent-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
-  cursor: pointer;
-  padding: 5px 20px;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-radius: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
-}
-
-.text-content > .actions > .action.subscribed {
-  background: unset;
-  border: var(--action-border);
-  color: var(--gray-color);
-}
-
-.text-content > .actions > .action.start {
-  padding: 6px 20px;
-  border: none;
-  color: var(--white-color);
-  background: var(--accent-linear);
-  font-weight: 500;
-}
-
-.text-content > .start-using > span.follow > span.plus > i.top {
-  rotate: 90deg;
-}
-
-.text-content > .start-using > span.follow > span.plus > i.hor {
-  position: absolute;
-  left: 10%;
-}
-
-.foot {
-  border-bottom: var(--story-border);
-  background-color: var(--background);
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-  z-index: 3;
-  width: 100%;
-  position: sticky;
-  top: 60px;
-}
-
-.foot > .author {
-  border-top: var(--story-border);
-  /* border-bottom: var(--story-border); */
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 400;
-  color: var(--gray-color);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.9rem;
-}
-
-div.content-container {
-  /* border: 1px solid #6b7280; */
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-flow: column;
-  align-items: start;
-  flex-wrap: nowrap;
-  gap: 15px;
-  width: 100%;
-}
 
 section.side {
   /* border: 1px solid #53595f; */
