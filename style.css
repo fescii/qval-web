@@ -1295,6 +1295,48 @@ main.profile {
 }
 
 
+main.topic {
+  padding: 15px 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+  min-height: 60vh;
+}
+
+section.main {
+  border: 1px solid #6b7280;
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  gap: 0;
+  width: 63%;
+}
+
+div.content-container {
+  border: 1px solid #6b7280;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  flex-wrap: nowrap;
+  gap: 15px;
+  width: 100%;
+}
+
+section.side {
+  /* border: 1px solid #53595f; */
+  padding: 0;
+  width: 35%;
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+  position: sticky;
+  top: 60px;
+  height: max-content;
+}
+
 
 /*Footer*/
 footer.footer {
