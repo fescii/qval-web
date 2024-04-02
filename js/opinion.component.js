@@ -64,35 +64,9 @@ export default class OpinionWrapper extends HTMLElement {
     // Convert posted time to the current timezone
     const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
 
-    // 2. Calculate difference from current date in the local timezone
-    const now = new Date();
-    const diff = now - date; // Difference in milliseconds
-
-    // 3. Determine the appropriate time unit and calculate relative value
-    if (diff < 60000) { // Less than 1 minute
-      const seconds = Math.round(diff / 1000);
-      return `${seconds}s`;
-    }
-    else if (diff < 3600000) { // Less than 1 hour
-      const minutes = Math.round(diff / 60000);
-      return `${minutes}m`;
-    }
-    else if (diff < 86400000) { // Less than 1 day
-      const hours = Math.round(diff / 3600000);
-      return `${hours}h`;
-    }
-    else if (diff < 604800000) { // Less than 1 week
-      const days = Math.round(diff / 86400000);
-      return `${days}d`;
-    }
-    else if (diff < 31536000000) { // Less than 1 year
-      const weeks = Math.round(diff / 604800000);
-      return `${weeks}w`;
-    }
-    else {  // 1 year or more
-      const years = Math.round(diff / 31536000000);
-      return `${years}y`;
-    }
+    return `
+      ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+    `
   }
 
   upVote() {
@@ -233,8 +207,12 @@ export default class OpinionWrapper extends HTMLElement {
   getHeader = () => {
     return `
       <div class="meta opinion">
-        <a href="" class="opinion-link">${this.getAttribute('id')}</a>
-        <span class="sp">•</span>
+        <span class="time">
+          <time class="published" datetime="${this.getAttribute('time')}">
+            ${this.getLapseTime(this.getAttribute('time'))}
+          </time>
+          <span class="sp">•</span>
+        </span>
         <div class="author">
           <span class="sp">by</span>
           <div class="author-name">
@@ -242,8 +220,6 @@ export default class OpinionWrapper extends HTMLElement {
             ${this.getAuthor()}
           </div>
         </div>
-        <span class="sp">•</span>
-        <span class="lapse">${this.getLapseTime(this.getAttribute('time'))}</span>
       </div>
     `
   }
@@ -442,7 +418,7 @@ export default class OpinionWrapper extends HTMLElement {
         -webkit-background-clip: text;
       }
 
-      .meta  .profile {
+      .meta .profile {
         border: var(--modal-border);
         box-shadow: var(--modal-shadow);
         background-color: var(--background);
@@ -459,7 +435,7 @@ export default class OpinionWrapper extends HTMLElement {
         border-radius: 12px;
       }
 
-      .meta  .profile > .cover {
+      .meta .profile > .cover {
         padding: 10px 10px;
         display: flex;
         flex-flow: column;
@@ -473,7 +449,7 @@ export default class OpinionWrapper extends HTMLElement {
         -o-transition: all 100ms ease-out;
       }
 
-      .meta  .profile > .cover p.about-info {
+      .meta .profile > .cover p.about-info {
         display: none;
         font-family: var(--font-main), san-serif;
       }
@@ -482,7 +458,7 @@ export default class OpinionWrapper extends HTMLElement {
         display: flex;
       }
 
-      .meta  .profile > span.pointer {
+      .meta .profile > span.pointer {
         border: var(--modal-border);
         border-bottom: none;
         border-right: none;
@@ -499,12 +475,12 @@ export default class OpinionWrapper extends HTMLElement {
         -moz-border-radius: 1px;
       }
 
-      .meta.opinion  .profile > span.pointer{
+      .meta.opinion .profile > span.pointer{
         left: unset;
-        right: 50%;
+        right: 45%;
       }
 
-      .meta  .profile > .cover>  .head {
+      .meta .profile > .cover > .head {
         background-color: var(--background);
         display: flex;
         flex-wrap: nowrap;
@@ -512,7 +488,7 @@ export default class OpinionWrapper extends HTMLElement {
         gap: 10px;
       }
 
-      .meta  .profile > .cover>  .head > .image {
+      .meta .profile > .cover > .head > .image {
         width: 40px;
         height: 40px;
         overflow: hidden;
@@ -521,7 +497,7 @@ export default class OpinionWrapper extends HTMLElement {
         -moz-border-radius: 50px;
       }
 
-      .meta  .profile > .cover>  .head > .image img {
+      .meta .profile > .cover > .head > .image img {
         width: 100%;
         height: 100%;
         object-fit: cover;

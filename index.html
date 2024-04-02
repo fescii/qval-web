@@ -17,9 +17,65 @@
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
 
   <script type="module">
+        import AppHome from "./js/apps/home.app.js";
+    import AppPost from "./js/apps/post.app.js";
+    import AppSearch from "./js/apps/search.app.js";
+    import AppProfile from "./js/apps/profile.app.js"
+
     import OpinionWrapper from "./js/opinion.component.js";
+    import StoryWrapper from "./js/story.component.js";
+    import PostWrapper from "./js/wrappers/post.wrapper.js";
+    import PersonWrapper from "./js/author.component.js";
+    import UserWrapper from "./js/person.component.js"
+
+    import StoryLoader from "./js/loaders/story.loader.js";
+    import PostLoader from "./js/loaders/post.loader.js";
+    import PeopleLoader from "./js/loaders/people.loader.js";
+    import TopicsLoader from "./js/loaders/topics.loader.js";
+
+    import StoryFeed from "./js/feeds/stories.feed.js";
+    import OpinionFeed from "./js/feeds/opinions.feed.js";
+    import PeopleFeed from "./js/feeds/people.feed.js"
+
+    import PeopleContainer from "./js/containers/people.container.js";
+    import StoriesContainer from "./js/containers/stories-container.js"
+    import TrendingContainer from "./js/containers/trending.container.js"
+    import TopicsContainer from "./js/containers/topics.container.js";
+    import FormContainer from "./js/containers/form.container.js";
+    import AddContainer from "./js/containers/add.container.js";
+
+    import DiscoverPeople from "./js/containers/people.discover.js"
+
+
+    customElements.define('app-home', AppHome);
+    customElements.define('app-post', AppPost);
+    customElements.define('app-search', AppSearch);
+    customElements.define('app-profile', AppProfile);
 
     customElements.define('opinion-wrapper', OpinionWrapper);
+    customElements.define('story-wrapper', StoryWrapper);
+    customElements.define('post-wrapper', PostWrapper);
+    customElements.define('person-wrapper', PersonWrapper);
+    customElements.define('user-wrapper', UserWrapper);
+
+
+    customElements.define('story-loader', StoryLoader);
+    customElements.define('post-loader', PostLoader);
+
+    customElements.define('people-loader', PeopleLoader);
+    customElements.define('topics-loader', TopicsLoader);
+    customElements.define('stories-feed', StoryFeed);
+    customElements.define('opinions-feed', OpinionFeed);
+    customElements.define('people-feed', PeopleFeed)
+
+    customElements.define('people-container', PeopleContainer);
+    customElements.define('stories-container', StoriesContainer);
+    customElements.define('trending-container', TrendingContainer);
+    customElements.define('topics-container', TopicsContainer);
+    customElements.define('form-container', FormContainer);
+    customElements.define('add-container', AddContainer);
+
+    customElements.define('discover-people', DiscoverPeople);
   </script>
 </head>
 
@@ -566,50 +622,9 @@
           <span class="date">June 23, 2021 (3y ago)</span>
         </a>
       </div>
-      <section class="opinion" id="sticky-position">
-        <div class="title">
-          <h2 class="opinion">Opinions</h2>
-          <div class="right">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M3.26123 17.2448C3.26123 16.8305 3.59702 16.4948 4.01123 16.4948H10.4838C10.898 16.4948 11.2338 16.8305 11.2338 17.2448C11.2338 17.659 10.898 17.9948 10.4838 17.9948H4.01123C3.59702 17.9948 3.26123 17.659 3.26123 17.2448Z"
-                fill="currentColor" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M14.6105 14.5886C15.2582 13.941 16.205 13.7738 17.267 13.7738C18.3289 13.7738 19.2757 13.941 19.9234 14.5886C20.5713 15.2363 20.7387 16.1831 20.7387 17.2456C20.7387 18.3081 20.5713 19.2549 19.9234 19.9026C19.2757 20.5502 18.3289 20.7174 17.267 20.7174C16.205 20.7174 15.2582 20.5502 14.6105 19.9026C13.9627 19.2549 13.7952 18.3081 13.7952 17.2456C13.7952 16.1831 13.9627 15.2363 14.6105 14.5886ZM15.671 15.6494C15.4681 15.8522 15.2952 16.2663 15.2952 17.2456C15.2952 18.2249 15.4681 18.6389 15.671 18.8418C15.8739 19.0446 16.288 19.2174 17.267 19.2174C18.2459 19.2174 18.66 19.0446 18.8629 18.8418C19.0658 18.6389 19.2387 18.2249 19.2387 17.2456C19.2387 16.2663 19.0658 15.8522 18.8629 15.6494C18.66 15.4466 18.2459 15.2738 17.267 15.2738C16.288 15.2738 15.8739 15.4466 15.671 15.6494Z"
-                fill="currentColor" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M12.7668 6.7561C12.7668 6.34189 13.1026 6.0061 13.5168 6.0061H19.9885C20.4027 6.0061 20.7385 6.34189 20.7385 6.7561C20.7385 7.17032 20.4027 7.5061 19.9885 7.5061H13.5168C13.1026 7.5061 12.7668 7.17032 12.7668 6.7561Z"
-                fill="currentColor" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M4.0764 4.09812C4.72422 3.45046 5.67114 3.28296 6.73367 3.28296C7.79582 3.28296 8.74253 3.45049 9.39023 4.09819C10.0379 4.74589 10.2055 5.6926 10.2055 6.75475C10.2055 7.81724 10.038 8.76408 9.39016 9.41171C8.7424 10.0593 7.79562 10.2265 6.73367 10.2265C5.67135 10.2265 4.72435 10.0593 4.07647 9.41178C3.42847 8.76413 3.26099 7.81724 3.26099 6.75475C3.26099 5.69261 3.42851 4.74583 4.0764 4.09812ZM5.13692 5.15892C4.93391 5.36187 4.76099 5.77599 4.76099 6.75475C4.76099 7.73405 4.93395 8.14805 5.13685 8.35084C5.33985 8.55374 5.7542 8.72654 6.73367 8.72654C7.71262 8.72654 8.12673 8.55377 8.32964 8.35091C8.5325 8.14811 8.70546 7.73404 8.70546 6.75475C8.70546 5.776 8.53254 5.36182 8.32957 5.15885C8.1266 4.95588 7.71242 4.78296 6.73367 4.78296C5.75441 4.78296 5.33999 4.9559 5.13692 5.15892Z"
-                fill="currentColor" />
-            </svg>
-          </div>
-        </div>
-        <form action="" class="opinion">
-          <div class="image">
-            <img src="img/img.jpg" alt="Fredrick Ochieng" srcset="">
-          </div>
-          <textarea name="reply" placeholder="What's your opinion?" id="reply"></textarea>
-          <button type="submit">Post</button>
-        </form>
-      </section>
+      <form-container type="story"></form-container>
       <section class="responses">
-        <opinion-wrapper id="D0343" date="2021-06-23T10:20:30Z"
-          url="/discuss/o/D0A343" opinions="98" profile="img/img.jpg">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit possimus!
-          Adipisci sit debitis necessitatibus facere quisquam,impedit exercitationem molestiae odit reprehenderit unde cum cumque labore, nihil tempore ut libero explicabo.
-        </opinion-wrapper>
-        <opinion-wrapper id="D0A343" date="2021-06-23T10:20:30Z" url="/discuss/o/D0343" opinions="98" profile="img/img.jpg">
-          Adipisci sit debitis necessitatibus facere quisquam,impedit exercitationem molestiae odit reprehenderit unde cum cumque labore, nihil tempore ut libero explicabo.
-        </opinion-wrapper>
-        <opinion-wrapper id="D0A343" date="2021-06-23T10:20:30Z" url="/discuss/o/D0343" opinions="98" profile="img/img.jpg">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit possimus!
-        </opinion-wrapper>
-        <opinion-wrapper id="D0A343" date="2021-06-23T10:20:30Z" url="/discuss/o/D0343" opinions="98" profile="img/img.jpg">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit possimus! impedit exercitationem molestiae odit reprehenderit unde cum
-          cumque labore, nihil tempore ut libero explicabo.
-        </opinion-wrapper>
+        <opinions-feed opinions="all" url="/U0A89BA6/opinions"></opinions-feed>
       </section>
     </article>
     <section class="side">
@@ -667,6 +682,7 @@
       </div>
     </section>
   </main>
+
   <footer class="footer">
     <section class="newsletter">
       <div class="title">Join Our Newsletter</div>

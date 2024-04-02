@@ -50,6 +50,7 @@ Author URL: https://femar.co.ke
   --author-background: #f1f3f4;
   --user-background: #f8f8f8;
   --dot-background: #6b7280c9;
+  --hover-background: #f8f8f8;
 
   --accent-color: #08b86f;
   --white-color: #ffffff;
@@ -686,7 +687,7 @@ main.main > article.content {
   width: 65%;
   display: flex;
   flex-flow: column;
-  gap: 10px;
+  gap: 0;
 }
 
 main.main > article.content .head {
@@ -873,34 +874,18 @@ main.main > article.content > #content.content ul,
 main.main > article.content > #content.content ol {
   margin: 10px 0 0 20px;
   line-height: 1.4;
-  color: #1f2937;
+  color: inherit;
 }
-
-main.main > article.content > #content.content ul a,
-main.main > article.content > #content.content ol a {
-  background: unset;
-  color: #1f2937;
-  font-weight: 500;
-  text-decoration-color: var(--anchor) !important;
-  text-decoration: underline;
-  -moz-text-decoration-color: var(--anchor) !important;
-}
-
-main.main > article.content > #content.content ul a:hover,
-main.main > article.content > #content.content ol a:hover {
-  text-decoration-color: #4b5563bd !important;
-  -moz-text-decoration-color: #4b5563bd !important;
-}
-
 
 /* Next Article */
 main.main > article.content .next-article {
-  border-top: thin dashed #4b556348;
+  /* border-top: var(--story-border); */
   padding: 20px 0;
+  margin: 0;
 }
 
 main.main > article.content .next-article > a {
-  border: thin solid #4b556331;
+  border: var(--story-border-mobile);
   padding: 15px 20px;
   display: flex;
   flex-flow: column;
@@ -915,166 +900,26 @@ main.main > article.content .next-article > a {
 }
 
 main.main > article.content .next-article > a:hover {
-  background-color: #f8f8f8;
+  background-color: var(--hover-background);
 }
 
 main.main > article.content .next-article > a > span.text {
-  color: var(--text-color);
+  color: var(--read-color);
   font-weight: 500;
 }
 
 main.main > article.content .next-article > a > span.date {
-  /* color: var(--text-color); */
   font-weight: 500;
   font-size: 0.8rem;
   font-family: var(--font-mono);
 }
 
 main.main > article.content .next-article > a > span.title {
-  /* color: var(--text-color); */
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.8rem;
 }
 
-/* Opinion */
-section.opinion {
-  /* border-top: var(--input-border); */
-  background-color: var(--background);
-  padding: 10px 0;
-  display: flex;
-  flex-flow: column;
-  gap: 0;
-  z-index: 2;
-  position: sticky;
-  top: 60px;
-}
-
-section.opinion.sticky {
-  border-bottom: var(--input-border);
-}
-
-section.opinion > form.opinion {
-  /* border-bottom: 1px solid #6b72805d; */
-  /* border: 1px solid #000000; */
-  padding: 10px 0 10px 0;
-  margin: 0 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--gray-color);
-  position: relative;
-}
-
-section.opinion > form.opinion {
-  padding: 0 0 5px 0;
-}
-
-
-section.opinion > form.opinion .image {
-  /* border: thin solid #4b5563bd; */
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* align-self: center; */
-  overflow: hidden;
-  width: 35px;
-  height: 35px;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-section.opinion > form.opinion .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-section.opinion > form.opinion > textarea {
-  /* border: var(--input-border); */
-  border: none;
-  padding: 8px !important;
-  margin: 0;
-  width: calc(100% - 35px);
-  resize: none;
-  height: 40px;
-  /* max-height: 100px !important; */
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--gray-color);
-  border-radius: 10px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-section.opinion > form.opinion > textarea::-webkit-scrollbar {
-  display: none !important;
-  visibility: hidden;
-}
-
-section.opinion > form.opinion > textarea:focus {
-  border: var(--input-border-focus);
-}
-
-section.opinion > form.opinion > button {
-  border: none;
-  cursor: pointer;
-  color: var(--white-color);
-  background: var(--accent-linear);
-  position: absolute;
-  right: 8px;
-  top: calc(50% - 18px);
-  height: 30px;
-  width: 60px;
-  padding: 0;
-  font-size: 0.9rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-}
-
-
-section.opinion > .title {
-  /* border: var(--input-border); */
-  padding: 0 10px 20px 0;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0;
-  color: var(--gray-color);
-}
-
-section.opinion.sticky > .title {
-  display: none;
-}
-
-section.opinion > .title > h2 {
-  margin: 0;
-  font-weight: 600;
-  line-height: 1.5;
-  font-size: 1.3rem;
-  color: var(--text-color);
-}
-
-
 /* Responses */
-
 main.main > article.content section.responses {
   /* border: 1px solid #000000; */
   display: flex;
