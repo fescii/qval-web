@@ -17,6 +17,7 @@ Author URL: https://femar.co.ke
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 /*
 
@@ -29,6 +30,7 @@ Author URL: https://femar.co.ke
   --font-main: "Inter";
   --font-text: "DM Sans";
   --font-mono: 'Jetbrains Mono';
+  --font-read: "Work Sans";
   --scroll-bar-background: #DDDDD7;
   --scroll-bar-linear: linear-gradient(#53595f, #627ea0);
 
@@ -53,6 +55,7 @@ Author URL: https://femar.co.ke
   --white-color: #ffffff;
   --gray-color: #6b7280;
   --text-color: #53595f;
+  --read-color: #333333;
   --title-color: #1f2937;
   --color-alt: #ff932f;
   --action-color: #1d2c38;
@@ -730,18 +733,18 @@ main.main > article.content .head > span.stats span.dot {
   display: none;
 }
 
-
-
 main.main > article.content > #content.content {
-  /* border: 1px solid #000000; */
   display: flex;
   flex-flow: column;
-  color: #1f2937;
+  color: var(--read-color);
+  font-family: var(--font-read), sans-serif;
   gap: 20px;
   font-size: 1rem;
+  font-weight: 400;
 }
 
 main.main > article.content > #content.content .fonts {
+  /* border: 1px solid #000000; */
   padding: 10px 0;
   display: flex;
   align-items: center;
@@ -781,10 +784,14 @@ main.main > article.content > #content.content .fonts .options > span.font {
   cursor: pointer;
   font-size: 0.95rem;
   color: var(--gray-color);
-  border: 1px solid #6b72805d;
+  border: var(--story-border-mobile);
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
+}
+
+main.main > article.content > #content.content .fonts .options > span.font.san-serif {
+  font-family: var(--font-read);
 }
 
 main.main > article.content > #content.content .fonts .options > span.font.mono {
@@ -797,51 +804,22 @@ main.main > article.content > #content.content .fonts .options > span.font.serif
 }
 
 main.main > article.content > #content.content .fonts .options > span.font.active {
-  border-color: #21d02abe;
-  background-color: #f3fff4;
+  border: var(--input-border-focus);
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 main.main > article.content > #content.content .fonts .options > span.font:hover {
-  border-color: #21d02abe;
-  background-color: #f3fff4;
-}
-
-main.main > article.content > #content.content div.src-image{
-  /* border: 1px solid #ff0000; */
-  padding: 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #1f2937;
-  font-size: 1rem;
-}
-
-main.main > article.content > #content.content div.src-image figure {
-  /* border: thin #c0c0c0 solid; */
-  display: flex;
-  flex-flow: column;
-  padding: 5px;
-  width: 500px;
-  max-width: 90%;
-  max-height: 350px;
-  margin: auto;
-}
-
-main.main > article.content > #content.content div.src-image figure img {
-  width: auto;
-  height: 100%;
-}
-
-main.main > article.content > #content.content div.src-image figure figcaption {
-  background-color: #dddddd;
-  font: italic smaller var(--font-main);
-  padding: 3px;
-  text-align: center;
+  color: var(--accent-color);
+  border: var(--input-border-focus);
 }
 
 main.main > article.content > #content.content * {
   font-size: inherit;
-  color: #1f2937;
+  color: inherit;
+  font-family: inherit;
   transition: all 300ms ease-in-out;
   -webkit-transition: all 300ms ease-in-out;
   -moz-transition: all 300ms ease-in-out;
@@ -850,10 +828,25 @@ main.main > article.content > #content.content * {
 }
 
 main.main > article.content > #content.content h2.title {
+  /* border: var(--input-border-focus); */
   padding: 0 !important;
   font-size: 1.3rem !important;
+  font-weight: 500;
   line-height: 1.5;
-  margin: 10px 0 5px 0;
+  margin: 5px 0;
+}
+
+main.main > article.content > #content.content h6,
+main.main > article.content > #content.content h5,
+main.main > article.content > #content.content h4,
+main.main > article.content > #content.content h3,
+main.main > article.content > #content.content h1 {
+  /* border: var(--input-border-focus); */
+  padding: 0 !important;
+  font-size: 1.25rem !important;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 5px 0;
 }
 
 main.main > article.content > #content.content p {
