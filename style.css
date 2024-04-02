@@ -408,6 +408,13 @@ header.header > ul.right > li.link.search a svg {
   height: 23px;
 }
 
+header.header>ul.right>li.link.actions a svg {
+  /* border: 1px solid #124ec5; */
+  margin: 0 0 -5px 0;
+  width: 24px;
+  height: 24px;
+}
+
 header.header > ul > li.link.theme {
   /* border: 1px solid #124ec5; */
   /* rotate: 15deg; */
@@ -1285,48 +1292,6 @@ main.main > section.side .on-this > .table-of-content ul > li > a:hover {
   color: #1f2937;
 }
 
-main.profile {
-  padding: 20px 0;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 0px;
-  min-height: 60vh;
-}
-
-main.topic {
-  padding: 15px 0;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 0px;
-  min-height: 60vh;
-}
-
-section.main {
-  /* border: 1px solid #6b7280; */
-  display: flex;
-  flex-flow: column;
-  align-items: start;
-  gap: 0;
-  width: 63%;
-}
-
-
-
-
-
-section.side {
-  /* border: 1px solid #53595f; */
-  padding: 0;
-  width: 35%;
-  display: flex;
-  flex-flow: column;
-  gap: 20px;
-  position: sticky;
-  top: 60px;
-  height: max-content;
-}
 
 
 /*Footer*/
