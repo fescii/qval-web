@@ -244,8 +244,12 @@ export default class StoryWrapper extends HTMLElement {
     if (story === "opinion") {
       return `
         <div class="meta opinion">
-          <a href="" class="opinion-link">${this.getAttribute('id')}</a>
-          <span class="sp">•</span>
+          <span class="time">
+            <time class="published" datetime="${this.getAttribute('time')}">
+              ${this.formatDateWithRelativeTime(this.getAttribute('time'))}
+            </time>
+            <span class="sp">•</span>
+          </span>
           <div class="author">
             <span class="sp">by</span>
             <div class="author-name">
@@ -573,7 +577,7 @@ export default class StoryWrapper extends HTMLElement {
         display: flex;
       }
 
-      .meta  .profile > span.pointer {
+      .meta .profile > span.pointer {
         border: var(--modal-border);
         border-bottom: none;
         border-right: none;
@@ -590,12 +594,12 @@ export default class StoryWrapper extends HTMLElement {
         -moz-border-radius: 1px;
       }
 
-      .meta.opinion  .profile > span.pointer{
+      .meta.opinion .profile > span.pointer{
         left: unset;
-        right: 50%;
+        right: 45%;
       }
 
-      .meta  .profile > .cover>  .head {
+      .meta .profile > .cover > .head {
         background-color: var(--background);
         display: flex;
         flex-wrap: nowrap;
@@ -603,7 +607,7 @@ export default class StoryWrapper extends HTMLElement {
         gap: 10px;
       }
 
-      .meta  .profile > .cover>  .head > .image {
+      .meta .profile > .cover > .head > .image {
         width: 40px;
         height: 40px;
         overflow: hidden;
@@ -612,7 +616,7 @@ export default class StoryWrapper extends HTMLElement {
         -moz-border-radius: 50px;
       }
 
-      .meta  .profile > .cover>  .head > .image img {
+      .meta .profile > .cover > .head > .image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -698,12 +702,14 @@ export default class StoryWrapper extends HTMLElement {
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
       }
+
       .meta span.action.follow {
         border: none;
         text-decoration: none;
         color: var(--white-color);
         background-color: var(--action-color);
       }
+
       .content {
         display: flex;
         flex-flow: column;

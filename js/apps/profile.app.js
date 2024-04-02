@@ -555,14 +555,15 @@ export default class AppProfile extends HTMLElement {
           font-size: 0.95rem;
         }
 
-        .actions > ul.tab > li.tab-item:first-of-type {
-          margin: 0 0 0 0;
-        }
-
         .actions > ul.tab > li.tab-item.active {
           padding: 6px 10px 8px 10px;
           margin: 0;
         }
+
+        .actions > ul.tab > li.tab-item:first-of-type {
+          margin: 0 10px 0 0;
+        }
+
         .actions > ul.tab > li.tab-item:hover>.text {
           color: var(--accent-color);
         }
