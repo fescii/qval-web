@@ -60,9 +60,7 @@ export default class AppTopic extends HTMLElement {
     if (mql.matches) {
       return /* html */`
         ${this.getHeader()}
-         ${this.getFoot()}
-        ${this.checkFollowing(this.getAttribute('u-follow'))}
-        ${this.getActions()}
+        ${this.getFoot()}
         <div class="content-container">
           ${this.getStories()}
         </div>
@@ -93,14 +91,15 @@ export default class AppTopic extends HTMLElement {
   }
 
   getHeader = () => {
+    let str = this.getAttribute('name');
     return `
       <div class="head">
         <div class="text-content">
           <h2 class="tag">
-            Health Care
+            ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}
           </h2>
           <div class="sub-text">
-            Discover, read, and contribute to stories about Health Care. Follow to interact
+            Discover, read, and contribute to stories about ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}. Follow to interact
             with the contributing authors in the topic.
             You can also get the stories periodically via email by subscribing to this topic.
           </div>
@@ -417,28 +416,26 @@ export default class AppTopic extends HTMLElement {
             gap: 0;
 					}
 
-          .head > .data > .name > .user > span.code {
-            margin: 0 0;
-            padding: 0;
-            color: transparent;
-            background: var(--accent-linear);
-            background-clip: text;
-            -webkit-background-clip: text;
-            font-family: var(--font-mono), monospace;
-            font-weight: 600;
+          .text-content > .actions {
+            margin-top: 10px;
+            padding: 0 0 15px 0;
           }
 
-          .text-content > .actions > .action.subscribed,
-          .actions > .author,
-          .actions {
+          .head {
+            padding: 0;
+          }
+
+          .text-content > .actions > .action.subscribed {
+            border-bottom: var(--story-border-mobile)
+          }
+          .foot > .author{
             border-bottom: var(--story-border-mobile);
           }
 
-          .actions > .author {
+          .foot {
             border-top: var(--story-border-mobile);
           }
 
-          .actions > ul.tab > li.tab-item,
 					.action,
 					a {
 						cursor: default !important;
