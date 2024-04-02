@@ -235,7 +235,7 @@ export default class AppTopic extends HTMLElement {
           display: flex;
           flex-flow: column;
           gap: 0;
-          padding: 0 0 20px 0;
+          padding: 0 0 15px 0;
         }
 
         .text-content {
@@ -273,7 +273,7 @@ export default class AppTopic extends HTMLElement {
           display: flex;
           flex-flow: row;
           gap: 50px;
-          margin-top: 10px;
+          margin: 20px 0 0 0;
         }
 
         .text-content > .actions > .action {
@@ -428,6 +428,7 @@ export default class AppTopic extends HTMLElement {
           .text-content > .actions > .action.subscribed {
             border-bottom: var(--story-border-mobile)
           }
+
           .foot > .author{
             border-bottom: var(--story-border-mobile);
           }
