@@ -414,14 +414,16 @@ header.header > ul.right > li.link.search a svg {
 }
 
 header.header>ul.right > li.link.signin > a {
-  border: var(--story-border);
+  /*border: var(--story-border);
+  */color: var(--white-color);
+  background: var(--accent-linear);
   padding: 5px 15px;
   font-family: var(--font-read);
-  border-radius: 12px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  -ms-border-radius: 12px;
-  -o-border-radius: 12px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 header.header > ul > li.link.theme {
