@@ -406,6 +406,11 @@ header.header > ul > li.link:hover  > a > svg {
 }
 
 
+header.header > ul.right {
+  position: relative;
+  gap: 15px;
+}
+
 header.header > ul.right > li.link.search a svg {
   /* border: 1px solid #124ec5; */
   margin: 0 0 -3px 0;
@@ -428,7 +433,7 @@ header.header>ul.right > li.link.signin > a {
 
 
 header.header>ul.right > li.link.profile > a {
-  border: var(--story-border-mobile);
+  /* border: var(--story-border-mobile); */
   width: 30px;
   height: 30px;
   overflow: hidden;
