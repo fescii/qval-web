@@ -779,6 +779,27 @@ main.main > article.content .head > span.stats span.dot {
   display: none;
 }
 
+main.main > article.content .head > .by {
+  border-top: var(--story-border-mobile);
+  border-bottom: var(--story-border-mobile);
+  background-color: var(--background);
+  margin: 15px 0;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--gray-color);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+}
+
+main.main > article.content .head > .by a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-family: var(--font-text), sans-serif;
+  font-size: 1rem;
+}
+
 main.main > article.content > #content.content {
   /* border: 1px solid #000000; */
   margin: 10px 0 0 0;
@@ -1002,14 +1023,12 @@ main.main > section.side {
 
 
 .posted-by {
-  border-top: var(--story-border-mobile);
-  border-bottom: var(--story-border-mobile);
+  /* border: thin solid #4b5563bd; */
   background-color: var(--background);
-  margin: 15px 0;
-  padding: 10px 0;
+  padding: 10px 15px 0 0;
   display: flex;
   flex-flow: column;
-  gap: 10px;
+  gap: 15px;
 }
 
 .posted-by > p.text {
