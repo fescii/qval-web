@@ -408,15 +408,15 @@ header.header > ul > li.link:hover  > a > svg {
 
 header.header > ul.right > li.link.search a svg {
   /* border: 1px solid #124ec5; */
-  margin: 0 0 -5px 0;
+  margin: 0 0 -3px 0;
   width: 23px;
   height: 23px;
 }
 
 header.header>ul.right > li.link.signin > a {
-  /*border: var(--story-border);
-  */color: var(--white-color);
-  background: var(--accent-linear);
+  border: var(--story-border-mobile);
+  /* color: var(--white-color); */
+  /* background: var(--accent-linear); */
   padding: 5px 15px;
   font-family: var(--font-read);
   border-radius: 10px;
