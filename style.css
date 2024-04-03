@@ -783,7 +783,7 @@ main.main > article.content .head > .by {
   border-top: var(--story-border-mobile);
   border-bottom: var(--story-border-mobile);
   background-color: var(--background);
-  margin: 15px 0;
+  margin: 15px 0 0 0;
   padding: 10px 0;
   display: flex;
   align-items: center;
@@ -803,7 +803,7 @@ main.main > article.content .head > .by a {
 
 main.main > article.content > #content.content {
   /* border: 1px solid #000000; */
-  margin: 10px 0 0 0;
+  margin: 5px 0 0 0;
   display: flex;
   flex-flow: column;
   color: var(--read-color);
