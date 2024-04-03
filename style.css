@@ -1001,23 +1001,23 @@ main.main > section.side {
 }
 
 
-main.main > section.side .head {
+.posted-by {
   /* border: thin solid #4b5563bd; */
   background-color: var(--background);
-  padding: 10px 15px 10px 0;
+  padding: 15px 0 0 0;
   display: flex;
   flex-flow: column;
-  gap: 15px;
+  gap: 10px;
 }
 
-main.main > section.side .head > p.text {
+.posted-by > p.text {
   color: var(--gray-color);
   padding: 0;
   margin: 0;
   font-weight: 500;
 }
 
-main.main > section.side .head > .author {
+.posted-by > .author {
   /* border: thin solid #4b5563bd; */
   padding: 0;
   display: flex;
@@ -1025,7 +1025,7 @@ main.main > section.side .head > .author {
   gap: 10px;
 }
 
-main.main > section.side .head > .author .image {
+.posted-by > .author .image {
   /* border: thin solid #4b5563bd; */
   padding: 0;
   display: flex;
@@ -1039,7 +1039,7 @@ main.main > section.side .head > .author .image {
   -moz-border-radius: 50px;
 }
 
-main.main > section.side .head > .author .image img {
+.posted-by > .author .image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1048,7 +1048,7 @@ main.main > section.side .head > .author .image img {
   -moz-border-radius: 50px;
 }
 
-main.main > section.side .head > .author > .name {
+.posted-by > .author > .name {
   /* border: thin solid #4b5563bd; */
   padding: 0;
   display: flex;
@@ -1056,12 +1056,12 @@ main.main > section.side .head > .author > .name {
   gap: 0;
 }
 
-main.main > section.side .head > .author > .name a {
+.posted-by > .author > .name a {
   font-weight: 500;
   color: var(--text-color);
 }
 
-main.main > section.side .head > .author > .name .occupation {
+.posted-by > .author > .name .occupation {
   /* font-weight: 500; */
   color: var(--gray-color);
   font-size: 0.95rem;
