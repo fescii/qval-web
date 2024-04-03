@@ -417,13 +417,45 @@ header.header>ul.right > li.link.signin > a {
   border: var(--story-border-mobile);
   /* color: var(--white-color); */
   /* background: var(--accent-linear); */
-  padding: 5px 15px;
+  padding: 4px 15px;
   font-family: var(--font-read);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+
+
+header.header>ul.right > li.link.profile > a {
+  border: var(--story-border-mobile);
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: var(--font-read);
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+header.header>ul.right > li.link.profile > a img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
 }
 
 header.header > ul > li.link.theme {
