@@ -1002,9 +1002,11 @@ main.main > section.side {
 
 
 .posted-by {
-  /* border: thin solid #4b5563bd; */
+  border-top: var(--story-border-mobile);
+  border-bottom: var(--story-border-mobile);
   background-color: var(--background);
-  padding: 15px 0 0 0;
+  margin: 15px 0;
+  padding: 10px 0;
   display: flex;
   flex-flow: column;
   gap: 10px;
