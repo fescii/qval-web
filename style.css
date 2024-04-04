@@ -772,7 +772,7 @@ main.main > article.content .head > span.stats {
   color: var(--gray-color);
   font-family: var(--font-mono);
   font-size: 0.9rem;
-  gap: 25px;
+  gap: 20px;
 }
 
 main.main > article.content .head > span.stats span.dot {
