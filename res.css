@@ -58,42 +58,7 @@
 
   /* Side */
   main.main > section.side {
-    /* border-top: thin solid #6b7280c2; */
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    /* background-color: var(--background); */
-    padding: 0;
-    width: 100%;
-    z-index: 5;
-    height: max-content;
-    display: flex;
-    flex-flow: column;
-    gap: 0;
-    position: fixed;
-    overflow-y: scroll;
-    top: calc(var(--vh-height, 100vh) - 100px);
-    min-height: calc(var(--vh-height, 100vh) - 20px);
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    transition: all 500ms ease-in-out;
-    -webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-  }
-
-  main.main > section.side.opened {
-    top: 30px;
-  }
-
-  main.main > section.side > span.open-details-mobile {
-    display: flex;
-  }
-
-  main.main > section.side.opened > span.open-details-mobile svg {
-    rotate: unset;
+    display: none;
   }
 
   footer.footer>.copy {
