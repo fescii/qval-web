@@ -854,9 +854,9 @@ main.main > article.content > #content.content .fonts .options * {
 
 main.main > article.content > #content.content .fonts .options > span.font {
   display: inline-block;
-  padding: 4px 15px;
+  padding: 3px 15px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--gray-color);
   border: var(--story-border-mobile);
   border-radius: 50px;
@@ -870,11 +870,12 @@ main.main > article.content > #content.content .fonts .options > span.font.san-s
 
 main.main > article.content > #content.content .fonts .options > span.font.mono {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 main.main > article.content > #content.content .fonts .options > span.font.serif {
   font-family: 'Times New Roman', Times, serif;
+  font-size: 0.95rem;
 }
 
 main.main > article.content > #content.content .fonts .options > span.font.active {
