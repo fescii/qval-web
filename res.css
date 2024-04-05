@@ -151,7 +151,7 @@
   header.header > ul.left > .account > a.login {
     border: 0.002rem solid #6b72808f;
     padding: 10px 0;
-    color: #1f2937;
+    color: var(--title-color);
     text-align: center;
   }
 
@@ -181,8 +181,8 @@
   header.header > ul.left > li.logout > a,
   header.header > ul.left > .account > a.settings,
   header.header > ul.left > .account > a.profile {
-    border: 0.002rem solid #6b72809a;
-    color: #1f2937;
+    border: var(--border-header);
+    color: var(--title-color);
     padding: 2px 5px 2px 10px;
     min-height: 40px;
     height: 40px;
@@ -232,7 +232,7 @@
   header.header > ul.left > .account > a > span.text {
     /* border: 0.002rem solid #6b72808f; */
     font-weight: 600;
-    color: #1f2937;
+    color: var(--title-color);
     text-align: center;
   }
 
@@ -244,22 +244,16 @@
 
 
   header.header > ul.left > li.link {
-    /*border: 3px solid #ff00ff;*/
-    border: 0.002rem solid #6b7280a9;
+    border-bottom: var(--border-header);
     min-width: 100%;
     width: 100%;
-    margin: 8px 0;
-    padding: 10px 5px 10px 10px;
+    margin: 0;
+    padding: 10px 0;
     height: max-content;
     display: flex;
     flex-flow: column;
-    align-items: stretch;
-    justify-content: space-between;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    align-items: start;
+    justify-content: center;
 }
 
 
@@ -288,18 +282,34 @@
 
   header.header > ul.left > li.link a {
     color: var(--gray-color);
-    cursor: pointer;
+    cursor: default;
     font-family: inherit;
   }
 
-  header.header > ul.left > li.link span.link-item > span.text,
   header.header > ul.left > li.link a {
     /* border: 1px solid black; */
     /* color: #4b5563; */
-    color: #1f2937;
+    color: var(--title-color);
     font-weight: 600;
-    cursor: pointer;
+    cursor: default;
     font-family: inherit;
+  }
+
+  header.header > ul.left > li.link span.link-item > span.text {
+    /* border: 1px solid black; */
+    color: var(--title-color);
+    font-weight: 600;
+    margin: 0 0 0 3px;
+    cursor: default;
+    font-family: inherit;
+  }
+
+
+  header.header > ul.left > li.link span.link-item svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 0 0 0;
   }
 
   header.header > ul.left > li.link > div.drop-down {
@@ -356,7 +366,7 @@
   }
 
   header.header > ul.left > li.link > div.drop-down ul:last-of-type {
-    border: none;
+    border: flex;
     padding: 10px 0 0 0;
   }
 
@@ -371,17 +381,16 @@
     justify-content: center;
     gap: 0;
     margin: 0;
-    padding: 0;
+    padding: 8px 0;
   }
 
   header.header > ul.left > li.link > div.drop-down ul.main > li > a {
     /* border: 0.002rem solid #6b72809a; */
-    color: #1f2937;
-    padding: 4px 5px 2px 10px;
-    min-height: 40px;
-    height: 40px;
+    color: var(--title-color);
+    padding: 0;
+    padding: 0 10px;
     display: flex;
-    flex-flow: row-reverse;
+    flex-flow: row;
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
@@ -391,7 +400,7 @@
     -o-border-radius: 10px;
   }
 
-  header.header > ul.left > li.link > div.drop-down ul.main > li:nth-of-type(odd) > a {
+  header.header > ul.left > li.link > div.drop-down ul.main > li:nth-of-type(odd) {
     background-color: #6b728021;
   }
 
@@ -402,6 +411,7 @@
   header.header > ul > li.link > div.drop-down ul > li svg {
     /* border: 1px solid red; */
     color: var(--gray-color);
+    display: none;
     width: 30px;
     height: 30px;
     margin: -2px 0 0 -8px;
@@ -436,19 +446,24 @@
   }
 
   header.header > ul > li.link > div.drop-down ul > li a span.content {
-    margin: 0 0 0 0px;
+    margin: 0;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-flow: column;
+    line-height: 1.5;
+    gap: 0;
+    width: 100%;
   }
 
   header.header > ul > li.link > div.drop-down ul > li a span.content h5 {
     /* border: 1px solid red; */
     font-weight: 500;
     font-size: 1rem;
-    line-height: 1.5;
     color: var(--gray-color);
   }
 
   header.header > ul > li.link > div.drop-down ul > li a span.content span.text {
-    display: none;
+    display: flex;
   }
 
   footer.footer {
