@@ -244,23 +244,17 @@
 
 
   header.header > ul.left > li.link {
-    /*border: 3px solid #ff00ff;
-    */border-top: var(--border-header);
+    border-bottom: var(--border-header);
     min-width: 100%;
     width: 100%;
-    margin: 8px 0;
+    margin: 0;
     padding: 10px 0;
     height: max-content;
     display: flex;
     flex-flow: column;
-    align-items: stretch;
-    justify-content: space-between;
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
-  }
+    align-items: start;
+    justify-content: center;
+}
 
 
   header.header > ul.left > li.link.active,
@@ -288,7 +282,7 @@
 
   header.header > ul.left > li.link a {
     color: var(--gray-color);
-    cursor: pointer;
+    cursor: default;
     font-family: inherit;
   }
 
@@ -297,7 +291,7 @@
     /* color: #4b5563; */
     color: var(--title-color);
     font-weight: 600;
-    cursor: pointer;
+    cursor: default;
     font-family: inherit;
   }
 
@@ -306,14 +300,22 @@
     color: var(--title-color);
     font-weight: 600;
     margin: 0 0 0 3px;
-    cursor: pointer;
+    cursor: default;
     font-family: inherit;
+  }
+
+
+  header.header > ul.left > li.link span.link-item svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px 0 0 0;
   }
 
   header.header > ul.left > li.link > div.drop-down {
     /* border: 1px solid #0059ff; */
     border: none;
-    display: flex;
+    display: none;
     padding: 10px 0 0 0;
     min-width: 100%;
     width: 100%;
