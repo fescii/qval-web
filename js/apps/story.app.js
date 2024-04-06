@@ -255,7 +255,7 @@ export default class AppStory extends HTMLElement {
         <p class="text">Posted by</p>
         <div class="author">
           <div class="image">
-            <img src="${this.getAttribute('author-image')}" alt="${this.getAttribute('author-name')}">
+            <img src="${this.getAttribute('author-img')}" alt="${this.getAttribute('author-name')}">
           </div>
           <div class="name">
             <a href="" class="name">${this.getAttribute('author-name')}</a>
@@ -327,7 +327,6 @@ export default class AppStory extends HTMLElement {
       </div>
     `
   }
-
 
   getStyles() {
     return /* css */`
