@@ -226,10 +226,10 @@ export default class AppStory extends HTMLElement {
   getNextArticle = () => {
     return `
       <div class="next-article">
-        <a href="" class="article">
+        <a href="/story/${this.getAttribute('next-id')}" class="article">
           <span class="title">Next article</span>
           <span class="text">${this.getAttribute('next-title')}</span>
-          <span class="date">${this.getAttribute('next-date')}</span>
+          <span class="date">${this.getDate(this.getAttribute('next-date'))}</span>
         </a>
       </div>
     `
@@ -381,16 +381,6 @@ export default class AppStory extends HTMLElement {
 	      }
 
 	      :host {
-          padding: 15px 0;
-          margin: 0;
-          display: flex;
-          justify-content: space-between;
-          gap: 0px;
-          min-height: 60vh;
-        }
-
-        main.main {
-          /* border: 1px solid red; */
           display: flex;
           gap: 0;
           min-height: 90vh;
@@ -450,14 +440,13 @@ export default class AppStory extends HTMLElement {
           display: inline-block;
           width: 5px;
           height: 5px;
-          background-color: #6b7280;
+          background-color: var(--dot-background);
           border-radius: 50px;
           -webkit-border-radius: 50px;
           -moz-border-radius: 50px;
           -ms-border-radius: 50px;
           -o-border-radius: 50px;
         }
-
 
         article.content .head > .by {
           border-top: var(--story-border);
@@ -737,29 +726,21 @@ export default class AppStory extends HTMLElement {
             margin: 0;
             display: flex;
             flex-flow: column;
-            justify-content: space-between;
             gap: 0;
 					}
 
-          .text-content > .actions {
-            margin-top: 10px;
-            padding: 0 0 15px 0;
+          article.content {
+            /* border: 1px solid #000000; */
+            padding: 30px 20px 30px 0;
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            gap: 0;
           }
 
-          .head {
-            padding: 0;
-          }
-
-          .text-content > .actions > .action.subscribed {
-            border-bottom: var(--story-border-mobile)
-          }
-
-          .foot > .author{
-            border-bottom: var(--story-border-mobile);
-          }
-
-          .foot {
+          article.content .head > .by {
             border-top: var(--story-border-mobile);
+            border-bottom: var(--story-border-mobile);
           }
 
 					.action,
@@ -767,15 +748,7 @@ export default class AppStory extends HTMLElement {
 						cursor: default !important;
           }
 
-          .section.main {
-            display: flex;
-            flex-flow: column;
-            gap: 0;
-            width: 100%;
-          }
-
           section.side {
-            /* border: 1px solid #ff0000; */
             padding: 0;
             display: none;
             width: 0%;
