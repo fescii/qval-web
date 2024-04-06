@@ -17,6 +17,18 @@ export default class StoryBody extends HTMLElement {
     // console.log('We are inside connectedCallback');
   }
 
+
+  fetchStoryContent = (contentContainer) => {
+    const storyLoaders = this.shadowObj.querySelectorAll('story-loader');
+    const content = this.getStories();
+    setTimeout(() => {
+      storyLoaders.forEach(loader = () => {
+        loader.remove()
+      })
+      contentContainer.insertAdjacentHTML('beforeend', content);
+    }, 2000)
+  }
+
   disableScroll() {
     // Get the current page scroll position
     let scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -33,7 +45,6 @@ export default class StoryBody extends HTMLElement {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
   }
-
 
   getTemplate() {
     // Show HTML Here
@@ -59,14 +70,20 @@ export default class StoryBody extends HTMLElement {
     `
   }
 
-
   getBody() {
     return `
-      ${this.getFonts()}
-      ${this.getContent()}
+      <div class="content-container">
+        ${this.getFonts()}
+        ${this.getContent()}
+      </div>
     `;
   }
 
+  getLoader = () => {
+    return `
+			<story-loader speed="300"></story-loader>
+		`
+  }
 
   getStyles() {
     return /* css */`
@@ -75,7 +92,7 @@ export default class StoryBody extends HTMLElement {
       *:after,
       *:before {
         box-sizing: border-box !important;
-        font-family: var(--font-read), sans-serif;
+        font-family: inherit;
         -webkit-box-sizing: border-box !important;
       }
 
@@ -87,30 +104,17 @@ export default class StoryBody extends HTMLElement {
         -webkit-appearance: none;
       }
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-      }
-
-      p,
-      ul,
-      ol {
-        padding: 0;
-        margin: 0;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-
       :host {
+        /* border: 1px solid #000000; */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-flow: column;
+        font-family: var(--font-read), sans-serif;
+        gap: 0;
+      }
+
+      .content-container {
         /* border: 1px solid #000000; */
         margin: 5px 0 0 0;
         display: flex;
@@ -125,6 +129,7 @@ export default class StoryBody extends HTMLElement {
       .fonts {
         border-bottom: var(--story-border);
         padding: 10px 0 15px;
+        margin: 0 0 15px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -191,8 +196,7 @@ export default class StoryBody extends HTMLElement {
         border: var(--input-border-focus);
       }
 
-      * {
-        font-family: var(--font-read), sans-serif;
+      .content-container * {
         color: inherit;
         font-family: inherit;
         transition: all 300ms ease-in-out;
@@ -202,66 +206,61 @@ export default class StoryBody extends HTMLElement {
         -o-transition: all 300ms ease-in-out;
       }
 
-      .intro {
+      .content-container.intro {
         /* border: 1px solid #000000; */
         margin: 15px 0 0 0;
       }
 
-      .paragraph {
+      .content-container .paragraph {
         /* border: 1px solid #000000; */
         margin: 20px 0 0 0;
       }
 
-      h2.title {
+      .content-container h2.title {
         /* border: var(--input-border-focus); */
         padding: 0 !important;
-        font-family: var(--font-read), sans-serif;
         font-size: 1.3rem !important;
         font-weight: 500;
         line-height: 1.5;
         margin: 5px 0;
       }
 
-      h6,
-      h5,
-      h4,
-      h3,
-      h1 {
+      .content-container h6,
+      .content-container h5,
+      .content-container h4,
+      .content-container h3,
+      .content-container h1 {
         /* border: var(--input-border-focus); */
         padding: 0 !important;
-        font-family: var(--font-read), sans-serif;
         font-size: 1.25rem !important;
         font-weight: 500;
         line-height: 1.5;
         margin: 5px 0;
       }
 
-      p {
+      .content-container p {
         margin: 0 0 10px 0;
-        font-family: var(--font-read), sans-serif;
         line-height: 1.5;
       }
 
-      a {
-        /* color: #1da1f2; */
+      .content-container a {
+        text-decoration: none;
         cursor: pointer;
-        font-family: var(--font-read), sans-serif;
         color: transparent;
         background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
 
-      a:hover {
+      .content-container a:hover {
         text-decoration-color: var(--anchor-active) !important;
         text-decoration: underline;
         -moz-text-decoration-color: var(--anchor-active) !important;
       }
 
-      ul,
-      ol {
+      .content-container ul,
+      .content-container ol {
         margin: 10px 0 0 20px;
-        font-family: var(--font-read), sans-serif;
         line-height: 1.4;
         color: inherit;
       }
