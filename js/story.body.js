@@ -15,18 +15,22 @@ export default class StoryBody extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
+
+    const contentContainer = this.shadowObj.querySelector('.content-container');
+
+    this.fetchStoryContent(contentContainer);
   }
 
 
   fetchStoryContent = (contentContainer) => {
     const storyLoaders = this.shadowObj.querySelectorAll('story-loader');
-    const content = this.getStories();
+    const content = this.getContent();
     setTimeout(() => {
-      storyLoaders.forEach(loader = () => {
+      storyLoaders.forEach(loader  => {
         loader.remove()
       })
       contentContainer.insertAdjacentHTML('beforeend', content);
-    }, 2000)
+    }, 2000);
   }
 
   disableScroll() {
@@ -72,9 +76,9 @@ export default class StoryBody extends HTMLElement {
 
   getBody() {
     return `
+      ${this.getFonts()}
       <div class="content-container">
-        ${this.getFonts()}
-        ${this.getContent()}
+        ${this.getLoader()}
       </div>
     `;
   }
@@ -260,7 +264,8 @@ export default class StoryBody extends HTMLElement {
 
       .content-container ul,
       .content-container ol {
-        margin: 10px 0 0 20px;
+        margin: 5px 0 0 20px;
+        padding: 0 0 0 15px;
         line-height: 1.4;
         color: inherit;
       }
