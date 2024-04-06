@@ -20,7 +20,9 @@
     import AppHome from "./js/apps/home.app.js";
     import AppPost from "./js/apps/post.app.js";
     import AppSearch from "./js/apps/search.app.js";
-    import AppProfile from "./js/apps/profile.app.js"
+    import AppProfile from "./js/apps/profile.app.js";
+
+    import StoryBody from "./js/story.body.js";
 
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
@@ -51,6 +53,8 @@
     customElements.define('app-post', AppPost);
     customElements.define('app-search', AppSearch);
     customElements.define('app-profile', AppProfile);
+
+    customElements.define('story-body', StoryBody)
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
@@ -509,14 +513,7 @@
           <a href="" class="name">Fredrick Ochieng</a>
         </div>
       </div>
-      <div id="content" class="content">
-        <div class="fonts" id="sticky-position">
-          <span class="options">
-            <span class="font san-serif active">Sans serif</span>
-            <span class="font mono">Mono</span>
-            <span class="font serif">Serif</span>
-          </span>
-        </div>
+      <story-body>
         <div class="intro">
           <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both&nbsp;<a
               href="https://www.blogger.com/#">Debian</a> or <a href="https://www.blogger.com/#">Ubuntu</a>.
@@ -524,7 +521,8 @@
             Debian, blur the lines between them. Let’s explore the important
             differences.
           </p>
-          <p>Following our <a href="">Series B last December</a>, I'm happy to announce we've raised a <a href=""><strong>$102M Series C</strong></a> from existing and new investors.</p>
+          <p>Following our <a href="">Series B last December</a>, I'm happy to announce we've raised a <a href=""><strong>$102M
+                Series C</strong></a> from existing and new investors.</p>
           <p>Our vision of the Web is a global realtime medium for both creators
             and consumers,
             where all friction and latency are eliminated.</p>
@@ -535,16 +533,19 @@
             </li>
             <li>
               <a href="">Lower the barrier of entry</a>
-              </li>
+            </li>
             <li><a href="">Focus on the end-user</a></li>
           </ol>
         </div>
         <div class="paragraph" id="section1">
           <h2 class="title">Debian Has Lower System Requirements</h2>
-          <p>If the device you want to <a href="https://www.blogger.com/#">install Linux</a> on is light on resources, you’ll want
-            to note Debian and Ubuntu’s differing minimum requirements. <a href="https://www.blogger.com/#">A Debian 11 desktop install requires</a>
+          <p>If the device you want to <a href="https://www.blogger.com/#">install Linux</a> on is light on resources, you’ll
+            want
+            to note Debian and Ubuntu’s differing minimum requirements. <a href="https://www.blogger.com/#">A Debian 11 desktop
+              install requires</a>
             at least a 1GHz processor, 1GB RAM, and
-            10GB storage. <a href="https://www.blogger.com/#">Ubuntu Desktop more than doubles those requirements</a> with a 2GHz dual-core
+            10GB storage. <a href="https://www.blogger.com/#">Ubuntu Desktop more than doubles those requirements</a> with a
+            2GHz dual-core
             processor, 4GB of RAM, and 25GB of disk space.
           </p>
           <p>That said, when we tested standard installations of both Debian 11
@@ -566,60 +567,61 @@
           </p>
         </div>
         <div class="paragraph" id="section2">
-            <h2 class="title">Ubuntu Makes Proprietary Software Easier to Get</h2>
-            <p>Ubuntu and Debian take different approaches to the debate on free and <a href="https://www.blogger.com/#">open
-                source</a>
-              (FOSS) versus closed source or “proprietary” software. When you first
-              run Debian, you don’t have immediate access to proprietary software,
-              which includes popular apps like Spotify, Steam, and Microsoft Teams.
-              This also includes drivers necessary to make some critical hardware
-              work, including NVIDIA GPUs. You can only get that proprietary software
-              by&nbsp;<a href="https://www.blogger.com/#">adding specific repositories</a> to your software sources, downloading <a
-                href="https://www.blogger.com/#">DEB files</a> from official websites, or installing them through services like <a
-                href="https://www.blogger.com/#">Snap</a> or <a href="https://www.blogger.com/#">Flathub</a>.
-            </p>
-            <p>In stark contrast, Ubuntu Desktop doesn’t hold any proprietary
-              software back. Generally, if there’s a popular app available for Linux,
-              you can get it with ease the moment you first boot up Ubuntu (an
-              exception might be <a href="https://www.blogger.com/#">Google Chrome</a>). Ubuntu will also make sure you get all
-              necessary hardware
-              drivers at installation, proprietary and otherwise.</p>
-            <p>Why the dramatic difference? Debian tries to serve a wider community
-              by making it easy for people who are dedicated to the FOSS way of life
-              to use Debian in good conscience. Ubuntu, however, prioritizes
-              convenience for the everyday user who doesn’t care about code
-              philosophies. If that’s you, you’ll likely find Ubuntu more appealing.</p>
+          <h2 class="title">Ubuntu Makes Proprietary Software Easier to Get</h2>
+          <p>Ubuntu and Debian take different approaches to the debate on free and <a href="https://www.blogger.com/#">open
+              source</a>
+            (FOSS) versus closed source or “proprietary” software. When you first
+            run Debian, you don’t have immediate access to proprietary software,
+            which includes popular apps like Spotify, Steam, and Microsoft Teams.
+            This also includes drivers necessary to make some critical hardware
+            work, including NVIDIA GPUs. You can only get that proprietary software
+            by&nbsp;<a href="https://www.blogger.com/#">adding specific repositories</a> to your software sources, downloading
+            <a href="https://www.blogger.com/#">DEB files</a> from official websites, or installing them through services like
+            <a href="https://www.blogger.com/#">Snap</a> or <a href="https://www.blogger.com/#">Flathub</a>.
+          </p>
+          <p>In stark contrast, Ubuntu Desktop doesn’t hold any proprietary
+            software back. Generally, if there’s a popular app available for Linux,
+            you can get it with ease the moment you first boot up Ubuntu (an
+            exception might be <a href="https://www.blogger.com/#">Google Chrome</a>). Ubuntu will also make sure you get all
+            necessary hardware
+            drivers at installation, proprietary and otherwise.</p>
+          <p>Why the dramatic difference? Debian tries to serve a wider community
+            by making it easy for people who are dedicated to the FOSS way of life
+            to use Debian in good conscience. Ubuntu, however, prioritizes
+            convenience for the everyday user who doesn’t care about code
+            philosophies. If that’s you, you’ll likely find Ubuntu more appealing.</p>
         </div>
         <div class="paragraph" id="section3">
-            <h2 class="title">Debian Supports Older Hardware</h2>
-            <p>If you’re thinking of <a href="https://www.blogger.com/#">reviving an aging device</a>
-              with Linux, you’re more likely to have success with Debian. That’s
-              partly because Debian still maintains support for 32-bit architectures
-              (also known as&nbsp;i386). Most consumer PCs released in or after the year
-              2009 use 64-bit architectures. But if your computer is from before that
-              year, you may need a distribution (distro) that still supports 32-bit,
-              such as Debian.
-            </p>
-            <p>Ubuntu, in contrast, dropped full 32-bit support with version 18.04.
-              Earlier versions with 32-bit support are still available for download,
-              but standard updates have already ended. Extended security updates&nbsp;for
-              version 14.04 will continue only until April 2024 and April 2026 for
-              16.04.
-            </p>
-            <p>The decision to drop 32-bit allowed the Ubuntu development team to
-              focus on serving modern users with modern devices. The Debian team, in
-              contrast, carries on the 32-bit legacy so that outmoded but otherwise
-              functioning devices can stay out of the trash bin. These are two
-              different but honorable objectives, and which serves you better depends
-              on your device.</p>
+          <h2 class="title">Debian Supports Older Hardware</h2>
+          <p>If you’re thinking of <a href="https://www.blogger.com/#">reviving an aging device</a>
+            with Linux, you’re more likely to have success with Debian. That’s
+            partly because Debian still maintains support for 32-bit architectures
+            (also known as&nbsp;i386). Most consumer PCs released in or after the year
+            2009 use 64-bit architectures. But if your computer is from before that
+            year, you may need a distribution (distro) that still supports 32-bit,
+            such as Debian.
+          </p>
+          <p>Ubuntu, in contrast, dropped full 32-bit support with version 18.04.
+            Earlier versions with 32-bit support are still available for download,
+            but standard updates have already ended. Extended security updates&nbsp;for
+            version 14.04 will continue only until April 2024 and April 2026 for
+            16.04.
+          </p>
+          <p>The decision to drop 32-bit allowed the Ubuntu development team to
+            focus on serving modern users with modern devices. The Debian team, in
+            contrast, carries on the 32-bit legacy so that outmoded but otherwise
+            functioning devices can stay out of the trash bin. These are two
+            different but honorable objectives, and which serves you better depends
+            on your device.</p>
         </div>
         <div class="paragraph" id="section4">
           <h2 class="title">Ubuntu Is Corporate-Backed</h2>
           <p>Ubuntu is maintained by an organization called <a href="https://www.blogger.com/#">Canonical</a>.
-            Debian, in contrast, is developed completely by a community of volunteers. Both offer their distros free of charge, but Canonical also
-              offers paid support if you’re using Ubuntu professionally.</p>
+            Debian, in contrast, is developed completely by a community of volunteers. Both offer their distros free of charge,
+            but Canonical also
+            offers paid support if you’re using Ubuntu professionally.</p>
         </div>
-      </div>
+      </story-body>
       <div class="next-article">
         <a href="" class="article">
           <span class="title">Next article</span>
