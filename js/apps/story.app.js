@@ -388,7 +388,7 @@ export default class AppStory extends HTMLElement {
 
         article.content {
           /* border: 1px solid #000000; */
-          padding: 30px 20px 30px 0;
+          padding: 10px 20px 30px 0;
           width: 65%;
           display: flex;
           flex-flow: column;
