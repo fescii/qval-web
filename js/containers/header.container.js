@@ -17,7 +17,7 @@ export default class HeaderContainer extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-    this.expandLists(this._authenticated);
+    this.expandLists();
     this.activateSlide();
   }
 
@@ -42,9 +42,9 @@ export default class HeaderContainer extends HTMLElement {
     }
   }
 
-  expandLists = (authenticated) => {
+  expandLists = () => {
     const mql = window.matchMedia('(max-width: 600px)');
-    if (mql.matches && authenticated) {
+    if (mql.matches) {
       const expandableHeaderLinks = this.shadowObj.querySelectorAll('ul.left > li.link.options-link');
       let activeLink = this.shadowObj.querySelector('ul.left > li.link.options-link.active');
       if (expandableHeaderLinks) {
