@@ -217,7 +217,7 @@ export default class StoryBody extends HTMLElement {
 
       .content-container .paragraph {
         /* border: 1px solid #000000; */
-        margin: 20px 0 0 0;
+        margin: 10px 0 0 0;
       }
 
       .content-container h2.title {
