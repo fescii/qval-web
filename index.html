@@ -23,6 +23,7 @@
     import AppProfile from "./js/apps/profile.app.js";
     import AppStory from "./js/apps/story.app.js";
 
+    import HeaderContainer from "./js/containers/header.container.js"
     import StoryBody from "./js/story.body.js";
 
     import OpinionWrapper from "./js/opinion.component.js";
@@ -56,7 +57,8 @@
     customElements.define('app-profile', AppProfile);
     customElements.define('app-story', AppStory);
 
-    customElements.define('story-body', StoryBody)
+    customElements.define('header-container', HeaderContainer);
+    customElements.define('story-body', StoryBody);
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
@@ -86,20 +88,20 @@
 </head>
 
 <body>
-  <header class="header">
+  <!-- <header class="header">
     <div class="nav">
       <input class="nav-input" type="checkbox" />
       <svg>
         <use xlink:href="#menu" />
         <use xlink:href="#menu" />
       </svg>
+
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="menu">
+          <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4" />
+        </symbol>
+      </svg>
     </div>
-    <!-- SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-      <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="menu">
-        <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4" />
-      </symbol>
-    </svg>
     <h2 class="site-name">avalQ</h2>
     <ul class="left">
       <div class="account">
@@ -497,7 +499,16 @@
         </a>
       </li>
     </ul>
-  </header>
+  </header> -->
+
+  <header-container id="U0AB236B6" create-account="/join" create-content="/create" title="Making the Web. Faster."
+    user-profile="/u/U0AB236B6" user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics"
+    stories-popular="/stories/popular" stories-recent="/stories/recent" stories-curated="/stories/curated"
+    discover="/discover" home="/home" journals="/journals" authors="/authors"  github="https://github.com/fescii" supabase="/link"
+    resource-apis="/apis" resource-feature="/feature-request" resource-shop="/shop" resource-guide="/guides" resource-newsletter="/newsletter"
+    resource-rss="/rss"
+    >
+  </header-container>
 
   <app-story id="P0AB236B6" topics="engineering, programming" title="Making the Web. Faster." date="2024-03-13T13:00:00+03:00"
     views="709" author-name="Fredrick Ochieng" author-img="img/img.jpg" author-id="U0A89BA6"
