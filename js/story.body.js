@@ -132,7 +132,7 @@ export default class StoryBody extends HTMLElement {
 
       .fonts {
         border-bottom: var(--story-border);
-        padding: 10px 0 15px;
+        padding: 10px 0 0;
         margin: 0 0 15px 0;
         display: flex;
         align-items: center;
