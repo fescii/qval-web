@@ -126,8 +126,8 @@ export default class AppProfile extends HTMLElement {
         </section>
 
         <section class="side">
-          ${this.getDonateCard()}
           <topics-container url="/topics/popular"></topics-container>
+          ${this.getInfo()}
         </section>
       `;
     }
@@ -163,14 +163,39 @@ export default class AppProfile extends HTMLElement {
     `
   }
 
-  getDonateCard = () => {
-    return /* html */`
-			<div class="donate-card">
-        <h2 class="title">Support us</h2>
-        <p class="info">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</p>
-        <a href="" class="link">Learn more</a>
+  getInfo = () => {
+    return `
+      <div class="company">
+        <ul class="footer-list">
+          <li class="item">
+            <a href="" class="item-link">Docs</a>
+          </li>
+          <li class="item">
+            <a href="" class="item-link">What’s New</a>
+            <span class="dot"></span>
+          </li>
+          <li class="item">
+            <a href="" class="item-link">Give a feedback </a>
+          </li>
+          <li class="item">
+            <a href="" class="item-link">Request a feature</a>
+          </li>
+          <li class="item">
+            <a href="" class="item-link">Source code</a>
+            <span class="dot"></span>
+          </li>
+          <li class="item">
+            <a href="" class="item-link">Donate</a>
+          </li>
+          <li class="item">
+            <a href="" class="item-link">Contact</a>
+          </li>
+          <li class="item">
+            <a href="#" class="item-link">&copy 2024 aduki, Inc</a>
+          </li>
+        </ul>
       </div>
-		`
+    `
   }
 
   getStories = () => {
@@ -652,6 +677,71 @@ export default class AppProfile extends HTMLElement {
           border-radius: 50px;
           -webkit-border-radius: 50px;
           -moz-border-radius: 50px;
+        }
+
+                .company {
+          display: flex;
+          margin: 20px 0;
+          flex-flow: column;
+          align-items: center;
+          gap: 10px;
+          max-width: 500px;
+        }
+
+        .company >.title {
+          color: var(--text-color);
+          font-family: var(--font-text), sans-serif;
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+
+        .company > ul.footer-list {
+          margin: 0;
+          list-style-type: none;
+          padding: 0 0 0 1px;
+          display: flex;
+          flex-flow: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: start;
+          gap: 10px;
+        }
+
+        .company > ul.footer-list > li.item {
+          margin: 0 10px 0 0;
+          padding: 0;
+          width: max-content;
+          position: relative;
+        }
+
+        .company > ul.footer-list > li.item > .dot {
+          display: inline-block;
+          background: var(--accent-linear);
+          width: 5px;
+          height: 5px;
+          position: absolute;
+          right: -9px;
+          top: 3px;
+          border-radius: 5px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+        }
+
+        .company > ul.footer-list > li.item > a.item-link {
+          color: var(--gray-color);
+          /* font-size: 0.98rem; */
+          text-decoration: none;
+          font-weight: 400;
+          font-size: 0.9rem;
+        }
+
+        .company > ul.footer-list > li.item > a.item-link:hover {
+          /* color: var(--accent-color); */
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+          border-bottom: 1px solid var(--accent-color);
         }
 
 				@media screen and (max-width:660px) {
