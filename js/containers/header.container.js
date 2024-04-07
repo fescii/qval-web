@@ -147,6 +147,7 @@ export default class HeaderContainer extends HTMLElement {
     else if (mql.matches && !authenticated) {
       return `
         <ul class="left">
+          ${this.getLeftAccount(authenticated)}
           ${this.getLeftAll()}
           ${this.getLeftArticles()}
           ${this.getLeftResources()}
@@ -156,6 +157,7 @@ export default class HeaderContainer extends HTMLElement {
     else {
       return `
         <ul class="left">
+          ${this.getLeftAccount(authenticated)}
           ${this.getLeftAll()}
           ${this.getLeftArticles()}
           ${this.getLeftResources()}
@@ -374,7 +376,7 @@ export default class HeaderContainer extends HTMLElement {
           </a>
         </li>
         <li class="item bulk">
-          <a href="${this.getAttribute('create-content')}" class="link">
+          <a href="${this.getAttribute('create-account')}" class="link">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9617 11.8921H11.9927C14.8247 11.8921 17.1287 9.58814 17.1287 6.75614C17.1287 3.92414 14.8247 1.61914 11.9927 1.61914C9.15975 1.61914 6.85575 3.92414 6.85575 6.75314C6.85075 8.12214 7.37975 9.41014 8.34375 10.3811C9.30675 11.3511 10.5917 11.8881 11.9617 11.8921ZM8.35575 6.75614C8.35575 4.75114 9.98775 3.11914 11.9927 3.11914C13.9977 3.11914 15.6287 4.75114 15.6287 6.75614C15.6287 8.76114 13.9977 10.3921 11.9927 10.3921H11.9647C10.9967 10.3901 10.0897 10.0101 9.40775 9.32314C8.72575 8.63714 8.35275 7.72614 8.35575 6.75614Z" fill="currentColor" />
               <path fill-rule="evenodd" clip-rule="evenodd" d="M4.40552 18.7561C4.40552 22.3811 10.1215 22.3811 11.9995 22.3811C13.8775 22.3811 19.5945 22.3811 19.5945 18.7341C19.5945 15.9411 16.1165 13.5811 11.9995 13.5811C7.88352 13.5811 4.40552 15.9511 4.40552 18.7561ZM5.90552 18.7561C5.90552 17.0211 8.51152 15.0811 11.9995 15.0811C15.4885 15.0811 18.0945 17.0101 18.0945 18.7341C18.0945 20.1581 16.0435 20.8811 11.9995 20.8811C7.95652 20.8811 5.90552 20.1661 5.90552 18.7561Z" fill="currentColor" />
@@ -616,6 +618,27 @@ export default class HeaderContainer extends HTMLElement {
         -webkit-box-sizing: border-box !important;
       }
 
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        padding: 0;
+        margin: 0;
+        font-family: inherit;
+      }
+
+      ul,
+      ol {
+        padding: 0;
+        margin: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
       *:focus {
         outline: inherit !important;
       }
@@ -625,8 +648,8 @@ export default class HeaderContainer extends HTMLElement {
       }
 
       :host {
-        /* border: 1px solid red; */
-        padding: 0 0 0 100px;
+        /*border: 1px solid red;*/
+        padding: 0 0 0 70px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -642,7 +665,7 @@ export default class HeaderContainer extends HTMLElement {
       h2.site-name {
         position: absolute;
         left: 0;
-        margin: 0 30px 0 0;
+        margin: 0;
         font-weight: 700;
         color: transparent;
         background: var(--accent-linear);
@@ -754,7 +777,7 @@ export default class HeaderContainer extends HTMLElement {
         }
       }
 
-     ul {
+      ul {
         /* border: 1px solid black; */
         height: 100%;
         display: flex;
@@ -763,15 +786,15 @@ export default class HeaderContainer extends HTMLElement {
       }
 
 
-     ul.left {
+      ul.left {
         position: relative
       }
 
-     ul.left > .account {
+      ul.left > .account {
         display: none;
       }
 
-     ul > li.link {
+      ul > li.link {
         /* border: 1px solid black; */
         /* font-family: var(--font-mono); */
         color: var(--gray-color);
@@ -784,12 +807,12 @@ export default class HeaderContainer extends HTMLElement {
         font-weight: 500;
       }
 
-     ul > li.logout {
+      ul > li.logout {
         display: none;
       }
 
-     ul > li.link.active,
-     ul > li.link:hover {
+      ul > li.link.active,
+      ul > li.link:hover {
         /* font-weight: 600; */
         color: transparent;
         background: var(--accent-linear);
@@ -798,23 +821,24 @@ export default class HeaderContainer extends HTMLElement {
         /* font-family: var(--font-mono); */
       }
 
-     ul > li.link span.link-item,
-     ul > li.link a {
+      ul > li.link span.link-item,
+      ul > li.link a {
         /* border: 1px solid black; */
         color: inherit;
         cursor: pointer;
         font-family: inherit;
+        text-decoration: none;
       }
 
-     ul > li.link span.link-item svg,
-     ul > li.link a svg {
+      ul > li.link span.link-item svg,
+      ul > li.link a svg {
         margin: 0 0 -2px 0;
         width: 15px;
         height: 15px;
       }
 
-     ul > li.link span.link-item svg,
-     ul > li.link a svg {
+      ul > li.link span.link-item svg,
+      ul > li.link a svg {
         transition: all 300ms ease-in-out;
         -webkit-transition: all 300ms ease-in-out;
         -moz-transition: all 300ms ease-in-out;
@@ -822,19 +846,19 @@ export default class HeaderContainer extends HTMLElement {
         -o-transition: all 300ms ease-in-out;
       }
 
-     ul > li.link span.link-item svg,
-     ul > li.link.active > a > svg,
-     ul > li.link:hover  > a > svg {
+      ul > li.link span.link-item svg,
+      ul > li.link.active > a > svg,
+      ul > li.link:hover  > a > svg {
         color: var(--accent-color);
       }
 
 
-     ul.right {
+      ul.right {
         position: relative;
         gap: 15px;
       }
 
-     ul.right > li.link.search a svg {
+      ul.right > li.link.search a svg {
         /* border: 1px solid #124ec5; */
         margin: 0 0 0 0;
         width: 25px;
