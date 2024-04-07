@@ -22,6 +22,7 @@ export default class HeaderContainer extends HTMLElement {
   }
 
   activateSlide = () => {
+    const self = this;
     // Mobile Switcher
     const mobileCheckbox = this.shadowObj.querySelector('.nav input.nav-input');
     const mobileOptions = this.shadowObj.querySelector('ul.left');
@@ -34,9 +35,11 @@ export default class HeaderContainer extends HTMLElement {
         if (event.currentTarget.checked) {
           // console.log(mobileOptions);
           mobileOptions.style.setProperty('left', 0);
+          self.disableScroll();
         }
         else {
           mobileOptions.style.setProperty('left', '-115%');
+          self.enableScroll();
         }
       })
     }
@@ -194,7 +197,7 @@ export default class HeaderContainer extends HTMLElement {
     }
     else {
     return /* html */`
-      <div class="account">
+      <div class="account out">
         <a href="" class="login">Login</a>
         <a href="" class="signup">Sign Up</a>
       </div>
@@ -1126,6 +1129,10 @@ export default class HeaderContainer extends HTMLElement {
           width: 100%;
           padding: 0;
           gap: 0;
+        }
+
+        ul.left > .account.out {
+          padding: 0 0 15px 0;
         }
 
 
