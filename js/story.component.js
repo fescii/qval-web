@@ -815,7 +815,6 @@ export default class StoryWrapper extends HTMLElement {
         margin: 0;
         margin-bottom: calc(16px / -3);
         display: flex;
-        overflow-y: scroll;
         display: flex;
         gap: 5px;
         align-items: start;
@@ -823,6 +822,7 @@ export default class StoryWrapper extends HTMLElement {
         flex-flow: column;
         transform: translateY(calc(-100% + 21px));
         transition: transform 0.5s linear;
+        overflow-y: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
       }

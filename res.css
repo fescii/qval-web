@@ -19,59 +19,13 @@
 }
 
 @media screen and (max-width:660px) {
-  header.header > ul > li.link.theme > .options {
-    border: 1px solid #057232a9;
-  }
-
-  main.post,
-  main.main {
-    /* border: 1px solid red; */
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-  }
-
-  main.post>.side,
-  main.post>.feeds {
-    width: 100%;
-  }
-
-  .stats>.stat.write span.line {
-    border-left: var(--open-line-mobile);
-  }
-
-  main.home > section.popular > div.stories > .trending {
-    margin: 10px 0;
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-    justify-content: unset;
-    gap: 10px;
-  }
-
-  main.main > article.content {
-    /* border: 1px solid #000000; */
-    padding: 30px 0;
-    width: 100%;
-  }
-
-  /* Side */
-  main.main > section.side {
-    display: none;
-  }
-
-  footer.footer>.copy {
-    flex-flow: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-}
-
-@media screen and (max-width:600px) {
   body {
     /* border: 1px solid blue; */
     padding: 0 10px 30px 10px;
+  }
+
+  header.header > ul > li.link.theme > .options {
+    border: 1px solid #057232a9;
   }
 
   header.header {
@@ -100,7 +54,7 @@
   }
 
   header.header > ul.left {
-    /* border: 1px solid black; */
+    border: 5px solid black;
     background-color: var(--background);
     position: fixed;
     left: calc(100% + 15px);
@@ -110,17 +64,25 @@
     bottom: 0;
     width: 100%;
     height: calc(var(--vh-height, 100vh) - 60px);
-    max-height: max-content;
+    max-height: calc(var(--vh-height, 100vh) - 60px);
     min-height: calc(var(--vh-height, 100vh) - 60px);
     align-items: stretch;
     justify-content: start;
     gap: 0;
     padding: 10px 15px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     transition: all 500ms ease-in-out;
     -webkit-transition: all 500ms ease-in-out;
     -moz-transition: all 500ms ease-in-out;
     -ms-transition: all 500ms ease-in-out;
     -o-transition: all 500ms ease-in-out;
+  }
+
+  header.header > ul.left::-webkit-scrollbar {
+    display: none !important;
+    visibility: hidden;
   }
 
   header.header > ul.left > .account {
@@ -463,6 +425,12 @@
 
   header.header > ul > li.link > div.drop-down ul > li a span.content span.text {
     display: flex;
+  }
+
+  footer.footer > .copy {
+    flex-flow: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   footer.footer {
