@@ -1135,7 +1135,6 @@ export default class HeaderContainer extends HTMLElement {
           padding: 0 0 15px 0;
         }
 
-
         ul.left > li.logout > a,
         ul.left > .account > a {
           /* border: 1px solid #ff00ff; */
