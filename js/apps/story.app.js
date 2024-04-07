@@ -110,11 +110,11 @@ export default class AppStory extends HTMLElement {
   }
 
   getStoryBody = () => {
-    return `
+    return /* html */ `
       <story-body>
         <div class="intro">
           <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both&nbsp;<a
-              href="https://www.blogger.com/#">Debian</a> or <a href="https://www.blogger.com/#">Ubuntu</a>.
+            href="https://www.blogger.com/#">Debian</a> or <a href="https://www.blogger.com/#">Ubuntu</a>.
             Their similarities, and the fact that Ubuntu is technically based on
             Debian, blur the lines between them. Let’s explore the important
             differences.
@@ -138,17 +138,21 @@ export default class AppStory extends HTMLElement {
         <div class="paragraph" id="section1">
           <h2 class="title">Debian Has Lower System Requirements</h2>
           <p>If the device you want to <a href="https://www.blogger.com/#">install Linux</a> on is light on resources, you’ll
-            want
-            to note Debian and Ubuntu’s differing minimum requirements. <a href="https://www.blogger.com/#">A Debian 11 desktop
+            want to note Debian and Ubuntu’s differing minimum requirements. <a href="https://www.blogger.com/#">A Debian 11 desktop
               install requires</a>
             at least a 1GHz processor, 1GB RAM, and
-            10GB storage. <a href="https://www.blogger.com/#">Ubuntu Desktop more than doubles those requirements</a> with a
-            2GHz dual-core
-            processor, 4GB of RAM, and 25GB of disk space.
+            10GB storage.
+          </p>
+          <p>
+            <a href="https://www.blogger.com/#">Ubuntu Desktop more than doubles those requirements</a> with a
+            2GHz dual-core processor, 4GB of RAM, and 25GB of disk space.
           </p>
           <p>That said, when we tested standard installations of both Debian 11
             and Ubuntu Desktop 20.04, the pull on resources didn’t differ
-            significantly, using about 1GB of RAM at idle. For older devices, this
+            significantly, using about 1GB of RAM at idle.
+          </p>
+          <p>
+            For older devices, this
             can be asking a lot, so you may want a more minimal desktop. That’s
             relatively easy to get with Debian, but for Ubuntu, you’re better off
             going with another “<a href="https://www.blogger.com/#">Ubuntu flavor</a>” like <a
@@ -156,11 +160,16 @@ export default class AppStory extends HTMLElement {
           </p>
           <p>Why? Much of the resource consumption comes from the GNOME desktop environment (DE), not the <a
               href="https://www.blogger.com/#">operating system</a>
-            itself. You can reduce&nbsp;Debian’s weight significantly if, at install,
+            itself.
+          </p>
+          <p>You can reduce&nbsp;Debian’s weight significantly if, at install,
             you simply choose a lightweight DE like Xfce or LXQt instead of GNOME
             (optionally, deselect “standard system utilities” as well to forgo most
-            of the preinstalled apps). On Ubuntu, you could <a href="https://www.blogger.com/#">get one of those DEs after
-              installation</a>, but that process is a bit more
+            of the preinstalled apps).
+          </p>
+          <p>
+            On Ubuntu, you could <a href="https://www.blogger.com/#">get one of those DEs after
+            installation</a>, but that process is a bit more
             complicated and leaves you with an additional DE you might not use.
           </p>
         </div>
@@ -168,9 +177,13 @@ export default class AppStory extends HTMLElement {
           <h2 class="title">Ubuntu Makes Proprietary Software Easier to Get</h2>
           <p>Ubuntu and Debian take different approaches to the debate on free and <a href="https://www.blogger.com/#">open
               source</a>
-            (FOSS) versus closed source or “proprietary” software. When you first
+            (FOSS) versus closed source or “proprietary” software.
+          </p>
+          <p>When you first
             run Debian, you don’t have immediate access to proprietary software,
             which includes popular apps like Spotify, Steam, and Microsoft Teams.
+          </p>
+          <p>
             This also includes drivers necessary to make some critical hardware
             work, including NVIDIA GPUs. You can only get that proprietary software
             by&nbsp;<a href="https://www.blogger.com/#">adding specific repositories</a> to your software sources, downloading
@@ -178,14 +191,20 @@ export default class AppStory extends HTMLElement {
             <a href="https://www.blogger.com/#">Snap</a> or <a href="https://www.blogger.com/#">Flathub</a>.
           </p>
           <p>In stark contrast, Ubuntu Desktop doesn’t hold any proprietary
-            software back. Generally, if there’s a popular app available for Linux,
+            software back.
+          </p>
+          <p>Generally, if there’s a popular app available for Linux,
             you can get it with ease the moment you first boot up Ubuntu (an
             exception might be <a href="https://www.blogger.com/#">Google Chrome</a>). Ubuntu will also make sure you get all
             necessary hardware
-            drivers at installation, proprietary and otherwise.</p>
+            drivers at installation, proprietary and otherwise.
+          </p>
           <p>Why the dramatic difference? Debian tries to serve a wider community
             by making it easy for people who are dedicated to the FOSS way of life
-            to use Debian in good conscience. Ubuntu, however, prioritizes
+            to use Debian in good conscience.
+          </p>
+          <p>
+            Ubuntu, however, prioritizes
             convenience for the everyday user who doesn’t care about code
             philosophies. If that’s you, you’ll likely find Ubuntu more appealing.</p>
         </div>
@@ -194,23 +213,30 @@ export default class AppStory extends HTMLElement {
           <p>If you’re thinking of <a href="https://www.blogger.com/#">reviving an aging device</a>
             with Linux, you’re more likely to have success with Debian. That’s
             partly because Debian still maintains support for 32-bit architectures
-            (also known as&nbsp;i386). Most consumer PCs released in or after the year
+            (also known as&nbsp;i386).
+          </p>
+          <p> Most consumer PCs released in or after the year
             2009 use 64-bit architectures. But if your computer is from before that
             year, you may need a distribution (distro) that still supports 32-bit,
             such as Debian.
           </p>
           <p>Ubuntu, in contrast, dropped full 32-bit support with version 18.04.
             Earlier versions with 32-bit support are still available for download,
-            but standard updates have already ended. Extended security updates&nbsp;for
+            but standard updates have already ended.
+          </p>
+          <p>Extended security updates&nbsp;for
             version 14.04 will continue only until April 2024 and April 2026 for
             16.04.
           </p>
           <p>The decision to drop 32-bit allowed the Ubuntu development team to
-            focus on serving modern users with modern devices. The Debian team, in
+            focus on serving modern users with modern devices.
+          </p>
+          <p>The Debian team, in
             contrast, carries on the 32-bit legacy so that outmoded but otherwise
             functioning devices can stay out of the trash bin. These are two
             different but honorable objectives, and which serves you better depends
-            on your device.</p>
+            on your device.
+          </p>
         </div>
         <div class="paragraph" id="section4">
           <h2 class="title">Ubuntu Is Corporate-Backed</h2>
@@ -388,7 +414,7 @@ export default class AppStory extends HTMLElement {
 
         article.content {
           /* border: 1px solid #000000; */
-          padding: 30px 20px 30px 0;
+          padding: 10px 20px 30px 0;
           width: 65%;
           display: flex;
           flex-flow: column;
