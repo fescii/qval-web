@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="logon.css">
+  <link rel="stylesheet" href="theme.css">
+	<script type="module">
+		//Importing
+		import LogonContainer from "./js/containers/logon.container.js";
+
+		customElements.define('logon-container', LogonContainer)
+
+	</script>
+	<title>Colink | Create and contribute to ideas that can change the world.</title>
+	<link rel="shortcut icon" href="img/favi.png" type="image/x-icon">
+</head>
+<body>
+	<logon-container url="/join" login="/join/login" register="/join/register"></logon-container>
+</body>
+</html>
