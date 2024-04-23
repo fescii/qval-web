@@ -877,7 +877,7 @@ export default class LogonContainer extends HTMLElement {
   getLoginSuccess(name) {
     return `
       <div class="finish login-success">
-        <span>Welcome</span>
+        <p>Welcome</p>
         <h2 class="title">${name}</h2>
 				<p>
 					You've successfully login into your account, click continue to proceed.
@@ -1042,7 +1042,7 @@ export default class LogonContainer extends HTMLElement {
         *:after,
         *:before {
           box-sizing: border-box;
-          font-family: var(--font-main), sans-serif;
+          font-family: var(--font-read), sans-serif;
         }
 
         *:focus {
@@ -1261,7 +1261,6 @@ export default class LogonContainer extends HTMLElement {
         }
 
         .logon-container > .stages span.no {
-          /* border: 1px solid red; */
           text-align: center;
           font-weight: 600;
           font-size: 1.2rem;
@@ -1326,7 +1325,7 @@ export default class LogonContainer extends HTMLElement {
           font-family: var(--font-read), sans-serif;
           color: var(--text-color);
           line-height: 1.4;
-          font-size: 1rem;
+          font-size: 1.15rem;
         }
 
         .logon-container > .finish > a,
@@ -1351,9 +1350,7 @@ export default class LogonContainer extends HTMLElement {
         }
 
         .logon-container >.welcome > .info {
-          /* border: 1px solid #606060; */
           grid-column: 1/3;
-          /* margin: 0 0 0 20px; */
           text-align: center;
           color: var(--text-color);
           line-height: 1.4;
@@ -1390,7 +1387,7 @@ export default class LogonContainer extends HTMLElement {
 
         }
 
-        .logon-container >.fields {
+        .logon-container > .fields {
           margin: 0 0 20px 0;
           width: 100%;
           display: flex;
@@ -1400,7 +1397,7 @@ export default class LogonContainer extends HTMLElement {
           gap: 20px;
         }
 
-        .logon-container >.fields .field.bio{
+        .logon-container > .fields .field.bio{
           display: grid;
           grid-template-columns: 1fr 1fr;
           justify-content: center;
@@ -1408,7 +1405,7 @@ export default class LogonContainer extends HTMLElement {
           row-gap: 20px;
         }
 
-        .logon-container >.fields>.field {
+        .logon-container > .fields > .field {
           width: 90%;
           display: flex;
           flex-flow: column;
@@ -1417,12 +1414,11 @@ export default class LogonContainer extends HTMLElement {
           gap: 2px;
         }
 
-        .logon-container >.fields.center>.field {
+        .logon-container > .fields.center > .field {
           align-items: center;
         }
 
-
-        .logon-container >.fields .field .input-group {
+        .logon-container > .fields .field .input-group {
           width: 100%;
           display: flex;
           flex-flow: column;
@@ -1434,16 +1430,16 @@ export default class LogonContainer extends HTMLElement {
           transition: border-color 0.3s ease-in-out;
         }
 
-        .logon-container >.fields .field.bio .input-group {
+        .logon-container > .fields .field.bio .input-group {
           width: 100%;
         }
 
-        .logon-container >.fields .field.bio .input-group.email {
+        .logon-container > .fields .field.bio .input-group.email {
           grid-column: 1/3;
           width: 100%;
         }
 
-        .logon-container>.fields .field .input-group > svg {
+        .logon-container > .fields .field .input-group > svg {
           position: absolute;
           right: 10px;
           top: 38px;
@@ -1451,35 +1447,35 @@ export default class LogonContainer extends HTMLElement {
           height: 20px;
         }
 
-        .logon-container>.fields .field .input-group > svg {
+        .logon-container > .fields .field .input-group > svg {
           display: none;
         }
 
-        .logon-container>.fields .field .input-group.success > svg {
+        .logon-container > .fields .field .input-group.success > svg {
           display: inline-block;
         }
-        .logon-container >.fields .field  .input-group.failed > svg {
+        .logon-container > .fields .field  .input-group.failed > svg {
           display: inline-block;
         }
 
-        .logon-container>.fields .field .input-group.success > svg {
+        .logon-container > .fields .field .input-group.success > svg {
           color: var(--accent-color);
         }
 
-        .logon-container >.fields .field  .input-group.failed > svg {
+        .logon-container > .fields .field  .input-group.failed > svg {
           color: var(--error-color);
         }
 
-        .logon-container >.fields label {
+        .logon-container > .fields label {
           padding: 0 0 5px 0;
           color: var(--text-color);
         }
 
-        .logon-container >.fields .field.bio label{
+        .logon-container > .fields .field.bio label{
           padding: 0 0 0 5px;
         }
 
-        .logon-container >.fields label {
+        .logon-container > .fields label {
           color: var(--text-color);
           font-size: 1.1rem;
           font-family: var(--font-main),sans-serif;
@@ -1487,7 +1483,7 @@ export default class LogonContainer extends HTMLElement {
           pointer-events: none;
         }
 
-        .logon-container >.fields .field input {
+        .logon-container > .fields .field input {
           border: var(--input-border);
           font-size: 1rem;
           width: 100%;
@@ -1498,59 +1494,59 @@ export default class LogonContainer extends HTMLElement {
           color: var(--text-color);
         }
 
-        .logon-container >.fields .field input:focus {
+        .logon-container > .fields .field input:focus {
           border: var(--input-border-focus);
         }
 
-        .logon-container >.fields .field  .input-group.success input,
-        .logon-container >.fields .field  .input-group.success input:focus {
+        .logon-container > .fields .field  .input-group.success input,
+        .logon-container > .fields .field  .input-group.success input:focus {
           border: var(--input-border-focus);
         }
 
-        .logon-container >.fields .field  .input-group.failed input,
-        .logon-container >.fields .field  .input-group.failed input:focus {
+        .logon-container > .fields .field  .input-group.failed input,
+        .logon-container > .fields .field  .input-group.failed input:focus {
           border: var(--input-border-error);
         }
 
-        .logon-container >.fields .field  .input-group.success input {
+        .logon-container > .fields .field  .input-group.success input {
           color: var(--accent-color);
         }
 
-        .logon-container>.fields .field .input-group.failed input {
+        .logon-container > .fields .field .input-group.failed input {
           color: var(--error-color);
         }
 
-        .logon-container >.fields label.focused {
+        .logon-container > .fields label.focused {
           top: -10px;
           font-size: 0.9rem;
           background-color: var(--label-focus-background);
           padding: 0 5px;
         }
 
-        .logon-container >.fields .field span.status {
+        .logon-container > .fields .field span.status {
           color: var(--error-color);
           font-size: 0.95rem;
           display: none;
           padding: 0 0 0 5px;
         }
 
-        .logon-container>.fields .field .input-group.failed span.status {
+        .logon-container > .fields .field .input-group.failed span.status {
           color: var(--error-color);
           font-size: 0.8rem;
           display: inline-block;
         }
 
-        .logon-container >.fields .field  .input-group.success span.status {
+        .logon-container > .fields .field  .input-group.success span.status {
           color: var(--accent-color);
           font-size: 0.8rem;
           display: inline-block;
         }
 
-        .logon-container >.fields .field  .input-group.success span.status {
+        .logon-container > .fields .field  .input-group.success span.status {
           display: none;
         }
 
-        .logon-container>.fields .actions {
+        .logon-container > .fields .actions {
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -1566,7 +1562,7 @@ export default class LogonContainer extends HTMLElement {
           gap: 5px;
           border: none;
           border-radius: 15px;
-          font-family: var(--font-main),sans-serif;
+          font-family: var(--font-main), sans-serif;
           line-height: 1.2;
           font-size: 1.2rem;
           font-weight: 500;
