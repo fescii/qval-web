@@ -37,17 +37,6 @@ export default class LogonContainer extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
-
-    document.addEventListener("DOMContentLoaded", (_) => {
-      Particles.init({
-        selector: '.canvas',
-        color: '#ffffff',
-        connectParticles: true
-      });
-    })
-
-
     const contentContainer = this.shadowObj.querySelector('.logon-container');
     if (contentContainer) {
       const contentTitle = contentContainer.querySelector('.head > .logo h2 span.action')
@@ -181,8 +170,8 @@ export default class LogonContainer extends HTMLElement {
         this._step += 1;
         break;
       case "login":
-        if(this._step >= 4) {
-          stages[4].classList.remove('active');
+        if(this._step >= 3) {
+          stages[3].classList.remove('active');
           stages[1].classList.add('active');
           this._step = 1;
         }
@@ -285,12 +274,9 @@ export default class LogonContainer extends HTMLElement {
       switch (stageType) {
         case 'register':
           if (outerThis._step === 1) {
-            outerThis.validateUsername(form);
-          }
-          else if (outerThis._step === 2) {
             outerThis.validateBio(form);
           }
-          else if (outerThis._step === 3) {
+          else if (outerThis._step === 2) {
             outerThis.validatePassword(form);
           }
           break;
@@ -831,7 +817,6 @@ export default class LogonContainer extends HTMLElement {
 				<span class="no stage first active">1</span>
 				<span class="no stage second">2</span>
 				<span class="no stage third">3</span>
-				<span class="no stage fourth">4</span>
 				<span class="stage done">
 					<span class="left"></span>
 					<span class="right"></span>
@@ -890,13 +875,7 @@ export default class LogonContainer extends HTMLElement {
   getRegistrationForm() {
     return `
       <form class="fields initial">
-				<div class="field username">
-					<div class="input-group">
-						<label for="username" class="center">Choose your username</label>
-						<input data-name="username" type="text" name="username" id="username" placeholder="Enter your desired username" required>
-						<span class="status">Username is taken!</span>
-					</div>
-				</div>
+				${this.getBioFields()}
 				<div class="actions">
 					<button type="button" class="action prev">
 						<span class="text">Back</span>
@@ -906,18 +885,6 @@ export default class LogonContainer extends HTMLElement {
 					</button>
 				</div>
 			</form>
-    `
-  }
-
-  getUsernameFields() {
-    return `
-      <div class="field username">
-				<div class="input-group">
-				  <label for="username" class="center">Choose your username</label>
-					<input data-name="username" type="text" name="username" id="username" placeholder="Enter your desired username" required>
-					<span class="status">Username is taken!</span>
-				</div>
-			</div>
     `
   }
 
