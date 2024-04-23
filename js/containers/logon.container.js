@@ -221,18 +221,6 @@ export default class LogonContainer extends HTMLElement {
             setTimeout(() => {
               stages[outerThis._step].classList.remove('active');
               outerThis._step -= 1;
-              const currentFields = form.querySelector('.field.bio');
-              if (currentFields) {
-                currentFields.remove();
-              }
-
-              form.insertAdjacentHTML('afterbegin', outerThis.getUsernameFields())
-            }, 1500);
-          }
-          else if(outerThis._step === 3) {
-            setTimeout(() => {
-              stages[outerThis._step].classList.remove('active');
-              outerThis._step -= 1;
               const currentFields = form.querySelector('.field.password');
               if (currentFields) {
                 currentFields.remove();
