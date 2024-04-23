@@ -30,7 +30,6 @@ export default class LogonContainer extends HTMLElement {
     this.render();
   }
 
-
   render() {
     // this.shadowObj.innerHTML = this.getTemplate();
     this.shadowObj.innerHTML = this.getTemplate();
