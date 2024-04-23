@@ -1037,6 +1037,11 @@ export default class LogonContainer extends HTMLElement {
           display: flex;
           align-items: center;
           justify-content: center;
+          background-position: 100%;
+          background-size: cover;
+          background-size: 1rem 1rem;
+          background-color: #f8f9fa;
+          background-image: radial-gradient(circle, #dee2e6 1px, rgba(0, 0, 0, 0) 1px);
         }
 
         #loader-container {
@@ -1633,17 +1638,45 @@ export default class LogonContainer extends HTMLElement {
         }
 
         @media screen and (max-width:700px) {
+
           :host {
             width: 100%;
             min-height: 100vh;
             height: 100%;
             display: flex;
             align-items: start;
-            justify-content: start;
+            justify-content: center;
+            background-color: var(--background);
+            background-position: unset;
+            background-size: unset;
+            background-size: unset;
+            background-image: unset;
+          }
+
+          .logon-container > .head {
+            background-color: transparent;
+            margin: 20px 0 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            font-family: var(--font-text), sans-serif;
+          }
+
+          .logon-container > .stages {
+            background-color: transparent;
+            height: max-content;
+            width: max-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 0 0 20px 0;
           }
 
           .logon-container {
-            background: var(--logon-background);
+            background: var(--background);
+            box-shadow: unset;
             z-index: 3;
             padding: 20px 10px;
             width: 100%;
@@ -1655,16 +1688,6 @@ export default class LogonContainer extends HTMLElement {
             gap: 10px;
             border-radius: 0;
             position: relative;
-          }
-          .logon-container >.welcome > .info {
-            font-size: 0.9rem;
-          }
-
-          .logon-container > .welcome > .info svg {
-            margin: 0 0 -3px 0;
-            color: var(--accent-color);
-            width: 14px;
-            height: 14px;
           }
 
           .logon-container > .welcome {
@@ -1700,8 +1723,20 @@ export default class LogonContainer extends HTMLElement {
             gap: 20px;
           }
 
+          .logon-container > .welcome > .info {
+            margin: 20px 0 0 0;
+            font-size: 0.9rem;
+          }
+
+          .logon-container > .welcome > .info svg {
+            margin: 0 0 -3px 0;
+            color: var(--accent-color);
+            width: 14px;
+            height: 14px;
+          }
+
           .logon-container > .footer {
-            margin: 30px 0 0 0;
+            margin: 10px 0 0 0;
             display: flex;
             flex-flow: row;
             flex-wrap: wrap;

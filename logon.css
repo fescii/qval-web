@@ -2,11 +2,11 @@ html {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-position: 100%;
+  /* background-position: 100%;
   background-size: cover;
   background-size: 1rem 1rem;
   background-color: #f8f9fa;
-  background-image: radial-gradient(circle, #dee2e6 1px, rgba(0, 0, 0, 0) 1px);
+  background-image: radial-gradient(circle, #dee2e6 1px, rgba(0, 0, 0, 0) 1px); */
 }
 
 body {
