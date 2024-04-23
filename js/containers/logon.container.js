@@ -804,7 +804,7 @@ export default class LogonContainer extends HTMLElement {
       <div class="head">
 				<div class="logo">
 					<h2 class="main">
-						<span class="action">Join</span> - Colink</h2>
+						<span class="action">Join</span> - Qval</h2>
 					<span class="slogan">Create and contribute to ideas that can change the world.</span>
 				</div>
 			</div>
@@ -1167,7 +1167,7 @@ export default class LogonContainer extends HTMLElement {
           background: var(--stage-no-linear);
           background-clip: text;
           -webkit-background-clip: text;
-          font-family: var(--font-mono), monospace;
+          font-family: var(--font-main), monospace;
         }
 
         .logon-container > .head > .logo span.slogan {
@@ -1177,7 +1177,7 @@ export default class LogonContainer extends HTMLElement {
           line-height: 1.4;
           font-family: var(--font-main), sans-serif;
           font-weight: 400;
-          font-size: 1rem;
+          font-size: 0.9rem;
           text-align: center;
         }
 
