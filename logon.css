@@ -2,10 +2,6 @@ html {
   margin: 0;
   padding: 0;
   width: 100%;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
   background-position: 100%;
   background-size: cover;
   background-size: 1rem 1rem;
@@ -17,9 +13,7 @@ body {
   /* border: 1px solid blue; */
   padding: 0 0 30px 0;
   margin: 0;
-  /* width: 85%; */
-  width: 1100px;
-  max-width: 1100px;
+  width: 100%;
   min-height: var(--vh-height, 100vh);
   font-family: var(--font-main), sans-serif;
 

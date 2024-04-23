@@ -1632,6 +1632,103 @@ export default class LogonContainer extends HTMLElement {
           font-weight: 400;
         }
 
+        @media screen and (max-width:700px) {
+          :host {
+            width: 100%;
+            min-height: 100vh;
+            height: 100%;
+            display: flex;
+            align-items: start;
+            justify-content: start;
+          }
+
+          .logon-container {
+            background: var(--logon-background);
+            z-index: 3;
+            padding: 20px 10px;
+            width: 100%;
+            height: max-content;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 0;
+            position: relative;
+          }
+          .logon-container >.welcome > .info {
+            font-size: 0.9rem;
+          }
+
+          .logon-container > .welcome > .info svg {
+            margin: 0 0 -3px 0;
+            color: var(--accent-color);
+            width: 14px;
+            height: 14px;
+          }
+
+          .logon-container > .welcome {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 10px;
+            justify-content: center;
+          }
+
+          .logon-container > .finish > a,
+          .logon-container > .welcome > a {
+            background: var(--stage-no-linear);
+            text-decoration: none;
+            padding: 8px 20px;
+            cursor: default;
+            margin: 20px 0;
+            width: 130px;
+          }
+
+          .logon-container > .finish  p,
+          .logon-container>.welcome  p {
+            font-size: 1rem;
+          }
+
+          .logon-container > .fields .actions > .action {
+            cursor: default;
+          }
+
+          .logon-container > .fields .field.bio{
+            display: flex;
+            flex-flow: column;
+            gap: 20px;
+          }
+
+          .logon-container > .footer {
+            margin: 30px 0 0 0;
+            display: flex;
+            flex-flow: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+          }
+
+          .logon-container > .footer > li {
+            display: flex;
+            margin: 5px 10px 0 0;
+            cursor: default;
+          }
+
+          .logon-container > .footer > li a {
+            color: inherit;
+            line-height: 1.4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+          }
+
+          .logon-container > .footer > li:first-of-type {
+            order: 5;
+          }
+        }
+
       </style>
     `;
   }
