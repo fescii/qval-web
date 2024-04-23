@@ -1264,7 +1264,7 @@ export default class LogonContainer extends HTMLElement {
           text-align: center;
           font-weight: 600;
           font-size: 1.2rem;
-          padding: 2px;
+          padding: 3px 2px 0 2px;
           background: var(--stage-done-linear);
           color: var(--white-color);
           width: 30px;
@@ -1374,8 +1374,8 @@ export default class LogonContainer extends HTMLElement {
 
         .logon-container>.welcome>.info a {
           color: var(--gray-color);
-          font-style: italic;
-          font-size: 0.9em;
+          /* font-style: italic; */
+          font-size: 1em;
         }
 
         .logon-container>.welcome>.info a:hover {
@@ -1617,6 +1617,7 @@ export default class LogonContainer extends HTMLElement {
           justify-content: center;
           align-items: center;
           gap: 5px;
+          font-family: var(--font-read), sans-serif;
           color: var(--gray-color);
           cursor: pointer;
         }
@@ -1654,14 +1655,14 @@ export default class LogonContainer extends HTMLElement {
           align-items: center;
           justify-content: center;
           gap: 0;
-          font-family: var(--font-mono), monospace;
+          font-family: var(--font-read), sans-serif;
         }
 
         .logon-container > .footer > li a.copyright .year {
-          font-family: var(--font-main), sans-serif;
+          font-family: var(--font-read), sans-serif;
           font-size: 0.9em;
           padding: 0 5px 0 2px;
-          font-weight: 500;
+          font-weight: 400;
         }
 
       </style>
