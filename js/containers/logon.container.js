@@ -172,6 +172,7 @@ export default class LogonContainer extends HTMLElement {
       case "login":
         if(this._step >= 3) {
           stages[3].classList.remove('active');
+          stages[2].classList.remove('active');
           stages[1].classList.add('active');
           this._step = 1;
         }
@@ -1604,7 +1605,7 @@ export default class LogonContainer extends HTMLElement {
           color: inherit;
           line-height: 1.4;
           text-decoration: none;
-          font-size: 0.95rem;
+          font-size: 1rem;
           font-weight: 400;
         }
 
@@ -1627,7 +1628,7 @@ export default class LogonContainer extends HTMLElement {
 
         .logon-container > .footer > li a.copyright .year {
           font-family: var(--font-read), sans-serif;
-          font-size: 0.9em;
+          font-size: 1em;
           padding: 0 5px 0 2px;
           font-weight: 400;
         }
