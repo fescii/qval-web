@@ -42,12 +42,48 @@ export default class LogonContainer extends HTMLElement {
       const stagesContainer = contentContainer.querySelector('.stages');
       this.activateRegister(contentContainer, stagesContainer, contentTitle);
       this.activateLogin(contentContainer, stagesContainer, contentTitle);
+      this.activateForgot(contentContainer, stagesContainer, contentTitle);
     }
 
   }
 
   disconnectedCallback() {
     // console.log('We are inside disconnectedCallback');
+  }
+
+  activateForgot(contentContainer, stagesContainer, contentTitle) {
+    const loader = this.getLoader();
+    const form = this.getForgotForm();
+    const outerThis = this;
+
+    const forgotButton = contentContainer.querySelector('.welcome  a.forgot');
+    if (forgotButton) {
+      forgotButton.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+
+        contentContainer.insertAdjacentHTML('afterbegin', loader);
+
+        const welcome = contentContainer.querySelector('.welcome');
+
+        setTimeout(() => {
+          if (welcome) {
+            welcome.remove()
+          }
+          welcome.remove();
+          contentTitle.textContent = 'Recover';
+          outerThis.changeStages('forgot', stagesContainer);
+          outerThis.nextStep('forgot', stagesContainer);
+          stagesContainer.insertAdjacentHTML('afterend', form)
+
+          contentContainer.querySelector('#loader-container').remove();
+
+          outerThis.submitEvent('forgot', contentContainer.querySelector('form'));
+          outerThis.prevStep('forgot', stagesContainer, contentContainer)
+        }, 1000);
+      })
+    }
   }
 
   activateRegister(contentContainer, stagesContainer, contentTitle) {
@@ -123,8 +159,23 @@ export default class LogonContainer extends HTMLElement {
 
     switch (stageType) {
       case 'register':
-        stagesContainer.classList.remove('login', 'welcome-stages');
+        stagesContainer.classList.remove('login', 'welcome-stages', 'forgot');
         stagesContainer.classList.add('register');
+
+        stages.forEach((stage, index) => {
+          if (index >= 3) {
+            stage.style.display = 'none';
+          }
+          else {
+            stage.style.display = 'inline-block';
+          }
+        });
+
+        break;
+
+      case 'forgot':
+        stagesContainer.classList.remove('login', 'welcome-stages', 'register');
+        stagesContainer.classList.add('forgot');
 
         stages.forEach(stage => {
           stage.style.display = 'inline-block';
@@ -133,11 +184,11 @@ export default class LogonContainer extends HTMLElement {
         break;
 
       case 'login':
-        stagesContainer.classList.remove('register', 'welcome-stages');
+        stagesContainer.classList.remove('register', 'welcome-stages', 'forgot');
         stagesContainer.classList.add('login');
 
         stages.forEach((stage, index) => {
-          if(index === 2 || index === 3) {
+          if(index >= 2) {
             stage.style.display = 'none';
           }
         });
@@ -145,7 +196,7 @@ export default class LogonContainer extends HTMLElement {
         break;
 
       case 'welcome':
-        stagesContainer.classList.remove('register', 'login');
+        stagesContainer.classList.remove('register', 'login', 'forgot');
         stagesContainer.classList.add('welcome-stages');
 
         stages.forEach((stage, index) => {
@@ -165,11 +216,28 @@ export default class LogonContainer extends HTMLElement {
 
     switch (stageType) {
       case "register":
+        if (this._step >= 4) {
+          stages[4].classList.remove('active');
+          stages[1].classList.add('active');
+          this._step = 1;
+        }
+        else if ((this._step + 1) === 3) {
+          stages[stages.length - 1].classList.add('active');
+          this._step = (stages.length - 1);
+        }
+        else {
+          stages[this._step + 1].classList.add('active');
+          this._step += 1;
+        }
+        break;
+      case "forgot":
+        console.log(this._step);
         stages[this._step + 1].classList.add('active');
         this._step += 1;
         break;
       case "login":
         if(this._step >= 3) {
+          stages[4].classList.remove('active');
           stages[3].classList.remove('active');
           stages[2].classList.remove('active');
           stages[1].classList.add('active');
@@ -215,6 +283,7 @@ export default class LogonContainer extends HTMLElement {
 
               outerThis.activateRegister(contentContainer, stagesContainer, contentTitle);
               outerThis.activateLogin(contentContainer, stagesContainer, contentTitle);
+              outerThis.activateForgot(contentContainer, stagesContainer, contentTitle);
             }, 1500);
           }
           else if(outerThis._step === 2) {
@@ -230,6 +299,45 @@ export default class LogonContainer extends HTMLElement {
             }, 1500);
           }
           break;
+        case "forgot":
+          console.log(outerThis._step);
+          if (outerThis._step <= 1) {
+            setTimeout(() => {
+              stages[1].classList.remove('active');
+              form.remove();
+              stagesContainer.insertAdjacentHTML('afterend', welcome)
+              outerThis._step = 0;
+
+              outerThis.activateRegister(contentContainer, stagesContainer, contentTitle);
+              outerThis.activateLogin(contentContainer, stagesContainer, contentTitle);
+              outerThis.activateForgot(contentContainer, stagesContainer, contentTitle);
+            }, 1500);
+          }
+          else if (outerThis._step === 2) {
+            setTimeout(() => {
+              stages[outerThis._step].classList.remove('active');
+              outerThis._step -= 1;
+              const currentFields = form.querySelector('.forgot.code');
+              if (currentFields) {
+                currentFields.remove();
+              }
+
+              form.insertAdjacentHTML('afterbegin', outerThis.getForgotFields())
+            }, 1500);
+          }
+          else if (outerThis._step === 3) {
+            setTimeout(() => {
+              stages[outerThis._step].classList.remove('active');
+              outerThis._step -= 1;
+              const currentFields = form.querySelector('.forgot.password');
+              if (currentFields) {
+                currentFields.remove();
+              }
+
+              form.insertAdjacentHTML('afterbegin', outerThis.getCodeField())
+            }, 1500);
+          }
+          break;
         case "login":
           if (this._step <= 1) {
             setTimeout(() => {
@@ -240,6 +348,7 @@ export default class LogonContainer extends HTMLElement {
 
               outerThis.activateRegister(contentContainer, stagesContainer, contentTitle);
               outerThis.activateLogin(contentContainer, stagesContainer, contentTitle);
+              outerThis.activateForgot(contentContainer, stagesContainer, contentTitle);
             }, 1500);
           }
           break;
@@ -266,6 +375,18 @@ export default class LogonContainer extends HTMLElement {
           }
           else if (outerThis._step === 2) {
             outerThis.validatePassword(form);
+          }
+          break;
+
+        case 'forgot':
+          if (outerThis._step === 1) {
+            outerThis.validateForgotEmail(form);
+          }
+          else if (outerThis._step === 2) {
+            outerThis.validateForgotCode(form);
+          }
+          else if(outerThis._step === 3) {
+            outerThis.validateForgotPassword(form);
           }
           break;
         case 'login':
@@ -703,6 +824,259 @@ export default class LogonContainer extends HTMLElement {
     }
   }
 
+  activateForgotCode(form) {
+    const stagesContainer = form.parentElement.querySelector('.stages');
+    const currentEl = form.querySelector('.field.forgot.email')
+    if (currentEl) {
+      currentEl.remove();
+    }
+    this.nextStep('forgot', stagesContainer);
+
+
+    form.insertAdjacentHTML('afterbegin', this.getCodeField())
+  }
+
+  activateForgotPassword(form) {
+    const stagesContainer = form.parentElement.querySelector('.stages');
+    const currentEl = form.querySelector('.field.forgot.code')
+    if (currentEl) {
+      currentEl.remove();
+    }
+    this.nextStep('forgot', stagesContainer);
+
+
+    form.insertAdjacentHTML('afterbegin', this.getResetPasswordFields())
+  }
+
+  validateForgotEmail(form) {
+    const outerThis = this;
+    const submitButton = form.querySelector('.actions > .action.next ');
+
+    submitButton.innerHTML = outerThis.getButtonLoader();
+    submitButton.style.setProperty("pointer-events", 'none');
+
+    const email = form.querySelector('.input-group.email');
+
+    const input = email.querySelector('input').value.trim();
+
+    email.classList.remove('success', 'failed');
+    let svg = email.querySelector('svg');
+    if (svg) {
+      svg.remove();
+    }
+    const emailStatus = email.querySelector('span.status');
+
+    if (input === '') {
+      emailStatus.textContent = 'Enter a valid email!';
+      email.insertAdjacentHTML('beforeend', outerThis._failed);
+      email.classList.add('failed');
+
+      setTimeout(() => {
+        submitButton.innerHTML = `<span class="text">Continue</span>`
+        submitButton.style.setProperty("pointer-events", 'auto');
+      }, 1000);
+    }
+    else {
+      // no Inspection
+      let validRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+      if (input.match(validRegex)) {
+
+        // Call the API
+        outerThis.checkForgotEmail(form, input, email, emailStatus);
+      }
+      else {
+        emailStatus.textContent = 'Enter a valid email!';
+        email.insertAdjacentHTML('beforeend', outerThis._failed);
+        email.classList.add('failed');
+
+        setTimeout(() => {
+          submitButton.innerHTML = `<span class="text">Continue</span>`
+          submitButton.style.setProperty("pointer-events", 'auto');
+        }, 1000);
+      }
+    }
+  }
+
+  validateForgotCode(form) {
+    const outerThis = this;
+    const submitButton = form.querySelector('.actions > .action.next ');
+
+    const codeInput = form.querySelector('.input-group.code');
+
+    submitButton.innerHTML = outerThis.getButtonLoader();
+    submitButton.style.setProperty("pointer-events", 'none');
+
+    const codeStatus = codeInput.querySelector('span.status');
+
+    codeInput.classList.remove('success', 'failed');
+    let svg = codeInput.querySelector('svg');
+    if (svg) {
+      svg.remove();
+    }
+
+
+    // Validate code
+    const input = codeInput.querySelector('input').value.trim();
+
+    if (input.length >= 6) {
+
+      // Call the API
+      outerThis.checkCode(form, input, codeInput, codeStatus);
+    }
+    else {
+      codeStatus.textContent = 'Code value cant be less than 6 chars long!';
+      codeInput.insertAdjacentHTML('beforeend', outerThis._failed);
+      codeInput.classList.add('failed');
+
+      setTimeout(() => {
+        submitButton.innerHTML = `<span class="text">Continue</span>`
+        submitButton.style.setProperty("pointer-events", 'auto');
+      }, 1000);
+    }
+  }
+
+  validateForgotPassword(form) {
+    const outerThis = this;
+    const submitButton = form.querySelector('.actions > .action.next');
+    const inputField = form.querySelector('.field.password');
+
+    // const inputGroups = inputField.querySelectorAll('.input-group');
+    const password = inputField.querySelector('.input-group.password');
+    const repeatPassword = inputField.querySelector('.input-group.repeat-password');
+
+    submitButton.innerHTML = outerThis.getButtonLoader();
+    submitButton.style.setProperty("pointer-events", 'none');
+
+    const input = password.querySelector('input').value.trim();
+    const inputRepeat = repeatPassword.querySelector('input').value.trim();
+
+    password.classList.remove('success', 'failed');
+    repeatPassword.classList.remove('success', 'failed');
+    let svg = password.querySelector('svg');
+    let svgRepeat = repeatPassword.querySelector('svg');
+    if (svg && svgRepeat) {
+      svg.remove();
+      svgRepeat.remove();
+    }
+
+
+    const passwordStatus = password.querySelector('span.status');
+    const repeatStatus = repeatPassword.querySelector('span.status');
+
+    if (input === '') {
+      passwordStatus.textContent = 'Password is required!';
+      password.insertAdjacentHTML('beforeend', outerThis._failed);
+      password.classList.add('failed');
+
+      setTimeout(() => {
+        submitButton.innerHTML = `<span class="text">Continue</span>`
+        submitButton.style.setProperty("pointer-events", 'auto');
+      }, 1000);
+    }
+    else {
+      if (this.isPassword(input, password, passwordStatus)) {
+        if (input === inputRepeat) {
+          repeatStatus.textContent = '';
+          repeatPassword.insertAdjacentHTML('beforeend', this._success);
+
+          this._data.register['password'] = input;
+
+          // console.log(this._data);
+
+          repeatPassword.classList.add('success');
+
+          // API Call
+          this.activateForgotFinish(form.parentElement);
+        }
+        else {
+          repeatStatus.textContent = 'Passwords must match be equal!';
+          repeatPassword.insertAdjacentHTML('beforeend', outerThis._failed);
+          repeatPassword.classList.add('failed');
+
+          setTimeout(() => {
+            submitButton.innerHTML = `<span class="text">Continue</span>`
+            submitButton.style.setProperty("pointer-events", 'auto');
+          }, 1000);
+        }
+      }
+      else {
+        setTimeout(() => {
+          submitButton.innerHTML = `<span class="text">Continue</span>`
+          submitButton.style.setProperty("pointer-events", 'auto');
+        }, 1000);
+      }
+    }
+  }
+
+  checkForgotEmail(form, input, email, emailStatus) {
+    const submitButton = form.querySelector('.actions > .action.next');
+
+    // After API call
+    let msg = 'Username is available' // From API
+
+    //Add user to the data object
+    this._data.register['username'] = input;
+
+    emailStatus.textContent = msg;
+    email.insertAdjacentHTML('beforeend', this._success);
+
+    this._data.register['email'] = input;
+
+    setTimeout(() => {
+      email.classList.add('success');
+    }, 1000);
+
+
+    setTimeout(() => {
+      submitButton.innerHTML = `<span class="text">Continue</span>`
+      submitButton.style.setProperty("pointer-events", 'auto');
+      this.activateForgotCode(form)
+    }, 2000);
+  }
+
+  checkCode(form, input, codeInput, codeStatus) {
+    const submitButton = form.querySelector('.actions > .action.next');
+
+    // After API call
+    let msg = 'Username is available' // From API
+
+    //Add user to the data object
+    this._data.register['username'] = input;
+
+    codeStatus.textContent = msg;
+    codeInput.insertAdjacentHTML('beforeend', this._success);
+
+    this._data.register['email'] = input;
+
+    setTimeout(() => {
+      codeInput.classList.add('success');
+    }, 1000);
+
+
+    setTimeout(() => {
+      submitButton.innerHTML = `<span class="text">Continue</span>`
+      submitButton.style.setProperty("pointer-events", 'auto');
+      this.activateForgotPassword(form)
+    }, 2000);
+  }
+
+  activateForgotFinish(contentContainer) {
+    const outerThis = this;
+    const stagesContainer = contentContainer.querySelector('.stages');
+    const contentTitle = contentContainer.querySelector('.head > .logo h2 span.action');
+    const finish = this.getForgotSuccess();
+    const form = contentContainer.querySelector('form');
+
+    setTimeout(() => {
+      form.remove();
+      outerThis.nextStep('forgot', stagesContainer);
+      stagesContainer.insertAdjacentHTML('afterend', finish)
+
+      outerThis.activateLogin(contentContainer, stagesContainer, contentTitle);
+    }, 1000);
+  }
+
   activateFinish(contentContainer) {
     const outerThis = this;
     const stagesContainer = contentContainer.querySelector('.stages');
@@ -751,7 +1125,7 @@ export default class LogonContainer extends HTMLElement {
   }
 
   getTemplate() {
-    return `
+    return /* html */`
       <div class="logon-container">
         ${this.getHeader()}
         ${this.getStages()}
@@ -805,6 +1179,7 @@ export default class LogonContainer extends HTMLElement {
 				<span class="no stage first active">1</span>
 				<span class="no stage second">2</span>
 				<span class="no stage third">3</span>
+        <span class="no stage fourth">4</span>
 				<span class="stage done">
 					<span class="left"></span>
 					<span class="right"></span>
@@ -814,14 +1189,18 @@ export default class LogonContainer extends HTMLElement {
   }
 
   getWelcome() {
-    return `
+    return /* html */`
       <div class="welcome">
 				<p>
 					Connect with your audience, amplify collaborations, and share your knowledge without limits.
 					Build a vibrant project hub where ideas ignite and progress shines.
 				</p>
-				<a href="/login/" class="login">Login</a>
-				<a href="/register/" class="register">Register</a>
+				<a href=${this.getAttribute('login')} class="login">Login</a>
+				<a href="${this.getAttribute('register')}" class="register">Register</a>
+
+        <p class="forgot">
+          Forgot your password? <a href="${this.getAttribute('forgot')}" class="forgot">Click here</a>
+        </p>
 				<div class="info">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill"
 						viewBox="0 0 16 16">
@@ -842,7 +1221,19 @@ export default class LogonContainer extends HTMLElement {
 				<p>
 					Your account has been created successfully. Please log in into your account to start sharing great ideas.
 				</p>
-				<a href="/login/" class="login">Login</a>
+				<a href="/join/login/" class="login">Login</a>
+			</div>
+    `
+  }
+
+  getForgotSuccess() {
+    return `
+      <div class="finish">
+        <h2 class="title">Success!</h2>
+				<p>
+					Your password has been successfully reset. Please log in into your account.
+				</p>
+				<a href="/join/login/" class="login">Login</a>
 			</div>
     `
   }
@@ -881,9 +1272,6 @@ export default class LogonContainer extends HTMLElement {
       <div class="field bio">
 				<div class="input-group firstname">
 					<label for="firstname" class="center">First name</label>
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-						<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-					</svg>
 					<input data-name="firstname" type="text" name="firstname" id="firstname" placeholder="Enter your first name" required>
 					<span class="status">First name is required</span>
 				</div>
@@ -907,6 +1295,63 @@ export default class LogonContainer extends HTMLElement {
 				<div class="input-group password">
 					<label for="password" class="center">Password</label>
 					<input data-name="password" type="password" name="password" id="password" placeholder="Enter your password" required>
+					<span class="status">Password is required</span>
+				</div>
+				<div class="input-group repeat-password">
+					<label for="password2" class="center">Repeat password</label>
+					<input data-name="password2" type="password" name="password2" id="password2" placeholder="Repeat your password" required>
+					<span class="status">Password is required</span>
+				</div>
+			</div>
+    `
+  }
+
+  getForgotForm() {
+    return `
+      <form class="fields initial">
+				${this.getForgotFields()}
+				<div class="actions">
+					<button type="button" class="action prev">
+						<span class="text">Back</span>
+					</button>
+					<button type="submit" class="action next">
+						<span class="text">Continue</span>
+					</button>
+				</div>
+			</form>
+    `
+  }
+
+  getForgotFields = () => {
+    return `
+      <div class="field forgot bio email">
+				<div class="input-group email">
+					<label for="email" class="center">Your email</label>
+					<input data-name="Email" type="email" name="email" id="email" placeholder="e.g john@example.com" required>
+					<span class="status">Email is required</span>
+				</div>
+			</div>
+    `
+  }
+
+  getCodeField = () => {
+    return `
+      <div class="field forgot bio code">
+        <div class="input-group code">
+          <label for="code" class="center">Verify code</label>
+          <input data-name="code" type="text" name="code" id="code" placeholder="Enter code sent to your email" required>
+          <span class="status">Code is required</span>
+        </div>
+      </div>
+    `
+  }
+
+  getResetPasswordFields = () => {
+    return `
+      <div class="field password bio forgot">
+				<div class="input-group password">
+					<label for="password" class="center">New Password</label>
+					<input data-name="password" type="password" name="password" id="password" placeholder="Enter your new password" required>
 					<span class="status">Password is required</span>
 				</div>
 				<div class="input-group repeat-password">
@@ -1249,6 +1694,11 @@ export default class LogonContainer extends HTMLElement {
           display: none;
         }
 
+        .logon-container > .stages.forgot span.no.fourth,
+        .logon-container > .stages.forgot span.no.third {
+          display: none;
+        }
+
         .logon-container > .stages span.no.active {
           background: var(--stage-no-linear);
         }
@@ -1278,7 +1728,7 @@ export default class LogonContainer extends HTMLElement {
         }
 
         .logon-container > .finish  p,
-        .logon-container>.welcome  p {
+        .logon-container > .welcome  p {
           grid-column: 1/3;
           margin: 0;
           text-align: center;
@@ -1332,19 +1782,38 @@ export default class LogonContainer extends HTMLElement {
           font-weight: 400;
         }
 
-        .logon-container>.welcome>.info a {
+        .logon-container > .welcome > .info a {
           color: var(--gray-color);
           /* font-style: italic; */
           font-size: 1em;
         }
 
-        .logon-container>.welcome>.info a:hover {
+        .logon-container > .welcome > .info a:hover {
           color: transparent;
           text-decoration: underline;
           background: var(--stage-active-linear);
           background-clip: text;
           -webkit-background-clip: text;
+        }
 
+        .logon-container >.welcome > p.forgot {
+          grid-column: 1/3;
+          text-align: center;
+          color: var(--text-color);
+          line-height: 1.4;
+        }
+
+        .logon-container > .welcome > p.forgot a {
+          color: var(--gray-color);
+          text-decoration: none;
+          font-size: 1em;
+        }
+
+        .logon-container > .welcome > p.forgot a:hover {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
         }
 
         .logon-container > .fields {
@@ -1357,7 +1826,7 @@ export default class LogonContainer extends HTMLElement {
           gap: 20px;
         }
 
-        .logon-container > .fields .field.bio{
+        .logon-container > .fields .field.bio {
           display: grid;
           grid-template-columns: 1fr 1fr;
           justify-content: center;
@@ -1394,6 +1863,7 @@ export default class LogonContainer extends HTMLElement {
           width: 100%;
         }
 
+        .logon-container > .fields .field.bio .input-group.code,
         .logon-container > .fields .field.bio .input-group.email {
           grid-column: 1/3;
           width: 100%;
