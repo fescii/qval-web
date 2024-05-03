@@ -292,11 +292,12 @@ section.content {
   display: flex;
   flex-flow: column;
   align-items: start;
-  gap: 25px;
+  padding: 0 0 70px 0;
+  gap: 35px;
   width: 70%;
 }
 
-section.content > .name-form {
+section.content > .profile {
   display: flex;
   flex-flow: column;
   gap: 10px;
@@ -432,6 +433,27 @@ form.fields .field input {
   border-radius: 12px;
   color: var(--text-color);
 }
+form.fields textarea {
+  border: none;
+  border: var(--input-border);
+  font-size: 1rem;
+  padding: 10px 12px;
+  margin: 0;
+  width: 100%;
+  resize: none;
+  height: 90px;
+  gap: 5px;
+  font-weight: 400;
+  color: var(--text-color);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  border-radius: 12px;
+}
+
+form.fields textarea::-webkit-scrollbar {
+  display: none !important;
+  visibility: hidden;
+}
 
 form.fields .field input:focus {
   border: var(--input-border-focus);
@@ -532,6 +554,65 @@ form.fields .actions > .action.next svg path {
 
 form.fields .actions > .action.disabled {
   pointer-events: none;
+}
+
+form.fields.picture {
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  gap: 20px;
+}
+
+form.fields .image-preview-container {
+  border: var(--input-border);
+  position: relative;
+  width: 150px;
+  width: 150px;
+  min-height: 150px;
+  min-width: 150px;
+  padding: 0;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+form.fields .image-preview-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  /* margin-bottom: 30px; */
+  border-radius: 20px;
+}
+
+form.fields .image-preview-container input {
+  display: none;
+}
+
+form.fields .image-preview-container label {
+  position: absolute;
+  top: 50%;
+  padding: 7px 12px;
+  margin: 0;
+  text-align: center;
+  background: var(--accent-linear);
+  color: var(--white-color);
+  font-size: 1rem;
+  font-family: var(--font-main), sans-serif;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
 }
 
 

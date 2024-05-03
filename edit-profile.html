@@ -252,7 +252,7 @@
       </ul>
     </section>
     <section class="content">
-      <div class="name-form">
+      <div class="profile name-form">
         <div class="top">
           <h4 class="title">Your name</h4>
           <p class="desc">
@@ -260,7 +260,7 @@
             Both first and last name fields can't be empty.
           </p>
         </div>
-        <form class="fields initial">
+        <form class="fields initial" id="name-form">
           <div class="field bio">
             <div class="input-group firstname">
               <label for="firstname" class="center">First name</label>
@@ -281,32 +281,51 @@
           </div>
         </form>
       </div>
-      <div class="bio-form">
+      <div class="profile bio-form">
         <div class="top">
-          <h4 class="title">Your name</h4>
+          <h4 class="title">Your bio</h4>
           <p class="desc">
-            Your name is how people will find you on the platform. You can use your real name or a nickname.
-            Both first and last name fields can't be empty.
+            Your bio is a brief summary of yourself. It should be no more than 160 characters in length.
+            Use this space to highlight your interests, skills, or any other relevant information about yourself.
           </p>
         </div>
-        <form class="fields initial">
-          <div class="field bio">
-            <div class="input-group firstname">
-              <label for="firstname" class="center">First name</label>
-              <input data-name="firstname" type="text" name="firstname" id="firstname" placeholder="Enter your first name"
-                value="Fredrick" required>
+        <form class="fields bio" id="bio-form">
+          <div class="field your-bio">
+            <div class="input-group your-bio">
+              <label for="bio" class="center">Your bio</label>
+              <input type="email" name="email" id="email" hidden>
+              <textarea name="bio1" id="bio1" cols="30"
+                rows="10">Your bio is a summary of yourself. It should be no more than 160 characters in length.</textarea>
               <span class="status">First name is required</span>
-            </div>
-            <div class="input-group lastname">
-              <label for="lastname" class="center">Last name</label>
-              <input data-name="lastname" type="text" name="lastname" id="lastname" placeholder="Enter your last name"
-                required>
-              <span class="status">Last name is required</span>
             </div>
           </div>
           <div class="actions">
             <button type="submit" class="action next">
-              <span class="text">Update name</span>
+              <span class="text">Update bio</span>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="profile picture-form">
+        <div class="top">
+          <h4 class="title">Your profile</h4>
+          <p class="desc">
+            Your profile picture is how people will recognize you on the platform. You can use a photo of yourself or an
+            avatar.
+            The image should be square and at least 200x200 pixels in size.
+          </p>
+        </div>
+        <form class="fields picture" id="picture-form">
+          <div class="image-preview-container">
+            <div class="preview">
+              <img id="preview-selected-image" />
+            </div>
+            <label for="file-upload">Select</label>
+            <input type="file" id="file-upload" accept="image/*" />
+          </div>
+          <div class="actions">
+            <button type="submit" class="action next">
+              <span class="text">Update profile</span>
             </button>
           </div>
         </form>
