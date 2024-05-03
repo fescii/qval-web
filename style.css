@@ -204,6 +204,8 @@ section.tab {
   flex-flow: column;
   gap: 10px;
   height: max-content;
+  position: sticky;
+  top: 70px;
 }
 
 section.tab > ul.tab {
@@ -290,7 +292,7 @@ section.content {
   display: flex;
   flex-flow: column;
   align-items: start;
-  gap: 0;
+  gap: 25px;
   width: 70%;
 }
 
@@ -349,7 +351,7 @@ form.fields > .field {
   gap: 20px;
 }
 
-form.fields.center>.field {
+form.fields.center > .field {
   align-items: center;
 }
 
@@ -375,7 +377,7 @@ form.fields .field.bio .input-group.email {
   width: 100%;
 }
 
-form.fields .field .input-group>svg {
+form.fields .field .input-group > svg {
   position: absolute;
   right: 10px;
   top: 38px;
@@ -383,23 +385,23 @@ form.fields .field .input-group>svg {
   height: 20px;
 }
 
-form.fields .field .input-group>svg {
+form.fields .field .input-group > svg {
   display: none;
 }
 
-form.fields .field .input-group.success>svg {
+form.fields .field .input-group.success > svg {
   display: inline-block;
 }
 
-form.fields .field .input-group.failed>svg {
+form.fields .field .input-group.failed > svg {
   display: inline-block;
 }
 
-form.fields .field .input-group.success>svg {
+form.fields .field .input-group.success > svg {
   color: var(--accent-color);
 }
 
-form.fields .field .input-group.failed>svg {
+form.fields .field .input-group.failed > svg {
   color: var(--error-color);
 }
 
@@ -488,7 +490,7 @@ form.fields .actions {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin: 10px 0 0 10px;
+  margin: 0 0 0 2px;
 }
 
 form.fields .actions > .action {
