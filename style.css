@@ -200,26 +200,31 @@ main.profile {
 section.tab {
   /* border: 1px solid #53595f; */
   padding: 0;
-  width: 35%;
+  width: 25%;
   display: flex;
   flex-flow: column;
-  gap: 15px;
+  gap: 10px;
   height: max-content;
 }
 
 section.tab > ul.tab {
+  border-top: var(--story-border-mobile);
   list-style-type: none;
   width: 100%;
-  padding: 0;
+  padding: 0 5px;
   margin: 0;
   display: flex;
   flex-flow: column;
   gap: 0;
 }
 
+section.tab > ul.tab.public {
+  border: none;
+}
+
 section.tab > ul.tab > li.tab-item {
   position: relative;
-  padding: 6px 10px;
+  padding: 0;
   color: var(--text-color);
   font-family: var(--font-text), sans-serif;
   margin: 0;
@@ -228,26 +233,23 @@ section.tab > ul.tab > li.tab-item {
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 5px;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
 }
 
-section.tab > ul.tab > li.tab-item.active {
-  /* border: 1px solid #6b7280; */
-  background-color: var(--tab-background);
+section.tab > ul.tab > span.title {
+  color: var(--gray-color);
+  display: inline-block;
+  padding: 15px 10px 6px 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 section.tab > ul.tab > li.tab-item > span.line {
   position: absolute;
   display: none;
   left: -10px;
-  top: calc(30% / 2);
+  top: calc(40% / 2);
   width: 4px;
-  height: 70%;
+  height: 60%;
   background: var(--accent-linear);
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -260,13 +262,37 @@ section.tab > ul.tab > li.tab-item.active > span.line {
   display: inline-block;
 }
 
+section.tab > ul.tab > li.tab-item > a.tab-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  font-family: var(--font-main), sans-serif;
+  padding: 7px 10px 6px 10px;
+  gap: 10px;
+  border-radius: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  -ms-border-radius: 9px;
+  -o-border-radius: 9px;
+}
+
+section.tab > ul.tab > li.tab-item > a.tab-link:hover {
+  background: var(--tab-background);
+}
+section.tab > ul.tab > li.tab-item.active > a.tab-link {
+  /* border: 1px solid #6b7280; */
+  background-color: var(--tab-background);
+}
+
 section.content {
   border: 1px solid #6b7280;
   display: flex;
   flex-flow: column;
   align-items: start;
   gap: 0;
-  width: 63%;
+  width: 70%;
 }
 
 
