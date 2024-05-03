@@ -287,12 +287,48 @@ section.tab > ul.tab > li.tab-item.active > a.tab-link {
 }
 
 section.content {
-  border: 1px solid #6b7280;
+  /* border: 1px solid #6b7280; */
   display: flex;
   flex-flow: column;
   align-items: start;
   gap: 0;
   width: 70%;
+}
+
+section.content > .name-form {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  padding: 0;
+  width: 100%;
+}
+
+section.content .top {
+  /* border: 1px solid #6b7280; */
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+  padding: 0;
+  width: 100%;
+}
+
+section.content .top > h4.title {
+  border-bottom: var(--story-border-mobile);
+  display: flex;
+  align-items: center;
+  color: var(--title-color);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0 0 6px 0;
+}
+
+section.content .top > .desc {
+  margin: 0;
+  padding: 10px 0;
+  color: var(--gray-color);
+  font-size: 1rem;
+  font-family: var(--font-main), sans-serif;
 }
 
 
