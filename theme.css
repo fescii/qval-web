@@ -30,6 +30,9 @@ Author URL: https://femar.co.ke
 */
 
 :root {
+  --tab-background: #d0d7de33;
+
+
   --font-main: "Inter";
   --font-text: "DM Sans";
   --font-mono: 'Jetbrains Mono';

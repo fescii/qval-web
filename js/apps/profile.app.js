@@ -42,6 +42,7 @@ export default class AppProfile extends HTMLElement {
     const contentContainer = this.shadowObj.querySelector('.content-container');
 
     if (tab && contentContainer) {
+      const line = tab.querySelector('span.line');
       const tabItems = tab.querySelectorAll('li.tab-item');
       let activeTab = tab.querySelector('li.tab-item.active');
 
@@ -50,6 +51,11 @@ export default class AppProfile extends HTMLElement {
           e.preventDefault()
           e.stopPropagation()
 
+          // Calculate half tab width - 10px
+          const tabWidth = (tab.offsetWidth/2) - 20;
+
+          line.style.left = `${tab.offsetLeft + tabWidth}px`;
+
           if (tab.dataset.element === activeTab.dataset.element) {
             return;
           }
@@ -57,7 +63,6 @@ export default class AppProfile extends HTMLElement {
             activeTab.classList.remove('active');
             tab.classList.add('active');
             activeTab = tab;
-            // console.log(tab);
             switch (tab.dataset.element) {
               case "stories":
                 contentContainer.innerHTML = outerThis.getStories();
@@ -147,12 +152,12 @@ export default class AppProfile extends HTMLElement {
           <div class="users">
             <a href="" class="stat followers">
               <span class="no">${this.getAttribute('followers')}</span>
-              <span class="text">Followers</span>
+              <span class="text">followers</span>
             </a>
             <span class="sp">•</span>
             <a href="" class="stat followers">
               <span class="no">${this.getAttribute('following')}</span>
-              <span class="text">Following</span>
+              <span class="text">stories</span>
             </a>
           </div>
         </div>
@@ -221,16 +226,14 @@ export default class AppProfile extends HTMLElement {
       <ul id="tab" class="tab">
         <li data-element="stories" class="tab-item details active">
           <span class="text">Stories</span>
-          <span class="line"></span>
         </li>
         <li data-element="opinions" class="tab-item opinions">
           <span class="text">Opinions</span>
-          <span class="line"></span>
         </li>
         <li data-element="people" class="tab-item people">
           <span class="text">People</span>
-          <span class="line"></span>
         </li>
+        <span class="line"></span>
       </ul>
     `
   }
@@ -356,14 +359,6 @@ export default class AppProfile extends HTMLElement {
           width: 100%;
         }
 
-        .head * {
-          transition: all 300ms ease-in-out;
-          -webkit-transition: all 300ms ease-in-out;
-          -moz-transition: all 300ms ease-in-out;
-          -ms-transition: all 300ms ease-in-out;
-          -o-transition: all 300ms ease-in-out;
-        }
-
         .head > .data {
           /* border: 1px solid #6b7280; */
           display: flex;
@@ -395,7 +390,7 @@ export default class AppProfile extends HTMLElement {
           padding: 0;
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
-          font-weight: 400;
+          font-weight: 500;
           line-height: 1.4;
           font-size: 1rem;
           display: flex;
@@ -427,13 +422,14 @@ export default class AppProfile extends HTMLElement {
           margin: 0;
           padding: 0;
           color: var(--gray-color);
-          font-family: var(--font-main), sans-serif;
+          font-family: var(--font-text), sans-serif;
           font-weight: 400;
           line-height: 1.4;
           font-size: 0.9rem;
           display: flex;
           align-items: center;
           gap: 5px;
+          text-transform: lowercase;
         }
 
         .head > .data > .users > a {
@@ -442,7 +438,11 @@ export default class AppProfile extends HTMLElement {
         }
 
         .head > .data > .users > a:hover {
-          color: var(--accent-color);
+          /* color: var(--accent-color); */
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
         }
 
         .head > .data > .users > a > span.no {
@@ -553,7 +553,7 @@ export default class AppProfile extends HTMLElement {
           margin: 0;
           list-style-type: none;
           display: flex;
-          gap: 5px;
+          gap: 0;
           align-items: center;
           max-width: 100%;
           overflow-x: scroll;
@@ -567,35 +567,35 @@ export default class AppProfile extends HTMLElement {
         }
 
         .actions > ul.tab > li.tab-item {
-          position: relative;
+          /* border: var(--story-border); */
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
           font-weight: 400;
-          padding: 6px 0 8px 0;
-          margin: 0 0 0 10px;
+          padding: 6px 20px 8px 0;
+          margin: 0;
           display: flex;
           align-items: center;
           cursor: pointer;
-          /* font-size: 1rem; */
+          overflow: visible;
           font-size: 0.95rem;
         }
 
-        .actions > ul.tab > li.tab-item.active {
-          padding: 6px 10px 8px 10px;
-          margin: 0;
+        .actions > ul.tab > li.tab-item > .text {
+          font-weight: 500;
+          font-size: 1rem;
         }
 
-        .actions > ul.tab > li.tab-item:first-of-type {
-          margin: 0 10px 0 0;
-        }
-
-        .actions > ul.tab > li.tab-item:hover>.text {
-          color: var(--accent-color);
+        .actions > ul.tab > li.tab-item:hover > .text {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: var(--font-text);
         }
 
         .actions > ul.tab > li.active {
           font-size: 0.95rem;
-          padding: 6px 10px 10px 10px;
+          /*padding: 6px 10px 10px 10px;*/
         }
 
         .actions > ul.tab > li.active > .text {
@@ -606,16 +606,20 @@ export default class AppProfile extends HTMLElement {
           font-family: var(--font-text);
         }
 
-        .actions > ul.tab > li.active > span.line {
+        .actions > ul.tab span.line {
           position: absolute;
+          z-index: 1;
           background: var(--accent-linear);
           display: inline-block;
-          bottom: 0;
-          right: 0;
-          left: 0;
+          bottom: -2.5px;
+          left: 12px;
+          width: 20px;
           min-height: 5px;
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          transition: all 300ms ease-in-out;
         }
 
         div.content-container {
@@ -679,7 +683,7 @@ export default class AppProfile extends HTMLElement {
           -moz-border-radius: 50px;
         }
 
-                .company {
+        .company {
           display: flex;
           margin: 20px 0;
           flex-flow: column;
@@ -784,7 +788,6 @@ export default class AppProfile extends HTMLElement {
           }
 
           section.side {
-            /* border: 1px solid #ff0000; */
             padding: 0;
             display: none;
             width: 0%;
