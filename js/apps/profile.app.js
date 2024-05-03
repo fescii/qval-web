@@ -152,12 +152,12 @@ export default class AppProfile extends HTMLElement {
           <div class="users">
             <a href="" class="stat followers">
               <span class="no">${this.getAttribute('followers')}</span>
-              <span class="text">Followers</span>
+              <span class="text">followers</span>
             </a>
             <span class="sp">•</span>
             <a href="" class="stat followers">
               <span class="no">${this.getAttribute('following')}</span>
-              <span class="text">Following</span>
+              <span class="text">stories</span>
             </a>
           </div>
         </div>
@@ -359,14 +359,6 @@ export default class AppProfile extends HTMLElement {
           width: 100%;
         }
 
-        .head * {
-          transition: all 300ms ease-in-out;
-          -webkit-transition: all 300ms ease-in-out;
-          -moz-transition: all 300ms ease-in-out;
-          -ms-transition: all 300ms ease-in-out;
-          -o-transition: all 300ms ease-in-out;
-        }
-
         .head > .data {
           /* border: 1px solid #6b7280; */
           display: flex;
@@ -398,7 +390,7 @@ export default class AppProfile extends HTMLElement {
           padding: 0;
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
-          font-weight: 400;
+          font-weight: 500;
           line-height: 1.4;
           font-size: 1rem;
           display: flex;
@@ -430,13 +422,14 @@ export default class AppProfile extends HTMLElement {
           margin: 0;
           padding: 0;
           color: var(--gray-color);
-          font-family: var(--font-main), sans-serif;
+          font-family: var(--font-text), sans-serif;
           font-weight: 400;
           line-height: 1.4;
           font-size: 0.9rem;
           display: flex;
           align-items: center;
           gap: 5px;
+          text-transform: lowercase;
         }
 
         .head > .data > .users > a {
@@ -445,7 +438,11 @@ export default class AppProfile extends HTMLElement {
         }
 
         .head > .data > .users > a:hover {
-          color: var(--accent-color);
+          /* color: var(--accent-color); */
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
         }
 
         .head > .data > .users > a > span.no {
@@ -583,12 +580,12 @@ export default class AppProfile extends HTMLElement {
           font-size: 0.95rem;
         }
 
-        .actions > ul.tab > li.tab-item.active {
-          /* padding: 6px 10px 8px 10px; */
-          margin: 0;
+        .actions > ul.tab > li.tab-item > .text {
+          font-weight: 500;
+          font-size: 1rem;
         }
 
-        .actions > ul.tab > li.tab-item:hover >.text {
+        .actions > ul.tab > li.tab-item:hover > .text {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
@@ -622,6 +619,7 @@ export default class AppProfile extends HTMLElement {
           border-top-right-radius: 5px;
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
+          transition: all 300ms ease-in-out;
         }
 
         div.content-container {
