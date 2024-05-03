@@ -42,6 +42,7 @@ export default class AppProfile extends HTMLElement {
     const contentContainer = this.shadowObj.querySelector('.content-container');
 
     if (tab && contentContainer) {
+      const line = tab.querySelector('span.line');
       const tabItems = tab.querySelectorAll('li.tab-item');
       let activeTab = tab.querySelector('li.tab-item.active');
 
@@ -50,6 +51,11 @@ export default class AppProfile extends HTMLElement {
           e.preventDefault()
           e.stopPropagation()
 
+          // Calculate half tab width - 10px
+          const tabWidth = (tab.offsetWidth/2) - 20;
+
+          line.style.left = `${tab.offsetLeft + tabWidth}px`;
+
           if (tab.dataset.element === activeTab.dataset.element) {
             return;
           }
@@ -57,7 +63,6 @@ export default class AppProfile extends HTMLElement {
             activeTab.classList.remove('active');
             tab.classList.add('active');
             activeTab = tab;
-            // console.log(tab);
             switch (tab.dataset.element) {
               case "stories":
                 contentContainer.innerHTML = outerThis.getStories();
@@ -221,16 +226,14 @@ export default class AppProfile extends HTMLElement {
       <ul id="tab" class="tab">
         <li data-element="stories" class="tab-item details active">
           <span class="text">Stories</span>
-          <span class="line"></span>
         </li>
         <li data-element="opinions" class="tab-item opinions">
           <span class="text">Opinions</span>
-          <span class="line"></span>
         </li>
         <li data-element="people" class="tab-item people">
           <span class="text">People</span>
-          <span class="line"></span>
         </li>
+        <span class="line"></span>
       </ul>
     `
   }
@@ -553,7 +556,7 @@ export default class AppProfile extends HTMLElement {
           margin: 0;
           list-style-type: none;
           display: flex;
-          gap: 5px;
+          gap: 0;
           align-items: center;
           max-width: 100%;
           overflow-x: scroll;
@@ -567,35 +570,35 @@ export default class AppProfile extends HTMLElement {
         }
 
         .actions > ul.tab > li.tab-item {
-          position: relative;
+          /* border: var(--story-border); */
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
           font-weight: 400;
-          padding: 6px 0 8px 0;
-          margin: 0 0 0 10px;
+          padding: 6px 20px 8px 0;
+          margin: 0;
           display: flex;
           align-items: center;
           cursor: pointer;
-          /* font-size: 1rem; */
+          overflow: visible;
           font-size: 0.95rem;
         }
 
         .actions > ul.tab > li.tab-item.active {
-          padding: 6px 10px 8px 10px;
+          /* padding: 6px 10px 8px 10px; */
           margin: 0;
         }
 
-        .actions > ul.tab > li.tab-item:first-of-type {
-          margin: 0 10px 0 0;
-        }
-
-        .actions > ul.tab > li.tab-item:hover>.text {
-          color: var(--accent-color);
+        .actions > ul.tab > li.tab-item:hover >.text {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: var(--font-text);
         }
 
         .actions > ul.tab > li.active {
           font-size: 0.95rem;
-          padding: 6px 10px 10px 10px;
+          /*padding: 6px 10px 10px 10px;*/
         }
 
         .actions > ul.tab > li.active > .text {
@@ -606,16 +609,19 @@ export default class AppProfile extends HTMLElement {
           font-family: var(--font-text);
         }
 
-        .actions > ul.tab > li.active > span.line {
+        .actions > ul.tab span.line {
           position: absolute;
+          z-index: 1;
           background: var(--accent-linear);
           display: inline-block;
-          bottom: 0;
-          right: 0;
-          left: 0;
+          bottom: -2.5px;
+          left: 12px;
+          width: 20px;
           min-height: 5px;
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
         }
 
         div.content-container {
@@ -679,7 +685,7 @@ export default class AppProfile extends HTMLElement {
           -moz-border-radius: 50px;
         }
 
-                .company {
+        .company {
           display: flex;
           margin: 20px 0;
           flex-flow: column;
@@ -784,7 +790,6 @@ export default class AppProfile extends HTMLElement {
           }
 
           section.side {
-            /* border: 1px solid #ff0000; */
             padding: 0;
             display: none;
             width: 0%;
