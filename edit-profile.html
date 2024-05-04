@@ -252,7 +252,7 @@
       </ul>
     </section>
     <section class="content">
-      <div class="profile name-form">
+      <!-- <div class="profile name-form">
         <div class="top">
           <h4 class="title">Your name</h4>
           <p class="desc">
@@ -305,7 +305,7 @@
             </button>
           </div>
         </form>
-      </div>
+      </div> -->
       <div class="profile picture-form">
         <div class="top">
           <h4 class="title">Your profile</h4>
@@ -315,13 +315,14 @@
             The image should be square and at least 200x200 pixels in size.
           </p>
         </div>
-        <form class="fields picture" id="picture-form">
-          <div class="image-preview-container">
-            <div class="preview">
-              <img id="preview-selected-image" />
-            </div>
-            <label for="file-upload">Select</label>
-            <input type="file" id="file-upload" accept="image/*" />
+        <form class="fields picture">
+          <div class="image-preview">
+            <label for="profile-image">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z"></path>
+              </svg>
+            </label>
+            <input type="file" id="profile-image" accept="image/*" />
           </div>
           <div class="actions">
             <button type="submit" class="action next">
@@ -333,11 +334,12 @@
     </section>
   </main>
   <script>
-    const image = document.querySelector('.image-preview-container input')
-    console.log(image);
-    if (image) {
+    const previewContainer =  document.querySelector('.image-preview')
+
+    if (previewContainer) {
+      const image = previewContainer.querySelector('input[type="file"]');
       image.addEventListener('change', (event) => {
-      console.log('Changed')
+      // console.log('Changed')
       // Get the selected files.
        const imageFiles = event.target.files;
 
@@ -349,14 +351,11 @@
             // Get the image path.
             const imageSrc = URL.createObjectURL(imageFiles[0]);
 
-            // Select the image preview element.
-            const imagePreviewElement = document.querySelector("#preview-selected-image");
+            // console.log(imageSrc);
 
-            // Assign the path to the image preview element.
-            imagePreviewElement.src = imageSrc;
+            //  Add the image as background image.
+            previewContainer.style.backgroundImage = `url(${imageSrc})`;
 
-            // Show the element by changing the display value to "block".
-            imagePreviewElement.style.display = "block";
           }
         });
     }

@@ -557,25 +557,29 @@ form.fields .actions > .action.disabled {
 }
 
 form.fields.picture {
+  /* border: var(--input-border); */
   display: flex;
   flex-flow: column;
   align-items: start;
   gap: 20px;
 }
 
-form.fields .image-preview-container {
-  border: var(--input-border);
-  position: relative;
+
+form.fields.picture > .image-preview {
+  /*all: unset;
+  */border: var(--input-border);
   width: 150px;
-  width: 150px;
-  min-height: 150px;
+  height: 150px;
   min-width: 150px;
-  padding: 0;
-  border-radius: 20px;
+  min-height: 150px;
+  object-fit: cover;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
+  justify-content: center;
+  background-repeat: no-repeat !important;
+  background-position: 100%;
+  background-size: cover;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -583,7 +587,7 @@ form.fields .image-preview-container {
   -o-border-radius: 50%;
 }
 
-form.fields .image-preview-container img {
+form.fields.picture > .image-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -592,7 +596,7 @@ form.fields .image-preview-container img {
   border-radius: 20px;
 }
 
-form.fields .image-preview-container input+label {
+form.fields.picture > .image-preview input+label {
   display: inline-block;
   width: max-content;
   height: 30px;
@@ -603,22 +607,26 @@ form.fields .image-preview-container input+label {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   position: absolute;
-  right: 20px;
-  top: 50%;
-  font-weight: normal;
-  transition: all 0.2s ease-in-out;
+  right: calc(50% - 20px);
+  top: calc(50% - 20px);
   transform: translateY(-50%);
+  font-weight: normal;
 }
 
-form.fields .image-preview-container input {
-  display: none;
+form.fields.picture > .image-preview input {
+  /* display: none; */
+  opacity: 0;
 }
 
-form.fields .image-preview-container label {
+form.fields.picture > .image-preview label {
   position: absolute;
-  top: 50%;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  top: calc(50% - 10px);
   padding: 7px 12px;
-  z-index: 5;
+  z-index: 1;
   margin: 0;
   text-align: center;
   background: var(--accent-linear);
@@ -631,7 +639,11 @@ form.fields .image-preview-container label {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-50%);
+}
+
+form.fields.picture > .image-preview label svg {
+  width: 20px;
+  height: 20px;
 }
 
 
