@@ -783,6 +783,104 @@ section.content > .activity > .actions > ul.tab span.line {
   transition: all 300ms ease-in-out;
 }
 
+section.content > .activity > .activities {
+  /* border: var(--story-border); */
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  padding: 0;
+  width: 100%;
+}
+
+section.content > .activity > .activities > .story {
+  border-bottom: var(--story-border);
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+  padding: 15px 0;
+  width: 100%;
+}
+
+.activities > .story > .head {
+  /* border: 1px solid #6b7280; */
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  width: 100%;
+}
+
+.activities > .story > .head svg {
+  width: 15px;
+  height: 15px;
+  color: var(--gray-color);
+  margin: 0 0 -1px 0;
+}
+
+.activities > .story > .head > span.text {
+  color: var(--gray-color);
+  font-size: 0.9rem;
+  font-family: var(--font-text), sans-serif;
+  font-style: italic;
+}
+
+.activities > .story > .content {
+  /* border: 1px solid #6b7280; */
+  color: var(--text-color);
+  display: flex;
+  flex-flow: column;
+  font-size: 0.95rem;
+  gap: 5px;
+  padding: 0;
+  width: 100%;
+}
+
+.activities > .story > .foot {
+  /* border: 1px solid #6b7280; */
+  color: var(--gray-color);
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  gap: 5px;
+  padding: 0;
+  width: 100%;
+}
+
+.activities > .story > .foot > .hash {
+  color: var(--gray-color);
+  font-size: 0.85rem;
+  /* font-family: var(--font-main), sans-serif; */
+}
+
+.activities > .story > .foot a {
+  color: var(--gray-color);
+  font-size: 0.95rem;
+  font-family: var(--font-main), sans-serif;
+  text-decoration: none;
+}
+
+.activities > .story > .foot a:hover {
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.activities > .story > .foot .sp {
+  color: var(--gray-color);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.activities > .story > .foot span.by,
+.activities > .story > .foot time {
+  font-size: 0.85rem;
+  font-family: var(--font-mono), sans-serif;
+}
+
+
+
 /*Footer*/
 footer.footer {
   border-top: thin solid #4b5563bd;
