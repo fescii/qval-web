@@ -820,7 +820,7 @@ section.content > .activity > .activities > .story {
 
 .activities > .story > .head > span.text {
   color: var(--gray-color);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-family: var(--font-text), sans-serif;
   font-style: italic;
 }
@@ -828,6 +828,7 @@ section.content > .activity > .activities > .story {
 .activities > .story > .content {
   /* border: 1px solid #6b7280; */
   color: var(--text-color);
+  font-family: var(--font-read), sans-serif;
   display: flex;
   flex-flow: column;
   font-size: 0.95rem;
