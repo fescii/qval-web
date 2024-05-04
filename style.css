@@ -432,7 +432,12 @@ form.fields .field input {
   padding: 10px 12px;
   border-radius: 12px;
   color: var(--text-color);
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
 }
+
 form.fields textarea {
   border: none;
   border: var(--input-border);
@@ -459,20 +464,59 @@ form.fields .field input:focus {
   border: var(--input-border-focus);
 }
 
+form.fields .field span.wrapper {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+form.fields .field span.wrapper > span.icon {
+  border: var(--input-border);
+  border-right: none;
+  max-height: 40px;
+  min-height: 40px;
+  font-size: 1rem;
+  width: 40px;
+  padding: 10px 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  color: var(--gray-color);
+  display: flex;
+  align-items: center;
+}
+
+form.fields .field span.wrapper > input {
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  width: calc(100% - 40px);
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+form.fields .field .input-group.success > span.wrapper >input,
+form.fields .field .input-group.success > span.wrapper >input:focus,
 form.fields .field .input-group.success input,
 form.fields .field .input-group.success input:focus {
   border: var(--input-border-focus);
 }
 
+form.fields .field .input-group.failed > span.wrapper > input,
+form.fields .field .input-group.failed > span.wrapper > input:focus,
 form.fields .field .input-group.failed input,
 form.fields .field .input-group.failed input:focus {
   border: var(--input-border-error);
 }
 
+form.fields .field .input-group.success span.wrapper > input,
 form.fields .field .input-group.success input {
   color: var(--accent-color);
 }
 
+form.fields .field .input-group.failed span.wrapper > input,
 form.fields .field .input-group.failed input {
   color: var(--error-color);
 }
@@ -566,8 +610,8 @@ form.fields.picture {
 
 
 form.fields.picture > .image-preview {
-  /*all: unset;
-  */border: var(--input-border);
+  border: var(--input-border);
+  position: relative;
   width: 150px;
   height: 150px;
   min-width: 150px;
@@ -624,7 +668,7 @@ form.fields.picture > .image-preview label {
   height: 40px;
   min-width: 40px;
   min-height: 40px;
-  top: calc(50% - 10px);
+  top: calc(50% - 20px);
   padding: 7px 12px;
   z-index: 1;
   margin: 0;
