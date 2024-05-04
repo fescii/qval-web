@@ -156,7 +156,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
               <path d="M580.3 267.2c56.2-56.2 56.2-147.3 0-203.5C526.8 10.2 440.9 7.3 383.9 57.2l-6.1 5.4c-10 8.7-11 23.9-2.3 33.9s23.9 11 33.9 2.3l6.1-5.4c38-33.2 95.2-31.3 130.9 4.4c37.4 37.4 37.4 98.1 0 135.6L433.1 346.6c-37.4 37.4-98.2 37.4-135.6 0c-35.7-35.7-37.6-92.9-4.4-130.9l4.7-5.4c8.7-10 7.7-25.1-2.3-33.9s-25.1-7.7-33.9 2.3l-4.7 5.4c-49.8 57-46.9 142.9 6.6 196.4c56.2 56.2 147.3 56.2 203.5 0L580.3 267.2zM59.7 244.8C3.5 301 3.5 392.1 59.7 448.2c53.6 53.6 139.5 56.4 196.5 6.5l6.1-5.4c10-8.7 11-23.9 2.3-33.9s-23.9-11-33.9-2.3l-6.1 5.4c-38 33.2-95.2 31.3-130.9-4.4c-37.4-37.4-37.4-98.1 0-135.6L207 165.4c37.4-37.4 98.1-37.4 135.6 0c35.7 35.7 37.6 92.9 4.4 130.9l-5.4 6.1c-8.7 10-7.7 25.1 2.3 33.9s25.1 7.7 33.9-2.3l5.4-6.1c49.9-57 47-142.9-6.5-196.5c-56.2-56.2-147.3-56.2-203.5 0L59.7 244.8z" />
             </svg>
-            <span class="text">Your contacts</span>
+            <span class="text">Your socials</span>
           </a>
         </li>
       </ul>
@@ -168,7 +168,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
               <path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
             </svg>
-            <span class="text">Email</span>
+            <span class="text">Your email</span>
           </a>
         </li>
         <li class="tab-item">
@@ -252,7 +252,7 @@
       </ul>
     </section>
     <section class="content">
-      <div class="profile name-form">
+      <!-- <div class="profile name-form">
         <div class="top">
           <h4 class="title">Your name</h4>
           <p class="desc">
@@ -315,13 +315,14 @@
             The image should be square and at least 200x200 pixels in size.
           </p>
         </div>
-        <form class="fields picture" id="picture-form">
-          <div class="image-preview-container">
-            <div class="preview">
-              <img id="preview-selected-image" />
-            </div>
-            <label for="file-upload">Select</label>
-            <input type="file" id="file-upload" accept="image/*" />
+        <form class="fields picture">
+          <div class="image-preview">
+            <label for="profile-image">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z"></path>
+              </svg>
+            </label>
+            <input type="file" id="profile-image" accept="image/*" />
           </div>
           <div class="actions">
             <button type="submit" class="action next">
@@ -330,14 +331,234 @@
           </div>
         </form>
       </div>
+      <div class="profile name-form">
+        <div class="top">
+          <h4 class="title">Your socials</h4>
+          <p class="desc">
+            Your socials are how people will connect with you outside the platform. You can add your email, twitter, linkedin, and x
+            accounts.
+          </p>
+        </div>
+        <form class="fields initial" id="name-form">
+          <div class="field bio">
+            <div class="input-group email">
+              <span class="wrapper">
+                <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                    <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"></path>
+                  </svg>
+                </span>
+                <input type="email" name="email" id="email" placeholder="e.g john@example.com" required>
+              </span>
+            </div>
+            <div class="input-group x">
+              <span class="wrapper">
+                <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                  </svg>
+                </span>
+                <input type="text" name="x" id="x" placeholder="Your X(twitter) username" required>
+              </span>
+            </div>
+            <div class="input-group linkedin">
+              <span class="wrapper">
+                <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                  </svg>
+                </span>
+                <input type="text" name="linkedin" id="linkedin" placeholder="Your linkedin username" required>
+              </span>
+            </div>
+            <div class="input-group threads">
+              <span class="wrapper">
+                <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-threads" viewBox="0 0 16 16">
+                    <path d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161" />
+                  </svg>
+                </span>
+                <input type="text" name="threads" id="threads" placeholder="Your threads username" required>
+              </span>
+            </div>
+            <div class="input-group threads">
+              <span class="wrapper">
+                <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"  fill="currentColor"  width="16" height="16">
+                    <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path>
+                  </svg>
+                </span>
+                <input type="url" name="link" id="link" placeholder="Your website or a link" required>
+              </span>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="action next">
+              <span class="text">Update socials</span>
+            </button>
+          </div>
+        </form>
+      </div> -->
+      <!-- <div class="profile email-form">
+        <div class="top">
+          <h4 class="title">Your email</h4>
+          <p class="desc">
+            Your email is how you will recover your account in case you forget your password. You can also use it to log in, reset your password, and receive notifications.
+          </p>
+        </div>
+        <form class="fields email" id="email-form">
+          <div class="field email">
+            <div class="input-group email">
+              <label for="email" class="center">Your email</label>
+              <input type="email" name="email" id="email" placeholder="e.g john@example.com" />
+              <span class="status">Email is required</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="action next">
+              <span class="text">Update email</span>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="profile password-form">
+        <div class="top">
+          <h4 class="title">Password</h4>
+          <p class="desc">
+            Your password is how you will log in to your account. You can change your password using the form below. You're required to enter your current password, then your new password.
+          </p>
+        </div>
+        <form class="fields password" id="password-form">
+          <div class="field password">
+            <div class="input-group current-password">
+              <label for="current-password" class="center">Current password</label>
+              <input type="password" name="current-password" id="current-password" placeholder="Enter your current password" />
+              <span class="status">Current password is required</span>
+            </div>
+            <div class="input-group new-password">
+              <label for="new-password" class="center">New password</label>
+              <input type="password" name="new-password" id="new-password" placeholder="Enter your new password" />
+              <span class="status">New password is required</span>
+            </div>
+            <div class="input-group confirm-password">
+              <label for="confirm-password" class="center">Confirm password</label>
+              <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your new password" />
+              <span class="status">Confirm password is required</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="action next">
+              <span class="text">Update password</span>
+            </button>
+          </div>
+        </form>
+      </div> -->
+      <div class="activity">
+        <div class="top">
+          <h4 class="title">Your activity</h4>
+          <p class="desc">
+            Your activity is a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes. You can also view your bookmarks and saved stories.
+          </p>
+        </div>
+
+
+        <div class="actions">
+          <ul id="tab" class="tab">
+            <li data-element="stories" class="tab-item details active">
+              <span class="text">Stories</span>
+            </li>
+            <li data-element="saved" class="tab-item saved">
+              <span class="text">Saved</span>
+            </li>
+            <li data-element="upvotes" class="tab-item upvotes">
+              <span class="text">Upvotes</span>
+            </li>
+            <li data-element="topic" class="tab-item topics">
+              <span class="text">Topics</span>
+            </li>
+            <span class="line"></span>
+          </ul>
+        </div>
+
+        <div class="activities stories">
+          <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                <path
+                  d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z">
+                </path>
+              </svg>
+              <span class="text">You added an article</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by you</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
+            </div>
+          </div>
+          <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                <path
+                  d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z">
+                </path>
+              </svg>
+              <span class="text">You added a story</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by you</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
+            </div>
+          </div>
+          <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                <path
+                  d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z">
+                </path>
+              </svg>
+              <span class="text">You added an article</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by you</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
   </main>
   <script>
-    const image = document.querySelector('.image-preview-container input')
-    console.log(image);
-    if (image) {
+    const previewContainer =  document.querySelector('.image-preview')
+
+    if (previewContainer) {
+      const image = previewContainer.querySelector('input[type="file"]');
       image.addEventListener('change', (event) => {
-      console.log('Changed')
+      // console.log('Changed')
       // Get the selected files.
        const imageFiles = event.target.files;
 
@@ -349,14 +570,11 @@
             // Get the image path.
             const imageSrc = URL.createObjectURL(imageFiles[0]);
 
-            // Select the image preview element.
-            const imagePreviewElement = document.querySelector("#preview-selected-image");
+            // console.log(imageSrc);
 
-            // Assign the path to the image preview element.
-            imagePreviewElement.src = imageSrc;
+            //  Add the image as background image.
+            previewContainer.style.backgroundImage = `url(${imageSrc})`;
 
-            // Show the element by changing the display value to "block".
-            imagePreviewElement.style.display = "block";
           }
         });
     }
