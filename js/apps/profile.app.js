@@ -611,7 +611,7 @@ export default class AppProfile extends HTMLElement {
           z-index: 1;
           background: var(--accent-linear);
           display: inline-block;
-          bottom: -2.5px;
+          bottom: -3px;
           left: 12px;
           width: 20px;
           min-height: 5px;
