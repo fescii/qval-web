@@ -27,7 +27,7 @@
     import AppSearch from "./js/apps/search.app.js";
     import AppProfile from "./js/apps/profile.app.js";
     import AppStory from "./js/apps/story.app.js";
-     import AppTopic from "./js/apps/topic.app.js";
+    import AppTopic from "./js/apps/topic.app.js";
 
     import HeaderContainer from "./js/containers/header.container.js"
     import StoryBody from "./js/story.body.js";
@@ -55,6 +55,10 @@
     import AddContainer from "./js/containers/add.container.js";
 
     import DiscoverPeople from "./js/containers/people.discover.js"
+
+    import StatStory from "./js/stats/stat.story.js";
+    import StatOpinion from "./js/stats/stat.opinion.js";
+    import ActivityItem from "./js/stats/activity.item.js"
 
 
     customElements.define('app-home', AppHome);
@@ -91,6 +95,10 @@
     customElements.define('add-container', AddContainer);
 
     customElements.define('discover-people', DiscoverPeople);
+
+    customElements.define('stat-story', StatStory);
+    customElements.define('stat-opinion', StatOpinion);
+    customElements.define('activity-item', ActivityItem);
   </script>
 </head>
 
@@ -125,6 +133,17 @@
     <section class="tab">
       <ul class="tab public">
         <li class="tab-item active">
+          <span class="line"></span>
+          <a href="/user/stats" class="tab-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+              <path
+                d="M9.533.753V.752c.217 2.385 1.463 3.626 2.653 4.81C13.37 6.74 14.498 7.863 14.498 10c0 3.5-3 6-6.5 6S1.5 13.512 1.5 10c0-1.298.536-2.56 1.425-3.286.376-.308.862 0 1.035.454C4.46 8.487 5.581 8.419 6 8c.282-.282.341-.811-.003-1.5C4.34 3.187 7.035.75 8.77.146c.39-.137.726.194.763.607ZM7.998 14.5c2.832 0 5-1.98 5-4.5 0-1.463-.68-2.19-1.879-3.383l-.036-.037c-1.013-1.008-2.3-2.29-2.834-4.434-.322.256-.63.579-.864.953-.432.696-.621 1.58-.046 2.73.473.947.67 2.284-.278 3.232-.61.61-1.545.84-2.403.633a2.79 2.79 0 0 1-1.436-.874A3.198 3.198 0 0 0 3 10c0 2.53 2.164 4.5 4.998 4.5Z">
+              </path>
+            </svg>
+            <span class="text">Your stats</span>
+          </a>
+        </li>
+        <li class="tab-item">
           <span class="line"></span>
           <a href="/user/edit/name" class="tab-link">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512" width="16px" height="16px">
@@ -461,10 +480,12 @@
           </p>
         </div>
 
-
         <div class="actions">
           <ul id="tab" class="tab">
-            <li data-element="stories" class="tab-item details active">
+            <li data-element="stories" class="tab-item all active">
+              <span class="text">All</span>
+            </li>
+            <li data-element="stories" class="tab-item stories">
               <span class="text">Stories</span>
             </li>
             <li data-element="saved" class="tab-item saved">
@@ -473,14 +494,109 @@
             <li data-element="upvotes" class="tab-item upvotes">
               <span class="text">Upvotes</span>
             </li>
-            <li data-element="topic" class="tab-item topics">
-              <span class="text">Topics</span>
-            </li>
             <span class="line"></span>
           </ul>
         </div>
 
         <div class="activities stories">
+          <activity-item id="479" hash="N0BA699HAB3" kind="added"
+            type="story" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... "
+            >
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="added" type="opinion" by="U0AB236B6D" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="saved" type="opinion" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="saved" type="story" by="U0AB236B6D" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="upvoted" type="story" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="upvoted" type="opinion" by="U0AB236B6D" time="2021-08-12T12:00:00Z"
+            on="6 may" content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="mentioned" type="opinion" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="mentioned" type="story" by="U0AB236B6D" time="2021-08-12T12:00:00Z"
+            on="6 may" content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <!-- <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                <path
+                  d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z">
+                </path>
+              </svg>
+              <span class="text">You added an article</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by you</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
+            </div>
+          </div>
+          <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                <path
+                  d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z">
+                </path>
+              </svg>
+              <span class="text">You added a story</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by you</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
+            </div>
+          </div>
+          <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="at">
+                <path
+                  d="M4.75 2.37a6.501 6.501 0 0 0 6.5 11.26.75.75 0 0 1 .75 1.298A7.999 7.999 0 0 1 .989 4.148 8 8 0 0 1 16 7.75v1.5a2.75 2.75 0 0 1-5.072 1.475 3.999 3.999 0 0 1-6.65-4.19A4 4 0 0 1 12 8v1.25a1.25 1.25 0 0 0 2.5 0V7.867a6.5 6.5 0 0 0-9.75-5.496ZM10.5 8a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z">
+                </path>
+              </svg>
+              <span class="text">You were mentioned in a story</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by U0AB236B6D</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+            </div>
+          </div>
           <div class="story">
             <div class="head">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -489,6 +605,28 @@
                 </path>
               </svg>
               <span class="text">You added an article</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by you</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
+            </div>
+          </div>
+          <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="saved">
+                <path
+                  d="m11.294.984 3.722 3.722a1.75 1.75 0 0 1-.504 2.826l-1.327.613a3.089 3.089 0 0 0-1.707 2.084l-.584 2.454c-.317 1.332-1.972 1.8-2.94.832L5.75 11.311 1.78 15.28a.749.749 0 1 1-1.06-1.06l3.969-3.97-2.204-2.204c-.968-.968-.5-2.623.832-2.94l2.454-.584a3.08 3.08 0 0 0 2.084-1.707l.613-1.327a1.75 1.75 0 0 1 2.826-.504ZM6.283 9.723l2.732 2.731a.25.25 0 0 0 .42-.119l.584-2.454a4.586 4.586 0 0 1 2.537-3.098l1.328-.613a.25.25 0 0 0 .072-.404l-3.722-3.722a.25.25 0 0 0-.404.072l-.613 1.328a4.584 4.584 0 0 1-3.098 2.537l-2.454.584a.25.25 0 0 0-.119.42l2.731 2.732Z">
+                </path>
+              </svg>
+              <span class="text">You saved a story</span>
             </div>
             <span class="content">
               This is a story about how you added an article to your profile. You can...
@@ -547,8 +685,311 @@
               <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
             </div>
           </div>
+          <div class="story">
+            <div class="head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="upvoted">
+                <path
+                  d="M3.47 7.78a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0l4.25 4.25a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018L9 4.81v7.44a.75.75 0 0 1-1.5 0V4.81L4.53 7.78a.75.75 0 0 1-1.06 0Z">
+                </path>
+              </svg>
+              <span class="text">You upvoted this article</span>
+            </div>
+            <span class="content">
+              This is a story about how you added an article to your profile. You can...
+            </span>
+            <div class="foot">
+              <span class="by">by you</span>
+              <span class="sp">•</span>
+              <time datetime="2021-08-12T12:00:00Z">on 6 may</time>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3 " class="link">view</a>
+              <span class="sp">•</span>
+              <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
+            </div>
+          </div> -->
         </div>
+      </div>
 
+      <div class="activity stats">
+        <div class="top">
+          <h4 class="title">Your stats</h4>
+          <p class="desc">
+            Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes. You can also view your bookmarks and saved stories.
+          </p>
+        </div>
+        <div class="actions">
+          <ul id="tab" class="tab">
+            <li data-element="stories" class="tab-item all active">
+              <span class="text">All</span>
+            </li>
+            <li data-element="stories" class="tab-item stories">
+              <span class="text">Stories</span>
+            </li>
+            <li data-element="saved" class="tab-item opinions">
+              <span class="text">Opinions</span>
+            </li>
+            <li data-element="upvotes" class="tab-item users">
+              <span class="text">Users</span>
+            </li>
+            <span class="line"></span>
+          </ul>
+        </div>
+        <div class="stats all">
+          <div class="summery">
+            <div class="title">
+              <h4 class="text">All contents</h4>
+              <span class="desc">
+                Summary of all engagements
+              </span>
+              <time datetime="2021-08-12T12:00:00Z">this month</time>
+            </div>
+            <div class="content">
+              <div class="main">
+                <div class="views">
+                  <div class="text">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M8.75 1.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.25a.75.75 0 0 1 .75-.75Zm-3.5 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm7 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Z">
+                      </path>
+                    </svg>
+                    <h2 class="no">3M</h2>
+                  </div>
+                  <span class="desc">All views</span>
+                </div>
+                <div class="compared">
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage">12.3%</span>
+                  </span>
+                  <span class="info">Compared to prior month</span>
+                </div>
+              </div>
+              <div class="main">
+                <div class="views">
+                  <div class="text">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M8.75 1.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.25a.75.75 0 0 1 .75-.75Zm-3.5 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm7 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Z">
+                      </path>
+                    </svg>
+                    <h2 class="no">121k</h2>
+                  </div>
+                  <span class="desc">All stories</span>
+                </div>
+                <div class="compared">
+                  <span class="change down">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                      <path
+                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
+                      </path>
+                    </svg>
+                    <span class="percentage">12.3%</span>
+                  </span>
+                  <span class="info">Compared to prior month</span>
+                </div>
+              </div>
+              <div class="main">
+                <div class="views">
+                  <div class="text">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M8.75 1.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.25a.75.75 0 0 1 .75-.75Zm-3.5 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm7 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Z">
+                      </path>
+                    </svg>
+                    <h2 class="no">803k</h2>
+                  </div>
+                  <span class="desc">All opinions</span>
+                </div>
+                <div class="compared">
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage">12.3%</span>
+                  </span>
+                  <span class="info">Compared to prior month</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats stories">
+          <div class="summery">
+            <div class="title">
+              <h4 class="text">Stories</h4>
+              <span class="desc">
+                Summary of story engagements
+              </span>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <h4 class="title">Views</h4>
+                <div class="stat">
+                  <h2 class="no">103k</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">3,635</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Views</h4>
+                <div class="stat">
+                  <h2 class="no">103k</h2>
+                  <span class="change down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">1,335</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Upvotes</h4>
+                <div class="stat">
+                  <h2 class="no">6,603</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">3,635</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats opinions">
+          <div class="summery">
+            <div class="title">
+              <h4 class="text">Opinions</h4>
+              <span class="desc">
+                Summary of opinions engagements
+              </span>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <h4 class="title">Views</h4>
+                <div class="stat">
+                  <h2 class="no">103k</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">3,635</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Views</h4>
+                <div class="stat">
+                  <h2 class="no">103k</h2>
+                  <span class="change down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">1,335</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Upvotes</h4>
+                <div class="stat">
+                  <h2 class="no">6,603</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">3,635</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats account">
+          <div class="summery">
+            <div class="title">
+              <h4 class="text">Account</h4>
+              <span class="desc">
+                Your account summery
+              </span>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <h4 class="title">Followers</h4>
+                <div class="stat">
+                  <h2 class="no">13k</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">635</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Subscribers</h4>
+                <div class="stat">
+                  <h2 class="no">103k</h2>
+                  <span class="change down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">1,335</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Donations</h4>
+                <div class="stat">
+                  <h2 class="no">Ksh. 6,603</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">3,635</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="activities stories">
+          <stat-story id="256" upvotes="609" views="531" date="2021-08-12T12:00:00Z"
+            content="This is a story about how you added an article to your profile."
+            >
+          </stat-story>
+          <stat-opinion id="256" upvotes="609" views="531" date="2021-08-12T12:00:00Z"
+            content="This is a story about how you added an article to your profile. Something here...">
+          </stat-opinion>
+        </div>
       </div>
     </section>
   </main>
