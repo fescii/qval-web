@@ -916,29 +916,39 @@ section.content > .activity > .activities > .story {
 }
 
 .stats > .summery {
-  border: var(--story-border-mobile);
+  border-bottom: var(--story-border-mobile);
   margin: 20px 0;
+  width: 100%;
   display: flex;
   flex-flow: column;
-  width: max-content;
   gap: 10px;
   justify-content: center;
-  padding: 0;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  padding: 0 0 10px;
 }
 
 .stats > .summery > .title {
-  border-bottom: var(--story-border-mobile);
+  /* border-bottom: var(--story-border-mobile); */
   display: flex;
+  position: relative;
   flex-flow: column;
-  padding: 6px 10px 8px 10px;
+  padding: 6px 0;
   gap: 0;
   justify-content: center;
   color: var(--text-color);
+}
+
+.stats > .summery > .title time {
+  position: absolute;
+  right: 10px;
+  color: var(--gray-color);
+  font-family: var(--font-mono), monospace;
+  border: var(--input-border);
+  padding: 2px 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 .stats > .summery > .title > h4 {
@@ -952,14 +962,15 @@ section.content > .activity > .activities > .story {
 .stats > .summery > .title > span.desc {
   color: var(--gray-color);
   font-size: 0.9rem;
-  font-family: var(--font-read), sans-serif;
+  font-family: var(--font-text), sans-serif;
 }
 
 .stats > .summery > .content {
   display: flex;
   flex-flow: row;
-  gap: 10px;
-  padding: 6px 10px 8px 10px;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 6px 0;
   width: 100%;
 }
 
@@ -973,6 +984,7 @@ section.content > .activity > .activities > .story {
 .stats > .summery > .content > .main .views {
   /* border: thin solid #4b5563bd; */
   display: flex;
+  width: max-content;
   flex-flow: column;
   align-items: center;
   gap: 0;
@@ -989,15 +1001,15 @@ section.content > .activity > .activities > .story {
 }
 
 .stats > .summery > .content > .main .views .text svg {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   /* margin: -2px 0 0 0; */
 }
 
 .stats > .summery > .content > .main .views .text > h2 {
   color: var(--text-color);
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 500;
   font-family: var(--font-text), sans-serif;
   margin: 0;
 }
@@ -1031,6 +1043,10 @@ section.content > .activity > .activities > .story {
   color: var(--accent-alt);
 }
 
+.stats > .summery > .content > .main .compared > .change.down {
+  color: var(--error-color);
+}
+
 .stats > .summery > .content > .main .compared > .change.up .percentage {
   color: transparent;
   background: var(--accent-linear);
@@ -1056,6 +1072,96 @@ section.content > .activity > .activities > .story {
   font-size: 0.9rem;
   font-family: var(--font-text), sans-serif;
   font-style: italic;
+}
+
+/* cards */
+.stats > .summery > .cards {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 6px 0;
+  width: 100%;
+}
+
+.stats > .summery .cards > .card {
+  /* border: thin solid #4b5563bd; */
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  padding: 10px 25px 10px 15px;
+  background-color: var(--stat-background);
+  justify-content: center;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.stats > .summery .cards > .card > .title {
+  color: var(--gray-color);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: var(--font-main), sans-serif;
+  margin: 0;
+}
+
+.stats > .summery .cards > .card > .stat {
+  /* border: thin solid #4b5563bd; */
+  color: var(--text-color);
+  display: flex;
+  flex-flow: row;
+  gap: 15px;
+  /* height: 50px; */
+  align-items: center;
+  font-family: var(--font-main), sans-serif;
+  margin: 0;
+}
+
+.stats > .summery .cards > .card > .stat > h2.no {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: var(--font-main), sans-serif;
+  margin: 0;
+}
+
+.stats > .summery .cards > .card > .stat > .change {
+  /* border: thin solid #4b5563bd; */
+  display: flex;
+  flex-flow: row;
+  gap: 2px;
+  padding: 0;
+}
+
+.stats > .summery .cards > .card > .stat > .change.up {
+  color: var(--accent-alt);
+}
+
+.stats > .summery .cards > .card > .stat > .change.down {
+  color: var(--error-color);
+}
+
+.stats > .summery .cards > .card > .stat > .change.up .percentage {
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.stats > .summery .cards > .card > .stat > .change .percentage {
+  /* color: var(--text-color); */
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: var(--font-main), sans-serif;
+  margin: 0;
+}
+
+.stats > .summery .cards > .card > .stat > .change svg {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
 }
 
 
