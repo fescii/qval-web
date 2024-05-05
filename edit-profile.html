@@ -58,6 +58,7 @@
 
     import StatStory from "./js/stats/stat.story.js";
     import StatOpinion from "./js/stats/stat.opinion.js";
+    import ActivityItem from "./js/stats/activity.item.js"
 
 
     customElements.define('app-home', AppHome);
@@ -97,6 +98,7 @@
 
     customElements.define('stat-story', StatStory);
     customElements.define('stat-opinion', StatOpinion);
+    customElements.define('activity-item', ActivityItem);
   </script>
 </head>
 
@@ -470,7 +472,7 @@
           </div>
         </form>
       </div> -->
-      <!-- <div class="activity">
+      <div class="activity">
         <div class="top">
           <h4 class="title">Your activity</h4>
           <p class="desc">
@@ -497,7 +499,41 @@
         </div>
 
         <div class="activities stories">
-          <div class="story">
+          <activity-item id="479" hash="N0BA699HAB3" kind="added"
+            type="story" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... "
+            >
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="added" type="opinion" by="U0AB236B6D" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="saved" type="opinion" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="saved" type="story" by="U0AB236B6D" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="upvoted" type="story" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="upvoted" type="opinion" by="U0AB236B6D" time="2021-08-12T12:00:00Z"
+            on="6 may" content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="mentioned" type="opinion" by="you" time="2021-08-12T12:00:00Z" on="6 may"
+            content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <activity-item id="479" hash="N0BA699HAB3" kind="mentioned" type="story" by="U0AB236B6D" time="2021-08-12T12:00:00Z"
+            on="6 may" content="This is a story about how you added an article to your profile. You can... ">
+          </activity-item>
+
+          <!-- <div class="story">
             <div class="head">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
                 <path
@@ -585,11 +621,11 @@
           </div>
           <div class="story">
             <div class="head">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="saved">
-              <path
-                d="m11.294.984 3.722 3.722a1.75 1.75 0 0 1-.504 2.826l-1.327.613a3.089 3.089 0 0 0-1.707 2.084l-.584 2.454c-.317 1.332-1.972 1.8-2.94.832L5.75 11.311 1.78 15.28a.749.749 0 1 1-1.06-1.06l3.969-3.97-2.204-2.204c-.968-.968-.5-2.623.832-2.94l2.454-.584a3.08 3.08 0 0 0 2.084-1.707l.613-1.327a1.75 1.75 0 0 1 2.826-.504ZM6.283 9.723l2.732 2.731a.25.25 0 0 0 .42-.119l.584-2.454a4.586 4.586 0 0 1 2.537-3.098l1.328-.613a.25.25 0 0 0 .072-.404l-3.722-3.722a.25.25 0 0 0-.404.072l-.613 1.328a4.584 4.584 0 0 1-3.098 2.537l-2.454.584a.25.25 0 0 0-.119.42l2.731 2.732Z">
-              </path>
-            </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="saved">
+                <path
+                  d="m11.294.984 3.722 3.722a1.75 1.75 0 0 1-.504 2.826l-1.327.613a3.089 3.089 0 0 0-1.707 2.084l-.584 2.454c-.317 1.332-1.972 1.8-2.94.832L5.75 11.311 1.78 15.28a.749.749 0 1 1-1.06-1.06l3.969-3.97-2.204-2.204c-.968-.968-.5-2.623.832-2.94l2.454-.584a3.08 3.08 0 0 0 2.084-1.707l.613-1.327a1.75 1.75 0 0 1 2.826-.504ZM6.283 9.723l2.732 2.731a.25.25 0 0 0 .42-.119l.584-2.454a4.586 4.586 0 0 1 2.537-3.098l1.328-.613a.25.25 0 0 0 .072-.404l-3.722-3.722a.25.25 0 0 0-.404.072l-.613 1.328a4.584 4.584 0 0 1-3.098 2.537l-2.454.584a.25.25 0 0 0-.119.42l2.731 2.732Z">
+                </path>
+              </svg>
               <span class="text">You saved a story</span>
             </div>
             <span class="content">
@@ -670,10 +706,9 @@
               <span class="sp">•</span>
               <a href="/s/N0BA699HAB3/edit" class="edit">manage</a>
             </div>
-          </div>
+          </div> -->
         </div>
-
-      </div> -->
+      </div>
 
       <div class="activity stats">
         <div class="top">
