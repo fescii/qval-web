@@ -903,6 +903,160 @@ section.content > .activity > .activities > .story {
   font-family: var(--font-mono), sans-serif;
 }
 
+/* stats */
+.stats {
+  /* border: thin solid #4b5563bd; */
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  /* align-items: center; */
+  gap: 10px;
+  font-size: 0.9rem;
+  font-family: var(--font-main), sans-serif;
+}
+
+.stats > .summery {
+  border: var(--story-border-mobile);
+  margin: 20px 0;
+  display: flex;
+  flex-flow: column;
+  width: max-content;
+  gap: 10px;
+  justify-content: center;
+  padding: 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.stats > .summery > .title {
+  border-bottom: var(--story-border-mobile);
+  display: flex;
+  flex-flow: column;
+  padding: 6px 10px 8px 10px;
+  gap: 0;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.stats > .summery > .title > h4 {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: var(--font-main), sans-serif;
+  margin: 0;
+}
+
+.stats > .summery > .title > span.desc {
+  color: var(--gray-color);
+  font-size: 0.9rem;
+  font-family: var(--font-read), sans-serif;
+}
+
+.stats > .summery > .content {
+  display: flex;
+  flex-flow: row;
+  gap: 10px;
+  padding: 6px 10px 8px 10px;
+  width: 100%;
+}
+
+.stats > .summery > .content > .main {
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  padding: 0;
+}
+
+.stats > .summery > .content > .main .views {
+  /* border: thin solid #4b5563bd; */
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+}
+
+.stats > .summery > .content > .main .views .text {
+  /* border: thin solid #4b5563bd; */
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 0;
+  color: var(--text-color);
+}
+
+.stats > .summery > .content > .main .views .text svg {
+  width: 40px;
+  height: 40px;
+  /* margin: -2px 0 0 0; */
+}
+
+.stats > .summery > .content > .main .views .text > h2 {
+  color: var(--text-color);
+  font-size: 2.5rem;
+  font-weight: 600;
+  font-family: var(--font-text), sans-serif;
+  margin: 0;
+}
+
+.stats > .summery > .content > .main .views .desc {
+  color: var(--gray-color);
+  font-size: 0.9rem;
+  font-family: var(--font-main), sans-serif;
+}
+
+.stats > .summery > .content > .main .compared {
+  /* border: thin solid #4b5563bd; */
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  padding: 0;
+  margin: 20px 0 0 0;
+}
+
+.stats > .summery > .content > .main .compared > .change {
+  /* border: thin solid #4b5563bd; */
+  display: flex;
+  flex-flow: row;
+  gap: 2px;
+  padding: 0;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.stats > .summery > .content > .main .compared > .change.up {
+  color: var(--accent-alt);
+}
+
+.stats > .summery > .content > .main .compared > .change.up .percentage {
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.stats > .summery > .content > .main .compared > .change .percentage {
+  /* color: var(--text-color); */
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-family: var(--font-read), sans-serif;
+  margin: 0;
+}
+
+.stats > .summery > .content > .main .compared > .change svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stats > .summery > .content > .main .compared span.info {
+  color: var(--gray-color);
+  font-size: 0.9rem;
+  font-family: var(--font-text), sans-serif;
+  font-style: italic;
+}
 
 
 /*Footer*/
