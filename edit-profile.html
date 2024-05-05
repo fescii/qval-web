@@ -27,7 +27,7 @@
     import AppSearch from "./js/apps/search.app.js";
     import AppProfile from "./js/apps/profile.app.js";
     import AppStory from "./js/apps/story.app.js";
-     import AppTopic from "./js/apps/topic.app.js";
+    import AppTopic from "./js/apps/topic.app.js";
 
     import HeaderContainer from "./js/containers/header.container.js"
     import StoryBody from "./js/story.body.js";
@@ -55,6 +55,9 @@
     import AddContainer from "./js/containers/add.container.js";
 
     import DiscoverPeople from "./js/containers/people.discover.js"
+
+    import StatStory from "./js/stats/stat.story.js";
+    import StatOpinion from "./js/stats/stat.opinion.js";
 
 
     customElements.define('app-home', AppHome);
@@ -91,6 +94,9 @@
     customElements.define('add-container', AddContainer);
 
     customElements.define('discover-people', DiscoverPeople);
+
+    customElements.define('stat-story', StatStory);
+    customElements.define('stat-opinion', StatOpinion);
   </script>
 </head>
 
@@ -885,6 +891,69 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="stats account">
+          <div class="summery">
+            <div class="title">
+              <h4 class="text">Account</h4>
+              <span class="desc">
+                Your account summery
+              </span>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <h4 class="title">Followers</h4>
+                <div class="stat">
+                  <h2 class="no">13k</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">635</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Subscribers</h4>
+                <div class="stat">
+                  <h2 class="no">103k</h2>
+                  <span class="change down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">1,335</span>
+                  </span>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="title">Donations</h4>
+                <div class="stat">
+                  <h2 class="no">Ksh. 6,603</h2>
+                  <span class="change up">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+                      <path
+                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
+                      </path>
+                    </svg>
+                    <span class="percentage up">3,635</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="activities stories">
+          <stat-story id="256" upvotes="609" views="531" date="2021-08-12T12:00:00Z"
+            content="This is a story about how you added an article to your profile."
+            >
+          </stat-story>
+          <stat-opinion id="256" upvotes="609" views="531" date="2021-08-12T12:00:00Z"
+            content="This is a story about how you added an article to your profile. Something here...">
+          </stat-opinion>
         </div>
       </div>
     </section>
