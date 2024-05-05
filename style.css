@@ -856,8 +856,9 @@ section.content > .activity > .activities > .story {
 
 .activities > .story > .foot a {
   color: var(--gray-color);
-  font-size: 0.95rem;
-  font-family: var(--font-main), sans-serif;
+  font-size: 0.9rem;
+  /* font-family: var(--font-main), sans-serif; */
+  font-family: var(--font-mono), sans-serif;
   text-decoration: none;
 }
 
