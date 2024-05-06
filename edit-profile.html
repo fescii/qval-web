@@ -56,6 +56,7 @@
 
     import DiscoverPeople from "./js/containers/people.discover.js"
 
+    import AllStat from "./js/stats/all.stat.js";
     import StatStory from "./js/stats/stat.story.js";
     import StatOpinion from "./js/stats/stat.opinion.js";
     import ActivityItem from "./js/stats/activity.item.js"
@@ -106,6 +107,7 @@
 
     customElements.define('discover-people', DiscoverPeople);
 
+    customElements.define('all-stat', AllStat);
     customElements.define('stat-story', StatStory);
     customElements.define('stat-opinion', StatOpinion);
     customElements.define('activity-item', ActivityItem);
@@ -340,91 +342,9 @@
             <span class="line"></span>
           </ul>
         </div>
-        <div class="stats all">
-          <div class="summery">
-            <div class="title">
-              <h4 class="text">All contents</h4>
-              <span class="desc">
-                Summary of all engagements
-              </span>
-              <time datetime="2021-08-12T12:00:00Z">this month</time>
-            </div>
-            <div class="content">
-              <div class="main">
-                <div class="views">
-                  <div class="text">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M8.75 1.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.25a.75.75 0 0 1 .75-.75Zm-3.5 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm7 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Z">
-                      </path>
-                    </svg>
-                    <h2 class="no">3M</h2>
-                  </div>
-                  <span class="desc">All views</span>
-                </div>
-                <div class="compared">
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage">12.3%</span>
-                  </span>
-                  <span class="info">Compared to prior month</span>
-                </div>
-              </div>
-              <div class="main">
-                <div class="views">
-                  <div class="text">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M8.75 1.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.25a.75.75 0 0 1 .75-.75Zm-3.5 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm7 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Z">
-                      </path>
-                    </svg>
-                    <h2 class="no">121k</h2>
-                  </div>
-                  <span class="desc">All stories</span>
-                </div>
-                <div class="compared">
-                  <span class="change down">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                      <path
-                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-                      </path>
-                    </svg>
-                    <span class="percentage">12.3%</span>
-                  </span>
-                  <span class="info">Compared to prior month</span>
-                </div>
-              </div>
-              <div class="main">
-                <div class="views">
-                  <div class="text">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M8.75 1.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.25a.75.75 0 0 1 .75-.75Zm-3.5 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm7 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Z">
-                      </path>
-                    </svg>
-                    <h2 class="no">803k</h2>
-                  </div>
-                  <span class="desc">All opinions</span>
-                </div>
-                <div class="compared">
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage">12.3%</span>
-                  </span>
-                  <span class="info">Compared to prior month</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <all-stat date="2021-09-01" date-last="2021-08-01" all="1654555" all-last="1554555" stories="965455" stories-last="995455"
+          opinions="84555" opinions-last="73555">
+        </all-stat>
         <div class="stats stories">
           <div class="summery">
             <div class="title">
@@ -449,7 +369,7 @@
                 </div>
               </div>
               <div class="card">
-                <h4 class="title">Views</h4>
+                <h4 class="title">Replies</h4>
                 <div class="stat">
                   <h2 class="no">103k</h2>
                   <span class="change down">
@@ -503,7 +423,7 @@
                 </div>
               </div>
               <div class="card">
-                <h4 class="title">Views</h4>
+                <h4 class="title">Replies</h4>
                 <div class="stat">
                   <h2 class="no">103k</h2>
                   <span class="change down">
