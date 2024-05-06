@@ -1,4 +1,4 @@
-export default class FormName extends HTMLElement {
+export default class FormBio extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -45,29 +45,25 @@ export default class FormName extends HTMLElement {
   getBody = () => {
     return /* html */`
       <div class="top">
-        <h4 class="title">Your name</h4>
+        <h4 class="title">Your bio</h4>
         <p class="desc">
-          Your name is how people will find you on the platform. You can use your real name or a nickname.
-          Both first and last name fields can't be empty.
+          Your bio is a brief summary of yourself. It should be no more than 160 characters in length.
+          Use this space to highlight your interests, skills, or any other relevant information about yourself.
         </p>
       </div>
-      <form class="fields initial" id="name-form">
-        <div class="field bio">
-          <div class="input-group firstname">
-            <label for="firstname" class="center">First name</label>
-            <input data-name="firstname" type="text" name="firstname" id="firstname" placeholder="Enter your first name"
-             value="${this.getAttribute('first-name')}" required>
-            <span class="status">First name is required</span>
-          </div>
-          <div class="input-group lastname">
-            <label for="lastname" class="center">Last name</label>
-            <input data-name="lastname" type="text" name="lastname" id="lastname" value="${this.getAttribute('last-name')}" placeholder="Enter your last name" required>
-            <span class="status">Last name is required</span>
+      <form class="fields bio" id="bio-form">
+        <div class="field your-bio">
+          <div class="input-group your-bio">
+            <label for="bio" class="center">Your bio</label>
+            <!-- <input type="email" name="email" id="email" hidden> -->
+            <textarea name="bio" id="bio" cols="30"
+              rows="10" required>${this.getAttribute('bio')}</textarea>
+            <span class="status">Bio is required</span>
           </div>
         </div>
         <div class="actions">
           <button type="submit" class="action next">
-            <span class="text">Update name</span>
+            <span class="text">Update bio</span>
           </button>
         </div>
       </form>
@@ -255,6 +251,29 @@ export default class FormName extends HTMLElement {
         -o-border-radius: 12px;
       }
 
+      form.fields textarea {
+        border: none;
+        border: var(--input-border);
+        font-size: 1rem;
+        padding: 10px 12px;
+        margin: 0;
+        width: 100%;
+        resize: none;
+        height: 90px;
+        gap: 5px;
+        font-weight: 400;
+        color: var(--text-color);
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        border-radius: 12px;
+      }
+
+      form.fields textarea::-webkit-scrollbar {
+        display: none !important;
+        visibility: hidden;
+      }
+
+      form.fields textarea:focus,
       form.fields .field input:focus {
         border: var(--input-border-focus);
       }
