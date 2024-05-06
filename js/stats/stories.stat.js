@@ -114,7 +114,7 @@ export default class StoriesStat extends HTMLElement {
     return /* html */`
       <div class="title">
         <h4 class="text">Stories</h4>
-        <span class="desc">Summary of story engagements</span>
+        <span class="desc">Your stories summery</span>
       </div>
     `
   }

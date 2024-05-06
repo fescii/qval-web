@@ -114,7 +114,7 @@ export default class OpinionsStat extends HTMLElement {
     return /* html */`
       <div class="title">
         <h4 class="text">Opinions</h4>
-        <span class="desc">Summary of opinions engagements</span>
+        <span class="desc">Your opinions summery</span>
       </div>
     `
   }
