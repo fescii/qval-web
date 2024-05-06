@@ -79,8 +79,6 @@ export default class AppProfile extends HTMLElement {
           }
         })
       })
-
-
     }
   }
 
