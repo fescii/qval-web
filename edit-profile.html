@@ -57,6 +57,9 @@
     import DiscoverPeople from "./js/containers/people.discover.js"
 
     import AllStat from "./js/stats/all.stat.js";
+    import StoriesStat from "./js/stats/stories.stat.js";
+    import OpinionsStat from "./js/stats/opinions.stat.js";
+    import UsersStat from "./js/stats/users.stat.js";
     import StatStory from "./js/stats/stat.story.js";
     import StatOpinion from "./js/stats/stat.opinion.js";
     import ActivityItem from "./js/stats/activity.item.js"
@@ -70,6 +73,7 @@
 
     import ActivityContainer from "./js/containers/activity.container.js";
     import ActivityFeed from "./js/feeds/activity.feed.js";
+    import StatFeed from "./js/feeds/stat.feed.js";
 
 
     customElements.define('app-home', AppHome);
@@ -108,6 +112,9 @@
     customElements.define('discover-people', DiscoverPeople);
 
     customElements.define('all-stat', AllStat);
+    customElements.define('stories-stat', StoriesStat);
+    customElements.define('opinions-stat', OpinionsStat);
+    customElements.define('users-stat', UsersStat);
     customElements.define('stat-story', StatStory);
     customElements.define('stat-opinion', StatOpinion);
     customElements.define('activity-item', ActivityItem);
@@ -121,6 +128,7 @@
 
     customElements.define('activity-container', ActivityContainer);
     customElements.define('activity-feed', ActivityFeed);
+    customElements.define('stat-feed', StatFeed);
   </script>
 </head>
 
@@ -342,180 +350,25 @@
             <span class="line"></span>
           </ul>
         </div>
-        <all-stat date="2021-09-01" date-last="2021-08-01" all="1654555" all-last="1554555" stories="965455" stories-last="995455"
-          opinions="84555" opinions-last="73555">
+        <all-stat date="2021-09-01" date-last="2021-08-01" all="1654757" all-last="1554751" stories="965457" stories-last="995458"
+          opinions="84754" opinions-last="73859">
         </all-stat>
-        <div class="stats stories">
-          <div class="summery">
-            <div class="title">
-              <h4 class="text">Stories</h4>
-              <span class="desc">
-                Summary of story engagements
-              </span>
-            </div>
-            <div class="cards">
-              <div class="card">
-                <h4 class="title">Views</h4>
-                <div class="stat">
-                  <h2 class="no">103k</h2>
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">3,635</span>
-                  </span>
-                </div>
-              </div>
-              <div class="card">
-                <h4 class="title">Replies</h4>
-                <div class="stat">
-                  <h2 class="no">103k</h2>
-                  <span class="change down">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">1,335</span>
-                  </span>
-                </div>
-              </div>
-              <div class="card">
-                <h4 class="title">Upvotes</h4>
-                <div class="stat">
-                  <h2 class="no">6,603</h2>
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">3,635</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="stats opinions">
-          <div class="summery">
-            <div class="title">
-              <h4 class="text">Opinions</h4>
-              <span class="desc">
-                Summary of opinions engagements
-              </span>
-            </div>
-            <div class="cards">
-              <div class="card">
-                <h4 class="title">Views</h4>
-                <div class="stat">
-                  <h2 class="no">103k</h2>
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">3,635</span>
-                  </span>
-                </div>
-              </div>
-              <div class="card">
-                <h4 class="title">Replies</h4>
-                <div class="stat">
-                  <h2 class="no">103k</h2>
-                  <span class="change down">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">1,335</span>
-                  </span>
-                </div>
-              </div>
-              <div class="card">
-                <h4 class="title">Upvotes</h4>
-                <div class="stat">
-                  <h2 class="no">6,603</h2>
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">3,635</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="stats account">
-          <div class="summery">
-            <div class="title">
-              <h4 class="text">Account</h4>
-              <span class="desc">
-                Your account summery
-              </span>
-            </div>
-            <div class="cards">
-              <div class="card">
-                <h4 class="title">Followers</h4>
-                <div class="stat">
-                  <h2 class="no">13k</h2>
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">635</span>
-                  </span>
-                </div>
-              </div>
-              <div class="card">
-                <h4 class="title">Subscribers</h4>
-                <div class="stat">
-                  <h2 class="no">103k</h2>
-                  <span class="change down">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">1,335</span>
-                  </span>
-                </div>
-              </div>
-              <div class="card">
-                <h4 class="title">Donations</h4>
-                <div class="stat">
-                  <h2 class="no">Ksh. 6,603</h2>
-                  <span class="change up">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
-                      <path
-                        d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-                      </path>
-                    </svg>
-                    <span class="percentage up">3,635</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="activities stories">
-          <stat-story id="256" upvotes="609" views="531" date="2021-08-12T12:00:00Z"
-            content="This is a story about how you added an article to your profile."
-            >
-          </stat-story>
-          <stat-opinion id="256" upvotes="609" views="531" date="2021-08-12T12:00:00Z"
-            content="This is a story about how you added an article to your profile. Something here...">
-          </stat-opinion>
-        </div>
+
+        <stories-stat date="2021-09-01" date-last="2021-08-01" views="96458" views-last="99457"
+         opinions="84555" opinions-last="73512" upvotes="4557" upvotes-last="3573">
+        </stories-stat>
+
+        <opinions-stat date="2021-09-01" date-last="2021-08-01" views="6543" views-last="9145" opinions="8754"
+          opinions-last="7559" upvotes="456" upvotes-last="593">
+        </opinions-stat>
+
+        <users-stat date="2021-09-01" date-last="2021-08-01" followers="6545" followers-last="9145" subscribers="8755"
+          subscribers-last="7555" donations="9453" donations-last="7587" currency="Ksh">
+        </users-stat>
+
+        <stat-feed api-stories="/api/v1/u/stats/stories"
+          api-opinions="/api/v1/u/stats/opinions">
+        </stat-feed>
       </div>
     </section>
   </main>
