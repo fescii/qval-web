@@ -649,7 +649,7 @@ section.content > .activity > .activities {
   flex-flow: row;
   gap: 15px;
   /* height: 50px; */
-  align-items: center;
+  align-items: end;
   font-family: var(--font-main), sans-serif;
   margin: 0;
 }
@@ -667,7 +667,7 @@ section.content > .activity > .activities {
   display: flex;
   flex-flow: row;
   gap: 2px;
-  padding: 0;
+  padding: 0 0 2px 0;
 }
 
 .stats > .summery .cards > .card > .stat > .change.up {
