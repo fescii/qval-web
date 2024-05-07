@@ -369,6 +369,7 @@ export default class OpinionWrapper extends HTMLElement {
 
 
       :host {
+        font-size: 16px;
         border-bottom: var(--story-border);
         font-family: var(--font-main), sans-serif;
         padding: 15px 0 0 0;
@@ -813,6 +814,7 @@ export default class OpinionWrapper extends HTMLElement {
 
       @media screen and (max-width:660px) {
         :host {
+        font-size: 16px;
           border-bottom: var(--story-border-mobile);
         }
 

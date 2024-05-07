@@ -161,6 +161,7 @@ export default class FormContainer extends HTMLElement {
 	      }
 
 	      :host {
+        font-size: 16px;
           ${this.checkType()}
           background-color: var(--background);
           padding: 0 0 10px 5px;
@@ -281,6 +282,7 @@ export default class FormContainer extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
+        font-size: 16px;
 						padding: 10px 0;
             border-bottom: var(--story-border-mobile);
 					}

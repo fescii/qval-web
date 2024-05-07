@@ -167,6 +167,7 @@ export default class TrendingContainer extends HTMLElement {
         }
 
         :host {
+        font-size: 16px;
           width: 100%;
         }
 

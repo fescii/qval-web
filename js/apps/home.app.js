@@ -156,7 +156,7 @@ export default class AppHome extends HTMLElement {
 	      }
 
 	      :host {
-          /* border: 1px solid red; */
+          font-size: 16px;
           padding: 0;
           margin: 0;
           display: flex;
@@ -250,6 +250,7 @@ export default class AppHome extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
+        font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;

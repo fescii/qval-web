@@ -93,6 +93,7 @@ export default class StoryLoader extends HTMLElement {
 	      }
 
 	      :host {
+        font-size: 16px;
 				  padding: 10px 0;
 				  display: flex;
 				  flex-flow: column;

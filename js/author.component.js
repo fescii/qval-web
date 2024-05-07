@@ -144,6 +144,7 @@ export default class PersonWrapper extends HTMLElement {
         }
 
         :host {
+        font-size: 16px;
           border: none;
           background-color: var(--user-background);
           padding: 14px;
@@ -261,6 +262,7 @@ export default class PersonWrapper extends HTMLElement {
 
         @media screen and (max-width:660px) {
           :host {
+        font-size: 16px;
             background-color: var(--author-background);
           }
 

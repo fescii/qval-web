@@ -43,10 +43,11 @@ html {
   align-items: center;
   justify-content: center;
   background-position: 100%;
-  background-size: 1rem 1rem;
+  /* background-size: 1rem 1rem; */
   background-color: var(--background);
-  /* background-color: #f3f4f9; */
-  /* background-image: radial-gradient(circle, rgb(209, 209, 209) 1px, rgba(0, 0, 0, 0) 1px); */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {

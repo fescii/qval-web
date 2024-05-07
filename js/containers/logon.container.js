@@ -2098,6 +2098,7 @@ export default class LogonContainer extends HTMLElement {
         @media screen and (max-width:700px) {
 
           :host {
+        font-size: 16px;
             width: 100%;
             min-height: 100vh;
             height: 100%;

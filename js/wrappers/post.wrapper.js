@@ -402,6 +402,7 @@ export default class PostWrapper extends HTMLElement {
 
 
       :host {
+        font-size: 16px;
         /* border: 1px solid #6b7280;*/
         display: flex;
         flex-flow: column;

@@ -109,6 +109,7 @@ export default class StoryBody extends HTMLElement {
       }
 
       :host {
+        font-size: 16px;
         /* border: 1px solid #000000; */
         margin: 0;
         padding: 0;

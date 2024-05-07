@@ -141,6 +141,7 @@ export default class OpinionFeed extends HTMLElement {
       }
 
       :host {
+        font-size: 16px;
 				width: 100%;
         padding: 0 0 30px;
       }
