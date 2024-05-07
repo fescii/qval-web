@@ -101,6 +101,7 @@ export default class StatOpinion extends HTMLElement {
       }
 
       :host {
+        font-size: 16px;
         border-bottom: var(--story-border);
         display: flex;
         flex-flow: column;

@@ -109,6 +109,7 @@ export default class FormEmail extends HTMLElement {
       }
 
       :host {
+        font-size: 16px;
         display: flex;
         flex-flow: column;
         gap: 10px;

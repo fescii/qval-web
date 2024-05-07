@@ -406,6 +406,7 @@ export default class AppStory extends HTMLElement {
 	      }
 
 	      :host {
+        font-size: 16px;
           display: flex;
           gap: 0;
           min-height: 90vh;
@@ -747,6 +748,7 @@ export default class AppStory extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
+        font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;

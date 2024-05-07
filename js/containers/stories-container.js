@@ -180,6 +180,7 @@ export default class StoriesContainer extends HTMLElement {
       }
 
       :host {
+        font-size: 16px;
 				width: 100%;
       }
 

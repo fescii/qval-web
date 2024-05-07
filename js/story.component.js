@@ -459,6 +459,7 @@ export default class StoryWrapper extends HTMLElement {
 
 
       :host {
+        font-size: 16px;
         border-bottom: var(--story-border);
         font-family: var(--font-main), sans-serif;
         ${this.checkType()}
@@ -1018,6 +1019,7 @@ export default class StoryWrapper extends HTMLElement {
       }
       @media screen and (max-width:660px) {
         :host {
+        font-size: 16px;
           border-bottom: var(--story-border-mobile);
         }
 

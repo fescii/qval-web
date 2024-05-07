@@ -133,6 +133,7 @@ export default class PeopleFeeds extends HTMLElement {
 	      }
 
 	      :host {
+        font-size: 16px;
 				  background-color: var(--background);
 				  padding: 0 0;
 				  display: flex;
@@ -154,6 +155,7 @@ export default class PeopleFeeds extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
+        font-size: 16px;
 						padding: 15px 0;
 						position: static;
 					}

@@ -221,6 +221,7 @@ export default class AppSearch extends HTMLElement {
 	      }
 
 	      :host {
+        font-size: 16px;
           padding: 0;
           margin: 0;
           display: flex;
@@ -502,6 +503,7 @@ export default class AppSearch extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
+        font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;

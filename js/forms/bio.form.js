@@ -112,6 +112,7 @@ export default class FormBio extends HTMLElement {
       }
 
       :host {
+        font-size: 16px;
         display: flex;
         flex-flow: column;
         gap: 10px;

@@ -330,6 +330,7 @@ export default class AllStat extends HTMLElement {
       }
 
       :host {
+        font-size: 16px;
         border-bottom: var(--story-border-mobile);
         margin: 10px 0;
         width: 100%;

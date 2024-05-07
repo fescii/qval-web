@@ -53,6 +53,7 @@ export default class TopicsLoader extends HTMLElement {
 	      }
 	
 	      :host {
+        font-size: 16px;
 					padding: 8px 0 0;
 					display: flex;
 					flex-flow: row;

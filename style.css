@@ -44,10 +44,11 @@ html {
   align-items: center;
   justify-content: center;
   background-position: 100%;
-  background-size: 1rem 1rem;
+  /* background-size: 1rem 1rem; */
   background-color: var(--background);
-  /* background-color: #f3f4f9; */
-  /* background-image: radial-gradient(circle, rgb(209, 209, 209) 1px, rgba(0, 0, 0, 0) 1px); */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -295,6 +296,90 @@ section.content {
   padding: 0 0 70px 0;
   gap: 35px;
   width: 70%;
+}
+
+div.coming-soon {
+  /* border: 1px solid #6b7280; */
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+  min-height: max-content;
+  height: 100%;
+}
+
+div.coming-soon > .title {
+  /* border: 1px solid #6b7280; */
+  color: var(--text-color);
+  font-family: var(--title-text), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.coming-soon > .title svg {
+  color: var(--error-color);
+  width: 50px;
+  height: 50px;
+  margin: 0 0 10px 0;
+}
+
+div.coming-soon > .title span.text {
+  color: var(--gray-color);
+  font-family: var(--font-text), sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+div.coming-soon > p.info {
+  color: var(--gray-color);
+  font-family: var(--font-main), sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.themes {
+  font-size: 16px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  padding: 0;
+  width: 100%;
+}
+
+.themes > .top {
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+  padding: 0;
+  width: 100%;
+}
+
+.themes > .top>h4.title {
+  border-bottom: var(--story-border-mobile);
+  display: flex;
+  align-items: center;
+  color: var(--title-color);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0 0 6px 0;
+}
+
+.themes .top > .desc {
+  margin: 0;
+  padding: 10px 0;
+  color: var(--gray-color);
+  font-size: 1rem;
+  font-family: var(--font-main), sans-serif;
 }
 
 

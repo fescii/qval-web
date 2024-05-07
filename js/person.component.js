@@ -151,6 +151,7 @@ export default class UserWrapper extends HTMLElement {
         }
 
         :host {
+        font-size: 16px;
           border-bottom: var(--story-border);
           padding: 15px 0;
           display: flex;
@@ -261,6 +262,7 @@ export default class UserWrapper extends HTMLElement {
 
         @media screen and (max-width:660px) {
           :host {
+        font-size: 16px;
             border-bottom: var(--story-border-mobile);
           }
 

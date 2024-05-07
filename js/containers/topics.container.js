@@ -173,6 +173,7 @@ export default class TopicsContainer extends HTMLElement {
 	      }
 
 	      :host {
+        font-size: 16px;
 					margin: 0;
 				  padding: 0;
 				  display: flex;
@@ -254,6 +255,7 @@ export default class TopicsContainer extends HTMLElement {
 				}
 				@media screen and (max-width:660px) {
 					:host {
+        font-size: 16px;
 						padding: 15px 0;
 					}
 
