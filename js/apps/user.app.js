@@ -16,7 +16,16 @@ export default class AppUser extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    this.activateTab()
+    // Check if the display is greater than 600px using mql
+    const mql = window.matchMedia('(max-width: 600px)');
+
+    console.log(mql);
+
+    // Populate the current tab
+    this.populateCurrent(mql.matches);
+
+    // Activate the tab
+    this.activateTab(mql.matches)
   }
 
   disableScroll() {
@@ -36,49 +45,164 @@ export default class AppUser extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  activateTab = () => {
+  activateTab = mql => {
     const outerThis = this;
-    const tab = this.shadowObj.querySelector('ul#tab');
-    const contentContainer = this.shadowObj.querySelector('.content-container');
+    const tabContainer = this.shadowObj.querySelector('section.tab');
+    const contentContainer = this.shadowObj.querySelector('section.content');
 
-    if (tab && contentContainer) {
-      const line = tab.querySelector('span.line');
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
+    if (tabContainer && contentContainer) {
+      const tabItems = tabContainer.querySelectorAll('li.tab-item');
+      let activeTab = tabContainer.querySelector('li.tab-item.active');
 
       tabItems.forEach(tab => {
         tab.addEventListener('click', e => {
           e.preventDefault()
           e.stopPropagation()
 
-          // Calculate half tab width - 10px
-          const tabWidth = (tab.offsetWidth/2) - 20;
-
-          line.style.left = `${tab.offsetLeft + tabWidth}px`;
-
-          if (tab.dataset.element === activeTab.dataset.element) {
-            return;
-          }
-          else {
-            activeTab.classList.remove('active');
-            tab.classList.add('active');
-            activeTab = tab;
-            switch (tab.dataset.element) {
-              case "stories":
-                contentContainer.innerHTML = outerThis.getStories();
-                break;
-              case "opinions":
-                contentContainer.innerHTML = outerThis.getOpinions();
-                break;
-              case "people":
-                contentContainer.innerHTML = outerThis.getPeople();
-              default:
-                break;
+          if (activeTab){
+            if (tab.dataset.name === activeTab.dataset.name) {
+              return;
             }
 
+            activeTab.classList.remove('active');
           }
+
+          // Add loader
+          contentContainer.innerHTML = outerThis.getLoader();
+
+          tab.classList.add('active');
+          activeTab = tab;
+
+          // Select loader
+          const loader = this.shadowObj.querySelector('#loader-container');
+
+          setTimeout(() => {
+            if (mql) {
+              tabContainer.style.display = 'none';
+            }
+            if (loader) {
+              loader.remove();
+            }
+            switch (tab.dataset.name) {
+              case 'stat':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
+                break;
+              case 'name':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
+                break;
+              case 'bio':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
+                break;
+              case 'profile':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
+                break;
+              case 'social':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormSocial());
+                break;
+              case 'email':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
+                break;
+              case 'privacy':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
+                break;
+              case 'password':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
+                break;
+              case 'topic':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+                break;
+              case 'activity':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
+                break;
+              case 'notification':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
+                break;
+              case 'reading':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+                break;
+              case 'appearance':
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+                break;
+              default:
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
+                break;
+            }
+          }, 3000);
         })
       })
+    }
+  }
+
+  populateCurrent = mql =>  {
+    const outerThis =this;
+    const current = this.getAttribute('current');
+
+    const tabContainer = this.shadowObj.querySelector('section.tab');
+
+    // Select li with class name as current and content Container
+    const currentItem = this.shadowObj.querySelector(`section.tab li.${current}`);
+    const contentContainer = this.shadowObj.querySelector('section.content');
+
+    // If selection is available
+    if(currentItem && contentContainer && tabContainer) {
+      currentItem.classList.add('active');
+
+      // Select loader
+      const loader = this.shadowObj.querySelector('#loader-container');
+
+      // Set timeout to remove loader
+      setTimeout(() => {
+        if (mql) {
+          tabContainer.style.display = 'none';
+        }
+        if(loader) {
+          loader.remove();
+        }
+        switch (current) {
+          case 'stats':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
+            break;
+          case 'form-name':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
+            break;
+          case 'form-bio':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
+            break;
+          case 'form-profile':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
+            break;
+          case 'form-socials':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
+            break;
+          case 'form-email':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
+            break;
+          case 'privacy':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
+            break;
+          case 'form-password':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
+            break;
+          case 'topics':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+            break;
+          case 'activity':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
+            break;
+          case 'notifications':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
+            break;
+          case 'reading':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+            break;
+          case 'appearance':
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+            break;
+          default:
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats())
+            break;
+        }
+      }, 3000)
     }
   }
 
@@ -109,6 +233,14 @@ export default class AppUser extends HTMLElement {
     return formattedString;
   }
 
+  getLoader() {
+    return `
+      <div id="loader-container">
+				<div class="loader"></div>
+			</div>
+    `
+  }
+
   getTemplate = () => {
     // Show HTML Here
     return `
@@ -125,6 +257,7 @@ export default class AppUser extends HTMLElement {
       <main class="profile">
         <section class="content">
           ${this.getTab()}
+          ${this.getLoader()}
         </section>
       </main>
       `;
@@ -135,7 +268,7 @@ export default class AppUser extends HTMLElement {
         <main class="profile">
           ${this.getTab()}
           <section class="content">
-            ${this.getStats()}
+            ${this.getLoader()}
           </section>
         </main>
       `;
@@ -158,7 +291,7 @@ export default class AppUser extends HTMLElement {
           <div class="foot">
             <span>Your account</span>
             <span class="sp">•</span>
-            <span class="since">${this.getDate(this.getAttribute('user-joined'))}</span>
+            <span class="since">${this.getDate(this.getAttribute('date-joined'))}</span>
           </div>
         </div>
       </section>
@@ -206,6 +339,14 @@ export default class AppUser extends HTMLElement {
         email="${this.getAttribute('user-email')}" x="${this.getAttribute('user-x')}"
         threads="${this.getAttribute('user-threads')}" linkedin="${this.getAttribute('user-linkedin')}" link="${this.getAttribute('user-link')}">
       </social-form>
+    `;
+  }
+
+  getFormEmail = () =>  {
+    return /* html */`
+      <email-form method="PATCH" url="/user/edit/email" api-url="/api/v1/u/edit/email"
+        email="${this.getAttribute('user-email')}">
+      </email-form>
     `;
   }
 
@@ -304,7 +445,7 @@ export default class AppUser extends HTMLElement {
     return /* html */`
       <section class="tab">
         <ul class="tab public">
-          <li class="tab-item active">
+          <li class="tab-item stats" data-name="stat">
             <span class="line"></span>
             <a href="/user/stats" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -315,7 +456,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your stats</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item form-name" data-name="name">
             <span class="line"></span>
             <a href="/user/edit/name" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512" width="16px" height="16px">
@@ -324,7 +465,8 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your name</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item form-bio" data-name="bio">
+            <span class="line"></span>
             <a href="/user/edit/bio" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  width="16px" height="16px" viewBox="0 0 512 512">
                 <path d="M441.2 59.1L453.1 71c9.4 9.4 9.4 24.6 0 33.9L432 126.1 386.3 80.4l20.8-21.1c9.4-9.5 24.6-9.5 34.1-.1zM231.9 236.8L352.6 114.5 398.1 160 276.6 281.6c-3.3 3.3-7.5 5.6-12 6.5L215 298.5l10.4-49.7c.9-4.5 3.2-8.7 6.4-11.9zM373 25.5L197.7 203.1c-9.7 9.8-16.4 22.3-19.2 35.8l-18 85.7c-1.7 7.9 .8 16.2 6.5 21.9s14 8.2 21.9 6.5l85.5-17.9c13.7-2.9 26.3-9.7 36.1-19.6L487.1 138.9c28.1-28.1 28.1-73.7 0-101.8L475.1 25.2C446.9-3.1 401-2.9 373 25.5zm-48.3-7.9C302.9 11.4 279.8 8 256 8C119 8 8 119 8 256S119 504 256 504c13.3 0 24-10.7 24-24s-10.7-24-24-24C145.5 456 56 366.5 56 256S145.5 56 256 56c9.7 0 19.3 .7 28.7 2l40-40.4zM454.1 228.4c1.2 9 1.9 18.2 1.9 27.6c0 57.4-46.6 104-104 104c-13.3 0-24 10.7-24 24s10.7 24 24 24c83.9 0 152-68.1 152-152c0-23.6-3.3-46.4-9.4-68l-40.4 40.5z"/>
@@ -332,7 +474,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your bio</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item form-profile"  data-name="profile">
             <span class="line"></span>
             <a href="/user/edit/profile" class="tab-link">
               <svg aria-hidden="true" height="16" fill="currentColor" viewBox="0 0 16 16" width="16">
@@ -341,7 +483,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your profile</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item form-socials" data-name="social">
             <span class="line"></span>
             <a href="/user/edit/contact" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
@@ -353,7 +495,7 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab security">
           <span class="title">Security</span>
-          <li class="tab-item">
+          <li class="tab-item form-email"  data-name="email">
             <span class="line"></span>
             <a href="/user/edit/email" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
@@ -362,7 +504,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your email</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item privacy" data-name="privacy">
             <span class="line"></span>
             <a href="/user/edit/privacy" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
@@ -372,7 +514,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your privacy</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item form-password" data-name="password">
             <span class="line"></span>
             <a href="/user/edit/password" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
@@ -384,7 +526,7 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab activity">
           <span class="title">Activity</span>
-          <li class="tab-item">
+          <li class="tab-item topics" data-name="topic">
             <span class="line"></span>
             <a href="/user/edit/topics" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -395,7 +537,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your topics</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item activity" data-name="activity">
             <span class="line"></span>
             <a href="/user/activity" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -404,7 +546,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your activity</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item notifications" data-name="notification">
             <span class="line"></span>
             <a href="/user/edit/notifications" class="tab-link">
               <svg height="16" viewBox="0 0 16 16" fill="currentColor" width="16">
@@ -416,7 +558,7 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab preference">
           <span class="title">Preference</span>
-          <li class="tab-item">
+          <li class="tab-item reading" data-name="reading">
             <span class="line"></span>
             <a href="/user/edit/reading" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -425,7 +567,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Reading</span>
             </a>
           </li>
-          <li class="tab-item">
+          <li class="tab-item appearance" data-name="appearance">
             <span class="line"></span>
             <a href="/user/edit/theme" class="tab-link">
               <svg height="16" viewBox="0 0 16 16" fill="currentColor" width="16">
@@ -497,6 +639,43 @@ export default class AppUser extends HTMLElement {
           display: flex;
           flex-flow: column;
           gap: 0px;
+        }
+
+        #loader-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: calc(40% - 35px);
+          right: 0;
+          z-index: 5;
+          background-color: var(--loader-background);
+          backdrop-filter: blur(1px);
+          -webkit-backdrop-filter: blur(1px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: inherit;
+          -webkit-border-radius: inherit;
+          -moz-border-radius: inherit;
+        }
+
+        #loader-container > .loader {
+          width: 35px;
+          aspect-ratio: 1;
+          --_g: no-repeat radial-gradient(farthest-side, #18A565 94%, #0000);
+          --_g1: no-repeat radial-gradient(farthest-side, #21D029 94%, #0000);
+          --_g2: no-repeat radial-gradient(farthest-side, #df791a 94%, #0000);
+          --_g3: no-repeat radial-gradient(farthest-side, #f09c4e 94%, #0000);
+          background:    var(--_g) 0 0,    var(--_g1) 100% 0,    var(--_g2) 100% 100%,    var(--_g3) 0 100%;
+          background-size: 30% 30%;
+          animation: l38 .9s infinite ease-in-out;
+          -webkit-animation: l38 .9s infinite ease-in-out;
+        }
+
+        @keyframes l38 {
+          100% {
+            background-position: 100% 0, 100% 100%, 0 100%, 0 0
+          }
         }
 
         section.top {
@@ -679,9 +858,10 @@ export default class AppUser extends HTMLElement {
         section.content {
           /* border: 1px solid #6b7280; */
           display: flex;
+          position: relative;
           flex-flow: column;
           align-items: start;
-          padding: 0 0 70px 0;
+          padding: 0;
           gap: 35px;
           width: 70%;
         }
@@ -739,6 +919,53 @@ export default class AppUser extends HTMLElement {
 					:host {
             font-size: 16px;
 					}
+
+          main.profile {
+            padding: 10px 0;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            flex-flow: column;
+            justify-content: start;
+            gap: 20px;
+            min-height: max-content;
+            height: max-content;
+            max-height: max-content;
+          }
+
+           section.content {
+            /* border: 1px solid #6b7280; */
+            display: flex;
+            flex-flow: column;
+            align-items: start;
+            min-height: 70vh;
+            padding: 0;
+            gap: 0;
+            width: 100%;
+          }
+
+          section.tab {
+            padding: 0;
+            width: 100%;
+            min-width: 100%;
+            display: none;
+            flex-flow: column;
+            gap: 10px;
+            height: max-content;
+            position: unset;
+          }
+
+          section.tab > ul.tab {
+            border-top: var(--story-border-mobile);
+            list-style-type: none;
+            width: 100%;
+            padding: 0 5px;
+            margin: 0;
+            display: flex;
+            flex-flow: column;
+            gap: 0;
+          }
+
 				}
 	    </style>
     `;

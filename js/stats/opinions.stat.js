@@ -193,7 +193,7 @@ export default class OpinionsStat extends HTMLElement {
 
     return /* html */`
       <div class="card">
-        <h4 class="title">Replies</h4>
+        <h4 class="title">Upvotes</h4>
         <div class="stat">
           <h2 class="no">
             ${this.formatNumber(currentUpvotes)}
@@ -248,190 +248,212 @@ export default class OpinionsStat extends HTMLElement {
 
   getStyles() {
     return /* css */`
-    <style>
-      *,
-      *:after,
-      *:before {
-        box-sizing: border-box !important;
-        font-family: inherit;
-        -webkit-box-sizing: border-box !important;
-      }
+      <style>
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box !important;
+          font-family: inherit;
+          -webkit-box-sizing: border-box !important;
+        }
 
-      *:focus {
-        outline: inherit !important;
-      }
+        *:focus {
+          outline: inherit !important;
+        }
 
-      *::-webkit-scrollbar {
-        -webkit-appearance: none;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-      }
-
-      p,
-      ul,
-      ol {
-        padding: 0;
-        margin: 0;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      :host {
-        font-size: 16px;
-        border-bottom: var(--story-border-mobile);
-        margin: 0;
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        gap: 10px;
-        justify-content: center;
-        padding: 0 0 10px;
-      }
-
-      .title {
-        display: flex;
-        position: relative;
-        flex-flow: column;
-        padding: 6px 0;
-        gap: 0;
-        justify-content: center;
-        color: var(--text-color);
-      }
-
-      .title time {
-        position: absolute;
-        right: 10px;
-        color: var(--gray-color);
-        font-family: var(--font-mono), monospace;
-        border: var(--input-border);
-        padding: 2px 10px;
-        border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -o-border-radius: 5px;
-      }
-
-      .title > h4 {
-        color: var(--text-color);
-        font-size: 1.2rem;
-        font-weight: 500;
-        font-family: var(--font-main), sans-serif;
-        margin: 0;
-      }
-
-      .title > span.desc {
-        color: var(--gray-color);
-        font-size: 0.9rem;
-        font-family: var(--font-text), sans-serif;
-      }
-
-      .cards {
-        display: flex;
-        flex-flow: row;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 6px 0;
-        width: 100%;
-      }
-
-      .cards > .card {
-        /* border: thin solid #4b5563bd; */
-        display: flex;
-        flex-flow: column;
-        gap: 10px;
-        padding: 10px 25px 10px 15px;
-        background-color: var(--stat-background);
-        justify-content: center;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        -ms-border-radius: 10px;
-        -o-border-radius: 10px;
-      }
-
-      .cards > .card > .title {
-        color: var(--gray-color);
-        font-size: 1rem;
-        font-weight: 400;
-        font-family: var(--font-main), sans-serif;
-        margin: 0;
-      }
-
-      .cards > .card > .stat {
-        /* border: thin solid #4b5563bd; */
-        color: var(--text-color);
-        display: flex;
-        flex-flow: row;
-        gap: 15px;
-        /* height: 50px; */
-        align-items: end;
-        font-family: var(--font-main), sans-serif;
-        margin: 0;
-      }
-
-      .cards > .card > .stat > h2.no {
-        color: var(--text-color);
-        font-size: 1.5rem;
-        font-weight: 500;
-        font-family: var(--font-main), sans-serif;
-        margin: 0;
-      }
-
-      .cards > .card > .stat > .change {
-        /* border: thin solid #4b5563bd; */
-        display: flex;
-        flex-flow: row;
-        gap: 2px;
-        padding: 0 0 2px 0;
-      }
-
-      .cards > .card > .stat > .change.up {
-        color: var(--accent-alt);
-      }
-
-      .cards > .card > .stat > .change.down {
-        color: var(--error-color);
-      }
-
-      .cards > .card > .stat > .change.up .percentage {
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .cards > .card > .stat > .change .percentage {
-        /* color: var(--text-color); */
-        font-size: 1rem;
-        font-weight: 400;
-        font-family: var(--font-main), sans-serif;
-        margin: 0;
-      }
-
-      .cards > .card > .stat > .change svg {
-        width: 18px;
-        height: 18px;
-        margin-top: 2px;
-      }
-
-      @media screen and (max-width:660px) {
-        ::-webkit-scrollbar {
+        *::-webkit-scrollbar {
           -webkit-appearance: none;
         }
-      }
-    </style>
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
+        }
+
+        p,
+        ul,
+        ol {
+          padding: 0;
+          margin: 0;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        :host {
+          font-size: 16px;
+          border-bottom: var(--story-border-mobile);
+          margin: 0;
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          gap: 10px;
+          justify-content: center;
+          padding: 0 0 10px;
+        }
+
+        .title {
+          display: flex;
+          position: relative;
+          flex-flow: column;
+          padding: 6px 0;
+          gap: 0;
+          justify-content: center;
+          color: var(--text-color);
+        }
+
+        .title time {
+          position: absolute;
+          right: 10px;
+          color: var(--gray-color);
+          font-family: var(--font-mono), monospace;
+          border: var(--input-border);
+          padding: 2px 10px;
+          border-radius: 5px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -o-border-radius: 5px;
+        }
+
+        .title > h4 {
+          color: var(--text-color);
+          font-size: 1.2rem;
+          font-weight: 500;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        .title > span.desc {
+          color: var(--gray-color);
+          font-size: 0.9rem;
+          font-family: var(--font-text), sans-serif;
+        }
+
+        .cards {
+          display: flex;
+          flex-flow: row;
+          justify-content: space-between;
+          gap: 20px;
+          padding: 6px 0;
+          width: 100%;
+        }
+
+        .cards > .card {
+          /* border: thin solid #4b5563bd; */
+          display: flex;
+          flex-flow: column;
+          gap: 10px;
+          padding: 10px 25px 10px 15px;
+          background-color: var(--stat-background);
+          justify-content: center;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          -ms-border-radius: 10px;
+          -o-border-radius: 10px;
+        }
+
+        .cards > .card > .title {
+          color: var(--gray-color);
+          font-size: 1rem;
+          font-weight: 400;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        .cards > .card > .stat {
+          /* border: thin solid #4b5563bd; */
+          color: var(--text-color);
+          display: flex;
+          flex-flow: row;
+          gap: 15px;
+          /* height: 50px; */
+          align-items: end;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        .cards > .card > .stat > h2.no {
+          color: var(--text-color);
+          font-size: 1.5rem;
+          font-weight: 500;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        .cards > .card > .stat > .change {
+          /* border: thin solid #4b5563bd; */
+          display: flex;
+          flex-flow: row;
+          gap: 2px;
+          padding: 0 0 2px 0;
+        }
+
+        .cards > .card > .stat > .change.up {
+          color: var(--accent-alt);
+        }
+
+        .cards > .card > .stat > .change.down {
+          color: var(--error-color);
+        }
+
+        .cards > .card > .stat > .change.up .percentage {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .cards > .card > .stat > .change .percentage {
+          /* color: var(--text-color); */
+          font-size: 1rem;
+          font-weight: 400;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        .cards > .card > .stat > .change svg {
+          width: 18px;
+          height: 18px;
+          margin-top: 2px;
+        }
+
+        @media screen and (max-width:600px) {
+          ::-webkit-scrollbar {
+            -webkit-appearance: none;
+          }
+
+          :host {
+            padding-bottom: 25px;
+          }
+
+          .cards {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 6px 0;
+            width: 100%;
+          }
+
+          .cards > .card {
+            display: flex;
+            flex-flow: column;
+            width: 100%;
+            gap: 10px;
+            padding: 10px 25px 10px 15px;
+          }
+        }
+      </style>
     `;
   }
 }

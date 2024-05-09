@@ -424,9 +424,27 @@ export default class UsersStat extends HTMLElement {
         margin-top: 2px;
       }
 
-      @media screen and (max-width:660px) {
+      @media screen and (max-width:600px) {
         ::-webkit-scrollbar {
           -webkit-appearance: none;
+        }
+
+        .cards {
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          padding: 6px 0;
+          width: 100%;
+        }
+
+        .cards > .card {
+          display: flex;
+          flex-flow: column;
+          width: 100%;
+          gap: 10px;
+          padding: 10px 25px 10px 15px;
         }
       }
     </style>
