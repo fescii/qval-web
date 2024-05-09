@@ -127,7 +127,6 @@ export default class AllStat extends HTMLElement {
       <div class="title">
         <h4 class="text">All contents</h4>
         <span class="desc"> Summary of all engagements</span>
-        <time datetime="${this.getAttribute('date')}">this month</time>
       </div>
     `
   }
@@ -482,9 +481,27 @@ export default class AllStat extends HTMLElement {
         font-style: italic;
       }
 
-      @media screen and (max-width:660px) {
+      @media screen and (max-width:600px) {
         ::-webkit-scrollbar {
           -webkit-appearance: none;
+        }
+        .content {
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          padding: 6px 0;
+          width: 100%;
+        }
+        .content > .main {
+          border: var(--story-border-mobile);
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+          padding: 10px 5px;
+          border-radius: 5px;
         }
       }
     </style>

@@ -124,7 +124,7 @@ export default class AppUser extends HTMLElement {
       ${this.getHeader()}
       <main class="profile">
         <section class="content">
-          ${this.getTab()}
+          ${this.getStats()}
         </section>
       </main>
       `;
@@ -158,7 +158,7 @@ export default class AppUser extends HTMLElement {
           <div class="foot">
             <span>Your account</span>
             <span class="sp">•</span>
-            <span class="since">${this.getDate(this.getAttribute('user-joined'))}</span>
+            <span class="since">${this.getDate(this.getAttribute('date-joined'))}</span>
           </div>
         </div>
       </section>
@@ -739,6 +739,52 @@ export default class AppUser extends HTMLElement {
 					:host {
             font-size: 16px;
 					}
+
+          main.profile {
+            padding: 10px 0;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            flex-flow: column;
+            justify-content: start;
+            gap: 20px;
+            min-height: max-content;
+            height: max-content;
+            max-height: max-content;
+          }
+
+           section.content {
+            /* border: 1px solid #6b7280; */
+            display: flex;
+            flex-flow: column;
+            align-items: start;
+            padding: 0;
+            gap: 0;
+            width: 100%;
+          }
+
+          section.tab {
+            padding: 0;
+            width: 100%;
+            min-width: 100%;
+            display: flex;
+            flex-flow: column;
+            gap: 10px;
+            height: max-content;
+            position: unset;
+          }
+
+          section.tab > ul.tab {
+            border-top: var(--story-border-mobile);
+            list-style-type: none;
+            width: 100%;
+            padding: 0 5px;
+            margin: 0;
+            display: flex;
+            flex-flow: column;
+            gap: 0;
+          }
+
 				}
 	    </style>
     `;
