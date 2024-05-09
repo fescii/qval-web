@@ -18,16 +18,14 @@ export default class AppUser extends HTMLElement {
 
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 600px)');
-    if (!mql.matches) {
 
-    }
-
+    console.log(mql);
 
     // Populate the current tab
-    this.populateCurrent();
+    this.populateCurrent(mql.matches);
 
     // Activate the tab
-    this.activateTab()
+    this.activateTab(mql.matches)
   }
 
   disableScroll() {
@@ -47,20 +45,19 @@ export default class AppUser extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  activateTab = () => {
+  activateTab = mql => {
     const outerThis = this;
-    const tab = this.shadowObj.querySelector('section.tab');
+    const tabContainer = this.shadowObj.querySelector('section.tab');
     const contentContainer = this.shadowObj.querySelector('section.content');
 
-    if (tab && contentContainer) {
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
+    if (tabContainer && contentContainer) {
+      const tabItems = tabContainer.querySelectorAll('li.tab-item');
+      let activeTab = tabContainer.querySelector('li.tab-item.active');
 
       tabItems.forEach(tab => {
         tab.addEventListener('click', e => {
           e.preventDefault()
           e.stopPropagation()
-
 
           if (activeTab){
             if (tab.dataset.name === activeTab.dataset.name) {
@@ -80,6 +77,9 @@ export default class AppUser extends HTMLElement {
           const loader = this.shadowObj.querySelector('#loader-container');
 
           setTimeout(() => {
+            if (mql) {
+              tabContainer.style.display = 'none';
+            }
             if (loader) {
               loader.remove();
             }
@@ -133,16 +133,18 @@ export default class AppUser extends HTMLElement {
     }
   }
 
-  populateCurrent = () =>  {
+  populateCurrent = mql =>  {
     const outerThis =this;
     const current = this.getAttribute('current');
+
+    const tabContainer = this.shadowObj.querySelector('section.tab');
 
     // Select li with class name as current and content Container
     const currentItem = this.shadowObj.querySelector(`section.tab li.${current}`);
     const contentContainer = this.shadowObj.querySelector('section.content');
 
     // If selection is available
-    if(currentItem && contentContainer) {
+    if(currentItem && contentContainer && tabContainer) {
       currentItem.classList.add('active');
 
       // Select loader
@@ -150,6 +152,9 @@ export default class AppUser extends HTMLElement {
 
       // Set timeout to remove loader
       setTimeout(() => {
+        if (mql) {
+          tabContainer.style.display = 'none';
+        }
         if(loader) {
           loader.remove();
         }
@@ -943,7 +948,7 @@ export default class AppUser extends HTMLElement {
             padding: 0;
             width: 100%;
             min-width: 100%;
-            display: flex;
+            display: none;
             flex-flow: column;
             gap: 10px;
             height: max-content;
