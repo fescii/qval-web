@@ -193,7 +193,7 @@ export default class OpinionsStat extends HTMLElement {
 
     return /* html */`
       <div class="card">
-        <h4 class="title">Replies</h4>
+        <h4 class="title">Upvotes</h4>
         <div class="stat">
           <h2 class="no">
             ${this.formatNumber(currentUpvotes)}

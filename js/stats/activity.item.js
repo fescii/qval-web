@@ -49,14 +49,25 @@ export default class ActivityItem extends HTMLElement {
         ${this.getAttribute('content')}
       </span>
       <div class="foot">
-        <span class="by">by ${this.getAttribute('by')} views</span>
-        <span class="sp">•</span>
-        <time datetime="2021-08-12T12:00:00Z">on ${this.getAttribute('on')}</time>
+        ${this.getAuthor(this.getAttribute('by'))}
+        <time datetime="2021-08-12T12:00:00Z">${this.getAttribute('on')}</time>
         <span class="sp">•</span>
         <a href="/story/${this.getAttribute('hash')} " class="link">view</a>
         ${this.getAction(this.getAttribute('by'))}
       </div>
     `;
+  }
+
+  getAuthor = (by) => {
+    if (by === 'you') {
+      return ''
+    }
+    else {
+      return /* html */ `
+        <span class="by">by<span>${this.getAttribute('by')}</span></span>
+        <span class="sp">•</span>
+      `
+    }
   }
 
   getAction = (by) => {
@@ -306,14 +317,13 @@ export default class ActivityItem extends HTMLElement {
       .foot > .hash {
         color: var(--gray-color);
         font-size: 0.85rem;
-        /* font-family: var(--font-main), sans-serif; */
+        font-family: var(--font-main), sans-serif;
       }
 
       .foot a {
         color: var(--gray-color);
         font-size: 0.9rem;
-        /* font-family: var(--font-main), sans-serif; */
-        font-family: var(--font-mono), sans-serif;
+        font-family: var(--font-main), sans-serif;
         text-decoration: none;
       }
 
@@ -330,10 +340,21 @@ export default class ActivityItem extends HTMLElement {
         margin: 0;
       }
 
-      .foot span.by,
-      .foot time {
+      .foot span.by {
         font-size: 0.85rem;
-        font-family: var(--font-mono), sans-serif;
+        font-family: var(--font-mono), monospace;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .foot span.by > span {
+        font-size: 0.8rem;
+        margin: 0 0 -2px 0;
+      }
+      .foot time {
+        font-size: 0.9rem;
+        font-family: var(--font-mono), monospace;
+        text-transform: capitalize;
       }
 
       @media screen and (max-width:660px) {
