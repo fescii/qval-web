@@ -318,9 +318,11 @@ export default class ActivityContainer extends HTMLElement {
         }
 
         @media screen and (max-width:600px) {
+
           ::-webkit-scrollbar {
             -webkit-appearance: none;
           }
+
           .top > .desc {
             margin: 0;
             padding: 6px 0 10px;

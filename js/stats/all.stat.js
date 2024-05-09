@@ -289,222 +289,228 @@ export default class AllStat extends HTMLElement {
 
   getStyles() {
     return /* css */`
-    <style>
-      *,
-      *:after,
-      *:before {
-        box-sizing: border-box !important;
-        font-family: inherit;
-        -webkit-box-sizing: border-box !important;
-      }
+      <style>
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box !important;
+          font-family: inherit;
+          -webkit-box-sizing: border-box !important;
+        }
 
-      *:focus {
-        outline: inherit !important;
-      }
+        *:focus {
+          outline: inherit !important;
+        }
 
-      *::-webkit-scrollbar {
-        -webkit-appearance: none;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-      }
-
-      p,
-      ul,
-      ol {
-        padding: 0;
-        margin: 0;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      :host {
-        font-size: 16px;
-        border-bottom: var(--story-border-mobile);
-        margin: 10px 0;
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        gap: 10px;
-        justify-content: center;
-        padding: 0 0 10px;
-      }
-
-      .title {
-        display: flex;
-        position: relative;
-        flex-flow: column;
-        padding: 6px 0;
-        gap: 0;
-        justify-content: center;
-        color: var(--text-color);
-      }
-
-      .title time {
-        position: absolute;
-        right: 10px;
-        color: var(--gray-color);
-        font-family: var(--font-mono), monospace;
-        border: var(--input-border);
-        padding: 2px 10px;
-        border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -o-border-radius: 5px;
-      }
-
-      .title > h4 {
-        color: var(--text-color);
-        font-size: 1.2rem;
-        font-weight: 500;
-        font-family: var(--font-main), sans-serif;
-        margin: 0;
-      }
-
-      .title > span.desc {
-        color: var(--gray-color);
-        font-size: 0.9rem;
-        font-family: var(--font-text), sans-serif;
-      }
-
-      .content {
-        display: flex;
-        flex-flow: row;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 6px 0;
-        width: 100%;
-      }
-
-      .content > .main {
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        padding: 0;
-      }
-
-      .content > .main .views {
-        display: flex;
-        width: max-content;
-        flex-flow: column;
-        align-items: center;
-        gap: 0;
-        padding: 0;
-      }
-
-      .content > .main .views .text {
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        gap: 0;
-        color: var(--text-color);
-      }
-
-      .content > .main .views .text svg {
-        width: 30px;
-        height: 30px;
-      }
-
-      .content > .main .views .text > h2 {
-        color: var(--text-color);
-        font-size: 1.5rem;
-        font-weight: 500;
-        font-family: var(--font-main), sans-serif;
-        margin: 0;
-      }
-
-      .content > .main .views .desc {
-        color: var(--gray-color);
-        font-size: 0.9rem;
-        font-family: var(--font-main), sans-serif;
-      }
-
-      .content > .main .compared {
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        padding: 0;
-        margin: 20px 0 0 0;
-      }
-
-      .content > .main .compared > .change {
-        display: flex;
-        flex-flow: row;
-        gap: 2px;
-        padding: 0;
-        align-items: center;
-      }
-
-      .content > .main .compared > .change.up {
-        color: var(--accent-alt);
-      }
-
-      .content > .main .compared > .change.down {
-        color: var(--error-color);
-      }
-
-      .content > .main .compared > .change.up .percentage {
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .content > .main .compared > .change .percentage {
-        /* color: var(--text-color); */
-        font-size: 1.05rem;
-        font-weight: 500;
-        font-family: var(--font-read), sans-serif;
-        margin: 0;
-      }
-
-      .content > .main .compared > .change svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      .content > .main .compared span.info {
-        color: var(--gray-color);
-        font-size: 0.9rem;
-        font-family: var(--font-text), sans-serif;
-        font-style: italic;
-      }
-
-      @media screen and (max-width:600px) {
-        ::-webkit-scrollbar {
+        *::-webkit-scrollbar {
           -webkit-appearance: none;
         }
-        .content {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
+        }
+
+        p,
+        ul,
+        ol {
+          padding: 0;
+          margin: 0;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        :host {
+          font-size: 16px;
+          border-bottom: var(--story-border-mobile);
+          margin: 10px 0;
+          width: 100%;
           display: flex;
           flex-flow: column;
+          gap: 10px;
           justify-content: center;
-          align-items: center;
+          padding: 0 0 10px;
+        }
+
+        .title {
+          display: flex;
+          position: relative;
+          flex-flow: column;
+          padding: 6px 0;
+          gap: 0;
+          justify-content: center;
+          color: var(--text-color);
+        }
+
+        .title time {
+          position: absolute;
+          right: 10px;
+          color: var(--gray-color);
+          font-family: var(--font-mono), monospace;
+          border: var(--input-border);
+          padding: 2px 10px;
+          border-radius: 5px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -o-border-radius: 5px;
+        }
+
+        .title > h4 {
+          color: var(--text-color);
+          font-size: 1.2rem;
+          font-weight: 500;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        .title > span.desc {
+          color: var(--gray-color);
+          font-size: 0.9rem;
+          font-family: var(--font-text), sans-serif;
+        }
+
+        .content {
+          display: flex;
+          flex-flow: row;
+          justify-content: space-between;
           gap: 20px;
           padding: 6px 0;
           width: 100%;
         }
+
         .content > .main {
-          border: var(--story-border-mobile);
-          width: 100%;
           display: flex;
           flex-flow: column;
           gap: 0;
-          padding: 10px 5px;
-          border-radius: 5px;
+          padding: 0;
         }
-      }
-    </style>
+
+        .content > .main .views {
+          display: flex;
+          width: max-content;
+          flex-flow: column;
+          align-items: center;
+          gap: 0;
+          padding: 0;
+        }
+
+        .content > .main .views .text {
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          gap: 0;
+          color: var(--text-color);
+        }
+
+        .content > .main .views .text svg {
+          width: 30px;
+          height: 30px;
+        }
+
+        .content > .main .views .text > h2 {
+          color: var(--text-color);
+          font-size: 1.5rem;
+          font-weight: 500;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        .content > .main .views .desc {
+          color: var(--gray-color);
+          font-size: 0.9rem;
+          font-family: var(--font-main), sans-serif;
+        }
+
+        .content > .main .compared {
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+          padding: 0;
+          margin: 20px 0 0 0;
+        }
+
+        .content > .main .compared > .change {
+          display: flex;
+          flex-flow: row;
+          gap: 2px;
+          padding: 0;
+          align-items: center;
+        }
+
+        .content > .main .compared > .change.up {
+          color: var(--accent-alt);
+        }
+
+        .content > .main .compared > .change.down {
+          color: var(--error-color);
+        }
+
+        .content > .main .compared > .change.up .percentage {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .content > .main .compared > .change .percentage {
+          /* color: var(--text-color); */
+          font-size: 1.05rem;
+          font-weight: 500;
+          font-family: var(--font-read), sans-serif;
+          margin: 0;
+        }
+
+        .content > .main .compared > .change svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .content > .main .compared span.info {
+          color: var(--gray-color);
+          font-size: 0.9rem;
+          font-family: var(--font-text), sans-serif;
+          font-style: italic;
+        }
+
+        @media screen and (max-width:600px) {
+          ::-webkit-scrollbar {
+            -webkit-appearance: none;
+          }
+
+          :host {
+            padding-bottom: 25px;
+          }
+
+          .content {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 6px 0;
+            width: 100%;
+          }
+
+          .content > .main {
+            border: var(--story-border-mobile);
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            gap: 0;
+            padding: 10px 5px;
+            border-radius: 5px;
+          }
+        }
+      </style>
     `;
   }
 }

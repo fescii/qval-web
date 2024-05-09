@@ -155,7 +155,7 @@ export default class StatContainer extends HTMLElement {
       <div class="top">
         <h4 class="title">Your stats</h4>
         <p class="desc">
-          Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes. You can also view your bookmarks and saved stories.
+          Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
         </p>
       </div>
     `;
@@ -369,6 +369,7 @@ export default class StatContainer extends HTMLElement {
           ::-webkit-scrollbar {
             -webkit-appearance: none;
           }
+
           .top > .desc {
             margin: 0;
             padding: 6px 0 10px;
