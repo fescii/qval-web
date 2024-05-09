@@ -20,12 +20,14 @@ export default class AppUser extends HTMLElement {
     const mql = window.matchMedia('(max-width: 600px)');
     if (!mql.matches) {
 
-      // Populate the current tab
-      this.populateCurrent();
-
-      // Activate the tab
-      this.activateTab()
     }
+
+
+    // Populate the current tab
+    this.populateCurrent();
+
+    // Activate the tab
+    this.activateTab()
   }
 
   disableScroll() {
@@ -59,8 +61,6 @@ export default class AppUser extends HTMLElement {
           e.preventDefault()
           e.stopPropagation()
 
-          // Add loader
-          contentContainer.innerHTML = outerThis.getLoader();
 
           if (activeTab){
             if (tab.dataset.name === activeTab.dataset.name) {
@@ -70,52 +70,61 @@ export default class AppUser extends HTMLElement {
             activeTab.classList.remove('active');
           }
 
+          // Add loader
+          contentContainer.innerHTML = outerThis.getLoader();
+
           tab.classList.add('active');
           activeTab = tab;
 
+          // Select loader
+          const loader = this.shadowObj.querySelector('#loader-container');
+
           setTimeout(() => {
+            if (loader) {
+              loader.remove();
+            }
             switch (tab.dataset.name) {
               case 'stat':
-                contentContainer.innerHTML = outerThis.getStats();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
                 break;
               case 'name':
-                contentContainer.innerHTML = outerThis.getFormName();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
                 break;
               case 'bio':
-                contentContainer.innerHTML = outerThis.getFormBio();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
                 break;
               case 'profile':
-                contentContainer.innerHTML = outerThis.getFormProfile();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
                 break;
               case 'social':
-                contentContainer.innerHTML = outerThis.getFormSocial();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormSocial());
                 break;
               case 'email':
-                contentContainer.innerHTML = outerThis.getFormEmail();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
                 break;
               case 'privacy':
-                contentContainer.innerHTML = outerThis.getSoonPrivacy();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
                 break;
               case 'password':
-                contentContainer.innerHTML = outerThis.getFormPassword();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
                 break;
               case 'topic':
-                contentContainer.innerHTML = outerThis.getSoon();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
                 break;
               case 'activity':
-                contentContainer.innerHTML = outerThis.getActivity();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
                 break;
               case 'notification':
-                contentContainer.innerHTML = outerThis.getSoonNotifications();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
                 break;
               case 'reading':
-                contentContainer.innerHTML = outerThis.getSoon();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
                 break;
               case 'appearance':
-                contentContainer.innerHTML = outerThis.getSoon();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
                 break;
               default:
-                contentContainer.innerHTML = outerThis.getStats();
+                contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
                 break;
             }
           }, 3000);
@@ -125,6 +134,7 @@ export default class AppUser extends HTMLElement {
   }
 
   populateCurrent = () =>  {
+    const outerThis =this;
     const current = this.getAttribute('current');
 
     // Select li with class name as current and content Container
@@ -135,50 +145,56 @@ export default class AppUser extends HTMLElement {
     if(currentItem && contentContainer) {
       currentItem.classList.add('active');
 
+      // Select loader
+      const loader = this.shadowObj.querySelector('#loader-container');
+
       // Set timeout to remove loader
       setTimeout(() => {
+        if(loader) {
+          loader.remove();
+        }
         switch (current) {
           case 'stats':
-            contentContainer.innerHTML = this.getStats();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
             break;
           case 'form-name':
-            contentContainer.innerHTML = this.getFormName();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
             break;
           case 'form-bio':
-            contentContainer.innerHTML = this.getFormBio();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
             break;
           case 'form-profile':
-            contentContainer.innerHTML = this.getFormProfile();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
             break;
           case 'form-socials':
-            contentContainer.innerHTML = this.getFormSocial();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
             break;
           case 'form-email':
-            contentContainer.innerHTML = this.getFormEmail();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
             break;
           case 'privacy':
-            contentContainer.innerHTML = this.getSoonPrivacy();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
             break;
           case 'form-password':
-            contentContainer.innerHTML = this.getFormPassword();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
             break;
           case 'topics':
-            contentContainer.innerHTML = this.getSoon();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
             break;
           case 'activity':
-            contentContainer.innerHTML = this.getActivity();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
             break;
           case 'notifications':
-            contentContainer.innerHTML = this.getSoonNotifications();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
             break;
           case 'reading':
-            contentContainer.innerHTML = this.getSoon();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
             break;
           case 'appearance':
-            contentContainer.innerHTML = this.getSoon();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
             break;
           default:
-            contentContainer.innerHTML = this.getStats();
+            contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats())
             break;
         }
       }, 3000)
@@ -235,6 +251,7 @@ export default class AppUser extends HTMLElement {
       ${this.getHeader()}
       <main class="profile">
         <section class="content">
+          ${this.getTab()}
           ${this.getLoader()}
         </section>
       </main>
