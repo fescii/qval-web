@@ -37,6 +37,7 @@ Author URL: https://femar.co.ke
 html {
   margin: 0;
   padding: 0;
+  font-size: 16px;
   width: 100%;
   display: flex;
   flex-flow: column;
@@ -53,6 +54,7 @@ html {
 body {
   /* border: 1px solid blue; */
   padding: 0 0 30px 0;
+  font-size: 16px;
   margin: 0;
   /* width: 85%; */
   width: 1100px;
