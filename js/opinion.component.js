@@ -4,6 +4,7 @@ export default class OpinionWrapper extends HTMLElement {
     super();
 
     // let's create our shadow root
+    // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
     this.render();
@@ -334,7 +335,6 @@ export default class OpinionWrapper extends HTMLElement {
       *:before {
         box-sizing: border-box !important;
         font-family: inherit;
-        -webkit-box-sizing: border-box !important;
       }
 
       *:focus {
@@ -377,7 +377,8 @@ export default class OpinionWrapper extends HTMLElement {
         width: 100%;
         display: flex;
         flex-flow: column;
-        gap: 5px;
+        gap: 0;
+        font-family: var(--font-main),sans-serif;
       }
 
       .meta {
@@ -400,63 +401,23 @@ export default class OpinionWrapper extends HTMLElement {
 
       .meta div.author-name {
         display: flex;
-        align-items: center;
-      }
-
-      .meta div.author-name > a {
-        text-decoration: none;
+        flex-flow: row;
+        gap: 0;
+        font-weight: 500;
+        cursor: pointer;
         color: transparent;
-        background: var(--accent-linear);
+        font-family: var(--font-mono),monospace;
+        background: linear-gradient(103.53deg, #18A565 -6.72%, #21D029 109.77%);
         background-clip: text;
         -webkit-background-clip: text;
       }
 
-      .meta a.opinion-link {
-        text-decoration: none;
-        color: transparent;
-        background-image: var(--alt-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .meta .profile {
-        border: var(--modal-border);
-        box-shadow: var(--modal-shadow);
-        background-color: var(--background);
-        padding: 0;
-        z-index: 2;
-        position: absolute;
-        top: 30px;
-        left: 0;
-        display: none;
-        flex-flow: column;
-        gap: 0;
-        width: 300px;
-        height: max-content;
-        border-radius: 12px;
-      }
-
-      .meta .profile > .cover {
-        padding: 10px 10px;
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        width: 100%;
-        border-radius: 12px;
-        transition: all 100ms ease-out;
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-      }
-
-      .meta .profile > .cover p.about-info {
-        display: none;
-        font-family: var(--font-main), san-serif;
-      }
-
-      .meta > .author:hover .profile {
-        display: flex;
+      .head > span.info > a > span.sub {
+        font-family: var(--font-mono),monospace;
+        font-size: 1rem;
+        align-self: center;
+        /*align-self: flex-end;
+        margin: 0 0 2px 0; */
       }
 
       .meta .profile > span.pointer {
@@ -508,21 +469,6 @@ export default class OpinionWrapper extends HTMLElement {
         -moz-border-radius: 50px;
       }
 
-      .meta .info {
-        display: flex;
-        flex-flow: column;
-      }
-
-      .meta .info p.name {
-        margin: 0;
-        color: var(--text-color);
-        font-weight: 500;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
       .meta .info p.name svg {
         margin: -2px 0 0;
         color: var(--accent-color);
@@ -556,9 +502,8 @@ export default class OpinionWrapper extends HTMLElement {
         margin: 0;
         color: var(--text-color);
         font-weight: 500;
-        font-family: var(--font-main),sans-serif;
-        font-size: 1.2rem;
-        line-height: 1.5;
+        font-family: var(--font-mono),monospace;
+        font-size: 0.94rem;
       }
 
       .meta .data > span.bio {
@@ -632,8 +577,8 @@ export default class OpinionWrapper extends HTMLElement {
         font-family: var(--font-text), sans-serif;
       }
 
-      .content ul a,
-      .content ol a {
+      #content.content ul a,
+      #content.content ol a {
         background: unset;
         color:var(--font-text);
         font-weight: 500;
@@ -679,61 +624,8 @@ export default class OpinionWrapper extends HTMLElement {
         font-family: var(--font-main),sans-serif;
       }
 
-      .stats > .stat.upvote {
-        /*border: var(--input-border);*/
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 3px;
-        font-size: 1rem;
-        font-weight: 400;
-        color: var(--gray-color);
-      }
-
-      .stats > .stat.upvote > .numb_list {
-        /*border: var(--action-border);*/
-        height: 21px;
-        min-height: 21px;
-        padding: 0;
-        margin: 0;
-        margin-bottom: calc(16px / -3);
-        display: flex;
-        overflow-y: scroll;
-        display: flex;
-        gap: 5px;
-        align-items: start;
-        justify-content: start;
-        flex-flow: column;
-        transform: translateY(calc(-100% + 21px));
-        transition: transform 0.5s linear;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-
-      .stats > .stat.upvote > .numb_list > .numb_list::-webkit-scrollbar {
-        display: none !important;
-        visibility: hidden;
-      }
-
-      .stats > .stat.upvote > .numb_list{
-        transition: all 500ms ease-in-out;
-        -webkit-transition: all 500ms ease-in-out;
-        -moz-transition: all 500ms ease-in-out;
-        -ms-transition: all 500ms ease-in-out;
-        -o-transition: all 500ms ease-in-out;
-      }
-
-      .stats > .stat.upvote > .numb_list > span {
-        /*border: 1px solid red;*/
-        line-height: 1;
-        display: inline-block;
-        text-align: start;
-        height: 21px;
-        min-height: 21px;
-        padding: 0;
-        margin: 0;
-        font-family: var(--font-main), san-serif;
+      .stats span.no {
+        font-family: var(--font-mono),monospace;
         font-size: 1rem;
       }
 
@@ -756,6 +648,9 @@ export default class OpinionWrapper extends HTMLElement {
 
       .stats > .stat.write {
         position: relative;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
       }
 
       .stats > .stat.write span.line {
@@ -787,216 +682,106 @@ export default class OpinionWrapper extends HTMLElement {
       }
 
       .stats > .stat.discuss svg {
-        margin: -1px 0 0 0;
-        color: inherit;
-        width: 18px;
-        height: 18px;
+        color: #6b7280;
+        width: 19px;
+        height: 19px;
       }
 
-      .stats > .stat.upvote svg {
+      .stats.active > .stat.write svg,
+      .stats > .stat.write:hover svg {
+        color: #18A565;
+      }
+
+      form.reply {
+        /* border: 1px solid #6b7280; */
+        padding: 0 0 0 25px;
+        margin: 10px 0 0 0;
+        display: flex;
+        gap: 10px;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #6b7280;
+        position: relative;
+      }
+
+      form.reply .image {
+        /* border: thin solid #4b5563bd; */
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        overflow: hidden;
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+      }
+
+      form.reply .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+      }
+
+      form.reply > textarea {
+        border: 1px solid #6b72805e;
+        padding: 8px !important;
         margin: 0;
-        width: 15px;
-        height: 15px;
+        width: calc(100% - 48px);
+        resize: none;
+        height: 38px;
+        /* max-height: 100px !important; */
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #6b7280;
+        border-radius: 10px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
 
-      .stats > .stat.upvote.true svg,
-      .stats > .stat.upvote.active svg {
-        color: var(--color-alt);
+      form.reply > textarea::-webkit-scrollbar {
+        display: none !important;
+        visibility: hidden;
       }
 
-      .stats > .stat.write svg {
-        color: var(--gray-color);
+      form.reply > textarea:focus {
+        border: 1px solid #18a5669a;
       }
 
-      .stats.active > .stat.write svg {
-        color: var(--accent-color);
+      form.reply > button {
+        border: none;
+        /* border: 1px solid #6b7280; */
+        position: absolute;
+        background-color: var(--background);
+        right: 8px;
+        bottom: 3px;
+        height: 30px;
+        width: 30px;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
       }
 
-      @media screen and (max-width:660px) {
-        :host {
-        font-size: 16px;
-          border-bottom: var(--story-border-mobile);
-        }
-
-        ::-webkit-scrollbar {
-          -webkit-appearance: none;
-        }
-
-        .meta a.opinion-link,
-        .meta div.author-name > a,
-        a,
-        .stats > .stat {
-          cursor: default !important;
-        }
-
-        h3.title {
-          color: var(--text-color);
-          margin: 0;
-          padding: 0;
-          font-size: 1rem;
-          font-weight: 600;
-          line-height: 1.5;
-        }
-
-        h3.title > a {
-          text-decoration: none;
-          color: inherit;
-        }
-
-        .stats > .stat.upvote > .numb_list {
-        /*border: var(--action-border);*/
-          margin-bottom: -1.8px;
-        }
-
-        .stats > .stat.upvote > .numb_list > span {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          line-height: 1;
-          padding: 0;
-        }
-
-        .stats > .stat.upvote.true > .numb_list > span {
-          padding: 0;
-        }
-
-        .stats > .stat.upvote.active > .numb_list > span {
-          padding: 0;
-        }
-
-        .stats > .stat.write span.line {
-          border-left: var(--open-line-mobile);
-        }
-
-        .stats > .stat.upvote svg {
-          margin: 0 0 0 0;
-          width: 14.5px;
-          height: 14.5px;
-        }
-
-        .meta .profile {
-          border: unset;
-          box-shadow: unset;
-          padding: 0;
-          z-index: 10;
-          position: fixed;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background-color: transparent;
-          display: none;
-          flex-flow: column;
-          justify-content: end;
-          gap: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: unset;
-        }
-
-        .meta.opened .profile {
-          display: flex;
-        }
-
-        .meta  .profile > .cover {
-          border-top: var(--modal-border);
-          box-shadow: unset;
-          padding: 20px 10px;
-          z-index: 3;
-          background-color: var(--background);
-          display: flex;
-          flex-flow: column;
-          gap: 5px;
-          width: 100%;
-          border-radius: unset;
-          border-top-left-radius: 15px;
-          border-top-right-radius: 15px;
-        }
-
-        .meta  .profile > .cover p.about-info {
-          display: block;
-          line-height: 1.4;
-          padding: 0;
-          font-size: 1rem;
-          color: var(--text-color);
-          margin: 10px 0 0 0;
-        }
-
-        .meta > .author:hover .profile {
-          display: none;
-        }
-
-        .meta.opinion .profile > span.pointer,
-        .meta  .profile > span.pointer {
-          border: var(--modal-border);
-          border-bottom: none;
-          border-right: none;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: var(--modal-overlay);
-          display: inline-block;
-          min-width: 100%;
-          height: 100%;
-          rotate: unset;
-          border-radius: 0;
-        }
-
-        .meta  .profile > .cover > .head {
-          display: flex;
-          flex-wrap: nowrap;
-          width: 100%;
-          gap: 10px;
-          z-index: 2;
-        }
-
-        .meta .data {
-          margin: 5px 0;
-          display: flex;
-          flex-flow: column;
-        }
-
-        .meta .data > p.name {
-          margin: 0;
-          color: var(--text-color);
-          font-weight: 500;
-          font-family: var(--font-main),sans-serif;
-          font-size: 1.2rem;
-          line-height: 1.5;
-        }
-
-        .meta .data > span.bio {
-          margin: 0;
-          color: var(--gray-color);
-          font-family: var(--font-main),sans-serif;
-          font-size: 0.9rem;
-        }
-
-        .meta span.action {
-          border: var(--action-border);
-          margin: 10px 0 5px;
-          padding: 10px 15px;
-          font-weight: 500;
-          font-family: var(--font-main),sans-serif;
-          font-size: 1.1rem;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          border-radius: 8px;
-          -webkit-border-radius: 8px;
-          -moz-border-radius: 8px;
-        }
-        .meta span.action.follow {
-          border: none;
-          text-decoration: none;
-          color: var(--white-color);
-          background-color: var(--action-color);
-        }
+      form.reply > button svg {
+        color: #18A565;
+        width: 24px;
+        height: 26px;
       }
     </style>
     `;
