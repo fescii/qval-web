@@ -1079,8 +1079,9 @@ export default class AppUser extends HTMLElement {
           /* border: 1px solid #6b7280; */
           color: var(--text-color);
           font-family: var(--title-text), sans-serif;
-          font-size: 1.5rem;
+          font-size: 1.25rem;
           font-weight: 600;
+          margin: 0 0 25px 0;
           display: flex;
           flex-flow: column;
           align-items: center;
@@ -1089,15 +1090,15 @@ export default class AppUser extends HTMLElement {
 
         div.coming-soon > .title svg {
           color: var(--error-color);
-          width: 50px;
-          height: 50px;
+          width: 25px;
+          height: 25px;
           margin: 0 0 10px 0;
         }
 
         div.coming-soon > .title span.text {
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
-          font-size: 1.8rem;
+          font-size: inherit;
           font-weight: 500;
           text-align: center;
         }
