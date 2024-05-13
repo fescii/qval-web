@@ -16,30 +16,35 @@ export default class AppUser extends HTMLElement {
   }
 
   connectedCallback() {
+    const outerThis = this;
 
     // Check if the display is greater than 600px using mql
-    const mql = window.matchMedia('(max-width: 600px)');
+    const mql = window.matchMedia('(max-width: 660px)');
 
-    // console.log(mql);
-
-    // Populate the current tab
-    this.populateCurrent(mql.matches);
-
-    // Activate the tab
+    // Select the tab container and content container
+    const current = this.getAttribute('current');
     const tabContainer = this.shadowObj.querySelector('section.tab');
     const contentContainer = this.shadowObj.querySelector('section.content');
 
-    // Status to show no tab click is active
-    let status = true;
+    // Select section top and back button
+    const top = this.shadowObj.querySelector('section.top');
+    const back = this.shadowObj.querySelector('section.back');
 
+
+    // Populate the current tab
+    if (current, tabContainer, contentContainer, top, back) {
+      this.populateCurrent(mql.matches, current, tabContainer, contentContainer);
+    }
+
+    // Activate the tab
     if (tabContainer && contentContainer) {
       const tabItems = tabContainer.querySelectorAll('li.tab-item');
       let activeTab = tabContainer.querySelector('li.tab-item.active');
 
       tabItems.forEach(tab => {
         tab.addEventListener('click', e => {
-          e.preventDefault()
-          e.stopPropagation()
+          e.preventDefault();
+          e.stopPropagation();
 
           if (activeTab) {
             if (tab.dataset.name !== activeTab.dataset.name) {
@@ -49,67 +54,187 @@ export default class AppUser extends HTMLElement {
                 //Update status
                 this._status = false;
 
+                // Remove all child elements of the content container
+                // Except the section elements
+                const children = contentContainer.children;
+                if (children) {
+                  for (let i = 0; i < children.length; i++) {
+                    if (children[i].tagName !== 'SECTION') {
+                      children[i].remove();
+                    }
+                  }
+                }
+
                 // Add loader
-                contentContainer.innerHTML = this.getLoader();
+                contentContainer.insertAdjacentHTML('beforeend', this.getLoader());
 
                 tab.classList.add('active');
                 activeTab = tab;
 
                 // Change content
-                this.changeContent(mql.matches, tab, tabContainer, contentContainer)
+                this.changeContent(mql.matches, tab, tabContainer, contentContainer);
+
+                // Check if this is mobile view
+                if (mql.matches) {
+                  tabContainer.style.display = 'none';
+
+                  // Set back to display flex and top to display none
+                  top.style.display = 'none';
+                  back.style.display = 'flex';
+
+                  // Select all child elements of the content container and display flex
+                  // except the section elements
+                  const children = contentContainer.children;
+                  if (children) {
+                    for (let i = 0; i < children.length; i++) {
+                      if (children[i].tagName !== 'SECTION') {
+                        children[i].style.display = 'flex';
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            else {
+              // Check if this is mobile view
+              if (mql.matches) {
+                tabContainer.style.display = 'none';
+
+                // Set back to display flex and top to display none
+                top.style.display = 'none';
+                back.style.display = 'flex';
+
+                // Select all child elements of the content container and display flex
+                const children = contentContainer.children;
+                if (children) {
+                  for (let i = 0; i < children.length; i++) {
+                    if (children[i].tagName !== 'SECTION') {
+                      children[i].style.display = 'flex';
+                    }
+                  }
+                }
               }
             }
           }
         })
       })
 
-      // Update the state
 
-    }
+      // Add event listener to back button
+      const backBtn = back.querySelector('.back-btn');
+      if (backBtn) {
+        backBtn.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
 
-    // Update state on window.onpopstate
-    window.onpopstate = function (event) {
-      // This event will be triggered when the browser's back button is clicked
+          // Check if this is mobile view
+          if (mql.matches) {
 
-      if (event.state) {
-        if (event.state.page) {
-          updatePage(event.state.content)
-        }
-        else if (event.state.tab) {
-          updateState(event.state)
+            // Set the top to display flex and back to display none
+            top.style.display = 'flex';
+            back.style.display = 'none';
+
+
+            // Select all child elements of the content container and display none
+            // only ones which are not section elements
+            const children = contentContainer.children;
+            if (children) {
+              for (let i = 0; i < children.length; i++) {
+                if (children[i].tagName !== 'SECTION') {
+                  children[i].style.display = 'none';
+                }
+              }
+            }
+
+            tabContainer.style.display = 'flex';
+          }
+        })
+      }
+
+
+      // Update state on window.onpopstate
+      window.onpopstate = event => {
+        // This event will be triggered when the browser's back button is clicked
+        // console.log(event.state);
+        if (event.state) {
+          if (event.state.page) {
+            outerThis.updatePage(event.state.content)
+          }
+          else if (event.state.tab) {
+
+            // Select the state tab
+            const tab = tabContainer.querySelector(`li.${event.state.tab}`);
+
+            if (tab) {
+              activeTab.classList.remove('active');
+
+              //Update status
+              this._status = false;
+
+              tab.classList.add('active');
+              activeTab = tab;
+
+              // Remove any child elements of the content container which is not section
+              const children = contentContainer.children;
+              if (children) {
+                for (let i = 0; i < children.length; i++) {
+                  if (children[i].tagName !== 'SECTION') {
+                    children[i].remove();
+                  }
+                }
+              }
+
+              //Check if this is mobile view
+              if (mql.matches) {
+                tabContainer.style.display = 'none';
+
+                // Set back to display flex and top to display none
+                top.style.display = 'none';
+                back.style.display = 'flex';
+
+                // Select all child elements of the content container and display flex
+                // except the section elements
+                const children = contentContainer.children;
+                if (children) {
+                  for (let i = 0; i < children.length; i++) {
+                    if (children[i].tagName !== 'SECTION') {
+                      children[i].style.display = 'flex';
+                    }
+                  }
+                }
+              }
+
+              outerThis.updateState(event.state, contentContainer);
+            }
+          }
         }
         else {
-          console.log('No, page or Tab')
-        }
-      }
-      else {
-        console.log('No Event!')
-      }
+          // Remove any child elements of the content container which is not section
+          const children = contentContainer.children;
+          if (children) {
+            for (let i = 0; i < children.length; i++) {
+              if (children[i].tagName !== 'SECTION') {
+                children[i].remove();
+              }
+            }
+          }
 
-    };
+          // Select li with class name as current and content Container
+          const currentTab = tabContainer.querySelector(`section.tab li.${current}`);
+          if (currentTab) {
+            activeTab.classList.remove('active');
+            activeTab = currentTab;
+            currentTab.classList.add('active');
+            outerThis.populateContent(current, contentContainer);
+          }
+        }
+      };
+    }
   }
 
-  updateState = state => {
-    const outerThis = this;
-    activeTab.classList.toggle('active')
-    let previousTab = outerThis.shadowObj.querySelector(`ul#tab>li.${state.tab}`);
-    previousTab.classList.toggle('active')
-    activeTab = previousTab
-    // activeTab.classList.toggle('active')
-
-    contentContainer.innerHTML = state.content
-    if (state.tab === 'feeds') {
-      outerThis.updateSection('feeds')
-      outerThis.updateSide('feeds')
-      contentContainer.innerHTML = state.content
-      outerThis.enableScroll()
-    }
-    else {
-      outerThis.updateSection(`${previousTab.dataset.element}`)
-      outerThis.updateSide(`${previousTab.dataset.element}`)
-      contentContainer.innerHTML = state.content
-      outerThis.enableScroll()
-    }
+  updateState = (state, contentContainer)=> {
+    // populate content
+    this.populateContent(state.tab, contentContainer);
   }
 
   updatePage = content => {
@@ -147,54 +272,13 @@ export default class AppUser extends HTMLElement {
         loader.remove();
       }
 
-      switch (tab.dataset.name) {
-        case 'stat':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
-          break;
-        case 'name':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
-          break;
-        case 'bio':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
-          break;
-        case 'profile':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
-          break;
-        case 'social':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormSocial());
-          break;
-        case 'email':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
-          break;
-        case 'privacy':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
-          break;
-        case 'password':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
-          break;
-        case 'topic':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-          break;
-        case 'activity':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
-          break;
-        case 'notification':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
-          break;
-        case 'typography':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-          break;
-        case 'appearance':
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-          break;
-        default:
-          contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
-          break;
-      }
+      // Populate Content
+      outerThis.populateContent(tab.dataset.name, contentContainer);
+
 
       // Updating History State
       window.history.pushState(
-        { content: contentContainer.innerHTML, tab: tab.dataset.name },
+        { tab: tab.dataset.name },
         tab.dataset.name, `${tab.getAttribute('url')}`
       );
 
@@ -203,18 +287,14 @@ export default class AppUser extends HTMLElement {
     }, 3000);
   }
 
-  populateCurrent = mql =>  {
-    const outerThis =this;
-    const current = this.getAttribute('current');
-
-    const tabContainer = this.shadowObj.querySelector('section.tab');
+  populateCurrent = (mql, current, tabContainer, contentContainer) =>  {
+    const outerThis = this;
 
     // Select li with class name as current and content Container
     const currentItem = this.shadowObj.querySelector(`section.tab li.${current}`);
-    const contentContainer = this.shadowObj.querySelector('section.content');
 
     // If selection is available
-    if(currentItem && contentContainer && tabContainer) {
+    if(currentItem) {
       currentItem.classList.add('active');
 
       // Select loader
@@ -228,51 +308,57 @@ export default class AppUser extends HTMLElement {
         if(loader) {
           loader.remove();
         }
-        switch (current) {
-          case 'stats':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
-            break;
-          case 'form-name':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
-            break;
-          case 'form-bio':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
-            break;
-          case 'form-profile':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
-            break;
-          case 'form-socials':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
-            break;
-          case 'form-email':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
-            break;
-          case 'privacy':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
-            break;
-          case 'form-password':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
-            break;
-          case 'topics':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-            break;
-          case 'activity':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
-            break;
-          case 'notifications':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
-            break;
-          case 'reading':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-            break;
-          case 'appearance':
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-            break;
-          default:
-            contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats())
-            break;
-        }
+
+        // Populate Content
+        outerThis.populateContent(current, contentContainer);
       }, 3000)
+    }
+  }
+
+  populateContent = (name, contentContainer) => {
+    switch (name) {
+      case 'stats':
+        contentContainer.insertAdjacentHTML('beforeend', this.getStats());
+        break;
+      case 'form-name':
+        contentContainer.insertAdjacentHTML('beforeend', this.getFormName());
+        break;
+      case 'form-bio':
+        contentContainer.insertAdjacentHTML('beforeend', this.getFormBio());
+        break;
+      case 'form-profile':
+        contentContainer.insertAdjacentHTML('beforeend', this.getFormProfile());
+        break;
+      case 'form-socials':
+        contentContainer.insertAdjacentHTML('beforeend', this.getFormSocial());
+        break;
+      case 'form-email':
+        contentContainer.insertAdjacentHTML('beforeend', this.getFormEmail());
+        break;
+      case 'privacy':
+        contentContainer.insertAdjacentHTML('beforeend', this.getSoonPrivacy());
+        break;
+      case 'form-password':
+        contentContainer.insertAdjacentHTML('beforeend', this.getFormPassword());
+        break;
+      case 'topics':
+        contentContainer.insertAdjacentHTML('beforeend', this.getSoon());
+        break;
+      case 'activity':
+        contentContainer.insertAdjacentHTML('beforeend', this.getActivity());
+        break;
+      case 'notifications':
+        contentContainer.insertAdjacentHTML('beforeend', this.getSoonNotifications());
+        break;
+      case 'typography':
+        contentContainer.insertAdjacentHTML('beforeend', this.getSoon());
+        break;
+      case 'theme':
+        contentContainer.insertAdjacentHTML('beforeend', this.getSoon());
+        break;
+      default:
+        contentContainer.insertAdjacentHTML('beforeend', this.getStats());
+        break;
     }
   }
 
@@ -363,6 +449,14 @@ export default class AppUser extends HTMLElement {
             <span class="sp">•</span>
             <span class="since">${this.getDate(this.getAttribute('date-joined'))}</span>
           </div>
+        </div>
+      </section>
+      <section class="back">
+        <div class="back-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+            <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
+          </svg>
+          <span class="text">Back</span>
         </div>
       </section>
     `
@@ -515,7 +609,7 @@ export default class AppUser extends HTMLElement {
     return /* html */`
       <section class="tab">
         <ul class="tab public">
-          <li url="/user/stats" class="tab-item stats" data-name="stat">
+          <li url="/user/stats" class="tab-item stats" data-name="stats">
             <span class="line"></span>
             <a href="/user/stats" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -526,7 +620,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your stats</span>
             </a>
           </li>
-          <li url="/user/edit/name" class="tab-item form-name" data-name="name">
+          <li url="/user/edit/name" class="tab-item form-name" data-name="form-name">
             <span class="line"></span>
             <a href="/user/edit/name" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512" width="16px" height="16px">
@@ -535,7 +629,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your name</span>
             </a>
           </li>
-          <li url="/user/edit/bio" class="tab-item form-bio" data-name="bio">
+          <li url="/user/edit/bio" class="tab-item form-bio" data-name="form-bio">
             <span class="line"></span>
             <a href="/user/edit/bio" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  width="16px" height="16px" viewBox="0 0 512 512">
@@ -544,7 +638,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your bio</span>
             </a>
           </li>
-          <li url="/user/edit/profile" class="tab-item form-profile"  data-name="profile">
+          <li url="/user/edit/profile" class="tab-item form-profile"  data-name="form-profile">
             <span class="line"></span>
             <a href="/user/edit/profile" class="tab-link">
               <svg aria-hidden="true" height="16" fill="currentColor" viewBox="0 0 16 16" width="16">
@@ -553,7 +647,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your profile</span>
             </a>
           </li>
-          <li url="/user/edit/socials" class="tab-item form-socials" data-name="social">
+          <li url="/user/edit/socials" class="tab-item form-socials" data-name="form-socials">
             <span class="line"></span>
             <a href="/user/edit/socials" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
@@ -565,7 +659,7 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab security">
           <span class="title">Security</span>
-          <li url="/user/edit/email" class="tab-item form-email"  data-name="email">
+          <li url="/user/edit/email" class="tab-item form-email"  data-name="form-email">
             <span class="line"></span>
             <a href="/user/edit/email" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
@@ -584,7 +678,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your privacy</span>
             </a>
           </li>
-          <li url="/user/edit/password" class="tab-item form-password" data-name="password">
+          <li url="/user/edit/password" class="tab-item form-password" data-name="form-password">
             <span class="line"></span>
             <a href="/user/edit/password" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
@@ -596,7 +690,7 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab activity">
           <span class="title">Activity</span>
-          <li url="/user/manage/topics" class="tab-item topics" data-name="topic">
+          <li url="/user/manage/topics" class="tab-item topics" data-name="topics">
             <span class="line"></span>
             <a href="/user/manage/topics" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -616,7 +710,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your activity</span>
             </a>
           </li>
-          <li url="/user/notifications" class="tab-item notifications" data-name="notification">
+          <li url="/user/notifications" class="tab-item notifications" data-name="notifications">
             <span class="line"></span>
             <a href="/user/notifications" class="tab-link">
               <svg height="16" viewBox="0 0 16 16" fill="currentColor" width="16">
@@ -628,7 +722,7 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab preference">
           <span class="title">Preference</span>
-          <li url="/user/typography" class="tab-item reading" data-name="typography">
+          <li url="/user/typography" class="tab-item typography" data-name="typography">
             <span class="line"></span>
             <a href="/user/typography" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -637,7 +731,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Typography</span>
             </a>
           </li>
-          <li url="/user/theme" class="tab-item appearance" data-name="appearance">
+          <li url="/user/theme" class="tab-item theme" data-name="theme">
             <span class="line"></span>
             <a href="/user/theme" class="tab-link">
               <svg height="16" viewBox="0 0 16 16" fill="currentColor" width="16">
@@ -751,9 +845,12 @@ export default class AppUser extends HTMLElement {
         section.top {
           /* border-bottom: var(--story-border); */
           display: flex;
+          width: 100%;
           gap: 5px;
           padding: 0 0 10px 0;
           margin: 10px 0 0 0;
+          display: flex;
+          align-items: center;
         }
 
         section.top > .profile {
@@ -823,6 +920,36 @@ export default class AppUser extends HTMLElement {
         section.top > .info > .foot > .since {
           font-size: 0.9rem;
           font-family: var(--font-read), sans-serif;
+        }
+
+        section.back {
+          display: none;
+          width: 100%;
+          gap: 0;
+          padding: 0;
+          margin: 10px 0 5px 0;
+          align-items: center;
+        }
+
+        section.back > .back-btn {
+          /* border: 1px solid #53595f;*/
+          display: flex;
+          align-items: center;
+          width: max-content;
+          gap: 0;
+        }
+
+        section.back > .back-btn > svg {
+          color: var(--text-color);
+          width: 30px;
+          height: 30px;
+          margin: 0 0 0 -8px;
+        }
+
+        section.back > .back-btn > span.text {
+          font-size: 1.2rem;
+          color: var(--text-color);
+          font-weight: 600;
         }
 
         main.profile {
@@ -989,6 +1116,14 @@ export default class AppUser extends HTMLElement {
 					:host {
             font-size: 16px;
 					}
+
+          section.back {
+            display: flex;
+          }
+
+          section.top {
+            display: none;
+          }
 
           main.profile {
             padding: 10px 0;
