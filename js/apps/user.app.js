@@ -3,6 +3,8 @@ export default class AppUser extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    this._status = true;
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -14,18 +16,104 @@ export default class AppUser extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
 
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 600px)');
 
-    console.log(mql);
+    // console.log(mql);
 
     // Populate the current tab
     this.populateCurrent(mql.matches);
 
     // Activate the tab
-    this.activateTab(mql.matches)
+    const tabContainer = this.shadowObj.querySelector('section.tab');
+    const contentContainer = this.shadowObj.querySelector('section.content');
+
+    // Status to show no tab click is active
+    let status = true;
+
+    if (tabContainer && contentContainer) {
+      const tabItems = tabContainer.querySelectorAll('li.tab-item');
+      let activeTab = tabContainer.querySelector('li.tab-item.active');
+
+      tabItems.forEach(tab => {
+        tab.addEventListener('click', e => {
+          e.preventDefault()
+          e.stopPropagation()
+
+          if (activeTab) {
+            if (tab.dataset.name !== activeTab.dataset.name) {
+              if (this._status) {
+                activeTab.classList.remove('active');
+
+                //Update status
+                this._status = false;
+
+                // Add loader
+                contentContainer.innerHTML = this.getLoader();
+
+                tab.classList.add('active');
+                activeTab = tab;
+
+                // Change content
+                this.changeContent(mql.matches, tab, tabContainer, contentContainer)
+              }
+            }
+          }
+        })
+      })
+
+      // Update the state
+
+    }
+
+    // Update state on window.onpopstate
+    window.onpopstate = function (event) {
+      // This event will be triggered when the browser's back button is clicked
+
+      if (event.state) {
+        if (event.state.page) {
+          updatePage(event.state.content)
+        }
+        else if (event.state.tab) {
+          updateState(event.state)
+        }
+        else {
+          console.log('No, page or Tab')
+        }
+      }
+      else {
+        console.log('No Event!')
+      }
+
+    };
+  }
+
+  updateState = state => {
+    const outerThis = this;
+    activeTab.classList.toggle('active')
+    let previousTab = outerThis.shadowObj.querySelector(`ul#tab>li.${state.tab}`);
+    previousTab.classList.toggle('active')
+    activeTab = previousTab
+    // activeTab.classList.toggle('active')
+
+    contentContainer.innerHTML = state.content
+    if (state.tab === 'feeds') {
+      outerThis.updateSection('feeds')
+      outerThis.updateSide('feeds')
+      contentContainer.innerHTML = state.content
+      outerThis.enableScroll()
+    }
+    else {
+      outerThis.updateSection(`${previousTab.dataset.element}`)
+      outerThis.updateSide(`${previousTab.dataset.element}`)
+      contentContainer.innerHTML = state.content
+      outerThis.enableScroll()
+    }
+  }
+
+  updatePage = content => {
+    pageContainer.innerHTML = content
   }
 
   disableScroll() {
@@ -45,92 +133,74 @@ export default class AppUser extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  activateTab = mql => {
+  changeContent = (mql, tab, tabContainer, contentContainer) =>  {
     const outerThis = this;
-    const tabContainer = this.shadowObj.querySelector('section.tab');
-    const contentContainer = this.shadowObj.querySelector('section.content');
 
-    if (tabContainer && contentContainer) {
-      const tabItems = tabContainer.querySelectorAll('li.tab-item');
-      let activeTab = tabContainer.querySelector('li.tab-item.active');
+    // Select loader
+    const loader = this.shadowObj.querySelector('#loader-container');
 
-      tabItems.forEach(tab => {
-        tab.addEventListener('click', e => {
-          e.preventDefault()
-          e.stopPropagation()
+    setTimeout(() => {
+      if (mql) {
+        tabContainer.style.display = 'none';
+      }
+      if (loader) {
+        loader.remove();
+      }
 
-          if (activeTab){
-            if (tab.dataset.name === activeTab.dataset.name) {
-              return;
-            }
+      switch (tab.dataset.name) {
+        case 'stat':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
+          break;
+        case 'name':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
+          break;
+        case 'bio':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
+          break;
+        case 'profile':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
+          break;
+        case 'social':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormSocial());
+          break;
+        case 'email':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
+          break;
+        case 'privacy':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
+          break;
+        case 'password':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
+          break;
+        case 'topic':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+          break;
+        case 'activity':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
+          break;
+        case 'notification':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
+          break;
+        case 'typography':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+          break;
+        case 'appearance':
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
+          break;
+        default:
+          contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
+          break;
+      }
 
-            activeTab.classList.remove('active');
-          }
+      // Updating History State
+      window.history.pushState(
+        { content: contentContainer.innerHTML, tab: tab.dataset.name },
+        tab.dataset.name, `${tab.getAttribute('url')}`
+      );
 
-          // Add loader
-          contentContainer.innerHTML = outerThis.getLoader();
-
-          tab.classList.add('active');
-          activeTab = tab;
-
-          // Select loader
-          const loader = this.shadowObj.querySelector('#loader-container');
-
-          setTimeout(() => {
-            if (mql) {
-              tabContainer.style.display = 'none';
-            }
-            if (loader) {
-              loader.remove();
-            }
-            switch (tab.dataset.name) {
-              case 'stat':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
-                break;
-              case 'name':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormName());
-                break;
-              case 'bio':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormBio());
-                break;
-              case 'profile':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormProfile());
-                break;
-              case 'social':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormSocial());
-                break;
-              case 'email':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormEmail());
-                break;
-              case 'privacy':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonPrivacy());
-                break;
-              case 'password':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getFormPassword());
-                break;
-              case 'topic':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-                break;
-              case 'activity':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getActivity());
-                break;
-              case 'notification':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoonNotifications());
-                break;
-              case 'reading':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-                break;
-              case 'appearance':
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getSoon());
-                break;
-              default:
-                contentContainer.insertAdjacentHTML('beforeend', outerThis.getStats());
-                break;
-            }
-          }, 3000);
-        })
-      })
-    }
+      // Update the status to true
+      this._status = true;
+    }, 3000);
   }
 
   populateCurrent = mql =>  {
@@ -445,7 +515,7 @@ export default class AppUser extends HTMLElement {
     return /* html */`
       <section class="tab">
         <ul class="tab public">
-          <li class="tab-item stats" data-name="stat">
+          <li url="/user/stats" class="tab-item stats" data-name="stat">
             <span class="line"></span>
             <a href="/user/stats" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -456,7 +526,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your stats</span>
             </a>
           </li>
-          <li class="tab-item form-name" data-name="name">
+          <li url="/user/edit/name" class="tab-item form-name" data-name="name">
             <span class="line"></span>
             <a href="/user/edit/name" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512" width="16px" height="16px">
@@ -465,7 +535,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your name</span>
             </a>
           </li>
-          <li class="tab-item form-bio" data-name="bio">
+          <li url="/user/edit/bio" class="tab-item form-bio" data-name="bio">
             <span class="line"></span>
             <a href="/user/edit/bio" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  width="16px" height="16px" viewBox="0 0 512 512">
@@ -474,7 +544,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your bio</span>
             </a>
           </li>
-          <li class="tab-item form-profile"  data-name="profile">
+          <li url="/user/edit/profile" class="tab-item form-profile"  data-name="profile">
             <span class="line"></span>
             <a href="/user/edit/profile" class="tab-link">
               <svg aria-hidden="true" height="16" fill="currentColor" viewBox="0 0 16 16" width="16">
@@ -483,9 +553,9 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your profile</span>
             </a>
           </li>
-          <li class="tab-item form-socials" data-name="social">
+          <li url="/user/edit/socials" class="tab-item form-socials" data-name="social">
             <span class="line"></span>
-            <a href="/user/edit/contact" class="tab-link">
+            <a href="/user/edit/socials" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
                 <path d="M580.3 267.2c56.2-56.2 56.2-147.3 0-203.5C526.8 10.2 440.9 7.3 383.9 57.2l-6.1 5.4c-10 8.7-11 23.9-2.3 33.9s23.9 11 33.9 2.3l6.1-5.4c38-33.2 95.2-31.3 130.9 4.4c37.4 37.4 37.4 98.1 0 135.6L433.1 346.6c-37.4 37.4-98.2 37.4-135.6 0c-35.7-35.7-37.6-92.9-4.4-130.9l4.7-5.4c8.7-10 7.7-25.1-2.3-33.9s-25.1-7.7-33.9 2.3l-4.7 5.4c-49.8 57-46.9 142.9 6.6 196.4c56.2 56.2 147.3 56.2 203.5 0L580.3 267.2zM59.7 244.8C3.5 301 3.5 392.1 59.7 448.2c53.6 53.6 139.5 56.4 196.5 6.5l6.1-5.4c10-8.7 11-23.9 2.3-33.9s-23.9-11-33.9-2.3l-6.1 5.4c-38 33.2-95.2 31.3-130.9-4.4c-37.4-37.4-37.4-98.1 0-135.6L207 165.4c37.4-37.4 98.1-37.4 135.6 0c35.7 35.7 37.6 92.9 4.4 130.9l-5.4 6.1c-8.7 10-7.7 25.1 2.3 33.9s25.1 7.7 33.9-2.3l5.4-6.1c49.9-57 47-142.9-6.5-196.5c-56.2-56.2-147.3-56.2-203.5 0L59.7 244.8z" />
               </svg>
@@ -495,7 +565,7 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab security">
           <span class="title">Security</span>
-          <li class="tab-item form-email"  data-name="email">
+          <li url="/user/edit/email" class="tab-item form-email"  data-name="email">
             <span class="line"></span>
             <a href="/user/edit/email" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
@@ -504,9 +574,9 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your email</span>
             </a>
           </li>
-          <li class="tab-item privacy" data-name="privacy">
+          <li url="/user/privacy" class="tab-item privacy" data-name="privacy">
             <span class="line"></span>
-            <a href="/user/edit/privacy" class="tab-link">
+            <a href="/user/privacy" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
                 <path
                   d="M73 127L256 49.4 439 127c5.9 2.5 9.1 7.8 9 12.8c-.4 91.4-38.4 249.3-186.3 320.1c-3.6 1.7-7.8 1.7-11.3 0C102.4 389 64.5 231.2 64 139.7c0-5 3.1-10.2 9-12.8zM457.7 82.8L269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.8 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2zM160 154.4V272c0 53 43 96 96 96s96-43 96-96V154.4c0-5.8-4.7-10.4-10.4-10.4h-.2c-3.4 0-6.5 1.6-8.5 4.3l-40 53.3c-3 4-7.8 6.4-12.8 6.4H232c-5 0-9.8-2.4-12.8-6.4l-40-53.3c-2-2.7-5.2-4.3-8.5-4.3h-.2c-5.8 0-10.4 4.7-10.4 10.4zM216 256a16 16 0 1 1 0 32 16 16 0 1 1 0-32zm64 16a16 16 0 1 1 32 0 16 16 0 1 1 -32 0z" />
@@ -514,7 +584,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your privacy</span>
             </a>
           </li>
-          <li class="tab-item form-password" data-name="password">
+          <li url="/user/edit/password" class="tab-item form-password" data-name="password">
             <span class="line"></span>
             <a href="/user/edit/password" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16px" height="16px" viewBox="0 0 512 512">
@@ -526,9 +596,9 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab activity">
           <span class="title">Activity</span>
-          <li class="tab-item topics" data-name="topic">
+          <li url="/user/manage/topics" class="tab-item topics" data-name="topic">
             <span class="line"></span>
-            <a href="/user/edit/topics" class="tab-link">
+            <a href="/user/manage/topics" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
                 <path
                   d="M0 2.75C0 1.783.784 1 1.75 1h8.5c.967 0 1.75.783 1.75 1.75v5.5A1.75 1.75 0 0 1 10.25 10H7.061l-2.574 2.573A1.457 1.457 0 0 1 2 11.543V10h-.25A1.75 1.75 0 0 1 0 8.25Zm1.75-.25a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h1a.75.75 0 0 1 .75.75v2.189L6.22 8.72a.747.747 0 0 1 .53-.22h3.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25Zm12.5 2h-.5a.75.75 0 0 1 0-1.5h.5c.967 0 1.75.783 1.75 1.75v5.5A1.75 1.75 0 0 1 14.25 12H14v1.543a1.457 1.457 0 0 1-2.487 1.03L9.22 12.28a.749.749 0 1 1 1.06-1.06l2.22 2.219V11.25a.75.75 0 0 1 .75-.75h1a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25Zm-5.47.28-3 3a.747.747 0 0 1-1.06 0l-1.5-1.5a.749.749 0 1 1 1.06-1.06l.97.969L7.72 3.72a.749.749 0 1 1 1.06 1.06Z">
@@ -537,7 +607,7 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your topics</span>
             </a>
           </li>
-          <li class="tab-item activity" data-name="activity">
+          <li url="/user/activity" class="tab-item activity" data-name="activity">
             <span class="line"></span>
             <a href="/user/activity" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
@@ -546,9 +616,9 @@ export default class AppUser extends HTMLElement {
               <span class="text">Your activity</span>
             </a>
           </li>
-          <li class="tab-item notifications" data-name="notification">
+          <li url="/user/notifications" class="tab-item notifications" data-name="notification">
             <span class="line"></span>
-            <a href="/user/edit/notifications" class="tab-link">
+            <a href="/user/notifications" class="tab-link">
               <svg height="16" viewBox="0 0 16 16" fill="currentColor" width="16">
                 <path d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"></path>
               </svg>
@@ -558,18 +628,18 @@ export default class AppUser extends HTMLElement {
         </ul>
         <ul class="tab preference">
           <span class="title">Preference</span>
-          <li class="tab-item reading" data-name="reading">
+          <li url="/user/typography" class="tab-item reading" data-name="typography">
             <span class="line"></span>
-            <a href="/user/edit/reading" class="tab-link">
+            <a href="/user/typography" class="tab-link">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
                 <path d="M6.71 10H2.332l-.874 2.498a.75.75 0 0 1-1.415-.496l3.39-9.688a1.217 1.217 0 0 1 2.302.018l3.227 9.681a.75.75 0 0 1-1.423.474Zm3.13-4.358C10.53 4.374 11.87 4 13 4c1.5 0 3 .939 3 2.601v5.649a.75.75 0 0 1-1.448.275C13.995 12.82 13.3 13 12.5 13c-.77 0-1.514-.231-2.078-.709-.577-.488-.922-1.199-.922-2.041 0-.694.265-1.411.887-1.944C11 7.78 11.88 7.5 13 7.5h1.5v-.899c0-.54-.5-1.101-1.5-1.101-.869 0-1.528.282-1.84.858a.75.75 0 1 1-1.32-.716ZM6.21 8.5 4.574 3.594 2.857 8.5Zm8.29.5H13c-.881 0-1.375.22-1.637.444-.253.217-.363.5-.363.806 0 .408.155.697.39.896.249.21.63.354 1.11.354.732 0 1.26-.209 1.588-.449.35-.257.412-.495.412-.551Z"></path>
               </svg>
-              <span class="text">Reading</span>
+              <span class="text">Typography</span>
             </a>
           </li>
-          <li class="tab-item appearance" data-name="appearance">
+          <li url="/user/theme" class="tab-item appearance" data-name="appearance">
             <span class="line"></span>
-            <a href="/user/edit/theme" class="tab-link">
+            <a href="/user/theme" class="tab-link">
               <svg height="16" viewBox="0 0 16 16" fill="currentColor" width="16">
                 <path d="M11.134 1.535c.7-.509 1.416-.942 2.076-1.155.649-.21 1.463-.267 2.069.34.603.601.568 1.411.368 2.07-.202.668-.624 1.39-1.125 2.096-1.011 1.424-2.496 2.987-3.775 4.249-1.098 1.084-2.132 1.839-3.04 2.3a3.744 3.744 0 0 1-1.055 3.217c-.431.431-1.065.691-1.657.861-.614.177-1.294.287-1.914.357A21.151 21.151 0 0 1 .797 16H.743l.007-.75H.749L.742 16a.75.75 0 0 1-.743-.742l.743-.008-.742.007v-.054a21.25 21.25 0 0 1 .13-2.284c.067-.647.187-1.287.358-1.914.17-.591.43-1.226.86-1.657a3.746 3.746 0 0 1 3.227-1.054c.466-.893 1.225-1.907 2.314-2.982 1.271-1.255 2.833-2.75 4.245-3.777ZM1.62 13.089c-.051.464-.086.929-.104 1.395.466-.018.932-.053 1.396-.104a10.511 10.511 0 0 0 1.668-.309c.526-.151.856-.325 1.011-.48a2.25 2.25 0 1 0-3.182-3.182c-.155.155-.329.485-.48 1.01a10.515 10.515 0 0 0-.309 1.67Zm10.396-10.34c-1.224.89-2.605 2.189-3.822 3.384l1.718 1.718c1.21-1.205 2.51-2.597 3.387-3.833.47-.662.78-1.227.912-1.662.134-.444.032-.551.009-.575h-.001V1.78c-.014-.014-.113-.113-.548.027-.432.14-.995.462-1.655.942Zm-4.832 7.266-.001.001a9.859 9.859 0 0 0 1.63-1.142L7.155 7.216a9.7 9.7 0 0 0-1.161 1.607c.482.302.889.71 1.19 1.192Z"></path>
               </svg>
