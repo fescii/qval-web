@@ -412,13 +412,13 @@ export default class AllStat extends HTMLElement {
         }
 
         .content > .main .views .text svg {
-          width: 30px;
-          height: 30px;
+          width: 25px;
+          height: 25px;
         }
 
         .content > .main .views .text > h2 {
           color: var(--text-color);
-          font-size: 1.5rem;
+          font-size: 1.25rem;
           font-weight: 500;
           font-family: var(--font-main), sans-serif;
           margin: 0;

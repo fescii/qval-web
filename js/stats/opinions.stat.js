@@ -383,7 +383,7 @@ export default class OpinionsStat extends HTMLElement {
 
         .cards > .card > .stat > h2.no {
           color: var(--text-color);
-          font-size: 1.5rem;
+          font-size: 1.25rem;
           font-weight: 500;
           font-family: var(--font-main), sans-serif;
           margin: 0;
