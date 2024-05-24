@@ -187,7 +187,7 @@ export default class AppPost extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+          font-size: 16px;
           /* border: 1px solid red; */
           padding: 0 0 30px 0;
           margin: 0;
@@ -363,7 +363,7 @@ export default class AppPost extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+            font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;
