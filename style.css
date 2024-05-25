@@ -149,26 +149,28 @@ section.content {
 
 .song > .head {
   /* border: 1px solid #6b7280; */
-  display: flex;
+  display: none;
   flex-flow: row;
   align-items: center;
-  gap: 0;
+  /* justify-content: space-between; */
+  gap: 5px;
 }
 
 .song > .head > .title {
   /* border: 1px solid #6b7280; */
-  color: var(--title-color);
+  color: var(--gray-color);
   font-weight: 500;
-  line-height: 1.5;
+  /* line-height: 1; */
   font-size: 1.05rem;
 }
 
 .song > .head > svg {
   color: var(--gray-color);
-  margin: 2px 0 0 -5px;
-  width: 22px;
-  height: 22px;
+  margin: 1px 0 0 -2px;
+  width: 18px;
+  height: 18px;
 }
+
 
 .song > .body {
   /* border: 1px solid #6b7280; */
@@ -213,6 +215,39 @@ section.content {
   -o-border-radius: 2px;
 }
 
+.song > .body > .lyrics > p span.highlight {
+  font-weight: 500;
+  padding: 0 5px;
+  color: transparent;
+  background: var(--accent-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.song > .body > .info {
+  /* border: 1px solid #6b7280; */
+  color: var(--gray-color);
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 2px;
+  font-weight: 500;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+}
+
+.song > .body > .info .genre {
+  text-transform: capitalize;
+}
+
+.song > .body > .info .sp {
+  /* border: 1px solid #6b7280; */
+  height: max-content;
+  line-height: 1;
+  margin: 2px 0 0 0;
+}
+
+
 .stats.actions {
   /* border: var(--input-border); */
   padding: 0;
@@ -220,6 +255,34 @@ section.content {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.stats.actions > span.play {
+  cursor: pointer;
+  /* border: thin solid #627ea073; */
+  display: flex;
+  align-items: center;
+  font-family: var(--font-text) sans-serif;
+  justify-content: start;
+  gap: 2px;
+  padding: 0 10px 0 8px;
+  height: 35px;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+  /*background: linear-gradient(#53595f, #627ea0);
+  */color: #627ea0;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+
+.stats.actions > span.play > svg {
+  /* border: 1px solid #6b7280; */
+  color: #627ea0;
+  width: 23px;
+  height: 23px;
 }
 
 .stats.actions > span.stat,
@@ -257,6 +320,7 @@ section.content {
   padding: 0;
 }
 
+.stats.actions > span.play:hover,
 .stats.actions > span.stat:hover,
 .stats.actions > span.action:hover {
   background: #f7f7f7;
@@ -266,6 +330,7 @@ section.content {
   /* border: var(--input-border); */
   font-family: var(--font-main), sans-serif;
   font-size: 1rem;
+  font-weight: 500;
 }
 
 .stats.actions > span {
