@@ -170,7 +170,7 @@ section.content {
   display: flex;
   flex-flow: column;
   position: relative;
-  gap: 3px;
+  gap: 5px;
   padding: 0;
   margin: 0 0 5px;
 }
@@ -178,9 +178,9 @@ section.content {
 .song > .body > .lyrics > p {
   display: block;
   color: var(--text-color);
-  font-family: var(--font-main), sans-serif;
-  line-height: 1.5;
-  font-size: 1rem;
+  font-family: var(--font-que), sans-serif;
+  line-height: 1.2;
+  font-size: 1.1rem;
   font-weight: 400;
   margin: 0;
   padding: 0 10px 0 18px;
