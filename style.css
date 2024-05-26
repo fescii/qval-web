@@ -391,14 +391,9 @@ section.content {
 .stats.actions > span.true > .numbers > span,
 .stats.actions > span.active > .numbers > span {
   color: transparent;
-  background: var(--accent-linear);
+  background: var(--second-linear);
   background-clip: text;
   -webkit-background-clip: text;
-}
-
-.stats.actions > span.true > .numbers > span {
-  padding: 0;
-  margin: 0;
 }
 
 .stats.actions > span.up > .numbers > span {
@@ -417,14 +412,14 @@ section.content {
 
 .stats.actions > span svg {
   color: inherit;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .stats.actions > span.action.like svg {
   margin: -1px 0 0 0;
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
 }
 
 .stats.actions > span.stat svg {
