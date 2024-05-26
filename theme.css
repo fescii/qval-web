@@ -40,6 +40,9 @@ Author URL: https://femar.co.ke
   --font-read: "Work Sans";
   --font-que:  "Yantramanav";
 
+  --card-box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2);
+  --card-box-shadow-alt: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
   --scroll-bar-background: #DDDDD7;
   --scroll-bar-linear: linear-gradient(#53595f, #627ea0);
 
