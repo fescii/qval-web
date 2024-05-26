@@ -172,15 +172,15 @@ section.content {
   position: relative;
   gap: 5px;
   padding: 0;
-  margin: 0 0 5px;
+  margin: 0 0 8px;
 }
 
 .song > .body > .lyrics > p {
   display: block;
   color: var(--text-color);
-  font-family: var(--font-que), sans-serif;
+  font-family: var(--font-main), sans-serif;
   line-height: 1.2;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   margin: 0;
   padding: 0 10px 0 18px;
@@ -263,10 +263,12 @@ section.content {
   justify-content: start;
   gap: 2px;
   padding: 0 10px 0 8px;
-  height: 35px;
+  height: 30px;
   border-radius: 50px;
   font-weight: 500;
   font-size: 1rem;
+  /* background: var(--action-linear); */
+  /* color: var(--white-color); */
   /* color: var(--action-color); */
   color: var(--gray-color);
   -webkit-border-radius: 50px;
@@ -285,7 +287,7 @@ section.content {
 .stats.actions > span.action {
   /* border: var(--input-border); */
   min-height: 35px;
-  height: 35px;
+  height: 30px;
   width: max-content;
   position: relative;
   padding: 5px 10px;
@@ -410,12 +412,18 @@ section.content {
   -webkit-background-clip: text;
 }
 
+.stats.actions > span.action.share {
+  min-width: 45px;
+}
+
 .stats.actions > span.action.share > .icon {
   display: flex;
   gap: 0;
 }
 .stats.actions > span.action.share > .icon > span.sp {
+  display: inline-block;
   font-size: 1.2rem;
+  margin: 0 0 2px 0;
   /* color: var(--gray-color); */
 }
 
