@@ -170,18 +170,18 @@ section.content {
   display: flex;
   flex-flow: column;
   position: relative;
-  gap: 0;
+  gap: 3px;
   padding: 0;
   margin: 0 0 5px;
 }
 
 .song > .body > .lyrics > p {
   display: block;
-  color: var(--gray-color);
-  font-family: var(--font-que), sans-serif;
-  line-height: 1.3;
-  font-size: 1.05rem;
-  font-weight: 500;
+  color: var(--text-color);
+  font-family: var(--font-main), sans-serif;
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
   margin: 0;
   padding: 0 10px 0 18px;
 }
@@ -191,10 +191,10 @@ section.content {
   display: inline-block;
   box-sizing: border-box;
   width: 3px;
-  height: 80%;
+  height: 90%;
   position: absolute;
-  left: 0;
-  top: 10%;
+  left: 2px;
+  top: 5%;
   /* background-color: var(--action-color); */
   background: var(--alt-linear);
   opacity: .7;
@@ -267,7 +267,8 @@ section.content {
   border-radius: 50px;
   font-weight: 500;
   font-size: 1rem;
-  color: var(--action-color);
+  /* color: var(--action-color); */
+  color: var(--gray-color);
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;
@@ -275,7 +276,7 @@ section.content {
 }
 
 .stats.actions > span.play > svg {
-  color: var(--action-color);
+  color: inherit;
   width: 23px;
   height: 23px;
 }
@@ -295,8 +296,8 @@ section.content {
   gap: 5px;
   font-size: 1rem;
   font-weight: 400;
-  color: var(--action-color);
-  /* color: var(--gray-color); */
+  /* color: var(--action-color); */
+  color: var(--gray-color);
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
@@ -414,7 +415,6 @@ section.content {
   -webkit-background-clip: text;
 }
 
-
 .stats.actions > span svg {
   color: inherit;
   width: 18px;
@@ -423,8 +423,8 @@ section.content {
 
 .stats.actions > span.action.like svg {
   margin: -1px 0 0 0;
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
 }
 
 .stats.actions > span.stat svg {
@@ -456,7 +456,7 @@ section.content {
 }
 
 .stats.actions>span.action.share > .overlay {
-  display: flex;
+  display: none;
   flex-flow: column;
   z-index: 4;
 }
@@ -513,6 +513,29 @@ section.content {
 .stats.actions > span.action.share .options > .option.frame > svg {
   width: 17px;
   height: 17px;
+}
+
+
+/* at media query 660px */
+@media screen and (max-width: 660px) {
+  main.test {
+    flex-flow: column;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  section.side {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  section.content {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 
