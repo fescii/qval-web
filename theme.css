@@ -15,7 +15,7 @@ Author URL: https://femar.co.ke
 */
 
 
-/* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Yantramanav:wght@100;300;400;500;700;900&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
@@ -38,6 +38,8 @@ Author URL: https://femar.co.ke
   --font-text: "DM Sans";
   --font-mono: 'Jetbrains Mono';
   --font-read: "Work Sans";
+  --font-que:  "Yantramanav";
+
   --scroll-bar-background: #DDDDD7;
   --scroll-bar-linear: linear-gradient(#53595f, #627ea0);
 
