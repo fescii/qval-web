@@ -149,15 +149,6 @@ section.content {
   padding: 15px 0 10px;
 }
 
-.song > .head {
-  /* border: 1px solid #6b7280; */
-  display: none;
-  flex-flow: row;
-  align-items: center;
-  /* justify-content: space-between; */
-  gap: 5px;
-}
-
 .song > .body {
   /* border: 1px solid #6b7280; */
   display: flex;
