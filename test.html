@@ -24,7 +24,13 @@
   <script type="module">
     import HeaderContainer from "./js/containers/header.container.js"
 
+    // Import post wrappers
+    import QuePost from "./js/post/que.post.js";
+
     customElements.define('header-container', HeaderContainer);
+
+    // Register post wrappers
+    customElements.define('que-post', QuePost);
   </script>
 </head>
 
@@ -39,363 +45,47 @@
 
   <main class="test">
     <section class="content">
-      <div class="song">
-        <div class="body">
-          <div class="lyrics">
-            <p>Maker on<span class="highlight">the</span>rise memorandum,<span class="highlight">but</span>on manila envelopes</p>
-            <p>Another government<span class="highlight">that finish</span>you and is tied up in the scandal under surveillance,
-              whole profile on a<span class="highlight">hidden</span>camera.</p>
-          </div>
-          <span class="title">James Bond</span>
-          <div class="info">
-            <span class="album">Amerikkka's Nightmare III</span>
-            <span class="sp">•</span>
-            <span class="artist">General Steel</span>
-            <span class="sp">•</span>
-            <span class="date">2017</span>
-          </div>
-        </div>
-        <div class="actions stats">
-          <span class="play">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M12 7.83241C12 6.70741 5.84844 3.10841 5.15062 3.75553C4.45414 4.40265 4.3857 11.2012 5.15062 11.9093C5.91688 12.6199 12 8.95741 12 7.83241Z"
-                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span class="text">Play</span>
-          </span>
-          <span class="action like true">
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"></path>
-            </svg> -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M7.655 14.916v-.001h-.002l-.006-.003-.018-.01a22.066 22.066 0 0 1-3.744-2.584C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.044 5.231-3.886 6.818a22.094 22.094 0 0 1-3.433 2.414 7.152 7.152 0 0 1-.31.17l-.018.01-.008.004a.75.75 0 0 1-.69 0Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span>
-          <!-- <span class="stat trend up">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span> -->
-          <span class="stat trend down">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span>
-          <span class="action share">
-            <span class="icon">
-              <span class="sp">•</span>
-              <span class="sp">•</span>
-            </span>
-            <div class="overlay">
-              <span class="close"></span>
-              <span class="options">
-                <span class="option link">
-                  <span class="text">Copy link</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
-                    <path
-                      d="M580.3 267.2c56.2-56.2 56.2-147.3 0-203.5C526.8 10.2 440.9 7.3 383.9 57.2l-6.1 5.4c-10 8.7-11 23.9-2.3 33.9s23.9 11 33.9 2.3l6.1-5.4c38-33.2 95.2-31.3 130.9 4.4c37.4 37.4 37.4 98.1 0 135.6L433.1 346.6c-37.4 37.4-98.2 37.4-135.6 0c-35.7-35.7-37.6-92.9-4.4-130.9l4.7-5.4c8.7-10 7.7-25.1-2.3-33.9s-25.1-7.7-33.9 2.3l-4.7 5.4c-49.8 57-46.9 142.9 6.6 196.4c56.2 56.2 147.3 56.2 203.5 0L580.3 267.2zM59.7 244.8C3.5 301 3.5 392.1 59.7 448.2c53.6 53.6 139.5 56.4 196.5 6.5l6.1-5.4c10-8.7 11-23.9 2.3-33.9s-23.9-11-33.9-2.3l-6.1 5.4c-38 33.2-95.2 31.3-130.9-4.4c-37.4-37.4-37.4-98.1 0-135.6L207 165.4c37.4-37.4 98.1-37.4 135.6 0c35.7 35.7 37.6 92.9 4.4 130.9l-5.4 6.1c-8.7 10-7.7 25.1 2.3 33.9s25.1 7.7 33.9-2.3l5.4-6.1c49.9-57 47-142.9-6.5-196.5c-56.2-56.2-147.3-56.2-203.5 0L59.7 244.8z" />
-                  </svg>
-                </span>
-                <span class="option frame">
-                  <span class="text">Share frame</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                    <path
-                      d="M.527 9.237a1.75 1.75 0 0 1 0-2.474L6.777.512a1.75 1.75 0 0 1 2.475 0l6.251 6.25a1.75 1.75 0 0 1 0 2.475l-6.25 6.251a1.75 1.75 0 0 1-2.475 0L.527 9.238Zm1.06-1.414a.25.25 0 0 0 0 .354l6.251 6.25a.25.25 0 0 0 .354 0l6.25-6.25a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.354 0l-6.25 6.25Z">
-                    </path>
-                  </svg>
-                </span>
-                <span class="option code">
-                  <span class="text">Embed code</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                    <path
-                      d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z">
-                    </path>
-                  </svg>
-                </span>
-              </span>
-            </div>
-          </span>
-        </div>
-      </div>
-      </div>
-      <div class="song">
-        <div class="body">
-          <div class="lyrics">
-            <p>
-              Hello <span class="highlight">is there anybody</span>in there?
-            </p>
-            <p>
-              Just nod if you can hear me
-            </p>
-            <p>
-              Is there anyone at home?
-            </p>
-          </div>
-          <span class="title">Comfortably Numb</span>
-          <div class="info">
-            <span class="album">The Wall</span>
-            <span class="sp">•</span>
-            <span class="artist">Pink Floyd</span>
-            <span class="sp">•</span>
-            <span class="date">30 Nov 1979</span>
-          </div>
-        </div>
-        <div class="actions stats">
-          <span class="play">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M12 7.83241C12 6.70741 5.84844 3.10841 5.15062 3.75553C4.45414 4.40265 4.3857 11.2012 5.15062 11.9093C5.91688 12.6199 12 8.95741 12 7.83241Z"
-                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span class="text">Play</span>
-          </span>
-          <span class="action like">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"></path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span>
-          <span class="stat trend up">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">39.1k</span>
-            </span>
-          </span>
-          <!-- <span class="stat trend down">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span> -->
-          <span class="action share">
-            <span class="icon">
-              <span class="sp">•</span>
-              <span class="sp">•</span>
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="song">
-        <div class="body">
-          <div class="lyrics">
-            <p>Maker on<span class="highlight">the</span>rise memorandum,<span class="highlight">but</span>on manila envelopes</p>
-            <p>Another government<span class="highlight">that finish</span>you and is tied up in the scandal under surveillance,
-              whole profile on a<span class="highlight">hidden</span>camera.</p>
-          </div>
-          <span class="title">James Bond</span>
-          <div class="info">
-            <span class="album">Amerikkka's Nightmare III</span>
-            <span class="sp">•</span>
-            <span class="artist">General Steel</span>
-            <span class="sp">•</span>
-            <span class="date">2017</span>
-          </div>
-        </div>
-        <div class="actions stats">
-          <span class="play">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M12 7.83241C12 6.70741 5.84844 3.10841 5.15062 3.75553C4.45414 4.40265 4.3857 11.2012 5.15062 11.9093C5.91688 12.6199 12 8.95741 12 7.83241Z"
-                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span class="text">Play</span>
-          </span>
-          <span class="action like">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"></path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span>
-          <!-- <span class="stat trend up">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span> -->
-          <span class="stat trend down">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span>
-          <span class="action share">
-            <span class="icon">
-              <span class="sp">•</span>
-              <span class="sp">•</span>
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="song">
-        <div class="body">
-          <div class="lyrics">
-            <p>
-              Hello <span class="highlight">is there anybody</span>in there?
-            </p>
-            <p>
-              Just nod if you can hear me
-            </p>
-            <p>
-              Is there anyone at home?
-            </p>
-          </div>
-          <span class="title">Comfortably Numb</span>
-          <div class="info">
-            <span class="album">The Wall</span>
-            <span class="sp">•</span>
-            <span class="artist">Pink Floyd</span>
-            <span class="sp">•</span>
-            <span class="date">30 Nov 1979</span>
-          </div>
-        </div>
-        <div class="actions stats">
-          <span class="play">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M12 7.83241C12 6.70741 5.84844 3.10841 5.15062 3.75553C4.45414 4.40265 4.3857 11.2012 5.15062 11.9093C5.91688 12.6199 12 8.95741 12 7.83241Z"
-                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span class="text">Play</span>
-          </span>
-          <span class="action like">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"></path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span>
-          <span class="stat trend up">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">39.1k</span>
-            </span>
-          </span>
-          <!-- <span class="stat trend down">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path
-                d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z">
-              </path>
-            </svg>
-            <span class="numbers">
-              <span id="uab">603</span>
-            </span>
-          </span> -->
-          <span class="action share">
-            <span class="icon">
-              <span class="sp">•</span>
-              <span class="sp">•</span>
-            </span>
-          </span>
-        </div>
-      </div>
+      <que-post id="Q0AB679DG479" liked="true" likes="1369" current-stats="603" last-stats="973" song="James Bond" album="Amerikkka's Nightmare III"
+        artist="General Steel" released="30 Aug 2017">
+        <p>Maker on<span class="highlight">the</span>rise memorandum,<span class="highlight">but</span>on manila envelopes</p>
+        <p>Another government<span class="highlight">that finish</span>you and is tied up in the scandal under surveillance,
+          whole profile on a<span class="highlight">hidden</span>camera.</p>
+      </que-post>
+
+      <que-post id="Q0AB679DG479" liked="true" likes="38369" current-stats="9603" last-stats="973" song="Comfortably Numb" album="The Wall"
+        artist="Pink Floyd" released="30 Nov 1979">
+        <p>Hello <span class="highlight">is there anybody</span>in there?</p>
+        <p>Just nod if you can hear me</p>
+        <p>Is there anyone at home?</p>
+      </que-post>
+
+      <que-post id="Q0AB679DG479" liked="false" likes="67369" current-stats="1178" last-stats="973" song="Baby" album="My World 2.0"
+        artist="Justin Bieber" released="18 Jan 2010">
+        <p>Ohh wooaah</p>
+        <p>You know you love me, I know you care</p>
+        <p>You shout whenever, and I'll be there</p>
+      </que-post>
+
+      <que-post id="Q0AB679DG479" liked="true" likes="36547894" current-stats="443603" last-stats="236700" song="The Box" album="Please Excuse Me for Being Antisocial"
+        artist="Roddy Ricch" released="6 Dec 2019">
+        <p>Pullin' out the coupe at the lot</p>
+        <p> Told 'em fuck 12, <span class="highlight">fuck SWAT</span></p>
+        <p>Bustin' all the bells out the box</p>
+      </que-post>
+
+      <que-post id="Q0AB679DG479" liked="true" likes="995412345" current-stats="78546789" last-stats="9876" song="Blinding Lights" album="After Hours"
+        artist="The Weeknd" released="29 Nov 2019">
+        <p>I've been tryna call</p>
+        <p>I've been on my own for long enough</p>
+        <p>Maybe you can show me how to love, maybe</p>
+        <p>I'm going through withdrawals</p>
+      </que-post>
+
     </section>
     <section class="side">
       side
     </section>
   </main>
-
-  <script>
-    // Check if document is ready
-    document.addEventListener('DOMContentLoaded',  e => {
-
-      // Get all share buttons
-      const shareButtons = document.querySelectorAll('.action.share');
-
-      // Loop through all share buttons
-      shareButtons.forEach(shareButton => {
-
-        // Get the overlay
-        const overlay = shareButton.querySelector('.overlay');
-
-        // Check if the overlay exists
-        if (overlay) {
-          // Select close button
-          const closeButton = overlay.querySelector('.close');
-
-
-          // Add event listener to the close button
-          closeButton.addEventListener('click', e => {
-            // prevent the default action
-            e.preventDefault()
-
-            // prevent the propagation of the event
-            e.stopPropagation();
-
-            // Remove the active class
-            overlay.classList.remove('active');
-          });
-
-          // Add event listener to the share button
-          shareButton.addEventListener('click', e => {
-            // prevent the default action
-            e.preventDefault()
-
-            // prevent the propagation of the event
-            e.stopPropagation();
-
-            // Toggle the overlay
-            overlay.classList.add('active');
-
-            // add event to run once when the overlay is active: when user click outside the overlay
-            document.addEventListener('click', e => {
-              e.preventDefault();
-              e.stopPropagation();
-
-              // Check if the target is not the overlay
-              if (!overlay.contains(e.target)) {
-
-                // Remove the active class
-                overlay.classList.remove('active');
-              }
-            }, { once: true });
-          });
-        }
-      });
-
-    });
-
-  </script>
 
 </body>
 
