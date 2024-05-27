@@ -260,6 +260,7 @@ section.content {
   display: flex;
   align-items: center;
   font-family: var(--font-text) sans-serif;
+  font-size: 0.95rem;
   justify-content: start;
   gap: 2px;
   padding: 0 10px 0 8px;
@@ -276,11 +277,17 @@ section.content {
   -ms-border-radius: 50px;
   -o-border-radius: 50px;
 }
+.stats.actions > span.play > span.text {
+  font-family: var(--font-text), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-color);
+}
 
 .stats.actions > span.play > svg {
   color: inherit;
-  width: 23px;
-  height: 23px;
+  width: 22px;
+  height: 22px;
 }
 
 .stats.actions > span.stat,
