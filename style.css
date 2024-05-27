@@ -236,7 +236,6 @@ section.content {
   /* margin: 2px 0 0 0; */
 }
 
-
 .stats.actions {
   /* border: var(--input-border); */
   padding: 5px 0 0 0;
@@ -455,7 +454,7 @@ section.content {
   color: var(--color-alt);
 }
 
-.stats.actions>span.action.share > .overlay {
+.stats.actions > span.action.share > .overlay {
   display: none;
   flex-flow: column;
   z-index: 4;
@@ -539,6 +538,49 @@ section.content {
     width: 100%;
     padding: 0;
     margin: 0;
+  }
+
+  /* actions */
+  .stats.actions>span.action.share > .overlay {
+    display: flex;
+    position: fixed;
+    background-color: #18a565;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  .stats.actions > span.action.share .options {
+    display: flex;
+    flex-flow: column;
+    gap: 0;
+    box-shadow: var(--card-box-shadow);
+    width: 100%;
+    padding: 8px 8px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: var(--background);
+    border: var(--story-border-mobile);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .stats.actions > span.action.share .options > .option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 8px 10px;
+    color: var(--text-color);
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
   }
 }
 
