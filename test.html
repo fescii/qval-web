@@ -103,6 +103,7 @@
               <span class="sp">•</span>
             </span>
             <div class="overlay">
+              <span class="close"></span>
               <span class="options">
                 <span class="option link">
                   <span class="text">Copy link</span>
@@ -349,6 +350,22 @@
 
         // Check if the overlay exists
         if (overlay) {
+          // Select close button
+          const closeButton = overlay.querySelector('.close');
+
+
+          // Add event listener to the close button
+          closeButton.addEventListener('click', e => {
+            // prevent the default action
+            e.preventDefault()
+
+            // prevent the propagation of the event
+            e.stopPropagation();
+
+            // Remove the active class
+            overlay.classList.remove('active');
+          });
+
           // Add event listener to the share button
           shareButton.addEventListener('click', e => {
             // prevent the default action
@@ -362,6 +379,9 @@
 
             // add event to run once when the overlay is active: when user click outside the overlay
             document.addEventListener('click', e => {
+              e.preventDefault();
+              e.stopPropagation();
+
               // Check if the target is not the overlay
               if (!overlay.contains(e.target)) {
 
