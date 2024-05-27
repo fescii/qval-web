@@ -334,6 +334,49 @@
     </section>
   </main>
 
+  <script>
+    // Check if document is ready
+    document.addEventListener('DOMContentLoaded',  e => {
+
+      // Get all share buttons
+      const shareButtons = document.querySelectorAll('.action.share');
+
+      // Loop through all share buttons
+      shareButtons.forEach(shareButton => {
+
+        // Get the overlay
+        const overlay = shareButton.querySelector('.overlay');
+
+        // Check if the overlay exists
+        if (overlay) {
+          // Add event listener to the share button
+          shareButton.addEventListener('click', e => {
+            // prevent the default action
+            e.preventDefault()
+
+            // prevent the propagation of the event
+            e.stopPropagation();
+
+            // Toggle the overlay
+            overlay.classList.add('active');
+
+            // add event to run once when the overlay is active: when user click outside the overlay
+            document.addEventListener('click', e => {
+              // Check if the target is not the overlay
+              if (!overlay.contains(e.target)) {
+
+                // Remove the active class
+                overlay.classList.remove('active');
+              }
+            }, { once: true });
+          });
+        }
+      });
+
+    });
+
+  </script>
+
 </body>
 
 </html>

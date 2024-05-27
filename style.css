@@ -461,6 +461,10 @@ section.content {
   z-index: 4;
 }
 
+.stats.actions>span.action.share > .overlay.active {
+  display: flex;
+}
+
 .stats.actions > span.action.share .options {
   display: flex;
   flex-flow: column;
@@ -486,7 +490,7 @@ section.content {
   justify-content: space-between;
   gap: 5px;
   padding: 8px 10px;
-  color: var(--action-color);
+  color: var(--text-color);
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
