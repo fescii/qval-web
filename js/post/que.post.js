@@ -301,7 +301,7 @@ export default class QuePost extends HTMLElement {
           <span class="text">Play</span>
         </span>
         ${this.getLike(this.getAttribute('liked'))}
-        ${this.getStat()}
+        <!-- ${this.getStat()} -->
         <span class="action share">
           <span class="icon">
             <span class="sp">•</span>
@@ -550,7 +550,7 @@ export default class QuePost extends HTMLElement {
       .body > .lyrics > p {
         display: block;
         color: var(--text-color);
-        font-family: var(--font-main), sans-serif;
+        font-family: var(--font-text), sans-serif;
         line-height: 1.2;
         font-size: 1rem;
         font-weight: 400;

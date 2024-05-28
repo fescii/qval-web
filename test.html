@@ -24,11 +24,18 @@
   <script type="module">
     import HeaderContainer from "./js/containers/header.container.js"
 
+    // Import form container
+    import FormContainer from "./js/containers/form.container.js"
+
+
     // Import post wrappers
     import QuePost from "./js/post/que.post.js";
     import QuickPost from "./js/post/quick.post.js";
 
     customElements.define('header-container', HeaderContainer);
+
+    // register form container
+    customElements.define('form-container', FormContainer);
 
     // Register post wrappers
     customElements.define('que-post', QuePost);
@@ -47,15 +54,16 @@
 
   <main class="test">
     <section class="content">
-      <quick-post story="opinion" upvotes="9" id="P0A43PBA" upvoted="true"
-	      views="609" time="2022-01-03T13:00:00+03:00"
+      <quick-post story="opinion" likes="9" id="P0A43PBA" liked="true"
+	      views="4369" time="2022-01-03T13:00:00+03:00"
 	      story-title="The US Senate called on the law markers"
 	      read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
 	      author-verified="true" author-name="Fredrick Ochieng"
 	      author-bio="Student At The East African University"
 	      author-followers="23" following="true">
-        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-        <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+        <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+        'Content here, content here', making it look like readable English.</p>
 	    </quick-post>
 
       <que-post id="Q0AB679DG479" liked="true" likes="969" current-stats="603" last-stats="373" song="James Bond" album="Amerikkka's Nightmare III"
@@ -64,6 +72,18 @@
         <p>Another government<span class="highlight">that finish</span>you and is tied up in the scandal under surveillance,
           whole profile on a<span class="highlight">hidden</span>camera.</p>
       </que-post>
+
+      <quick-post story="opinion" likes="63" id="P0A43PBA" liked="true"
+        views="369" time="2019-08-16T13:00:00+03:00"
+        story-title="The US Senate called on the law markers"
+        read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
+        author-verified="true" author-name="Fredrick Ochieng"
+        author-bio="Student At The East African University"
+        author-followers="23" following="true">
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+        <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+        'Content here, content here', making it look like readable English.</p>
+      </quick-post>
 
       <que-post id="Q0AB679DG479" liked="true" likes="738369" current-stats="49603" last-stats="973" song="Comfortably Numb" album="The Wall"
         artist="Pink Floyd" released="30 Nov 1979">

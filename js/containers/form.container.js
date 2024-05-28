@@ -93,21 +93,6 @@ export default class FormContainer extends HTMLElement {
     `;
 	}
 
-  checkType = () => {
-    const mql = window.matchMedia('(max-width: 660px)');
-
-    if (this.getAttribute('type') === 'opinion') {
-      return 'border-bottom: none;';
-    }
-    else {
-      if (mql.matches) {
-        return 'border-bottom: var(--story-border-mobile);';
-      }
-      else {
-        return 'border-bottom: var(--story-border);';
-      }
-    }
-  }
 
 	getStyles() {
 		return /* css */`
@@ -161,10 +146,9 @@ export default class FormContainer extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
-          ${this.checkType()}
+          font-size: 16px;
           background-color: var(--background);
-          padding: 0 0 10px 5px;
+          padding: 0;
           display: flex;
           flex-flow: column;
           gap: 0;
@@ -282,9 +266,7 @@ export default class FormContainer extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
-						padding: 10px 0;
-            border-bottom: var(--story-border-mobile);
+            font-size: 16px;
 					}
 
           div.options > span {
