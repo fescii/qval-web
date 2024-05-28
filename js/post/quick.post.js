@@ -17,13 +17,15 @@ export default class QuickPost extends HTMLElement {
     // console.log('We are inside connectedCallback');
 
     this.openForm();
-    this.openProfile();
 
     // scroll the likes
     this.scrollLikes();
 
     // activate the like button
     this.likePost();
+
+    // Open share overlay
+    this.openShare();
   }
 
   disableScroll() {
@@ -282,38 +284,55 @@ export default class QuickPost extends HTMLElement {
     }
   }
 
-  openProfile = () => {
-    const outerThis = this;
-    const mql = window.matchMedia('(max-width: 660px)');
-    const metaElement = this.shadowObj.querySelector(".meta");
+  // fn to open the share overlay
+  openShare = () => {
+    // Get share button
+    const shareButton = this.shadowObj.querySelector('.action.share');
 
-    // console.log(metaElement);
+    // Check if the overlay exists
+    if (shareButton) {
+      // Get overlay
+      const overlay = shareButton.querySelector('.overlay');
 
-    if (mql.matches) {
-      if (metaElement) {
-        const link = metaElement.querySelector("a.action-link");
-        const content = metaElement.querySelector("div.user-container");
-        const pointer = metaElement.querySelector('.pointer');
+      // Select close button
+      const closeButton = shareButton.querySelector('.close');
 
-        // console.log(content);
+      // Add event listener to the close button
+      closeButton.addEventListener('click', e => {
+        // prevent the default action
+        e.preventDefault()
 
-        if (link && content && pointer) {
-          link.addEventListener("click", ev => {
-            ev.preventDefault();
-            ev.stopPropagation();
+        // prevent the propagation of the event
+        e.stopPropagation();
 
-            content.style.setProperty("display", "flex");
-            outerThis.disableScroll()
-          })
+        // Remove the active class
+        overlay.classList.remove('active');
+      });
 
-          pointer.addEventListener("click", e => {
-            e.preventDefault();
+      // Add event listener to the share button
+      shareButton.addEventListener('click', e => {
+        // prevent the default action
+        e.preventDefault()
 
-            content.style.setProperty("display", "none");
-            outerThis.enableScroll()
-          })
-        }
-      }
+        // prevent the propagation of the event
+        e.stopPropagation();
+
+        // Toggle the overlay
+        overlay.classList.add('active');
+
+        // add event to run once when the overlay is active: when user click outside the overlay
+        document.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Check if the target is not the overlay
+          if (!overlay.contains(e.target)) {
+
+            // Remove the active class
+            overlay.classList.remove('active');
+          }
+        }, { once: true });
+      });
     }
   }
 
@@ -392,40 +411,7 @@ export default class QuickPost extends HTMLElement {
           <span class="sp">by</span>
           <div class="author-name">
             <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
-            ${this.getAuthor()}
           </div>
-        </div>
-      </div>
-    `
-  }
-
-  getAuthor = () => {
-    return `
-      <div class="profile user-container">
-        <span class="pointer"></span>
-        <div class="cover">
-          <div class="head">
-            <div class="image">
-              <img src="${this.getAttribute('author-img')}" alt="User profile">
-            </div>
-            <div class="info">
-              <p class="name">
-                <span class="text">${this.getAttribute('author-id')}</span>
-                ${this.checkVerified(this.getAttribute('author-verified'))}
-              </p>
-              <a href="" class="followers">
-                <span class="no">${this.getAttribute('author-followers')}</span>
-                <span class="text">followers</span>
-              </a>
-            </div>
-          </div>
-          <div class="data">
-            <p class="name">${this.getAttribute('author-name')}</p>
-            <span class="bio">${this.getAttribute('author-bio')}</span>
-            <p class="about-info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
-            Facilis nulla optio quas quod veniam nam voluptas!</p>
-          </div>
-          ${this.checkFollowing(this.getAttribute('following'))}
         </div>
       </div>
     `
@@ -475,15 +461,37 @@ export default class QuickPost extends HTMLElement {
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0189 2.86915V2.86915C12.3569 2.28315 11.3456 2.34449 10.7596 3.00649C10.7596 3.00649 7.84694 6.29649 6.83694 7.43849C5.8256 8.57982 6.56694 10.1565 6.56694 10.1565C6.56694 10.1565 8.23627 10.6852 9.23227 9.55982C10.2289 8.43449 13.1563 5.12849 13.1563 5.12849C13.7423 4.46649 13.6803 3.45515 13.0189 2.86915Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10.0061 3.86719L12.4028 5.98919" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="numbers">
-            <span id="prev">372</span>
-          </span>
+          ${this.getOpinions()}
           <span class="line"></span>
         </span>
         ${this.getLike(this.getAttribute('liked'))}
         ${this.getViews()}
+        <span class="action share">
+          <span class="icon">
+            <span class="sp">•</span>
+            <span class="sp">•</span>
+          </span>
+          ${this.getShare()}
+        </span>
       </div>
 		`
+  }
+
+  getOpinions = () => {
+    // Get total opinions and parse to integer
+    const opinions = this.getAttribute('opinions') || 0;
+
+    // Convert the opinions to a number
+    const totalOpinions = this.parseToNumber(opinions);
+
+    //  format the number
+    const opinionsFormatted = this.formatNumber(totalOpinions);
+
+    return /*html*/`
+      <span class="numbers">
+        <span id="prev">${opinionsFormatted}</span>
+      </span>
+    `
   }
 
   getViews = () => {
@@ -576,12 +584,39 @@ export default class QuickPost extends HTMLElement {
     }
   }
 
+  getShare = () => {
+    return /* html */`
+      <div class="overlay">
+        <span class="close"></span>
+        <span class="options">
+          <span class="option link">
+            <span class="text">Copy link</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
+              <path d="M580.3 267.2c56.2-56.2 56.2-147.3 0-203.5C526.8 10.2 440.9 7.3 383.9 57.2l-6.1 5.4c-10 8.7-11 23.9-2.3 33.9s23.9 11 33.9 2.3l6.1-5.4c38-33.2 95.2-31.3 130.9 4.4c37.4 37.4 37.4 98.1 0 135.6L433.1 346.6c-37.4 37.4-98.2 37.4-135.6 0c-35.7-35.7-37.6-92.9-4.4-130.9l4.7-5.4c8.7-10 7.7-25.1-2.3-33.9s-25.1-7.7-33.9 2.3l-4.7 5.4c-49.8 57-46.9 142.9 6.6 196.4c56.2 56.2 147.3 56.2 203.5 0L580.3 267.2zM59.7 244.8C3.5 301 3.5 392.1 59.7 448.2c53.6 53.6 139.5 56.4 196.5 6.5l6.1-5.4c10-8.7 11-23.9 2.3-33.9s-23.9-11-33.9-2.3l-6.1 5.4c-38 33.2-95.2 31.3-130.9-4.4c-37.4-37.4-37.4-98.1 0-135.6L207 165.4c37.4-37.4 98.1-37.4 135.6 0c35.7 35.7 37.6 92.9 4.4 130.9l-5.4 6.1c-8.7 10-7.7 25.1 2.3 33.9s25.1 7.7 33.9-2.3l5.4-6.1c49.9-57 47-142.9-6.5-196.5c-56.2-56.2-147.3-56.2-203.5 0L59.7 244.8z" />
+            </svg>
+          </span>
+          <span class="option more">
+            <span class="text">Share options</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"  fill="currentColor">
+            <path d="M15 3a3 3 0 0 1-5.175 2.066l-3.92 2.179a2.994 2.994 0 0 1 0 1.51l3.92 2.179a3 3 0 1 1-.73 1.31l-3.92-2.178a3 3 0 1 1 0-4.133l3.92-2.178A3 3 0 1 1 15 3Zm-1.5 10a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 13.5 13Zm-9-5a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 4.5 8Zm9-5a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 13.5 3Z"></path>
+            </svg>
+          </span>
+          <span class="option code">
+            <span class="text">Embed code</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"></path>
+            </svg>
+          </span>
+        </span>
+      </div>
+    `
+  }
+
   getForm = () => {
     return `
       <form-container type="opinion"></form-container>
     `
   }
-
 
   getStyles() {
     return /* css */`
@@ -638,35 +673,6 @@ export default class QuickPost extends HTMLElement {
         gap: 0;
       }
 
-      .read-time {
-        color: var(--gray-color);
-        font-size: 0.9rem;
-        font-family: var(--font-mono),sans-serif;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .read-time > span.sp {
-        display: inline-block;
-        margin: 0 0 -2px;
-      }
-
-      h3.title {
-        color: var(--text-color);
-        font-family: var(--font-text), sans-serif;
-        margin: 0;
-        padding: 0;
-        font-size: 1rem;
-        font-weight: 500;
-        line-height: 1.5;
-      }
-
-      h3.title > a {
-        text-decoration: none;
-        color: inherit;
-      }
-
       .meta {
         height: 25px;
         display: flex;
@@ -676,6 +682,11 @@ export default class QuickPost extends HTMLElement {
         font-family: var(--font-mono),monospace;
         gap: 5px;
         font-size: 0.9rem;
+      }
+
+      .meta > span.time {
+        font-family: var(--font-text), sans-serif;
+        font-size: 0.85rem;
       }
 
       .meta > .author {
@@ -890,7 +901,7 @@ export default class QuickPost extends HTMLElement {
       }
 
       .content p {
-        margin: 0 0 8px 0;
+        margin: 0 0 10px 0;
         padding: 0;
         line-height: 1.4;
         font-family: var(--font-text), sans-serif;
@@ -968,12 +979,10 @@ export default class QuickPost extends HTMLElement {
         -o-border-radius: 50px;
       }
 
-      .stats.actions > span.write > span.text {
-        font-family: var(--font-main), sans-serif;
-        /*display: none;*/
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--gray-color);
+      .stats.actions > span.write.action > svg {
+        width: 19px;
+        height: 19px;
+        margin: -2px 0 0 0;
       }
 
       .stats.actions > span.write.action span.line {
@@ -995,7 +1004,7 @@ export default class QuickPost extends HTMLElement {
         color: var(--accent-color);
       }
 
-      .stats.actions > span.write.action.open > span.text {
+      .stats.actions > span.write.action.open > span.numbers {
         color: transparent;
         background: var(--accent-linear);
         background-clip: text;
@@ -1168,9 +1177,10 @@ export default class QuickPost extends HTMLElement {
         transition: transform 0.5s ease;
       }
 
-      .stats.actions > span.write svg {
-        width: 20px;
-        height: 20px;
+      .stats.actions > span.stat.views svg {
+        color: inherit;
+        width: 16px;
+        height: 16px;
       }
 
       .stats.actions > span.stat.up svg {
@@ -1249,7 +1259,7 @@ export default class QuickPost extends HTMLElement {
       }
 
       .stats.actions > span.action.share .options > .option.code > svg,
-      .stats.actions > span.action.share .options > .option.frame > svg {
+      .stats.actions > span.action.share .options > .option.more > svg {
         width: 17px;
         height: 17px;
       }
@@ -1353,11 +1363,16 @@ export default class QuickPost extends HTMLElement {
           height: 30px;
         }
 
-        .stats.actions > span.action.share .options > .option.code > svg,
-        .stats.actions > span.action.share .options > .option.frame > svg {
+        .stats.actions > span.action.share .options > .option.code > svg {
           width: 29px;
           height: 29px;
         }
+
+        .stats.actions > span.action.share .options > .option.more > svg {
+          width: 27px;
+          height: 27px;
+        }
+
 
         .stats.actions > span.action.share .options > .option > span.text {
           font-family: var(--font-read), sans-serif;

@@ -16,6 +16,9 @@ export default class QuePost extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
+    // Open form
+    this.openForm();
+
     // Add event listeners
     this.openShare();
 
@@ -162,6 +165,38 @@ export default class QuePost extends HTMLElement {
     }
   }
 
+  openForm = () => {
+    const writeBtn = this.shadowObj.querySelector('span.action.write');
+    const formContainer = this.shadowObj.querySelector('div.form-container');
+    if (writeBtn && formContainer) {
+      const formElement = this.getForm();
+
+      writeBtn.addEventListener('click', event => {
+        event.preventDefault();
+
+        // console.log(writeContainer);
+        // console.log(formElement);
+
+        // writeContainer.classList.toggle('active');
+        if (writeBtn.classList.contains('open')) {
+          writeBtn.classList.remove('open');
+
+          // adjust the margin top of the form container
+          formContainer.style.setProperty('margin-top', '0');
+          formContainer.innerHTML = '';
+        }
+        else {
+          writeBtn.classList.add('open');
+          // adjust the margin top of the form container
+          formContainer.style.setProperty('margin-top', '15px');
+
+          // Add the form to the form container
+          formContainer.insertAdjacentHTML('beforeend', formElement);
+        }
+      })
+    }
+  }
+
   // Define the easeInOutQuad function for smoother scrolling
   easeInOutQuad =  (t, b, c, d) => {
     t /= d / 2;
@@ -294,14 +329,17 @@ export default class QuePost extends HTMLElement {
   getActions = () => {
     return /*html*/`
       <div class="actions stats">
-        <span class="play">
+        <span class="action write">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7.83241C12 6.70741 5.84844 3.10841 5.15062 3.75553C4.45414 4.40265 4.3857 11.2012 5.15062 11.9093C5.91688 12.6199 12 8.95741 12 7.83241Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8.00016 1.83337C3.3755 1.83337 1.8335 3.37537 1.8335 8.00004C1.8335 12.6247 3.3755 14.1667 8.00016 14.1667C12.6248 14.1667 14.1668 12.6247 14.1668 8.00004" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0189 2.86915V2.86915C12.3569 2.28315 11.3456 2.34449 10.7596 3.00649C10.7596 3.00649 7.84694 6.29649 6.83694 7.43849C5.8256 8.57982 6.56694 10.1565 6.56694 10.1565C6.56694 10.1565 8.23627 10.6852 9.23227 9.55982C10.2289 8.43449 13.1563 5.12849 13.1563 5.12849C13.7423 4.46649 13.6803 3.45515 13.0189 2.86915Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10.0061 3.86719L12.4028 5.98919" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="text">Play</span>
+          ${this.getOpinions()}
+          <span class="line"></span>
         </span>
         ${this.getLike(this.getAttribute('liked'))}
-        <!-- ${this.getStat()} -->
+        ${this.getViews()}
         <span class="action share">
           <span class="icon">
             <span class="sp">•</span>
@@ -310,6 +348,46 @@ export default class QuePost extends HTMLElement {
           ${this.getShare()}
         </span>
       </div>
+      <div class="form-container"></div>
+    `
+  }
+
+  getViews = () => {
+    // Get total views and parse to integer
+    const views = this.getAttribute('views') || 0;
+
+    // Convert the views to a number
+    const totalViews = this.parseToNumber(views);
+
+    // Format the number
+    const viewsFormatted = this.formatNumber(totalViews);
+
+    return /*html*/`
+      <span class="stat views">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" width="16" height="16">
+          <path d="M8.75 1.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-1.5 0V2.25a.75.75 0 0 1 .75-.75Zm-3.5 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm7 0a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Z"></path>
+        </svg>
+        <span class="numbers">
+          <span id="prev">${viewsFormatted}</span>
+        </span>
+      </span>
+    `
+  }
+
+  getOpinions = () => {
+    // Get total opinions and parse to integer
+    const opinions = this.getAttribute('opinions') || 0;
+
+    // Convert the opinions to a number
+    const totalOpinions = this.parseToNumber(opinions);
+
+    //  format the number
+    const opinionsFormatted = this.formatNumber(totalOpinions);
+
+    return /*html*/`
+      <span class="numbers">
+        <span id="prev">${opinionsFormatted}</span>
+      </span>
     `
   }
 
@@ -381,48 +459,6 @@ export default class QuePost extends HTMLElement {
     }
   }
 
-  getStat = () => {
-    // Get current stats and last stats
-    const currentStats = this.getAttribute('current-stats') || 0;
-    const lastStats = this.getAttribute('last-stats') || 0;
-
-    // Parse the values to integers
-    const current = this.parseToNumber(currentStats);
-    const last = this.parseToNumber(lastStats);
-
-    // Get the absolute difference between the two
-    const diff = Math.abs(current - last);
-
-    // Format the number
-    const diffFormatted = this.formatNumber(diff);
-
-
-    if (current > last) {
-      return /*html*/`
-        <span class="stat trend up">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-            <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z"></path>
-          </svg>
-          <span class="numbers">
-            <span id="uab">${diffFormatted}</span>
-          </span>
-        </span>
-      `
-    }
-    else {
-      return /*html*/`
-        <span class="stat trend down">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-            <path d="M4.22 4.179a.75.75 0 0 1 1.06 0l5.26 5.26v-4.2a.75.75 0 0 1 1.5 0v6.01a.75.75 0 0 1-.75.75H5.28a.75.75 0 0 1 0-1.5h4.2L4.22 5.24a.75.75 0 0 1 0-1.06Z"></path>
-          </svg>
-          <span class="numbers">
-            <span id="uab">${diffFormatted}</span>
-          </span>
-        </span>
-      `
-    }
-  }
-
   getShare = () => {
     return /* html */`
       <div class="overlay">
@@ -478,6 +514,12 @@ export default class QuePost extends HTMLElement {
         </div>
       </div>
     `;
+  }
+
+  getForm = () => {
+    return `
+      <form-container type="opinion"></form-container>
+    `
   }
 
   getStyles() {
@@ -542,9 +584,11 @@ export default class QuePost extends HTMLElement {
         display: flex;
         flex-flow: column;
         position: relative;
+        background: var(--que-background);
         gap: 5px;
-        padding: 0;
+        padding: 5px 0;
         margin: 0 0 8px;
+        border-radius: 5px;
       }
 
       .body > .lyrics > p {
@@ -555,7 +599,7 @@ export default class QuePost extends HTMLElement {
         font-size: 1rem;
         font-weight: 400;
         margin: 0;
-        padding: 0 10px 0 18px;
+        padding: 0 10px 0 15px;
       }
 
       .body > .lyrics::before {
@@ -588,9 +632,9 @@ export default class QuePost extends HTMLElement {
 
       .body > span.title {
         color: var(--action-color);
-        font-family: var(--font-que), sans-serif;
+        font-family: var(--font-text), sans-serif;
         font-weight: 500;
-        font-size: 1.07rem;
+        font-size: 1.01rem;
         line-height: 1;
       }
 
@@ -603,7 +647,6 @@ export default class QuePost extends HTMLElement {
         gap: 5px;
         font-weight: 500;
         font-family: var(--font-text), sans-serif;
-        /* font-family: var(--font-que), sans-serif; */
         font-size: 0.8rem;
       }
 
@@ -623,18 +666,19 @@ export default class QuePost extends HTMLElement {
         margin: 0;
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 0;
       }
 
-      .stats.actions > span.play {
+      .stats.actions > span.write.action {
         cursor: pointer;
+        position: relative;
         display: flex;
         align-items: center;
         font-family: var(--font-text) sans-serif;
         font-size: 0.95rem;
         justify-content: start;
-        gap: 2px;
-        padding: 0 10px 0 8px;
+        gap: 5px;
+        padding: 5px 5px;
         height: 30px;
         border-radius: 50px;
         font-weight: 500;
@@ -645,17 +689,81 @@ export default class QuePost extends HTMLElement {
         -ms-border-radius: 50px;
         -o-border-radius: 50px;
       }
-      .stats.actions > span.play > span.text {
-        font-family: var(--font-text), sans-serif;
+
+      .stats.actions > span.write > span.text {
+        font-family: var(--font-main), sans-serif;
+        /*display: none;*/
         font-size: 0.9rem;
         font-weight: 500;
         color: var(--gray-color);
       }
 
-      .stats.actions > span.play > svg {
-        color: inherit;
-        width: 22px;
-        height: 22px;
+      .stats.actions > span.write.action span.line {
+        background: var(--accent-linear);
+        position: absolute;
+        top: 30px;
+        left: 13px;
+        display: none;
+        width: 3px;
+        height: 20px;
+        border-radius: 5px;
+      }
+
+      .stats.actions > span.write.action.open span.line {
+        display: inline-block;
+      }
+
+      .stats.actions > span.write.action.open {
+        color: var(--accent-color);
+      }
+
+      .stats.actions > span.write.action.open > span.numbers {
+        color: transparent;
+        background: var(--accent-linear);
+        background-clip: text;
+        -webkit-background-clip: text;
+      }
+
+      .stats.actions > span.stat.views {
+        gap: 2px;
+      }
+
+      .stats.actions > span.stat.views {
+        padding: 5px 5px;
+      }
+
+      .stats.actions > span.stat,
+      .stats.actions > span.action {
+        /* border: var(--input-border); */
+        min-height: 35px;
+        height: 30px;
+        width: max-content;
+        position: relative;
+        padding: 5px 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        font-size: 1rem;
+        font-weight: 400;
+        /* color: var(--action-color); */
+        color: var(--gray-color);
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        -ms-border-radius: 50px;
+        -o-border-radius: 50px;
+      }
+
+      .stats.actions > span.write.action > svg {
+        width: 19px;
+        height: 19px;
+        margin: -2px 0 0 0;
+      }
+
+      .stats.actions > span.stat.views {
+        gap: 2px;
       }
 
       .stats.actions > span.stat,
@@ -683,7 +791,7 @@ export default class QuePost extends HTMLElement {
       }
 
       .stats.actions > span:first-of-type {
-        margin: 0 0 0 -10px;
+        margin: 0 0 0 -5px;
       }
 
       .stats.actions > span.action.share {
@@ -805,16 +913,17 @@ export default class QuePost extends HTMLElement {
         height: 16px;
       }
 
+      .stats.actions > span.stat.views svg {
+        color: inherit;
+        width: 16px;
+        height: 16px;
+      }
+
       .stats.actions > span.action.like svg {
         margin: -1px 0 0 0;
         width: 16px;
         height: 16px;
         transition: transform 0.5s ease;
-      }
-
-      .stats.actions > span.stat svg {
-        width: 19px;
-        height: 19px;
       }
 
       .stats.actions > span.stat.up svg {

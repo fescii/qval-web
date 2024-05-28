@@ -31,6 +31,7 @@
     // Import post wrappers
     import QuePost from "./js/post/que.post.js";
     import QuickPost from "./js/post/quick.post.js";
+    import StoryPost from "./js/post/story.post.js";
 
     customElements.define('header-container', HeaderContainer);
 
@@ -40,6 +41,7 @@
     // Register post wrappers
     customElements.define('que-post', QuePost);
     customElements.define('quick-post', QuickPost);
+    customElements.define('story-post', StoryPost);
   </script>
 </head>
 
@@ -54,38 +56,36 @@
 
   <main class="test">
     <section class="content">
-      <quick-post story="opinion" likes="9" id="P0A43PBA" liked="true"
+      <story-post story="story" id="P0A43PBA" views="609" time="2024-03-13T13:00:00+03:00"
+        story-title="The US Senate called on the law markers" read-time="6" author-id="U0A43PBA">
+      </story-post>
+
+      <quick-post story="opinion" likes="9" opinions="3872" id="P0A43PBA" liked="true"
 	      views="4369" time="2022-01-03T13:00:00+03:00"
 	      story-title="The US Senate called on the law markers"
-	      read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
-	      author-verified="true" author-name="Fredrick Ochieng"
-	      author-bio="Student At The East African University"
-	      author-followers="23" following="true">
+	      read-time="6" author-id="U0A43PBA">
         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
         <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
         'Content here, content here', making it look like readable English.</p>
 	    </quick-post>
 
-      <que-post id="Q0AB679DG479" liked="true" likes="969" current-stats="603" last-stats="373" song="James Bond" album="Amerikkka's Nightmare III"
+      <que-post id="Q0AB679DG479" liked="true" opinions="72" likes="969" views="603" song="James Bond" album="Amerikkka's Nightmare III"
         artist="General Steel" released="30 Aug 2017">
         <p>Maker on<span class="highlight">the</span>rise memorandum,<span class="highlight">but</span>on manila envelopes</p>
         <p>Another government<span class="highlight">that finish</span>you and is tied up in the scandal under surveillance,
           whole profile on a<span class="highlight">hidden</span>camera.</p>
       </que-post>
 
-      <quick-post story="opinion" likes="63" id="P0A43PBA" liked="true"
+      <quick-post story="opinion" likes="63" opinions="372" id="P0A43PBA" liked="true"
         views="369" time="2019-08-16T13:00:00+03:00"
         story-title="The US Senate called on the law markers"
-        read-time="6" author-id="U0A43PBA" author-img="img/img.jpg"
-        author-verified="true" author-name="Fredrick Ochieng"
-        author-bio="Student At The East African University"
-        author-followers="23" following="true">
+        read-time="6" author-id="U0A43PBA">
         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
         <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
         'Content here, content here', making it look like readable English.</p>
       </quick-post>
 
-      <que-post id="Q0AB679DG479" liked="true" likes="738369" current-stats="49603" last-stats="973" song="Comfortably Numb" album="The Wall"
+      <que-post id="Q0AB679DG479" liked="true" opinions="872" likes="738369" views="49603" song="Comfortably Numb" album="The Wall"
         artist="Pink Floyd" released="30 Nov 1979">
         <p>There is no pain, you are receding</p>
         <p>A distant ship,<span class="highlight">smoke on the horizon</span></p>
@@ -93,21 +93,29 @@
         <p>Your lips move, but I can't hear what you're saying</p>
       </que-post>
 
-      <que-post id="Q0AB679DG479" liked="false" likes="67369" current-stats="1178" last-stats="973" song="Baby" album="My World 2.0"
+      <que-post id="Q0AB679DG479" liked="false" opinions="563" likes="67369" views="1178" song="Baby" album="My World 2.0"
         artist="Justin Bieber" released="18 Jan 2010">
         <p>Ohh wooaah</p>
         <p>You know you love me, I know you care</p>
         <p>You shout whenever, and I'll be there</p>
       </que-post>
 
-      <que-post id="Q0AB679DG479" liked="true" likes="36547894" current-stats="443603" last-stats="236700" song="The Box" album="Please Excuse Me for Being Antisocial"
+      <story-post story="story" id="P0A43PBA" views="1369" time="2024-03-13T13:00:00+03:00"
+        story-title="The US Senate called on the law markers" read-time="6" author-id="U0A43PBA">
+      </story-post>
+
+      <que-post id="Q0AB679DG479" liked="true" opinions="8172" likes="36547894" views="443603" song="The Box" album="Please Excuse Me for Being Antisocial"
         artist="Roddy Ricch" released="6 Dec 2019">
         <p>Pullin' out the coupe at the lot</p>
         <p> Told 'em fuck 12,<span class="highlight">fuck SWAT</span></p>
         <p>Bustin' all the bells out the box</p>
       </que-post>
 
-      <que-post id="Q0AB679DG479" liked="true" likes="995412345" current-stats="78546789" last-stats="9876" song="Blinding Lights" album="After Hours"
+      <story-post story="story" id="P0A43PBA" views="85469" time="2024-03-13T13:00:00+03:00"
+        story-title="How to create bootable disk in ubuntu 21.10" read-time="6" author-id="U0A43PBA">
+      </story-post>
+
+      <que-post id="Q0AB679DG479" liked="true" opinions="633872" likes="995412345" views="78546789" song="Blinding Lights" album="After Hours"
         artist="The Weeknd" released="29 Nov 2019">
         <p>I've been tryna call</p>
         <p>I've been on<span class="highlight">my own for long</span>enough</p>
