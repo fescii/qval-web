@@ -448,11 +448,30 @@ export default class QuickPost extends HTMLElement {
   }
 
   getContent = () => {
-    return `
-      <div class="content">
-        ${this.innerHTML}
-      </div>
-    `
+    const content = this.innerHTML;
+
+    // Convert content to str and check length
+    const contentStr = content.toString();
+    const contentLength = contentStr.length;
+
+    // Check if content length is greater than 200
+    if (contentLength > 350) {
+      return /*html*/`
+        <div class="content extra">
+          ${content}
+          <div class="read-more">
+            <span class="action">Read more</span>
+          </div>
+        </div>
+      `
+    }
+    else {
+      return /*html*/`
+        <div class="content">
+          ${content}
+        </div>
+      `
+    }
   }
 
   getFooter = () => {
@@ -688,7 +707,8 @@ export default class QuickPost extends HTMLElement {
       }
 
       .meta > span.time {
-        font-family: var(--font-text), sans-serif;
+        font-family: var(--font-main), sans-serif;
+        /* font-weight: 500; */
         font-size: 0.85rem;
       }
 
@@ -718,179 +738,6 @@ export default class QuickPost extends HTMLElement {
         background-image: var(--alt-linear);
         background-clip: text;
         -webkit-background-clip: text;
-      }
-
-      .meta  .profile {
-        border: var(--modal-border);
-        box-shadow: var(--modal-shadow);
-        background-color: var(--background);
-        padding: 0;
-        z-index: 2;
-        position: absolute;
-        top: 30px;
-        left: 0;
-        display: none;
-        flex-flow: column;
-        gap: 0;
-        width: 300px;
-        height: max-content;
-        border-radius: 12px;
-      }
-
-      .meta  .profile > .cover {
-        padding: 10px 10px;
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        width: 100%;
-        border-radius: 12px;
-        transition: all 100ms ease-out;
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-      }
-
-      .meta  .profile > .cover p.about-info {
-        display: none;
-        font-family: var(--font-main), san-serif;
-      }
-
-      .meta > .author:hover .profile {
-        display: flex;
-      }
-
-      .meta .profile > span.pointer {
-        border: var(--modal-border);
-        border-bottom: none;
-        border-right: none;
-        position: absolute;
-        top: -5px;
-        left: 50px;
-        background-color: var(--background);
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        rotate: 45deg;
-        border-radius: 1px;
-        -webkit-border-radius: 1px;
-        -moz-border-radius: 1px;
-      }
-
-      .meta.opinion .profile > span.pointer{
-        left: unset;
-        right: 45%;
-      }
-
-      .meta .profile > .cover > .head {
-        background-color: var(--background);
-        display: flex;
-        flex-wrap: nowrap;
-        width: 100%;
-        gap: 10px;
-      }
-
-      .meta .profile > .cover > .head > .image {
-        width: 40px;
-        height: 40px;
-        overflow: hidden;
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-      }
-
-      .meta .profile > .cover > .head > .image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        overflow: hidden;
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-      }
-
-      .meta .info {
-        display: flex;
-        flex-flow: column;
-      }
-
-      .meta .info p.name {
-        margin: 0;
-        color: var(--text-color);
-        font-weight: 500;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .meta .info p.name svg {
-        margin: -2px 0 0;
-        color: var(--accent-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .meta .info a.followers {
-        text-decoration: none;
-        margin: 0;
-        color: var(--gray-color);
-        background: unset;
-        font-family: var(--font-main),sans-serif;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .meta .info a.followers > span.no {
-        font-family: var(--font-mono),sans-serif;
-      }
-
-      .meta .data {
-        margin: 5px 0;
-        display: flex;
-        flex-flow: column;
-      }
-
-      .meta .data > p.name {
-        margin: 0;
-        color: var(--text-color);
-        font-weight: 500;
-        font-family: var(--font-main),sans-serif;
-        font-size: 1.2rem;
-        line-height: 1.5;
-      }
-
-      .meta .data > span.bio {
-        margin: 0;
-        color: var(--gray-color);
-        font-family: var(--font-main),sans-serif;
-        font-size: 0.9rem;
-      }
-
-      .meta span.action {
-        border: var(--action-border);
-        margin: 10px 0 5px;
-        padding: 6px 15px;
-        font-weight: 500;
-        font-family: var(--font-main),sans-serif;
-        font-size: 0.9rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        border-radius: 8px;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-      }
-
-      .meta span.action.follow {
-        border: none;
-        text-decoration: none;
-        color: var(--white-color);
-        background-color: var(--action-color);
       }
 
       .content {
