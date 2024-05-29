@@ -1,6 +1,4 @@
 // Extending the functionality of the span element
-// Dependencies: js/elements/element.js
-
 export default class CustomSpan extends HTMLSpanElement {
   constructor() {
     super('span');
@@ -39,7 +37,7 @@ export default class CustomSpan extends HTMLSpanElement {
 
   // attribute change callback
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log('Attribute Changed', name, oldValue, newValue);
+    // console.log('Attribute Changed', name, oldValue, newValue);
     this.setStyles();
   }
 
