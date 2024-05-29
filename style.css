@@ -144,7 +144,7 @@ section.content {
   /* border: 1px solid #6b7280; */
   display: flex;
   flex-flow: column;
-  gap: 10px;
+  gap: 12px;
   padding: 0;
 }
 
@@ -153,6 +153,7 @@ section.content {
   display: flex;
   flex-flow: column;
   gap: 0;
+  font-family: var(--font-text), sans-serif;
 }
 
 .post > .content p {
@@ -165,7 +166,7 @@ section.content {
   padding: 0;
   display: flex;
   flex-flow: column;
-  gap: 0;
+  gap: 15px;
 }
 
 .post > .poll > .poll-options {
@@ -189,7 +190,7 @@ section.content {
   width: 100%;
   cursor: pointer;
   line-height: 1.5;
-  border: var(--story-border-mobile);
+  border: var(--story-border);
   padding: 0;
   font-family: var(--font-text), sans-serif;
   color: var(--gray-color);
@@ -199,6 +200,7 @@ section.content {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+
 
 .post > .poll > .poll-options > .poll-option label span.text {
   /* border: var(--story-border-mobile); */
@@ -230,11 +232,9 @@ section.content {
   top: 0;
   bottom: 0;
   display: inline-block;
-  width: 0%;
   z-index: 0;
   height: 100%;
-  background: var(--hover-background);
-  /* opacity: 0.9; */
+  background: var(--poll-background);
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   transition: width 0.3s ease-in-out;
@@ -248,22 +248,37 @@ section.content {
   display: none;
 }
 
-.post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label span.fill {
-  width: 10%;
-  background: #b8b9b9;
+.post > .poll > .poll-options > .poll-option.high label span.fill {
+  background: var(--poll-linear);
 }
 
-.post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label span.text {
+.post > .poll > .poll-options > .poll-option.high label span.text {
   font-weight: 500;
   color: var(--title-color);
-  /* color: transparent;
-  background: var(--second-linear);
-  background-clip: text;
-  -webkit-background-clip: text; */
 }
 
-.post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label svg {
+.post > .poll > .poll-options > .poll-option input[type="radio"]:checked + label svg {
   display: inline-block;
+}
+
+.post > .poll > .poll-options > .poll-option.high input[type="radio"]:checked + label svg {
+  display: inline-block;
+  color: var(--accent-color);
+}
+
+.post > .poll > .info {
+  padding: 0;
+  display: flex;
+  flex-flow: row;
+  color: var(--gray-color);
+  gap: 5px;
+  font-size: 0.95rem;
+}
+
+.post > .poll > .info .count,
+.post > .poll > .info .count {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
 }
 
 /* at media query 660px */
