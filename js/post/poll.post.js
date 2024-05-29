@@ -57,6 +57,62 @@ export default class QuickPost extends HTMLElement {
     window.onscroll = function () { };
   }
 
+  // Listen for checked radio button
+  listenForChecked = () => {
+    const outerThis = this;
+    // Get the poll options container
+    const pollOptions = this.shadowObj.querySelector('.poll-options');
+
+    // Check if the poll options container exists
+    if (pollOptions) {
+      // Get all the poll inputs
+      const inputs = pollOptions.querySelectorAll('input[type="radio"]');
+
+      // Add event listener to the poll options container
+      inputs.forEach(input => {
+        // add event listener to the input
+        input.addEventListener('change', e => {
+          // prevent the default action
+          e.preventDefault();
+
+          // prevent the propagation of the event
+          e.stopPropagation();
+
+          // Get the selected option
+          const selectedOption = e.target.parentElement.parentElement;
+
+          // Get the selected option name
+          const selectedOptionName = selectedOption.dataset.name;
+
+          // Get the new options
+          const newOptions = outerThis._options.map(option => {
+            // Check if the option is the selected option
+            if (option.name === selectedOptionName) {
+              return { ...option, votes: option.votes + 1 };
+            }
+            else {
+              return option;
+            }
+          });
+
+          // Update the options
+          outerThis._options = newOptions;
+
+          // Update the selected attribute
+          outerThis.setAttribute('selected', selectedOptionName);
+
+          // Update the voted attribute
+          outerThis.setAttribute('voted', 'true');
+
+          // Update the options attribute
+          outerThis.setAttribute('options', JSON.stringify(newOptions));
+        });
+
+      });
+
+    }
+  }
+
   // Update poll expiry time per second
   updatePollTime = () => {
     // select the poll time element
@@ -510,7 +566,39 @@ export default class QuickPost extends HTMLElement {
     `
   }
 
+  // Get the options for the poll
   getPollOptions = () => {
+    // Check if user has voted
+    if (this._voted) {
+      return this.getVotedOptions();
+    }
+    else {
+      return this.getOptions();
+    }
+  }
+
+  getOptions = () => {
+    // get the options
+    const options = this._options;
+
+    // Map through the options and return the html
+    return options.map((option, index) => {
+      return /*html*/`
+        <div data-name="${option.name}" class="poll-option">
+          <input type="radio" name="poll" id="poll-${index + 1}">
+          <label for="poll-${index + 1}">
+            <span class="text">${option.text}</span>
+            <span is="custom-span" width="0" class="fill"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+            </svg>
+          </label>
+        </div>
+      `;
+    }).join('');
+  }
+
+  getVotedOptions = () => {
     // Get the options
     const options = this._options;
 
