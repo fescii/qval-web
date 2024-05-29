@@ -6,6 +6,12 @@ export default class QuickPost extends HTMLElement {
     // Get array of objects for poll options and parse to Array
     this._options = Array.from(JSON.parse(this.getAttribute('options')));
 
+    // Get the end time for the poll
+    this._endTime = new Date(this.getAttribute('end-time'));
+
+    // Check if user has voted and convert to boolean
+    this._voted = true ? this.getAttribute('voted') === 'true' : false;
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -29,6 +35,9 @@ export default class QuickPost extends HTMLElement {
 
     // Open share overlay
     this.openShare();
+
+    // Update poll expiry time per second
+    this.updatePollTime();
   }
 
   disableScroll() {
@@ -48,11 +57,12 @@ export default class QuickPost extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  // Get remaining time for the poll
-  getRemainingTime = () => {
-    // Get Iso string of the poll end time
-    const timeStr = this.getAttribute('time');
-    const endTime = new Date(timeStr);
+  // Update poll expiry time per second
+  updatePollTime = () => {
+    // select the poll time element
+    const pollTime = this.shadowObj.querySelector('.poll span.count');
+
+    const endTime = this._endTime;
 
     // Convert the end time to local time
     const localEndTime = new Date(endTime.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
@@ -61,20 +71,48 @@ export default class QuickPost extends HTMLElement {
     const currentTime = new Date(Date.now());
 
     // Get the difference between the current time and the end time
-    const timeDiff = localEndTime - currentTime;
+    let timeDiff = localEndTime - currentTime;
 
-    // Check if the time difference is less than 0
-    if (timeDiff <= 0) {
-      return 'Poll ended';
+    // Check if the poll time element exists
+    if (pollTime) {
+      // Check if the time difference is less than 0
+      if (timeDiff <= 0) {
+        pollTime.textContent = "Poll ended";
+      }
+      else {
+        // Update the poll time every second
+        setInterval(() => {
+          pollTime.textContent = this.getRemainingTime(timeDiff);
+
+          // update the time difference
+          timeDiff = localEndTime - new Date(Date.now());
+        }, 1000);
+      }
     }
+  }
 
-    // Get the remaining time in hours: minutes: seconds
-    return new Intl.DateTimeFormat('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    }).format(timeDiff);
+  // Get remaining time for the poll
+  getRemainingTime = (timeDiff) => {
+    // get the number of hours if any in the time difference
+    let hours = Math.floor(timeDiff / (1000 * 60 * 60));
+
+    // Get the number of minutes if any in the time difference excluding days and hours
+    let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+    // Get the number of seconds if any in the time difference excluding days, hours and minutes
+    let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+
+    // Check if total hours is less than 10, add a leading zero
+    hours = hours < 10 ? `0${hours}` : hours;
+
+    // Check if minutes is less than 10, add a leading zero
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    // Check if seconds is less than 10, add a leading zero
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${hours}:${minutes}:${seconds}`;
   }
 
   // fn to like a post
@@ -462,11 +500,11 @@ export default class QuickPost extends HTMLElement {
 
         <span class="info">
           <span class="total">
-            <span class="count">${totalVotes}</span>
+            <span class="total">${totalVotes}</span>
             <span class="text">votes</span>
           </span>
           <span class="sp">•</span>
-          <span class="count">${this.getRemainingTime()}</span>
+          <span class="count">00:00:00</span>
         </span>
       </div>
     `
@@ -476,17 +514,29 @@ export default class QuickPost extends HTMLElement {
     // Get the options
     const options = this._options;
 
+    // get selected option
+    const selected = this.getAttribute('selected');
+
     // Calculate the total percentage for each option based on the total votes
     const totalVotes = options.reduce((acc, option) => acc + option.votes, 0);
 
     // Calculate the percentage for each option
     options.forEach(option => { option.percentage = (option.votes / totalVotes) * 100 });
 
+    // get the option highest number of votes
+    const highestVotes = Math.max(...options.map(option => option.votes));
+
     // loop through the options and return the html
     return options.map((option, index) => {
+      // Check which option is selected
+      const isSelected = selected === option.name;
+
+      // Check if the option has the highest number of votes
+      const isHighest = option.votes === highestVotes;
+
       return /*html*/`
-        <div data-name="${option.name}" class="poll-option">
-          <input type="radio" name="poll" id="poll-${index+1}">
+        <div data-name="${option.name}" class="poll-option ${isSelected ? 'selected' : ''} ${isHighest ? 'high' : ''}">
+          <input type="radio" name="poll" id="poll-${index+1}" ${isSelected ? 'checked' : ''}>
           <label for="poll-${index+1}">
             <span class="text">${option.text}</span>
             <span is="custom-span" width="${option.percentage.toFixed(2)}%" class="fill"></span>
@@ -495,7 +545,7 @@ export default class QuickPost extends HTMLElement {
             </svg>
           </label>
         </div>
-      `
+      `;
     }).join('');
   }
 
@@ -940,13 +990,13 @@ export default class QuickPost extends HTMLElement {
         flex-flow: row;
         color: var(--gray-color);
         gap: 5px;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
 
-      .poll > .info .count,
+      .poll > .info .total,
       .poll > .info .count {
-        font-family: var(--font-mono), monospace;
-        font-size: 0.9rem;
+        font-family: var(--font-text), sans-serif;
+        font-size: 0.8rem;
       }
 
       .stats.actions {
@@ -1264,9 +1314,9 @@ export default class QuickPost extends HTMLElement {
         height: 17px;
       }
 
-      @media screen and (max-width:660px) {
+      @media screen and (max-width: 660px) {
         :host {
-        font-size: 16px;
+          font-size: 16px;
           border-bottom: var(--story-border-mobile);
         }
 
@@ -1281,18 +1331,8 @@ export default class QuickPost extends HTMLElement {
           cursor: default !important;
         }
 
-        h3.title {
-          color: var(--text-color);
-          margin: 0;
-          padding: 0;
-          font-size: 1rem;
-          font-weight: 600;
-          line-height: 1.5;
-        }
-
-        h3.title > a {
-          text-decoration: none;
-          color: inherit;
+        .poll > .poll-options > .poll-option > label {
+          border: var(--story-border-mobile) !important;;
         }
 
         a,
