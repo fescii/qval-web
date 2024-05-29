@@ -1043,7 +1043,7 @@ export default class QuickPost extends HTMLElement {
       }
 
       .meta > span.time {
-        font-family: var(--font-text), sans-serif;
+        font-family: var(--font-main), sans-serif;
         font-size: 0.85rem;
       }
 
