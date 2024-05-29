@@ -3,6 +3,9 @@ export default class QuickPost extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // Get array of objects for poll options and parse to Array
+    this._options = Array.from(JSON.parse(this.getAttribute('options')));
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -43,6 +46,35 @@ export default class QuickPost extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
+  }
+
+  // Get remaining time for the poll
+  getRemainingTime = () => {
+    // Get Iso string of the poll end time
+    const timeStr = this.getAttribute('time');
+    const endTime = new Date(timeStr);
+
+    // Convert the end time to local time
+    const localEndTime = new Date(endTime.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
+
+    // Get the current time
+    const currentTime = new Date(Date.now());
+
+    // Get the difference between the current time and the end time
+    const timeDiff = localEndTime - currentTime;
+
+    // Check if the time difference is less than 0
+    if (timeDiff <= 0) {
+      return 'Poll ended';
+    }
+
+    // Get the remaining time in hours: minutes: seconds
+    return new Intl.DateTimeFormat('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }).format(timeDiff);
   }
 
   // fn to like a post
@@ -393,6 +425,7 @@ export default class QuickPost extends HTMLElement {
     return `
       ${this.getHeader()}
       ${this.getContent()}
+      ${this.getPoll()}
       ${this.getFooter()}
       <div class="form-container"></div>
     `;
@@ -417,31 +450,53 @@ export default class QuickPost extends HTMLElement {
     `
   }
 
-  checkFollowing = (following) => {
-    if (following === 'true') {
-      return `
-			  <span class="action following">Following</span>
-			`
-    }
-    else {
-      return `
-			  <span class="action follow">Follow</span>
-			`
-    }
+  getPoll = () =>  {
+    // Calculate the total percentage for each option based on the total votes
+    const totalVotes = this._options.reduce((acc, option) => acc + option.votes, 0);
+
+    return /*html*/`
+      <div class="poll">
+        <div class="poll-options">
+          ${this.getPollOptions()}
+        </div>
+
+        <span class="info">
+          <span class="total">
+            <span class="count">${totalVotes}</span>
+            <span class="text">votes</span>
+          </span>
+          <span class="sp">•</span>
+          <span class="count">${this.getRemainingTime()}</span>
+        </span>
+      </div>
+    `
   }
 
-  checkVerified = (value) => {
-    if (value === 'true') {
-      return `
-			  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0" />
-          <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z" />
-        </svg>
-			`
-    }
-    else {
-      return ''
-    }
+  getPollOptions = () => {
+    // Get the options
+    const options = this._options;
+
+    // Calculate the total percentage for each option based on the total votes
+    const totalVotes = options.reduce((acc, option) => acc + option.votes, 0);
+
+    // Calculate the percentage for each option
+    options.forEach(option => { option.percentage = (option.votes / totalVotes) * 100 });
+
+    // loop through the options and return the html
+    return options.map((option, index) => {
+      return /*html*/`
+        <div data-name="${option.name}" class="poll-option">
+          <input type="radio" name="poll" id="poll-${index+1}">
+          <label for="poll-${index+1}">
+            <span class="text">${option.text}</span>
+            <span is="custom-span" width="${option.percentage.toFixed(2)}%" class="fill"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+            </svg>
+          </label>
+        </div>
+      `
+    }).join('');
   }
 
   getContent = () => {
@@ -717,179 +772,6 @@ export default class QuickPost extends HTMLElement {
         -webkit-background-clip: text;
       }
 
-      .meta  .profile {
-        border: var(--modal-border);
-        box-shadow: var(--modal-shadow);
-        background-color: var(--background);
-        padding: 0;
-        z-index: 2;
-        position: absolute;
-        top: 30px;
-        left: 0;
-        display: none;
-        flex-flow: column;
-        gap: 0;
-        width: 300px;
-        height: max-content;
-        border-radius: 12px;
-      }
-
-      .meta  .profile > .cover {
-        padding: 10px 10px;
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        width: 100%;
-        border-radius: 12px;
-        transition: all 100ms ease-out;
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-      }
-
-      .meta  .profile > .cover p.about-info {
-        display: none;
-        font-family: var(--font-main), san-serif;
-      }
-
-      .meta > .author:hover .profile {
-        display: flex;
-      }
-
-      .meta .profile > span.pointer {
-        border: var(--modal-border);
-        border-bottom: none;
-        border-right: none;
-        position: absolute;
-        top: -5px;
-        left: 50px;
-        background-color: var(--background);
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        rotate: 45deg;
-        border-radius: 1px;
-        -webkit-border-radius: 1px;
-        -moz-border-radius: 1px;
-      }
-
-      .meta.opinion .profile > span.pointer{
-        left: unset;
-        right: 45%;
-      }
-
-      .meta .profile > .cover > .head {
-        background-color: var(--background);
-        display: flex;
-        flex-wrap: nowrap;
-        width: 100%;
-        gap: 10px;
-      }
-
-      .meta .profile > .cover > .head > .image {
-        width: 40px;
-        height: 40px;
-        overflow: hidden;
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-      }
-
-      .meta .profile > .cover > .head > .image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        overflow: hidden;
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-      }
-
-      .meta .info {
-        display: flex;
-        flex-flow: column;
-      }
-
-      .meta .info p.name {
-        margin: 0;
-        color: var(--text-color);
-        font-weight: 500;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .meta .info p.name svg {
-        margin: -2px 0 0;
-        color: var(--accent-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .meta .info a.followers {
-        text-decoration: none;
-        margin: 0;
-        color: var(--gray-color);
-        background: unset;
-        font-family: var(--font-main),sans-serif;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .meta .info a.followers > span.no {
-        font-family: var(--font-mono),sans-serif;
-      }
-
-      .meta .data {
-        margin: 5px 0;
-        display: flex;
-        flex-flow: column;
-      }
-
-      .meta .data > p.name {
-        margin: 0;
-        color: var(--text-color);
-        font-weight: 500;
-        font-family: var(--font-main),sans-serif;
-        font-size: 1.2rem;
-        line-height: 1.5;
-      }
-
-      .meta .data > span.bio {
-        margin: 0;
-        color: var(--gray-color);
-        font-family: var(--font-main),sans-serif;
-        font-size: 0.9rem;
-      }
-
-      .meta span.action {
-        border: var(--action-border);
-        margin: 10px 0 5px;
-        padding: 6px 15px;
-        font-weight: 500;
-        font-family: var(--font-main),sans-serif;
-        font-size: 0.9rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        border-radius: 8px;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-      }
-
-      .meta span.action.follow {
-        border: none;
-        text-decoration: none;
-        color: var(--white-color);
-        background-color: var(--action-color);
-      }
-
       .content {
         display: flex;
         flex-flow: column;
@@ -947,6 +829,124 @@ export default class QuickPost extends HTMLElement {
       .content ol a:hover {
         text-decoration-color: #4b5563bd !important;
         -moz-text-decoration-color: #4b5563bd !important;
+      }
+
+      .poll {
+        padding: 10px 0 5px 0;
+        display: flex;
+        flex-flow: column;
+        gap: 15px;
+      }
+
+      .poll > .poll-options {
+        padding: 0;
+        display: flex;
+        flex-flow: column;
+        gap: 8px;
+      }
+
+      .poll > .poll-options > .poll-option {
+        padding: 0;
+        display: flex;
+        flex-flow: row;
+        gap: 0;
+      }
+
+      .poll > .poll-options > .poll-option label {
+        display: inline-block;
+        position: relative;
+        height: 30px;
+        width: 100%;
+        cursor: pointer;
+        line-height: 1.5;
+        border: var(--story-border);
+        padding: 0;
+        font-family: var(--font-text), sans-serif;
+        color: var(--gray-color);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+      }
+
+      .poll > .poll-options > .poll-option label span.text {
+        /* border: var(--story-border-mobile); */
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        display: inline-block;
+        z-index: 1;
+        width: 100%;
+        height: max-content;
+        padding: 2px 8px;
+      }
+
+      .poll > .poll-options > .poll-option label svg {
+        position: absolute;
+        display: none;
+        right: 8px;
+        top: 50%;
+        z-index: 3;
+        transform: translateY(-50%);
+        color: var(--gray-color);
+      }
+
+      .poll > .poll-options > .poll-option label span.fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        display: inline-block;
+        z-index: 0;
+        height: 100%;
+        background: var(--poll-background);
+        border-top-left-radius: 9px;
+        border-bottom-left-radius: 9px;
+        transition: width 0.3s ease-in-out;
+        -webkit-transition: width 0.3s ease-in-out;
+        -moz-transition: width 0.3s ease-in-out;
+        -ms-transition: width 0.3s ease-in-out;
+        -o-transition: width 0.3s ease-in-out;
+      }
+
+      .poll > .poll-options > .poll-option input[type="radio"] {
+        display: none;
+      }
+
+      .poll > .poll-options > .poll-option.high label span.fill {
+        background: var(--poll-linear);
+      }
+
+      .poll > .poll-options > .poll-option.high label span.text {
+        font-weight: 500;
+        color: var(--title-color);
+      }
+
+      .poll > .poll-options > .poll-option input[type="radio"]:checked + label svg {
+        display: inline-block;
+      }
+
+      .poll > .poll-options > .poll-option.high input[type="radio"]:checked + label svg {
+        display: inline-block;
+        color: var(--accent-color);
+      }
+
+      .poll > .info {
+        padding: 0;
+        display: flex;
+        flex-flow: row;
+        color: var(--gray-color);
+        gap: 5px;
+        font-size: 0.95rem;
+      }
+
+      .poll > .info .count,
+      .poll > .info .count {
+        font-family: var(--font-mono), monospace;
+        font-size: 0.9rem;
       }
 
       .stats.actions {
@@ -1377,129 +1377,6 @@ export default class QuickPost extends HTMLElement {
           font-family: var(--font-read), sans-serif;
           font-weight: 400;
           font-size: 0.8rem;
-        }
-
-        .meta .profile {
-          border: unset;
-          box-shadow: unset;
-          padding: 0;
-          z-index: 10;
-          position: fixed;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background-color: transparent;
-          display: none;
-          flex-flow: column;
-          justify-content: end;
-          gap: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: unset;
-        }
-
-        .meta.opened .profile {
-          display: flex;
-        }
-
-        .meta  .profile > .cover {
-          border-top: var(--modal-border);
-          box-shadow: unset;
-          padding: 20px 10px;
-          z-index: 3;
-          background-color: var(--background);
-          display: flex;
-          flex-flow: column;
-          gap: 5px;
-          width: 100%;
-          border-radius: unset;
-          border-top-left-radius: 15px;
-          border-top-right-radius: 15px;
-        }
-
-        .meta  .profile > .cover p.about-info {
-          display: block;
-          line-height: 1.4;
-          padding: 0;
-          font-size: 1rem;
-          color: var(--text-color);
-          margin: 10px 0 0 0;
-        }
-
-        .meta > .author:hover .profile {
-          display: none;
-        }
-
-        .meta.opinion .profile > span.pointer,
-        .meta  .profile > span.pointer {
-          border: var(--modal-border);
-          border-bottom: none;
-          border-right: none;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: var(--modal-overlay);
-          display: inline-block;
-          min-width: 100%;
-          height: 100%;
-          rotate: unset;
-          border-radius: 0;
-        }
-
-        .meta  .profile > .cover > .head {
-          display: flex;
-          flex-wrap: nowrap;
-          width: 100%;
-          gap: 10px;
-          z-index: 2;
-        }
-
-        .meta .data {
-          margin: 5px 0;
-          display: flex;
-          flex-flow: column;
-        }
-
-        .meta .data > p.name {
-          margin: 0;
-          color: var(--text-color);
-          font-weight: 500;
-          font-family: var(--font-main),sans-serif;
-          font-size: 1.2rem;
-          line-height: 1.5;
-        }
-
-        .meta .data > span.bio {
-          margin: 0;
-          color: var(--gray-color);
-          font-family: var(--font-main),sans-serif;
-          font-size: 0.9rem;
-        }
-
-        .meta span.action {
-          border: var(--action-border);
-          margin: 10px 0 5px;
-          padding: 10px 15px;
-          font-weight: 500;
-          font-family: var(--font-main),sans-serif;
-          font-size: 1.1rem;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          border-radius: 8px;
-          -webkit-border-radius: 8px;
-          -moz-border-radius: 8px;
-        }
-        .meta span.action.follow {
-          border: none;
-          text-decoration: none;
-          color: var(--white-color);
-          background-color: var(--action-color);
         }
       }
     </style>

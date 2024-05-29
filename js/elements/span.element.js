@@ -40,7 +40,7 @@ export default class CustomSpan extends HTMLSpanElement {
   // attribute change callback
   attributeChangedCallback(name, oldValue, newValue) {
     console.log('Attribute Changed', name, oldValue, newValue);
-    this.render();
+    this.setStyles();
   }
 
   // get the template
