@@ -848,7 +848,7 @@ export default class PostWrapper extends HTMLElement {
 
       .stats > .stat.upvote.true svg,
       .stats > .stat.upvote.active svg {
-        color: var(--color-alt);
+        color: var(--alt-color);
       }
 
       @media screen and (max-width:660px) {

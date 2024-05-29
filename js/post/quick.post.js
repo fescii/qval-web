@@ -1193,7 +1193,7 @@ export default class QuickPost extends HTMLElement {
 
       .stats.actions > span.true svg,
       .stats.actions > span.active svg {
-        color: var(--color-alt);
+        color: var(--alt-color);
       }
 
       .stats.actions > span.action.share > .overlay {

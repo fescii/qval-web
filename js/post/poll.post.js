@@ -38,6 +38,16 @@ export default class QuickPost extends HTMLElement {
 
     // Update poll expiry time per second
     this.updatePollTime();
+
+    // Check if user has voted
+    if (this._voted) {
+      // disable all inputs
+      this.disableInputs();
+    }
+    else {
+      // Listen for checked radio button
+      this.listenForChecked();
+    }
   }
 
   disableScroll() {
@@ -55,6 +65,19 @@ export default class QuickPost extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
+  }
+
+  // Disable all inputs
+  disableInputs = () => {
+    // Select radio inputs
+    const inputs = this.shadowObj.querySelectorAll('input[type="radio"]');
+
+    // Loop through the inputs and disable them
+    if (inputs) {
+      inputs.forEach(input => {
+        input.disabled = true;
+      });
+    }
   }
 
   // Listen for checked radio button
@@ -79,7 +102,7 @@ export default class QuickPost extends HTMLElement {
           e.stopPropagation();
 
           // Get the selected option
-          const selectedOption = e.target.parentElement.parentElement;
+          const selectedOption = e.target.parentElement;
 
           // Get the selected option name
           const selectedOptionName = selectedOption.dataset.name;
@@ -98,6 +121,18 @@ export default class QuickPost extends HTMLElement {
           // Update the options
           outerThis._options = newOptions;
 
+          // Calculate the total percentage for each option based on the total votes
+          const totalVotes = newOptions.reduce((acc, option) => acc + option.votes, 0);
+
+          // Calculate the percentage for each option
+          newOptions.forEach(option => { option.percentage = (option.votes / totalVotes) * 100 });
+
+          // update votes attribute in the selected option
+          let votes = outerThis.parseToNumber(selectedOption.getAttribute('votes'));
+          console.log(votes);
+          selectedOption.setAttribute('votes', votes + 1);
+          console.log(selectedOption.getAttribute('votes'));
+
           // Update the selected attribute
           outerThis.setAttribute('selected', selectedOptionName);
 
@@ -106,10 +141,78 @@ export default class QuickPost extends HTMLElement {
 
           // Update the options attribute
           outerThis.setAttribute('options', JSON.stringify(newOptions));
-        });
 
+          // update the fill width for each option fill element
+          outerThis.updateFillWidth();
+
+          // update the total votes element
+          outerThis.updateTotalVotes();
+
+          // disable all inputs after voting
+          outerThis.disableInputs();
+        });
       });
 
+    }
+  }
+
+  // Update width of the fill element for each option
+  updateFillWidth = () => {
+    // Get the poll options container
+    const pollOptions = this.shadowObj.querySelector('.poll-options');
+
+    // Check if the poll options container exists
+    if (pollOptions) {
+      // Get all the poll options
+      const options = pollOptions.querySelectorAll('.poll-option');
+
+      // Loop through the options and update the fill width
+      options.forEach(option => {
+        // Get the fill element
+        const fill = option.querySelector('.fill');
+
+        // Get the votes for the option
+        const votes = this.parseToNumber(option.getAttribute('votes'));
+
+        // Get the total votes
+        const totalVotes = this._options.reduce((acc, option) => acc + option.votes, 0);
+
+        // Check if the current option has the highest number of votes
+        const isHighest = votes === Math.max(...this._options.map(option => option.votes));
+
+        // add the high class if the option has the highest number of votes
+        if (isHighest) {
+          option.classList.add('high');
+        }
+
+        // Calculate the percentage for the option
+        const percentage = (votes / totalVotes) * 100;
+
+        // Update the fill width
+        fill.style.width = `${percentage}%`;
+
+        // Update the percentage text
+        let html = `
+          <span class="percentage">${percentage.toFixed(1)}%</span>
+        `
+
+        // Insert the html beforeend of the label
+        option.querySelector('label').insertAdjacentHTML('beforeend', html);
+      });
+    }
+  }
+
+  // Update total votes element
+  updateTotalVotes = () => {
+    // Select the total votes element
+    const totalVotes = this.shadowObj.querySelector('.poll .info > .total > span.total');
+
+    if (totalVotes) {
+      // Get the total votes
+      const votes = this._options.reduce((acc, option) => acc + option.votes, 0);
+
+      // Update the total votes
+      totalVotes.textContent = votes;
     }
   }
 
@@ -568,13 +671,60 @@ export default class QuickPost extends HTMLElement {
 
   // Get the options for the poll
   getPollOptions = () => {
+    // Check if poll has ended
+    const pollEnded = new Date(Date.now()) > this._endTime;
+
+    // Check if poll has ended
+    if (pollEnded) {
+      return this.getEndedOptions();
+    }
     // Check if user has voted
-    if (this._voted) {
+    else if (this._voted) {
       return this.getVotedOptions();
     }
     else {
       return this.getOptions();
     }
+  }
+
+  getEndedOptions = () => {
+    // Get the options
+    const options = this._options;
+
+    // get selected option
+    const selected = this.getAttribute('selected');
+
+    // Calculate the total percentage for each option based on the total votes
+    const totalVotes = options.reduce((acc, option) => acc + option.votes, 0);
+
+    // Calculate the percentage for each option
+    options.forEach(option => { option.percentage = (option.votes / totalVotes) * 100 });
+
+    // get the option highest number of votes
+    const highestVotes = Math.max(...options.map(option => option.votes));
+
+    // loop through the options and return the html
+    return options.map((option, index) => {
+      // Check which option is selected
+      const isSelected = selected === option.name;
+
+      // Check if the option has the highest number of votes
+      const isHighest = option.votes === highestVotes;
+
+      return /*html*/`
+        <div votes="${option.votes}" data-name="${option.name}" class="poll-option ${isSelected ? 'selected' : ''} ${isHighest ? 'high' : ''}">
+          <input type="radio" name="poll" id="poll-${index + 1}" ${isSelected ? 'checked' : ''} disabled>
+          <label for="poll-${index + 1}">
+            <span class="text">${option.text}</span>
+            <span is="custom-span" width="${option.percentage.toFixed(2)}%" class="fill"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+            </svg>
+            <span class="percentage">${option.percentage.toFixed(1)}%</span>
+          </label>
+        </div>
+      `;
+    }).join('');
   }
 
   getOptions = () => {
@@ -584,7 +734,7 @@ export default class QuickPost extends HTMLElement {
     // Map through the options and return the html
     return options.map((option, index) => {
       return /*html*/`
-        <div data-name="${option.name}" class="poll-option">
+        <div votes="${option.votes}" data-name="${option.name}" class="poll-option">
           <input type="radio" name="poll" id="poll-${index + 1}">
           <label for="poll-${index + 1}">
             <span class="text">${option.text}</span>
@@ -623,7 +773,7 @@ export default class QuickPost extends HTMLElement {
       const isHighest = option.votes === highestVotes;
 
       return /*html*/`
-        <div data-name="${option.name}" class="poll-option ${isSelected ? 'selected' : ''} ${isHighest ? 'high' : ''}">
+        <div votes="${option.votes}" data-name="${option.name}" class="poll-option ${isSelected ? 'selected' : ''} ${isHighest ? 'high' : ''}">
           <input type="radio" name="poll" id="poll-${index+1}" ${isSelected ? 'checked' : ''}>
           <label for="poll-${index+1}">
             <span class="text">${option.text}</span>
@@ -631,6 +781,7 @@ export default class QuickPost extends HTMLElement {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
               <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
             </svg>
+            <span class="percentage">${option.percentage.toFixed(1)}%</span>
           </label>
         </div>
       `;
@@ -1025,11 +1176,31 @@ export default class QuickPost extends HTMLElement {
       .poll > .poll-options > .poll-option label svg {
         position: absolute;
         display: none;
-        right: 8px;
+        right: 50px;
         top: 50%;
         z-index: 3;
         transform: translateY(-50%);
         color: var(--gray-color);
+      }
+
+      .poll > .poll-options > .poll-option label span.percentage {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        z-index: 2;
+        transform: translateY(-50%);
+        font-family: var(--font-main), sans-serif;
+        color: var(--gray-color);
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .poll > .poll-options > .poll-option.high label span.percentage {
+        font-weight: 600;
+        color: transparent;
+        background: var(--second-linear);
+        background-clip: text;
+        -webkit-background-clip: text;
       }
 
       .poll > .poll-options > .poll-option label span.fill {
@@ -1069,22 +1240,31 @@ export default class QuickPost extends HTMLElement {
 
       .poll > .poll-options > .poll-option.high input[type="radio"]:checked + label svg {
         display: inline-block;
-        color: var(--accent-color);
+        color: var(--alt-color);
       }
 
       .poll > .info {
         padding: 0;
         display: flex;
         flex-flow: row;
+        align-items: center;
+        justify-content: start;
         color: var(--gray-color);
         gap: 5px;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
 
-      .poll > .info .total,
+      .poll > .info .sp {
+        font-size: 0.83rem;
+        margin: 2px 0 0 0;
+      }
+
+      .poll > .info > .total .total,
       .poll > .info .count {
         font-family: var(--font-text), sans-serif;
-        font-size: 0.8rem;
+        font-size: 0.83rem;
+        display: inline-block;
+        margin: 3px 0 0 0;
       }
 
       .stats.actions {
@@ -1331,7 +1511,7 @@ export default class QuickPost extends HTMLElement {
 
       .stats.actions > span.true svg,
       .stats.actions > span.active svg {
-        color: var(--color-alt);
+        color: var(--alt-color);
       }
 
       .stats.actions > span.action.share > .overlay {

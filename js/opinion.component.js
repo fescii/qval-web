@@ -801,7 +801,7 @@ export default class OpinionWrapper extends HTMLElement {
 
       .stats > .stat.upvote.true svg,
       .stats > .stat.upvote.active svg {
-        color: var(--color-alt);
+        color: var(--alt-color);
       }
 
       .stats > .stat.write svg {
