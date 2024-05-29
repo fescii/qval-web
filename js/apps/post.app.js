@@ -47,12 +47,14 @@ export default class AppPost extends HTMLElement {
     if (mql.matches) {
       return /* html */`
         <post-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
-          upvoted="${this.getAttribute('upvoted')}" views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
-          author-id="${this.getAttribute('author-id')}" author-img="${this.getAttribute('author-img')}" author-verified="${this.getAttribute('author-verified')}"
-          author-name="${this.getAttribute('author-name')}" author-bio="${this.getAttribute('author-bio')}" author-followers="${this.getAttribute('author-verified')}"
-          following="${this.getAttribute('following')}" author-about="${this.getAttribute('author-about')}"
-          >
-          ${this.getAttribute('content')}
+          opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+          views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+          author-id="${this.getAttribute('author-id')}">
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+              'Content here, content here', making it look like readable English.</p>
+            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+            <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
         </post-wrapper>
         <opinions-feed opinions="all" url="/opinions"></opinions-feed>
       `;
@@ -61,13 +63,15 @@ export default class AppPost extends HTMLElement {
       return /* html */`
         <div class="feeds">
           <post-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
-          upvoted="${this.getAttribute('upvoted')}" views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
-          author-id="${this.getAttribute('author-id')}" author-img="${this.getAttribute('author-img')}" author-verified="${this.getAttribute('author-verified')}"
-          author-name="${this.getAttribute('author-name')}" author-bio="${this.getAttribute('author-bio')}" author-followers="${this.getAttribute('author-verified')}"
-          following="${this.getAttribute('following')}" author-about="${this.getAttribute('author-about')}"
-          >
-          ${this.getAttribute('content')}
-        </post-wrapper>
+            opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+             views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+            author-id="${this.getAttribute('author-id')}">
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+            'Content here, content here', making it look like readable English.</p>
+            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+            <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+          </post-wrapper>
           <opinions-feed opinions="all" url="/opinions"></opinions-feed>
         </div>
         <div class="side">
@@ -194,7 +198,6 @@ export default class AppPost extends HTMLElement {
           display: flex;
           justify-content: space-between;
           gap: 30px;
-
           min-height: 60vh;
         }
 

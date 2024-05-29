@@ -26,6 +26,9 @@ export default class QuickPost extends HTMLElement {
 
     // Open share overlay
     this.openShare();
+
+    // Open read more
+    this.openReadMore();
   }
 
   disableScroll() {
@@ -249,6 +252,32 @@ export default class QuickPost extends HTMLElement {
     }
   }
 
+  // Open read more
+  openReadMore = () => {
+    // Get the read more button
+    const readMore = this.shadowObj.querySelector('.content .read-more');
+
+    // Get the content
+    const content = this.shadowObj.querySelector('.content');
+
+    // Check if the read more button exists
+    if (readMore && content) {
+      readMore.addEventListener('click', e => {
+        // prevent the default action
+        e.preventDefault()
+
+        // prevent the propagation of the event
+        e.stopPropagation();
+
+        // Toggle the active class
+        content.classList.remove('extra');
+
+        // remove the read more button
+        readMore.remove();
+      });
+    }
+  }
+
   formatNumber = n => {
     if (n >= 0 && n <= 999) {
       return n.toString();
@@ -284,58 +313,6 @@ export default class QuickPost extends HTMLElement {
       return num;
     } else {
       return 0;
-    }
-  }
-
-  // fn to open the share overlay
-  openShare = () => {
-    // Get share button
-    const shareButton = this.shadowObj.querySelector('.action.share');
-
-    // Check if the overlay exists
-    if (shareButton) {
-      // Get overlay
-      const overlay = shareButton.querySelector('.overlay');
-
-      // Select close button
-      const closeButton = shareButton.querySelector('.close');
-
-      // Add event listener to the close button
-      closeButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Remove the active class
-        overlay.classList.remove('active');
-      });
-
-      // Add event listener to the share button
-      shareButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Toggle the overlay
-        overlay.classList.add('active');
-
-        // add event to run once when the overlay is active: when user click outside the overlay
-        document.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // Check if the target is not the overlay
-          if (!overlay.contains(e.target)) {
-
-            // Remove the active class
-            overlay.classList.remove('active');
-          }
-        }, { once: true });
-      });
     }
   }
 
@@ -420,33 +397,6 @@ export default class QuickPost extends HTMLElement {
     `
   }
 
-  checkFollowing = (following) => {
-    if (following === 'true') {
-      return `
-			  <span class="action following">Following</span>
-			`
-    }
-    else {
-      return `
-			  <span class="action follow">Follow</span>
-			`
-    }
-  }
-
-  checkVerified = (value) => {
-    if (value === 'true') {
-      return `
-			  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0" />
-          <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z" />
-        </svg>
-			`
-    }
-    else {
-      return ''
-    }
-  }
-
   getContent = () => {
     const content = this.innerHTML;
 
@@ -454,13 +404,16 @@ export default class QuickPost extends HTMLElement {
     const contentStr = content.toString();
     const contentLength = contentStr.length;
 
-    // Check if content length is greater than 200
-    if (contentLength > 350) {
+    // Check if content length is greater than 400
+    if (contentLength > 400) {
       return /*html*/`
         <div class="content extra">
           ${content}
           <div class="read-more">
-            <span class="action">Read more</span>
+            <span class="action">view more</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path>
+            </svg>
           </div>
         </div>
       `
@@ -749,6 +702,41 @@ export default class QuickPost extends HTMLElement {
         margin: 0;
         padding: 0;
       }
+
+      /* more content */
+      .content.extra {
+        max-height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .content.extra .read-more {
+        /* border: var(--input-border); */
+        position: absolute;
+        bottom: -5px;
+        right: 0;
+        left: 0;
+        width: 100%;
+        padding: 5px 0;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        min-height: 80px;
+        gap: 3px;
+        cursor: pointer;
+        font-weight: 500;
+        font-family: var(--font-text), sans-serif;
+        color: var(--gray-color);
+        background: var(--fade-linear-gradient);
+      }
+
+      .content.extra .read-more svg {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin: 0 0 2px 0;
+      }
+
 
       .content p {
         margin: 0 0 10px 0;
@@ -1131,19 +1119,6 @@ export default class QuickPost extends HTMLElement {
           cursor: default !important;
         }
 
-        h3.title {
-          color: var(--text-color);
-          margin: 0;
-          padding: 0;
-          font-size: 1rem;
-          font-weight: 600;
-          line-height: 1.5;
-        }
-
-        h3.title > a {
-          text-decoration: none;
-          color: inherit;
-        }
 
         a,
         span.stat,
@@ -1227,129 +1202,6 @@ export default class QuickPost extends HTMLElement {
           font-family: var(--font-read), sans-serif;
           font-weight: 400;
           font-size: 0.8rem;
-        }
-
-        .meta .profile {
-          border: unset;
-          box-shadow: unset;
-          padding: 0;
-          z-index: 10;
-          position: fixed;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background-color: transparent;
-          display: none;
-          flex-flow: column;
-          justify-content: end;
-          gap: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: unset;
-        }
-
-        .meta.opened .profile {
-          display: flex;
-        }
-
-        .meta  .profile > .cover {
-          border-top: var(--modal-border);
-          box-shadow: unset;
-          padding: 20px 10px;
-          z-index: 3;
-          background-color: var(--background);
-          display: flex;
-          flex-flow: column;
-          gap: 5px;
-          width: 100%;
-          border-radius: unset;
-          border-top-left-radius: 15px;
-          border-top-right-radius: 15px;
-        }
-
-        .meta  .profile > .cover p.about-info {
-          display: block;
-          line-height: 1.4;
-          padding: 0;
-          font-size: 1rem;
-          color: var(--text-color);
-          margin: 10px 0 0 0;
-        }
-
-        .meta > .author:hover .profile {
-          display: none;
-        }
-
-        .meta.opinion .profile > span.pointer,
-        .meta  .profile > span.pointer {
-          border: var(--modal-border);
-          border-bottom: none;
-          border-right: none;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: var(--modal-overlay);
-          display: inline-block;
-          min-width: 100%;
-          height: 100%;
-          rotate: unset;
-          border-radius: 0;
-        }
-
-        .meta  .profile > .cover > .head {
-          display: flex;
-          flex-wrap: nowrap;
-          width: 100%;
-          gap: 10px;
-          z-index: 2;
-        }
-
-        .meta .data {
-          margin: 5px 0;
-          display: flex;
-          flex-flow: column;
-        }
-
-        .meta .data > p.name {
-          margin: 0;
-          color: var(--text-color);
-          font-weight: 500;
-          font-family: var(--font-main),sans-serif;
-          font-size: 1.2rem;
-          line-height: 1.5;
-        }
-
-        .meta .data > span.bio {
-          margin: 0;
-          color: var(--gray-color);
-          font-family: var(--font-main),sans-serif;
-          font-size: 0.9rem;
-        }
-
-        .meta span.action {
-          border: var(--action-border);
-          margin: 10px 0 5px;
-          padding: 10px 15px;
-          font-weight: 500;
-          font-family: var(--font-main),sans-serif;
-          font-size: 1.1rem;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          border-radius: 8px;
-          -webkit-border-radius: 8px;
-          -moz-border-radius: 8px;
-        }
-        .meta span.action.follow {
-          border: none;
-          text-decoration: none;
-          color: var(--white-color);
-          background-color: var(--action-color);
         }
       }
     </style>
