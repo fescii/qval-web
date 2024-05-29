@@ -272,9 +272,9 @@ export default class StoryPost extends HTMLElement {
         font-family: var(--font-text), sans-serif;
         margin: 0;
         padding: 0;
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 500;
-        line-height: 1.5;
+        line-height: 1.4;
       }
 
       h3.title > a {
