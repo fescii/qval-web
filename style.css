@@ -214,6 +214,16 @@ section.content {
   padding: 2px 8px;
 }
 
+.post > .poll > .poll-options > .poll-option label svg {
+  position: absolute;
+  display: none;
+  right: 8px;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  color: var(--gray-color);
+}
+
 .post > .poll > .poll-options > .poll-option label span.fill {
   position: absolute;
   left: 0;
@@ -240,14 +250,20 @@ section.content {
 
 .post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label span.fill {
   width: 10%;
+  background: #b8b9b9;
 }
 
 .post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label span.text {
   font-weight: 500;
-  color: transparent;
+  color: var(--title-color);
+  /* color: transparent;
   background: var(--second-linear);
   background-clip: text;
-  -webkit-background-clip: text;
+  -webkit-background-clip: text; */
+}
+
+.post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label svg {
+  display: inline-block;
 }
 
 /* at media query 660px */

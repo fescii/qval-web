@@ -27,6 +27,9 @@
     // Import form container
     import FormContainer from "./js/containers/form.container.js"
 
+    // Import elements
+    import CustomSpan from "./js/elements/span.element.js"
+
 
     // Import post wrappers
     import QuePost from "./js/post/que.post.js";
@@ -42,6 +45,9 @@
     customElements.define('que-post', QuePost);
     customElements.define('quick-post', QuickPost);
     customElements.define('story-post', StoryPost);
+
+    // Register elements not as custom elements but extend HTMLElement
+    customElements.define('custom-span', CustomSpan, { extends: 'span' });
   </script>
 </head>
 
@@ -68,28 +74,40 @@
               <input type="radio" name="poll" id="poll-1">
               <label for="poll-1">
                 <span class="text">Option 1</span>
-                <span class="fill"></span>
+                <span is="custom-span" width="60%" class="fill"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+                </svg>
               </label>
             </div>
             <div class="poll-option">
               <input type="radio" name="poll" id="poll-2">
               <label for="poll-2">
                 <span class="text">Option 2</span>
-                <span class="fill"></span>
+                <span is="custom-span" width="30%" class="fill"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+                </svg>
               </label>
             </div>
             <div class="poll-option">
               <input type="radio" name="poll" id="poll-3">
               <label for="poll-3">
                 <span class="text">Option 3</span>
-                <span class="fill"></span>
+                <span is="custom-span" width="3%" class="fill"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+                </svg>
               </label>
             </div>
-            <div class="poll-option">
+            <div class="poll-option selected">
               <input type="radio" name="poll" id="poll-4">
               <label for="poll-4">
                 <span class="text">Option 4</span>
-                <span class="fill"></span>
+                <span is="custom-span" width="7%" class="fill"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                  <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+                </svg>
               </label>
             </div>
           </div>
