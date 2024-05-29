@@ -496,11 +496,11 @@ export default class QuePost extends HTMLElement {
 
     // Get and shorten artist name to 20 characters
     const artist = this.getAttribute('artist');
-    const artistShort = artist.length > 20 ? artist.substring(0, 20) + '...' : artist;
+    const artistShort = artist.length > 15 ? artist.substring(0, 15) + '...' : artist;
 
     // Get and shorten album name to 20 characters
     const album = this.getAttribute('album');
-    const albumShort = album.length > 20 ? album.substring(0, 20) + '...' : album;
+    const albumShort = album.length > 15 ? album.substring(0, 15) + '...' : album;
 
     return /* html */`
       <div class="body">
@@ -580,17 +580,20 @@ export default class QuePost extends HTMLElement {
       .body {
         display: flex;
         flex-flow: column;
+        background: var(--que-background);
         gap: 0;
+        padding: 7px 5px;
+        border-radius: 5px;
       }
 
       .body > .lyrics {
         display: flex;
         flex-flow: column;
         position: relative;
-        background: var(--que-background);
+        /* background: var(--que-background); */
         gap: 5px;
         padding: 5px 0;
-        margin: 0 0 8px;
+        margin: 0 0 10px;
         border-radius: 5px;
       }
 
@@ -625,7 +628,6 @@ export default class QuePost extends HTMLElement {
       }
 
       .body > .lyrics > p span.highlight {
-        /* font-weight: 500; */
         padding: 0 5px;
         color: transparent;
         background: var(--accent-linear);
@@ -638,19 +640,18 @@ export default class QuePost extends HTMLElement {
         font-family: var(--font-text), sans-serif;
         font-weight: 500;
         font-size: 1.01rem;
-        line-height: 1;
+        line-height: 1.4;
       }
 
       .body > .info {
-        /* border: 1px solid #6b7280; */
         color: var(--gray-color);
         display: flex;
         flex-flow: row;
         align-items: center;
         gap: 5px;
         font-weight: 500;
-        font-family: var(--font-text), sans-serif;
-        font-size: 0.8rem;
+        font-family: var(--font-read), sans-serif;
+        font-size: 0.9rem;
       }
 
       .body > .info .genre {
@@ -660,11 +661,9 @@ export default class QuePost extends HTMLElement {
       .body > .info .sp {
         height: max-content;
         line-height: 1;
-        /* margin: 2px 0 0 0; */
       }
 
       .stats.actions {
-        /* border: var(--input-border); */
         padding: 5px 0 0 0;
         margin: 0;
         display: flex;
@@ -1018,6 +1017,17 @@ export default class QuePost extends HTMLElement {
 
         ::-webkit-scrollbar {
           -webkit-appearance: none;
+        }
+
+        .body > .info {
+          color: var(--gray-color);
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          gap: 5px;
+          font-weight: 500;
+          font-family: var(--font-read), sans-serif;
+          font-size: 0.7rem;
         }
 
         a,

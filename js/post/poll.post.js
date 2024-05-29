@@ -1615,7 +1615,7 @@ export default class QuickPost extends HTMLElement {
         }
 
         .poll > .poll-options > .poll-option > label {
-          border: var(--story-border-mobile) !important;;
+          border: var(--poll-border);
         }
 
         a,
