@@ -118,6 +118,7 @@ Author URL: https://femar.co.ke
   --stage-active-linear: linear-gradient(0deg, #df791a 0%, #f09c4e 100%);
   --stage-no-linear: linear-gradient(0deg, #18A565 0%, #21D029 100%);
 }
+
 *,
 *:after,
 *:before {

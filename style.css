@@ -140,6 +140,116 @@ section.content {
   width: 63%;
 }
 
+.post {
+  /* border: 1px solid #6b7280; */
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.post > .content {
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+}
+
+.post > .content p {
+  padding: 0;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.post > .poll {
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+}
+
+.post > .poll > .poll-options {
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+
+.post > .poll > .poll-options > .poll-option {
+  padding: 0;
+  display: flex;
+  flex-flow: row;
+  gap: 0;
+}
+
+.post > .poll > .poll-options > .poll-option label {
+  display: inline-block;
+  position: relative;
+  height: 30px;
+  width: 100%;
+  cursor: pointer;
+  line-height: 1.5;
+  border: var(--story-border-mobile);
+  padding: 0;
+  font-family: var(--font-text), sans-serif;
+  color: var(--gray-color);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.post > .poll > .poll-options > .poll-option label span.text {
+  /* border: var(--story-border-mobile); */
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  z-index: 1;
+  width: 100%;
+  height: max-content;
+  padding: 2px 8px;
+}
+
+.post > .poll > .poll-options > .poll-option label span.fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: inline-block;
+  width: 0%;
+  z-index: 0;
+  height: 100%;
+  background: var(--hover-background);
+  /* opacity: 0.9; */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: width 0.3s ease-in-out;
+  -webkit-transition: width 0.3s ease-in-out;
+  -moz-transition: width 0.3s ease-in-out;
+  -ms-transition: width 0.3s ease-in-out;
+  -o-transition: width 0.3s ease-in-out;
+}
+
+.post > .poll > .poll-options > .poll-option input[type="radio"] {
+  display: none;
+}
+
+.post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label span.fill {
+  width: 10%;
+}
+
+.post > .poll > .poll-options > .poll-option input[type="radio"]:checked+label span.text {
+  font-weight: 500;
+  color: transparent;
+  background: var(--second-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
 /* at media query 660px */
 @media screen and (max-width: 660px) {
   main.test {
