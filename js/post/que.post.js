@@ -79,6 +79,9 @@ export default class QuePost extends HTMLElement {
         // add scaling to the svg: reduce the size of the svg
         svg.style.transform = 'scale(0.8)';
 
+        // Add a transition to the svg
+        svg.style.transition = 'transform 0.2s ease-in-out';
+
         // Check if the user has liked the post
         if (liked === 'true') {
           // Set the new value of likes

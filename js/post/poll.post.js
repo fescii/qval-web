@@ -211,8 +211,11 @@ export default class QuickPost extends HTMLElement {
       // Get the total votes
       const votes = this._options.reduce((acc, option) => acc + option.votes, 0);
 
+      // Convert the total votes to a string with commas
+      const votesStr = this.numberWithCommas(votes);
+
       // Update the total votes
-      totalVotes.textContent = votes;
+      totalVotes.textContent = votesStr;
     }
   }
 
@@ -306,6 +309,9 @@ export default class QuickPost extends HTMLElement {
 
         // add scaling to the svg: reduce the size of the svg
         svg.style.transform = 'scale(0.8)';
+
+        // Add a transition to the svg
+        svg.style.transition = 'transform 0.2s ease-in-out';
 
         // Check if the user has liked the post
         if (liked === 'true') {
@@ -565,6 +571,11 @@ export default class QuickPost extends HTMLElement {
     }
   }
 
+  // fn to take number and return a string with commas
+  numberWithCommas = x => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   formatDateWithRelativeTime = (isoDateStr) => {
     const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
     let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -651,6 +662,9 @@ export default class QuickPost extends HTMLElement {
     // Calculate the total percentage for each option based on the total votes
     const totalVotes = this._options.reduce((acc, option) => acc + option.votes, 0);
 
+    // convert the total votes to a string with commas
+    const totalVotesStr = this.numberWithCommas(totalVotes);
+
     return /*html*/`
       <div class="poll">
         <div class="poll-options">
@@ -659,7 +673,7 @@ export default class QuickPost extends HTMLElement {
 
         <span class="info">
           <span class="total">
-            <span class="total">${totalVotes}</span>
+            <span class="total">${totalVotesStr}</span>
             <span class="text">votes</span>
           </span>
           <span class="sp">•</span>
@@ -1261,8 +1275,9 @@ export default class QuickPost extends HTMLElement {
 
       .poll > .info > .total .total,
       .poll > .info .count {
-        font-family: var(--font-text), sans-serif;
-        font-size: 0.83rem;
+        font-family: var(--font-main), sans-serif;
+        font-weight: 500;
+        font-size: 0.75rem;
         display: inline-block;
         margin: 3px 0 0 0;
       }
