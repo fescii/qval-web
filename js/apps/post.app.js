@@ -47,125 +47,15 @@ export default class AppPost extends HTMLElement {
     if (mql.matches) {
       return /* html */`
         <que-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
+        <que-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
           opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+          song="${this.getAttribute('song')}" artist="${this.getAttribute('artist')}" album="${this.getAttribute('album')}" released="${this.getAttribute('released')}"
           song="${this.getAttribute('song')}" artist="${this.getAttribute('artist')}" album="${this.getAttribute('album')}" released="${this.getAttribute('released')}"
           views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
           author-id="${this.getAttribute('author-id')}">
-          <div>
-            <span class="label"># Intro</span>
-              <p>Oh-ooh-whoa-oh-oh-oh-oh</p>
-              <p>Oh-ooh-whoa-oh-oh-oh-oh</p>
-              <p>Oh-ooh-whoa-oh, oh-oh-oh-oh</p>
-          </div>
-
-          <div>
-            <span class="label"># Verse</span>
-              <p>You know you love me (yo), I know you care (uh-huh)</p>
-              <p>Just shout whenever (yo), and I'll be there (uh-huh)</p>
-              <p>You are my love (yo), you are my heart (uh-huh)</p>
-              <p>And we will never, ever, ever be apart (yo, uh-huh)</p>
-          </div>
-
-          <div>
-            <span class="label"># Verse</span>
-              <p>Are we an item? (Yo) girl, quit playin' (uh-huh)</p>
-              <p>We're just friends" (yo), what are you sayin'? (Uh-huh)</p>
-              <p>Said, "There's another" (yo), and looked right in my eyes (uh-huh)</p>
-              <p>My first love broke my heart for the first time, and I was like (yo, uh-huh)</p>
-          </div>
-
-          <div>
-              <span class="label"># Chorus</span>
-              <p>Baby, baby, baby, oh</p>
-              <p>Like, "Baby, baby, baby, no</p>
-              <p>Like, "Baby, baby, baby, oh</p>
-              <p>I thought you'd always be mine, mine</p>
-          </div>
-
-          <div>
-             <span class="label"># Chorus</span>
-              <p>Baby, baby, baby, oh</p>
-              <p>Like, "Baby, baby, baby, no</p>
-              <p>Like, "Baby, baby, baby, oh</p>
-              <p>I thought you'd always be mine, mine</p>
-          </div>
-
-          <div>
-              <span class="label"># Verse</span>
-              <p>Oh, for you, I would've done whatever (uh-huh)</p>
-              <p>And I just can't believe we ain't together (yo, uh-huh)</p>
-              <p>And I wanna play it cool (yo), but I'm losin' you (uh-huh)</p>
-              <p>I'll buy you anything (yo), I'll buy you any ring (uh-huh)</p>
-          </div>
-
-          <div>
-              <span class="label"># Verse</span>
-              <p>And I'm in pieces (yo), baby, fix me (uh-huh)</p>
-              <p>And just shake me 'til you wake me from this bad dream (yo, uh-huh)</p>
-              <p>I'm goin' down (oh), down, down, down (uh-huh)</p>
-              <p>And I just can't believe, my first love won't be around, and I'm like</p>
-          </div>
-
-          <div>
-              <span class="label"># Chorus</span>
-              <p>Baby, baby, baby, oh</p>
-              <p>Like, "Baby, baby, baby, no</p>
-              <p>Like, "Baby, baby, baby, oh</p>
-              <p>I thought you'd always be mine, mine</p>
-          </div>
-
-          <div>
-             <span class="label"># Chorus</span>
-              <p>Baby, baby, baby, oh</p>
-              <p>Like, "Baby, baby, baby, no</p>
-              <p>Like, "Baby, baby, baby, oh</p>
-              <p>I thought you'd always be mine, mine (Luda!)</p>
-          </div>
-
-          <div>
-              <span class="label"># Bridge</span>
-              <p>When I was 13, I had my first love</p>
-              <p>There was nobody that compared to my baby</p>
-              <p>And nobody came between us, nor could ever come above</p>
-              <p>She had me goin' crazy</p>
-              <p>Oh, I was starstruck</p>
-              <p>She woke me up daily</p>
-          </div>
-
-          <div>
-              <span class="label"># Bridge</span>
-              <p>Don't need no Starbucks (woo)</p>
-              <p>She made my heart pound</p>
-              <p>And skip a beat when I see her in the street and</p>
-              <p>At school on the playground</p>
-              <p>But I really wanna see her on the weekend</p>
-              <p>She knows she got me dazin'</p>
-              <p>'Cause she was so amazin'</p>
-              <p>And now, my heart is breakin'</p>
-              <p>But I just keep on sayin'</p>
-          </div>
-
-          <div>
-              <span class="label"># Chorus</span>
-              <p>Baby, baby, baby, oh</p>
-              <p>Like, "Baby, baby, baby, no</p>
-              <p>Like, "Baby, baby, baby, oh</p>
-              <p>I thought you'd always be mine, mine</p>
-          </div>
-
-          <div>
-              <span class="label"># Chorus / Outro</span>
-              <p>Baby, baby, baby, oh</p>
-              <p>Like, "Baby, baby, baby, no</p>
-              <p>Like, "Baby, baby, baby, oh</p>
-              <p>I thought you'd always be mine, mine</p>
-              <p>I'm gone (yeah, yeah, yeah, yeah, yeah, yeah)</p>
-              <p>Now, I'm all gone (yeah, yeah, yeah, yeah, yeah, yeah)</p>
-              <p>Now, I'm all gone (yeah, yeah, yeah, yeah, yeah, yeah)</p>
-              <p>Now, I'm all gone (gone, gone, gone)</p>
-              <p>I'm gone</p>
-          </div>
-
+          <p>Maker on<span class="highlight">the</span>rise memorandum,<span class="highlight">but</span>on manila envelopes</p>
+          <p>Another government<span class="highlight">that finish</span>you and is tied up in the scandal under surveillance,
+          whole profile on a<span class="highlight">hidden</span>camera.</p>
         </que-wrapper>
         <opinions-feed opinions="all" url="/opinions"></opinions-feed>
       `;
@@ -174,124 +64,16 @@ export default class AppPost extends HTMLElement {
       return /* html */`
         <div class="feeds">
           <que-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
+          <que-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
             opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
             song="${this.getAttribute('song')}" artist="${this.getAttribute('artist')}" album="${this.getAttribute('album')}" released="${this.getAttribute('released')}"
             views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+            song="${this.getAttribute('song')}" artist="${this.getAttribute('artist')}" album="${this.getAttribute('album')}" released="${this.getAttribute('released')}"
+            views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
             author-id="${this.getAttribute('author-id')}">
-            <div>
-              <span class="label"># Intro</span>
-                <p>Oh-ooh-whoa-oh-oh-oh-oh</p>
-                <p>Oh-ooh-whoa-oh-oh-oh-oh</p>
-                <p>Oh-ooh-whoa-oh, oh-oh-oh-oh</p>
-            </div>
-
-            <div>
-              <span class="label"># Verse</span>
-                <p>You know you love me (yo), I know you care (uh-huh)</p>
-                <p>Just shout whenever (yo), and I'll be there (uh-huh)</p>
-                <p>You are my love (yo), you are my heart (uh-huh)</p>
-                <p>And we will never, ever, ever be apart (yo, uh-huh)</p>
-            </div>
-
-            <div>
-              <span class="label"># Verse</span>
-                <p>Are we an item? (Yo) girl, quit playin' (uh-huh)</p>
-                <p>We're just friends" (yo), what are you sayin'? (Uh-huh)</p>
-                <p>Said, "There's another" (yo), and looked right in my eyes (uh-huh)</p>
-                <p>My first love broke my heart for the first time, and I was like (yo, uh-huh)</p>
-            </div>
-
-            <div>
-                <span class="label"># Chorus</span>
-                <p>Baby, baby, baby, oh</p>
-                <p>Like, "Baby, baby, baby, no</p>
-                <p>Like, "Baby, baby, baby, oh</p>
-                <p>I thought you'd always be mine, mine</p>
-            </div>
-
-            <div>
-              <span class="label"># Chorus</span>
-                <p>Baby, baby, baby, oh</p>
-                <p>Like, "Baby, baby, baby, no</p>
-                <p>Like, "Baby, baby, baby, oh</p>
-                <p>I thought you'd always be mine, mine</p>
-            </div>
-
-            <div>
-                <span class="label"># Verse</span>
-                <p>Oh, for you, I would've done whatever (uh-huh)</p>
-                <p>And I just can't believe we ain't together (yo, uh-huh)</p>
-                <p>And I wanna play it cool (yo), but I'm losin' you (uh-huh)</p>
-                <p>I'll buy you anything (yo), I'll buy you any ring (uh-huh)</p>
-            </div>
-
-            <div>
-                <span class="label"># Verse</span>
-                <p>And I'm in pieces (yo), baby, fix me (uh-huh)</p>
-                <p>And just shake me 'til you wake me from this bad dream (yo, uh-huh)</p>
-                <p>I'm goin' down (oh), down, down, down (uh-huh)</p>
-                <p>And I just can't believe, my first love won't be around, and I'm like</p>
-            </div>
-
-            <div>
-                <span class="label"># Chorus</span>
-                <p>Baby, baby, baby, oh</p>
-                <p>Like, "Baby, baby, baby, no</p>
-                <p>Like, "Baby, baby, baby, oh</p>
-                <p>I thought you'd always be mine, mine</p>
-            </div>
-
-            <div>
-              <span class="label"># Chorus</span>
-                <p>Baby, baby, baby, oh</p>
-                <p>Like, "Baby, baby, baby, no</p>
-                <p>Like, "Baby, baby, baby, oh</p>
-                <p>I thought you'd always be mine, mine (Luda!)</p>
-            </div>
-
-            <div>
-                <span class="label"># Bridge</span>
-                <p>When I was 13, I had my first love</p>
-                <p>There was nobody that compared to my baby</p>
-                <p>And nobody came between us, nor could ever come above</p>
-                <p>She had me goin' crazy</p>
-                <p>Oh, I was starstruck</p>
-                <p>She woke me up daily</p>
-            </div>
-
-            <div>
-                <span class="label"># Bridge</span>
-                <p>Don't need no Starbucks (woo)</p>
-                <p>She made my heart pound</p>
-                <p>And skip a beat when I see her in the street and</p>
-                <p>At school on the playground</p>
-                <p>But I really wanna see her on the weekend</p>
-                <p>She knows she got me dazin'</p>
-                <p>'Cause she was so amazin'</p>
-                <p>And now, my heart is breakin'</p>
-                <p>But I just keep on sayin'</p>
-            </div>
-
-            <div>
-                <span class="label"># Chorus</span>
-                <p>Baby, baby, baby, oh</p>
-                <p>Like, "Baby, baby, baby, no</p>
-                <p>Like, "Baby, baby, baby, oh</p>
-                <p>I thought you'd always be mine, mine</p>
-            </div>
-
-            <div>
-                <span class="label"># Chorus / Outro</span>
-                <p>Baby, baby, baby, oh</p>
-                <p>Like, "Baby, baby, baby, no</p>
-                <p>Like, "Baby, baby, baby, oh</p>
-                <p>I thought you'd always be mine, mine</p>
-                <p>I'm gone (yeah, yeah, yeah, yeah, yeah, yeah)</p>
-                <p>Now, I'm all gone (yeah, yeah, yeah, yeah, yeah, yeah)</p>
-                <p>Now, I'm all gone (yeah, yeah, yeah, yeah, yeah, yeah)</p>
-                <p>Now, I'm all gone (gone, gone, gone)</p>
-                <p>I'm gone</p>
-            </div>
+            <p>Maker on<span class="highlight">the</span>rise memorandum,<span class="highlight">but</span>on manila envelopes</p>
+            <p>Another government<span class="highlight">that finish</span>you and is tied up in the scandal under surveillance,
+             whole profile on a<span class="highlight">hidden</span>camera.</p>
           </que-wrapper>
           <opinions-feed opinions="all" url="/opinions"></opinions-feed>
         </div>
