@@ -266,7 +266,7 @@ export default class AuthorWrapper extends HTMLElement {
         display: flex;
         flex-flow: column;
         align-items: start;
-        gap: 8px;
+        gap: 0px;
       }
 
       .content-container {
@@ -274,7 +274,7 @@ export default class AuthorWrapper extends HTMLElement {
         display: flex;
         flex-flow: column;
         align-items: start;
-        gap: 0;
+        gap: 8px;
       }
 
       .top {
