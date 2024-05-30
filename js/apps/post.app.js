@@ -15,6 +15,19 @@ export default class AppPost extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
+
+    // mql query at: 660px
+    const mql = window.matchMedia('(max-width: 660px)');
+
+    this.watchMediaQuery(mql);
+  }
+
+  // watch for mql changes
+  watchMediaQuery = mql => {
+    mql.addEventListener('change', () => {
+
+      this.render();
+    });
   }
 
   disableScroll() {
@@ -72,17 +85,28 @@ export default class AppPost extends HTMLElement {
   }
 
   getPost = () => {
-    return /* html */`
-      <post-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
+    // return /* html */`
+    //   <post-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
+    //     opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+    //     views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+    //     author-id="${this.getAttribute('author-id')}">
+    //         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+    //         <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+    //         'Content here, content here', making it look like readable English.</p>
+    //         <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+    //         <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+    //   </post-wrapper>
+    // `
+
+    return /*html */`
+      <poll-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
         opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
         views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
-        author-id="${this.getAttribute('author-id')}">
-            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-            <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
-            'Content here, content here', making it look like readable English.</p>
-            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-            <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-      </post-wrapper>
+        author-id="${this.getAttribute('author-id')}"
+        options='${this.getAttribute('options')}' voted="${this.getAttribute('voted')}" selected="${this.getAttribute('selected')}"
+        end-time="${this.getAttribute('end-time')}">
+        <p>Which is the best programming language?</p>
+      </poll-wrapper>
     `
   }
 

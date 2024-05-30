@@ -1,4 +1,4 @@
-export default class QuickPost extends HTMLElement {
+export default class PollWrapper extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -25,29 +25,9 @@ export default class QuickPost extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    this.openForm();
+    const contentContainer = this.shadowObj.querySelector('div.content-container');
 
-    // scroll the likes
-    this.scrollLikes();
-
-    // activate the like button
-    this.likePost();
-
-    // Open share overlay
-    this.openShare();
-
-    // Update poll expiry time per second
-    this.updatePollTime();
-
-    // Check if user has voted
-    if (this._voted) {
-      // disable all inputs
-      this.disableInputs();
-    }
-    else {
-      // Listen for checked radio button
-      this.listenForChecked();
-    }
+    this.fetchContent(contentContainer);
   }
 
   disableScroll() {
@@ -65,6 +45,40 @@ export default class QuickPost extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
+  }
+
+  fetchContent = (contentContainer) => {
+    const outerThis = this;
+    const storyLoader = this.shadowObj.querySelector('post-loader');
+    const content = this.getFull();
+    setTimeout(() => {
+      storyLoader.remove();
+      contentContainer.insertAdjacentHTML('beforeend', content);
+      // like post
+      outerThis.likePost();
+      // open share overlay
+      outerThis.openShare();
+      // scroll likes
+      outerThis.scrollLikes();
+
+      // Update poll expiry time per second
+      outerThis.updatePollTime();
+
+      // Check if user has voted
+      if (outerThis._voted) {
+        // disable all inputs
+        outerThis.disableInputs();
+      }
+      else {
+        // Listen for checked radio button
+        outerThis.listenForChecked();
+      }
+    }, 2000)
+  }
+
+  // fn to take number and return a string with commas
+  numberWithCommas = x => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   // Disable all inputs
@@ -519,106 +533,29 @@ export default class QuickPost extends HTMLElement {
     }
   }
 
-  // fn to open the share overlay
-  openShare = () => {
-    // Get share button
-    const shareButton = this.shadowObj.querySelector('.action.share');
-
-    // Check if the overlay exists
-    if (shareButton) {
-      // Get overlay
-      const overlay = shareButton.querySelector('.overlay');
-
-      // Select close button
-      const closeButton = shareButton.querySelector('.close');
-
-      // Add event listener to the close button
-      closeButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Remove the active class
-        overlay.classList.remove('active');
-      });
-
-      // Add event listener to the share button
-      shareButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Toggle the overlay
-        overlay.classList.add('active');
-
-        // add event to run once when the overlay is active: when user click outside the overlay
-        document.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // Check if the target is not the overlay
-          if (!overlay.contains(e.target)) {
-
-            // Remove the active class
-            overlay.classList.remove('active');
-          }
-        }, { once: true });
-      });
-    }
-  }
-
-  // fn to take number and return a string with commas
-  numberWithCommas = x => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
   formatDateWithRelativeTime = (isoDateStr) => {
-    const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
-    let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    // userTimezone.replace('%2F', '/')
-
-    // Convert posted time to the current timezone
-    const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
-
-    return `
-      ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-    `
-  }
-
-  openForm = () => {
-    const writeBtn = this.shadowObj.querySelector('span.action.write');
-    const formContainer = this.shadowObj.querySelector('div.form-container');
-    if (writeBtn && formContainer) {
-      const formElement = this.getForm();
-
-      writeBtn.addEventListener('click', event => {
-        event.preventDefault();
-
-        // console.log(writeContainer);
-        // console.log(formElement);
-
-        // writeContainer.classList.toggle('active');
-        if (writeBtn.classList.contains('open')) {
-          writeBtn.classList.remove('open');
-
-          // adjust the margin top of the form container
-          formContainer.style.setProperty('margin-top', '0');
-          formContainer.innerHTML = '';
-        }
-        else {
-          writeBtn.classList.add('open');
-          // adjust the margin top of the form container
-          formContainer.style.setProperty('margin-top', '15px');
-
-          // Add the form to the form container
-          formContainer.insertAdjacentHTML('beforeend', formElement);
-        }
-      })
+    // 1. Convert ISO date string with timezone to local Date object
+    let date;
+    try {
+      date = new Date(isoDateStr);
     }
+    catch (error) {
+      date = new Date(Date.now())
+    }
+
+    // Get date
+    const localDate = date.toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: '2-digit'
+    });
+
+    // Get time
+    let localTime = date.toLocaleDateString('en-US', {
+      hour: 'numeric', minute: '2-digit', hour12: true
+    });
+
+    localTime = localTime.split(',')[1].trim();
+
+    return { dateStr: localDate, timeStr: localTime }
   }
 
   getTemplate() {
@@ -629,33 +566,12 @@ export default class QuickPost extends HTMLElement {
     `;
   }
 
-  getBody() {
+  getContent = () => {
     return `
-      ${this.getHeader()}
-      ${this.getContent()}
-      ${this.getPoll()}
-      ${this.getFooter()}
-      <div class="form-container"></div>
-    `;
-  }
-
-  getHeader = () => {
-    return /*html*/`
-      <div class="meta opinion">
-        <span class="time">
-          <time class="published" datetime="${this.getAttribute('time')}">
-            ${this.formatDateWithRelativeTime(this.getAttribute('time'))}
-          </time>
-          <span class="sp">•</span>
-        </span>
-        <div class="author">
-          <span class="sp">by</span>
-          <div class="author-name">
-            <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
-          </div>
-        </div>
+      <div class="content">
+        ${this.innerHTML}
       </div>
-    `
+    `;
   }
 
   getPoll = () =>  {
@@ -802,18 +718,34 @@ export default class QuickPost extends HTMLElement {
     }).join('');
   }
 
-  getContent = () => {
-    return `
-      <div class="content">
-        ${this.innerHTML}
+  getMeta = () => {
+    let dateObject = this.formatDateWithRelativeTime(this.getAttribute('time'))
+
+    // Get total number of views
+    let views = this.getAttribute('views');
+
+    // views format
+    views = this.numberWithCommas(views);
+
+
+    return /* html */`
+      <div class="meta">
+        <span class="time">${dateObject.timeStr}</span>
+        <span class="sp">•</span>
+        <time class="published" datetime="${this.getAttribute('time')}">${dateObject.dateStr}</time>
+        <span class="sp">•</span>
+        <span class="views">
+          <span class="no">${views}</span>
+          <span class="text">views</span>
+        </span>
       </div>
     `
   }
 
-  getFooter = () => {
+  getStats = () => {
     return /* html */`
       <div class="actions stats">
-        <span class="action write">
+        <span class="action write open">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8.00016 1.83337C3.3755 1.83337 1.8335 3.37537 1.8335 8.00004C1.8335 12.6247 3.3755 14.1667 8.00016 14.1667C12.6248 14.1667 14.1668 12.6247 14.1668 8.00004" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0189 2.86915V2.86915C12.3569 2.28315 11.3456 2.34449 10.7596 3.00649C10.7596 3.00649 7.84694 6.29649 6.83694 7.43849C5.8256 8.57982 6.56694 10.1565 6.56694 10.1565C6.56694 10.1565 8.23627 10.6852 9.23227 9.55982C10.2289 8.43449 13.1563 5.12849 13.1563 5.12849C13.7423 4.46649 13.6803 3.45515 13.0189 2.86915Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -970,16 +902,33 @@ export default class QuickPost extends HTMLElement {
     `
   }
 
-  getForm = () => {
+  getLoader = () => {
     return `
-      <form-container type="opinion"></form-container>
-    `
+			<post-loader speed="300"></post-loader>
+		`
+  }
+
+  getFull() {
+    return `
+      ${this.getContent()}
+      ${this.getPoll()}
+      ${this.getMeta()}
+      ${this.getStats()}
+      <form-container type="post"></form-container>
+    `;
+  }
+
+  getBody() {
+    return `
+      <div class="content-container">
+        ${this.getLoader()}
+      </div>
+    `;
   }
 
   getStyles() {
     return /* css */`
     <style>
-
       *,
       *:after,
       *:before {
@@ -1018,82 +967,40 @@ export default class QuickPost extends HTMLElement {
         text-decoration: none;
       }
 
-
       :host {
         font-size: 16px;
-        border-bottom: var(--story-border);
-        font-family: var(--font-main), sans-serif;
-        padding: 15px 0 10px;
-        margin: 0;
-        width: 100%;
+        /* border: 1px solid #6b7280;*/
         display: flex;
         flex-flow: column;
         gap: 0;
+        width: 100%;
+        height: max-content;
       }
 
-      .meta {
-        height: 25px;
+      .content-container {
         display: flex;
-        position: relative;
-        color: var(--gray-color);
-        align-items: center;
-        font-family: var(--font-mono),monospace;
-        gap: 5px;
-        font-size: 0.9rem;
-      }
-
-      .meta > span.time {
-        font-family: var(--font-main), sans-serif;
-        font-size: 0.85rem;
-      }
-
-      .meta > .author {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .meta div.author-name {
-        display: flex;
-        align-items: center;
-      }
-
-      .meta div.author-name > a {
-        text-decoration: none;
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .meta a.opinion-link {
-        text-decoration: none;
-        color: transparent;
-        background-image: var(--alt-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
+        flex-flow: column;
+        gap: 0;
+        width: 100%;
+        height: max-content;
       }
 
       .content {
         display: flex;
         flex-flow: column;
         color: var(--text-color);
-        line-height: 1.4;
+        line-height: 1.5;
         gap: 0;
         margin: 0;
         padding: 0;
       }
 
       .content p {
-        margin: 0 0 10px 0;
+        margin: 5px 0 0 0;
         padding: 0;
-        line-height: 1.4;
+        line-height: 1.5;
+        font-size: 1.05rem;
         font-family: var(--font-text), sans-serif;
-      }
-
-      .content p:last-of-type {
-        margin: 0;
       }
 
       .content a {
@@ -1121,7 +1028,7 @@ export default class QuickPost extends HTMLElement {
       .content ul a,
       .content ol a {
         background: unset;
-        color:var(--font-text);
+        color: var(--font-text);
         font-weight: 500;
         text-decoration-color: var(--anchor) !important;
         text-decoration: underline;
@@ -1132,6 +1039,21 @@ export default class QuickPost extends HTMLElement {
       .content ol a:hover {
         text-decoration-color: #4b5563bd !important;
         -moz-text-decoration-color: #4b5563bd !important;
+      }
+
+      .meta {
+        border-bottom: var(--story-border);
+        border-top: var(--story-border);
+        margin: 10px 0 0;
+        padding: 12px 0;
+        display: flex;
+        position: relative;
+        color: var(--text-color);
+        align-items: center;
+        font-family: var(--font-text), sans-serif;
+        gap: 5px;
+        font-size: 1rem;
+        font-weight: 600;
       }
 
       .poll {
@@ -1185,6 +1107,11 @@ export default class QuickPost extends HTMLElement {
         width: 100%;
         height: max-content;
         padding: 2px 8px;
+        transition: width 0.5s ease-in-out;
+        -webkit-transition: width 0.5s ease-in-out;
+        -moz-transition: width 0.5s ease-in-out;
+        -ms-transition: width 0.5s ease-in-out;
+        -o-transition: width 0.5s ease-in-out;
       }
 
       .poll > .poll-options > .poll-option label svg {
@@ -1228,11 +1155,11 @@ export default class QuickPost extends HTMLElement {
         background: var(--poll-background);
         border-top-left-radius: 9px;
         border-bottom-left-radius: 9px;
-        transition: width 0.3s ease-in-out;
-        -webkit-transition: width 0.3s ease-in-out;
-        -moz-transition: width 0.3s ease-in-out;
-        -ms-transition: width 0.3s ease-in-out;
-        -o-transition: width 0.3s ease-in-out;
+        transition: width 0.5s ease-in-out;
+        -webkit-transition: width 0.5s ease-in-out;
+        -moz-transition: width 0.5s ease-in-out;
+        -ms-transition: width 0.5s ease-in-out;
+        -o-transition: width 0.5s ease-in-out;
       }
 
       .poll > .poll-options > .poll-option input[type="radio"] {
@@ -1285,7 +1212,7 @@ export default class QuickPost extends HTMLElement {
       .stats.actions {
         /* border: var(--input-border); */
         padding: 5px 0 0 0;
-        margin: 0;
+        margin: 0 0 15px 0;
         display: flex;
         align-items: center;
         gap: 0;
@@ -1599,28 +1526,40 @@ export default class QuickPost extends HTMLElement {
 
       @media screen and (max-width: 660px) {
         :host {
-          font-size: 16px;
-          border-bottom: var(--story-border-mobile);
+          margin: 0 0 15px;
         }
 
         ::-webkit-scrollbar {
           -webkit-appearance: none;
         }
 
-        .meta a.opinion-link,
-        .meta div.author-name > a,
+        .meta {
+          border-bottom: var(--story-border-mobile);
+          border-top: var(--story-border-mobile);
+          margin: 5px 0 0 0;
+          padding: 12px 0;
+          display: flex;
+          position: relative;
+          color: var(--text-color);
+          align-items: center;
+          font-family: var(--font-text), sans-serif;
+          font-size: 0.95rem;
+          gap: 5px;
+          font-weight: 600;
+        }
+
+        .stats {
+          padding: 10px 0;
+        }
+
         a,
         .stats > .stat {
           cursor: default !important;
         }
 
-        .poll > .poll-options > .poll-option > label {
-          border: var(--poll-border);
-        }
-
         a,
-        span.stat,
         .poll > .poll-options > .poll-option label,
+        span.stat,
         span.action {
           cursor: default !important;
         }

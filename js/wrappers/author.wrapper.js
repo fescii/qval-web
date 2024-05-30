@@ -290,7 +290,6 @@ export default class AuthorWrapper extends HTMLElement {
 		`
   }
 
-
   getStyles() {
     return /* css */`
       <style>
@@ -555,13 +554,43 @@ export default class AuthorWrapper extends HTMLElement {
           .content-container > svg {
             display: inline-block;
             position: absolute;
-            top: 20px;
-            right: 15px;
+            top: 18px;
+            right: 5px;
             color: var(--gray-color);
-            cursor: pointer;
-            width: 25px;
-            height: 25px;
+            cursor: default !important;
+            width: 22px;
+            height: 22px;
             transition: all 0.5s ease;
+          }
+
+          .top > .avatar {
+            width: 40px;
+            height: 40px;
+          }
+
+          .top > .name > h4.name {
+            color: var(--text-color);
+            font-family: var(--font-read), sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+          }
+
+          .top > .name > h4.name svg {
+            color: var(--alt-color);
+            margin: 4px 0 0 0;
+            width: 15px;
+            height: 15px;
+          }
+
+          .top > .name > a.username {
+            color: var(--gray-color);
+            font-family: var(--font-mono), monospace;
+            font-size: 0.83rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            gap: 2px;
+            align-items: center;
           }
         }
       </style>

@@ -19,34 +19,34 @@
   <meta property="og:url" content="https://">
 
   <script type="module">
-    // import HeaderContainer from "./js/containers/header.container.js"
+    import HeaderContainer from "./js/containers/header.container.js"
 
-    // // Import form container
-    // import FormContainer from "./js/containers/form.container.js"
+    // Import form container
+    import FormContainer from "./js/containers/form.container.js"
 
-    // // Import elements
-    // import CustomSpan from "./js/elements/span.element.js"
+    // Import elements
+    import CustomSpan from "./js/elements/span.element.js"
 
 
-    // // Import post wrappers
-    // import QuePost from "./js/post/que.post.js";
-    // import QuickPost from "./js/post/quick.post.js";
-    // import StoryPost from "./js/post/story.post.js";
-    // import PollPost from "./js/post/poll.post.js";
+    // Import post wrappers
+    import QuePost from "./js/post/que.post.js";
+    import QuickPost from "./js/post/quick.post.js";
+    import StoryPost from "./js/post/story.post.js";
+    import PollPost from "./js/post/poll.post.js";
 
-    // customElements.define('header-container', HeaderContainer);
+    customElements.define('header-container', HeaderContainer);
 
-    // // register form container
-    // customElements.define('form-container', FormContainer);
+    // register form container
+    customElements.define('form-container', FormContainer);
 
-    // // Register post wrappers
-    // customElements.define('que-post', QuePost);
-    // customElements.define('quick-post', QuickPost);
-    // customElements.define('story-post', StoryPost);
-    // customElements.define('poll-post', PollPost);
+    // Register post wrappers
+    customElements.define('que-post', QuePost);
+    customElements.define('quick-post', QuickPost);
+    customElements.define('story-post', StoryPost);
+    customElements.define('poll-post', PollPost);
 
-    // // Register elements not as custom elements but extend HTMLElement
-    // customElements.define('custom-span', CustomSpan, { extends: 'span' });
+    // Register elements not as custom elements but extend HTMLElement
+    customElements.define('custom-span', CustomSpan, { extends: 'span' });
   </script>
 </head>
 
@@ -62,7 +62,7 @@
   <main class="test">
     <section class="content">
 
-      <!-- <story-post story="story" id="P0A43PBA" views="609" time="2024-03-13T13:00:00+03:00"
+      <story-post story="story" id="P0A43PBA" views="609" time="2024-03-13T13:00:00+03:00"
         story-title="The US Senate called on the law markers" read-time="6" author-id="U0A43PBA">
       </story-post>
 
@@ -152,17 +152,11 @@
         <p>I've been on<span class="highlight">my own for long</span>enough</p>
         <p>Maybe you can show me how to love, maybe</p>
         <p>I'm going through withdrawals</p>
-      </que-post> -->
+      </que-post>
 
     </section>
     <section class="side">
       <div class="author">
-        <!-- <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0607 6.74999L11.5303 7.28032L8.7071 10.1035C8.31657 10.4941 7.68341 10.4941 7.29288 10.1035L4.46966 7.28032L3.93933 6.74999L4.99999 5.68933L5.53032 6.21966L7.99999 8.68933L10.4697 6.21966L11 5.68933L12.0607 6.74999Z" fill="currentColor"></path>
-        </svg> -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-          <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path>
-        </svg>
         <div class="top">
           <div class="avatar">
             <img src="img/img.jpg" alt="Author name">

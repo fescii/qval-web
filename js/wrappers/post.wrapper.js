@@ -339,6 +339,13 @@ export default class PostWrapper extends HTMLElement {
 
   getMeta = () => {
     let dateObject = this.formatDateWithRelativeTime(this.getAttribute('time'))
+
+    // Get total number of views
+    let views = this.getAttribute('views');
+
+    // views format
+    views = this.numberWithCommas(views);
+
     return /* html */`
       <div class="meta">
         <span class="time">${dateObject.timeStr}</span>
@@ -346,7 +353,7 @@ export default class PostWrapper extends HTMLElement {
         <time class="published" datetime="${this.getAttribute('time')}">${dateObject.dateStr}</time>
         <span class="sp">•</span>
         <span class="views">
-          <span class="no">${this.getAttribute('views')}</span>
+          <span class="no">${views}</span>
           <span class="text">views</span>
         </span>
       </div>
@@ -663,7 +670,7 @@ export default class PostWrapper extends HTMLElement {
         font-family: var(--font-text), sans-serif;
         gap: 5px;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 600;
       }
 
       .stats.actions {
@@ -1000,6 +1007,7 @@ export default class PostWrapper extends HTMLElement {
           color: var(--text-color);
           align-items: center;
           font-family: var(--font-text), sans-serif;
+          font-size: 0.95rem;
           gap: 5px;
           font-weight: 500;
         }

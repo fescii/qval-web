@@ -34,7 +34,11 @@
 
     // Import wrappers
     import PostWrapper from "./js/wrappers/post.wrapper.js";
+    import PollWrapper from "./js/wrappers/poll.wrapper.js"
     import AuthorWrapper from "./js/wrappers/author.wrapper.js";
+
+    // Import elements
+    import CustomSpan from "./js/elements/span.element.js"
 
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
@@ -73,13 +77,16 @@
 
     // Register wrappers
     customElements.define('post-wrapper', PostWrapper);
+    customElements.define('poll-wrapper', PollWrapper);
     customElements.define('author-wrapper', AuthorWrapper);
+
+    // Register elements not as custom elements but extend HTMLElement
+      customElements.define('custom-span', CustomSpan, { extends: 'span' });
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
     customElements.define('person-wrapper', PersonWrapper);
     customElements.define('user-wrapper', UserWrapper);
-
 
     customElements.define('story-loader', StoryLoader);
     customElements.define('post-loader', PostLoader);
@@ -111,7 +118,7 @@
     resource-guide="/guides" resource-newsletter="/newsletter" resource-rss="/rss">
   </header-container> -->
 
-  <app-post story="opinion"  url="/p/P0A43PBA" upvotes="729" id="P0A43PBA" upvoted="true" likes="1479" opinions="3872" id="P0A43PBA" liked="false" views="4369"
+  <!-- <app-post story="opinion"  url="/p/P0A43PBA" upvotes="729" id="P0A43PBA" upvoted="true" likes="1479" opinions="3872" id="P0A43PBA" liked="false" views="4369"
     time="2022-01-03T13:00:00+03:00" author-username="U0A43PBAH6A"
     author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
      author-followers="7623" author-following="263" author-follow="false"
@@ -119,6 +126,18 @@
     I love to write about technology and software development.
     I am also passionate about open-source software and I am a contributor to various open-source projects."
     >
+  </app-post> -->
+
+
+  <app-post story="opinion" url="/p/P0A43PBA" upvotes="729" id="P0A43PBA" upvoted="true" likes="1479" opinions="3872"
+    id="P0A43PBA" liked="false" views="4369" time="2022-01-03T13:00:00+03:00"
+    voted="false" selected="null" end-time="2024-05-30T23:56:23+03:00"
+    options='[{"name":"java","text":"Java","votes":367},{"name":"python","text":"Python","votes":986},{"name":"javascript","text":"JavaScript","votes":879},{"name":"csharp","text":"C#","votes":117}]'
+    author-username="U0A43PBAH6A"
+    author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
+    author-following="263" author-follow="false" author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+      I love to write about technology and software development.
+      I am also passionate about open-source software and I am a contributor to various open-source projects.">
   </app-post>
 
   <!-- <footer class="footer">
@@ -170,123 +189,6 @@
       </div>
     </div>
   </footer> -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const stickyPositions = document.querySelectorAll('#sticky-position');
-      window.addEventListener('scroll', () => {
-        if (stickyPositions) {
-          stickyPositions.forEach(stickyPosition => {
-            const positionRect = stickyPosition.getBoundingClientRect();
-            if (positionRect.top <= 70) {
-              stickyPosition.classList.add('sticky');
-            }
-            else {
-              stickyPosition.classList.remove('sticky');
-            }
-          })
-        }
-      })
-
-      const replyTextarea = document.querySelector('textarea#reply');
-      if (replyTextarea) {
-        replyTextarea.addEventListener('input', () => {
-          replyTextarea.style.height = 'auto';
-          const height = replyTextarea.scrollHeight;
-          if (height <= 60) {
-            replyTextarea.style.height = `38px`;
-          }
-          else if (height <= 100) {
-            replyTextarea.style.height = `${height + 10}px`;
-          }
-          else {
-            replyTextarea.style.height = `100px`;
-          }
-        });
-      }
-
-
-      // Mobile Switcher
-      const mobileCheckbox = document.querySelector('header.header .nav input.nav-input');
-      const mobileOptions = document.querySelector('header.header ul.left');
-
-      if (mobileCheckbox && mobileOptions) {
-        mobileCheckbox.addEventListener('change', (event) => {
-          if (event.currentTarget.checked) {
-            // console.log(mobileOptions);
-            mobileOptions.style.setProperty('left', 0);
-          }
-          else {
-            mobileOptions.style.setProperty('left', '-115%');
-          }
-        })
-      }
-
-      const mql = window.matchMedia('(max-width: 600px)');
-
-      if (mql.matches) {
-        const expandableHeaderLinks = document.querySelectorAll('header.header > ul > li.link.options-link');
-        let activeLink = document.querySelector('header.header > ul > li.link.options-link.active');
-        if (expandableHeaderLinks) {
-          expandableHeaderLinks.forEach(link => {
-            // const options = link.querySelector('div.drop-down');
-            link.addEventListener('click', event => {
-              // event.preventDefault();
-
-              if (activeLink) {
-                if (activeLink.dataset.name !== link.dataset.name) {
-                  activeLink.classList.remove('active');
-                }
-              }
-
-              let isActive = event.target.classList.contains('active');
-
-              // console.log(isActive);
-              link.classList.toggle('active');
-              activeLink = link;
-            })
-          });
-        }
-
-        const articleInfo = document.querySelector('main.main > section.side');
-        const footerBtn = document.querySelector(' main.main > section.side > span.open-details-mobile');
-
-        if (articleInfo && footerBtn) {
-          const btnTextContent = footerBtn.querySelector('span.text');
-          footerBtn.addEventListener('click', event => {
-            event.preventDefault();
-
-            const isOpened = articleInfo.classList.contains('opened');
-
-            if (isOpened) {
-              btnTextContent.textContent = 'View details'
-              articleInfo.classList.remove('opened');
-            }
-            else {
-              btnTextContent.textContent = 'Hide details'
-              articleInfo.classList.add('opened');
-            }
-          })
-        }
-      }
-
-      // Get Theme switcher
-
-      const themeSwitcher = document.querySelector('header.header > ul > li.link.theme > .options');
-
-      if (themeSwitcher) {
-        themeSwitcher.addEventListener('click', () => {
-          if (themeSwitcher.classList.contains('dark')) {
-            themeSwitcher.classList.remove('dark');
-            themeSwitcher.classList.add('light');
-          }
-          else {
-            themeSwitcher.classList.remove('light');
-            themeSwitcher.classList.add('dark');
-          }
-        })
-      }
-    })
-  </script>
 </body>
 
 </html>
