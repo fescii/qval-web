@@ -39,13 +39,69 @@ export default class AuthorWrapper extends HTMLElement {
   }
 
   fetchContent = (contentContainer) => {
-    // const outerThis = this;
+    const outerThis = this;
     const storyLoader = this.shadowObj.querySelector('post-loader');
     const content = this.getContent();
     setTimeout(() => {
       storyLoader.remove();
       contentContainer.insertAdjacentHTML('beforeend', content);
+      outerThis.expandCollapse();
     }, 2000)
+  }
+
+  // Expand and collapse the author info
+  expandCollapse = () => {
+    // mql is a media query list
+    const mql = window.matchMedia('(max-width: 660px)');
+
+    // check if the screen is mobile
+    if (mql.matches) {
+      const contentContainer = this.shadowObj.querySelector('div.content-container');
+      const svg = this.shadowObj.querySelector('svg');
+
+      // check if the content container and svg exist
+      if (contentContainer && svg) {
+
+        // Select bio, stats, and actions
+        const bio = this.shadowObj.querySelector('.bio');
+        const stats = this.shadowObj.querySelector('.stats');
+        const actions = this.shadowObj.querySelector('.actions');
+
+        if (bio && stats && actions) {
+
+          // Add event listener to the svg
+          svg.addEventListener('click', () => {
+            // if the content container is expanded, collapse it
+            if (contentContainer.dataset.expanded === 'false') {
+              // add gap to the content container
+              contentContainer.style.gap = '8px';
+
+              // Set the height to max for bio, stats, and actions
+              stats.style.setProperty('max-height', 'max-content');
+              bio.style.setProperty('max-height', 'max-content');
+              actions.style.setProperty('max-height', 'max-content');
+
+              // Collapse the content container
+              svg.style.transform = 'rotate(180deg)';
+              contentContainer.dataset.expanded = 'true';
+            }
+            else {
+              // Remove gap from the content container
+              contentContainer.style.gap = '0';
+
+              // Set the height to 0 for bio, stats, and actions
+              actions.style.setProperty('max-height', '0');
+              bio.style.setProperty('max-height', '0');
+              stats.style.setProperty('max-height', '0');
+
+              // Expand the content container
+              svg.style.transform = 'rotate(0deg)';
+              contentContainer.dataset.expanded = 'false';
+            }
+          })
+        }
+      }
+    }
   }
 
   formatNumber = n => {
@@ -96,7 +152,7 @@ export default class AuthorWrapper extends HTMLElement {
 
   getBody = () => {
     return /* html */`
-      <div class="content-container">
+      <div data-expanded="false" class="content-container">
         ${this.getLoader()}
       </div>
     `
@@ -104,11 +160,29 @@ export default class AuthorWrapper extends HTMLElement {
 
   getContent = () => {
     return /* html */`
+      ${this.getSvg()}
 		  ${this.getHeader()}
       ${this.getStats()}
       ${this.getBio()}
       ${this.getActions()}
 		`
+  }
+
+  getSvg = () => {
+    // check if screen is mobile using mql
+    const mql = window.matchMedia('(max-width: 660px)');
+
+    // check if the screen is mobile
+    if (mql.matches) {
+      return /* html */`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path>
+        </svg>
+      `
+    }
+    else {
+      return ''
+    }
   }
 
   getHeader = () => {
@@ -258,7 +332,6 @@ export default class AuthorWrapper extends HTMLElement {
           text-decoration: none;
         }
 
-
         :host {
           font-size: 16px;
           padding: 0;
@@ -270,6 +343,7 @@ export default class AuthorWrapper extends HTMLElement {
         }
 
         .content-container {
+          position: relative;
           width: 100%;
           display: flex;
           flex-flow: column;
@@ -445,7 +519,7 @@ export default class AuthorWrapper extends HTMLElement {
             display: flex;
             flex-flow: column;
             align-items: start;
-            gap: 8px;
+            gap: 0;
             transition: all 0.3s ease;
             -webkit-transition: all 0.3s ease;
             -moz-transition: all 0.3s ease;
@@ -453,6 +527,15 @@ export default class AuthorWrapper extends HTMLElement {
             -o-transition: all 0.3s ease;
           }
 
+          .content-container > .stats,
+          .content-container > .bio,
+          .content-container > .actions {
+            transition: all 0.5s ease;
+            max-height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+          }
 
           ::-webkit-scrollbar {
             -webkit-appearance: none;
@@ -469,7 +552,7 @@ export default class AuthorWrapper extends HTMLElement {
             cursor: default !important;
           }
 
-          :host > svg {
+          .content-container > svg {
             display: inline-block;
             position: absolute;
             top: 20px;
@@ -478,6 +561,7 @@ export default class AuthorWrapper extends HTMLElement {
             cursor: pointer;
             width: 25px;
             height: 25px;
+            transition: all 0.5s ease;
           }
         }
       </style>

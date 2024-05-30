@@ -193,13 +193,14 @@ export default class AppPost extends HTMLElement {
         .top h3 {
           margin: 0;
           font-family: var(--font-main), sans-serif;
-          font-size: 1.1rem;
+          font-size: 1.2rem;
           font-weight: 600;
         }
 
         .top svg {
-          width: 20px;
-          height: 20px;
+          cursor: pointer;
+          width: 23px;
+          height: 23px;
         }
 
         .feeds {

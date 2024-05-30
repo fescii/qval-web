@@ -141,32 +141,13 @@ section.content {
 }
 
 .author {
-  border-top: var(--story-border-mobile);
-  border-bottom: var(--story-border-mobile);
-  position: relative;
-  padding: 10px 0;
+  /* border: 1px solid #53595f; */
+  padding: 0;
   width: 100%;
-  max-height: max-content;
   display: flex;
   flex-flow: column;
   align-items: start;
   gap: 8px;
-  transition: all 0.3s ease;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-}
-
-
-.author > svg {
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  color: var(--gray-color);
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
 }
 
 .author > .top {
@@ -251,7 +232,7 @@ section.content {
 .author > .stats {
   /* border: 1px solid #53595f; */
   color: var(--gray-color);
-  display: none;
+  display: flex;
   width: 100%;
   flex-flow: row;
   align-items: center;
@@ -283,7 +264,7 @@ section.content {
 
 .author > .bio {
   /* border: 1px solid #53595f; */
-  display: none;
+  display: flex;
   flex-flow: column;
   gap: 5px;
   color: var(--text-color);
@@ -299,7 +280,7 @@ section.content {
 
 .author > .actions {
   /* border: 1px solid #53595f; */
-  display: none;
+  display: flex;
   width: 100%;
   flex-flow: row;
   align-items: center;

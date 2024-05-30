@@ -982,6 +982,10 @@ export default class PostWrapper extends HTMLElement {
       }
 
       @media screen and (max-width: 660px) {
+        :host {
+          margin: 0 0 15px;
+        }
+
         ::-webkit-scrollbar {
           -webkit-appearance: none;
         }
