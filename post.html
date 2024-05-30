@@ -32,9 +32,12 @@
     import HeaderContainer from "./js/containers/header.container.js"
     import StoryBody from "./js/story.body.js";
 
+    // Import wrappers
+    import PostWrapper from "./js/wrappers/post.wrapper.js";
+    import AuthorWrapper from "./js/wrappers/author.wrapper.js";
+
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
-    import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PersonWrapper from "./js/author.component.js";
     import UserWrapper from "./js/person.component.js"
 
@@ -67,9 +70,13 @@
     customElements.define('header-container', HeaderContainer);
     customElements.define('story-body', StoryBody);
 
+
+    // Register wrappers
+    customElements.define('post-wrapper', PostWrapper);
+    customElements.define('author-wrapper', AuthorWrapper);
+
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('post-wrapper', PostWrapper);
     customElements.define('person-wrapper', PersonWrapper);
     customElements.define('user-wrapper', UserWrapper);
 
@@ -105,10 +112,12 @@
   </header-container>
 
   <app-post story="opinion"  url="/p/P0A43PBA" upvotes="729" id="P0A43PBA" upvoted="true" likes="1479" opinions="3872" id="P0A43PBA" liked="false" views="4369"
-    time="2022-01-03T13:00:00+03:00" author-id="U0A43PBA"
+    time="2022-01-03T13:00:00+03:00" author-username="U0A43PBAH6A"
     author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
-    author-bio="Student At The East African University" author-followers="23" following="true"
-    author-about="I am a student at the East African University. I am a software developer and a tech enthusiast."
+     author-followers="7623" author-following="263" author-follow="false"
+    author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+    I love to write about technology and software development.
+    I am also passionate about open-source software and I am a contributor to various open-source projects."
     >
   </app-post>
 

@@ -21,34 +21,34 @@
     content="https://">
 
   <script type="module">
-    import HeaderContainer from "./js/containers/header.container.js"
+    // import HeaderContainer from "./js/containers/header.container.js"
 
-    // Import form container
-    import FormContainer from "./js/containers/form.container.js"
+    // // Import form container
+    // import FormContainer from "./js/containers/form.container.js"
 
-    // Import elements
-    import CustomSpan from "./js/elements/span.element.js"
+    // // Import elements
+    // import CustomSpan from "./js/elements/span.element.js"
 
 
-    // Import post wrappers
-    import QuePost from "./js/post/que.post.js";
-    import QuickPost from "./js/post/quick.post.js";
-    import StoryPost from "./js/post/story.post.js";
-    import PollPost from "./js/post/poll.post.js";
+    // // Import post wrappers
+    // import QuePost from "./js/post/que.post.js";
+    // import QuickPost from "./js/post/quick.post.js";
+    // import StoryPost from "./js/post/story.post.js";
+    // import PollPost from "./js/post/poll.post.js";
 
-    customElements.define('header-container', HeaderContainer);
+    // customElements.define('header-container', HeaderContainer);
 
-    // register form container
-    customElements.define('form-container', FormContainer);
+    // // register form container
+    // customElements.define('form-container', FormContainer);
 
-    // Register post wrappers
-    customElements.define('que-post', QuePost);
-    customElements.define('quick-post', QuickPost);
-    customElements.define('story-post', StoryPost);
-    customElements.define('poll-post', PollPost);
+    // // Register post wrappers
+    // customElements.define('que-post', QuePost);
+    // customElements.define('quick-post', QuickPost);
+    // customElements.define('story-post', StoryPost);
+    // customElements.define('poll-post', PollPost);
 
-    // Register elements not as custom elements but extend HTMLElement
-    customElements.define('custom-span', CustomSpan, { extends: 'span' });
+    // // Register elements not as custom elements but extend HTMLElement
+    // customElements.define('custom-span', CustomSpan, { extends: 'span' });
   </script>
 </head>
 
@@ -64,7 +64,7 @@
   <main class="test">
     <section class="content">
 
-      <story-post story="story" id="P0A43PBA" views="609" time="2024-03-13T13:00:00+03:00"
+      <!-- <story-post story="story" id="P0A43PBA" views="609" time="2024-03-13T13:00:00+03:00"
         story-title="The US Senate called on the law markers" read-time="6" author-id="U0A43PBA">
       </story-post>
 
@@ -154,11 +154,50 @@
         <p>I've been on<span class="highlight">my own for long</span>enough</p>
         <p>Maybe you can show me how to love, maybe</p>
         <p>I'm going through withdrawals</p>
-      </que-post>
+      </que-post> -->
 
     </section>
     <section class="side">
-      side
+      <div class="author">
+        <div class="top">
+          <div class="avatar">
+            <img src="img/img.jpg" alt="Author name">
+          </div>
+          <div class="name">
+            <h4 class="name">
+              <span class="name">Fredrick Ochieng</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+              </svg>
+            </h4>
+            <a href="" class="username">
+              <span class="text">U0AB236B6CH9</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="stats">
+          <span class="stat">
+            <span class="number">1,234</span>
+            <span class="label">Followers</span>
+          </span>
+          <span class="sp">•</span>
+          <span class="stat">
+            <span class="number">1,234</span>
+            <span class="label">Following</span>
+          </span>
+        </div>
+        <div class="bio">
+          <p>I am a software developer and a tech enthusiast. I love to write about technology and share my knowledge
+            with the world.</p>
+          <p> Also a fan of open source and a contributor to various open source projects.</p>
+        </div>
+        <div class="actions">
+          <a href="" class="action follow">Follow</a>
+        </div>
+      </div>
     </section>
   </main>
 
