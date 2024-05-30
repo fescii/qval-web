@@ -219,234 +219,268 @@ export default class AuthorWrapper extends HTMLElement {
 
   getStyles() {
     return /* css */`
-    <style>
-      *,
-      *:after,
-      *:before {
-        box-sizing: border-box !important;
-        font-family: inherit;
-        -webkit-box-sizing: border-box !important;
-      }
+      <style>
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box !important;
+          font-family: inherit;
+          -webkit-box-sizing: border-box !important;
+        }
 
-      *:focus {
-        outline: inherit !important;
-      }
+        *:focus {
+          outline: inherit !important;
+        }
 
-      *::-webkit-scrollbar {
-        -webkit-appearance: none;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-      }
-
-      p,
-      ul,
-      ol {
-        padding: 0;
-        margin: 0;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-
-      :host {
-        font-size: 16px;
-        padding: 0;
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        align-items: start;
-        gap: 0px;
-      }
-
-      .content-container {
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        align-items: start;
-        gap: 8px;
-      }
-
-      .top {
-        display: flex;
-        width: 100%;
-        flex-flow: row;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .top > .avatar {
-        width: 45px;
-        height: 45px;
-        overflow: hidden;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-      }
-
-      .top > .avatar > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .top > .name {
-        display: flex;
-        justify-content: center;
-        flex-flow: column;
-        gap: 0;
-      }
-
-      .top > .name > h4.name {
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: var(--text-color);
-        font-family: var(--font-text), sans-serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-      }
-
-      .top > .name > h4.name svg {
-        color: var(--alt-color);
-        margin: 5px 0 0 0;
-      }
-
-      .top > .name > a.username {
-        color: var(--gray-color);
-        font-family: var(--font-mono), monospace;
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-decoration: none;
-        display: flex;
-        gap: 2px;
-        align-items: center;
-      }
-
-      .top > .name > a.username svg {
-        color: var(--gray-color);
-        width: 15px;
-        height: 15px;
-        margin: 3px 0 0 0;
-      }
-
-      .top > .name > a.username:hover {
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .top > .name > a.username:hover svg {
-        color: var(--accent-color);
-      }
-
-      .stats {
-        color: var(--gray-color);
-        display: flex;
-        width: 100%;
-        flex-flow: row;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .stats > .stat {
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .stats > .stat > .label {
-        color: var(--gray-color);
-        font-family: var(--font-main), sans-serif;
-        text-transform: lowercase;
-        font-size: 1rem;
-        font-weight: 400;
-      }
-
-      .stats > .stat > .number {
-        color: var(--text-color);
-        font-family: var(--font-main), sans-serif;
-        font-size: 0.84rem;
-        font-weight: 500;
-      }
-
-      .bio {
-        display: flex;
-        flex-flow: column;
-        gap: 5px;
-        color: var(--text-color);
-        font-family: var(--font-text), sans-serif;
-        font-size: 1rem;
-        line-height: 1.4;
-        font-weight: 400;
-      }
-
-      .bio > p {
-        all: inherit;
-      }
-
-      .actions {
-        display: flex;
-        width: 100%;
-        flex-flow: row;
-        align-items: center;
-        gap: 10px;
-        margin: 10px 0;
-      }
-
-      .actions > a.action {
-        border: var(--action-border);
-        text-decoration: none;
-        display: flex;
-        width: 100%;
-        flex-flow: row;
-        align-items: center;
-        justify-content: center;
-        padding: 5px 20px;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        color: var(--text-color);
-        -ms-border-radius: 10px;
-        -o-border-radius: 10px;
-      }
-
-      .actions > a.action.follow {
-        border: none;
-        background: var(--accent-linear);
-        color: var(--white-color);
-      }
-
-      @media screen and (max-width: 660px) {
-        ::-webkit-scrollbar {
+        *::-webkit-scrollbar {
           -webkit-appearance: none;
         }
 
-        a,
-        .stats > .stat {
-          cursor: default !important;
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
         }
 
-        a,
-        span.stat,
-        span.action {
-          cursor: default !important;
+        p,
+        ul,
+        ol {
+          padding: 0;
+          margin: 0;
         }
-      }
-    </style>
+
+        a {
+          text-decoration: none;
+        }
+
+
+        :host {
+          font-size: 16px;
+          padding: 0;
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          align-items: start;
+          gap: 0px;
+        }
+
+        .content-container {
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          align-items: start;
+          gap: 8px;
+        }
+
+        .content-container > svg {
+          display: none;
+        }
+
+        .top {
+          display: flex;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .top > .avatar {
+          width: 45px;
+          height: 45px;
+          overflow: hidden;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+        }
+
+        .top > .avatar > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .top > .name {
+          display: flex;
+          justify-content: center;
+          flex-flow: column;
+          gap: 0;
+        }
+
+        .top > .name > h4.name {
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: var(--text-color);
+          font-family: var(--font-text), sans-serif;
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+
+        .top > .name > h4.name svg {
+          color: var(--alt-color);
+          margin: 5px 0 0 0;
+        }
+
+        .top > .name > a.username {
+          color: var(--gray-color);
+          font-family: var(--font-mono), monospace;
+          font-size: 0.9rem;
+          font-weight: 500;
+          text-decoration: none;
+          display: flex;
+          gap: 2px;
+          align-items: center;
+        }
+
+        .top > .name > a.username svg {
+          color: var(--gray-color);
+          width: 15px;
+          height: 15px;
+          margin: 3px 0 0 0;
+        }
+
+        .top > .name > a.username:hover {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .top > .name > a.username:hover svg {
+          color: var(--accent-color);
+        }
+
+        .stats {
+          color: var(--gray-color);
+          display: flex;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .stats > .stat {
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .stats > .stat > .label {
+          color: var(--gray-color);
+          font-family: var(--font-main), sans-serif;
+          text-transform: lowercase;
+          font-size: 1rem;
+          font-weight: 400;
+        }
+
+        .stats > .stat > .number {
+          color: var(--text-color);
+          font-family: var(--font-main), sans-serif;
+          font-size: 0.84rem;
+          font-weight: 500;
+        }
+
+        .bio {
+          display: flex;
+          flex-flow: column;
+          gap: 5px;
+          color: var(--text-color);
+          font-family: var(--font-text), sans-serif;
+          font-size: 1rem;
+          line-height: 1.4;
+          font-weight: 400;
+        }
+
+        .bio > p {
+          all: inherit;
+        }
+
+        .actions {
+          display: flex;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          gap: 10px;
+          margin: 10px 0;
+        }
+
+        .actions > a.action {
+          border: var(--action-border);
+          text-decoration: none;
+          display: flex;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          justify-content: center;
+          padding: 5px 20px;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          color: var(--text-color);
+          -ms-border-radius: 10px;
+          -o-border-radius: 10px;
+        }
+
+        .actions > a.action.follow {
+          border: none;
+          background: var(--accent-linear);
+          color: var(--white-color);
+        }
+
+        @media screen and (max-width: 660px) {
+          .content-container {
+            border-top: var(--story-border-mobile);
+            border-bottom: var(--story-border-mobile);
+            position: relative;
+            padding: 10px 0;
+            width: 100%;
+            max-height: max-content;
+            display: flex;
+            flex-flow: column;
+            align-items: start;
+            gap: 8px;
+            transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+          }
+
+
+          ::-webkit-scrollbar {
+            -webkit-appearance: none;
+          }
+
+          a,
+          .stats > .stat {
+            cursor: default !important;
+          }
+
+          a,
+          span.stat,
+          span.action {
+            cursor: default !important;
+          }
+
+          :host > svg {
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            color: var(--gray-color);
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+          }
+        }
+      </style>
     `;
   }
 }

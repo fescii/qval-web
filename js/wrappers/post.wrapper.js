@@ -337,19 +337,6 @@ export default class PostWrapper extends HTMLElement {
     `;
   }
 
-  getHeader = () => {
-    return /* html */ `
-      <div class="head top">
-        <div class="author">
-          <span class="sp">by</span>
-          <div class="author-name">
-            <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
-          </div>
-        </div>
-      </div>
-    `
-  }
-
   getMeta = () => {
     let dateObject = this.formatDateWithRelativeTime(this.getAttribute('time'))
     return /* html */`
@@ -534,7 +521,6 @@ export default class PostWrapper extends HTMLElement {
 
   getFull() {
     return `
-      ${this.getHeader()}
       ${this.getContent()}
       ${this.getMeta()}
       ${this.getStats()}
@@ -591,7 +577,6 @@ export default class PostWrapper extends HTMLElement {
         text-decoration: none;
       }
 
-
       :host {
         font-size: 16px;
         /* border: 1px solid #6b7280;*/
@@ -608,45 +593,6 @@ export default class PostWrapper extends HTMLElement {
         gap: 0;
         width: 100%;
         height: max-content;
-      }
-
-      .head.top {
-        height: 25px;
-        display: flex;
-        position: relative;
-        color: var(--gray-color);
-        align-items: center;
-        font-family: var(--font-mono), monospace;
-        gap: 20px;
-        font-size: 0.9rem;
-      }
-
-      .head > .author {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .head div.author-name {
-        display: flex;
-        align-items: center;
-      }
-
-      .head div.author-name>a {
-        text-decoration: none;
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .head a.opinion-link {
-        text-decoration: none;
-        color: transparent;
-        background-image: var(--alt-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
       }
 
       .content {

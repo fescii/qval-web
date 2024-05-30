@@ -951,7 +951,6 @@ export default class HeaderContainer extends HTMLElement {
         -o-transition: all 300ms ease-in-out;
       }
 
-
       ul > li.link.active span.link-item svg,
       ul > li.link:hover span.link-item svg {
         rotate: 180deg;
