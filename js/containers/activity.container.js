@@ -99,14 +99,22 @@ export default class ActivityContainer extends HTMLElement {
   }
 
   getHeader = () => {
-    return /* html */`
-      <div class="top">
-        <h4 class="title">Your activity</h4>
-        <p class="desc">
-          Your activity is a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
-        </p>
-      </div>
-    `;
+    // mql
+    const mql = window.matchMedia('(max-width: 660px)');
+
+    // check if the media query is true
+    if (!mql.matches) {
+      return /* html */`
+        <div class="top">
+          <h4 class="title">Your activity</h4>
+          <p class="desc">
+            Your activity is a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+          </p>
+        </div>
+      `;
+    }
+
+    return '';
   }
 
   getTab = () => {
@@ -235,7 +243,7 @@ export default class ActivityContainer extends HTMLElement {
         .actions > ul.tab {
           height: max-content;
           width: 100%;
-          padding: 5px 0 0 0;
+          padding: 0;
           margin: 0;
           list-style-type: none;
           display: flex;
@@ -330,6 +338,11 @@ export default class ActivityContainer extends HTMLElement {
             font-size: 1rem;
             line-height: 1.5;
             font-family: var(--font-read), sans-serif;
+          }
+
+          .actions {
+            position: sticky;
+            top: 50px;
           }
         }
       </style>

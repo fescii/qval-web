@@ -43,13 +43,10 @@ export default class FormPassword extends HTMLElement {
   }
 
   getBody = () => {
+    const mql = window.matchMedia('(max-width: 600px)');
+
     return /* html */`
-      <div class="top">
-        <h4 class="title">Your password</h4>
-        <p class="desc">
-          Your password is how you will log in to your account. You can change your password using the form below. You're required to enter your current password, then your new password.
-        </p>
-      </div>
+      ${this.getHeader(mql)}
       <form class="fields password" id="password-form">
         <div class="field password">
           <div class="input-group current-password">
@@ -75,6 +72,21 @@ export default class FormPassword extends HTMLElement {
         </div>
       </form>
     `;
+  }
+
+  getHeader = mql => {
+    if (!mql.matches) {
+      return /* html */`
+        <div class="top">
+          <h4 class="title">Your password</h4>
+          <p class="desc">
+            Your password is how you will log in to your account. You can change your password using the form below. You're required to enter your current password, then your new password.
+          </p>
+        </div>
+      `;
+    }
+
+    return '';
   }
 
   getStyles() {

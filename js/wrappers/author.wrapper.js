@@ -186,6 +186,12 @@ export default class AuthorWrapper extends HTMLElement {
   }
 
   getHeader = () => {
+    // Get name and check if it's greater than 20 characters
+    const name = this.getAttribute('name');
+
+    // Check if the name is greater than 20 characters: replace the rest with ...
+    let displayName = name.length > 20 ? `${name.substring(0, 20)}..` : name;
+
     return /* html */ `
       <div class="top">
         <div class="avatar">
@@ -193,7 +199,7 @@ export default class AuthorWrapper extends HTMLElement {
         </div>
         <div class="name">
           <h4 class="name">
-            <span class="name">${this.getAttribute('name')}</span>
+            <span class="name">${displayName}</span>
             ${this.checkVerified(this.getAttribute('verified'))}
           </h4>
           <a href="${this.getAttribute('url')}" class="username">

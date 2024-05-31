@@ -5,6 +5,8 @@ export default class AppUser extends HTMLElement {
 
     this._status = true;
 
+    this._current = this.getAttribute('current');
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -21,18 +23,28 @@ export default class AppUser extends HTMLElement {
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 660px)');
 
+    // Watch for media query changes
+    this.watchMediaQuery(mql);
+
     // Select the tab container and content container
     const current = this.getAttribute('current');
     const tabContainer = this.shadowObj.querySelector('section.tab');
     const contentContainer = this.shadowObj.querySelector('section.content');
 
+    // get tab where class is this._current
+    const currentTab = tabContainer.querySelector(`li.${current}`);
+
+    if (currentTab) {
+      this.updateCurrentText(currentTab);
+    }
+
     // Select section top and back button
     const top = this.shadowObj.querySelector('section.top');
-    const back = this.shadowObj.querySelector('section.back');
+    const back = this.shadowObj.querySelector('div.top-nav');
 
 
     // Populate the current tab
-    if (current, tabContainer, contentContainer, top, back) {
+    if (current && tabContainer && contentContainer) {
       this.populateCurrent(mql.matches, current, tabContainer, contentContainer);
     }
 
@@ -53,6 +65,11 @@ export default class AppUser extends HTMLElement {
 
                 //Update status
                 this._status = false;
+
+                // Update current attribute
+                this.setAttribute('current', tab.dataset.name);
+
+                this.updateCurrentText(tab)
 
                 // Remove all child elements of the content container
                 // Except the section elements
@@ -80,7 +97,10 @@ export default class AppUser extends HTMLElement {
 
                   // Set back to display flex and top to display none
                   top.style.display = 'none';
-                  back.style.display = 'flex';
+
+                  if (back) {
+                    back.style.display = 'flex';
+                  }
 
                   // Select all child elements of the content container and display flex
                   // except the section elements
@@ -102,7 +122,10 @@ export default class AppUser extends HTMLElement {
 
                 // Set back to display flex and top to display none
                 top.style.display = 'none';
-                back.style.display = 'flex';
+
+                if (back) {
+                  back.style.display = 'flex';
+                }
 
                 // Select all child elements of the content container and display flex
                 const children = contentContainer.children;
@@ -119,38 +142,38 @@ export default class AppUser extends HTMLElement {
         })
       })
 
+      if (back) {
+        // Add event listener to back button
+        const backBtn = back.querySelector('svg.top-back-btn');
+        if (backBtn) {
+          backBtn.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
 
-      // Add event listener to back button
-      const backBtn = back.querySelector('.back-btn');
-      if (backBtn) {
-        backBtn.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
+            // Check if this is mobile view
+            if (mql.matches) {
 
-          // Check if this is mobile view
-          if (mql.matches) {
-
-            // Set the top to display flex and back to display none
-            top.style.display = 'flex';
-            back.style.display = 'none';
+              // Set the top to display flex and back to display none
+              top.style.display = 'flex';
+              back.style.display = 'none';
 
 
-            // Select all child elements of the content container and display none
-            // only ones which are not section elements
-            const children = contentContainer.children;
-            if (children) {
-              for (let i = 0; i < children.length; i++) {
-                if (children[i].tagName !== 'SECTION') {
-                  children[i].style.display = 'none';
+              // Select all child elements of the content container and display none
+              // only ones which are not section elements
+              const children = contentContainer.children;
+              if (children) {
+                for (let i = 0; i < children.length; i++) {
+                  if (children[i].tagName !== 'SECTION') {
+                    children[i].style.display = 'none';
+                  }
                 }
               }
+
+              tabContainer.style.display = 'flex';
             }
-
-            tabContainer.style.display = 'flex';
-          }
-        })
+          })
+        }
       }
-
 
       // Update state on window.onpopstate
       window.onpopstate = event => {
@@ -170,6 +193,11 @@ export default class AppUser extends HTMLElement {
 
               //Update status
               this._status = false;
+
+              // Update current attribute
+              this.setAttribute('current', tab.dataset.name);
+
+              this.updateCurrentText(tab);
 
               tab.classList.add('active');
               activeTab = tab;
@@ -229,6 +257,39 @@ export default class AppUser extends HTMLElement {
           }
         }
       };
+
+      // Select svg.header-back-btn
+      const headerBackBtn = this.shadowObj.querySelector('svg.header-back-btn');
+      if (headerBackBtn) {
+        // handle click to navigate through the history state
+        headerBackBtn.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Check if this is mobile view
+          if (mql.matches) {
+            // Set the top to display flex and back to display none
+            top.style.display = 'flex';
+            back.style.display = 'none';
+
+            // Select all child elements of the content container and display none
+            // only ones which are not section elements
+            const children = contentContainer.children;
+            if (children) {
+              for (let i = 0; i < children.length; i++) {
+                if (children[i].tagName !== 'SECTION') {
+                  children[i].style.display = 'none';
+                }
+              }
+            }
+
+            tabContainer.style.display = 'flex';
+          }
+
+          // Navigate to the previous page
+          window.history.back();
+        })
+      }
     }
   }
 
@@ -239,6 +300,29 @@ export default class AppUser extends HTMLElement {
 
   updatePage = content => {
     pageContainer.innerHTML = content
+  }
+
+  // watch for mql changes
+  watchMediaQuery = mql => {
+    mql.addEventListener('change', () => {
+
+      this.render();
+    });
+  }
+
+  // Update current
+  updateCurrentText = tab => {
+    // Select the top h3
+    const top = this.shadowObj.querySelector('.top-nav > h3.name');
+
+    // Get the span.text from tab
+    const text = tab.querySelector('span.text');
+
+    // console.log(top);
+
+    if (top && text) {
+      top.textContent = text.textContent;
+    }
   }
 
   disableScroll() {
@@ -409,9 +493,9 @@ export default class AppUser extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
-      ${this.getHeader()}
       <main class="profile">
         <section class="content">
+          ${this.getTop()}
           ${this.getTab()}
           ${this.getLoader()}
         </section>
@@ -432,33 +516,59 @@ export default class AppUser extends HTMLElement {
   }
 
   getHeader = () => {
+
+    // Get name and check if it's greater than 20 characters
+    const name = this.getAttribute('user-name');
+
+    // Check if the name is greater than 20 characters: replace the rest with ...
+    let displayName =  name.length > 18 ? `${name.substring(0, 18)}..` : name;
+
+
     return /* html */`
       <section class="top">
+        <svg class="header-back-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
+        </svg>
         <div class="profile">
           <img src="${this.getAttribute('user-image')}" alt="profile image" class="profile-image">
         </div>
-        <div class="info">
+        <div class="name">
           <h4 class="name">
-            <a href="/u/${this.getAttribute('user-hash')}">
-              <span class="text">${this.getAttribute('user-name')}</span>
-              <span class="username">(${this.getAttribute('user-hash')})</span>
-            </a>
+            <span class="name">${displayName}</span>
+            ${this.checkVerified(this.getAttribute('verified'))}
           </h4>
-          <div class="foot">
-            <span>Your account</span>
-            <span class="sp">•</span>
-            <span class="since">${this.getDate(this.getAttribute('date-joined'))}</span>
-          </div>
+          <a href="${this.getAttribute('user-url')}" class="username">
+            <span class="text">${this.getAttribute('user-hash')}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
+            </svg>
+          </a>
         </div>
       </section>
-      <section class="back">
-        <div class="back-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-            <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
-          </svg>
-          <span class="text">Back</span>
-        </div>
-      </section>
+    `
+  }
+
+  checkVerified = verified => {
+    if (verified === 'true') {
+      return /*html*/`
+			  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+          <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+        </svg>
+			`
+    }
+    else {
+      return ''
+    }
+  }
+
+  getTop = () => {
+    return /* html */ `
+      <div class="top-nav">
+        <svg class="top-back-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
+        </svg>
+        <h3 class="name">Settings</h3>
+      </div>
     `
   }
 
@@ -605,9 +715,21 @@ export default class AppUser extends HTMLElement {
     `
   }
 
+  checkHeaderMobile = mql => {
+    if (mql.matches) {
+      return this.getHeader();
+    }
+
+    return '';
+  }
+
   getTab = () =>  {
+    // Check if the header is mobile
+    const mql = window.matchMedia('(max-width: 660px)');
+
     return /* html */`
       <section class="tab">
+        ${this.checkHeaderMobile(mql)}
         <ul class="tab public">
           <li url="/user/stats" class="tab-item stats" data-name="stats">
             <span class="line"></span>
@@ -805,6 +927,43 @@ export default class AppUser extends HTMLElement {
           gap: 0px;
         }
 
+        .top-nav {
+          border-bottom: var(--story-border);
+          color: var(--title-color);
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          background-color: var(--background);
+          padding: 0;
+          gap: 0;
+          max-height: 50px;
+          min-height: 50px;
+          margin: 0 0 5px;
+          gap: 0;
+          width: 100%;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+        }
+
+        .top-nav h3 {
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          margin: 0;
+          padding: 0;
+          font-family: var(--font-main), sans-serif;
+          font-size: 1.2rem;
+          font-weight: 600;
+        }
+
+        .top-nav svg {
+          cursor: pointer;
+          width: 35px;
+          height: 35px;
+          margin: 0 0 0 -8px;
+        }
+
         #loader-container {
           position: absolute;
           top: 0;
@@ -845,20 +1004,36 @@ export default class AppUser extends HTMLElement {
         section.top {
           /* border-bottom: var(--story-border); */
           display: flex;
+          background-color: var(--background);
           width: 100%;
-          gap: 5px;
-          padding: 0 0 10px 0;
-          margin: 10px 0 0 0;
+          gap: 0;
+          padding: 7px 0;
+          height: 64px;
+          max-height: 64px;
+          margin: 0;
           display: flex;
           align-items: center;
+          z-index: 100;
+          position: sticky;
+          top: 0;
+        }
+
+        section.top > svg {
+          cursor: pointer;
+          color: var(--title-color);
+          width: 38px;
+          height: 38px;
+          margin: 0 0 0 -5px;
         }
 
         section.top > .profile {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
+          min-width: 40px;
+          min-height: 40px;
           overflow: hidden;
           border-radius: 50%;
           -webkit-border-radius: 50%;
@@ -873,57 +1048,63 @@ export default class AppUser extends HTMLElement {
           object-fit: cover;
         }
 
-        section.top > .info {
-          /* border: var(--story-border); */
+        section.top > .name {
+          margin: 0 0 0 5px;
           display: flex;
+          justify-content: center;
           flex-flow: column;
           gap: 0;
-          font-family: var(--font-main), sans-serif;
         }
 
-        section.top > .info > .name {
-          font-size: 1rem;
-          font-weight: 600;
-        }
-
-        section.top > .info > .name > a {
-          color: var(--text-color);
-          text-decoration: none;
+        section.top > .name > h4.name {
+          margin: 0;
           display: flex;
-          gap: 5px;
           align-items: center;
-          justify-content: center;
-        }
-
-        section.top > .info > .name > a:hover {
-          text-decoration: underline;
-        }
-
-        section.top > .info > .name > a > .username {
-          color: var(--gray-color);
-          display: inline-block;
-          margin-bottom: -2px;
-          font-size: 0.8rem;
-          font-family: var(--font-mono), monospace;
+          gap: 5px;
+          color: var(--title-color);
+          font-family: var(--font-read), sans-serif;
+          font-size: 1rem;
           font-weight: 500;
         }
 
-        section.top > .info > .foot {
-          display: flex;
-          gap: 5px;
-          align-items: center;
-          color: var(--gray-color);
-          font-family: var(--font-read), sans-serif;
-          font-size: 0.95rem;
+        section.top > .name > h4.name svg {
+          color: var(--alt-color);
+          margin: 2px 0 0 0;
+          width: 15px;
+          height: 15px;
         }
 
-        section.top > .info > .foot > .since {
-          font-size: 0.9rem;
-          font-family: var(--font-read), sans-serif;
+        section.top > .name > a.username {
+          color: var(--gray-color);
+          font-family: var(--font-mono), monospace;
+          font-size: 0.8rem;
+          font-weight: 500;
+          text-decoration: none;
+          display: flex;
+          gap: 2px;
+          align-items: center;
+        }
+
+        section.top > .name > a.username svg {
+          color: var(--gray-color);
+          width: 15px;
+          height: 15px;
+          margin: 1px 0 0 0;
+        }
+
+        section.top > .name > a.username:hover {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        section.top > .name > a.username:hover svg {
+          color: var(--accent-color);
         }
 
         section.back {
-          display: none;
+          display: flex;
           width: 100%;
           gap: 0;
           padding: 0;
@@ -957,12 +1138,12 @@ export default class AppUser extends HTMLElement {
           margin: 0;
           display: flex;
           justify-content: space-between;
-          gap: 0px;
+          gap: 0;
           min-height: 60vh;
         }
 
         section.tab {
-          /* border: 1px solid #53595f; */
+          /* border: 1px solid #53595f;*/
           padding: 0;
           width: 25%;
           display: flex;
@@ -971,13 +1152,22 @@ export default class AppUser extends HTMLElement {
           height: max-content;
           position: sticky;
           top: 70px;
+          max-height: 100%;
+          overflow-y: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        section.tab::-webkit-scrollbar {
+          display: none;
+          visibility: hidden;
         }
 
         section.tab > ul.tab {
           border-top: var(--story-border-mobile);
           list-style-type: none;
           width: 100%;
-          padding: 0 5px;
+          padding: 0;
           margin: 0;
           display: flex;
           flex-flow: column;
@@ -1058,7 +1248,7 @@ export default class AppUser extends HTMLElement {
           position: relative;
           flex-flow: column;
           align-items: start;
-          padding: 0;
+          padding: ;
           gap: 35px;
           width: 70%;
         }
@@ -1123,7 +1313,17 @@ export default class AppUser extends HTMLElement {
           }
 
           section.top {
+            padding: 7px 0;
+            height: 55px;
+            max-height: 55px;
             display: none;
+          }
+
+          section.top > svg {
+            cursor: default !important;
+            width: 38px;
+            height: 38px;
+            margin: 0 0 0 -8px;
           }
 
           main.profile {
@@ -1165,7 +1365,7 @@ export default class AppUser extends HTMLElement {
             border-top: var(--story-border-mobile);
             list-style-type: none;
             width: 100%;
-            padding: 0 5px;
+            padding: 0;
             margin: 0;
             display: flex;
             flex-flow: column;

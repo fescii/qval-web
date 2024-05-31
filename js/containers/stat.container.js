@@ -151,14 +151,22 @@ export default class StatContainer extends HTMLElement {
   }
 
   getHeader = () => {
-    return /* html */`
-      <div class="top">
-        <h4 class="title">Your stats</h4>
-        <p class="desc">
-          Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
-        </p>
-      </div>
-    `;
+    // mql
+    const mql = window.matchMedia('(max-width: 660px)');
+
+    // check if the media query is true
+    if (!mql.matches) {
+      return /* html */`
+        <div class="top">
+          <h4 class="title">Your stats</h4>
+          <p class="desc">
+            Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+          </p>
+        </div>
+      `;
+    }
+
+    return '';
   }
 
   getTab = () => {
@@ -283,7 +291,7 @@ export default class StatContainer extends HTMLElement {
         .actions > ul.tab {
           height: max-content;
           width: 100%;
-          padding: 5px 0 0 0;
+          padding: 0;
           margin: 0;
           list-style-type: none;
           display: flex;
@@ -377,6 +385,11 @@ export default class StatContainer extends HTMLElement {
             font-size: 1rem;
             line-height: 1.5;
             font-family: var(--font-main), sans-serif;
+          }
+
+          .actions {
+            position: sticky;
+            top: 50px;
           }
         }
 
