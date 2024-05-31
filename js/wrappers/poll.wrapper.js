@@ -143,9 +143,9 @@ export default class PollWrapper extends HTMLElement {
 
           // update votes attribute in the selected option
           let votes = outerThis.parseToNumber(selectedOption.getAttribute('votes'));
-          console.log(votes);
+          // console.log(votes);
           selectedOption.setAttribute('votes', votes + 1);
-          console.log(selectedOption.getAttribute('votes'));
+          // console.log(selectedOption.getAttribute('votes'));
 
           // Update the selected attribute
           outerThis.setAttribute('selected', selectedOptionName);
