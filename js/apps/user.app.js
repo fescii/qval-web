@@ -18,8 +18,6 @@ export default class AppUser extends HTMLElement {
   }
 
   connectedCallback() {
-    const outerThis = this;
-
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 660px)');
 
@@ -39,15 +37,26 @@ export default class AppUser extends HTMLElement {
       this.updateCurrentText(currentTab);
     }
 
-    // Select section top and back button
-    const top = this.shadowObj.querySelector('section.top');
-    const back = this.shadowObj.querySelector('div.top-nav');
-
-
     // Populate the current tab
     if (current && tabContainer && contentContainer) {
       this.populateCurrent(mql.matches, current, tabContainer, contentContainer);
     }
+
+    // Activate the tab
+    this.activateTab(mql);
+  }
+
+  activateTab = mql => {
+    const outerThis = this;
+
+    // Select the tab container and content container
+    const current = this.getAttribute('current');
+    const tabContainer = this.shadowObj.querySelector('section.tab');
+    const contentContainer = this.shadowObj.querySelector('section.content');
+
+    // Select section top and back button
+    const top = this.shadowObj.querySelector('section.top');
+    const back = this.shadowObj.querySelector('div.top-nav');
 
     // Activate the tab
     if (tabContainer && contentContainer) {
@@ -165,7 +174,6 @@ export default class AppUser extends HTMLElement {
               // only ones which are not section elements
               const children = Array.from(contentContainer.children);
               if (children) {
-                console.log(children);
                 children.forEach(child => {
                   if (child.classList.contains('tab')) {
                     child.style.display = 'flex';
@@ -245,7 +253,7 @@ export default class AppUser extends HTMLElement {
         }
         else {
           // Remove any child elements of the content container which is not section
-          const children =  Array.from(contentContainer.children);
+          const children = Array.from(contentContainer.children);
           if (children) {
             children.forEach(child => {
               if (!child.classList.contains('remains')) {
@@ -276,7 +284,6 @@ export default class AppUser extends HTMLElement {
           // Check if this is mobile view
           if (mql.matches) {
             // Set the top to display flex and back to display none
-            top.style.display = 'flex';
             back.style.display = 'none';
 
             // Select all child elements of the content container and display none
@@ -284,13 +291,16 @@ export default class AppUser extends HTMLElement {
             const children = Array.from(contentContainer.children);
             if (children) {
               children.forEach(child => {
-                if (!child.classList.contains('tab')) {
+                if (child.classList.contains('tab')) {
                   child.style.display = 'none';
+                }
+                else {
+                  child.style.display = 'flex';
                 }
               })
             }
 
-            tabContainer.style.display = 'flex';
+            // tabContainer.style.display = 'flex';
           }
 
           // Prevent navigation to outside origin domain
@@ -324,9 +334,11 @@ export default class AppUser extends HTMLElement {
 
       const current = outerThis.getAttribute('current');
 
-      console.log(current);
       // Populate the current contents
       outerThis.populateCurrent(mql.matches, current, tabContainer, contentContainer);
+
+      // Activate the tab
+      outerThis.activateTab(mql);
     });
   }
 
@@ -412,10 +424,6 @@ export default class AppUser extends HTMLElement {
         if(loader) {
           loader.remove();
         }
-
-        console.log('Current: ', current)
-
-        console.log('Content Container: ', contentContainer)
 
         // Populate Content
         outerThis.populateContent(current, contentContainer);
@@ -1346,6 +1354,10 @@ export default class AppUser extends HTMLElement {
             height: 55px;
             max-height: 55px;
             display: none;
+          }
+
+          .top-nav svg {
+            cursor: default !important;
           }
 
           section.top > svg {
