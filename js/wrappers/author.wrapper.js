@@ -487,7 +487,7 @@ export default class AuthorWrapper extends HTMLElement {
           flex-flow: row;
           align-items: center;
           gap: 10px;
-          margin: 10px 0;
+          margin: 5px 0 10px;
         }
 
         .actions > a.action {

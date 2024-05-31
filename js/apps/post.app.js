@@ -133,7 +133,7 @@ export default class AppPost extends HTMLElement {
   }
 
   getStyles() {
-    return /* css */`
+    return /*css*/`
 	    <style>
 	      *,
 	      *:after,

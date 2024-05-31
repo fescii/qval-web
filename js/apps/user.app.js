@@ -193,6 +193,7 @@ export default class AppUser extends HTMLElement {
       // Update state on window.onpopstate
       window.onpopstate = event => {
         // This event will be triggered when the browser's back button is clicked
+
         // console.log(event.state);
         if (event.state) {
           if (event.state.page) {

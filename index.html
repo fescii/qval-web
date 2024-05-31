@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog title</title>
+  <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="res.css">
 
@@ -27,9 +28,16 @@
     import HeaderContainer from "./js/containers/header.container.js"
     import StoryBody from "./js/story.body.js";
 
+    // Import wrappers
+    import PostWrapper from "./js/wrappers/post.wrapper.js";
+    import PollWrapper from "./js/wrappers/poll.wrapper.js"
+    import AuthorWrapper from "./js/wrappers/author.wrapper.js";
+
+    // Import elements
+    import CustomSpan from "./js/elements/span.element.js"
+
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
-    import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PersonWrapper from "./js/author.component.js";
     import UserWrapper from "./js/person.component.js"
 
@@ -62,9 +70,16 @@
     customElements.define('header-container', HeaderContainer);
     customElements.define('story-body', StoryBody);
 
+    // Register wrappers
+    customElements.define('post-wrapper', PostWrapper);
+    customElements.define('poll-wrapper', PollWrapper);
+    customElements.define('author-wrapper', AuthorWrapper);
+
+    // Register elements not as custom elements but extend HTMLElement
+    customElements.define('custom-span', CustomSpan, { extends: 'span' });
+
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('post-wrapper', PostWrapper);
     customElements.define('person-wrapper', PersonWrapper);
     customElements.define('user-wrapper', UserWrapper);
 
@@ -91,22 +106,27 @@
 
 <body>
 
-  <header-container id="U0AB236B6" create-account="/join" create-content="/create"
+  <!-- <header-container id="U0AB236B6" create-account="/join" create-content="/create"
     user-profile="/u/U0AB236B6" user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics"
     stories-popular="/stories/popular" stories-recent="/stories/recent" stories-curated="/stories/curated"
     discover="/discover" home="/home" journals="/journals" authors="/authors"  github="https://github.com/fescii" supabase="/link"
     resource-apis="/apis" resource-feature="/feature-request" resource-shop="/shop" resource-guide="/guides" resource-newsletter="/newsletter"
     resource-rss="/rss"
     >
-  </header-container>
+  </header-container> -->
 
-  <app-story id="P0AB236B6" topics="engineering, programming" title="Making the Web. Faster." date="2024-03-13T13:00:00+03:00"
-    views="709" author-name="Fredrick Ochieng" author-img="img/img.jpg" author-id="U0A89BA6"
-    author-bio="Student" next-id="P0AB236B6" next-date="2024-03-13T13:00:00+03:00"
-    next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance" >
+  <app-story id="P0AB236B6" topics="engineering, programming" story-title="Making the Web. Faster." date="2024-03-13T13:00:00+03:00"
+    views="709" next-id="P0AB236B6" next-date="2024-03-13T13:00:00+03:00"
+    next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance"
+    author-username="U0A43PBAH6A"
+    author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
+    author-following="263" author-follow="false" author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+      I love to write about technology and software development.
+      I am also passionate about open-source software and I am a contributor to various open-source projects."
+    >
   </app-story>
 
-  <footer class="footer">
+  <!-- <footer class="footer">
     <section class="newsletter">
       <div class="title">Join Our Newsletter</div>
       <div class="text">
@@ -154,7 +174,7 @@
         <a href="#" id="copyright">2024 aduki,Inc</a>
       </div>
     </div>
-  </footer>
+  </footer> -->
 </body>
 
 </html>

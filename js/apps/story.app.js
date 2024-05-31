@@ -94,7 +94,7 @@ export default class AppStory extends HTMLElement {
     return `
       <div class="head">
         <span class="topic">${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}</span>
-        <h1 class="title">${this.getAttribute('title')}</h1>
+        <h1 class="title">${this.getAttribute('story-title')}</h1>
         <span class="stats">
           <span class="date">${this.getDate(this.getAttribute('date'))}</span>
           <span class="dot"></span>
@@ -276,20 +276,14 @@ export default class AppStory extends HTMLElement {
   }
 
   getAuthor = () => {
-    return `
-      <div class="posted-by">
-        <p class="text">Posted by</p>
-        <div class="author">
-          <div class="image">
-            <img src="${this.getAttribute('author-img')}" alt="${this.getAttribute('author-name')}">
-          </div>
-          <div class="name">
-            <a href="" class="name">${this.getAttribute('author-name')}</a>
-            <span class="occupation">${this.getAttribute('author-bio')}</span>
-          </div>
-        </div>
-      </div>
-    `
+    return /* html */`
+			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
+       followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
+       verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
+      >
+       ${this.getAttribute('author-bio')}
+      </author-wrapper>
+		`
   }
 
   getRelatedStories = () => {
