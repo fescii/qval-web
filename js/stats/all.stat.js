@@ -487,7 +487,7 @@ export default class AllStat extends HTMLElement {
           }
 
           :host {
-            padding-bottom: 25px;
+            border-bottom: none;
           }
 
           .content {
@@ -495,18 +495,18 @@ export default class AllStat extends HTMLElement {
             flex-flow: column;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 0;
             padding: 6px 0;
             width: 100%;
           }
 
           .content > .main {
-            border: var(--story-border-mobile);
+            border-bottom: var(--story-border-mobile);
             width: 100%;
             display: flex;
             flex-flow: column;
             gap: 0;
-            padding: 10px 5px;
+            padding: 15px 5px;
             border-radius: 5px;
           }
         }

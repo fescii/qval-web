@@ -23,13 +23,14 @@ export default class AppUser extends HTMLElement {
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 660px)');
 
-    // Watch for media query changes
-    this.watchMediaQuery(mql);
 
     // Select the tab container and content container
     const current = this.getAttribute('current');
     const tabContainer = this.shadowObj.querySelector('section.tab');
     const contentContainer = this.shadowObj.querySelector('section.content');
+
+    // Watch for media query changes
+    this.watchMediaQuery(mql)
 
     // get tab where class is this._current
     const currentTab = tabContainer.querySelector(`li.${current}`);
@@ -72,14 +73,15 @@ export default class AppUser extends HTMLElement {
                 this.updateCurrentText(tab)
 
                 // Remove all child elements of the content container
-                // Except the section elements
-                const children = contentContainer.children;
+                // Except the section element
+                const children = Array.from(contentContainer.children);
+
                 if (children) {
-                  for (let i = 0; i < children.length; i++) {
-                    if (children[i].tagName !== 'SECTION') {
-                      children[i].remove();
+                  children.forEach(child => {
+                    if (!child.classList.contains('remains')) {
+                      child.remove();
                     }
-                  }
+                  })
                 }
 
                 // Add loader
@@ -95,22 +97,22 @@ export default class AppUser extends HTMLElement {
                 if (mql.matches) {
                   tabContainer.style.display = 'none';
 
-                  // Set back to display flex and top to display none
-                  top.style.display = 'none';
-
                   if (back) {
                     back.style.display = 'flex';
                   }
 
                   // Select all child elements of the content container and display flex
                   // except the section elements
-                  const children = contentContainer.children;
+                  const children = Array.from(contentContainer.children);
                   if (children) {
-                    for (let i = 0; i < children.length; i++) {
-                      if (children[i].tagName !== 'SECTION') {
-                        children[i].style.display = 'flex';
+                    children.forEach(child => {
+                      if (child.classList.contains('tab')) {
+                        child.style.display = 'none';
                       }
-                    }
+                      else {
+                        child.style.display = 'flex';
+                      }
+                    })
                   }
                 }
               }
@@ -118,24 +120,25 @@ export default class AppUser extends HTMLElement {
             else {
               // Check if this is mobile view
               if (mql.matches) {
-                tabContainer.style.display = 'none';
-
-                // Set back to display flex and top to display none
-                top.style.display = 'none';
 
                 if (back) {
                   back.style.display = 'flex';
                 }
 
                 // Select all child elements of the content container and display flex
-                const children = contentContainer.children;
+                const children = Array.from(contentContainer.children);
                 if (children) {
-                  for (let i = 0; i < children.length; i++) {
-                    if (children[i].tagName !== 'SECTION') {
-                      children[i].style.display = 'flex';
+                  children.forEach(child => {
+                    if (child.classList.contains('.tab')) {
+                      child.style.display = 'none';
                     }
-                  }
+                    else {
+                      child.style.display = 'flex';
+                    }
+                  })
                 }
+
+                tabContainer.style.display = 'none';
               }
             }
           }
@@ -160,13 +163,17 @@ export default class AppUser extends HTMLElement {
 
               // Select all child elements of the content container and display none
               // only ones which are not section elements
-              const children = contentContainer.children;
+              const children = Array.from(contentContainer.children);
               if (children) {
-                for (let i = 0; i < children.length; i++) {
-                  if (children[i].tagName !== 'SECTION') {
-                    children[i].style.display = 'none';
+                console.log(children);
+                children.forEach(child => {
+                  if (child.classList.contains('tab')) {
+                    child.style.display = 'flex';
                   }
-                }
+                  else {
+                    child.style.display = 'none';
+                  }
+                })
               }
 
               tabContainer.style.display = 'flex';
@@ -203,13 +210,13 @@ export default class AppUser extends HTMLElement {
               activeTab = tab;
 
               // Remove any child elements of the content container which is not section
-              const children = contentContainer.children;
+              const children = Array.from(contentContainer.children);
               if (children) {
-                for (let i = 0; i < children.length; i++) {
-                  if (children[i].tagName !== 'SECTION') {
-                    children[i].remove();
+                children.forEach(child => {
+                  if (!child.classList.contains('remains')) {
+                    child.remove();
                   }
-                }
+                })
               }
 
               //Check if this is mobile view
@@ -222,13 +229,13 @@ export default class AppUser extends HTMLElement {
 
                 // Select all child elements of the content container and display flex
                 // except the section elements
-                const children = contentContainer.children;
+                const children = Array.from(contentContainer.children);
                 if (children) {
-                  for (let i = 0; i < children.length; i++) {
-                    if (children[i].tagName !== 'SECTION') {
-                      children[i].style.display = 'flex';
+                  children.forEach(child => {
+                    if (!child.classList.contains('remains')) {
+                      child.style.display = 'flex';
                     }
-                  }
+                  })
                 }
               }
 
@@ -238,13 +245,13 @@ export default class AppUser extends HTMLElement {
         }
         else {
           // Remove any child elements of the content container which is not section
-          const children = contentContainer.children;
+          const children =  Array.from(contentContainer.children);
           if (children) {
-            for (let i = 0; i < children.length; i++) {
-              if (children[i].tagName !== 'SECTION') {
-                children[i].remove();
+            children.forEach(child => {
+              if (!child.classList.contains('remains')) {
+                child.remove();
               }
-            }
+            })
           }
 
           // Select li with class name as current and content Container
@@ -274,20 +281,23 @@ export default class AppUser extends HTMLElement {
 
             // Select all child elements of the content container and display none
             // only ones which are not section elements
-            const children = contentContainer.children;
+            const children = Array.from(contentContainer.children);
             if (children) {
-              for (let i = 0; i < children.length; i++) {
-                if (children[i].tagName !== 'SECTION') {
-                  children[i].style.display = 'none';
+              children.forEach(child => {
+                if (!child.classList.contains('tab')) {
+                  child.style.display = 'none';
                 }
-              }
+              })
             }
 
             tabContainer.style.display = 'flex';
           }
 
-          // Navigate to the previous page
-          window.history.back();
+          // Prevent navigation to outside origin domain
+          if (window.history.length > 1) {
+            // Navigate to the previous page
+            window.history.back();
+          }
         })
       }
     }
@@ -304,9 +314,19 @@ export default class AppUser extends HTMLElement {
 
   // watch for mql changes
   watchMediaQuery = mql => {
+    const outerThis = this;
     mql.addEventListener('change', () => {
 
-      this.render();
+      outerThis.render();
+
+      const tabContainer = outerThis.shadowObj.querySelector('section.tab');
+      const contentContainer = outerThis.shadowObj.querySelector('section.content');
+
+      const current = outerThis.getAttribute('current');
+
+      console.log(current);
+      // Populate the current contents
+      outerThis.populateCurrent(mql.matches, current, tabContainer, contentContainer);
     });
   }
 
@@ -392,6 +412,10 @@ export default class AppUser extends HTMLElement {
         if(loader) {
           loader.remove();
         }
+
+        console.log('Current: ', current)
+
+        console.log('Content Container: ', contentContainer)
 
         // Populate Content
         outerThis.populateContent(current, contentContainer);
@@ -525,8 +549,8 @@ export default class AppUser extends HTMLElement {
 
 
     return /* html */`
-      <section class="top">
-        <svg class="header-back-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+      <section class="top remains">
+        <svg class="header-back-btn" title="Go back" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
           <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
         </svg>
         <div class="profile">
@@ -563,7 +587,7 @@ export default class AppUser extends HTMLElement {
 
   getTop = () => {
     return /* html */ `
-      <div class="top-nav">
+      <div class="top-nav remains">
         <svg class="top-back-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
           <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
         </svg>
@@ -728,7 +752,7 @@ export default class AppUser extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
 
     return /* html */`
-      <section class="tab">
+      <section class="tab remains">
         ${this.checkHeaderMobile(mql)}
         <ul class="tab public">
           <li url="/user/stats" class="tab-item stats" data-name="stats">
@@ -1024,6 +1048,11 @@ export default class AppUser extends HTMLElement {
           width: 38px;
           height: 38px;
           margin: 0 0 0 -5px;
+          transition: color 0.3s ease;
+        }
+
+        section.top > svg:hover {
+          color: var(--accent-color);
         }
 
         section.top > .profile {

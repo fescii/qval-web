@@ -43,7 +43,7 @@ export default class FormPassword extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(max-width: 600px)');
+    const mql = window.matchMedia('(max-width: 660px)');
 
     return /* html */`
       ${this.getHeader(mql)}
@@ -86,7 +86,13 @@ export default class FormPassword extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+        <div class="top">
+          <p class="desc">
+            Your password is how you will log in to your account. You can change your password using the form below. You're required to enter your current password, then your new password.
+          </p>
+        </div>
+    `;
   }
 
   getStyles() {

@@ -43,7 +43,7 @@ export default class FormName extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(min-width: 600px)');
+    const mql = window.matchMedia('(min-width: 660px)');
 
     return /* html */`
       ${this.getHeader(mql)}
@@ -83,7 +83,14 @@ export default class FormName extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+        <div class="top">
+          <p class="desc">
+            Your name is how people will find you on the platform. You can use your real name or a nickname.
+            Both first and last name fields can't be empty.
+          </p>
+        </div>
+    `;
   }
 
   getStyles() {

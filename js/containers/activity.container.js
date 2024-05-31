@@ -114,7 +114,13 @@ export default class ActivityContainer extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+        <div class="top">
+          <p class="desc">
+            Your activity is a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+          </p>
+        </div>
+    `;
   }
 
   getTab = () => {

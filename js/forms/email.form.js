@@ -43,7 +43,7 @@ export default class FormEmail extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(min-width: 600px)');
+    const mql = window.matchMedia('(min-width: 660px)');
     return /* html */`
       ${this.getHeader(mql)}
       <form class="fields email" id="email-form">
@@ -75,7 +75,13 @@ export default class FormEmail extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+        <div class="top">
+          <p class="desc">
+            Your email is how you will recover your account in case you forget your password. You can also use it to log in, reset your password, and receive notifications.
+          </p>
+        </div>
+    `;
   }
 
   getStyles() {

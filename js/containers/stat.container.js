@@ -166,7 +166,13 @@ export default class StatContainer extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+        <div class="top">
+          <p class="desc">
+            Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+          </p>
+        </div>
+    `;
   }
 
   getTab = () => {

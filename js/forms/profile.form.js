@@ -70,7 +70,7 @@ export default class FormProfile extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(max-width: 600px)');
+    const mql = window.matchMedia('(max-width: 660px)');
 
     return /* html */`
       ${this.getHeader(mql)}
@@ -106,7 +106,15 @@ export default class FormProfile extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+        <div class="top">
+          <p class="desc">
+            Your profile picture is how people will recognize you on the platform. You can use a photo of yourself or an
+            avatar.
+            The image should be square and at least 200x200 pixels in size.
+          </p>
+        </div>
+    `;
   }
 
   getStyles() {

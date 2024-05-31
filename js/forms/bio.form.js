@@ -43,7 +43,7 @@ export default class FormBio extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(max-width: 600px)');
+    const mql = window.matchMedia('(max-width: 660px)');
 
     return /* html */`
       ${this.getHeader(mql)}
@@ -79,7 +79,14 @@ export default class FormBio extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+      <div class="top">
+        <p class="desc">
+          Your bio is a brief summary of yourself. It should be no more than 160 characters in length.
+          Use this space to highlight your interests, skills, or any other relevant information about yourself.
+        </p>
+      </div>
+    `;
   }
 
   getStyles() {

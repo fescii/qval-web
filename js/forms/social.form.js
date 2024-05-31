@@ -43,7 +43,7 @@ export default class FormName extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(max-width: 600px)');
+    const mql = window.matchMedia('(max-width: 660px)');
     return /* html */`
       ${this.getHeader(mql)}
       <form class="fields initial" id="social-form">
@@ -121,7 +121,14 @@ export default class FormName extends HTMLElement {
       `;
     }
 
-    return '';
+    return /* html */`
+        <div class="top">
+          <p class="desc">
+            Your socials are how people will connect with you outside the platform. You can add your email, twitter, linkedin, and x
+            accounts.
+          </p>
+        </div>
+    `;
   }
 
   getEmail = email => {
