@@ -643,7 +643,7 @@ export default class PollWrapper extends HTMLElement {
 
       return /*html*/`
         <div votes="${option.votes}" data-name="${option.name}" class="poll-option ${isSelected ? 'selected' : ''} ${isHighest ? 'high' : ''}">
-          <input type="radio" name="poll" id="poll-${index + 1}" ${isSelected ? 'checked' : ''} disabled>
+          <input type="radio" name="poll" id="poll-${index + 1}" ${isSelected ? 'checked="true"' : ''} disabled="true">
           <label for="poll-${index + 1}">
             <span class="text">${option.text}</span>
             <span is="custom-span" width="${option.percentage.toFixed(2)}%" class="fill"></span>

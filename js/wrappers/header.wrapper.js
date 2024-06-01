@@ -43,7 +43,7 @@ export default class HeaderWrapper extends HTMLElement {
     const content = this.getContent(title);
     setTimeout(() => {
       storyLoader.remove();
-      contentContainer.style.setProperty('display', 'flex', 'important');
+      contentContainer.classList.remove('short');
       contentContainer.insertAdjacentHTML('beforeend', content);
     }, 2000)
   }
@@ -58,9 +58,9 @@ export default class HeaderWrapper extends HTMLElement {
 
   getBody = () => {
     return /* html */`
-      ${this.getLoader()}
-      <nav data-expanded="false" class="nav none">
+      <nav data-expanded="false" class="nav short">
       </nav>
+      ${this.getLoader()}
     `
   }
 
@@ -166,11 +166,12 @@ export default class HeaderWrapper extends HTMLElement {
           font-size: 16px;
           width: 100%;
           height: max-content;
+          background-color: var(--background);
           gap: 0;
-          display:
-          z-index: 100;
+          display: block;
           position: sticky;
           top: 0;
+          z-index: 100;
         }
 
         nav.nav {
@@ -182,15 +183,17 @@ export default class HeaderWrapper extends HTMLElement {
           justify-content: space-between;
           width: 100%;
           gap: 10px;
-          background-color: var(--background);
           height: 60px;
           max-height: 60px;
           padding: 22px 0 10px;
           margin: 0 0 10px;
         }
 
-        nav.nav.none {
-          display: none;
+        nav.nav.short {
+          border-bottom: none;
+          max-height: 10px;
+          padding: 0;
+          margin: 0 0 10px;
         }
 
         nav.nav > .left {

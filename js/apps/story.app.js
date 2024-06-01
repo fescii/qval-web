@@ -17,6 +17,13 @@ export default class AppStory extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
+
+    const mql = window.matchMedia('(max-width: 660px)');
+
+    // add listener for the media query
+    mql.addEventListener('change', () => {
+      this.render();
+    })
   }
 
   disableScroll() {
@@ -286,63 +293,16 @@ export default class AppStory extends HTMLElement {
 
   getRelatedStories = () => {
     return /* html */`
-			<div class="related">
-        <p class="title">Related stories.</p>
-        <ul class="stories">
-          <li class="story">
-            <a href="" class="link">
-              <span class="title">Ubuntu vs Debian: Which one is better</span>
-              <span class="date">June 23, 2021</span>
-            </a>
-          </li>
-          <li class="story">
-            <a href="" class="link">
-              <span class="title">Ubuntu Makes Proprietary Software Easier to Get</span>
-              <span class="date">June 23, 2021</span>
-            </a>
-          </li>
-          <li class="story">
-            <a href="" class="link">
-              <span class="title">Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance</span>
-              <span class="date">June 23, 2021</span>
-            </a></li>
-        </ul>
-      </div>
+			<related-container topics='${this.getAttribute("topics")}'>
+      </related-container>
 		`
   }
 
   getInfo = () => {
-    return `
-      <div class="company">
-        <ul class="footer-list">
-          <li class="item">
-            <a href="" class="item-link">Docs</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">What’s New</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Give a feedback </a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Request a feature</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Source code</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Donate</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Contact</a>
-          </li>
-          <li class="item">
-            <a href="#" class="item-link">&copy 2024 aduki, Inc</a>
-          </li>
-        </ul>
-      </div>
+    return /*html*/`
+      <info-container docs="/about/docs" new="/about/new"
+       feedback="/about/feedback" request="/about/request" code="/about/code" donate="/about/donate" contact="/about/contact" company="https://github.com/aduki-hub">
+      </info-container>
     `
   }
 
@@ -402,7 +362,7 @@ export default class AppStory extends HTMLElement {
           display: flex;
           width: 100%;
           gap: 20px;
-          min-height: 90vh;
+          min-height: 100vh;
           justify-content: space-between;
         }
 
@@ -441,127 +401,6 @@ export default class AppStory extends HTMLElement {
         section.side::-webkit-scrollbar {
           visibility: hidden;
           display: none;
-        }
-
-        section.side .related {
-          /* border: thin solid #4b5563bd; */
-          background-color: var(--background);
-          padding: 10px 0;
-          margin: 0;
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        section.side .related > p.title {
-          color: var(--title-color);
-          padding: 0;
-          font-size: 1.2rem;
-          margin: 0;
-          font-weight: 500;
-        }
-
-        section.side .related > ul.stories {
-          list-style-type: none;
-          padding: 0;
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        section.side .related > ul.stories li.story {
-          text-decoration: none;
-          padding: 10px 0 0 0;
-          display: flex;
-        }
-
-        section.side .related > ul.stories li.story a {
-          text-decoration: none;
-          display: flex;
-          flex-flow: column;
-          color: var(--gray-color);
-        }
-
-        section.side .related > ul.stories li.story a span.title {
-          color: var(--read-color);
-          font-family: var(--font-text), sans-serif;
-          font-weight: 500;
-        }
-
-        section.side .related > ul.stories li.story a:hover > span.title {
-          color: var(--title-color);
-        }
-
-        section.side .related > ul.stories li.story a span.date {
-          color: var(--gray-color);
-          font-family: var(--font-main), sans-serif;
-          line-height: 1.4;
-          font-size: 0.8rem;
-        }
-
-        section.side > .company {
-          display: flex;
-          margin: 20px 0;
-          flex-flow: column;
-          align-items: center;
-          gap: 10px;
-          max-width: 500px;
-        }
-
-        section.side > .company >.title {
-          color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1.1rem;
-          font-weight: 600;
-        }
-
-        section.side > .company > ul.footer-list {
-          margin: 0;
-          list-style-type: none;
-          padding: 0 0 0 1px;
-          display: flex;
-          flex-flow: row;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: start;
-          gap: 10px;
-        }
-
-        section.side > .company > ul.footer-list > li.item {
-          margin: 0 10px 0 0;
-          padding: 0;
-          width: max-content;
-          position: relative;
-        }
-
-        section.side > .company > ul.footer-list > li.item > .dot {
-          display: inline-block;
-          background: var(--accent-linear);
-          width: 5px;
-          height: 5px;
-          position: absolute;
-          right: -9px;
-          top: 3px;
-          border-radius: 5px;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-        }
-
-        section.side > .company > ul.footer-list > li.item > a.item-link {
-          color: var(--gray-color);
-          /* font-size: 0.98rem; */
-          text-decoration: none;
-          font-weight: 400;
-          font-size: 0.9rem;
-        }
-
-        section.side > .company > ul.footer-list > li.item > a.item-link:hover {
-          /* color: var(--accent-color); */
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-          border-bottom: 1px solid var(--accent-color);
         }
 
 				@media screen and (max-width:660px) {

@@ -42,21 +42,26 @@
     import PersonWrapper from "./js/author.component.js";
     import UserWrapper from "./js/person.component.js"
 
+    // Import loaders
     import StoryLoader from "./js/loaders/story.loader.js";
     import PostLoader from "./js/loaders/post.loader.js";
     import PeopleLoader from "./js/loaders/people.loader.js";
     import TopicsLoader from "./js/loaders/topics.loader.js";
+    import InfoLoader from "./js/loaders/info.loader.js";
 
     import StoryFeed from "./js/feeds/stories.feed.js";
     import OpinionFeed from "./js/feeds/opinions.feed.js";
     import PeopleFeed from "./js/feeds/people.feed.js"
 
+    // Import containers
     import PeopleContainer from "./js/containers/people.container.js";
     import StoriesContainer from "./js/containers/stories-container.js"
     import TrendingContainer from "./js/containers/trending.container.js"
     import TopicsContainer from "./js/containers/topics.container.js";
     import FormContainer from "./js/containers/form.container.js";
     import AddContainer from "./js/containers/add.container.js";
+    import InfoContainer from "./js/containers/info.container.js";
+    import RelatedContainer from "./js/containers/related.container.js";
 
     import DiscoverPeople from "./js/containers/people.discover.js"
 
@@ -86,21 +91,27 @@
     customElements.define('user-wrapper', UserWrapper);
 
 
+    // Register loaders
     customElements.define('story-loader', StoryLoader);
     customElements.define('post-loader', PostLoader);
-
     customElements.define('people-loader', PeopleLoader);
     customElements.define('topics-loader', TopicsLoader);
+    customElements.define('info-loader', InfoLoader);
+
+    // Register feeds
     customElements.define('stories-feed', StoryFeed);
     customElements.define('opinions-feed', OpinionFeed);
     customElements.define('people-feed', PeopleFeed)
 
+    // Register containers
     customElements.define('people-container', PeopleContainer);
     customElements.define('stories-container', StoriesContainer);
     customElements.define('trending-container', TrendingContainer);
     customElements.define('topics-container', TopicsContainer);
     customElements.define('form-container', FormContainer);
     customElements.define('add-container', AddContainer);
+    customElements.define('info-container', InfoContainer);
+    customElements.define('related-container', RelatedContainer);
 
     customElements.define('discover-people', DiscoverPeople);
   </script>
@@ -117,7 +128,7 @@
     >
   </header-container> -->
 
-  <app-story id="P0AB236B6" topics="engineering, programming" story-title="Making the Web. Faster." date="2024-03-13T13:00:00+03:00"
+  <app-story id="P0AB236B6" topics="engineering, programming, technology" story-title="Making the Web. Faster." date="2024-03-13T13:00:00+03:00"
     views="709" next-hash="P0AB236B6AB57" next-date="2024-03-13T13:00:00+03:00"
     user-url="/u/U0A43PBAH6A" auth-url="/join" url="/s/P0AB236B6HA89B" search-url="/search"
     next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance"

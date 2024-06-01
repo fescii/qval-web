@@ -15,7 +15,7 @@ export default class TopicsContainer extends HTMLElement {
 
 	connectedCallback() {
 		// console.log('We are inside connectedCallback');
-		const contentContainer = this.shadowObj.querySelector('ul.topics');
+		const contentContainer = this.shadowObj.querySelector('div.content');
 
 		this.fetchTopics(contentContainer);
 	}
@@ -46,78 +46,80 @@ export default class TopicsContainer extends HTMLElement {
 	getBody = () => {
 		// language=HTML
 		return /* html */`
-			<div class="title">
-				<h4 class="title">Topics</h4>
-				<span class="text">Trending topics now</span>
-			</div>
-			<ul class="topics">
+			<div class="content">
 				${this.getLoader()}
-			</ul>
+			</div>
     `;
 	}
 
 	getTopics = () => {
 		return /* html */`
-			<li class="topic">
-        <a href="" class="link">
-          <span class="no">63</span>
-          <span class="text">Health Care</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">1.03k</span>
-          <span class="text">Spotify</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">3</span>
-          <span class="text">Good morning</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">117</span>
-          <span class="text">Sora</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">71</span>
-          <span class="text">Videotape</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">44</span>
-          <span class="text">Kendrick Lamar</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">9</span>
-          <span class="text">World War III</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">13</span>
-          <span class="text">Christian</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">5</span>
-          <span class="text">Nato</span>
-        </a>
-      </li>
-      <li class="topic">
-        <a href="" class="link">
-          <span class="no">73</span>
-          <span class="text">Programming</span>
-        </a>
-      </li>
+			<div class="title">
+				<h4 class="title">Topics</h4>
+				<span class="text">Trending topics now</span>
+			</div>
+			<ul class="topics">
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">63</span>
+						<span class="text">Health Care</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">1.03k</span>
+						<span class="text">Spotify</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">3</span>
+						<span class="text">Good morning</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">117</span>
+						<span class="text">Sora</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">71</span>
+						<span class="text">Videotape</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">44</span>
+						<span class="text">Kendrick Lamar</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">9</span>
+						<span class="text">World War III</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">13</span>
+						<span class="text">Christian</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">5</span>
+						<span class="text">Nato</span>
+					</a>
+				</li>
+				<li class="topic">
+					<a href="" class="link">
+						<span class="no">73</span>
+						<span class="text">Programming</span>
+					</a>
+				</li>
+			</ul>
 		`
 	}
 
@@ -173,12 +175,24 @@ export default class TopicsContainer extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+        	font-size: 16px;
 					margin: 0;
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 10px;
+				}
+
+				div.content {
+				  margin: 0;
+				  padding: 0;
+				  display: flex;
+				  flex-flow: row;
+				  flex-wrap: wrap;
+				  align-items: center;
+				  justify-content: start;
+				  gap: 10px;
+				  width: 100%;
 				}
 
 				ul.topics {
@@ -204,14 +218,15 @@ export default class TopicsContainer extends HTMLElement {
 				}
 
 				.title h4 {
-				  color: #1f2937;
+				  color: var(--title-color);
 				  font-size: 1.3rem;
 				  font-weight: 600;
-				  line-height: 1.4;
+				  line-height: 1;
 				}
 
 				.title > span {
 				  color: var(--gray-color);
+					font-family: var(--font-read), sans-serif;
 				  font-size: 0.85rem;
 				}
 
@@ -225,13 +240,15 @@ export default class TopicsContainer extends HTMLElement {
 				}
 
 				ul.topics > li.topic a.link {
-				  border: thin solid #6b728094;
+				  border: var(--topic-border);
 				  margin: 0;
 				  text-decoration: none;
-					font-family: var(--font-text), sans-serif;
+					font-family: var(--font-read), sans-serif;
 				  color: var(--gray-color);
 				  padding: 4px 10px;
 				  display: flex;
+					align-items: center;
+					justify-content: center;
 				  gap: 5px;
 				  flex-flow: row;
 				  flex-wrap: nowrap;
@@ -242,8 +259,8 @@ export default class TopicsContainer extends HTMLElement {
 				}
 
 				ul.topics > li.topic a.link > span.no {
-				  font-family: var(--font-mono),monospace;
-				  font-size: 0.92rem;
+				  font-family: var(--font-main), san-serif;
+				  font-size: 0.85rem;
 				}
 
 				ul.topics > li.topic a.link:hover {
@@ -251,11 +268,11 @@ export default class TopicsContainer extends HTMLElement {
 				  background: var(--accent-linear);
 				  background-clip: text;
 				  -webkit-background-clip: text;
-				  border-color: #21D029af;
+					border: var(--topic-border-active);
 				}
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+        		font-size: 16px;
 						padding: 15px 0;
 					}
 

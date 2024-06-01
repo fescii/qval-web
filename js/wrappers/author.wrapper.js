@@ -487,7 +487,7 @@ export default class AuthorWrapper extends HTMLElement {
           flex-flow: row;
           align-items: center;
           gap: 10px;
-          margin: 5px 0 10px;
+          margin: 5px 0;
         }
 
         .actions > a.action {
@@ -498,7 +498,7 @@ export default class AuthorWrapper extends HTMLElement {
           flex-flow: row;
           align-items: center;
           justify-content: center;
-          padding: 5px 20px;
+          padding: 7px 20px;
           border-radius: 10px;
           -webkit-border-radius: 10px;
           -moz-border-radius: 10px;
@@ -511,6 +511,11 @@ export default class AuthorWrapper extends HTMLElement {
           border: none;
           background: var(--accent-linear);
           color: var(--white-color);
+           border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          -ms-border-radius: 10px;
+          -o-border-radius: 10px;
         }
 
         @media screen and (max-width: 660px) {
