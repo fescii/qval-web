@@ -279,6 +279,7 @@ export default class HeaderWrapper extends HTMLElement {
 
         @media screen and (max-width: 660px) {
           nav.nav {
+            border-bottom: var(--story-border-mobile);
             height: 50px;
             max-height: 50px;
             padding: 10px 0;
