@@ -657,7 +657,7 @@ export default class StoryBody extends HTMLElement {
           display: flex;
           flex-flow: column;
           gap: 0;
-          margin: 0;
+          margin: 5px 0;
         }
 
         .content-container > div.head > .topic {
@@ -676,8 +676,8 @@ export default class StoryBody extends HTMLElement {
         }
 
         .content-container > div.head > h1.story-title {
-          margin: 0;
-          padding: 5px 0;
+          margin: 15px 0 0;
+          padding: 0;
           font-weight: 700;
           font-size: 1.7rem;
           line-height: 1.5;
