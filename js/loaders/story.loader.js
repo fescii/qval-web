@@ -26,7 +26,7 @@ export default class StoryLoader extends HTMLElement {
 	}
 
 	getBody() {
-		return `
+		return /* html */`
 			<div class="loader">
 				<span class="head">
 					<span class="start skeleton"></span>
@@ -70,14 +70,6 @@ export default class StoryLoader extends HTMLElement {
 		    <span class="full skeleton"></span>
 		    <span class="full skeleton"></span>
       </div>
-      <div class="loader">
-		    <div class="body skeleton"></div>
-		    <span class="foot">
-					<span class="start skeleton"></span>
-					<span class="dot skeleton"></span>
-					<span class="end skeleton"></span>
-				</span>
-		  </div>
     `;
 	}
 
