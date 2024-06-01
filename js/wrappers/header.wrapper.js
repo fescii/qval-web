@@ -172,6 +172,7 @@ export default class HeaderWrapper extends HTMLElement {
           position: sticky;
           top: 0;
           z-index: 100;
+          margin: 0 0 10px;
         }
 
         nav.nav {
@@ -186,7 +187,6 @@ export default class HeaderWrapper extends HTMLElement {
           height: 60px;
           max-height: 60px;
           padding: 22px 0 10px;
-          margin: 0 0 10px;
         }
 
         nav.nav.short {
@@ -282,7 +282,6 @@ export default class HeaderWrapper extends HTMLElement {
             height: 50px;
             max-height: 50px;
             padding: 10px 0;
-            margin: 0 0 5px;
           }
 
           ::-webkit-scrollbar {

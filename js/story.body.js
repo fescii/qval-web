@@ -242,7 +242,8 @@ export default class StoryBody extends HTMLElement {
           flex-flow: column;
           align-items: flex-end;
           text-align: end;
-          font-size: 0.9rem;
+          font-size: 1rem;
+          font-family: var(--font-read), sans-serif;
           gap: 10px;
           color: var(--gray-color);
           border-radius: 5px;
@@ -262,7 +263,7 @@ export default class StoryBody extends HTMLElement {
         .content-container .next-article > a > span.date {
           font-weight: 500;
           font-size: 0.8rem;
-          font-family: var(--font-mono);
+          font-family: var(--font-main), sans-serif;
         }
 
         .content-container .next-article > a > span.title {
