@@ -268,7 +268,7 @@ export default class PollWrapper extends HTMLElement {
   }
 
   // Get remaining time for the poll
-  getRemainingTime = (timeDiff) => {
+  getRemainingTime = timeDiff => {
     // get the number of hours if any in the time difference
     let hours = Math.floor(timeDiff / (1000 * 60 * 60));
 

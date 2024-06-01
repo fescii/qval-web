@@ -71,7 +71,7 @@ export default class AppStory extends HTMLElement {
         ${this.getTop()}
         <article class="content">
           ${this.getStoryBody()}
-          ${this.getForm()}
+          ${this.getAuthor()}
           ${this.getOpinions()}
         </article>
       `;
@@ -81,7 +81,6 @@ export default class AppStory extends HTMLElement {
         <article class="content">
           ${this.getTop()}
           ${this.getStoryBody()}
-          ${this.getForm()}
           ${this.getOpinions()}
         </article>
 
@@ -109,6 +108,8 @@ export default class AppStory extends HTMLElement {
       <story-body topic="${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}"
         story-title="${this.getAttribute('story-title')}"
         next-hash="${this.getAttribute('next-hash')}" next-title="${this.getAttribute('next-title')}" next-date="${this.getAttribute('next-date')}"
+        hash="${this.getAttribute('hash')}" opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+        views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
       >
         <div class="intro">
           <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both <a

@@ -171,7 +171,7 @@ export default class HeaderWrapper extends HTMLElement {
           display: block;
           position: sticky;
           top: 0;
-          z-index: 100;
+          z-index: 10;
           margin: 0 0 10px;
         }
 
