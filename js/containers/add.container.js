@@ -90,7 +90,7 @@ export default class FormContainer extends HTMLElement {
 
 	      :host {
         font-size: 16px;
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           background-color: var(--background);
           padding: 10px 0;
           display: flex;
@@ -142,7 +142,7 @@ export default class FormContainer extends HTMLElement {
 					:host {
         font-size: 16px;
 						padding: 10px 0;
-            border-bottom: var(--story-border-mobile);
+            border-bottom: var(--border-mobile);
             gap: 10px;
 					}
 

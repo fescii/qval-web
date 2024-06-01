@@ -347,7 +347,7 @@ export default class AppTopic extends HTMLElement {
         }
 
         .foot {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           background-color: var(--background);
           display: flex;
           flex-flow: column;
@@ -359,8 +359,8 @@ export default class AppTopic extends HTMLElement {
         }
 
         .foot > .author {
-          border-top: var(--story-border);
-          /* border-bottom: var(--story-border); */
+          border-top: var(--border);
+          /* border-bottom: var(--border); */
           padding: 10px 0;
           display: flex;
           align-items: center;
@@ -518,15 +518,15 @@ export default class AppTopic extends HTMLElement {
           }
 
           .text-content > .actions > .action.subscribed {
-            border-bottom: var(--story-border-mobile)
+            border-bottom: var(--border-mobile)
           }
 
           .foot > .author{
-            border-bottom: var(--story-border-mobile);
+            border-bottom: var(--border-mobile);
           }
 
           .foot {
-            border-top: var(--story-border-mobile);
+            border-top: var(--border-mobile);
           }
 
 					.action,

@@ -181,7 +181,7 @@ export default class TrendingContainer extends HTMLElement {
         }
 
         a.more {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           padding: 10px 0;
           text-decoration: none;
           font-family: var(--font-text), sans-serif;
@@ -198,7 +198,7 @@ export default class TrendingContainer extends HTMLElement {
         }
 
         div.stories > .title {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           padding: 0 0 15px 0;
           margin: 0;
           width: 100%;
@@ -266,7 +266,7 @@ export default class TrendingContainer extends HTMLElement {
         @media screen and (max-width:660px) {
           a.more,
           div.stories > .title {
-            border-bottom: var(--story-border-mobile);
+            border-bottom: var(--border-mobile);
           }
 
           a,

@@ -270,7 +270,7 @@ export default class FormContainer extends HTMLElement {
 					}
 
           div.options > span {
-            border: var(--story-border-mobile);
+            border: var(--border-mobile);
           }
 				}
 	    </style>

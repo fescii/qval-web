@@ -154,7 +154,7 @@ export default class FormPassword extends HTMLElement {
         }
 
         .top > h4.title {
-          border-bottom: var(--story-border-mobile);
+          border-bottom: var(--border-mobile);
           display: flex;
           align-items: center;
           color: var(--title-color);

@@ -2030,7 +2030,7 @@ export default class LogonContainer extends HTMLElement {
 
         /* Logon Footer */
         .logon-container >.footer {
-          border-top: var(--story-border);
+          border-top: var(--border);
           margin: 10px 0 0 0;
           width: 100%;
           padding: 10px 0 10px 0;

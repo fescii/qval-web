@@ -176,7 +176,7 @@ export default class HeaderWrapper extends HTMLElement {
         }
 
         nav.nav {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           color: var(--title-color);
           display: flex;
           flex-flow: row;
@@ -259,7 +259,7 @@ export default class HeaderWrapper extends HTMLElement {
         }
 
         nav.nav > .links > a.link.signin {
-          border: var(--story-border-mobile);
+          border: var(--border-mobile);
           font-weight: 500;
           padding: 3px 15px;
           font-family: var(--font-read);
@@ -279,7 +279,7 @@ export default class HeaderWrapper extends HTMLElement {
 
         @media screen and (max-width: 660px) {
           nav.nav {
-            border-bottom: var(--story-border-mobile);
+            border-bottom: var(--border-mobile);
             height: 50px;
             max-height: 50px;
             padding: 10px 0;

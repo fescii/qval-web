@@ -520,8 +520,8 @@ export default class AuthorWrapper extends HTMLElement {
 
         @media screen and (max-width: 660px) {
           .content-container {
-            border-top: var(--story-border-mobile);
-            border-bottom: var(--story-border-mobile);
+            border-top: var(--border-mobile);
+            border-bottom: var(--border-mobile);
             position: relative;
             padding: 10px 0;
             width: 100%;

@@ -961,7 +961,7 @@ export default class AppUser extends HTMLElement {
         }
 
         .top-nav {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           color: var(--title-color);
           display: flex;
           flex-flow: row;
@@ -1035,7 +1035,7 @@ export default class AppUser extends HTMLElement {
         }
 
         section.top {
-          /* border-bottom: var(--story-border); */
+          /* border-bottom: var(--border); */
           display: flex;
           background-color: var(--background);
           width: 100%;
@@ -1202,7 +1202,7 @@ export default class AppUser extends HTMLElement {
         }
 
         section.tab > ul.tab {
-          border-top: var(--story-border-mobile);
+          border-top: var(--border-mobile);
           list-style-type: none;
           width: 100%;
           padding: 0;
@@ -1404,7 +1404,7 @@ export default class AppUser extends HTMLElement {
           }
 
           section.tab > ul.tab {
-            border-top: var(--story-border-mobile);
+            border-top: var(--border-mobile);
             list-style-type: none;
             width: 100%;
             padding: 0;

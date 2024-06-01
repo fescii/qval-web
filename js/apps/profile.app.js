@@ -521,7 +521,7 @@ export default class AppProfile extends HTMLElement {
         }
 
         .actions {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           background-color: var(--background);
           display: flex;
           flex-flow: column;
@@ -533,8 +533,8 @@ export default class AppProfile extends HTMLElement {
         }
 
         .actions > .author {
-          /* border-top: var(--story-border); */
-          border-bottom: var(--story-border);
+          /* border-top: var(--border); */
+          border-bottom: var(--border);
           padding: 10px 0;
           display: flex;
           align-items: center;
@@ -566,7 +566,7 @@ export default class AppProfile extends HTMLElement {
         }
 
         .actions > ul.tab > li.tab-item {
-          /* border: var(--story-border); */
+          /* border: var(--border); */
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
           font-weight: 400;
@@ -771,7 +771,7 @@ export default class AppProfile extends HTMLElement {
 
           .actions > .author,
           .actions {
-            border-bottom: var(--story-border-mobile);
+            border-bottom: var(--border-mobile);
           }
 
           .actions > ul.tab > li.tab-item,

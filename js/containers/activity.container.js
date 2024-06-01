@@ -215,7 +215,7 @@ export default class ActivityContainer extends HTMLElement {
         }
 
         .top > h4.title {
-          border-bottom: var(--story-border-mobile);
+          border-bottom: var(--border-mobile);
           display: flex;
           align-items: center;
           color: var(--title-color);
@@ -235,7 +235,7 @@ export default class ActivityContainer extends HTMLElement {
         }
 
         .actions {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           background-color: var(--background);
           display: flex;
           flex-flow: column;
@@ -267,7 +267,7 @@ export default class ActivityContainer extends HTMLElement {
         }
 
         .actions > ul.tab > li.tab-item {
-          /* border: var(--story-border); */
+          /* border: var(--border); */
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
           font-weight: 400;
@@ -323,7 +323,7 @@ export default class ActivityContainer extends HTMLElement {
         }
 
         .content {
-          /* border: var(--story-border); */
+          /* border: var(--border); */
           display: flex;
           flex-flow: column;
           gap: 0;

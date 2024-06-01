@@ -46,22 +46,18 @@ Author URL: https://femar.co.ke
   --input-border-focus: 1px solid #18a5669a;
   --input-border-error: 1px solid #ec4a1965;
   --action-border: 1px solid #6b72803f;
-  --story-border: thin solid #6b72801a;
+  --border: thin solid #6b72801a;
   --action-border: thin solid #627ea073;
   --topic-border: thin solid #6b728046;
   --topic-border-active: thin solid #21d02a7a;
-
-  --label-focus-background: #eaf3ff;
-
   --poll-border: thin solid #6b728025;
-
-  --story-border-mobile: thin solid #6b72802f;
-  --border-mobile: thin solid #6b728088;
+  --border-mobile: thin solid #6b728036;
   --border-header: 0.002rem solid #6b72809a;
 
   --background: #ffffff;
   --vh-height: 100dvh;
 
+  --label-focus-background: #eaf3ff;
   --action-background: #1d2c38d2;
   --author-background: #f1f3f4;
   --user-background: #f8f8f8;

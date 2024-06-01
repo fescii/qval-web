@@ -330,7 +330,7 @@ export default class AllStat extends HTMLElement {
 
         :host {
           font-size: 16px;
-          border-bottom: var(--story-border-mobile);
+          border-bottom: var(--border-mobile);
           margin: 10px 0;
           width: 100%;
           display: flex;
@@ -501,7 +501,7 @@ export default class AllStat extends HTMLElement {
           }
 
           .content > .main {
-            border-bottom: var(--story-border-mobile);
+            border-bottom: var(--border-mobile);
             width: 100%;
             display: flex;
             flex-flow: column;

@@ -112,7 +112,7 @@ export default class StatOpinion extends HTMLElement {
 
       :host {
         font-size: 16px;
-        border-bottom: var(--story-border);
+        border-bottom: var(--border);
         display: flex;
         flex-flow: column;
         gap: 5px;

@@ -240,7 +240,7 @@ export default class AppSearch extends HTMLElement {
         }
 
         form.search {
-          border-bottom: var(--story-border);
+          border-bottom: var(--border);
           background: var(--background);
           padding: 10px 0 0 0;
           margin: 0 0 15px 0;
@@ -520,7 +520,7 @@ export default class AppSearch extends HTMLElement {
           }
 
           form.search {
-            border-bottom: var(--story-border-mobile);
+            border-bottom: var(--border-mobile);
           }
 
           form.search > .contents > input {

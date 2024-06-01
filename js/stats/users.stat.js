@@ -287,7 +287,7 @@ export default class UsersStat extends HTMLElement {
 
       :host {
         font-size: 16px;
-        border-bottom: var(--story-border-mobile);
+        border-bottom: var(--border-mobile);
         margin: 0;
         width: 100%;
         display: flex;

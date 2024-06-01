@@ -659,8 +659,8 @@ export default class PostWrapper extends HTMLElement {
       }
 
       .meta {
-        border-bottom: var(--story-border);
-        border-top: var(--story-border);
+        border-bottom: var(--border);
+        border-top: var(--border);
         margin: 10px 0 0;
         padding: 12px 0;
         display: flex;
@@ -945,7 +945,7 @@ export default class PostWrapper extends HTMLElement {
         bottom: calc(100% - 35px);
         right: calc(50% - 100px);
         background: var(--background);
-        border: var(--story-border-mobile);
+        border: var(--border-mobile);
         border-radius: 20px;
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
@@ -998,8 +998,8 @@ export default class PostWrapper extends HTMLElement {
         }
 
         .meta {
-          border-bottom: var(--story-border-mobile);
-          border-top: var(--story-border-mobile);
+          border-bottom: var(--border-mobile);
+          border-top: var(--border-mobile);
           margin: 5px 0 0 0;
           padding: 12px 0;
           display: flex;
@@ -1068,7 +1068,7 @@ export default class PostWrapper extends HTMLElement {
           right: 0;
           left: 0;
           background: var(--background);
-          border: var(--story-border-mobile);
+          border: var(--border-mobile);
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
           border-top-left-radius: 10px;

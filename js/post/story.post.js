@@ -234,7 +234,7 @@ export default class StoryPost extends HTMLElement {
 
       :host {
         font-size: 16px;
-        border-bottom: var(--story-border);
+        border-bottom: var(--border);
         font-family: var(--font-main), sans-serif;
         padding: 15px 0 10px;
         margin: 0;
@@ -502,7 +502,7 @@ export default class StoryPost extends HTMLElement {
       @media screen and (max-width:660px) {
         :host {
         font-size: 16px;
-          border-bottom: var(--story-border-mobile);
+          border-bottom: var(--border-mobile);
         }
 
         ::-webkit-scrollbar {
