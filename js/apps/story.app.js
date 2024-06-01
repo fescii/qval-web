@@ -96,7 +96,6 @@ export default class AppStory extends HTMLElement {
     `
   }
 
-
   getStoryBody = () => {
     let str = this.topics[0];
     return /* html */ `
@@ -105,7 +104,7 @@ export default class AppStory extends HTMLElement {
         next-hash="${this.getAttribute('next-hash')}" next-title="${this.getAttribute('next-title')}" next-date="${this.getAttribute('next-date')}"
       >
         <div class="intro">
-          <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both<a
+          <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both <a
             href="https://www.blogger.com/#">Debian</a> or <a href="https://www.blogger.com/#">Ubuntu</a>.
             <br>Their similarities, and the fact that Ubuntu is technically based on
             Debian, blur the lines between them.<br> Let’s explore the important
@@ -402,7 +401,7 @@ export default class AppStory extends HTMLElement {
           font-size: 16px;
           display: flex;
           width: 100%;
-          gap: 0;
+          gap: 20px;
           min-height: 90vh;
           justify-content: space-between;
         }
@@ -417,26 +416,24 @@ export default class AppStory extends HTMLElement {
 
         /* Responses */
         article.content section.responses {
-          /* border: 1px solid #000000; */
           display: flex;
           flex-flow: column;
           gap: 0;
         }
 
         section.side {
-          /* border: thin solid #4b5563bd; */
           padding: 0;
           margin: 0;
           background-color: transparent;
-          width: 33%;
+          width: 32%;
           height: max-content;
           display: flex;
           flex-flow: column;
           gap: 0;
           position: sticky;
-          top: 60px;
-          height: calc(100vh - 60px);
-          max-height: calc(100vh - 60px);
+          top: 25px;
+          height: calc(100vh - 25px);
+          max-height: calc(100vh - 25px);
           overflow-y: scroll;
           scrollbar-width: none;
         }

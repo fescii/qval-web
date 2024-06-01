@@ -171,7 +171,6 @@ export default class HeaderWrapper extends HTMLElement {
           z-index: 100;
           position: sticky;
           top: 0;
-          padding: 22px 0 10px;
         }
 
         nav.nav {
