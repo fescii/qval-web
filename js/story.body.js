@@ -33,6 +33,19 @@ export default class StoryBody extends HTMLElement {
     }, 2000);
   }
 
+  getDate = isoDateStr => {
+    const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
+    let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // userTimezone.replace('%2F', '/')
+
+    // Convert posted time to the current timezone
+    const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
+
+    return `
+      ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+    `
+  }
+
   disableScroll() {
     // Get the current page scroll position
     let scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -59,7 +72,34 @@ export default class StoryBody extends HTMLElement {
   }
 
   getContent = () => {
-    return this.innerHTML;
+    return `
+      ${this.getHeader()}
+      <div class="body">
+        ${this.innerHTML}
+      </div>
+      ${this.getNextArticle()}
+    `;
+  }
+
+  getHeader = () => {
+    return `
+      <div class="head">
+        <span class="topic">${this.getAttribute('topic')}</span>
+        <h1 class="story-title">${this.getAttribute('story-title')}</h1>
+      </div>
+    `
+  }
+
+  getNextArticle = () => {
+    return /* html */`
+      <div class="next-article">
+        <a href="/s/${this.getAttribute('next-hash').toLowerCase()}" class="article">
+          <span class="title">Next article</span>
+          <span class="text">${this.getAttribute('next-title')}</span>
+          <span class="date">${this.getDate(this.getAttribute('next-date'))}</span>
+        </a>
+      </div>
+    `
   }
 
   getFonts = () => {
@@ -75,8 +115,7 @@ export default class StoryBody extends HTMLElement {
   }
 
   getBody() {
-    return `
-      ${this.getFonts()}
+    return /*html*/`
       <div class="content-container">
         ${this.getLoader()}
       </div>
@@ -110,7 +149,6 @@ export default class StoryBody extends HTMLElement {
 
       :host {
         font-size: 16px;
-        /* border: 1px solid #000000; */
         margin: 0;
         padding: 0;
         display: flex;
@@ -120,88 +158,98 @@ export default class StoryBody extends HTMLElement {
       }
 
       .content-container {
-        /* border: 1px solid #000000; */
-        margin: 5px 0 0 0;
+        margin: 0;
         display: flex;
         flex-flow: column;
-        color: var(--read-color);
-        font-family: var(--font-read), sans-serif;
+      }
+
+      .content-container > div.head {
+        display: flex;
+        flex-flow: column;
         gap: 0;
-        font-size: 1rem;
-        font-weight: 400;
+        margin: 0;
       }
 
-      .fonts {
-        border-bottom: var(--story-border);
-        padding: 10px 0;
-        margin: 0 0 15px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: var(--gray-color);
-        gap: 20px;
-        z-index: 2;
-        position: sticky;
-        top: 60px;
-        background-color: var(--background);
-      }
-
-      .fonts > .options {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        color: var(--gray-color);
-        gap: 20px;
-      }
-
-      .fonts .options * {
-        transition: all 300ms ease-in-out;
-        -webkit-transition: all 300ms ease-in-out;
-        -moz-transition: all 300ms ease-in-out;
-        -ms-transition: all 300ms ease-in-out;
-        -o-transition: all 300ms ease-in-out;
-      }
-
-      .fonts .options > span.font {
-        display: inline-block;
-        padding: 3px 15px;
-        cursor: pointer;
-        font-size: 1rem;
-        color: var(--gray-color);
-        border: var(--story-border-mobile);
+      .content-container > div.head > .topic {
+        width: max-content;
+        color: var(--white-color);
+        margin: 0;
+        padding: 3px 10px 4px 10px;
+        box-shadow: 0 0 0 1px #ffffff25, 0 2px 2px #0000000a, 0 8px 16px -4px #0000000a;
+        background: var(--accent-linear);
+        font-family: var(--font-read), sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
         border-radius: 50px;
         -webkit-border-radius: 50px;
         -moz-border-radius: 50px;
       }
 
-      .fonts .options > span.font.san-serif {
-        font-family: var(--font-read);
+      .content-container > div.head > h1.story-title {
+        margin: 0;
+        padding: 5px 0;
+        font-weight: 700;
+        font-size: 1.7rem;
+        line-height: 1.5;
+        color: var(--title-color);
       }
 
-      .fonts .options > span.font.mono {
+      .content-container > .next-article {
+        /* border-top: var(--story-border); */
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .content-container .next-article > a {
+        border: var(--story-border-mobile);
+        padding: 15px 20px;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-end;
+        text-align: end;
+        font-size: 0.9rem;
+        gap: 10px;
+        color: var(--gray-color);
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+      }
+
+      .content-container .next-article > a:hover {
+        background-color: var(--hover-background);
+      }
+
+      .content-container .next-article > a > span.text {
+        color: var(--read-color);
+        font-weight: 500;
+      }
+
+      .content-container .next-article > a > span.date {
+        font-weight: 500;
+        font-size: 0.8rem;
         font-family: var(--font-mono);
-        font-size: 0.85rem;
       }
 
-      .fonts .options > span.font.serif {
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 0.95rem;
+      .content-container .next-article > a > span.title {
+        font-weight: 400;
+        font-size: 0.8rem;
       }
 
-      .fonts .options > span.font.active {
-        border: var(--input-border-focus);
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
+      div.body {
+        /* border: 1px solid #000000; */
+        margin: 0;
+        display: flex;
+        flex-flow: column;
+        color: var(--read-color);
+        font-family: var(--font-read), sans-serif;
+        gap: 0;
+        font-size: 1.125rem;
+        font-weight: 400;
       }
 
-      .fonts .options > span.font:hover {
-        color: var(--accent-color);
-        border: var(--input-border-focus);
-      }
-
-      .content-container * {
+      div.body * {
+        font-size: 1.05rem;
+        line-height: 1.5;
         color: inherit;
         font-family: inherit;
         transition: all 300ms ease-in-out;
@@ -211,17 +259,12 @@ export default class StoryBody extends HTMLElement {
         -o-transition: all 300ms ease-in-out;
       }
 
-      .content-container.intro {
-        /* border: 1px solid #000000; */
-        margin: 15px 0 0 0;
-      }
-
-      .content-container .paragraph {
+      div.body .section {
         /* border: 1px solid #000000; */
         margin: 10px 0 0 0;
       }
 
-      .content-container h2.title {
+      div.body h2.title {
         /* border: var(--input-border-focus); */
         padding: 0 !important;
         font-size: 1.3rem !important;
@@ -230,50 +273,96 @@ export default class StoryBody extends HTMLElement {
         margin: 5px 0;
       }
 
-      .content-container h6,
-      .content-container h5,
-      .content-container h4,
-      .content-container h3,
-      .content-container h1 {
+      div.body h6,
+      div.body h5,
+      div.body h4,
+      div.body h3,
+      div.body h1 {
         /* border: var(--input-border-focus); */
         padding: 0 !important;
         font-size: 1.25rem !important;
+        color: var(--title-color);
         font-weight: 500;
         line-height: 1.5;
-        margin: 5px 0;
+        margin: 15px 0 5px 0;
       }
 
-      .content-container p {
-        margin: 0 0 10px 0;
+      div.body p {
+        margin: 15px 0;
         line-height: 1.5;
       }
 
-      .content-container a {
+      div.body p:first-of-type {
+        margin: 0 0 15px 0;
+      }
+
+      div.body a {
         text-decoration: none;
         cursor: pointer;
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
+        color: var(--anchor-color) !important;
       }
 
-      .content-container a:hover {
-        text-decoration-color: var(--anchor-active) !important;
+      div.body a:hover {
+        /* text-decoration-color: var(--anchor-active) !important; */
         text-decoration: underline;
-        -moz-text-decoration-color: var(--anchor-active) !important;
       }
 
-      .content-container ul,
-      .content-container ol {
-        margin: 5px 0 0 20px;
+      div.body blockquote {
+        margin: 10px 0;
+        padding: 5px 15px;
+        font-style: italic;
+        border-left: 2px solid var(--gray-color);
+        background: var(--background);
+        color: var(--text-color);
+        font-weight: 400;
+      }
+
+      div.body blockquote:before {
+        content: open-quote;
+        color: var(--gray-color);
+        font-size: 1.5rem;
+        line-height: 1;
+        margin: 0;
+      }
+
+      div.body blockquote:after {
+        content: close-quote;
+        color: var(--gray-color);
+        font-size: 1.5rem;
+        line-height: 1;
+        margin: 0;
+      }
+
+      div.body hr {
+        border: none;
+        background-color: var(--gray-color);
+        height: 1px;
+        margin: 10px 0;
+      }
+
+      div.body b,
+      div.body strong {
+        font-weight: 500;
+
+      }
+
+      div.body ul,
+      div.body ol {
+        margin: 5px 0 15px 20px;
         padding: 0 0 0 15px;
-        line-height: 1.4;
         color: inherit;
       }
 
       @media screen and (max-width:660px) {
         .fonts {
           border-bottom: var(--story-border-mobile);
+        }
+
+        .content-container * {
+          font-size: 1rem;
+          line-height: 1.4;
+          color: inherit;
+          font-family: inherit;
         }
 
         a {

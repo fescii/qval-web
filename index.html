@@ -32,6 +32,7 @@
     import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PollWrapper from "./js/wrappers/poll.wrapper.js"
     import AuthorWrapper from "./js/wrappers/author.wrapper.js";
+    import HeaderWrapper from "./js/wrappers/header.wrapper.js";
 
     // Import elements
     import CustomSpan from "./js/elements/span.element.js"
@@ -74,6 +75,7 @@
     customElements.define('post-wrapper', PostWrapper);
     customElements.define('poll-wrapper', PollWrapper);
     customElements.define('author-wrapper', AuthorWrapper);
+    customElements.define('header-wrapper', HeaderWrapper);
 
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });
@@ -116,10 +118,10 @@
   </header-container> -->
 
   <app-story id="P0AB236B6" topics="engineering, programming" story-title="Making the Web. Faster." date="2024-03-13T13:00:00+03:00"
-    views="709" next-id="P0AB236B6" next-date="2024-03-13T13:00:00+03:00"
+    views="709" next-hash="P0AB236B6AB57" next-date="2024-03-13T13:00:00+03:00"
+    user-url="/u/U0A43PBAH6A" auth-url="/join" url="/s/P0AB236B6HA89B" search-url="/search"
     next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance"
-    author-username="U0A43PBAH6A"
-    author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
+    author-username="U0A43PBAH6A" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
     author-following="263" author-follow="false" author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
       I love to write about technology and software development.
       I am also passionate about open-source software and I am a contributor to various open-source projects."

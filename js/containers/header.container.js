@@ -863,7 +863,6 @@ export default class HeaderContainer extends HTMLElement {
       }
 
       ul.right > li.link.search a svg {
-        /* border: 1px solid #124ec5; */
         margin: 0 0 0 0;
         width: 25px;
         height: 25px;
@@ -871,8 +870,6 @@ export default class HeaderContainer extends HTMLElement {
 
       ul.right > li.link.signin > a {
         border: var(--story-border-mobile);
-        /* color: var(--white-color); */
-        /* background: var(--accent-linear); */
         padding: 4px 15px;
         font-family: var(--font-read);
         border-radius: 10px;
@@ -884,7 +881,6 @@ export default class HeaderContainer extends HTMLElement {
 
 
       ul.right > li.link.profile > a {
-        /* border: var(--story-border-mobile); */
         width: 30px;
         height: 30px;
         overflow: hidden;

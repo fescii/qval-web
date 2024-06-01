@@ -61,10 +61,9 @@ export default class AppStory extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
+        ${this.getTop()}
         <article class="content">
-          ${this.getHeader()}
           ${this.getStoryBody()}
-          ${this.getNextArticle()}
           ${this.getForm()}
           ${this.getOpinions()}
         </article>
@@ -73,9 +72,8 @@ export default class AppStory extends HTMLElement {
     else {
       return /* html */`
         <article class="content">
-          ${this.getHeader()}
+          ${this.getTop()}
           ${this.getStoryBody()}
-          ${this.getNextArticle()}
           ${this.getForm()}
           ${this.getOpinions()}
         </article>
@@ -89,38 +87,38 @@ export default class AppStory extends HTMLElement {
     }
   }
 
-  getHeader = () => {
-    let str = this.topics[0];
-    return `
-      <div class="head">
-        <span class="topic">${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}</span>
-        <h1 class="title">${this.getAttribute('story-title')}</h1>
-        <span class="stats">
-          <span class="date">${this.getDate(this.getAttribute('date'))}</span>
-          <span class="dot"></span>
-          <span class="views">${this.getAttribute('views')} views</span>
-        </span>
-
-        <div class="by">
-          <span class="by">by</span>
-          <a href="" class="name">${this.getAttribute('author-name')}</a>
-        </div>
-      </div>
+  getTop = () => {
+    return /* html */ `
+      <header-wrapper section="Story" type="story"
+        user-url="${this.getAttribute('user-url')}" auth-url="${this.getAttribute('auth-url')}"
+        url="${this.getAttribute('story-url')}" search-url="${this.getAttribute('search-url')}">
+      </header-wrapper>
     `
   }
 
+
   getStoryBody = () => {
+    let str = this.topics[0];
     return /* html */ `
-      <story-body>
+      <story-body topic="${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}"
+        story-title="${this.getAttribute('story-title')}"
+        next-hash="${this.getAttribute('next-hash')}" next-title="${this.getAttribute('next-title')}" next-date="${this.getAttribute('next-date')}"
+      >
         <div class="intro">
-          <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both&nbsp;<a
+          <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both<a
             href="https://www.blogger.com/#">Debian</a> or <a href="https://www.blogger.com/#">Ubuntu</a>.
-            Their similarities, and the fact that Ubuntu is technically based on
-            Debian, blur the lines between them. Let’s explore the important
+            <br>Their similarities, and the fact that Ubuntu is technically based on
+            Debian, blur the lines between them.<br> Let’s explore the important
             differences.
           </p>
-          <p>Following our <a href="">Series B last December</a>, I'm happy to announce we've raised a <a href=""><strong>$102M
-                Series C</strong></a> from existing and new investors.</p>
+          <blockquote>
+            Debian and Ubuntu are both popular Linux distributions, but they have
+              different philosophies and target audiences. <br/> Debian is community-driven
+              and focuses on stability, while Ubuntu is corporate-backed and
+              emphasizes ease of use.
+          </blockquote>
+          <p>Following our <a href="https://femar.me">Series B last December</a>, I'm happy to announce we've raised a <a href=""><strong>$102M
+              Series C</strong></a> from existing and new investors.</p>
           <p>Our vision of the Web is a global realtime medium for both creators
             and consumers,
             where all friction and latency are eliminated.</p>
@@ -134,10 +132,11 @@ export default class AppStory extends HTMLElement {
             </li>
             <li><a href="">Focus on the end-user</a></li>
           </ol>
+          <hr />
         </div>
-        <div class="paragraph" id="section1">
+        <div class="section" id="section1">
           <h2 class="title">Debian Has Lower System Requirements</h2>
-          <p>If the device you want to <a href="https://www.blogger.com/#">install Linux</a> on is light on resources, you’ll
+          <p>If the device you want to <strong>install Linux</strong> on is light on resources, you’ll
             want to note Debian and Ubuntu’s differing minimum requirements. <a href="https://www.blogger.com/#">A Debian 11 desktop
               install requires</a>
             at least a 1GHz processor, 1GB RAM, and
@@ -153,7 +152,7 @@ export default class AppStory extends HTMLElement {
           </p>
           <p>
             For older devices, this
-            can be asking a lot, so you may want a more minimal desktop. That’s
+            can be asking a lot, so you may want a more minimal desktop. <br>That’s
             relatively easy to get with Debian, but for Ubuntu, you’re better off
             going with another “<a href="https://www.blogger.com/#">Ubuntu flavor</a>” like <a
               href="https://www.blogger.com/#">Lubuntu</a> or <a href="https://www.blogger.com/#">Xubuntu</a>.
@@ -173,7 +172,7 @@ export default class AppStory extends HTMLElement {
             complicated and leaves you with an additional DE you might not use.
           </p>
         </div>
-        <div class="paragraph" id="section2">
+        <div class="section" id="section2">
           <h2 class="title">Ubuntu Makes Proprietary Software Easier to Get</h2>
           <p>Ubuntu and Debian take different approaches to the debate on free and <a href="https://www.blogger.com/#">open
               source</a>
@@ -208,7 +207,7 @@ export default class AppStory extends HTMLElement {
             convenience for the everyday user who doesn’t care about code
             philosophies. If that’s you, you’ll likely find Ubuntu more appealing.</p>
         </div>
-        <div class="paragraph" id="section3">
+        <div class="section" id="section3">
           <h2 class="title">Debian Supports Older Hardware</h2>
           <p>If you’re thinking of <a href="https://www.blogger.com/#">reviving an aging device</a>
             with Linux, you’re more likely to have success with Debian. That’s
@@ -238,7 +237,7 @@ export default class AppStory extends HTMLElement {
             on your device.
           </p>
         </div>
-        <div class="paragraph" id="section4">
+        <div class="section" id="section4">
           <h2 class="title">Ubuntu Is Corporate-Backed</h2>
           <p>Ubuntu is maintained by an organization called <a href="https://www.blogger.com/#">Canonical</a>.
             Debian, in contrast, is developed completely by a community of volunteers. Both offer their distros free of charge,
@@ -289,7 +288,7 @@ export default class AppStory extends HTMLElement {
   getRelatedStories = () => {
     return /* html */`
 			<div class="related">
-        <p class="title">Related stories</p>
+        <p class="title">Related stories.</p>
         <ul class="stories">
           <li class="story">
             <a href="" class="link">
@@ -400,135 +399,20 @@ export default class AppStory extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+          font-size: 16px;
           display: flex;
+          width: 100%;
           gap: 0;
           min-height: 90vh;
           justify-content: space-between;
         }
 
         article.content {
-          /* border: 1px solid #000000; */
-          padding: 10px 20px 30px 0;
+          padding: 0;
           width: 65%;
           display: flex;
           flex-flow: column;
           gap: 0;
-        }
-
-        article.content .head {
-          /* border: 1px solid #000000; */
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        article.content .head > .topic {
-          width: max-content;
-          color: var(--white-color);
-          margin: 0 0 5px;
-          padding: 3px 10px 4px 10px;
-          box-shadow: 0 0 0 1px #ffffff25, 0 2px 2px #0000000a, 0 8px 16px -4px #0000000a;
-          background: var(--accent-linear);
-          font-family: var(--font-read), sans-serif;
-          font-size: 0.9rem;
-          font-weight: 500;
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-        }
-
-        article.content .head > h1.title {
-          margin: 5px 0;
-          font-weight: 700;
-          font-size: 1.7rem;
-          line-height: 1.5;
-          color: var(--title-color);
-        }
-
-        article.content .head > span.stats {
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          color: var(--gray-color);
-          font-family: var(--font-mono);
-          font-size: 0.9rem;
-          gap: 20px;
-        }
-
-        article.content .head > span.stats span.dot {
-          display: inline-block;
-          width: 5px;
-          height: 5px;
-          background-color: var(--dot-background);
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-          -ms-border-radius: 50px;
-          -o-border-radius: 50px;
-        }
-
-        article.content .head > .by {
-          border-top: var(--story-border);
-          border-bottom: var(--story-border);
-          background-color: var(--background);
-          margin: 15px 0 0 0;
-          padding: 10px 0;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          color: var(--gray-color);
-          font-family: var(--font-mono), monospace;
-          /* font-family: var(--font-read), sans-serif; */
-          font-size: 1rem;
-        }
-
-        article.content .head > .by a {
-          text-decoration: none;
-          color: var(--text-color);
-          font-family: var(--font-read), sans-serif;
-          font-size: 1rem;
-        }
-
-        article.content .next-article {
-          /* border-top: var(--story-border); */
-          padding: 20px 0;
-          margin: 0;
-        }
-
-        article.content .next-article > a {
-          border: var(--story-border-mobile);
-          padding: 15px 20px;
-          display: flex;
-          flex-flow: column;
-          align-items: flex-end;
-          text-align: end;
-          font-size: 0.9rem;
-          gap: 10px;
-          color: var(--gray-color);
-          border-radius: 5px;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-        }
-
-        article.content .next-article > a:hover {
-          background-color: var(--hover-background);
-        }
-
-        article.content .next-article > a > span.text {
-          color: var(--read-color);
-          font-weight: 500;
-        }
-
-        article.content .next-article > a > span.date {
-          font-weight: 500;
-          font-size: 0.8rem;
-          font-family: var(--font-mono);
-        }
-
-        article.content .next-article > a > span.title {
-          font-weight: 400;
-          font-size: 0.8rem;
         }
 
         /* Responses */
@@ -541,7 +425,7 @@ export default class AppStory extends HTMLElement {
 
         section.side {
           /* border: thin solid #4b5563bd; */
-          padding: 20px 0 30px 0;
+          padding: 0;
           margin: 0;
           background-color: transparent;
           width: 33%;
@@ -551,72 +435,15 @@ export default class AppStory extends HTMLElement {
           gap: 0;
           position: sticky;
           top: 60px;
+          height: calc(100vh - 60px);
+          max-height: calc(100vh - 60px);
+          overflow-y: scroll;
+          scrollbar-width: none;
         }
 
-        .posted-by {
-          /* border: thin solid #4b5563bd; */
-          background-color: var(--background);
-          padding: 10px 15px 0 0;
-          display: flex;
-          flex-flow: column;
-          gap: 15px;
-        }
-
-        .posted-by > p.text {
-          color: var(--gray-color);
-          padding: 0;
-          margin: 0;
-          font-weight: 500;
-        }
-
-        .posted-by > .author {
-          /* border: thin solid #4b5563bd; */
-          padding: 0;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .posted-by > .author .image {
-          /* border: thin solid #4b5563bd; */
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          width: 45px;
-          height: 45px;
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-        }
-
-        .posted-by > .author .image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-        }
-
-        .posted-by > .author > .name {
-          /* border: thin solid #4b5563bd; */
-          padding: 0;
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        .posted-by > .author > .name a {
-          font-weight: 500;
-          color: var(--text-color);
-        }
-
-        .posted-by > .author > .name .occupation {
-          /* font-weight: 500; */
-          color: var(--gray-color);
-          font-size: 0.95rem;
+        section.side::-webkit-scrollbar {
+          visibility: hidden;
+          display: none;
         }
 
         section.side .related {
@@ -630,8 +457,9 @@ export default class AppStory extends HTMLElement {
         }
 
         section.side .related > p.title {
-          color: var(--gray-color);
+          color: var(--title-color);
           padding: 0;
+          font-size: 1.2rem;
           margin: 0;
           font-weight: 500;
         }
@@ -660,18 +488,17 @@ export default class AppStory extends HTMLElement {
         section.side .related > ul.stories li.story a span.title {
           color: var(--read-color);
           font-family: var(--font-text), sans-serif;
-          font-weight: 400;
+          font-weight: 500;
         }
 
         section.side .related > ul.stories li.story a:hover > span.title {
-          color: var(--read-color);
-          /* font-weight: 500; */
+          color: var(--title-color);
         }
-
 
         section.side .related > ul.stories li.story a span.date {
           color: var(--gray-color);
-          font-family: var(--font-mono), monospace;
+          font-family: var(--font-main), sans-serif;
+          line-height: 1.4;
           font-size: 0.8rem;
         }
 
@@ -742,7 +569,7 @@ export default class AppStory extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+            font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;
@@ -750,18 +577,17 @@ export default class AppStory extends HTMLElement {
             gap: 0;
 					}
 
+          article.content .head {
+            margin: 10px 0 0 0;
+          }
+
           article.content {
             /* border: 1px solid #000000; */
-            padding: 30px 0 30px 0;
+            padding: 0;
             width: 100%;
             display: flex;
             flex-flow: column;
             gap: 0;
-          }
-
-          article.content .head > .by {
-            border-top: var(--story-border-mobile);
-            border-bottom: var(--story-border-mobile);
           }
 
 					.action,

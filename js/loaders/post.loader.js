@@ -26,7 +26,7 @@ export default class PostLoader extends HTMLElement {
 	}
 
 	getBody() {
-		return `
+		return /*html*/`
 			<div class="loader author">
 				<span class="head">
           <span class="dot skeleton"></span>
@@ -54,7 +54,7 @@ export default class PostLoader extends HTMLElement {
 	}
 
 	getStyles() {
-		return `
+		return /* css */`
 	    <style>
 	      *,
 	      *:after,
@@ -65,10 +65,11 @@ export default class PostLoader extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+        	font-size: 16px;
 				  /*border: var(--input-border);*/
 				  display: flex;
 				  flex-flow: column;
+					padding: 0;
 				  gap: 0;
 				  width: 100%;
 				}
