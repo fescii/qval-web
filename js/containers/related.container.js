@@ -132,7 +132,7 @@ export default class RelatedContainer extends HTMLElement {
 
 	      :host {
         	font-size: 16px;
-          margin: 20px 0 0 0;
+          margin: 15px 0 0 0;
 				  display: flex;
 				  flex-flow: column;
 				}

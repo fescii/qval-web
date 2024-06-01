@@ -101,7 +101,7 @@ export default class AppPost extends HTMLElement {
     // `
 
     return /*html */`
-      <poll-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
+      <poll-wrapper upvotes="${this.getAttribute('upvotes')}" hash="${this.getAttribute('hash')}"
         opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
         views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
         author-id="${this.getAttribute('author-id')}"
@@ -215,15 +215,15 @@ export default class AppPost extends HTMLElement {
         }
 
         div.side {
-          padding: 0;
+          padding: 25px 0 0 0;
           width: 35%;
           display: flex;
           flex-flow: column;
           gap: 20px;
           position: sticky;
-          top: 25px;
-          height: calc(100vh - 25px);
-          max-height: calc(100vh - 25px);
+          top: 0;
+          height: 100vh;
+          max-height: 100vh;
           overflow-y: scroll;
           scrollbar-width: none;
         }
@@ -261,7 +261,6 @@ export default class AppPost extends HTMLElement {
           }
 
           div.side {
-            /* border: 1px solid #ff0000; */
             padding: 0;
             width: 100%;
           }

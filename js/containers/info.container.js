@@ -140,7 +140,7 @@ export default class InfoContainer extends HTMLElement {
 
 	      :host {
         	font-size: 16px;
-					margin: 0;
+					margin: 15px 0 20px;
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
@@ -148,7 +148,6 @@ export default class InfoContainer extends HTMLElement {
 				}
 
 				div.content {
-				  margin: 15px 0;
 				  padding: 0;
 				  display: flex;
 				  flex-flow: row;
@@ -226,7 +225,6 @@ export default class InfoContainer extends HTMLElement {
 				@media screen and (max-width:660px) {
 					:host {
         		font-size: 16px;
-						padding: 15px 0;
 					}
 
 					::-webkit-scrollbar {

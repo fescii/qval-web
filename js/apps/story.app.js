@@ -383,7 +383,7 @@ export default class AppStory extends HTMLElement {
         }
 
         section.side {
-          padding: 0;
+          padding: 25px 0 0 0;
           margin: 0;
           background-color: transparent;
           width: 32%;
@@ -392,9 +392,9 @@ export default class AppStory extends HTMLElement {
           flex-flow: column;
           gap: 0;
           position: sticky;
-          top: 25px;
-          height: calc(100vh - 25px);
-          max-height: calc(100vh - 25px);
+          top: 0;
+          height: 100vh;
+          max-height: 100vh;
           overflow-y: scroll;
           scrollbar-width: none;
         }
