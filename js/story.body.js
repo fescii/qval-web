@@ -690,7 +690,7 @@ export default class StoryBody extends HTMLElement {
         }
 
         .content-container .next-article > a {
-          border: var(--story-border-mobile);
+          background-color: var(--que-background);
           padding: 15px 20px;
           display: flex;
           flex-flow: column;
@@ -703,10 +703,6 @@ export default class StoryBody extends HTMLElement {
           border-radius: 5px;
           -webkit-border-radius: 5px;
           -moz-border-radius: 5px;
-        }
-
-        .content-container .next-article > a:hover {
-          background-color: var(--hover-background);
         }
 
         .content-container .next-article > a > span.text {
@@ -1204,10 +1200,6 @@ export default class StoryBody extends HTMLElement {
             border-radius: 5px;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
-          }
-
-          .content-container .next-article > a:hover {
-            background-color: none;
           }
 
           .content-container .next-article > a > span.text {
