@@ -875,7 +875,7 @@ export default class AppProfile extends HTMLElement {
             padding: 6px 25px;
           }
 
-          .actions > ul.tab > li.tab-item,
+          .tab-control > ul.tab > li.tab-item,
 					.action,
 					a {
 						cursor: default !important;
