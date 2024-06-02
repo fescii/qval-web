@@ -14,7 +14,8 @@ export default class AppHome extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    //Scroll the window to the top
+    window.scrollTo(0, 0);
   }
 
   disableScroll() {

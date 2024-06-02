@@ -39,7 +39,6 @@ export default class StoryBody extends HTMLElement {
 
       // Add event listeners
       this.likePost();
-      this.openShare();
       this.scrollLikes();
     }, 2000);
   }
@@ -201,58 +200,6 @@ export default class StoryBody extends HTMLElement {
     animateScroll();
   }
 
-  // fn to open the share overlay
-  openShare = () => {
-    // Get share button
-    const shareButton = this.shadowObj.querySelector('.action.share');
-
-    // Check if the overlay exists
-    if (shareButton) {
-      // Get overlay
-      const overlay = shareButton.querySelector('.overlay');
-
-      // Select close button
-      const closeButton = shareButton.querySelector('.close');
-
-      // Add event listener to the close button
-      closeButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Remove the active class
-        overlay.classList.remove('active');
-      });
-
-      // Add event listener to the share button
-      shareButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Toggle the overlay
-        overlay.classList.add('active');
-
-        // add event to run once when the overlay is active: when user click outside the overlay
-        document.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // Check if the target is not the overlay
-          if (!overlay.contains(e.target)) {
-
-            // Remove the active class
-            overlay.classList.remove('active');
-          }
-        }, { once: true });
-      });
-    }
-  }
-
   formatNumber = n => {
     if (n >= 0 && n <= 999) {
       return n.toString();
@@ -372,6 +319,7 @@ export default class StoryBody extends HTMLElement {
       <div class="head">
         <span class="topic">${this.getAttribute('topic')}</span>
         <h1 class="story-title">${this.getAttribute('story-title')}</h1>
+        ${this.getShare()}
       </div>
     `
   }
@@ -426,13 +374,6 @@ export default class StoryBody extends HTMLElement {
         </span>
         ${this.getLike(this.getAttribute('liked'))}
         ${this.getViews()}
-        <span class="action share">
-          <span class="icon">
-            <span class="sp">•</span>
-            <span class="sp">•</span>
-          </span>
-          ${this.getShare()}
-        </span>
       </div>
 		`
   }
@@ -545,30 +486,21 @@ export default class StoryBody extends HTMLElement {
   }
 
   getShare = () => {
+    // Get url to share
+    const url = this.getAttribute('url');
+
+    // Get window host url including https/http part
+    const host = this.getAttribute('host');
+
+    // combine the url with the host
+    const shareUrl = `${host}${url}`;
+
+    // Get the tilte of the story
+    const title = this.getAttribute('story-title');
+
+
     return /* html */`
-      <div class="overlay">
-        <span class="close"></span>
-        <span class="options">
-          <span class="option link">
-            <span class="text">Copy link</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
-              <path d="M580.3 267.2c56.2-56.2 56.2-147.3 0-203.5C526.8 10.2 440.9 7.3 383.9 57.2l-6.1 5.4c-10 8.7-11 23.9-2.3 33.9s23.9 11 33.9 2.3l6.1-5.4c38-33.2 95.2-31.3 130.9 4.4c37.4 37.4 37.4 98.1 0 135.6L433.1 346.6c-37.4 37.4-98.2 37.4-135.6 0c-35.7-35.7-37.6-92.9-4.4-130.9l4.7-5.4c8.7-10 7.7-25.1-2.3-33.9s-25.1-7.7-33.9 2.3l-4.7 5.4c-49.8 57-46.9 142.9 6.6 196.4c56.2 56.2 147.3 56.2 203.5 0L580.3 267.2zM59.7 244.8C3.5 301 3.5 392.1 59.7 448.2c53.6 53.6 139.5 56.4 196.5 6.5l6.1-5.4c10-8.7 11-23.9 2.3-33.9s-23.9-11-33.9-2.3l-6.1 5.4c-38 33.2-95.2 31.3-130.9-4.4c-37.4-37.4-37.4-98.1 0-135.6L207 165.4c37.4-37.4 98.1-37.4 135.6 0c35.7 35.7 37.6 92.9 4.4 130.9l-5.4 6.1c-8.7 10-7.7 25.1 2.3 33.9s25.1 7.7 33.9-2.3l5.4-6.1c49.9-57 47-142.9-6.5-196.5c-56.2-56.2-147.3-56.2-203.5 0L59.7 244.8z" />
-            </svg>
-          </span>
-          <span class="option more">
-            <span class="text">Share options</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"  fill="currentColor">
-            <path d="M15 3a3 3 0 0 1-5.175 2.066l-3.92 2.179a2.994 2.994 0 0 1 0 1.51l3.92 2.179a3 3 0 1 1-.73 1.31l-3.92-2.178a3 3 0 1 1 0-4.133l3.92-2.178A3 3 0 1 1 15 3Zm-1.5 10a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 13.5 13Zm-9-5a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 4.5 8Zm9-5a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 13.5 3Z"></path>
-            </svg>
-          </span>
-          <span class="option code">
-            <span class="text">Embed code</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"></path>
-            </svg>
-          </span>
-        </span>
-      </div>
+      <share-wrapper url="${shareUrl.toLowerCase()}" summery="${title}"></share-wrapper>
     `
   }
 

@@ -105,6 +105,48 @@ Typography End
 ==============
 
 */
+
+
+/* Toast Message */
+body > .toast {
+  position: fixed;
+  bottom: 10px;
+  right: 50%;
+  transform: translateX(50%);
+  background: var(--accent-linear);
+  color: var(--white-color);
+  padding: 8px 15px;
+  width: max-content;
+  max-width: 95%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+body > .toast.false {
+  background: var(--error-linear);
+}
+
+body > .toast > p {
+  margin: 0;
+  padding: 0;
+}
+
+body > .toast > svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* End Toast Message */
+
+
 main.test {
   /* border: 1px solid #53595f; */
   padding: 15px 0;
@@ -135,9 +177,29 @@ section.content {
   width: 63%;
 }
 
-.top {
-  /* border: 1px solid #53595f; */
+.share {
+  border-top: var(--border);
+  border-bottom: var(--border);
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.share > .title {
+  color: var(--text-color);
+  font-family: var(--font-text), sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
   padding: 0;
+}
+
+.share-buttons {
+  /* border-right: var(--border-mobile); */
+  border-width: 2px;
+  padding: 0 0 5px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -146,52 +208,58 @@ section.content {
   gap: 8px;
 }
 
-.top > a.link {
-  text-decoration: none;
-  color: var(--gray-color);
+.share-buttons > a {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.top > a.link.profile:hover,
-.top > a.link.search:hover {
-  transition: color 0.3s ease-in-out;
-    -webkit-transition: color 0.3s ease-in-out;
-    -moz-transition: color 0.3s ease-in-out;
-    -ms-transition: color 0.3s ease-in-out;
-    -o-transition: color 0.3s ease-in-out;
-  color: var(--accent-color);
-}
-
-.top a.link.search a svg {
-  margin: 0 0 0 0;
-  width: 22px;
-  height: 22px;
-}
-
-.top > a.link.profile > svg {
-  width: 23px;
-  height: 23px;
-}
-
-.top > a.link.signin {
-  border: var(--border-mobile);
-  font-weight: 500;
-  padding: 4px 15px;
-  font-family: var(--font-read);
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-}
-
-.top > a.link.signin:hover {
-  color: transparent;
+  height: 30px;
+  width: 30px;
+  min-height: 30px;
+  min-width: 30px;
+  max-height: 30px;
+  max-width: 30px;
+  padding: 5px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
   background: var(--accent-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
+  color: var(--white-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.share-buttons > a.x {
+  background: linear-gradient(103.53deg, #1DA1F2 -6.72%, #0A95D7 109.77%);
+}
+
+.share-buttons > a.facebook {
+  background: linear-gradient(103.53deg, #1877F2 -6.72%, #0A5A9C 109.77%);
+}
+
+.share-buttons > a.linkedin {
+  background: linear-gradient(103.53deg, #0077B5 -6.72%, #005684 109.77%);;
+}
+
+.share-buttons > a.mail {
+  background: linear-gradient(103.53deg, #D44638 -6.72%, #D44638 109.77%);
+}
+
+.share-buttons > a.reddit {
+  background: linear-gradient(103.53deg, #FF4500 -6.72%, #FF4500 109.77%);
+}
+
+.share-buttons > a.telegram {
+  background: linear-gradient(103.53deg, #0088CC -6.72%, #0088CC 109.77%);
+}
+
+.share-buttons > a.whatsapp {
+  background: linear-gradient(103.53deg, #25D366 -6.72%, #25D366 109.77%);
+}
+
+.share-buttons > a > svg {
+  height: 15px;
+  width: 15px;
 }
 
 

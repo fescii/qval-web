@@ -33,6 +33,7 @@
     import PollWrapper from "./js/wrappers/poll.wrapper.js"
     import AuthorWrapper from "./js/wrappers/author.wrapper.js";
     import HeaderWrapper from "./js/wrappers/header.wrapper.js";
+    import ShareWrapper from "./js/wrappers/share.wrapper.js";
 
     // Import elements
     import CustomSpan from "./js/elements/span.element.js"
@@ -81,6 +82,7 @@
     customElements.define('poll-wrapper', PollWrapper);
     customElements.define('author-wrapper', AuthorWrapper);
     customElements.define('header-wrapper', HeaderWrapper);
+    customElements.define('share-wrapper', ShareWrapper);
 
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });
@@ -130,7 +132,7 @@
 
   <app-story hash="P0AB236B6BA17" topics="engineering, programming, technology" story-title="Making the Web. Faster." time="2024-03-13T13:00:00+03:00"
     next-hash="P0AB236B6AB57" next-date="2024-03-13T13:00:00+03:00"
-    user-url="/u/U0A43PBAH6A" auth-url="/join" url="/s/P0AB236B6HA89B" search-url="/search"
+    user-url="/u/U0A43PBAH6A" auth-url="/join" url="/s/P0AB236B6HA89B" search-url="/search" host="https://getopas.pythonanywhere.com"
     next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance"
     opinions="673" liked="false" likes="972" views="6473"
     author-username="U0A43PBAH6A" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"

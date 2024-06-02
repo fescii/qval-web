@@ -45,7 +45,7 @@ export default class HeaderWrapper extends HTMLElement {
       storyLoader.remove();
       contentContainer.classList.remove('short');
       contentContainer.insertAdjacentHTML('beforeend', content);
-    }, 2000)
+    }, 1500)
   }
 
   getTemplate() {

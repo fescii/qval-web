@@ -104,14 +104,23 @@ export default class AppStory extends HTMLElement {
 
   getStoryBody = () => {
     let str = this.topics[0];
+    let formatted = str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase());
+
+    // Show HTML Here
     return /* html */ `
-      <story-body topic="${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}"
-        story-title="${this.getAttribute('story-title')}"
+      <story-body topic="${formatted}"
+        story-title="${this.getAttribute('story-title')}"  url="${this.getAttribute('url')}" host="${this.getAttribute('host')}"
         next-hash="${this.getAttribute('next-hash')}" next-title="${this.getAttribute('next-title')}" next-date="${this.getAttribute('next-date')}"
         hash="${this.getAttribute('hash')}" opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
-        views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
-      >
-        <div class="intro">
+        views="${this.getAttribute('views')}" time="${this.getAttribute('time')}">
+        ${this.getStoryContent()}
+      </story-body>
+    `
+  }
+
+  getStoryContent = () => {
+    return /*html*/`
+      <div class="intro">
           <p>If you’re looking for a Linux distribution, you’ve likely seen recommendations for both <a
             href="https://www.blogger.com/#">Debian</a> or <a href="https://www.blogger.com/#">Ubuntu</a>.
             <br>Their similarities, and the fact that Ubuntu is technically based on
@@ -251,7 +260,6 @@ export default class AppStory extends HTMLElement {
             but Canonical also
             offers paid support if you’re using Ubuntu professionally.</p>
         </div>
-      </story-body>
     `
   }
 
