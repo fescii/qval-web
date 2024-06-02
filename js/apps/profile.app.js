@@ -3,6 +3,9 @@ export default class AppProfile extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // Check if you is true and convert to boolean
+    this._you = this.getAttribute('you') === 'true';
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -146,11 +149,12 @@ export default class AppProfile extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
+        ${this.getTop()}
         ${this.getHeader()}
         ${this.getStats()}
         ${this.getBio()}
-        ${this.getButtons()}
         ${this.getActions()}
+        ${this.getTab()}
         <div class="content-container">
           ${this.getStories()}
         </div>
@@ -159,11 +163,12 @@ export default class AppProfile extends HTMLElement {
     else {
       return /* html */`
         <section class="main">
+          ${this.getTop()}
           ${this.getHeader()}
           ${this.getStats()}
           ${this.getBio()}
-          ${this.getButtons()}
           ${this.getActions()}
+          ${this.getTab()}
           <div class="content-container">
             ${this.getStories()}
           </div>
@@ -175,6 +180,15 @@ export default class AppProfile extends HTMLElement {
         </section>
       `;
     }
+  }
+
+  getTop = () => {
+    return /* html */ `
+      <header-wrapper section="Profile" type="profile"
+        user-url="${this.getAttribute('url')}" auth-url="${this.getAttribute('auth-url')}"
+        url="${this.getAttribute('url')}" search-url="${this.getAttribute('search-url')}">
+      </header-wrapper>
+    `
   }
 
   getHeader = () => {
@@ -261,12 +275,24 @@ export default class AppProfile extends HTMLElement {
     `
   }
 
-  getButtons() {
-    return /*html*/`
-      <div class="buttons">
-        ${this.checkFollowing(this.getAttribute('user-follow'))}
-      </div>
-    `;
+  getActions = you => {
+    // You is true
+    if (this._you) {
+      return /*html*/`
+        <div class="actions">
+          <a href="/user/edit/profile" class="action">Edit profile</a>
+          <a href="/user/stats" class="action">Your stats</a>
+        </div>
+      `
+    }
+    else {
+      return /*html*/`
+        <div class="actions">
+          ${this.checkFollowing(this.getAttribute('user-follow'))}
+          <span class="action">Coming Soon</span>
+        </div>
+      `
+    }
   }
 
   checkFollowing = following => {
@@ -337,42 +363,23 @@ export default class AppProfile extends HTMLElement {
 
   getTab = () => {
     return /* html */`
-      <ul id="tab" class="tab">
-        <li data-element="stories" class="tab-item details active">
-          <span class="text">Stories</span>
-        </li>
-        <li data-element="opinions" class="tab-item opinions">
-          <span class="text">Opinions</span>
-        </li>
-        <li data-element="people" class="tab-item people">
-          <span class="text">People</span>
-        </li>
-        <span class="line"></span>
-      </ul>
-    `
-  }
-
-  getActions = () => {
-    return `
-      <div class="actions">
-        ${this.getAuthor()}
-        ${this.getTab()}
+      <div class="tab-control">
+        <ul id="tab" class="tab">
+          <li data-element="stories" class="tab-item details active">
+            <span class="text">Stories</span>
+          </li>
+          <li data-element="opinions" class="tab-item opinions">
+            <span class="text">Opinions</span>
+          </li>
+          <li data-element="people" class="tab-item people">
+            <span class="text">People</span>
+          </li>
+          <span class="line"></span>
+        </ul>
       </div>
     `
   }
 
-  getAuthor = () => {
-    return `
-      <div class="author">
-        <span class="code">${this.getAttribute('id')}</span>
-        <span class="sp">•</span>
-        <span class="stories">
-          <span class="no">${this.getAttribute('stories')}</span>
-          <span class="text">Stories</span>
-        </span>
-      </div>
-    `
-  }
 
   getStyles() {
     return /* css */`
@@ -505,7 +512,7 @@ export default class AppProfile extends HTMLElement {
           color: var(--gray-color);
           width: 15px;
           height: 15px;
-          margin: 3px 0 0 0;
+          margin: 2px 0 0 0;
         }
 
         .top > .name > a.username:hover {
@@ -568,24 +575,27 @@ export default class AppProfile extends HTMLElement {
           margin: 0;
         }
 
-        .buttons {
+        .actions {
+          border-bottom: var(--border);
           display: flex;
           width: 100%;
-          margin: 10px 0;
+          margin: 0;
+          padding: 10px 0 15px;
           flex-flow: row;
           align-items: center;
-          gap: 10px;
+          justify-content: space-between;
+          gap: 30px;
         }
 
-        .buttons > a.action {
+        .actions > .action {
           border: var(--action-border);
           text-decoration: none;
           display: flex;
-          width: 100%;
+          width: calc(50% - 30px);
           flex-flow: row;
           align-items: center;
           justify-content: center;
-          padding: 7px 20px;
+          padding: 6px 25px;
           border-radius: 10px;
           -webkit-border-radius: 10px;
           -moz-border-radius: 10px;
@@ -594,7 +604,7 @@ export default class AppProfile extends HTMLElement {
           -o-border-radius: 10px;
         }
 
-        .buttons > a.action.follow {
+        .actions > .action.follow {
           border: none;
           background: var(--accent-linear);
           color: var(--white-color);
@@ -605,7 +615,7 @@ export default class AppProfile extends HTMLElement {
           -o-border-radius: 10px;
         }
 
-        .actions {
+        .tab-control {
           border-bottom: var(--border);
           background-color: var(--background);
           display: flex;
@@ -617,7 +627,7 @@ export default class AppProfile extends HTMLElement {
           top: 60px;
         }
 
-        .actions > .author {
+        .tab-control > .author {
           /* border-top: var(--border); */
           border-bottom: var(--border);
           padding: 10px 0;
@@ -630,7 +640,7 @@ export default class AppProfile extends HTMLElement {
           font-size: 0.9rem;
         }
 
-        .actions > ul.tab {
+        .tab-control > ul.tab {
           height: max-content;
           width: 100%;
           padding: 5px 0 0 0;
@@ -645,12 +655,12 @@ export default class AppProfile extends HTMLElement {
           scrollbar-width: none;
         }
 
-        .actions > ul.tab::-webkit-scrollbar {
+        .tab-control > ul.tab::-webkit-scrollbar {
           display: none !important;
           visibility: hidden;
         }
 
-        .actions > ul.tab > li.tab-item {
+        .tab-control > ul.tab > li.tab-item {
           /* border: var(--border); */
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
@@ -664,12 +674,12 @@ export default class AppProfile extends HTMLElement {
           font-size: 0.95rem;
         }
 
-        .actions > ul.tab > li.tab-item > .text {
+        .tab-control > ul.tab > li.tab-item > .text {
           font-weight: 500;
           font-size: 1rem;
         }
 
-        .actions > ul.tab > li.tab-item:hover > .text {
+        .tab-control > ul.tab > li.tab-item:hover > .text {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
@@ -677,12 +687,12 @@ export default class AppProfile extends HTMLElement {
           font-family: var(--font-text);
         }
 
-        .actions > ul.tab > li.active {
+        .tab-control > ul.tab > li.active {
           font-size: 0.95rem;
           /*padding: 6px 10px 10px 10px;*/
         }
 
-        .actions > ul.tab > li.active > .text {
+        .tab-control > ul.tab > li.active > .text {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
@@ -690,7 +700,7 @@ export default class AppProfile extends HTMLElement {
           font-family: var(--font-text);
         }
 
-        .actions > ul.tab span.line {
+        .tab-control > ul.tab span.line {
           position: absolute;
           z-index: 1;
           background: var(--accent-linear);
@@ -834,7 +844,7 @@ export default class AppProfile extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+            font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;
@@ -843,20 +853,26 @@ export default class AppProfile extends HTMLElement {
             gap: 0;
 					}
 
-          .head > .data > .name > .user > span.code {
-            margin: 0 0;
-            padding: 0;
-            color: transparent;
-            background: var(--accent-linear);
-            background-clip: text;
-            -webkit-background-clip: text;
-            font-family: var(--font-mono), monospace;
-            font-weight: 600;
+          .top {
+            display: flex;
+            width: 100%;
+            flex-flow: row;
+            align-items: center;
+            gap: 8px;
+          }
+          
+          .tab-control {
+            border-bottom: var(--border-mobile);
+            margin: 5px 0 5px 0;
+            position: sticky;
+            top: 50px;
           }
 
-          .actions > .author,
-          .actions {
-            border-bottom: var(--border-mobile);
+          .actions > .action {
+            cursor: default !important;
+            display: flex;
+            width: calc(50% - 15px);
+            padding: 6px 25px;
           }
 
           .actions > ul.tab > li.tab-item,

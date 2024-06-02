@@ -85,6 +85,11 @@ export default class HeaderWrapper extends HTMLElement {
               <path d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z" />
             </svg>
           </a>
+          <a href="/discover" class="link discover">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"></path>
+            </svg>
+          </a>
           <a href="${this.getAttribute('search-url')}" class="link search">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="11.7666" cy="11.7667" r="8.98856" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
@@ -236,6 +241,7 @@ export default class HeaderWrapper extends HTMLElement {
           justify-content: center;
         }
 
+        nav.nav > .links > a.link.discover:hover,
         nav.nav > .links > a.link.profile:hover,
         nav.nav > .links > a.link.search:hover {
           transition: color 0.3s ease-in-out;
@@ -250,6 +256,11 @@ export default class HeaderWrapper extends HTMLElement {
           margin: 0;
           width: 22px;
           height: 22px;
+        }
+
+        nav.nav > .links > a.link.discover > svg {
+          width: 20px;
+          height: 20px;
         }
 
         nav.nav > .links > a.link.profile > svg {
