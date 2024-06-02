@@ -259,8 +259,8 @@ export default class TopicsContainer extends HTMLElement {
 				}
 
 				ul.topics > li.topic a.link > span.no {
-				  font-family: var(--font-main), san-serif;
-				  font-size: 0.85rem;
+				  font-family: var(--font-mono), monospace;
+				  font-size: 0.89rem;
 				}
 
 				ul.topics > li.topic a.link:hover {
@@ -270,6 +270,7 @@ export default class TopicsContainer extends HTMLElement {
 				  -webkit-background-clip: text;
 					border: var(--topic-border-active);
 				}
+
 				@media screen and (max-width:660px) {
 					:host {
         		font-size: 16px;
