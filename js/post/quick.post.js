@@ -1121,6 +1121,7 @@ export default class QuickPost extends HTMLElement {
 
 
         a,
+        .content.extra .read-more,
         span.stat,
         span.action {
           cursor: default !important;
