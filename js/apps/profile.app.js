@@ -16,7 +16,46 @@ export default class AppProfile extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
+  
     this.activateTab()
+  }
+
+  formatNumber = n => {
+    if (n >= 0 && n <= 999) {
+      return n.toString();
+    } else if (n >= 1000 && n <= 9999) {
+      const value = (n / 1000).toFixed(2);
+      return `${value}k`;
+    } else if (n >= 10000 && n <= 99999) {
+      const value = (n / 1000).toFixed(1);
+      return `${value}k`;
+    } else if (n >= 100000 && n <= 999999) {
+      const value = (n / 1000).toFixed(0);
+      return `${value}k`;
+    } else if (n >= 1000000 && n <= 9999999) {
+      const value = (n / 1000000).toFixed(2);
+      return `${value}M`;
+    } else if (n >= 10000000 && n <= 99999999) {
+      const value = (n / 1000000).toFixed(1);
+      return `${value}M`;
+    } else if (n >= 100000000 && n <= 999999999) {
+      const value = (n / 1000000).toFixed(0);
+      return `${value}M`;
+    } else {
+      return "1B+";
+    }
+  }
+
+  parseToNumber = num_str => {
+    // Try parsing the string to an integer
+    const num = parseInt(num_str);
+
+    // Check if parsing was successful
+    if (!isNaN(num)) {
+      return num;
+    } else {
+      return 0;
+    }
   }
 
   disableScroll() {
@@ -108,8 +147,9 @@ export default class AppProfile extends HTMLElement {
     if (mql.matches) {
       return /* html */`
         ${this.getHeader()}
+        ${this.getStats()}
         ${this.getBio()}
-        ${this.checkFollowing(this.getAttribute('u-follow'))}
+        ${this.getButtons()}
         ${this.getActions()}
         <div class="content-container">
           ${this.getStories()}
@@ -120,8 +160,9 @@ export default class AppProfile extends HTMLElement {
       return /* html */`
         <section class="main">
           ${this.getHeader()}
+          ${this.getStats()}
           ${this.getBio()}
-          ${this.checkFollowing(this.getAttribute('u-follow'))}
+          ${this.getButtons()}
           ${this.getActions()}
           <div class="content-container">
             ${this.getStories()}
@@ -137,33 +178,108 @@ export default class AppProfile extends HTMLElement {
   }
 
   getHeader = () => {
-    return `
-      <div class="head">
-        <div class="data">
-          <div class="name">
-            <span class="user">
-              <span class="code">${this.getAttribute('id')}</span>
-              <span class="joined">${this.getDate(this.getAttribute('join-date'))}</span>
-            </span>
-            <p>Fredrick Ochieng</p>
-          </div>
-          <div class="users">
-            <a href="" class="stat followers">
-              <span class="no">${this.getAttribute('followers')}</span>
-              <span class="text">followers</span>
-            </a>
-            <span class="sp">•</span>
-            <a href="" class="stat followers">
-              <span class="no">${this.getAttribute('following')}</span>
-              <span class="text">stories</span>
-            </a>
-          </div>
+    // Get name and check if it's greater than 20 characters
+    const name = this.getAttribute('name');
+
+    // gET URL
+    const url = this.getAttribute('url');
+
+    // Check if the name is greater than 20 characters: replace the rest with ...
+    let displayName = name.length > 25 ? `${name.substring(0, 25)}..` : name;
+
+    return /* html */ `
+      <div class="top">
+        <div class="avatar">
+          <img src="${this.getAttribute('picture')}" alt="Author name">
         </div>
-        <div class="image">
-          <img src=${this.getAttribute('img')} alt="Profile photo">
+        <div class="name">
+          <h4 class="name">
+            <span class="name">${displayName}</span>
+            ${this.checkVerified(this.getAttribute('verified'))}
+          </h4>
+          <a href="${url.toLowerCase()}" class="username">
+            <span class="text">${this.getAttribute('username')}</span>
+          </a>
         </div>
       </div>
     `
+  }
+
+  checkVerified = verified => {
+    if (verified === 'true') {
+      return /*html*/`
+			  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+          <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+        </svg>
+			`
+    }
+    else {
+      return ''
+    }
+  }
+
+  getStats = () => {
+    // Get total followers & following and parse to integer
+    const followers = this.getAttribute('followers') || 0;
+    const following = this.getAttribute('following') || 0;
+
+    // Convert the followers & following to a number
+    const totalFollowers = this.parseToNumber(followers);
+    const totalFollowing = this.parseToNumber(following);
+
+    //  format the number
+    const followersFormatted = this.formatNumber(totalFollowers);
+    const followingFormatted = this.formatNumber(totalFollowing);
+
+
+    return /* html */`
+      <div class="stats">
+        <span class="stat">
+          <span class="number">${followersFormatted}</span>
+          <span class="label">Followers</span>
+        </span>
+        <span class="sp">•</span>
+        <span class="stat">
+          <span class="number">${followingFormatted}</span>
+          <span class="label">Following</span>
+        </span>
+      </div>
+		`
+  }
+
+  getBio = () => {
+    // Get bio content
+    const bio = this.getAttribute('bio') || 'The user has not added a bio yet';
+
+    // separate by new lines and wrap each line in a paragraph tag
+    const bioLines = bio.split('\n').map(line => `<p>${line}</p>`).join('');
+
+    return /*html*/`
+      <div class="bio">
+        ${bioLines}
+      </div>
+    `
+  }
+
+  getButtons() {
+    return /*html*/`
+      <div class="buttons">
+        ${this.checkFollowing(this.getAttribute('user-follow'))}
+      </div>
+    `;
+  }
+
+  checkFollowing = following => {
+    if (following === 'true') {
+      return /*html*/`
+			  <a href="" class="action">Following</a>
+			`
+    }
+    else {
+      return /*html*/`
+			  <a href="" class="action follow">Follow</a>
+			`
+    }
   }
 
   getInfo = () => {
@@ -258,27 +374,6 @@ export default class AppProfile extends HTMLElement {
     `
   }
 
-  getBio = () => {
-    return `
-      <p class="about">
-        ${this.getAttribute('bio')}
-      </p>
-    `
-  }
-
-  checkFollowing = (following) => {
-    if (following === 'true') {
-      return `
-			  <div class="action following">Following</div>
-			`
-    }
-    else {
-      return `
-			  <div class="action follow">Follow</div>
-			`
-    }
-  }
-
   getStyles() {
     return /* css */`
 	    <style>
@@ -331,7 +426,7 @@ export default class AppProfile extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+          font-size: 16px;
           padding: 15px 0;
           margin: 0;
           display: flex;
@@ -349,175 +444,165 @@ export default class AppProfile extends HTMLElement {
           width: 63%;
         }
 
-        .head {
-          /* border: 1px solid #6b7280; */
+        .top {
           display: flex;
-          flex-flow: row;
-          justify-content: space-between;
-          gap: 0;
           width: 100%;
-        }
-
-        .head > .data {
-          /* border: 1px solid #6b7280; */
-          display: flex;
-          flex-flow: column;
-          gap: 0px;
-        }
-
-        .head > .data > .name {
-          /* border: 1px solid #6b7280; */
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        .head > .data > .name > p {
-          /* border: 1px solid #6b7280; */
-          margin: 0;
-          padding: 0;
-          color: var(--text-color);
-          font-family: var(--font-text);
-          font-weight: 500;
-          line-height: 1.4;
-          font-size: 1.2rem;
-        }
-
-        .head > .data > .name > .user {
-          /* border: 1px solid #6b7280; */
-          margin: 0 0 10px 0;
-          padding: 0;
-          color: var(--gray-color);
-          font-family: var(--font-text), sans-serif;
-          font-weight: 500;
-          line-height: 1.4;
-          font-size: 1rem;
-          display: flex;
-          font-family: var(--font-mono), monospace;
-          align-items: start;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        .head > .data > .name > .user > span.code {
-          /* border: 1px solid #6b7280; */
-          margin: 0 0;
-          padding: 0;
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-          font-family: var(--font-mono), monospace;
-          font-weight: 400;
-        }
-
-        .head > .data > .name > .user > span.joined {
-          font-size: 0.9rem;
-          font-family: var(--font-text), sans-serif;
-        }
-
-        .head > .data > .users {
-          /* border: 1px solid #6b7280; */
-          margin: 0;
-          padding: 0;
-          color: var(--gray-color);
-          font-family: var(--font-text), sans-serif;
-          font-weight: 400;
-          line-height: 1.4;
-          font-size: 0.9rem;
-          display: flex;
+          flex-flow: row;
           align-items: center;
-          gap: 5px;
-          text-transform: lowercase;
+          gap: 8px;
         }
 
-        .head > .data > .users > a {
-          text-decoration: none;
-          color: inherit;
-        }
-
-        .head > .data > .users > a:hover {
-          /* color: var(--accent-color); */
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-        }
-
-        .head > .data > .users > a > span.no {
-          font-family: var(--font-mono), monospace;
-          font-size: 0.9rem;
-        }
-
-        .head > .image {
-          /* border: 1px solid #6b7280; */
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 90px;
-          height: 90px;
+        .top > .avatar {
+          width: 45px;
+          height: 45px;
           overflow: hidden;
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-          -ms-border-radius: 50px;
-          -o-border-radius: 50px;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
         }
 
-        .head > .image > img {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .top > .avatar > img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          overflow: hidden;
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-          -ms-border-radius: 50px;
-          -o-border-radius: 50px;
         }
 
-        p.about {
-          /* border: 1px solid #6b7280; */
-          margin: 15px 0;
-          padding: 0;
-          color: var(--text-color);
-          font-family: var(--font-text);
-          font-weight: 400;
-          line-height: 1.4;
-          font-size: 1rem;
+        .top > .name {
+          display: flex;
+          justify-content: center;
+          flex-flow: column;
+          gap: 0;
         }
 
-        .action {
-          border: var(--action-border);
-          text-decoration: none;
-          margin: 5px 0;
-          padding: 8px 15px 7px;
-          width: 100%;
-          font-weight: 400;
-          color: var(--gray-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1.15rem;
-          cursor: pointer;
+        .top > .name > h4.name {
+          margin: 0;
           display: flex;
           align-items: center;
-          justify-content: center;
-          text-align: center;
-          border-radius: 12px;
-          -webkit-border-radius: 12px;
-          -moz-border-radius: 12px;
-          -ms-border-radius: 12px;
-          -o-border-radius: 12px;
+          gap: 5px;
+          color: var(--text-color);
+          font-family: var(--font-text), sans-serif;
+          font-size: 1.1rem;
+          font-weight: 600;
         }
 
-        .action.follow {
-          border: var(--input-border-focus);
+        .top > .name > h4.name svg {
+          color: var(--alt-color);
+          margin: 5px 0 0 0;
+        }
+
+        .top > .name > a.username {
+          color: var(--gray-color);
+          font-family: var(--font-mono), monospace;
+          font-size: 0.9rem;
+          font-weight: 500;
+          text-decoration: none;
+          display: flex;
+          gap: 2px;
+          align-items: center;
+        }
+
+        .top > .name > a.username svg {
+          color: var(--gray-color);
+          width: 15px;
+          height: 15px;
+          margin: 3px 0 0 0;
+        }
+
+        .top > .name > a.username:hover {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
           -webkit-background-clip: text;
+        }
+
+        .top > .name > a.username:hover svg {
+          color: var(--accent-color);
+        }
+
+        .stats {
+          color: var(--gray-color);
+          display: flex;
+          margin: 10px 0;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .stats > .stat {
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .stats > .stat > .label {
+          color: var(--gray-color);
+          font-family: var(--font-main), sans-serif;
+          text-transform: lowercase;
+          font-size: 1rem;
+          font-weight: 400;
+        }
+
+        .stats > .stat > .number {
+          color: var(--text-color);
+          font-family: var(--font-main), sans-serif;
+          font-size: 0.84rem;
+          font-weight: 500;
+        }
+
+        .bio {
+          display: flex;
+          flex-flow: column;
+          margin: 5px 0;
+          gap: 5px;
+          color: var(--text-color);
+          font-family: var(--font-text), sans-serif;
+          font-size: 1rem;
+          line-height: 1.4;
+          font-weight: 400;
+        }
+
+        .bio > p {
+          all: inherit;
+          margin: 0;
+        }
+
+        .buttons {
+          display: flex;
+          width: 100%;
+          margin: 10px 0;
+          flex-flow: row;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .buttons > a.action {
+          border: var(--action-border);
+          text-decoration: none;
+          display: flex;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          justify-content: center;
+          padding: 7px 20px;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          color: var(--text-color);
+          -ms-border-radius: 10px;
+          -o-border-radius: 10px;
+        }
+
+        .buttons > a.action.follow {
+          border: none;
+          background: var(--accent-linear);
+          color: var(--white-color);
+           border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          -ms-border-radius: 10px;
+          -o-border-radius: 10px;
         }
 
         .actions {
