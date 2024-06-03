@@ -313,6 +313,13 @@ export default class AppProfile extends HTMLElement {
           width: 63%;
         }
 
+        .body {
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+          width: 100%;
+        }
+
         .tab-control {
           border-bottom: var(--border);
           background-color: var(--background);
