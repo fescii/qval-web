@@ -71,37 +71,10 @@ export default class AppHome extends HTMLElement {
   }
 
   getInfo = () => {
-    return `
-      <div class="company">
-        <ul class="footer-list">
-          <li class="item">
-            <a href="" class="item-link">Docs</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">What’s New</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Give a feedback </a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Request a feature</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Source code</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Donate</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Contact</a>
-          </li>
-          <li class="item">
-            <a href="#" class="item-link">&copy 2024 aduki, Inc</a>
-          </li>
-        </ul>
-      </div>
+    return /*html*/`
+      <info-container docs="/about/docs" new="/about/new"
+       feedback="/about/feedback" request="/about/request" code="/about/code" donate="/about/donate" contact="/about/contact" company="https://github.com/aduki-hub">
+      </info-container>
     `
   }
 
@@ -173,85 +146,30 @@ export default class AppHome extends HTMLElement {
         }
 
         div.side {
-          /* border: 1px solid #ff0000; */
-          padding: 0;
-          width: 35%;
-          display: flex;
-          flex-flow: column;
-          gap: 20px;
-          position: sticky;
-          top: 60px;
-          height: max-content;
-        }
-
-        .company {
-          display: flex;
-          margin: 20px 0;
-          flex-flow: column;
-          align-items: center;
-          gap: 10px;
-          max-width: 500px;
-        }
-
-        .company >.title {
-          color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1.1rem;
-          font-weight: 600;
-        }
-
-        .company > ul.footer-list {
+          padding: 25px 0 0 0;
           margin: 0;
-          list-style-type: none;
-          padding: 0 0 0 1px;
+          background-color: transparent;
+          width: 32%;
+          height: max-content;
           display: flex;
-          flex-flow: row;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: start;
-          gap: 10px;
+          flex-flow: column;
+          gap: 0;
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          max-height: 100vh;
+          overflow-y: scroll;
+          scrollbar-width: none;
         }
 
-        .company > ul.footer-list > li.item {
-          margin: 0 10px 0 0;
-          padding: 0;
-          width: max-content;
-          position: relative;
-        }
-
-        .company > ul.footer-list > li.item > .dot {
-          display: inline-block;
-          background: var(--accent-linear);
-          width: 5px;
-          height: 5px;
-          position: absolute;
-          right: -9px;
-          top: 3px;
-          border-radius: 5px;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-        }
-
-        .company > ul.footer-list > li.item > a.item-link {
-          color: var(--gray-color);
-          /* font-size: 0.98rem; */
-          text-decoration: none;
-          font-weight: 400;
-          font-size: 0.9rem;
-        }
-
-        .company > ul.footer-list > li.item > a.item-link:hover {
-          /* color: var(--accent-color); */
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-          border-bottom: 1px solid var(--accent-color);
+        div.side::-webkit-scrollbar {
+          visibility: hidden;
+          display: none;
         }
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+            font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;

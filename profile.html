@@ -43,6 +43,7 @@
     import PollWrapper from "./js/wrappers/poll.wrapper.js"
     import AuthorWrapper from "./js/wrappers/author.wrapper.js";
     import HeaderWrapper from "./js/wrappers/header.wrapper.js";
+    import ProfileWrapper from "./js/wrappers/profile.wrapper.js";
 
     // Import elements
     import CustomSpan from "./js/elements/span.element.js"
@@ -96,6 +97,7 @@
     customElements.define('poll-wrapper', PollWrapper);
     customElements.define('author-wrapper', AuthorWrapper);
     customElements.define('header-wrapper', HeaderWrapper);
+    customElements.define('profile-wrapper', ProfileWrapper);
 
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });

@@ -150,10 +150,7 @@ export default class AppProfile extends HTMLElement {
     if (mql.matches) {
       return /* html */`
         ${this.getTop()}
-        ${this.getHeader()}
-        ${this.getStats()}
-        ${this.getBio()}
-        ${this.getActions()}
+        ${this.getAuthor()}
         ${this.getTab()}
         <div class="content-container">
           ${this.getStories()}
@@ -164,13 +161,12 @@ export default class AppProfile extends HTMLElement {
       return /* html */`
         <section class="main">
           ${this.getTop()}
-          ${this.getHeader()}
-          ${this.getStats()}
-          ${this.getBio()}
-          ${this.getActions()}
-          ${this.getTab()}
-          <div class="content-container">
-            ${this.getStories()}
+          <div class="body">
+            ${this.getAuthor()}
+            ${this.getTab()}
+            <div class="content-container">
+              ${this.getStories()}
+            </div>
           </div>
         </section>
 
@@ -191,121 +187,14 @@ export default class AppProfile extends HTMLElement {
     `
   }
 
-  getHeader = () => {
-    // Get name and check if it's greater than 20 characters
-    const name = this.getAttribute('name');
-
-    // gET URL
-    const url = this.getAttribute('url');
-
-    // Check if the name is greater than 20 characters: replace the rest with ...
-    let displayName = name.length > 25 ? `${name.substring(0, 25)}..` : name;
-
-    return /* html */ `
-      <div class="top">
-        <div class="avatar">
-          <img src="${this.getAttribute('picture')}" alt="Author name">
-        </div>
-        <div class="name">
-          <h4 class="name">
-            <span class="name">${displayName}</span>
-            ${this.checkVerified(this.getAttribute('verified'))}
-          </h4>
-          <a href="${url.toLowerCase()}" class="username">
-            <span class="text">${this.getAttribute('username')}</span>
-          </a>
-        </div>
-      </div>
-    `
-  }
-
-  checkVerified = verified => {
-    if (verified === 'true') {
-      return /*html*/`
-			  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-          <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
-        </svg>
-			`
-    }
-    else {
-      return ''
-    }
-  }
-
-  getStats = () => {
-    // Get total followers & following and parse to integer
-    const followers = this.getAttribute('followers') || 0;
-    const following = this.getAttribute('following') || 0;
-
-    // Convert the followers & following to a number
-    const totalFollowers = this.parseToNumber(followers);
-    const totalFollowing = this.parseToNumber(following);
-
-    //  format the number
-    const followersFormatted = this.formatNumber(totalFollowers);
-    const followingFormatted = this.formatNumber(totalFollowing);
-
-
+  getAuthor = () => {
     return /* html */`
-      <div class="stats">
-        <span class="stat">
-          <span class="number">${followersFormatted}</span>
-          <span class="label">Followers</span>
-        </span>
-        <span class="sp">•</span>
-        <span class="stat">
-          <span class="number">${followingFormatted}</span>
-          <span class="label">Following</span>
-        </span>
-      </div>
-		`
-  }
-
-  getBio = () => {
-    // Get bio content
-    const bio = this.getAttribute('bio') || 'The user has not added a bio yet';
-
-    // separate by new lines and wrap each line in a paragraph tag
-    const bioLines = bio.split('\n').map(line => `<p>${line}</p>`).join('');
-
-    return /*html*/`
-      <div class="bio">
-        ${bioLines}
-      </div>
+      <profile-wrapper name="${this.getAttribute('name')}" username="${this.getAttribute('username')}" you="${this._you}"
+        url="${this.getAttribute('url')}" picture="${this.getAttribute('picture')}" verified="${this.getAttribute('verified')}"
+        followers="${this.getAttribute('followers')}" following="${this.getAttribute('following')}" user-follow="${this.getAttribute('user-follow')}"
+        bio="${this.getAttribute('bio')}">
+      </profile-wrapper>
     `
-  }
-
-  getActions = you => {
-    // You is true
-    if (this._you) {
-      return /*html*/`
-        <div class="actions">
-          <a href="/user/edit/profile" class="action">Edit profile</a>
-          <a href="/user/stats" class="action">Your stats</a>
-        </div>
-      `
-    }
-    else {
-      return /*html*/`
-        <div class="actions">
-          ${this.checkFollowing(this.getAttribute('user-follow'))}
-          <span class="action">Coming Soon</span>
-        </div>
-      `
-    }
-  }
-
-  checkFollowing = following => {
-    if (following === 'true') {
-      return /*html*/`
-			  <a href="" class="action">Following</a>
-			`
-    }
-    else {
-      return /*html*/`
-			  <a href="" class="action follow">Follow</a>
-			`
-    }
   }
 
   getInfo = () => {
@@ -407,12 +296,12 @@ export default class AppProfile extends HTMLElement {
 
 	      :host {
           font-size: 16px;
-          padding: 15px 0;
+          padding: 0;
           margin: 0;
           display: flex;
           justify-content: space-between;
           gap: 0px;
-          min-height: 60vh;
+          min-height: 100vh;
         }
 
         section.main {
@@ -420,174 +309,8 @@ export default class AppProfile extends HTMLElement {
           display: flex;
           flex-flow: column;
           align-items: start;
-          height: 100vh;
-          max-height: max-content;
           gap: 0;
           width: 63%;
-        }
-
-        .top {
-          display: flex;
-          width: 100%;
-          flex-flow: row;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .top > .avatar {
-          width: 45px;
-          height: 45px;
-          overflow: hidden;
-          border-radius: 50%;
-          -webkit-border-radius: 50%;
-          -moz-border-radius: 50%;
-        }
-
-        .top > .avatar > img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .top > .name {
-          display: flex;
-          justify-content: center;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        .top > .name > h4.name {
-          margin: 0;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1.1rem;
-          font-weight: 600;
-        }
-
-        .top > .name > h4.name svg {
-          color: var(--alt-color);
-          margin: 5px 0 0 0;
-        }
-
-        .top > .name > a.username {
-          color: var(--gray-color);
-          font-family: var(--font-mono), monospace;
-          font-size: 0.9rem;
-          font-weight: 500;
-          text-decoration: none;
-          display: flex;
-          gap: 2px;
-          align-items: center;
-        }
-
-        .top > .name > a.username svg {
-          color: var(--gray-color);
-          width: 15px;
-          height: 15px;
-          margin: 2px 0 0 0;
-        }
-
-        .top > .name > a.username:hover {
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-        }
-
-        .top > .name > a.username:hover svg {
-          color: var(--accent-color);
-        }
-
-        .stats {
-          color: var(--gray-color);
-          display: flex;
-          margin: 10px 0;
-          width: 100%;
-          flex-flow: row;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .stats > .stat {
-          display: flex;
-          flex-flow: row;
-          align-items: center;
-          gap: 5px;
-        }
-
-        .stats > .stat > .label {
-          color: var(--gray-color);
-          font-family: var(--font-main), sans-serif;
-          text-transform: lowercase;
-          font-size: 1rem;
-          font-weight: 400;
-        }
-
-        .stats > .stat > .number {
-          color: var(--text-color);
-          font-family: var(--font-main), sans-serif;
-          font-size: 0.84rem;
-          font-weight: 500;
-        }
-
-        .bio {
-          display: flex;
-          flex-flow: column;
-          margin: 5px 0;
-          gap: 5px;
-          color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1rem;
-          line-height: 1.4;
-          font-weight: 400;
-        }
-
-        .bio > p {
-          all: inherit;
-          margin: 0;
-        }
-
-        .actions {
-          border-bottom: var(--border);
-          display: flex;
-          width: 100%;
-          margin: 0;
-          padding: 10px 0 15px;
-          flex-flow: row;
-          align-items: center;
-          justify-content: space-between;
-          gap: 30px;
-        }
-
-        .actions > .action {
-          border: var(--action-border);
-          text-decoration: none;
-          display: flex;
-          width: calc(50% - 30px);
-          flex-flow: row;
-          align-items: center;
-          justify-content: center;
-          padding: 6px 25px;
-          border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -moz-border-radius: 10px;
-          color: var(--text-color);
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
-        }
-
-        .actions > .action.follow {
-          border: none;
-          background: var(--accent-linear);
-          color: var(--white-color);
-           border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -moz-border-radius: 10px;
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
         }
 
         .tab-control {

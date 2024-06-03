@@ -788,8 +788,8 @@ export default class QuickPost extends HTMLElement {
       }
 
       .stats.actions {
-        /* border: var(--input-border); */
-        padding: 5px 0 0 0;
+        /*border: var(--input-border);*/
+        padding: 5px 0 0 1px;
         margin: 0;
         display: flex;
         align-items: center;
@@ -1104,7 +1104,7 @@ export default class QuickPost extends HTMLElement {
 
       @media screen and (max-width:660px) {
         :host {
-        font-size: 16px;
+          font-size: 16px;
           border-bottom: var(--border-mobile);
         }
 
@@ -1125,6 +1125,10 @@ export default class QuickPost extends HTMLElement {
         span.stat,
         span.action {
           cursor: default !important;
+        }
+
+        .stats.actions {
+          padding: 5px 0 0 0;
         }
 
         .stats.actions > span.play:hover,

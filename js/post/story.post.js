@@ -15,8 +15,6 @@ export default class StoryPost extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-
-    this.openForm();
   }
 
   disableScroll() {

@@ -1284,7 +1284,7 @@ export default class QuickPost extends HTMLElement {
 
       .stats.actions {
         /* border: var(--input-border); */
-        padding: 5px 0 0 0;
+        padding: 5px 0 0 1px;
         margin: 0;
         display: flex;
         align-items: center;
@@ -1623,6 +1623,10 @@ export default class QuickPost extends HTMLElement {
         .poll > .poll-options > .poll-option label,
         span.action {
           cursor: default !important;
+        }
+
+        .stats.actions {
+          padding: 5px 0 0 0;
         }
 
         .stats.actions > span.play:hover,
