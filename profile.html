@@ -45,6 +45,9 @@
     import HeaderWrapper from "./js/wrappers/header.wrapper.js";
     import ProfileWrapper from "./js/wrappers/profile.wrapper.js";
 
+    // Import sections
+    import ProfileSection from "./js/sections/profile.section.js";
+
     // Import elements
     import CustomSpan from "./js/elements/span.element.js"
 
@@ -99,6 +102,9 @@
     customElements.define('header-wrapper', HeaderWrapper);
     customElements.define('profile-wrapper', ProfileWrapper);
 
+    // Register sections
+    customElements.define('profile-section', ProfileSection);
+
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });
 
@@ -140,10 +146,11 @@
     resource-guide="/guides" resource-newsletter="/newsletter" resource-rss="/rss">
   </header-container> -->
 
-  <app-profile you="true" url="/u/U0A43PBAH6A1" stories="609" join-date="2022-01-03T13:00:00+03:00"
-    username="U0A43PBAH6A" picture="img/img.jpg" verified="true" name="Fredrick Ochieng" followers="7623"
-    following="263" user-follow="false" bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+  <app-profile you="true" url="/u/u0a43pbah6a1" stories="609" join-date="2022-01-03T13:00:00+03:00"
+    username="U0A43PBAH6A1" picture="img/img.jpg" verified="true" name="Fredrick Ochieng" followers="7623"
+    following="263" user-follow="false" bio="I am a student at the east african university, I am a software developer and a tech enthusiast.
       I love to write about technology and software development."
+      stories-url="/u/u0a43pbah6a1/stories" replies-url="/u/u0a43pbah6a1/replies" followers-url="/u/u0a43pbah6a1/followers"
     >
   </app-profile>
 </body>

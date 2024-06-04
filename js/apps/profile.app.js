@@ -18,9 +18,6 @@ export default class AppProfile extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-
-  
-    this.activateTab()
   }
 
   formatNumber = n => {
@@ -78,52 +75,6 @@ export default class AppProfile extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  activateTab = () => {
-    const outerThis = this;
-    const tab = this.shadowObj.querySelector('ul#tab');
-    const contentContainer = this.shadowObj.querySelector('.content-container');
-
-    if (tab && contentContainer) {
-      const line = tab.querySelector('span.line');
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
-
-      tabItems.forEach(tab => {
-        tab.addEventListener('click', e => {
-          e.preventDefault()
-          e.stopPropagation()
-
-          // Calculate half tab width - 10px
-          const tabWidth = (tab.offsetWidth/2) - 20;
-
-          line.style.left = `${tab.offsetLeft + tabWidth}px`;
-
-          if (tab.dataset.element === activeTab.dataset.element) {
-            return;
-          }
-          else {
-            activeTab.classList.remove('active');
-            tab.classList.add('active');
-            activeTab = tab;
-            switch (tab.dataset.element) {
-              case "stories":
-                contentContainer.innerHTML = outerThis.getStories();
-                break;
-              case "opinions":
-                contentContainer.innerHTML = outerThis.getOpinions();
-                break;
-              case "people":
-                contentContainer.innerHTML = outerThis.getPeople();
-              default:
-                break;
-            }
-
-          }
-        })
-      })
-    }
-  }
-
   getDate = (isoDateStr) => {
     const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
     let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -151,10 +102,7 @@ export default class AppProfile extends HTMLElement {
       return /* html */`
         ${this.getTop()}
         ${this.getAuthor()}
-        ${this.getTab()}
-        <div class="content-container">
-          ${this.getStories()}
-        </div>
+        ${this.getSection()}
       `;
     }
     else {
@@ -163,10 +111,7 @@ export default class AppProfile extends HTMLElement {
           ${this.getTop()}
           <div class="body">
             ${this.getAuthor()}
-            ${this.getTab()}
-            <div class="content-container">
-              ${this.getStories()}
-            </div>
+            ${this.getSection()}
           </div>
         </section>
 
@@ -197,6 +142,17 @@ export default class AppProfile extends HTMLElement {
     `
   }
 
+  getSection = () => {
+    return /* html */`
+      <profile-section title="Stories" username="${this.getAttribute('username')}" url="${this.getAttribute('url')}"
+        stories-url="${this.getAttribute('stories-url')}" replies-url="${this.getAttribute('replies-url')}"
+        followers-url="${this.getAttribute('followers-url')}"
+        following-url="${this.getAttribute('following-url')}">
+      </profile-section>
+    `
+
+  }
+
   getInfo = () => {
     return /*html*/`
       <info-container docs="/about/docs" new="/about/new"
@@ -204,44 +160,6 @@ export default class AppProfile extends HTMLElement {
       </info-container>
     `
   }
-
-  getStories = () => {
-    return `
-      <stories-feed stories="all" url="/U0A89BA6/stories"></stories-feed>
-    `
-  }
-
-  getOpinions = () => {
-    return `
-      <opinions-feed opinions="all" url="/U0A89BA6/opinions"></opinions-feed>
-    `
-  }
-
-  getPeople = () => {
-    return `
-      <people-feed opinions="all" url="/U0A89BA6/followers"></people-feed>
-    `
-  }
-
-  getTab = () => {
-    return /* html */`
-      <div class="tab-control">
-        <ul id="tab" class="tab">
-          <li data-element="stories" class="tab-item details active">
-            <span class="text">Stories</span>
-          </li>
-          <li data-element="opinions" class="tab-item opinions">
-            <span class="text">Opinions</span>
-          </li>
-          <li data-element="people" class="tab-item people">
-            <span class="text">People</span>
-          </li>
-          <span class="line"></span>
-        </ul>
-      </div>
-    `
-  }
-
 
   getStyles() {
     return /* css */`
@@ -317,118 +235,6 @@ export default class AppProfile extends HTMLElement {
           display: flex;
           flex-flow: column;
           gap: 0;
-          width: 100%;
-        }
-
-        .tab-control {
-          border-bottom: var(--border);
-          background-color: var(--background);
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-          z-index: 3;
-          width: 100%;
-          position: sticky;
-          top: 60px;
-        }
-
-        .tab-control > .author {
-          /* border-top: var(--border); */
-          border-bottom: var(--border);
-          padding: 10px 0;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          font-weight: 400;
-          color: var(--gray-color);
-          font-family: var(--font-mono), monospace;
-          font-size: 0.9rem;
-        }
-
-        .tab-control > ul.tab {
-          height: max-content;
-          width: 100%;
-          padding: 5px 0 0 0;
-          margin: 0;
-          list-style-type: none;
-          display: flex;
-          gap: 0;
-          align-items: center;
-          max-width: 100%;
-          overflow-x: scroll;
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-
-        .tab-control > ul.tab::-webkit-scrollbar {
-          display: none !important;
-          visibility: hidden;
-        }
-
-        .tab-control > ul.tab > li.tab-item {
-          /* border: var(--border); */
-          color: var(--gray-color);
-          font-family: var(--font-text), sans-serif;
-          font-weight: 400;
-          padding: 6px 20px 8px 0;
-          margin: 0;
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          overflow: visible;
-          font-size: 0.95rem;
-        }
-
-        .tab-control > ul.tab > li.tab-item > .text {
-          font-weight: 500;
-          font-size: 1rem;
-        }
-
-        .tab-control > ul.tab > li.tab-item:hover > .text {
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-          font-family: var(--font-text);
-        }
-
-        .tab-control > ul.tab > li.active {
-          font-size: 0.95rem;
-          /*padding: 6px 10px 10px 10px;*/
-        }
-
-        .tab-control > ul.tab > li.active > .text {
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-          font-family: var(--font-text);
-        }
-
-        .tab-control > ul.tab span.line {
-          position: absolute;
-          z-index: 1;
-          background: var(--accent-linear);
-          display: inline-block;
-          bottom: -3px;
-          left: 12px;
-          width: 20px;
-          min-height: 5px;
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
-          border-bottom-left-radius: 5px;
-          border-bottom-right-radius: 5px;
-          transition: all 300ms ease-in-out;
-        }
-
-        div.content-container {
-          margin: 0;
-          padding: 0;
-          display: flex;
-          flex-flow: column;
-          align-items: start;
-          flex-wrap: nowrap;
-          gap: 15px;
           width: 100%;
         }
 
