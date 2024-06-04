@@ -264,7 +264,7 @@ export default class AppProfile extends HTMLElement {
             margin: 0;
             display: flex;
             flex-flow: column;
-            justify-content: space-between;
+            justify-content: start;
             gap: 0;
 					}
 
