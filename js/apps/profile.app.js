@@ -116,6 +116,7 @@ export default class AppProfile extends HTMLElement {
         </section>
 
         <section class="side">
+          ${this.getHighlights()}
           <topics-container url="/topics/popular"></topics-container>
           ${this.getInfo()}
         </section>
@@ -151,6 +152,18 @@ export default class AppProfile extends HTMLElement {
       </profile-section>
     `
 
+  }
+
+  getHighlights = () => {
+    return /* html */`
+      <highlights-container url="${this.getAttribute('highlights-url')}"
+        followers="${this.getAttribute('followers')}" following="${this.getAttribute('following')}" 
+        stories="${this.getAttribute('stories')}" replies="${this.getAttribute('replies')}" 
+        topics="${this.getAttribute('topics')}" views="${this.getAttribute('views')}"
+        date-joined="${this.getAttribute('date-joined')}">
+      </highlights-container>
+
+    `
   }
 
   getInfo = () => {
