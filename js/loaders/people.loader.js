@@ -71,7 +71,7 @@ export default class PeopleLoader extends HTMLElement {
 	}
 
 	getStyles() {
-		return `
+		return /*css*/`
 	    <style>
 	      *,
 	      *:after,
@@ -82,17 +82,19 @@ export default class PeopleLoader extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+        	font-size: 16px;
 					display: flex;
 					flex-flow: column;
 					gap: 15px;
 					width: 100%;
+					min-width: 100%;
 				}
 
 				.loader {
 					padding: 15px 10px 0 0;
 					display: flex;
 					width: 100%;
+					max-width: 100%;
 					flex-flow: row !important;
 					flex-wrap: nowrap;
 					gap: 20px;

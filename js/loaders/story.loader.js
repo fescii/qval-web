@@ -91,6 +91,7 @@ export default class StoryLoader extends HTMLElement {
 				  flex-flow: column;
 				  gap: 5px;
 				  width: 100%;
+					min-width: 100%;
 				}
 
 				.loader {
@@ -99,8 +100,8 @@ export default class StoryLoader extends HTMLElement {
 				  flex-flow: column;
 				  gap: 6px;
 				  /*max-width: 400px;*/
-				  width: 90%;
-				  max-width: 100%;
+				  width: 100%;
+				  min-width: 100%;
 				}
 
 				.loader .skeleton {

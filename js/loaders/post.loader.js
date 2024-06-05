@@ -72,15 +72,15 @@ export default class PostLoader extends HTMLElement {
 					padding: 0;
 				  gap: 0;
 				  width: 100%;
+					min-width: 100%;
 				}
 
 				.loader {
-				  /*border: var(--input-border);*/
 				  padding: 8px 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 6px;
-				  width: 90%;
+				  width: 100%;
 				  max-width: 100%;
 				}
 
