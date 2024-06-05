@@ -186,7 +186,7 @@ section.side > .user-info > p.title {
   line-height: 1.5;
   font-weight: 600;
   margin: 0;
-  padding: 0;
+  padding: 0 0 8px;
 }
 
 section.side > .user-info > ul.info {
