@@ -42,7 +42,7 @@ export default class TopicsLoader extends HTMLElement {
 	}
 
 	getStyles() {
-		return `
+		return /* css */`
 	    <style>
 	      *,
 	      *:after,
@@ -53,7 +53,7 @@ export default class TopicsLoader extends HTMLElement {
 	      }
 	
 	      :host {
-        font-size: 16px;
+        	font-size: 16px;
 					padding: 8px 0 0;
 					display: flex;
 					flex-flow: row;
@@ -65,7 +65,7 @@ export default class TopicsLoader extends HTMLElement {
 				.topic {
 					display: inline-block;
 					width: 25%;
-					height: 20px;
+					height: 17px;
 					border-radius: 50px;
 					-webkit-border-radius: 50px;
 					-moz-border-radius: 50px;

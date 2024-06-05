@@ -222,12 +222,14 @@ export default class TopicsContainer extends HTMLElement {
 				  font-size: 1.3rem;
 				  font-weight: 600;
 				  line-height: 1;
+					display: none;
 				}
 
 				.title > span {
-				  color: var(--gray-color);
-					font-family: var(--font-read), sans-serif;
-				  font-size: 0.85rem;
+				  color: var(--text-color);
+					font-family: var(--font-main), sans-serif;
+				  font-size: 1rem;
+					font-weight: 500;
 				}
 
 				ul.topics > li.topic {

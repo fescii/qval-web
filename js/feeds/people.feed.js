@@ -133,14 +133,13 @@ export default class PeopleFeeds extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+          font-size: 16px;
 				  background-color: var(--background);
 				  padding: 0 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 5px;
           width: 100%;
-          max-width: 100%;
         }
 
 				.people-list {
@@ -150,12 +149,11 @@ export default class PeopleFeeds extends HTMLElement {
 					flex-flow: column;
 					gap: 0;
 					width: 100%;
-          max-width: 100%;
 				}
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+            font-size: 16px;
 						padding: 15px 0;
 						position: static;
 					}

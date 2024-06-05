@@ -230,8 +230,9 @@ export default class AppProfile extends HTMLElement {
           padding: 0;
           margin: 0;
           display: flex;
+          width: 100%;
           justify-content: space-between;
-          gap: 0px;
+          gap: 30px;
           min-height: 100vh;
         }
 
@@ -241,7 +242,7 @@ export default class AppProfile extends HTMLElement {
           flex-flow: column;
           align-items: start;
           gap: 0;
-          width: 63%;
+          width: 64%;
         }
 
         .body {
@@ -253,10 +254,10 @@ export default class AppProfile extends HTMLElement {
 
         section.side {
           padding: 25px 0 0 0;
-          width: 35%;
+          width: 34%;
           display: flex;
           flex-flow: column;
-          gap: 20px;
+          gap: 10px;
           position: sticky;
           top: 0;
           height: 100vh;
