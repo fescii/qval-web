@@ -260,6 +260,7 @@ export default class HighlightsContainer extends HTMLElement {
           line-height: 1.3;
           font-weight: 600;
           margin: 0;
+          display: none;
           padding: 0 0 8px;
         }
         
