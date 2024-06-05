@@ -108,7 +108,6 @@ export default class ProfileWrapper extends HTMLElement {
   getContent = () => {
     return /* html */`
       ${this.getHeader()}
-      ${this.getStats()}
       ${this.getBio()}
       ${this.getActions(this._you)}
 		`
@@ -128,15 +127,20 @@ export default class ProfileWrapper extends HTMLElement {
       <div class="top">
         <div class="avatar">
           <img src="${this.getAttribute('picture')}" alt="Author name">
-        </div>
-        <div class="name">
-          <h4 class="name">
-            <span class="name">${displayName}</span>
+          <div class="icon">
             ${this.checkVerified(this.getAttribute('verified'))}
-          </h4>
-          <a href="${url.toLowerCase()}" class="username">
-            <span class="text">${this.getAttribute('username')}</span>
-          </a>
+          </div>
+        </div>
+        <div class="info">
+          <div class="name">
+            <h4 class="name">
+              <span class="name">${displayName}</span>
+            </h4>
+            <a href="${url.toLowerCase()}" class="username">
+              <span class="text">${this.getAttribute('username')}</span>
+            </a>
+          </div>
+          ${this.getStats()}
         </div>
       </div>
     `
@@ -311,9 +315,11 @@ export default class ProfileWrapper extends HTMLElement {
         }
 
         .top > .avatar {
-          width: 45px;
-          height: 45px;
-          overflow: hidden;
+          position: relative;
+          width: 100px;
+          height: 100px;
+          min-width: 100px;
+          min-height: 100px;
           border-radius: 50%;
           -webkit-border-radius: 50%;
           -moz-border-radius: 50%;
@@ -323,32 +329,70 @@ export default class ProfileWrapper extends HTMLElement {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          overflow: hidden;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
         }
 
-        .top > .name {
+        .top > .avatar > .icon {
+          background: var(--background);
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 30px;
+          height: 30px;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+        }
+        
+        .top > .avatar > .icon svg {
+          width: 22px;
+          height: 22px;
+          color: var(--accent-color);
+        }
+
+        .top > .info {
+          display: flex;
+          flex-flow: column;
+          padding: 10px 0 0 10px;
+          gap: 5px;
+          align-items: start;
+          justify-content: center;
+          align-content: center;
+          width: calc(100% - 100px);
+          max-width: calc(100% - 100px);
+          height: 100px;
+          max-height: 100px;
+        }
+
+        .top > .info > .name {
           display: flex;
           justify-content: center;
           flex-flow: column;
           gap: 0;
         }
 
-        .top > .name > h4.name {
+        .top > .info > .name > h4.name {
           margin: 0;
           display: flex;
           align-items: center;
           gap: 5px;
           color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1.1rem;
+          font-family: var(--font-read), sans-serif;
+          font-size: 1.5rem;
           font-weight: 600;
         }
 
-        .top > .name > h4.name svg {
+        .top > .info > .name > h4.name svg {
           color: var(--alt-color);
           margin: 5px 0 0 0;
         }
 
-        .top > .name > a.username {
+        .top > .info > .name > a.username {
           color: var(--gray-color);
           font-family: var(--font-mono), monospace;
           font-size: 0.9rem;
@@ -359,46 +403,46 @@ export default class ProfileWrapper extends HTMLElement {
           align-items: center;
         }
 
-        .top > .name > a.username svg {
+        .top > .info > .name > a.username svg {
           color: var(--gray-color);
           width: 15px;
           height: 15px;
           margin: 2px 0 0 0;
         }
 
-        .top > .name > a.username:hover {
+        .top > .info > .name > a.username:hover {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
           -webkit-background-clip: text;
         }
 
-        .top > .name > a.username:hover svg {
+        .top > .info > .name > a.username:hover svg {
           color: var(--accent-color);
         }
 
         .stats {
           color: var(--gray-color);
           display: flex;
-          margin: 10px 0;
+          margin: 10px 0 5px 0;
           width: 100%;
           flex-flow: row;
           align-items: center;
-          gap: 10px;
+          gap: 5px;
         }
 
         .stats > .stat {
           display: flex;
           flex-flow: row;
           align-items: center;
-          gap: 5px;
+          gap: 3px;
         }
 
         .stats > .stat > .label {
           color: var(--gray-color);
           font-family: var(--font-main), sans-serif;
           text-transform: lowercase;
-          font-size: 1rem;
+          font-size: 0.9rem;
           font-weight: 400;
         }
 
