@@ -358,8 +358,8 @@ export default class ProfileWrapper extends HTMLElement {
         .top > .info {
           display: flex;
           flex-flow: column;
-          padding: 10px 0 0 10px;
-          gap: 5px;
+          padding: 5px 0 0 10px;
+          gap: 10px;
           align-items: start;
           justify-content: center;
           align-content: center;
