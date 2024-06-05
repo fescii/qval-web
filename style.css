@@ -299,7 +299,21 @@ section.content {
   gap: 8px;
 }
 
-.share-buttons > a {
+.share-buttons > .link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+}
+
+.share-buttons > .link > .text {
+  display: none;
+}
+
+.share-buttons > .link > .icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -317,38 +331,37 @@ section.content {
   color: var(--white-color);
   font-size: 0.9rem;
   font-weight: 500;
-  text-transform: capitalize;
 }
 
-.share-buttons > a.x {
+.share-buttons > a.x > .icon {
   background: linear-gradient(103.53deg, #1DA1F2 -6.72%, #0A95D7 109.77%);
 }
 
-.share-buttons > a.facebook {
+.share-buttons > a.facebook > .icon {
   background: linear-gradient(103.53deg, #1877F2 -6.72%, #0A5A9C 109.77%);
 }
 
-.share-buttons > a.linkedin {
+.share-buttons > a.linkedin > .icon {
   background: linear-gradient(103.53deg, #0077B5 -6.72%, #005684 109.77%);;
 }
 
-.share-buttons > a.mail {
+.share-buttons > a.link.mail > .icon {
   background: linear-gradient(103.53deg, #D44638 -6.72%, #D44638 109.77%);
 }
 
-.share-buttons > a.reddit {
+.share-buttons > a.reddit > .icon {
   background: linear-gradient(103.53deg, #FF4500 -6.72%, #FF4500 109.77%);
 }
 
-.share-buttons > a.telegram {
+.share-buttons > a.telegram > .icon {
   background: linear-gradient(103.53deg, #0088CC -6.72%, #0088CC 109.77%);
 }
 
-.share-buttons > a.whatsapp {
+.share-buttons > a.whatsapp > .icon {
   background: linear-gradient(103.53deg, #25D366 -6.72%, #25D366 109.77%);
 }
 
-.share-buttons > a > svg {
+.share-buttons > .link > svg {
   height: 15px;
   width: 15px;
 }
@@ -374,6 +387,59 @@ section.content {
     padding: 0;
     margin: 0;
   }
+
+  .share-buttons {
+    border-width: 2px;
+    padding: 5px 0;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: start;
+    width: max-content;
+    gap: 10px;
+  }
+  
+  .share-buttons > .link {
+    width: 100%;
+    cursor: default !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: var(--text-color);
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+  }
+
+  .share-buttons > .link > .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: max-content;
+    width: max-content;
+    min-height: max-content;
+    min-width: max-content;
+    max-height: max-content;
+    max-width: max-content;
+    padding: max-content;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    background: var(--accent-linear);
+    color: var(--white-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .share-buttons > .link > .text {
+    display: flex;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-main), sans-serif;
+  }
+  
 }
 
 
