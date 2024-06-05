@@ -216,7 +216,7 @@ export default class ProfileWrapper extends HTMLElement {
       return /*html*/`
         <div class="actions">
           ${this.checkFollowing(this.getAttribute('user-follow'))}
-          <span class="action">Coming Soon</span>
+          <span class="action">Soon</span>
         </div>
       `
     }
@@ -390,11 +390,6 @@ export default class ProfileWrapper extends HTMLElement {
           font-weight: 600;
         }
 
-        .top > .info > .name > h4.name svg {
-          color: var(--alt-color);
-          margin: 5px 0 0 0;
-        }
-
         .top > .info > .name > a.username {
           color: var(--gray-color);
           font-family: var(--font-mono), monospace;
@@ -527,6 +522,65 @@ export default class ProfileWrapper extends HTMLElement {
           span.stat,
           span.action {
             cursor: default !important;
+          }
+
+          .top > .avatar {
+            width: 80px;
+            height: 80px;
+            min-width: 80px;
+            min-height: 80px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+          }
+  
+          .top > .avatar > img {
+            width: 100%;
+            height: 100%;
+          }
+  
+          .top > .avatar > .icon {
+            background: var(--background);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 25px;
+            height: 25px;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+          }
+          
+          .top > .avatar > .icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-color);
+          }
+  
+          .top > .info {
+            display: flex;
+            flex-flow: column;
+            padding: 0 0 0 10px;
+            gap: 10px;
+          }
+
+          .top > .info > .name > h4.name {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-color);
+            font-family: var(--font-text), sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+          }
+
+          .stats {
+            margin: 0 5px 0 0;
+            width: 100%;
+            gap: 5px;
           }
         }
       </style>

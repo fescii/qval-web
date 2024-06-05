@@ -199,11 +199,11 @@ export default class AuthorWrapper extends HTMLElement {
       <div class="top">
         <div class="avatar">
           <img src="${this.getAttribute('picture')}" alt="Author name">
+          ${this.checkVerified(this.getAttribute('verified'))}
         </div>
         <div class="name">
           <h4 class="name">
             <span class="name">${displayName}</span>
-            ${this.checkVerified(this.getAttribute('verified'))}
           </h4>
           <a href="${url.toLowerCase()}" class="username">
             <span class="text">${this.getAttribute('username')}</span>
@@ -219,9 +219,11 @@ export default class AuthorWrapper extends HTMLElement {
   checkVerified = verified => {
     if (verified === 'true') {
       return /*html*/`
-			  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-          <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
-        </svg>
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+            <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+          </svg>
+        </div>
 			`
     }
     else {
@@ -372,9 +374,9 @@ export default class AuthorWrapper extends HTMLElement {
         }
 
         .top > .avatar {
+          position: relative;
           width: 45px;
           height: 45px;
-          overflow: hidden;
           border-radius: 50%;
           -webkit-border-radius: 50%;
           -moz-border-radius: 50%;
@@ -383,7 +385,31 @@ export default class AuthorWrapper extends HTMLElement {
         .top > .avatar > img {
           width: 100%;
           height: 100%;
+          overflow: hidden;
           object-fit: cover;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+        }
+
+        .top > .avatar > .icon {
+          background: var(--background);
+          position: absolute;
+          bottom: -1px;
+          right: -2px;
+          width: 20px;
+          height: 20px;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+        }
+        
+        .top > .avatar > .icon svg {
+          width: 15px;
+          height: 15px;
+          color: var(--accent-color);
         }
 
         .top > .name {
