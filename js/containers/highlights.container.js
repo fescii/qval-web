@@ -233,7 +233,7 @@ export default class HighlightsContainer extends HTMLElement {
 	      :host {
         	font-size: 16px;
 					margin: 0;
-				  padding: 0;
+				  padding: 10px 0 0 0;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 10px;
