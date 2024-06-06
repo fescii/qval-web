@@ -253,11 +253,11 @@ export default class AppProfile extends HTMLElement {
         }
 
         section.side {
-          padding: 25px 0 0 0;
+          padding: 25px 0;
           width: 34%;
           display: flex;
           flex-flow: column;
-          gap: 10px;
+          gap: 20px;
           position: sticky;
           top: 0;
           height: 100vh;

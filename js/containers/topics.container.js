@@ -56,7 +56,7 @@ export default class TopicsContainer extends HTMLElement {
 		return /* html */`
 			<div class="title">
 				<h4 class="title">Topics</h4>
-				<span class="text">Trending topics now</span>
+				<span class="text">Trending topics</span>
 			</div>
 			<ul class="topics">
 				<li class="topic">

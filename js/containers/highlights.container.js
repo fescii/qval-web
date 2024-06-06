@@ -247,7 +247,7 @@ export default class HighlightsContainer extends HTMLElement {
 				  align-items: center;
 				  justify-content: start;
 				  width: 100%;
-          padding: 0 0 10px;
+          padding: 0;
           gap: 10px;
         }
         

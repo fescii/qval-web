@@ -391,14 +391,14 @@ export default class AppStory extends HTMLElement {
         }
 
         section.side {
-          padding: 25px 0 0 0;
+          padding: 25px 0;
           margin: 0;
           background-color: transparent;
           width: 32%;
           height: max-content;
           display: flex;
           flex-flow: column;
-          gap: 0;
+          gap: 20px;
           position: sticky;
           top: 0;
           height: 100vh;

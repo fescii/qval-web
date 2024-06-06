@@ -140,7 +140,7 @@ export default class InfoContainer extends HTMLElement {
 
 	      :host {
         	font-size: 16px;
-					margin: 20px 0 20px;
+					margin: 0;
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;

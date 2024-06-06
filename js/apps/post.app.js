@@ -223,7 +223,7 @@ export default class AppPost extends HTMLElement {
         }
 
         div.side {
-          padding: 25px 0 0 0;
+          padding: 25px 0;
           width: 35%;
           display: flex;
           flex-flow: column;

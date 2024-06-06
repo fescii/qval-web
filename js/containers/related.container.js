@@ -20,12 +20,22 @@ export default class RelatedContainer extends HTMLElement {
     this.fetchTopics(contentContainer);
   }
 
-  fetchTopics = (contentContainer) => {
+  fetchTopics = contentContainer => {
+    //Get type of stories to fetch
+    const type = this.getAttribute('type');
+
     const topicsLoader = this.shadowObj.querySelector('post-loader');
     const content = this.getRelatedStories();
     setTimeout(() => {
       topicsLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
+      switch (type) {
+        case 'top':
+          contentContainer.insertAdjacentHTML('beforeend', this.getTopStories());
+          break;
+        default:
+          contentContainer.insertAdjacentHTML('beforeend', content);
+          break;
+      }
     }, 2000)
   }
 
@@ -74,6 +84,46 @@ export default class RelatedContainer extends HTMLElement {
               <span class="title">Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance</span>
               <span class="date">June 23, 2021</span>
             </a></li>
+        </ul>
+      </div>
+		`
+  }
+
+  getTopStories = () => {
+    return /* html */`
+			<div class="related">
+        <p class="title">Trending stories.</p>
+        <ul class="stories">
+          <li class="story">
+            <a href="" class="link">
+              <span class="title">Ubuntu vs Debian: Which one is better</span>
+              <span class="date">June 23, 2021</span>
+            </a>
+          </li>
+          <li class="story">
+            <a href="" class="link">
+              <span class="title">Ubuntu Makes Proprietary Software Easier to Get</span>
+              <span class="date">June 23, 2021</span>
+            </a>
+          </li>
+          <li class="story">
+            <a href="" class="link">
+              <span class="title">Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance</span>
+              <span class="date">June 23, 2021</span>
+            </a>
+          </li>
+          <li class="story">
+            <a href="" class="link">
+              <span class="title">Ubuntu vs Debian: Which one is better</span>
+              <span class="date">June 23, 2021</span>
+            </a>
+          </li>
+          <li class="story">
+            <a href="" class="link">
+              <span class="title">Ubuntu Makes Proprietary Software Easier to Get</span>
+              <span class="date">June 23, 2021</span>
+            </a>
+          </li>
         </ul>
       </div>
 		`
@@ -132,7 +182,7 @@ export default class RelatedContainer extends HTMLElement {
 
 	      :host {
         	font-size: 16px;
-          margin: 15px 0 0 0;
+          margin: 0;
 				  display: flex;
 				  flex-flow: column;
 				}
@@ -159,11 +209,13 @@ export default class RelatedContainer extends HTMLElement {
         }
 
         .related > p.title {
-          color: var(--title-color);
           padding: 0;
-          font-size: 1.2rem;
+          color: var(--text-color);
+					font-family: var(--font-main), sans-serif;
+				  font-size: 1rem;
+					font-weight: 500;
+				  line-height: 1;
           margin: 0;
-          font-weight: 500;
         }
 
         .related > ul.stories {
@@ -188,13 +240,14 @@ export default class RelatedContainer extends HTMLElement {
         }
 
         .related > ul.stories li.story a span.title {
-          color: var(--read-color);
+          color: var(--text-color);
           font-family: var(--font-text), sans-serif;
-          font-weight: 500;
+          font-weight: 400;
+          font-size: 1rem;
         }
 
         .related > ul.stories li.story a:hover > span.title {
-          color: var(--title-color);
+          color: var(--read-color);
         }
 
         .related > ul.stories li.story a span.date {

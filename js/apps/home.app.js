@@ -66,6 +66,7 @@ export default class AppHome extends HTMLElement {
           <stories-feed stories="all" url="/stories/feed"></stories-feed>
         </div>
         <div class="side">
+          ${this.getRelatedStories()}
           <topics-container url="/topics/popular"></topics-container>
           ${this.getInfo()}
         </div>
@@ -80,6 +81,13 @@ export default class AppHome extends HTMLElement {
         url="${this.getAttribute('url')}" search-url="${this.getAttribute('search-url')}">
       </header-wrapper>
     `
+  }
+
+  getRelatedStories = () => {
+    return /* html */`
+			<related-container type="top" limit="5" topics='top'>
+      </related-container>
+		`
   }
 
   getInfo = () => {
@@ -158,14 +166,14 @@ export default class AppHome extends HTMLElement {
         }
 
         div.side {
-          padding: 25px 0 0 0;
+          padding: 25px 0;
           margin: 0;
           background-color: transparent;
           width: 32%;
           height: max-content;
           display: flex;
           flex-flow: column;
-          gap: 0;
+          gap: 20px;
           position: sticky;
           top: 0;
           height: 100vh;
