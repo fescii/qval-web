@@ -47,6 +47,7 @@ export default class AppHome extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
+        ${this.getTop()}
         <add-container type="story"></add-container>
         <stories-container stories="popular" url="/stories/popular"></stories-container>
         <topics-container url="/topics/popular"></topics-container>
@@ -58,6 +59,7 @@ export default class AppHome extends HTMLElement {
     else {
       return /* html */`
         <div class="feeds">
+          ${this.getTop()}
           <add-container type="story"></add-container>
           <stories-container stories="popular" url="/stories/popular"></stories-container>
           <discover-people url="/people/discover"></discover-people>
@@ -69,6 +71,15 @@ export default class AppHome extends HTMLElement {
         </div>
       `;
     }
+  }
+
+  getTop = () => {
+    return /* html */ `
+      <header-wrapper section="Qval" type="home"
+        user-url="${this.getAttribute('url')}" auth-url="${this.getAttribute('auth-url')}"
+        url="${this.getAttribute('url')}" search-url="${this.getAttribute('search-url')}">
+      </header-wrapper>
+    `
   }
 
   getInfo = () => {

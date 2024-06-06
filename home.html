@@ -39,13 +39,13 @@
     import PollWrapper from "./js/wrappers/poll.wrapper.js"
     import AuthorWrapper from "./js/wrappers/author.wrapper.js";
     import HeaderWrapper from "./js/wrappers/header.wrapper.js";
+    import PersonWrapper from "./js/wrappers/person.wrapper.js";
 
     // Import elements
     import CustomSpan from "./js/elements/span.element.js"
 
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
-    import PersonWrapper from "./js/author.component.js";
     import UserWrapper from "./js/person.component.js"
 
     // Import loaders
@@ -54,6 +54,7 @@
     import PeopleLoader from "./js/loaders/people.loader.js";
     import TopicsLoader from "./js/loaders/topics.loader.js";
     import InfoLoader from "./js/loaders/info.loader.js";
+    import AuthorsLoader from "./js/loaders/authors.loader.js";
 
     import StoryFeed from "./js/feeds/stories.feed.js";
     import RepliesFeed from "./js/feeds/replies.feed.js";
@@ -92,19 +93,20 @@
     customElements.define('poll-wrapper', PollWrapper);
     customElements.define('author-wrapper', AuthorWrapper);
     customElements.define('header-wrapper', HeaderWrapper);
+    customElements.define('person-wrapper', PersonWrapper);
 
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('person-wrapper', PersonWrapper);
     customElements.define('user-wrapper', UserWrapper);
 
     // Register loaders
     customElements.define('story-loader', StoryLoader);
     customElements.define('post-loader', PostLoader);
     customElements.define('info-loader', InfoLoader);
+    customElements.define('authors-loader', AuthorsLoader);
 
     customElements.define('people-loader', PeopleLoader);
     customElements.define('topics-loader', TopicsLoader);
@@ -126,13 +128,13 @@
 </head>
 
 <body>
-  <header-container id="U0AB236B6" create-account="/join" create-content="/create" user-profile="/u/U0AB236B6"
+  <!-- <header-container id="U0AB236B6" create-account="/join" create-content="/create" user-profile="/u/U0AB236B6"
     user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics" stories-popular="/stories/popular"
     stories-recent="/stories/recent" stories-curated="/stories/curated" discover="/discover" home="/home"
     journals="/journals" authors="/authors" github="https://github.com/fescii" supabase="/link" resource-apis="/apis"
     resource-feature="/feature-request" resource-shop="/shop" resource-guide="/guides" resource-newsletter="/newsletter"
     resource-rss="/rss">
-  </header-container>
+  </header-container> -->
 
   <app-home url="app/home"></app-home>
   <!--<footer class="footer">

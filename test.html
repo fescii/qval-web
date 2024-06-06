@@ -19,14 +19,15 @@
   <meta property="og:url" content="https://">
 
   <script type="module">
+    import AppHome from "./js/apps/home.app.js";
+    import AppPost from "./js/apps/post.app.js";
+    import AppSearch from "./js/apps/search.app.js";
+    import AppProfile from "./js/apps/profile.app.js";
+    import AppStory from "./js/apps/story.app.js";
+    import AppTopic from "./js/apps/topic.app.js";
+
     import HeaderContainer from "./js/containers/header.container.js"
-
-    // Import form container
-    import FormContainer from "./js/containers/form.container.js"
-
-    // Import elements
-    import CustomSpan from "./js/elements/span.element.js"
-
+    import StoryBody from "./js/story.body.js";
 
     // Import post wrappers
     import QuePost from "./js/post/que.post.js";
@@ -34,10 +35,53 @@
     import StoryPost from "./js/post/story.post.js";
     import PollPost from "./js/post/poll.post.js";
 
-    customElements.define('header-container', HeaderContainer);
+    // Import wrappers
+    import PostWrapper from "./js/wrappers/post.wrapper.js";
+    import PollWrapper from "./js/wrappers/poll.wrapper.js"
+    import AuthorWrapper from "./js/wrappers/author.wrapper.js";
+    import HeaderWrapper from "./js/wrappers/header.wrapper.js";
 
-    // register form container
-    customElements.define('form-container', FormContainer);
+    // Import elements
+    import CustomSpan from "./js/elements/span.element.js"
+
+    import OpinionWrapper from "./js/opinion.component.js";
+    import StoryWrapper from "./js/story.component.js";
+    import PersonWrapper from "./js/author.component.js";
+    import UserWrapper from "./js/person.component.js"
+
+    // Import loaders
+    import StoryLoader from "./js/loaders/story.loader.js";
+    import PostLoader from "./js/loaders/post.loader.js";
+    import PeopleLoader from "./js/loaders/people.loader.js";
+    import TopicsLoader from "./js/loaders/topics.loader.js";
+    import InfoLoader from "./js/loaders/info.loader.js";
+    import AuthorsLoader from "./js/loaders/authors.loader.js";
+
+    import StoryFeed from "./js/feeds/stories.feed.js";
+    import RepliesFeed from "./js/feeds/replies.feed.js";
+    import PeopleFeed from "./js/feeds/people.feed.js"
+
+    // Import containers
+    import PeopleContainer from "./js/containers/people.container.js";
+    import StoriesContainer from "./js/containers/stories-container.js"
+    import TrendingContainer from "./js/containers/trending.container.js"
+    import TopicsContainer from "./js/containers/topics.container.js";
+    import FormContainer from "./js/containers/form.container.js";
+    import AddContainer from "./js/containers/add.container.js";
+    import InfoContainer from "./js/containers/info.container.js";
+
+    import DiscoverPeople from "./js/containers/people.discover.js"
+
+
+    customElements.define('app-home', AppHome);
+    customElements.define('app-post', AppPost);
+    customElements.define('app-search', AppSearch);
+    customElements.define('app-profile', AppProfile);
+    customElements.define('app-story', AppStory);
+    customElements.define('app-topic', AppTopic);
+
+    customElements.define('header-container', HeaderContainer);
+    customElements.define('story-body', StoryBody);
 
     // Register post wrappers
     customElements.define('que-post', QuePost);
@@ -45,8 +89,42 @@
     customElements.define('story-post', StoryPost);
     customElements.define('poll-post', PollPost);
 
+    // Register wrappers
+    customElements.define('post-wrapper', PostWrapper);
+    customElements.define('poll-wrapper', PollWrapper);
+    customElements.define('author-wrapper', AuthorWrapper);
+    customElements.define('header-wrapper', HeaderWrapper);
+
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });
+
+    customElements.define('opinion-wrapper', OpinionWrapper);
+    customElements.define('story-wrapper', StoryWrapper);
+    customElements.define('person-wrapper', PersonWrapper);
+    customElements.define('user-wrapper', UserWrapper);
+
+    // Register loaders
+    customElements.define('story-loader', StoryLoader);
+    customElements.define('post-loader', PostLoader);
+    customElements.define('info-loader', InfoLoader);
+    customElements.define('authors-loader', AuthorsLoader);
+
+    customElements.define('people-loader', PeopleLoader);
+    customElements.define('topics-loader', TopicsLoader);
+    customElements.define('stories-feed', StoryFeed);
+    customElements.define('replies-feed', RepliesFeed);
+    customElements.define('people-feed', PeopleFeed)
+
+    // Register containers
+    customElements.define('people-container', PeopleContainer);
+    customElements.define('stories-container', StoriesContainer);
+    customElements.define('trending-container', TrendingContainer);
+    customElements.define('topics-container', TopicsContainer);
+    customElements.define('form-container', FormContainer);
+    customElements.define('add-container', AddContainer);
+    customElements.define('info-container', InfoContainer);
+
+    customElements.define('discover-people', DiscoverPeople);
   </script>
 </head>
 
@@ -152,30 +230,7 @@
         </div>
       </div>
 
-      <div class="author">
-        <div class="author-info">
-          <div class="avatar">
-            <img src="img/img.jpg" alt="Author name">
-          <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-              <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708"></path>
-            </svg>
-          </div>
-          </div>
-          <div class="name">
-            <h4 class="name">
-              <span class="name">Fredrick Ochieng</span>
-            </h4>
-            <a href="/u/u0a43pbah6a" class="username">
-              <span class="text">U0A43PBAH6A</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <button class="action following">following</button>
-      </div>
+      <discover-people url="/people/discover"></discover-people>
 
     </section>
     <section class="side">

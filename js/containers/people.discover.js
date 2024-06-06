@@ -21,7 +21,7 @@ export default class DiscoverPeople extends HTMLElement {
   }
 
   fetchPeople = (contentContainer) => {
-    const peopleLoader = this.shadowObj.querySelector('people-loader');
+    const peopleLoader = this.shadowObj.querySelector('authors-loader');
     const content = this.getPeople();
     setTimeout(() => {
       peopleLoader.remove();
@@ -39,7 +39,7 @@ export default class DiscoverPeople extends HTMLElement {
 
   getLoader = () => {
     return `
-			<people-loader speed="300"></people-loader>
+			<authors-loader speed="300"></authors-loader>
 		`
   }
 
@@ -53,32 +53,23 @@ export default class DiscoverPeople extends HTMLElement {
   }
 
   getPeople = () => {
-    return `
-			<person-wrapper id="U0A43PBA" img="img/img.jpg"
-        verified="true" name="Fredrick Ochieng"
-        bio="Student At The East African University"
-        followers="23" following="true">
+    return /*html*/`
+			<person-wrapper username="U0A43PBAHS13" url="/u/U0A43PBAHS13"
+			 picture="img/img.jpg" verified="true" name="Fredrick Ochieng" user-follow="true">
       </person-wrapper>
-      <person-wrapper id="U0A43PBA" img="img/img.jpg"
-        verified="true" name="Fredrick Ochieng"
-        bio="Student At The East African University"
-        followers="23" following="false">
+      <person-wrapper username="U0A43PVB23BA" url="/u/U0A43PVB23BA"
+				picture="img/img.jpg" verified="true" name="Fredrick Ochieng" user-follow="false">
       </person-wrapper>
-      <person-wrapper id="U0A43PBA" img="img/img.jpg"
-        verified="true" name="Fredrick Ochieng"
-        bio="Student At The East African University"
-        followers="23" following="false">
+      <person-wrapper username="U0N36AA43PBA" url="/u/U0N36AA43PBA"
+				picture="img/img.jpg" verified="false" name="Fredrick Ochieng" user-follow="false">
       </person-wrapper>
-    <person-wrapper id="U0A43PBA" img="img/img.jpg"
-      verified="true" name="Fredrick Ochieng"
-      bio="Student At The East African University"
-      followers="23" following="false">
-    </person-wrapper>
-    <person-wrapper id="U0A43PBA" img="img/img.jpg"
-      verified="true" name="Fredrick Ochieng"
-      bio="Student At The East African University"
-      followers="23" following="false">
-    </person-wrapper>
+			<person-wrapper username="U0HA23A43PBA" url="/u/U0HA23A43PBA"
+				picture="img/img.jpg" verified="true" name="Fredrick Ochieng"
+				followers="23" user-follow="false">
+			</person-wrapper>
+			<person-wrapper username="U0PNBA43P2BA" url="/u/U0PNBA43P2BA"
+				picture="img/img.jpg" verified="true" name="Fredrick Ochieng" user-follow="false">
+			</person-wrapper>
 		`
   }
 
