@@ -16,6 +16,22 @@ export default class FormContainer extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
+    // Select the content container
+    const contentContainer = this.shadowObj.querySelector('div.container');
+
+    // Fetch the content
+    if (contentContainer) {
+      this.fetchContent(contentContainer);
+    }
+  }
+
+  fetchContent = contentContainer => {
+    const storyLoader = this.shadowObj.querySelector('post-loader');
+    const content = this.getContent();
+    setTimeout(() => {
+      storyLoader.remove();
+      contentContainer.insertAdjacentHTML('beforeend', content);
+    }, 1500)
   }
 
   getTemplate = () => {
@@ -28,13 +44,29 @@ export default class FormContainer extends HTMLElement {
 
   getBody = () => {
     return /* html */`
-      <p class="title"> What's on your mind?</p>
-      <div class="options">
-        <a href="/create/article" class="option article">Article</a>
-        <a href="/create/post" class="option article">Post</a>
+      <div class="container">
+        ${this.getLoader()}
       </div>
     `;
   }
+
+  getContent = () => {
+    return /* html */`
+      <p class="title"> What's on your mind?</p>
+      <div class="options">
+        <a href="/create/article" class="option article">Article</a>
+        <a href="/create/post" class="option post">Post</a>
+        <a href="/create/poll" class="option poll">Poll</a>
+      </div>
+    `;
+  }
+
+  getLoader = () => {
+    return `
+			<post-loader speed="300"></post-loader>
+		`
+  }
+
 
 
   getStyles() {
@@ -89,18 +121,26 @@ export default class FormContainer extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+          font-size: 16px;
           border-bottom: var(--border);
           background-color: var(--background);
-          padding: 10px 0;
+          padding: 0;
+          display: block;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+        }
+
+        div.container {
           display: flex;
           flex-flow: column;
-          gap: 8px;
+          gap: 10px;
+          padding: 10px 0;
         }
 
         p.title {
           color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
+          font-family: var(--font-main), sans-serif;
           font-weight: 500;
           font-size: 1.1rem;
         }
@@ -125,7 +165,7 @@ export default class FormContainer extends HTMLElement {
           text-decoration: none;
           padding: 2px 10px;
           font-weight: 500;
-          width: 100px;
+          width: 80px;
           cursor: pointer;
           display: flex;
           flex-flow: row;
@@ -138,18 +178,33 @@ export default class FormContainer extends HTMLElement {
           -moz-border-radius: 12px;
         }
 
+        div.options > a.option:hover {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
-						padding: 10px 0;
+            font-size: 16px;
+						padding: 0;
             border-bottom: var(--border-mobile);
-            gap: 10px;
+            gap: 0;
 					}
 
           div.options {
             display: flex;
             align-items: flex-start;
-            gap: 18px;
+            gap: 15px;
+            width: 100%;
+            overflow-x: scroll;
+            scrollbar-width: none;
+          }
+
+          div.options::-webkit-scrollbar {
+            display: none;
+            visibility: hidden;
           }
 
           div.options > a.option {

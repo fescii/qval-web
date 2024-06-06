@@ -66,12 +66,7 @@ export default class HeaderWrapper extends HTMLElement {
 
   getContent  = title => {
     return /* html */ `
-      <div class="left">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-          <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path>
-        </svg>
-        <h3 class="name">${title}</h3>
-      </div>
+      ${this.getTitle(this.getAttribute('type'))}
       ${this.getTopIcons(true)}
     `
   }
@@ -129,6 +124,29 @@ export default class HeaderWrapper extends HTMLElement {
     return `
 			<post-loader speed="300"></post-loader>
 		`
+  }
+
+  // Check if the type is home
+  getTitle = type => {
+    const section = this.getAttribute('section');
+
+    if (type === 'home') {
+      return /*html*/`
+        <div class="left home">
+          <h3 class="name">${section}</h3>
+        </div>
+      `
+    }
+    else {
+      return /*html*/`
+        <div class="left">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+            <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path>
+          </svg>
+          <h3 class="name">${section}</h3>
+        </div>
+      `
+    }
   }
 
   getStyles() {
@@ -196,7 +214,7 @@ export default class HeaderWrapper extends HTMLElement {
           gap: 10px;
           height: 60px;
           max-height: 60px;
-          padding: 22px 0 10px;
+          padding: 22px 0 8px;
         }
 
         nav.nav.short {
@@ -219,6 +237,18 @@ export default class HeaderWrapper extends HTMLElement {
           font-family: var(--font-main), sans-serif;
           font-size: 1.3rem;
           font-weight: 600;
+        }
+
+        nav.nav > .left.home h3 {
+          margin: 0 0 -2px 0;
+          padding: 0 0 0 2px;
+          font-weight: 700;
+          color: transparent;
+          font-size: 1.5rem;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: var(--font-text);
         }
 
         nav.nav > .left svg {
