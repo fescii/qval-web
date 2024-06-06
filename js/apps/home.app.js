@@ -85,7 +85,7 @@ export default class AppHome extends HTMLElement {
 
   getRelatedStories = () => {
     return /* html */`
-			<related-container type="top" limit="5" topics='top'>
+			<related-container type="top" limit="5" topics='top1, top2, top3'>
       </related-container>
 		`
   }

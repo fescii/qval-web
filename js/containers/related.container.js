@@ -22,20 +22,13 @@ export default class RelatedContainer extends HTMLElement {
 
   fetchTopics = contentContainer => {
     //Get type of stories to fetch
-    const type = this.getAttribute('type');
+    // const type = this.getAttribute('type');
 
     const topicsLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getRelatedStories();
+    const content = this.getStories();
     setTimeout(() => {
       topicsLoader.remove();
-      switch (type) {
-        case 'top':
-          contentContainer.insertAdjacentHTML('beforeend', this.getTopStories());
-          break;
-        default:
-          contentContainer.insertAdjacentHTML('beforeend', content);
-          break;
-      }
+      contentContainer.insertAdjacentHTML('beforeend', content);
     }, 2000)
   }
 
@@ -62,34 +55,7 @@ export default class RelatedContainer extends HTMLElement {
     `;
   }
 
-  getRelatedStories = () => {
-    return /* html */`
-			<div class="related">
-        <p class="title">Related stories.</p>
-        <ul class="stories">
-          <li class="story">
-            <a href="" class="link">
-              <span class="title">Ubuntu vs Debian: Which one is better</span>
-              <span class="date">June 23, 2021</span>
-            </a>
-          </li>
-          <li class="story">
-            <a href="" class="link">
-              <span class="title">Ubuntu Makes Proprietary Software Easier to Get</span>
-              <span class="date">June 23, 2021</span>
-            </a>
-          </li>
-          <li class="story">
-            <a href="" class="link">
-              <span class="title">Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance</span>
-              <span class="date">June 23, 2021</span>
-            </a></li>
-        </ul>
-      </div>
-		`
-  }
-
-  getTopStories = () => {
+  getStories = () => {
     return /* html */`
 			<div class="related">
         <p class="title">Trending stories.</p>
