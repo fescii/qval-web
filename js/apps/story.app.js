@@ -72,7 +72,7 @@ export default class AppStory extends HTMLElement {
         <article class="content">
           ${this.getStoryBody()}
           ${this.getAuthor()}
-          ${this.getOpinions()}
+          ${this.getSection()}
         </article>
       `;
     }
@@ -81,7 +81,7 @@ export default class AppStory extends HTMLElement {
         <article class="content">
           ${this.getTop()}
           ${this.getStoryBody()}
-          ${this.getOpinions()}
+          ${this.getSection()}
         </article>
 
         <section class="side">
@@ -281,14 +281,6 @@ export default class AppStory extends HTMLElement {
     `
   }
 
-  getOpinions = () => {
-    return `
-      <section class="responses">
-        <opinions-feed opinions="all" url="/story/${this.getAttribute('id')}/opinions"></opinions-feed>
-      </section>
-    `
-  }
-
   getAuthor = () => {
     return /* html */`
 			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
@@ -305,6 +297,14 @@ export default class AppStory extends HTMLElement {
 			<related-container topics='${this.getAttribute("topics")}'>
       </related-container>
 		`
+  }
+
+  getSection = () => {
+    return /* html */`
+      <post-section active="${this.getAttribute('tab')}" section-title="Story" username="${this.getAttribute('author-username')}"
+        url="${this.getAttribute('url')}" replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}">
+      </post-section>
+    `
   }
 
   getInfo = () => {

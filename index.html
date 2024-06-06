@@ -34,6 +34,11 @@
     import AuthorWrapper from "./js/wrappers/author.wrapper.js";
     import HeaderWrapper from "./js/wrappers/header.wrapper.js";
     import ShareWrapper from "./js/wrappers/share.wrapper.js";
+    import UserWrapper from "./js/wrappers/user.wrapper.js";
+
+    // Import sections
+    import ProfileSection from "./js/sections/profile.section.js";
+    import PostSection from "./js/sections/post.section.js";
 
     // Import elements
     import CustomSpan from "./js/elements/span.element.js"
@@ -41,7 +46,6 @@
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
     import PersonWrapper from "./js/author.component.js";
-    import UserWrapper from "./js/person.component.js"
 
     // Import loaders
     import StoryLoader from "./js/loaders/story.loader.js";
@@ -83,14 +87,18 @@
     customElements.define('author-wrapper', AuthorWrapper);
     customElements.define('header-wrapper', HeaderWrapper);
     customElements.define('share-wrapper', ShareWrapper);
+    customElements.define('user-wrapper', UserWrapper);
+
+    // Register sections
+    customElements.define('profile-section', ProfileSection);
+    customElements.define('post-section', PostSection);
 
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });
 
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('person-wrapper', PersonWrapper);
-    customElements.define('user-wrapper', UserWrapper);
+    customElements.define('person-wrapper', PersonWrapper);;
 
 
     // Register loaders
@@ -132,6 +140,7 @@
 
   <app-story hash="P0AB236B6BA17" topics="engineering, programming, technology" story-title="Making the Web. Faster." time="2024-03-13T13:00:00+03:00"
     next-hash="P0AB236B6AB57" next-date="2024-03-13T13:00:00+03:00"
+    tab="replies" replies-url="/s/P0AB236B6BA17/replies" likes-url="/s/P0AB236B6BA17/likes"
     user-url="/u/U0A43PBAH6A" auth-url="/join" url="/s/P0AB236B6HA89B" search-url="/search" host="https://getopas.pythonanywhere.com"
     next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance"
     opinions="673" liked="false" likes="972" views="6473"
