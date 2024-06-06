@@ -154,6 +154,13 @@ export default class FormContainer extends HTMLElement {
           font-weight: 400;
           color: var(--gray-color);
           position: relative;
+          overflow-x: scroll;
+          scrollbar-width: none;
+        }
+
+        div.options::-webkit-scrollbar {
+          display: none;
+          visibility: hidden;
         }
 
         div.options > a.option {
@@ -192,6 +199,13 @@ export default class FormContainer extends HTMLElement {
             border-bottom: var(--border-mobile);
             gap: 0;
 					}
+
+          div.container {
+            display: flex;
+            flex-flow: column;
+            gap: 10px;
+            padding: 5px 0 10px 0;
+          }  
 
           div.options {
             display: flex;
