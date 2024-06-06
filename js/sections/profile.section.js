@@ -85,7 +85,7 @@ export default class ProfileSection extends HTMLElement {
               case "replies":
                 feeds.innerHTML = outerThis.getReplies();
                 break;
-              case "people":
+              case "followers":
                 feeds.innerHTML = outerThis.getPeople();
               default:
                 break;
@@ -131,8 +131,8 @@ export default class ProfileSection extends HTMLElement {
           <li data-element="replies" class="tab-item replies">
             <span class="text">Replies</span>
           </li>
-          <li data-element="people" class="tab-item people">
-            <span class="text">People</span>
+          <li data-element="followers" class="tab-item followers">
+            <span class="text">Followers</span>
           </li>
           <span class="line"></span>
         </ul>
@@ -342,7 +342,7 @@ export default class ProfileSection extends HTMLElement {
         @media screen and (max-width: 660px) {
           .tab-control {
             border-bottom: var(--border-mobile);
-            margin: 5px 0 5px 0;
+            margin: 0 5px 0;
             position: sticky;
             top: 50px;
           }
