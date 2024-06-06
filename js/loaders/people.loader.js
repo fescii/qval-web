@@ -67,6 +67,26 @@ export default class PeopleLoader extends HTMLElement {
         </div>
         <div class="action skeleton"></div>
       </div>
+			<div class="loader">
+        <div class="head">
+          <span class="profile skeleton"></span>
+          <span class="info">
+            <span class="name skeleton"></span>
+            <span class="followers skeleton"></span>
+          </span>
+        </div>
+        <div class="action skeleton"></div>
+      </div>
+			<div class="loader">
+        <div class="head">
+          <span class="profile skeleton"></span>
+          <span class="info">
+            <span class="name skeleton"></span>
+            <span class="followers skeleton"></span>
+          </span>
+        </div>
+        <div class="action skeleton"></div>
+      </div>
     `;
 	}
 
