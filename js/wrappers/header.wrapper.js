@@ -15,9 +15,9 @@ export default class HeaderWrapper extends HTMLElement {
 
   connectedCallback() {
 
-    const contentContainer = this.shadowObj.querySelector('nav.nav');
+    // const contentContainer = this.shadowObj.querySelector('nav.nav');
 
-    this.fetchContent(contentContainer);
+    // this.fetchContent(contentContainer);
   }
 
   disableScroll() {
@@ -37,17 +37,6 @@ export default class HeaderWrapper extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  fetchContent = contentContainer => {
-    const title = this.getAttribute('section');
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent(title);
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.classList.remove('short');
-      contentContainer.insertAdjacentHTML('beforeend', content);
-    }, 1500)
-  }
-
   getTemplate() {
     // Show HTML Here
     return `
@@ -57,10 +46,11 @@ export default class HeaderWrapper extends HTMLElement {
   }
 
   getBody = () => {
+    const title = this.getAttribute('section');
     return /* html */`
-      <nav data-expanded="false" class="nav short">
+      <nav data-expanded="false" class="nav">
+        ${this.getContent(title)}
       </nav>
-      ${this.getLoader()}
     `
   }
 
@@ -118,12 +108,6 @@ export default class HeaderWrapper extends HTMLElement {
         </div>
       `
     }
-  }
-
-  getLoader = () => {
-    return `
-			<post-loader speed="300"></post-loader>
-		`
   }
 
   // Check if the type is home
