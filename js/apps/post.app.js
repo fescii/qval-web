@@ -67,7 +67,7 @@ export default class AppPost extends HTMLElement {
         ${this.getTop()}
         ${this.getPost()}
         ${this.getAuthor()}
-        <opinions-feed opinions="all" url="/opinions"></opinions-feed>
+        ${this.getSection()}
       `;
     }
     else {
@@ -75,7 +75,7 @@ export default class AppPost extends HTMLElement {
         <div class="feeds">
           ${this.getTop()}
           ${this.getPost()}
-          <opinions-feed opinions="all" url="/opinions"></opinions-feed>
+          ${this.getSection()}
         </div>
         <div class="side">
           ${this.getAuthor()}
@@ -109,6 +109,14 @@ export default class AppPost extends HTMLElement {
         end-time="${this.getAttribute('end-time')}">
         <p>Which is the best programming language?</p>
       </poll-wrapper>
+    `
+  }
+
+  getSection = () => {
+    return /* html */`
+      <post-section active="${this.getAttribute('tab')}" section-title="Profile" username="${this.getAttribute('username')}"
+        url="${this.getAttribute('url')}" replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}">
+      </post-section>
     `
   }
 
@@ -243,6 +251,7 @@ export default class AppPost extends HTMLElement {
             margin: 0;
             display: flex;
             flex-flow: column;
+            justify-content: flex-start;
             gap: 0;
           }
 

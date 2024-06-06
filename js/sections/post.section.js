@@ -1,4 +1,4 @@
-export default class ProfileSection extends HTMLElement {
+export default class PostSection extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -58,9 +58,9 @@ export default class ProfileSection extends HTMLElement {
       tab.classList.add('active');
     }
     else {
-      // Select the stories tab
-      const storiesTab = this.shadowObj.querySelector("ul#tab > li.stories");
-      storiesTab.classList.add('active');
+      // select replies tab
+      const replies = this.shadowObj.querySelector(`ul#tab > li.replies`);
+      replies.classList.add('active');
     }
   }
 
@@ -94,14 +94,11 @@ export default class ProfileSection extends HTMLElement {
             tab.classList.add('active');
             activeTab = tab;
             switch (tab.dataset.element) {
-              case "stories":
-                feeds.innerHTML = outerThis.getStories();
-                break;
               case "replies":
                 feeds.innerHTML = outerThis.getReplies();
                 break;
-              case "followers":
-                feeds.innerHTML = outerThis.getPeople();
+              case "likes":
+                feeds.innerHTML = outerThis.getLikes();
               default:
                 break;
             }
@@ -132,8 +129,9 @@ export default class ProfileSection extends HTMLElement {
     return /* html */`
       ${this.getTab()}
       <div class="feeds">
-        ${this.getContainer()}
-      </div
+        ${this.getContainer(this.getAttribute('active'))}
+      </div>
+
 		`
   }
 
@@ -141,14 +139,11 @@ export default class ProfileSection extends HTMLElement {
     return /* html */`
       <div class="tab-control">
         <ul id="tab" class="tab">
-          <li data-element="stories" class="tab-item stories">
-            <span class="text">Stories</span>
-          </li>
           <li data-element="replies" class="tab-item replies">
             <span class="text">Replies</span>
           </li>
-          <li data-element="followers" class="tab-item followers">
-            <span class="text">Followers</span>
+          <li data-element="likes" class="tab-item likes">
+            <span class="text">Likes</span>
           </li>
           <span class="line"></span>
         </ul>
@@ -157,23 +152,15 @@ export default class ProfileSection extends HTMLElement {
   }
 
   getContainer = active => {
-    // Switch active tab
+    // Switch between replies and likes
     switch (active) {
-      case "stories":
-        return this.getStories();
       case "replies":
         return this.getReplies();
-      case "followers":
-        return this.getPeople();
+      case "likes":
+        return this.getLikes();
       default:
-        return this.getStories();
+        return this.getReplies();
     }
-  }
-
-  getStories = () => {
-    return `
-      <stories-feed stories="all" url="/U0A89BA6/stories"></stories-feed>
-    `
   }
 
   getReplies = () => {
@@ -182,7 +169,7 @@ export default class ProfileSection extends HTMLElement {
     `
   }
 
-  getPeople = () => {
+  getLikes = () => {
     return `
       <people-feed opinions="all" url="/U0A89BA6/followers"></people-feed>
     `
@@ -237,7 +224,7 @@ export default class ProfileSection extends HTMLElement {
 
         :host {
           font-size: 16px;
-          padding: 0;
+          padding: 15px 0;
           width: 100%;
           display: flex;
           flex-flow: column;
@@ -262,6 +249,7 @@ export default class ProfileSection extends HTMLElement {
 
         .tab-control {
           border-bottom: var(--border);
+          border-top: var(--border);
           background-color: var(--background);
           display: flex;
           flex-flow: column;
@@ -362,8 +350,13 @@ export default class ProfileSection extends HTMLElement {
         }
 
         @media screen and (max-width: 660px) {
+          :host {
+            padding: 0;
+          }
+
           .tab-control {
             border-bottom: var(--border-mobile);
+            border-top: none;
             margin: 0 5px 0;
             position: sticky;
             top: 50px;

@@ -37,6 +37,11 @@
     import PollWrapper from "./js/wrappers/poll.wrapper.js"
     import AuthorWrapper from "./js/wrappers/author.wrapper.js";
     import HeaderWrapper from "./js/wrappers/header.wrapper.js";
+    import UserWrapper from "./js/wrappers/user.wrapper.js";
+
+    // Import sections
+    import ProfileSection from "./js/sections/profile.section.js";
+    import PostSection from "./js/sections/post.section.js";
 
     // Import elements
     import CustomSpan from "./js/elements/span.element.js"
@@ -44,7 +49,6 @@
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
     import PersonWrapper from "./js/author.component.js";
-    import UserWrapper from "./js/person.component.js"
 
     // Import loaders
     import StoryLoader from "./js/loaders/story.loader.js";
@@ -85,6 +89,11 @@
     customElements.define('poll-wrapper', PollWrapper);
     customElements.define('author-wrapper', AuthorWrapper);
     customElements.define('header-wrapper', HeaderWrapper);
+    customElements.define('user-wrapper', UserWrapper);
+
+    // Register sections
+    customElements.define('profile-section', ProfileSection);
+    customElements.define('post-section', PostSection);
 
     // Register elements not as custom elements but extend HTMLElement
     customElements.define('custom-span', CustomSpan, { extends: 'span' });
@@ -92,7 +101,6 @@
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
     customElements.define('person-wrapper', PersonWrapper);
-    customElements.define('user-wrapper', UserWrapper);
 
     // Register loaders
     customElements.define('story-loader', StoryLoader);
@@ -120,15 +128,7 @@
 
 <body>
 
-  <!-- <header-container id="U0AB236B6" create-account="/join" create-content="/create"
-    user-profile="/u/U0AB236B6" user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics"
-    stories-popular="/stories/popular" stories-recent="/stories/recent" stories-curated="/stories/curated"
-    discover="/discover" home="/home" journals="/journals" authors="/authors" github="https://github.com/fescii"
-    supabase="/link" resource-apis="/apis" resource-feature="/feature-request" resource-shop="/shop"
-    resource-guide="/guides" resource-newsletter="/newsletter" resource-rss="/rss">
-  </header-container> -->
-
-  <!-- <app-post story="opinion"  url="/p/P0A43PBA" upvotes="729" id="P0A43PBA" upvoted="true" likes="1479" opinions="3872" id="P0A43PBA" liked="false" views="4369"
+  <!-- <app-post tab="replies"  url="/p/P0A43PBA" upvotes="729" id="P0A43PBA" upvoted="true" likes="1479" opinions="3872" id="P0A43PBA" liked="false" views="4369"
     time="2022-01-03T13:00:00+03:00" author-username="U0A43PBAH6A"
     author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
      author-followers="7623" author-following="263" author-follow="false"
@@ -139,9 +139,10 @@
   </app-post> -->
 
 
-  <app-post story="opinion" url="/p/P0A43PBA64AB" upvotes="729" hash="P0A43PBA64AB" upvoted="true" likes="1479" opinions="3872"
+  <app-post tab="replies" url="/p/P0A43PBA64AB" hash="P0A43PBA64AB"likes="1479" opinions="3872"
     id="P0A43PBA" liked="false" views="4369" time="2022-01-03T13:00:00+03:00"
     voted="true" selected="three" end-time="2024-05-31T23:56:23+03:00"
+    replies-url="/p/P0A43PBA64AB/replies" likes-url="/p/P0A43PBA64AB/likes"
     options='[{"name":"one","text":"Java","votes":367},{"name":"two","text":"Python","votes":986},{"name":"three","text":"JavaScript","votes":879},{"name":"four","text":"C#","votes":117}]'
     author-username="U0A43PBAH6A"
     author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
