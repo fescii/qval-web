@@ -28,6 +28,12 @@
     import HeaderContainer from "./js/containers/header.container.js"
     import StoryBody from "./js/story.body.js";
 
+    // Import post wrappers
+    import QuePost from "./js/post/que.post.js";
+    import QuickPost from "./js/post/quick.post.js";
+    import StoryPost from "./js/post/story.post.js";
+    import PollPost from "./js/post/poll.post.js";
+
     // Import wrappers
     import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PollWrapper from "./js/wrappers/poll.wrapper.js"
@@ -55,7 +61,7 @@
     import InfoLoader from "./js/loaders/info.loader.js";
 
     import StoryFeed from "./js/feeds/stories.feed.js";
-    import OpinionFeed from "./js/feeds/opinions.feed.js";
+    import RepliesFeed from "./js/feeds/replies.feed.js";
     import PeopleFeed from "./js/feeds/people.feed.js"
 
     // Import containers
@@ -80,6 +86,12 @@
 
     customElements.define('header-container', HeaderContainer);
     customElements.define('story-body', StoryBody);
+
+    // Register post wrappers
+    customElements.define('que-post', QuePost);
+    customElements.define('quick-post', QuickPost);
+    customElements.define('story-post', StoryPost);
+    customElements.define('poll-post', PollPost);
 
     // Register wrappers
     customElements.define('post-wrapper', PostWrapper);
@@ -110,7 +122,7 @@
 
     // Register feeds
     customElements.define('stories-feed', StoryFeed);
-    customElements.define('opinions-feed', OpinionFeed);
+    customElements.define('replies-feed', RepliesFeed);
     customElements.define('people-feed', PeopleFeed)
 
     // Register containers

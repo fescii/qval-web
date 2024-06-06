@@ -1086,7 +1086,7 @@ export default class QuickPost extends HTMLElement {
       }
 
       .content p {
-        margin: 0 0 10px 0;
+        margin: 0 0 5px 0;
         padding: 0;
         line-height: 1.4;
         font-family: var(--font-text), sans-serif;

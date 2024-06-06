@@ -165,7 +165,7 @@ export default class PostSection extends HTMLElement {
 
   getReplies = () => {
     return `
-      <opinions-feed opinions="all" url="/U0A89BA6/opinions"></opinions-feed>
+      <replies-feed opinions="all" url="/U0A89BA6/opinions"></replies-feed>
     `
   }
 
