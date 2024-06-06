@@ -36,6 +36,7 @@
     import QuickPost from "./js/post/quick.post.js";
     import StoryPost from "./js/post/story.post.js";
     import PollPost from "./js/post/poll.post.js";
+    import UserWrapper from "./js/wrappers/user.wrapper.js";
 
     // Import wrappers
     import PostWrapper from "./js/wrappers/post.wrapper.js";
@@ -53,7 +54,6 @@
     import OpinionWrapper from "./js/opinion.component.js";
     import StoryWrapper from "./js/story.component.js";
     import PersonWrapper from "./js/author.component.js";
-    import UserWrapper from "./js/person.component.js"
 
     // Import loaders
     import StoryLoader from "./js/loaders/story.loader.js";
@@ -101,6 +101,7 @@
     customElements.define('author-wrapper', AuthorWrapper);
     customElements.define('header-wrapper', HeaderWrapper);
     customElements.define('profile-wrapper', ProfileWrapper);
+    customElements.define('user-wrapper', UserWrapper);
 
     // Register sections
     customElements.define('profile-section', ProfileSection);
@@ -111,7 +112,6 @@
     customElements.define('opinion-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
     customElements.define('person-wrapper', PersonWrapper);
-    customElements.define('user-wrapper', UserWrapper);
 
     // Register loaders
     customElements.define('story-loader', StoryLoader);

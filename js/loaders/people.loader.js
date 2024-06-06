@@ -85,13 +85,14 @@ export default class PeopleLoader extends HTMLElement {
         	font-size: 16px;
 					display: flex;
 					flex-flow: column;
+					padding: 15px 0;
 					gap: 15px;
 					width: 100%;
 					min-width: 100%;
 				}
 
 				.loader {
-					padding: 15px 10px 0 0;
+					padding: 0;
 					display: flex;
 					width: 100%;
 					max-width: 100%;
