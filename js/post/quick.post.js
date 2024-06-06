@@ -863,7 +863,6 @@ export default class QuickPost extends HTMLElement {
         gap: 5px;
         font-size: 1rem;
         font-weight: 400;
-        /* color: var(--action-color); */
         color: var(--gray-color);
         border-radius: 50px;
         -webkit-border-radius: 50px;
@@ -881,11 +880,10 @@ export default class QuickPost extends HTMLElement {
       }
 
       .stats.actions > span:first-of-type {
-        margin: 0 0 0 -7px;
+        margin: 0 0 0 -5px;
       }
 
       .stats.actions > span.action.share {
-        /* border: var(--input-border); */
         min-height: 35px;
         height: 35px;
         width: 35px;
@@ -911,7 +909,6 @@ export default class QuickPost extends HTMLElement {
       }
 
       .stats.actions > span {
-        /* border: var(--input-border); */
         padding: 0;
         display: flex;
         align-items: center;
@@ -919,7 +916,6 @@ export default class QuickPost extends HTMLElement {
         gap: 3px;
         font-size: 1rem;
         font-weight: 400;
-        /* color: var(--gray-color); */
       }
 
       .stats.actions > .stat > .numbers,

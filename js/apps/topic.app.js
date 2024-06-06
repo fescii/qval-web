@@ -142,8 +142,8 @@ export default class AppTopic extends HTMLElement {
           </h2>
           <div class="sub-text">
             Discover, read, and contribute to stories about ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}.
-            <br>Interact with the contributing authors in the topic.
-            <br>You can also get the stories periodically via email by subscribing to this topic.
+            <br>
+            ${this.getAttribute('description')}
           </div>
           <div class="actions">
             ${this.checkSubscribed(this.getAttribute('subscribed'))}
