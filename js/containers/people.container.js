@@ -213,7 +213,7 @@ export default class PeopleContainer extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+        		font-size: 16px;
 						padding: 15px 0;
 						position: static;
 					}

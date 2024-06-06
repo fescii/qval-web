@@ -60,6 +60,7 @@ export default class AppHome extends HTMLElement {
         <div class="feeds">
           <add-container type="story"></add-container>
           <stories-container stories="popular" url="/stories/popular"></stories-container>
+          <discover-people url="/people/discover"></discover-people>
           <stories-feed stories="all" url="/stories/feed"></stories-feed>
         </div>
         <div class="side">
