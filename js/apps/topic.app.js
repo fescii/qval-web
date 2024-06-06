@@ -47,6 +47,44 @@ export default class AppTopic extends HTMLElement {
     `
   }
 
+  formatNumber = n => {
+    if (n >= 0 && n <= 999) {
+      return n.toString();
+    } else if (n >= 1000 && n <= 9999) {
+      const value = (n / 1000).toFixed(2);
+      return `${value}k`;
+    } else if (n >= 10000 && n <= 99999) {
+      const value = (n / 1000).toFixed(1);
+      return `${value}k`;
+    } else if (n >= 100000 && n <= 999999) {
+      const value = (n / 1000).toFixed(0);
+      return `${value}k`;
+    } else if (n >= 1000000 && n <= 9999999) {
+      const value = (n / 1000000).toFixed(2);
+      return `${value}M`;
+    } else if (n >= 10000000 && n <= 99999999) {
+      const value = (n / 1000000).toFixed(1);
+      return `${value}M`;
+    } else if (n >= 100000000 && n <= 999999999) {
+      const value = (n / 1000000).toFixed(0);
+      return `${value}M`;
+    } else {
+      return "1B+";
+    }
+  }
+
+  parseToNumber = num_str => {
+    // Try parsing the string to an integer
+    const num = parseInt(num_str);
+
+    // Check if parsing was successful
+    if (!isNaN(num)) {
+      return num;
+    } else {
+      return 0;
+    }
+  }
+
   getTemplate = () => {
     // Show HTML Here
     return `
@@ -59,8 +97,10 @@ export default class AppTopic extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
+        ${this.getTop()}
         ${this.getHeader()}
         ${this.getFoot()}
+        ${this.getAuthor()}
         <div class="content-container">
           ${this.getStories()}
         </div>
@@ -69,6 +109,7 @@ export default class AppTopic extends HTMLElement {
     else {
       return /* html */`
         <section class="main">
+          ${this.getTop()}
           ${this.getHeader()}
           ${this.getFoot()}
           <div class="content-container">
@@ -77,6 +118,7 @@ export default class AppTopic extends HTMLElement {
         </section>
 
         <section class="side">
+          ${this.getAuthor()}
           <topics-container url="/topics/popular"></topics-container>
           ${this.getInfo()}
         </section>
@@ -99,9 +141,9 @@ export default class AppTopic extends HTMLElement {
             ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}
           </h2>
           <div class="sub-text">
-            Discover, read, and contribute to stories about ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}. Follow to interact
-            with the contributing authors in the topic.
-            You can also get the stories periodically via email by subscribing to this topic.
+            Discover, read, and contribute to stories about ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}.
+            <br>Interact with the contributing authors in the topic.
+            <br>You can also get the stories periodically via email by subscribing to this topic.
           </div>
           <div class="actions">
             ${this.checkSubscribed(this.getAttribute('subscribed'))}
@@ -114,60 +156,57 @@ export default class AppTopic extends HTMLElement {
     `
   }
 
+  getTop = () => {
+    return /* html */ `
+      <header-wrapper section="Topic" type="topic"
+        user-url="${this.getAttribute('user-url')}">
+      </header-wrapper>
+    `
+  }
+
   getInfo = () => {
-    return `
-      <div class="company">
-        <ul class="footer-list">
-          <li class="item">
-            <a href="" class="item-link">Docs</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">What’s New</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Give a feedback </a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Request a feature</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Source code</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Donate</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Contact</a>
-          </li>
-          <li class="item">
-            <a href="#" class="item-link">&copy 2024 aduki, Inc</a>
-          </li>
-        </ul>
-      </div>
+    return /*html*/`
+      <info-container docs="/about/docs" new="/about/new"
+       feedback="/about/feedback" request="/about/request" code="/about/code" donate="/about/donate" contact="/about/contact" company="https://github.com/aduki-hub">
+      </info-container>
     `
   }
 
   getFoot = () => {
     return `
       <div class="foot">
-        ${this.getAuthor()}
+        ${this.getStats()}
+      </div>
+    `
+  }
+
+  getStats = () => {
+    // Get stories
+    let stories = this.parseToNumber(this.getAttribute('stories'));
+
+    // Format the number
+    let formattedStories = this.formatNumber(stories);
+    return `
+      <div class="author">
+        <span class="code">${this.getAttribute('hash')}</span>
+        <span class="sp">•</span>
+        <span class="stories">
+          <span class="no">${formattedStories}</span>
+          <span class="text">Stories</span>
+        </span>
       </div>
     `
   }
 
   getAuthor = () => {
-    return `
-      <div class="author">
-        <span class="code">${this.getAttribute('id')}</span>
-        <span class="sp">•</span>
-        <span class="stories">
-          <span class="no">${this.getAttribute('stories')}</span>
-          <span class="text">Stories</span>
-        </span>
-      </div>
-    `
+    return /* html */`
+			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
+       followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
+       verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
+      >
+       ${this.getAttribute('author-bio')}
+      </author-wrapper>
+		`
   }
 
   checkSubscribed = (subscribed) => {
@@ -239,13 +278,12 @@ export default class AppTopic extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
-          padding: 15px 0;
+          font-size: 16px;
+          padding: 0;
           margin: 0;
           display: flex;
           justify-content: space-between;
           gap: 0px;
-          min-height: 60vh;
         }
 
         section.main {
@@ -255,6 +293,7 @@ export default class AppTopic extends HTMLElement {
           align-items: start;
           gap: 0;
           width: 63%;
+          min-height: 100vh
         }
 
         .head {
@@ -316,11 +355,7 @@ export default class AppTopic extends HTMLElement {
           align-items: center;
           justify-content: center;
           gap: 10px;
-          border-radius: 15px;
-          -webkit-border-radius: 15px;
-          -moz-border-radius: 15px;
-          -ms-border-radius: 15px;
-          -o-border-radius: 15px;
+          border-radius: 12px;
         }
 
         .text-content > .actions > .action.subscribed {
@@ -355,12 +390,11 @@ export default class AppTopic extends HTMLElement {
           z-index: 3;
           width: 100%;
           position: sticky;
-          top: 60px;
+          top: 58px;
         }
 
         .foot > .author {
           border-top: var(--border);
-          /* border-bottom: var(--border); */
           padding: 10px 0;
           display: flex;
           align-items: center;
@@ -384,122 +418,27 @@ export default class AppTopic extends HTMLElement {
         }
 
         section.side {
-          /* border: 1px solid #53595f; */
-          padding: 0;
+          padding: 25px 0;
           width: 35%;
           display: flex;
           flex-flow: column;
           gap: 20px;
           position: sticky;
-          top: 60px;
-          height: max-content;
+          top: 0;
+          height: 100vh;
+          max-height: 100vh;
+          overflow-y: scroll;
+          scrollbar-width: none;
         }
 
-        section.side > .donate-card {
-          /* border: 1px solid #ff0000; */
-          padding: 0;
-          width: 100%;
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        section.side > .donate-card h2 {
-          margin: 0;
-          color: #1f2937;
-          line-height: 1.5;
-          font-weight: 600;
-          font-family: var(--font-text), sans-serif;
-        }
-
-        section.side > .donate-card p {
-          margin: 0;
-          color: var(--text-color);
-          line-height: 1.4;
-        }
-
-        section.side > .donate-card a {
-          text-decoration: none;
-          line-height: 1.4;
-          width: max-content;
-          color: var(--white-color);
-          margin: 5px 0;
-          padding: 4px 10px;
-          font-weight: 400;
-          background: var(--accent-linear);
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-        }
-
-                .company {
-          display: flex;
-          margin: 20px 0;
-          flex-flow: column;
-          align-items: center;
-          gap: 10px;
-          max-width: 500px;
-        }
-
-        .company >.title {
-          color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1.1rem;
-          font-weight: 600;
-        }
-
-        .company > ul.footer-list {
-          margin: 0;
-          list-style-type: none;
-          padding: 0 0 0 1px;
-          display: flex;
-          flex-flow: row;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: start;
-          gap: 10px;
-        }
-
-        .company > ul.footer-list > li.item {
-          margin: 0 10px 0 0;
-          padding: 0;
-          width: max-content;
-          position: relative;
-        }
-
-        .company > ul.footer-list > li.item > .dot {
-          display: inline-block;
-          background: var(--accent-linear);
-          width: 5px;
-          height: 5px;
-          position: absolute;
-          right: -9px;
-          top: 3px;
-          border-radius: 5px;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-        }
-
-        .company > ul.footer-list > li.item > a.item-link {
-          color: var(--gray-color);
-          /* font-size: 0.98rem; */
-          text-decoration: none;
-          font-weight: 400;
-          font-size: 0.9rem;
-        }
-
-        .company > ul.footer-list > li.item > a.item-link:hover {
-          /* color: var(--accent-color); */
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-          border-bottom: 1px solid var(--accent-color);
+        section.side::-webkit-scrollbar {
+          visibility: hidden;
+          display: none;
         }
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+            font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;
@@ -525,8 +464,16 @@ export default class AppTopic extends HTMLElement {
             border-bottom: var(--border-mobile);
           }
 
-          .foot {
+          .foot > .author {
+            border: none;
             border-top: var(--border-mobile);
+          }
+
+          .foot {
+            border: none;
+            border-bottom: var(--border-mobile);
+            position: sticky;
+            top: 49px;
           }
 
 					.action,
