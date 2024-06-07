@@ -134,22 +134,23 @@ export default class AppTopic extends HTMLElement {
 
   getHeader = () => {
     let str = this.getAttribute('name');
-    return `
+    // Replace all - with space 
+    str = str.replace(/-/g, ' ');
+
+    // capitalize the first letter of the string
+    str = str.charAt(0).toUpperCase() + str.slice(1);
+    return /*html*/`
       <div class="head">
         <div class="text-content">
-          <h2 class="tag">
-            ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}
-          </h2>
+          <h2 class="tag">${str}</h2>
           <div class="sub-text">
-            Discover, read, and contribute to stories about ${str.toLowerCase().replace(/(^|\s)\S/g, match => match.toUpperCase())}.
+            Discover, read, and contribute to stories about ${str}.
             <br>
             ${this.getAttribute('description')}
           </div>
           <div class="actions">
             ${this.checkSubscribed(this.getAttribute('subscribed'))}
-            <span class="action start">
-              <span class="text">Start writing</span>
-            </span>
+            ${this.checkFollow(this.getAttribute('user-follow'))}
           </div>
         </div>
       </div>
@@ -209,16 +210,33 @@ export default class AppTopic extends HTMLElement {
 		`
   }
 
-  checkSubscribed = (subscribed) => {
+  checkFollow = subscribed => {
     if (subscribed === 'true') {
-      return `
+      return /*html*/`
+			  <span class="action following" id="follow-action">
+          <span class="text">Following</span>
+        </span>
+			`
+    }
+    else {
+      return /*html*/`
+			  <span class="action follow" id="follow-action">
+          <span class="text">Follow</span>
+        </span>
+			`
+    }
+  }
+
+  checkSubscribed = subscribed => {
+    if (subscribed === 'true') {
+      return /*html*/`
 			  <span class="action subscribed" id="subscribe-action">
           <span class="text">Subscribed</span>
         </span>
 			`
     }
     else {
-      return `
+      return /*html*/`
 			  <span class="action subscribe" id="subscribe-action">
           <span class="text">Subscribe</span>
         </span>
@@ -312,8 +330,8 @@ export default class AppTopic extends HTMLElement {
 
         .text-content > .tag {
           font-size: 1.5rem;
-          font-weight: 500;
-          font-family: var(--font-text);
+          font-weight: 600;
+          font-family: var(--font-main);
           margin: 0;
           background: var(--accent-linear);
           background-clip: text;
@@ -326,7 +344,7 @@ export default class AppTopic extends HTMLElement {
           -o-animation: gradient 10s ease infinite;
         }
 
-        .text-content >.sub-text {
+        .text-content > .sub-text {
           font-size: 1rem;
           color: var(--text-color);
           line-height: 1.5;
@@ -334,7 +352,7 @@ export default class AppTopic extends HTMLElement {
         }
 
         .text-content > .actions {
-          /* border: 1px solid red; */
+          width: 100%;
           display: flex;
           flex-flow: row;
           gap: 50px;
@@ -343,13 +361,11 @@ export default class AppTopic extends HTMLElement {
 
         .text-content > .actions > .action {
           text-decoration: none;
-          border: var(--input-border-focus);
-          color: transparent;
+          color: var(--white-color);
           background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
           cursor: pointer;
           padding: 5px 20px;
+          width: 130px;
           font-size: 1rem;
           display: flex;
           align-items: center;
@@ -358,27 +374,17 @@ export default class AppTopic extends HTMLElement {
           border-radius: 12px;
         }
 
+        .text-content > .actions > .action.follow {
+          background: var(--action-linear);
+
+        }
+
+        .text-content > .actions > .action.following,
         .text-content > .actions > .action.subscribed {
+          padding: 4.5px 20px;
           background: unset;
           border: var(--action-border);
           color: var(--gray-color);
-        }
-
-        .text-content > .actions > .action.start {
-          padding: 6px 20px;
-          border: none;
-          color: var(--white-color);
-          background: var(--accent-linear);
-          font-weight: 500;
-        }
-
-        .text-content > .start-using > span.follow > span.plus > i.top {
-          rotate: 90deg;
-        }
-
-        .text-content > .start-using > span.follow > span.plus > i.hor {
-          position: absolute;
-          left: 10%;
         }
 
         .foot {
@@ -400,8 +406,19 @@ export default class AppTopic extends HTMLElement {
           align-items: center;
           gap: 5px;
           font-weight: 400;
-          color: var(--gray-color);
+          color: var(--text-color);
           font-family: var(--font-mono), monospace;
+          font-size: 0.9rem;
+        }
+
+        .foot > .author .stories .text {
+          font-family: var(--font-main), sans-serif;
+          font-size: 1rem;
+        }
+
+        .foot > .author .no {
+          font-weight: 500;
+          font-family: var(--font-main), sans-serif;
           font-size: 0.9rem;
         }
 

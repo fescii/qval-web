@@ -38,6 +38,7 @@ import PeopleFeed from "./feeds/people.feed.js";
 import StoriesFeed from "./feeds/stories.feed.js";
 import RepliesFeed from "./feeds/replies.feed.js";
 import StatFeed from "./feeds/stat.feed.js";
+import TopicFeed from "./feeds/topics.feed.js";
 
 
 // Import forms
@@ -55,6 +56,7 @@ import PeopleLoader from "./loaders/people.loader.js";
 import PostLoader from "./loaders/post.loader.js";
 import StoryLoader from "./loaders/story.loader.js";
 import TopicsLoader from "./loaders/topics.loader.js";
+import TopicLoader from "./loaders/topic.loader.js";
 
 
 // Import Sections
@@ -79,6 +81,7 @@ import PollWrapper from "./wrappers/poll.wrapper.js";
 import ProfileWrapper from "./wrappers/profile.wrapper.js";
 import ShareWrapper from "./wrappers/share.wrapper.js";
 import UserWrapper from "./wrappers/user.wrapper.js";
+import TopicWrapper from "./wrappers/topic.wrapper.js";
 
 // Import bodies
 import StoryBody from "./bodies/story.body.js";
@@ -124,6 +127,7 @@ const initApp = () => {
   customElements.define("stories-feed", StoriesFeed);
   customElements.define("replies-feed", RepliesFeed);
   customElements.define("stat-feed", StatFeed);
+  customElements.define("topics-feed", TopicFeed);
 
   // Register forms
   customElements.define("bio-form", BioForm);
@@ -140,6 +144,7 @@ const initApp = () => {
   customElements.define("post-loader", PostLoader);
   customElements.define("story-loader", StoryLoader);
   customElements.define("topics-loader", TopicsLoader);
+  customElements.define("topic-loader", TopicLoader);
 
   // Register sections
   customElements.define("post-section", PostSection);
@@ -163,6 +168,7 @@ const initApp = () => {
   customElements.define("profile-wrapper", ProfileWrapper);
   customElements.define("share-wrapper", ShareWrapper);
   customElements.define("user-wrapper", UserWrapper);
+  customElements.define("topic-wrapper", TopicWrapper);
 
   // Register bodies
   customElements.define("story-body", StoryBody);

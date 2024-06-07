@@ -211,9 +211,9 @@ export default class AppSearch extends HTMLElement {
     `
   }
 
-  getReplies = () => {
+  getTopics = () => {
     return `
-      <replies-feed opinions="all" url="/U0A89BA6/replies"></replies-feed>
+      <topics-feed topics="all" url="${this._url}/topics"></topics-feed>
     `
   }
 
