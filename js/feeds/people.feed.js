@@ -55,25 +55,32 @@ export default class PeopleFeeds extends HTMLElement {
   getPeople = () => {
     return /*html*/`
 			<user-wrapper username="U0BC98H63AB1" name="John Doe" picture="img/img.jpg"
-        verified="true" user-follow="true" url="/u/U0BC98H63AB1" >
+        verified="true" user-follow="true" url="/u/U0BC98H63AB1"
+				following="236" followers="9734">
       </user-wrapper>
       <user-wrapper username="U0BC98H63BCA" name="Janet Doe" picture="https://100k-faces.glitch.me/random-image" 
-        verified="false" user-follow="false" url="/u/U0BC98H63AB1" >
+        verified="false" user-follow="false" url="/u/U0BC98H63AB1"
+				following="736" followers="5134">
       </user-wrapper>
       <user-wrapper username="U0BC9BAC53H4" name="Yosemite Sam" picture="https://100k-faces.glitch.me/random-image"
-        verified="true" user-follow="true" url="/u/U0BC98H63AB1" >
+        verified="true" user-follow="true" url="/u/U0BC98H63AB1"
+				following="36" followers="234">
       </user-wrapper>
       <user-wrapper username="U0PHAB693NBA" name="Farghon Legon" picture="https://100k-faces.glitch.me/random-image" 
-        verified="false" user-follow="true" url="/u/U0BC98H63AB1" >
+        verified="false" user-follow="true" url="/u/U0BC98H63AB1"
+				following="36" followers="9734">
       </user-wrapper>
       <user-wrapper username="U0DAB69B79NH" name="Porky Pig" picture="https://100k-faces.glitch.me/random-image"
-        verified="false" user-follow="false" url="/u/U0BC98H63AB1" >
+        verified="false" user-follow="false" url="/u/U0BC98H63AB1"
+				following="6723" followers="79734">
       </user-wrapper>
       <user-wrapper username="U0BCCA53HP1" name="Bugs Bunny" picture="https://100k-faces.glitch.me/random-image" 
-        verified="true" user-follow="false" url="/u/U0BC98H63AB1" >
+        verified="true" user-follow="false" url="/u/U0BC98H63AB1"
+				following="836" followers="1034">
       </user-wrapper>
       <user-wrapper username="U0PC98H63AB8" name="Marvin Martian" picture="https://100k-faces.glitch.me/random-image"
-        verified="false" user-follow="true" url="/u/U0BC98H63AB1" >
+        verified="false" user-follow="true" url="/u/U0BC98H63AB1"
+				following="6" followers="934">
       </user-wrapper>
 		`
   }

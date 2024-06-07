@@ -15,8 +15,44 @@ export default class UserWrapper extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
+  }
 
-    // this.openForm();
+  formatNumber = n => {
+    if (n >= 0 && n <= 999) {
+      return n.toString();
+    } else if (n >= 1000 && n <= 9999) {
+      const value = (n / 1000).toFixed(2);
+      return `${value}k`;
+    } else if (n >= 10000 && n <= 99999) {
+      const value = (n / 1000).toFixed(1);
+      return `${value}k`;
+    } else if (n >= 100000 && n <= 999999) {
+      const value = (n / 1000).toFixed(0);
+      return `${value}k`;
+    } else if (n >= 1000000 && n <= 9999999) {
+      const value = (n / 1000000).toFixed(2);
+      return `${value}M`;
+    } else if (n >= 10000000 && n <= 99999999) {
+      const value = (n / 1000000).toFixed(1);
+      return `${value}M`;
+    } else if (n >= 100000000 && n <= 999999999) {
+      const value = (n / 1000000).toFixed(0);
+      return `${value}M`;
+    } else {
+      return "1B+";
+    }
+  }
+
+  parseToNumber = num_str => {
+    // Try parsing the string to an integer
+    const num = parseInt(num_str);
+
+    // Check if parsing was successful
+    if (!isNaN(num)) {
+      return num;
+    } else {
+      return 0;
+    }
   }
 
   getTemplate() {
@@ -39,24 +75,27 @@ export default class UserWrapper extends HTMLElement {
     let displayName = name.length > 20 ? `${name.substring(0, 20)}..` : name;
 
     return /* html */ `
-      <div class="author-info">
-        <div class="avatar">
-          <img src="${this.getAttribute('picture')}" alt="Author name">
-          ${this.checkVerified(this.getAttribute('verified'))}
+      <div class="author">
+        <div class="author-info">
+          <div class="avatar">
+            <img src="${this.getAttribute('picture')}" alt="Author name">
+            ${this.checkVerified(this.getAttribute('verified'))}
+          </div>
+          <div class="name">
+            <h4 class="name">
+              <span class="name">${displayName}</span>
+            </h4>
+            <a href="${url.toLowerCase()}" class="username">
+              <span class="text">${this.getAttribute('username')}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
+              </svg>
+            </a>
+          </div>
         </div>
-        <div class="name">
-          <h4 class="name">
-            <span class="name">${displayName}</span>
-          </h4>
-          <a href="${url.toLowerCase()}" class="username">
-            <span class="text">${this.getAttribute('username')}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
-            </svg>
-          </a>
-        </div>
+        ${this.checkFollowing(this.getAttribute('user-follow'))}
       </div>
-      ${this.checkFollowing(this.getAttribute('user-follow'))}
+      ${this.getStats()}
     `
   }
 
@@ -75,7 +114,6 @@ export default class UserWrapper extends HTMLElement {
     }
   }
 
-
   checkFollowing = following => {
     if (following === 'true') {
       return /*html*/`
@@ -87,6 +125,35 @@ export default class UserWrapper extends HTMLElement {
         <button class="action follow">follow</button>
 			`
     }
+  }
+
+  getStats = () => {
+    // Get total followers & following and parse to integer
+    const followers = this.getAttribute('followers') || 0;
+    const following = this.getAttribute('following') || 0;
+
+    // Convert the followers & following to a number
+    const totalFollowers = this.parseToNumber(followers);
+    const totalFollowing = this.parseToNumber(following);
+
+    //  format the number
+    const followersFormatted = this.formatNumber(totalFollowers);
+    const followingFormatted = this.formatNumber(totalFollowing);
+
+
+    return /* html */`
+      <div class="stats">
+        <span class="stat">
+          <span class="number">${followersFormatted}</span>
+          <span class="label">Followers</span>
+        </span>
+        <span class="sp">•</span>
+        <span class="stat">
+          <span class="number">${followingFormatted}</span>
+          <span class="label">Following</span>
+        </span>
+      </div>
+		`
   }
 
 
@@ -148,8 +215,16 @@ export default class UserWrapper extends HTMLElement {
           width: 100%;
           display: flex;
           align-items: center;
-          flex-flow: row;
+          flex-flow: column;
           gap: 10px;
+        }
+
+        .author {
+          display: flex;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          justify-content: space-between;
         }
         
         .author-info {
@@ -157,7 +232,7 @@ export default class UserWrapper extends HTMLElement {
           width: 100%;
           flex-flow: row;
           align-items: center;
-          gap: 5px;
+          gap: 10px;
         }
         
         .author-info > .avatar {
@@ -275,7 +350,38 @@ export default class UserWrapper extends HTMLElement {
           color: var(--text-color);
           font-weight: 400;
           font-size: 0.9rem;
-        }        
+        }
+
+        .stats {
+          color: var(--gray-color);
+          display: flex;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .stats > .stat {
+          display: flex;
+          flex-flow: row;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .stats > .stat > .label {
+          color: var(--gray-color);
+          font-family: var(--font-main), sans-serif;
+          text-transform: lowercase;
+          font-size: 0.9rem;
+          font-weight: 400;
+        }
+
+        .stats > .stat > .number {
+          color: var(--text-color);
+          font-family: var(--font-main), sans-serif;
+          font-size: 0.8rem;
+          font-weight: 500;
+        }     
 
         @media screen and (max-width:660px) {
           :host {

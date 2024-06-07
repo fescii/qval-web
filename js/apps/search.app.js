@@ -3,6 +3,9 @@ export default class AppSearch extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    //Get url in lowercase
+    this._url = this.getAttribute('url').trim().toLowerCase();
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -14,7 +17,15 @@ export default class AppSearch extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // Activate tab
+    const contentContainer = this.shadowObj.querySelector('div.content-container');
+
+    // update active tab
+    this.updateActiveTab(this.getAttribute('tab'));
+    
+    if (contentContainer) {
+      this.activateTab(contentContainer);
+    }
   }
 
   disableScroll() {
@@ -32,6 +43,65 @@ export default class AppSearch extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
+  }
+
+  updateActiveTab = active => {
+    // Select tab with active class
+    const tab = this.shadowObj.querySelector(`ul#tab > li.${active}`);
+
+    if (tab) {
+      tab.classList.add('active');
+    }
+    else {
+      // Select the stories tab
+      const storiesTab = this.shadowObj.querySelector("ul#tab > li.stories");
+      storiesTab.classList.add('active');
+    }
+  }
+
+  activateTab = contentContainer => {
+    const outerThis = this;
+    const tab = this.shadowObj.querySelector('ul#tab');
+
+    if (tab && contentContainer) {
+      const line = tab.querySelector('span.line');
+      const tabItems = tab.querySelectorAll('li.tab-item');
+      let activeTab = tab.querySelector('li.tab-item.active');
+
+      tabItems.forEach(tab => {
+        tab.addEventListener('click', e => {
+          e.preventDefault()
+          e.stopPropagation()
+
+          // Calculate half tab width - 10px
+          const tabWidth = (tab.offsetWidth/2) - 20;
+
+          line.style.left = `${tab.offsetLeft + tabWidth}px`;
+
+          if (tab.dataset.element === activeTab.dataset.element) {
+            return;
+          }
+          else {
+            activeTab.classList.remove('active');
+            tab.classList.add('active');
+            activeTab = tab;
+            switch (tab.dataset.element) {
+              case "stories":
+                contentContainer.innerHTML = outerThis.getStories();
+                break;
+              case "topics":
+                contentContainer.innerHTML = outerThis.getTopics();
+                break;
+              case "people":
+                contentContainer.innerHTML = outerThis.getPeople();
+              default:
+                break;
+            }
+
+          }
+        })
+      })
+    }
   }
 
   getTemplate = () => {
@@ -73,26 +143,32 @@ export default class AppSearch extends HTMLElement {
   }
 
   getBody = () => {
+    const tab = this.getAttribute('tab');
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
+        ${this.getTop()}
         ${this.getForm()}
+        ${this.getTab()}
         <div class="content-container">
-          ${this.getTopics()}
+          ${this.getContainer(tab)}
         </div>
       `;
     }
     else {
       return /* html */`
         <section class="main">
+          ${this.getTop()}
           ${this.getForm()}
+          ${this.getTab()}
           <div class="content-container">
-            ${this.getTopics()}
+            ${this.getContainer(tab)}
           </div>
         </section>
 
         <section class="side">
           <topics-container url="/topics/popular"></topics-container>
+          ${this.getRelatedStories()}
           ${this.getInfo()}
         </section>
       `;
@@ -110,62 +186,82 @@ export default class AppSearch extends HTMLElement {
           </svg>
           <button type="submit">Search</button>
         </div>
-        ${this.getTab()}
       </form>
     `
   }
 
-  getInfo = () => {
+  getContainer = active => {
+    // Switch active tab
+    switch (active) {
+      case "stories":
+        return this.getStories();
+      case "people":
+        return this.getReplies();
+      case "topic":
+        return this.getPeople();
+      default:
+        return this.getStories();
+    }
+  }
+
+
+  getStories = () => {
     return `
-      <div class="company">
-        <ul class="footer-list">
-          <li class="item">
-            <a href="" class="item-link">Docs</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">What’s New</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Give a feedback </a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Request a feature</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Source code</a>
-            <span class="dot"></span>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Donate</a>
-          </li>
-          <li class="item">
-            <a href="" class="item-link">Contact</a>
-          </li>
-          <li class="item">
-            <a href="#" class="item-link">&copy 2024 aduki, Inc</a>
-          </li>
-        </ul>
-      </div>
+      <stories-feed stories="all" url="${this._url}/stories"></stories-feed>
+    `
+  }
+
+  getReplies = () => {
+    return `
+      <replies-feed opinions="all" url="/U0A89BA6/replies"></replies-feed>
+    `
+  }
+
+  getPeople = () => {
+    return `
+      <people-feed opinions="all" url="${this._url}/people"></people-feed>
+    `
+  }
+
+  getTop = () => {
+    return /* html */ `
+      <header-wrapper section="Search" type="search"
+        user-url="${this.getAttribute('user-url')}">
+      </header-wrapper>
+    `
+  }
+
+  getRelatedStories = () => {
+    return /* html */`
+			<related-container type="top" limit="5" topics='top1, top2, top3'>
+      </related-container>
+		`
+  }
+
+  getInfo = () => {
+    return /*html*/`
+      <info-container docs="/about/docs" new="/about/new"
+       feedback="/about/feedback" request="/about/request" code="/about/code" donate="/about/donate" contact="/about/contact" company="https://github.com/aduki-hub">
+      </info-container>
     `
   }
 
   getTab = () => {
     return /* html */`
-      <ul id="tab" class="tab">
-        <li data-element="discover" class="tab-item discover  active">
-          <span class="text">Discover</span>
+      <div class="tab-control">
+        <ul id="tab" class="tab">
+          <li data-element="stories" class="tab-item stories">
+            <span class="text">Stories</span>
+          </li>
+          <li data-element="topics" class="tab-item topics">
+            <span class="text">Topics</span>
+          </li>
+          <li data-element="people" class="tab-item people">
+            <span class="text">People</span>
+          </li>
           <span class="line"></span>
-        </li>
-        <li data-element="stories" class="tab-item stories">
-          <span class="text">Stories</span>
-          <span class="line"></span>
-        </li>
-        <li data-element="people" class="tab-item people">
-          <span class="text">People</span>
-          <span class="line"></span>
-        </li>
-      </ul>
+        </ul>
+      </div>
     `
   }
 
@@ -221,29 +317,27 @@ export default class AppSearch extends HTMLElement {
 	      }
 
 	      :host {
-        font-size: 16px;
+          font-size: 16px;
           padding: 0;
           margin: 0;
           display: flex;
           justify-content: space-between;
           gap: 0px;
-          min-height: 60vh;
         }
 
         section.main {
-          /* border: 1px solid #6b7280; */
           display: flex;
           flex-flow: column;
           align-items: start;
           gap: 0;
           width: 63%;
+          min-height: 100vh;
         }
 
         form.search {
-          border-bottom: var(--border);
           background: var(--background);
-          padding: 10px 0 0 0;
-          margin: 0 0 15px 0;
+          padding: 0;
+          margin: 15px 0;
           display: flex;
           flex-flow: column;
           align-items: start;
@@ -251,8 +345,6 @@ export default class AppSearch extends HTMLElement {
           gap: 15px;
           z-index: 3;
           width: 100%;
-          position: sticky;
-          top: 60px;
         }
 
         form.search > .contents {
@@ -288,10 +380,10 @@ export default class AppSearch extends HTMLElement {
         form.search > .contents > svg {
           position: absolute;
           height: 20px;
+          color: var(--gray-color);
           width: 20px;
           left: 10px;
           top: calc(50% - 12px);
-          color: var(--gray-color);
         }
 
         form.search > .contents > button {
@@ -316,14 +408,38 @@ export default class AppSearch extends HTMLElement {
           -moz-border-radius: 50px;
         }
 
-        ul.tab {
+        .tab-control {
+          border-bottom: var(--border);
+          background-color: var(--background);
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+          z-index: 3;
+          width: 100%;
+          position: sticky;
+          top: 58px;
+        }
+
+        .tab-control > .author {
+          border-bottom: var(--border);
+          padding: 10px 0;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-weight: 400;
+          color: var(--gray-color);
+          font-family: var(--font-mono), monospace;
+          font-size: 0.9rem;
+        }
+
+        .tab-control > ul.tab {
           height: max-content;
           width: 100%;
-          padding: 0;
+          padding: 5px 0 0 0;
           margin: 0;
           list-style-type: none;
           display: flex;
-          gap: 5px;
+          gap: 0;
           align-items: center;
           max-width: 100%;
           overflow-x: scroll;
@@ -331,32 +447,30 @@ export default class AppSearch extends HTMLElement {
           scrollbar-width: none;
         }
 
-        ul.tab::-webkit-scrollbar {
+        .tab-control > ul.tab::-webkit-scrollbar {
           display: none !important;
           visibility: hidden;
         }
 
-        ul.tab > li.tab-item {
-          position: relative;
+        .tab-control > ul.tab > li.tab-item {
           color: var(--gray-color);
+          font-family: var(--font-text), sans-serif;
           font-weight: 400;
-          padding: 6px 10px 8px 10px;
+          padding: 6px 20px 8px 0;
+          margin: 0;
           display: flex;
           align-items: center;
           cursor: pointer;
+          overflow: visible;
+          font-size: 0.95rem;
+        }
+
+        .tab-control > ul.tab > li.tab-item > .text {
+          font-weight: 500;
           font-size: 1rem;
         }
 
-        ul.tab > li.tab-item:hover > .text {
-          color: var(--accent-color);
-        }
-
-        ul.tab > li.active {
-          font-size: 0.95rem;
-          padding: 6px 10px 10px 10px;
-        }
-
-        ul.tab > li.active > .text {
+        .tab-control > ul.tab > li.tab-item:hover > .text {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
@@ -364,20 +478,35 @@ export default class AppSearch extends HTMLElement {
           font-family: var(--font-text);
         }
 
-        ul.tab > li.active > span.line {
+        .tab-control > ul.tab > li.active {
+          font-size: 0.95rem;
+        }
+
+        .tab-control > ul.tab > li.active > .text {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: var(--font-text);
+        }
+
+        .tab-control > ul.tab span.line {
           position: absolute;
+          z-index: 1;
           background: var(--accent-linear);
           display: inline-block;
-          bottom: 0;
-          right: 0;
-          left: 0;
-          min-height: 4px;
-          border-top-left-radius: 50px;
-          border-top-right-radius: 50px;
+          bottom: -3px;
+          left: 12px;
+          width: 20px;
+          min-height: 5px;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          transition: all 300ms ease-in-out;
         }
 
         div.content-container {
-          /* border: 1px solid #6b7280; */
           padding: 0;
           display: flex;
           flex-flow: column;
@@ -388,122 +517,27 @@ export default class AppSearch extends HTMLElement {
         }
 
         section.side {
-          /* border: 1px solid #53595f; */
-          padding: 0;
+          padding: 25px 0;
           width: 35%;
           display: flex;
           flex-flow: column;
           gap: 20px;
           position: sticky;
-          top: 60px;
-          height: max-content;
+          top: 0;
+          height: 100vh;
+          max-height: 100vh;
+          overflow-y: scroll;
+          scrollbar-width: none;
         }
 
-        section.side > .donate-card {
-          /* border: 1px solid #ff0000; */
-          padding: 0;
-          width: 100%;
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        section.side > .donate-card h2 {
-          margin: 0;
-          color: #1f2937;
-          line-height: 1.5;
-          font-weight: 600;
-          font-family: var(--font-text), sans-serif;
-        }
-
-        section.side > .donate-card p {
-          margin: 0;
-          color: var(--text-color);
-          line-height: 1.4;
-        }
-
-        section.side > .donate-card a {
-          text-decoration: none;
-          line-height: 1.4;
-          width: max-content;
-          color: var(--white-color);
-          margin: 5px 0;
-          padding: 4px 10px;
-          font-weight: 400;
-          background: var(--accent-linear);
-          border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -moz-border-radius: 50px;
-        }
-
-                .company {
-          display: flex;
-          margin: 20px 0;
-          flex-flow: column;
-          align-items: center;
-          gap: 10px;
-          max-width: 500px;
-        }
-
-        .company >.title {
-          color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
-          font-size: 1.1rem;
-          font-weight: 600;
-        }
-
-        .company > ul.footer-list {
-          margin: 0;
-          list-style-type: none;
-          padding: 0 0 0 1px;
-          display: flex;
-          flex-flow: row;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: start;
-          gap: 10px;
-        }
-
-        .company > ul.footer-list > li.item {
-          margin: 0 10px 0 0;
-          padding: 0;
-          width: max-content;
-          position: relative;
-        }
-
-        .company > ul.footer-list > li.item > .dot {
-          display: inline-block;
-          background: var(--accent-linear);
-          width: 5px;
-          height: 5px;
-          position: absolute;
-          right: -9px;
-          top: 3px;
-          border-radius: 5px;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-        }
-
-        .company > ul.footer-list > li.item > a.item-link {
-          color: var(--gray-color);
-          /* font-size: 0.98rem; */
-          text-decoration: none;
-          font-weight: 400;
-          font-size: 0.9rem;
-        }
-
-        .company > ul.footer-list > li.item > a.item-link:hover {
-          /* color: var(--accent-color); */
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-          border-bottom: 1px solid var(--accent-color);
+        section.side::-webkit-scrollbar {
+          visibility: hidden;
+          display: none;
         }
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+            font-size: 16px;
 						padding: 0;
             margin: 0;
             display: flex;
@@ -515,6 +549,8 @@ export default class AppSearch extends HTMLElement {
 					::-webkit-scrollbar {
 						-webkit-appearance: none;
 					}
+
+          .tab-control > ul.tab > li.tab-item,
 					a {
 						cursor: default !important;
           }
@@ -538,6 +574,13 @@ export default class AppSearch extends HTMLElement {
             flex-flow: column;
             gap: 0;
             width: 100%;
+          }
+
+          .tab-control {
+            border: none;
+            border-bottom: var(--border-mobile);
+            position: sticky;
+            top: 49px;
           }
 
           section.side {

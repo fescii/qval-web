@@ -66,8 +66,8 @@ export default class AppHome extends HTMLElement {
           <stories-feed stories="all" url="/stories/feed"></stories-feed>
         </div>
         <div class="side">
-          ${this.getRelatedStories()}
           <topics-container url="/topics/popular"></topics-container>
+          ${this.getRelatedStories()}
           ${this.getInfo()}
         </div>
       `;
