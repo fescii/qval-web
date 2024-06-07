@@ -417,7 +417,7 @@ export default class StoryBody extends HTMLElement {
     `
   }
 
-  getLike = (liked) => {
+  getLike = liked => {
     if (liked === 'true') {
       return /*html*/`
         <span class="action like true">

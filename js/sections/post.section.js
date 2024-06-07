@@ -3,6 +3,9 @@ export default class PostSection extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // Get default active tab
+    this._active = this.getAttribute('active');
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -93,6 +96,16 @@ export default class PostSection extends HTMLElement {
             activeTab.classList.remove('active');
             tab.classList.add('active');
             activeTab = tab;
+
+            // Updating History State
+            window.history.pushState(
+              { tab: tab.dataset.element, content: feeds.innerHTML},
+              tab.dataset.element, `${tab.getAttribute('url')}`
+            );
+
+            // Change active attribute
+            outerThis.setAttribute('active', tab.dataset.element);
+
             switch (tab.dataset.element) {
               case "replies":
                 feeds.innerHTML = outerThis.getReplies();
@@ -106,7 +119,72 @@ export default class PostSection extends HTMLElement {
           }
         })
       })
+
+      // Update state on window.onpopstate
+      window.onpopstate = event => {
+        // This event will be triggered when the browser's back button is clicked
+
+        // console.log(event.state);
+        if (event.state) {
+          if (event.state.page) {
+            outerThis.updatePage(event.state.content)
+          }
+          else if (event.state.tab) {
+
+            // Select the state tab
+            const tab = outerThis.shadowObj.querySelector(`ul#tab > li.${event.state.tab}`);
+
+            if (tab) {
+              activeTab.classList.remove('active');
+
+              tab.classList.add('active');
+              activeTab = tab;
+
+              // Calculate half tab width - 10px
+              const tabWidth = (tab.offsetWidth/2) - 20;
+
+              // Update the line
+              line.style.left = `${tab.offsetLeft + tabWidth}px`;
+
+              outerThis.updateState(event.state, feeds);
+
+              // Update active attribute
+              outerThis.setAttribute('active', event.state.tab);
+            }
+          }
+        }
+        else {
+          // Select li with class name as current and content Container
+          const currentTab = outerThis.shadowObj.querySelector(`ul#tab > li.tab-item.${this._active}`);
+          if (currentTab) {
+            activeTab.classList.remove('active');
+            activeTab = currentTab;
+            currentTab.classList.add('active');
+
+            // Calculate half tab width - 10px
+            const tabWidth = (currentTab.offsetWidth/2) - 20;
+
+            // update line position
+            line.style.left = `${currentTab.offsetLeft + tabWidth}px`;
+
+
+            outerThis.updateDefault(feeds);
+
+            // Update active attribute
+            outerThis.setAttribute('active', currentTab.dataset.element);
+          }
+        }
+      };
     }
+  }
+
+  updateState = (state, contentContainer)=> {
+    // populate content
+    contentContainer.innerHTML = state.content;
+  }
+
+  updateDefault = contentContainer => {
+    contentContainer.innerHTML = this.getContainer(this._active);
   }
 
   getTemplate() {
@@ -139,10 +217,10 @@ export default class PostSection extends HTMLElement {
     return /* html */`
       <div class="tab-control">
         <ul id="tab" class="tab">
-          <li data-element="replies" class="tab-item replies">
+          <li url="/replies" data-element="replies" class="tab-item replies">
             <span class="text">Replies</span>
           </li>
-          <li data-element="likes" class="tab-item likes">
+          <li url="/likes" data-element="likes" class="tab-item likes">
             <span class="text">Likes</span>
           </li>
           <span class="line"></span>
