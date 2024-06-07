@@ -64,15 +64,15 @@ export default class QuickPost extends HTMLElement {
     // get current content
     const content = this.shadowObj.querySelector('#content')
 
-    // Get full post
-    const post =  this.getFullPost();
-
     if(body && content) {
       content.addEventListener('click', event => {
         event.preventDefault();
 
         // scroll to the top of the page
         window.scrollTo(0, 0);
+
+        // Get full post
+        const post =  this.getFullPost();
   
         // replace and push states
         this.replaceAndPushStates(url, body, post);

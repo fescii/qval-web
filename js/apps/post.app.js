@@ -215,7 +215,6 @@ export default class AppPost extends HTMLElement {
           display: flex;
           justify-content: space-between;
           gap: 30px;
-          /* use viewport device height */
           min-height: 100dvh;
         }
 
@@ -251,12 +250,11 @@ export default class AppPost extends HTMLElement {
 					}
 
           .container {
-            padding: 0;
-            margin: 0;
             display: flex;
             flex-flow: column;
             justify-content: flex-start;
             gap: 0;
+            min-height: 100dvh;
           }
 
 					::-webkit-scrollbar {
