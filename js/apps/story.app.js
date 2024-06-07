@@ -303,8 +303,8 @@ export default class AppStory extends HTMLElement {
 
   getSection = () => {
     return /* html */`
-      <post-section active="${this.getAttribute('tab')}" section-title="Story" username="${this.getAttribute('author-username')}"
-        url="${this.getAttribute('url')}" replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}">
+      <post-section url="${this.getAttribute('url')}" active="${this.getAttribute('tab')}" section-title="Story" username="${this.getAttribute('author-username')}"
+        replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}">
       </post-section>
     `
   }

@@ -160,7 +160,7 @@ export default class AppProfile extends HTMLElement {
 
   getSection = () => {
     return /* html */`
-      <profile-section active="${this.getAttribute('tab')}" section-title="Profile" username="${this.getAttribute('username')}" url="${this.getAttribute('url')}"
+      <profile-section url="${this.getAttribute('url')}" active="${this.getAttribute('tab')}" section-title="Profile" username="${this.getAttribute('username')}"
         stories-url="${this.getAttribute('stories-url')}" replies-url="${this.getAttribute('replies-url')}"
         followers-url="${this.getAttribute('followers-url')}"
         following-url="${this.getAttribute('following-url')}">

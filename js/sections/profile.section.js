@@ -180,6 +180,14 @@ export default class ProfileSection extends HTMLElement {
     }
   }
 
+  updatePage = content => {
+    // select body
+    const body = document.querySelector('body');
+
+    // populate content
+    body.innerHTML = content;
+  }
+
   updateState = (state, contentContainer)=> {
     // populate content
     contentContainer.innerHTML = state.content;
@@ -215,16 +223,21 @@ export default class ProfileSection extends HTMLElement {
   }
 
   getTab = () => {
+    // Get url 
+    let url = this.getAttribute('url');
+
+    // convert url to lowercase
+    url = url.toLowerCase();
     return /* html */`
       <div class="tab-control">
         <ul id="tab" class="tab">
-          <li url="/stories" data-element="stories" class="tab-item stories">
+          <li url="${url}/stories" data-element="stories" class="tab-item stories">
             <span class="text">Stories</span>
           </li>
-          <li url="/replies" data-element="replies" class="tab-item replies">
+          <li url="${url}/replies" data-element="replies" class="tab-item replies">
             <span class="text">Replies</span>
           </li>
-          <li url="followers" data-element="followers" class="tab-item followers">
+          <li url="${url}/followers" data-element="followers" class="tab-item followers">
             <span class="text">Followers</span>
           </li>
           <span class="line"></span>

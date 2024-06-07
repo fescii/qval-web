@@ -3,6 +3,12 @@ export default class AppSearch extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // Get default tab
+    this._tab = this.getAttribute('tab');
+
+    // get query
+    this._query = this.getAttribute('query') || '';
+
     //Get url in lowercase
     this._url = this.getAttribute('url').trim().toLowerCase();
 
@@ -109,6 +115,21 @@ export default class AppSearch extends HTMLElement {
             activeTab.classList.remove('active');
             tab.classList.add('active');
             activeTab = tab;
+
+            // get tab url attribute
+            let url = tab.getAttribute('url');
+
+            // check if this._query is empty or null, if not update url
+            if (this._query !== '' && this._query !== null && this._query !== 'null') {
+              url = `${url}?q=${this._query}`;
+            }
+
+            // Updating History State
+            window.history.pushState(
+              { tab: tab.dataset.element, content: contentContainer.innerHTML},
+              tab.dataset.element, `${url}`
+            );
+
             switch (tab.dataset.element) {
               case "stories":
                 contentContainer.innerHTML = outerThis.getStories();
@@ -124,8 +145,81 @@ export default class AppSearch extends HTMLElement {
 
           }
         })
-      })
+      });
+
+      // Update state on window.onpopstate
+      window.onpopstate = event => {
+        // This event will be triggered when the browser's back button is clicked
+
+        // console.log(event.state);
+        if (event.state) {
+          if (event.state.page) {
+            outerThis.updatePage(event.state.content)
+          }
+          else if (event.state.tab) {
+
+            // Select the state tab
+            const tab = outerThis.shadowObj.querySelector(`ul#tab > li.${event.state.tab}`);
+
+            if (tab) {
+              activeTab.classList.remove('active');
+
+              tab.classList.add('active');
+              activeTab = tab;
+
+              // Calculate half tab width - 10px
+              const tabWidth = (tab.offsetWidth/2) - 20;
+
+              // Update the line
+              line.style.left = `${tab.offsetLeft + tabWidth}px`;
+
+              outerThis.updateState(event.state, contentContainer);
+
+              // Update active attribute
+              outerThis.setAttribute('tab', event.state.tab);
+            }
+          }
+        }
+        else {
+          // Select li with class name as current and content Container
+          const currentTab = outerThis.shadowObj.querySelector(`ul#tab > li.tab-item.${this._tab}`);
+          if (currentTab) {
+            activeTab.classList.remove('active');
+            activeTab = currentTab;
+            currentTab.classList.add('active');
+
+            // Calculate half tab width - 10px
+            const tabWidth = (currentTab.offsetWidth/2) - 20;
+
+            // update line position
+            line.style.left = `${currentTab.offsetLeft + tabWidth}px`;
+
+
+            outerThis.updateDefault(contentContainer);
+
+            // Update active attribute
+            outerThis.setAttribute('tab', currentTab.dataset.element);
+          }
+        }
+      };
     }
+  }
+
+  updatePage = content => {
+    // select body
+    const body = document.querySelector('body');
+
+    // populate content
+    body.innerHTML = content;
+  }
+
+  updateState = (state, contentContainer)=> {
+    // populate content
+    contentContainer.innerHTML = state.content;
+  }
+
+  updateDefault = contentContainer => {
+    contentContainer.innerHTML = this.getContainer(this._tab);
   }
 
   getTemplate = () => {
@@ -200,10 +294,10 @@ export default class AppSearch extends HTMLElement {
   }
 
   getForm = () => {
-    return `
+    return /*html*/`
       <form action="" method="get" class="search">
         <div class="contents">
-          <input type="text" name="query" id="query" placeholder="What's your query?">
+          <input type="text" name="q" id="query" placeholder="What's your query?">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="11.7666" cy="11.7667" r="8.98856" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"  stroke-linejoin="round" />
             <path d="M18.0183 18.4853L21.5423 22.0001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -271,16 +365,21 @@ export default class AppSearch extends HTMLElement {
   }
 
   getTab = () => {
+    // Get url 
+    let url = this.getAttribute('url');
+
+    // convert url to lowercase
+    url = url.toLowerCase();
     return /* html */`
       <div class="tab-control">
         <ul id="tab" class="tab">
-          <li data-element="stories" class="tab-item stories">
+          <li url="${url}/stories" data-element="stories" class="tab-item stories">
             <span class="text">Stories</span>
           </li>
-          <li data-element="topics" class="tab-item topics">
+          <li url="${url}/topics" data-element="topics" class="tab-item topics">
             <span class="text">Topics</span>
           </li>
-          <li data-element="people" class="tab-item people">
+          <li url="${url}/people" data-element="people" class="tab-item people">
             <span class="text">People</span>
           </li>
           <span class="line"></span>

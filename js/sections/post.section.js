@@ -178,6 +178,14 @@ export default class PostSection extends HTMLElement {
     }
   }
 
+  updatePage = content => {
+    // select body
+    const body = document.querySelector('body');
+
+    // populate content
+    body.innerHTML = content;
+  }
+
   updateState = (state, contentContainer)=> {
     // populate content
     contentContainer.innerHTML = state.content;
@@ -214,13 +222,19 @@ export default class PostSection extends HTMLElement {
   }
 
   getTab = () => {
+    // Get url 
+    let url = this.getAttribute('url');
+
+    // convert url to lowercase
+    url = url.toLowerCase();
+
     return /* html */`
       <div class="tab-control">
         <ul id="tab" class="tab">
-          <li url="/replies" data-element="replies" class="tab-item replies">
+          <li url="${url}/replies" data-element="replies" class="tab-item replies">
             <span class="text">Replies</span>
           </li>
-          <li url="/likes" data-element="likes" class="tab-item likes">
+          <li url="${url}/likes" data-element="likes" class="tab-item likes">
             <span class="text">Likes</span>
           </li>
           <span class="line"></span>
