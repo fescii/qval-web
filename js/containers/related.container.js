@@ -22,10 +22,10 @@ export default class RelatedContainer extends HTMLElement {
 
   fetchTopics = contentContainer => {
     //Get type of stories to fetch
-    // const type = this.getAttribute('type');
+    const type = this.getAttribute('type');
 
     const topicsLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getStories();
+    const content = this.getStories(type);
     setTimeout(() => {
       topicsLoader.remove();
       contentContainer.insertAdjacentHTML('beforeend', content);
@@ -55,10 +55,23 @@ export default class RelatedContainer extends HTMLElement {
     `;
   }
 
-  getStories = () => {
+  getTitle = type => {
+    switch (type) {
+      case 'top':
+        return 'Trending stories';
+      case 'latest':
+        return 'Latest stories';
+      case 'related':
+        return 'Related stories';
+      default:
+        return 'Trending stories';
+    }
+  }
+
+  getStories = type => {
     return /* html */`
 			<div class="related">
-        <p class="title">Trending stories.</p>
+        <p class="title">${this.getTitle(type)}</p>
         <ul class="stories">
           <li class="story">
             <a href="" class="link">

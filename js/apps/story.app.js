@@ -296,7 +296,7 @@ export default class AppStory extends HTMLElement {
 
   getRelatedStories = () => {
     return /* html */`
-			<related-container type="top" limit="5" topics='${this.getAttribute("topics")}'>
+			<related-container type="related" limit="5" topics='${this.getAttribute("topics")}'>
       </related-container>
 		`
   }
