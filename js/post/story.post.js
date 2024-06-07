@@ -72,18 +72,45 @@ export default class StoryPost extends HTMLElement {
     }
   }
 
-  formatDateWithRelativeTime = (isoDateStr) => {
-    const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
-    let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    // userTimezone.replace('%2F', '/')
+ // Get lapse time
+ getLapseTime = isoDateStr => {
+  const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
+  let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    // Convert posted time to the current timezone
-    const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
+  // Convert posted time to the current timezone
+  const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
 
-    return `
-      ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-    `
+  // Get the current time
+  const currentTime = new Date();
+
+  // Get the difference in time
+  const timeDifference = currentTime - date;
+
+  // Get the seconds
+  const seconds = timeDifference / 1000;
+
+  // Check if seconds is less than 60: return Just now
+  if (seconds < 60) {
+    return 'Just now';
   }
+  // check if seconds is less than 86400: return time AM/PM
+  if (seconds < 86400) {
+    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+  }
+
+  // check if seconds is less than 604800: return day and time
+  if (seconds <= 604800) {
+    return date.toLocaleDateString('en-US', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true });
+  }
+
+  // Check if the date is in the current year:: return date and month short 2-digit year without time
+  if (date.getFullYear() === currentTime.getFullYear()) {
+    return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', });
+  }
+  else {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+}
 
   getTemplate() {
     // Show HTML Here
@@ -108,7 +135,6 @@ export default class StoryPost extends HTMLElement {
       <span class="time">${this.getAttribute('read-time')}</span>
     `
   }
-
 
   getViews = () => {
     // Get the number of views
@@ -161,22 +187,18 @@ export default class StoryPost extends HTMLElement {
   }
 
   getFooter = () => {
-    return `
-			<div class="meta">
-        <div class="author">
-          <span class="sp">by</span>
-          <div class="author-name">
-            <a href="" class="link action-link">${this.getAttribute('author-username')}</a>
-          </div>
-        </div>
-        <span class="time">
-          <span class="sp">•</span>
-          <time class="published" datetime="${this.getAttribute('time')}">
-            ${this.formatDateWithRelativeTime(this.getAttribute('time'))}
-          </time>
-        </span>
+    let authorUrl = this.getAttribute('author-url');
+    authorUrl = authorUrl.trim().toLowerCase();
+    return /*html*/`
+      <div class="meta top-meta">
+        <span class="by">by</span>
+        <a href="${authorUrl}" class="link author-link">${this.getAttribute('author-username')}</a>
+        <span class="sp">•</span>
+        <time class="time" datetime="${this.getAttribute('time')}">
+          ${this.getLapseTime(this.getAttribute('time'))}
+        </time>
       </div>
-		`
+    `
   }
 
   getBody() {
@@ -281,7 +303,7 @@ export default class StoryPost extends HTMLElement {
       }
 
       .meta {
-        height: 25px;
+        height: max-content;
         display: flex;
         position: relative;
         color: var(--gray-color);
@@ -289,37 +311,32 @@ export default class StoryPost extends HTMLElement {
         font-family: var(--font-mono),monospace;
         gap: 5px;
         font-size: 0.9rem;
+        line-height: 1.5;
       }
 
-      .meta > span.time {
-        font-family: var(--font-text), sans-serif;
-        font-size: 0.85rem;
+      .meta > span.sp {
+        margin: 1px 0 0 0;
       }
 
-      .meta > .author {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+      .meta > time.time {
+        font-family: var(--font-main), sans-serif;
+        font-size: 0.83rem;
+        font-weight: 500;
+        margin: 1px 0 0 0;
       }
 
-      .meta div.author-name {
-        display: flex;
-        align-items: center;
-      }
-
-      .meta div.author-name > a {
+      .meta a.link {
         text-decoration: none;
         color: transparent;
-        background: var(--accent-linear);
+        background-image: var(--action-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }
 
-      .meta a.reply-link {
+      .meta  a.author-link {
         text-decoration: none;
         color: transparent;
-        background-image: var(--alt-linear);
+        background: var(--accent-linear);
         background-clip: text;
         -webkit-background-clip: text;
       }

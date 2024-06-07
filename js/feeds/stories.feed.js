@@ -63,7 +63,7 @@ export default class StoryFeed extends HTMLElement {
       </story-post>
 
       <quick-post story="quick" url="/s/P0A43PBA64AB" likes="9" replies="3872" hash="P0ANB32A43PBA" liked="false"
-	      views="4369" time="2022-01-03T13:00:00+03:00"
+	      views="4369" time="2019-01-07T23:53:01+03:00"
 	      story-title="The US Senate called on the law markers"
         author-username="U0A43PBAH6A" author-url="/u/U0A43PBAH6A"
         author-img="/img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
@@ -72,6 +72,17 @@ export default class StoryFeed extends HTMLElement {
         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
         <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
         'Content here, content here', making it look like readable English.</p>
+        <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+        <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+	    </quick-post>
+
+      <quick-post story="quick" url="/s/P0A43PBA64AB" likes="9" replies="3872" hash="P0ANB32A43PBA" liked="false"
+	      views="4369" time="2024-06-04T23:53:01+03:00"
+	      story-title="The US Senate called on the law markers"
+        author-username="U0A43PBAH6A" author-url="/u/U0A43PBAH6A"
+        author-img="/img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
+        author-following="263" author-follow="false" author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+          I love to write about technology and software development.">
         <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
         <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
 	    </quick-post>
