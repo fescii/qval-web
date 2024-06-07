@@ -277,6 +277,10 @@ export default class StoryPost extends HTMLElement {
         font-family: var(--font-mono), monospace;
       }
 
+      .read-time .views {
+        font-weight: 500;
+      }
+
       .read-time .views .views-no {
         font-family: var(--font-main), monospace;
         font-size: 0.8rem;

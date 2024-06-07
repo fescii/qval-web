@@ -87,7 +87,7 @@ export default class StoryFeed extends HTMLElement {
         <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
 	    </quick-post>
 
-      <poll-post story="poll" url="/s/P0A43PBA64AB" hash="P0A43HVA56PBA" views="89609" time="2024-03-13T19:00:00+03:00" end-time="2024-05-29T19:00:00+03:00"
+      <poll-post story="poll" url="/s/P0A43PBA64AB" hash="P0A43HVA56PBA" views="89609" time="2024-03-13T19:00:00+03:00" end-time="2024-06-10T19:00:00+03:00"
         liked="false" likes="36987" replies="7872" voted="false" selected="null"
         options='[{"name":"control","text":"Control room","votes":11780},{"name":"bth","text":"Beyond the horizon","votes":3367},{"name":"tuku","text":"Tuku","votes":3478},{"name":"kid","text":"The kid","votes":4198}]'
         author-username="U0A43PBAH6A" author-url="/u/U0A43PBAH6A"

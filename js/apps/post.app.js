@@ -22,7 +22,7 @@ export default class AppPost extends HTMLElement {
 
     this.watchMediaQuery(mql);
 
-    // scroll the window to the top
+    // scroll the window to the top and set height to 100vh
     window.scrollTo(0, 0);
   }
 
@@ -215,7 +215,8 @@ export default class AppPost extends HTMLElement {
           display: flex;
           justify-content: space-between;
           gap: 30px;
-          min-height: 100vh;
+          /* use viewport device height */
+          min-height: 100dvh;
         }
 
         .feeds {

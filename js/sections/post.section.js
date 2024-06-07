@@ -449,7 +449,7 @@ export default class PostSection extends HTMLElement {
           .tab-control {
             border-bottom: var(--border-mobile);
             border-top: none;
-            margin: 0 5px 0;
+            margin: 0;
             position: sticky;
             top: 50px;
           }

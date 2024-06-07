@@ -12,6 +12,8 @@ export default class PollPost extends HTMLElement {
     // Check if user has voted and convert to boolean
     this._voted = true ? this.getAttribute('voted') === 'true' : false;
 
+    this._selected = this.getAttribute('selected') || 'none';
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -50,7 +52,10 @@ export default class PollPost extends HTMLElement {
     }
 
     // Open poll post
-    this.openPollPost()
+    this.openPollPost();
+
+    // Click poll container
+    this.clickPollContainer();
   }
 
   // Open quick post
@@ -66,27 +71,75 @@ export default class PollPost extends HTMLElement {
     // get current content
     const content = this.shadowObj.querySelector('#content')
 
-    // Get full post
-    const post =  this.getFullPost();
-
     if(body && content) {
       content.addEventListener('click', event => {
-        // Replace the content with the current url and body content
-        // get window location
-        const pageUrl = window.location.href;
-        window.history.replaceState(
-          { page: 'page', content: body.innerHTML },
-          url, pageUrl
-        );
+        event.preventDefault();
 
-        // Updating History State
-        window.history.pushState(
-          { page: 'page', content: post},
-          url, url
-        );
+        // Get full post
+        const post =  this.getFullPost();
+
+        // replace and push states
+        this.replaceAndPushStates(url, body, post);
 
         body.innerHTML = post;
       })
+    }
+  }
+
+  // Replace and push states
+  replaceAndPushStates = (url, body, post) => {
+    // Replace the content with the current url and body content
+    // get window location
+    const pageUrl = window.location.href;
+    window.history.replaceState(
+      { page: 'page', content: body.innerHTML },
+      url, pageUrl
+    );
+
+    // Updating History State
+    window.history.pushState(
+      { page: 'page', content: post},
+      url, url
+    );
+  }
+
+  clickPollContainer = () => {
+    // get url
+    let url = this.getAttribute('url');
+
+    url = url.trim().toLowerCase();
+
+    // Get the body
+    const body = document.querySelector('body');
+
+
+    // select the poll container
+    const pollContainer = this.shadowObj.querySelector('.poll');
+
+    if (pollContainer) {
+      // add event listener to the poll container
+      pollContainer.addEventListener('click', e => {
+        // prevent the default action
+        // e.preventDefault();
+
+        // console.log('Poll container clicked');
+
+        // prevent the propagation of the event
+        e.stopPropagation();
+        // e.stopImmediatePropagation();
+
+        // check if the user has voted or time is expired
+        if (this._voted || new Date(Date.now()) > this._endTime) {
+          // Get full post
+          const post =  this.getFullPost();
+
+          // replace and push states
+          this.replaceAndPushStates(url, body, post);
+
+          // update the body content
+          body.innerHTML = post;
+        }
+      });
     }
   }
 
@@ -169,9 +222,8 @@ export default class PollPost extends HTMLElement {
 
           // update votes attribute in the selected option
           let votes = outerThis.parseToNumber(selectedOption.getAttribute('votes'));
-          console.log(votes);
+
           selectedOption.setAttribute('votes', votes + 1);
-          console.log(selectedOption.getAttribute('votes'));
 
           // Update the selected attribute
           outerThis.setAttribute('selected', selectedOptionName);
@@ -187,6 +239,9 @@ export default class PollPost extends HTMLElement {
 
           // update the total votes element
           outerThis.updateTotalVotes();
+
+          // update this._voted
+          outerThis._voted = true;
 
           // disable all inputs after voting
           outerThis.disableInputs();
@@ -1684,6 +1739,7 @@ export default class PollPost extends HTMLElement {
         }
 
         .meta a.reply-link,
+        .content,
         .meta div.author-name > a,
         a,
         .stats > .stat {

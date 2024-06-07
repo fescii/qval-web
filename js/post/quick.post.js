@@ -69,23 +69,34 @@ export default class QuickPost extends HTMLElement {
 
     if(body && content) {
       content.addEventListener('click', event => {
-        // Replace the content with the current url and body content
-        // get window location
-        const pageUrl = window.location.href;
-        window.history.replaceState(
-          { page: 'page', content: body.innerHTML },
-          url, pageUrl
-        );
+        event.preventDefault();
 
-        // Updating History State
-        window.history.pushState(
-          { page: 'page', content: post},
-          url, url
-        );
+        // scroll to the top of the page
+        window.scrollTo(0, 0);
+  
+        // replace and push states
+        this.replaceAndPushStates(url, body, post);
 
         body.innerHTML = post;
       })
     }
+  }
+
+   // Replace and push states
+   replaceAndPushStates = (url, body, post) => {
+    // Replace the content with the current url and body content
+    // get window location
+    const pageUrl = window.location.href;
+    window.history.replaceState(
+      { page: 'page', content: body.innerHTML },
+      url, pageUrl
+    );
+
+    // Updating History State
+    window.history.pushState(
+      { page: 'page', content: post},
+      url, url
+    );
   }
 
   // Get lapse time
@@ -1191,6 +1202,7 @@ export default class QuickPost extends HTMLElement {
 
         a,
         .content.extra .read-more,
+        .content,
         span.stat,
         span.action {
           cursor: default !important;
