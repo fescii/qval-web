@@ -17,6 +17,9 @@ export default class AppTopic extends HTMLElement {
     // Scroll to the top of the page
     window.scrollTo(0, 0);
 
+    // onpopstate event
+    this.onpopEvent();
+
     // Watch for media query changes
     const mql = window.matchMedia('(max-width: 660px)');
     this.watchMediaQuery(mql);
@@ -27,7 +30,32 @@ export default class AppTopic extends HTMLElement {
     mql.addEventListener('change', () => {
       // Re-render the component
       this.render();
+
+      // call onpopstate event
+      this.onpopEvent();
     });
+  }
+
+  onpopEvent = () => {
+    // Update state on window.onpopstate
+    window.onpopstate = event => {
+      // This event will be triggered when the browser's back button is clicked
+
+      // console.log(event.state);
+      if (event.state) {
+        if (event.state.page) {
+          outerThis.updatePage(event.state.content)
+        }
+      }
+    }
+  }
+
+  updatePage = content => {
+    // select body
+    const body = document.querySelector('body');
+
+    // populate content
+    body.innerHTML = content;
   }
 
   disableScroll() {

@@ -313,13 +313,17 @@ export default class AppUser extends HTMLElement {
     }
   }
 
+  updatePage = content => {
+    // select body
+    const body = document.querySelector('body');
+
+    // populate content
+    body.innerHTML = content;
+  }
+
   updateState = (state, contentContainer)=> {
     // populate content
     this.populateContent(state.tab, contentContainer);
-  }
-
-  updatePage = content => {
-    pageContainer.innerHTML = content
   }
 
   // watch for mql changes

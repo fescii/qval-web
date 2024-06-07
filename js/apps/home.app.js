@@ -16,6 +16,46 @@ export default class AppHome extends HTMLElement {
   connectedCallback() {
     //Scroll the window to the top
     window.scrollTo(0, 0);
+
+    // onpopstate event
+    this.onpopEvent();
+
+    // Watch for media query changes
+    const mql = window.matchMedia('(max-width: 660px)');
+    this.watchMediaQuery(mql);
+  }
+
+  // watch for mql changes
+  watchMediaQuery = mql => {
+    mql.addEventListener('change', () => {
+      // Re-render the component
+      this.render();
+
+      // call onpopstate event
+      this.onpopEvent();
+    });
+  }
+
+  onpopEvent = () => {
+    // Update state on window.onpopstate
+    window.onpopstate = event => {
+      // This event will be triggered when the browser's back button is clicked
+
+      // console.log(event.state);
+      if (event.state) {
+        if (event.state.page) {
+          outerThis.updatePage(event.state.content)
+        }
+      }
+    }
+  }
+
+  updatePage = content => {
+    // select body
+    const body = document.querySelector('body');
+
+    // populate content
+    body.innerHTML = content;
   }
 
   disableScroll() {
