@@ -113,7 +113,7 @@ export default class AppStory extends HTMLElement {
       <story-body topic="${formatted}"
         story-title="${this.getAttribute('story-title')}"  url="${this.getAttribute('url')}" host="${this.getAttribute('host')}"
         next-hash="${this.getAttribute('next-hash')}" next-title="${this.getAttribute('next-title')}" next-date="${this.getAttribute('next-date')}"
-        hash="${this.getAttribute('hash')}" opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+        hash="${this.getAttribute('hash')}" replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
         views="${this.getAttribute('views')}" time="${this.getAttribute('time')}">
         ${this.getStoryContent()}
       </story-body>

@@ -60,11 +60,11 @@ export default class ActivityFeed extends HTMLElement {
             >
           </activity-item>
 
-          <activity-item id="479" hash="N0BA699HAB3" kind="added" type="opinion" by="U0AB236B6D" time="2021-08-12T12:00:00Z" on="may 6"
+          <activity-item id="479" hash="N0BA699HAB3" kind="added" type="reply" by="U0AB236B6D" time="2021-08-12T12:00:00Z" on="may 6"
             content="This is a story about how you added an article to your profile. You can... ">
           </activity-item>
 
-          <activity-item id="479" hash="N0BA699HAB3" kind="saved" type="opinion" by="you" time="2021-08-12T12:00:00Z" on="may 6"
+          <activity-item id="479" hash="N0BA699HAB3" kind="saved" type="reply" by="you" time="2021-08-12T12:00:00Z" on="may 6"
             content="This is a story about how you added an article to your profile. You can... ">
           </activity-item>
 
@@ -76,11 +76,11 @@ export default class ActivityFeed extends HTMLElement {
             content="This is a story about how you added an article to your profile. You can... ">
           </activity-item>
 
-          <activity-item id="479" hash="N0BA699HAB3" kind="upvoted" type="opinion" by="U0AB236B6D" time="2021-08-12T12:00:00Z"
+          <activity-item id="479" hash="N0BA699HAB3" kind="upvoted" type="reply" by="U0AB236B6D" time="2021-08-12T12:00:00Z"
             on="may 6" content="This is a story about how you added an article to your profile. You can... ">
           </activity-item>
 
-          <activity-item id="479" hash="N0BA699HAB3" kind="mentioned" type="opinion" by="you" time="2021-08-12T12:00:00Z" on="may 6"
+          <activity-item id="479" hash="N0BA699HAB3" kind="mentioned" type="reply" by="you" time="2021-08-12T12:00:00Z" on="may 6"
             content="This is a story about how you added an article to your profile. You can... ">
           </activity-item>
 

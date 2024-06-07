@@ -178,13 +178,13 @@ export default class ProfileSection extends HTMLElement {
 
   getReplies = () => {
     return /* html */`
-      <replies-feed opinions="all" url="/U0A89BA6/opinions"></replies-feed>
+      <replies-feed replies="all" url="/U0A89BA6/replies"></replies-feed>
     `
   }
 
   getPeople = () => {
     return /* html */`
-      <people-feed opinions="all" url="/U0A89BA6/followers"></people-feed>
+      <people-feed replies="all" url="/U0A89BA6/followers"></people-feed>
     `
   }
 

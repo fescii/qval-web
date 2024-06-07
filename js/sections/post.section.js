@@ -165,13 +165,13 @@ export default class PostSection extends HTMLElement {
 
   getReplies = () => {
     return `
-      <replies-feed opinions="all" url="/U0A89BA6/opinions"></replies-feed>
+      <replies-feed replies="all" url="/U0A89BA6/replies"></replies-feed>
     `
   }
 
   getLikes = () => {
     return `
-      <people-feed opinions="all" url="/U0A89BA6/followers"></people-feed>
+      <people-feed replies="all" url="/U0A89BA6/followers"></people-feed>
     `
   }
 

@@ -54,21 +54,21 @@ export default class StatContainer extends HTMLElement {
                 contentContainer.innerHTML = `
                   ${outerThis.getAll()}
                   ${outerThis.getStories()}
-                  ${outerThis.getOpinions()}
+                  ${outerThis.getReplies()}
                   ${outerThis.getAccount()}
                 `;
                 break;
               case "stories":
                 contentContainer.innerHTML = outerThis.getStatFeedStories();
                 break;
-              case "opinions":
-                contentContainer.innerHTML = outerThis.getStatFeedOpinions();
+              case "replies":
+                contentContainer.innerHTML = outerThis.getStatFeedReplies();
                 break;
               default:
                 contentContainer.innerHTML = `
                   ${outerThis.getAll()}
                   ${outerThis.getStories()}
-                  ${outerThis.getOpinions()}
+                  ${outerThis.getReplies()}
                   ${outerThis.getAccount()}
                 `;
                 break;
@@ -96,7 +96,7 @@ export default class StatContainer extends HTMLElement {
 			<div class="content">
 				${this.getAll()}
         ${this.getStories()}
-        ${this.getOpinions()}
+        ${this.getReplies()}
         ${this.getAccount()}
       </div>
     `;
@@ -105,7 +105,7 @@ export default class StatContainer extends HTMLElement {
   getAll = () => {
     return /* html */`
 			<all-stat date="2021-09-01" date-last="2021-08-01" all="1654757" all-last="1554751" stories="965457" stories-last="995458"
-        opinions="84754" opinions-last="73859">
+        replies="84754" replies-last="73859">
       </all-stat>
 		`;
   }
@@ -113,16 +113,16 @@ export default class StatContainer extends HTMLElement {
   getStories = () => {
     return /* html */`
 			<stories-stat date="2021-09-01" date-last="2021-08-01" views="96458" views-last="99457"
-        opinions="84555" opinions-last="73512" upvotes="4557" upvotes-last="3573">
+        replies="84555" replies-last="73512" upvotes="4557" upvotes-last="3573">
       </stories-stat>
 		`
   }
 
-  getOpinions = () => {
+  getReplies = () => {
     return /* html */`
-			<opinions-stat date="2021-09-01" date-last="2021-08-01" views="6543" views-last="9145" opinions="8754"
-        opinions-last="7559" upvotes="456" upvotes-last="593">
-      </opinions-stat>
+			<replies-stat date="2021-09-01" date-last="2021-08-01" views="6543" views-last="9145" replies="8754"
+        replies-last="7559" upvotes="456" upvotes-last="593">
+      </replies-stat>
 		`;
   }
 
@@ -137,15 +137,15 @@ export default class StatContainer extends HTMLElement {
   getStatFeedStories = () => {
     return /* html */`
       <stat-feed current="stories" api-stories="/api/v1/u/stats/stories"
-        api-opinions="/api/v1/u/stats/opinions">
+        api-replies="/api/v1/u/stats/replies">
       </stat-feed>
     `;
   }
 
-  getStatFeedOpinions = () => {
+  getStatFeedReplies = () => {
     return /* html */`
-      <stat-feed current="opinions" api-stories="/api/v1/u/stats/stories"
-        api-opinions="/api/v1/u/stats/opinions">
+      <stat-feed current="replies" api-stories="/api/v1/u/stats/stories"
+        api-replies="/api/v1/u/stats/replies">
       </stat-feed>
     `;
   }
@@ -160,7 +160,7 @@ export default class StatContainer extends HTMLElement {
         <div class="top">
           <h4 class="title">Your stats</h4>
           <p class="desc">
-            Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+            Your stats are a summary of your interactions on the platform. You can view your stories, replies and likes/upvotes.
           </p>
         </div>
       `;
@@ -169,7 +169,7 @@ export default class StatContainer extends HTMLElement {
     return /* html */`
         <div class="top">
           <p class="desc">
-            Your stats are a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+            Your stats are a summary of your interactions on the platform. You can view your stories, replies and likes/upvotes.
           </p>
         </div>
     `;
@@ -185,8 +185,8 @@ export default class StatContainer extends HTMLElement {
           <li data-element="stories" class="tab-item stories">
             <span class="text">Stories</span>
           </li>
-          <li data-element="opinions" class="tab-item opinions">
-            <span class="text">Opinions</span>
+          <li data-element="replies" class="tab-item replies">
+            <span class="text">Replies</span>
           </li>
           <span class="line"></span>
         </ul>

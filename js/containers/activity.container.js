@@ -56,7 +56,7 @@ export default class ActivityContainer extends HTMLElement {
               case "stories":
                 contentContainer.innerHTML = outerThis.getAll();
                 break;
-              case "opinions":
+              case "replies":
                 contentContainer.innerHTML = outerThis.getAll();
                 break;
               case "saved":
@@ -108,7 +108,7 @@ export default class ActivityContainer extends HTMLElement {
         <div class="top">
           <h4 class="title">Your activity</h4>
           <p class="desc">
-            Your activity is a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+            Your activity is a summary of your interactions on the platform. You can view your stories, replies and likes/upvotes.
           </p>
         </div>
       `;
@@ -117,7 +117,7 @@ export default class ActivityContainer extends HTMLElement {
     return /* html */`
         <div class="top">
           <p class="desc">
-            Your activity is a summary of your interactions on the platform. You can view your stories, opinions and likes/upvotes.
+            Your activity is a summary of your interactions on the platform. You can view your stories, replies and likes/upvotes.
           </p>
         </div>
     `;
@@ -133,8 +133,8 @@ export default class ActivityContainer extends HTMLElement {
           <li data-element="stories" class="tab-item stories">
             <span class="text">Stories</span>
           </li>
-          <li data-element="opinions" class="tab-item opinions">
-            <span class="text">Opinions</span>
+          <li data-element="replies" class="tab-item replies">
+            <span class="text">Replies</span>
           </li>
           <li data-element="saved" class="tab-item saved">
             <span class="text">Saved</span>

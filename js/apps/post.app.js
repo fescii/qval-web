@@ -89,7 +89,7 @@ export default class AppPost extends HTMLElement {
   getPost = () => {
     // return /* html */`
     //   <post-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
-    //     opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+    //     replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
     //     views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
     //     author-id="${this.getAttribute('author-id')}">
     //         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
@@ -102,7 +102,7 @@ export default class AppPost extends HTMLElement {
 
     return /*html */`
       <poll-wrapper upvotes="${this.getAttribute('upvotes')}" hash="${this.getAttribute('hash')}"
-        opinions="${this.getAttribute('opinions')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+        replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
         views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
         author-id="${this.getAttribute('author-id')}"
         options='${this.getAttribute("options")}' voted="${this.getAttribute('voted')}" selected="${this.getAttribute('selected')}"

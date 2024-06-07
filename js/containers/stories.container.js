@@ -59,7 +59,7 @@ export default class StoriesContainer extends HTMLElement {
         story-title="The US Senate called on the law markers" read-time="6" author-id="U0A43PBA">
       </story-post>
 
-      <quick-post story="opinion" likes="9" opinions="3872" id="P0A43PBA" liked="false"
+      <quick-post story="reply" likes="9" replies="3872" id="P0A43PBA" liked="false"
 	      views="4369" time="2022-01-03T13:00:00+03:00"
 	      story-title="The US Senate called on the law markers"
 	      read-time="6" author-id="U0A43PBA">
@@ -71,7 +71,7 @@ export default class StoriesContainer extends HTMLElement {
 	    </quick-post>
 
       <poll-post id="P0A43PBA" views="89609" time="2024-03-13T19:00:00+03:00" end-time="2024-06-02T19:00:00+03:00"
-        liked="false" likes="36987" opinions="7872" voted="true" selected="one"
+        liked="false" likes="36987" replies="7872" voted="true" selected="one"
         options='[{"name":"one","text":"Control room","votes":11780},{"name":"two","text":"Beyond the horizon","votes":3367},{"name":"three","text":"Tuku","votes":3478},{"name":"four","text":"The kid","votes":4198}]'
         author-id="U0A43PBA">
         <p>
@@ -79,7 +79,7 @@ export default class StoriesContainer extends HTMLElement {
         </p>
       </poll-post>
 
-      <quick-post story="opinion" likes="63" opinions="372" id="P0A43PBA" liked="true"
+      <quick-post story="reply" likes="63" replies="372" id="P0A43PBA" liked="true"
         views="369" time="2019-08-16T13:00:00+03:00"
         story-title="The US Senate called on the law markers"
         read-time="6" author-id="U0A43PBA">
@@ -89,7 +89,7 @@ export default class StoriesContainer extends HTMLElement {
       </quick-post>
 
       <poll-post id="P0A43PBA" views="9609" time="2024-03-13T13:00:00+03:00" end-time="2024-05-31T23:00:00+03:00" liked="true"
-        likes="6367" opinions="872" voted="false" selected="null"
+        likes="6367" replies="872" voted="false" selected="null"
         options='[{"name":"java","text":"Java","votes":367},{"name":"python","text":"Python","votes":986},{"name":"javascript","text":"JavaScript","votes":879},{"name":"csharp","text":"C#","votes":117}]'
         author-id="U0A43PBA">
         <p>Which is the best programming language?</p>
@@ -99,7 +99,7 @@ export default class StoriesContainer extends HTMLElement {
         story-title="The US Senate called on the law markers" read-time="6" author-id="U0A43PBA">
       </story-post>
 
-      <quick-post story="opinion" likes="9" opinions="3872" id="P0A43PBA" liked="false"
+      <quick-post story="reply" likes="9" replies="3872" id="P0A43PBA" liked="false"
 	      views="4369" time="2022-01-03T13:00:00+03:00"
 	      story-title="The US Senate called on the law markers"
 	      read-time="6" author-id="U0A43PBA">

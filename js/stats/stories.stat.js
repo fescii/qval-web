@@ -105,7 +105,7 @@ export default class StoriesStat extends HTMLElement {
       <div class="cards">
         ${this.getViews()}
         ${this.getUpvotes()}
-        ${this.getOpinions()}
+        ${this.getReplies()}
       </div>
     `;
   }
@@ -204,12 +204,12 @@ export default class StoriesStat extends HTMLElement {
     `
   }
 
-  getOpinions = () => {
+  getReplies = () => {
     let icon = ''
-    const lastOpinions = this.parseToNumber(this.getAttribute('opinions-last'));
-    const currentOpinions = this.parseToNumber(this.getAttribute('opinions'));
+    const lastReplies = this.parseToNumber(this.getAttribute('replies-last'));
+    const currentReplies = this.parseToNumber(this.getAttribute('replies'));
 
-    const change = this.calculateDifference(lastOpinions, currentOpinions);
+    const change = this.calculateDifference(lastReplies, currentReplies);
 
     // if change is negative, we need to make it positive
     const difference = Math.abs(change);
@@ -238,7 +238,7 @@ export default class StoriesStat extends HTMLElement {
         <h4 class="title">Replies</h4>
         <div class="stat">
           <h2 class="no">
-            ${this.formatNumber(currentOpinions)}
+            ${this.formatNumber(currentReplies)}
           </h2>
           ${icon}
         </div>

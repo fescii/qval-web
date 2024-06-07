@@ -243,7 +243,7 @@ export default class AppSearch extends HTMLElement {
 
   getPeople = () => {
     return `
-      <people-feed opinions="all" url="${this._url}/people"></people-feed>
+      <people-feed replies="all" url="${this._url}/people"></people-feed>
     `
   }
 

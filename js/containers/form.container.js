@@ -48,8 +48,8 @@ export default class FormContainer extends HTMLElement {
 
 	getBody = () => {
 		return /* html */`
-      <form action="" class="opinion">
-        <textarea name="reply" placeholder="What's your opinion?" id="reply"></textarea>
+      <form action="" class="reply">
+        <textarea name="reply" placeholder="What's your reply?" id="reply"></textarea>
         <div class="footer">
           <div class="actions">
             <span class="action at" title="Mention">
@@ -154,7 +154,7 @@ export default class FormContainer extends HTMLElement {
           gap: 0;
         }
 
-        form.opinion {
+        form.reply {
           padding: 0;
           margin: 0;
           display: flex;
@@ -166,7 +166,7 @@ export default class FormContainer extends HTMLElement {
           position: relative;
         }
 
-        form.opinion > textarea {
+        form.reply > textarea {
           border: none;
           /* border: var(--input-border); */
           padding: 4px 0;
@@ -186,12 +186,12 @@ export default class FormContainer extends HTMLElement {
           scrollbar-width: none;
         }
 
-        form.opinion > textarea::-webkit-scrollbar {
+        form.reply > textarea::-webkit-scrollbar {
           display: none !important;
           visibility: hidden;
         }
 
-        form.opinion .footer {
+        form.reply .footer {
           /* border: var(--input-border); */
           padding: 0;
           width: 100%;
@@ -201,7 +201,7 @@ export default class FormContainer extends HTMLElement {
           gap: 10px;
         }
 
-        form.opinion .footer > .actions {
+        form.reply .footer > .actions {
           /* border: var(--input-border); */
           padding: 0;
           display: flex;
@@ -210,7 +210,7 @@ export default class FormContainer extends HTMLElement {
           gap: 10px;
         }
 
-        form.opinion .footer * {
+        form.reply .footer * {
           transition: all 300ms ease-in-out;
           -webkit-transition: all 300ms ease-in-out;
           -moz-transition: all 300ms ease-in-out;
@@ -218,7 +218,7 @@ export default class FormContainer extends HTMLElement {
           -o-transition: all 300ms ease-in-out;
         }
 
-        form.opinion .footer > .actions > .action {
+        form.reply .footer > .actions > .action {
           /* border: var(--input-border); */
           cursor: pointer;
           padding: 0;
@@ -229,7 +229,7 @@ export default class FormContainer extends HTMLElement {
           gap: 0;
         }
 
-        form.opinion .footer > .actions > .action > svg {
+        form.reply .footer > .actions > .action > svg {
           /* border: var(--input-border); */
           padding: 0;
           display: flex;
@@ -240,12 +240,12 @@ export default class FormContainer extends HTMLElement {
           height: 20px;
         }
 
-        form.opinion .footer > .actions > .action:hover {
+        form.reply .footer > .actions > .action:hover {
           /* border: var(--input-border); */
           color: var(--accent-color);
         }
 
-        form.opinion .footer > button {
+        form.reply .footer > button {
           border: none;
           cursor: pointer;
           color: var(--white-color);

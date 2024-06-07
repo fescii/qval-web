@@ -1,4 +1,4 @@
-export default class OpinionsStat extends HTMLElement {
+export default class RepliesStat extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -105,7 +105,7 @@ export default class OpinionsStat extends HTMLElement {
       <div class="cards">
         ${this.getViews()}
         ${this.getUpvotes()}
-        ${this.getOpinions()}
+        ${this.getReplies()}
       </div>
     `;
   }
@@ -113,8 +113,8 @@ export default class OpinionsStat extends HTMLElement {
   getHeader = () => {
     return /* html */`
       <div class="title">
-        <h4 class="text">Opinions</h4>
-        <span class="desc">Your opinions summery</span>
+        <h4 class="text">Replies</h4>
+        <span class="desc">Your replies summery</span>
       </div>
     `
   }
@@ -204,12 +204,12 @@ export default class OpinionsStat extends HTMLElement {
     `
   }
 
-  getOpinions = () => {
+  getReplies = () => {
     let icon = ''
-    const lastOpinions = this.parseToNumber(this.getAttribute('opinions-last'));
-    const currentOpinions = this.parseToNumber(this.getAttribute('opinions'));
+    const lastReplies = this.parseToNumber(this.getAttribute('replies-last'));
+    const currentReplies = this.parseToNumber(this.getAttribute('replies'));
 
-    const change = this.calculateDifference(lastOpinions, currentOpinions);
+    const change = this.calculateDifference(lastReplies, currentReplies);
 
     // if change is negative, we need to make it positive
     const difference = Math.abs(change);
@@ -238,7 +238,7 @@ export default class OpinionsStat extends HTMLElement {
         <h4 class="title">Replies</h4>
         <div class="stat">
           <h2 class="no">
-            ${this.formatNumber(currentOpinions)}
+            ${this.formatNumber(currentReplies)}
           </h2>
           ${icon}
         </div>

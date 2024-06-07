@@ -206,7 +206,7 @@ export default class OpinionWrapper extends HTMLElement {
 
   getHeader = () => {
     return `
-      <div class="meta opinion">
+      <div class="meta reply">
         <span class="time">
           <time class="published" datetime="${this.getAttribute('time')}">
             ${this.getLapseTime(this.getAttribute('time'))}
@@ -313,7 +313,7 @@ export default class OpinionWrapper extends HTMLElement {
 
   getForm = () => {
     return `
-      <form-container type="opinion"></form-container>
+      <form-container type="reply"></form-container>
     `
   }
 
@@ -411,7 +411,7 @@ export default class OpinionWrapper extends HTMLElement {
         -webkit-background-clip: text;
       }
 
-      .meta a.opinion-link {
+      .meta a.reply-link {
         text-decoration: none;
         color: transparent;
         background-image: var(--alt-linear);
@@ -476,7 +476,7 @@ export default class OpinionWrapper extends HTMLElement {
         -moz-border-radius: 1px;
       }
 
-      .meta.opinion .profile > span.pointer{
+      .meta.reply .profile > span.pointer{
         left: unset;
         right: 45%;
       }
@@ -822,7 +822,7 @@ export default class OpinionWrapper extends HTMLElement {
           -webkit-appearance: none;
         }
 
-        .meta a.opinion-link,
+        .meta a.reply-link,
         .meta div.author-name > a,
         a,
         .stats > .stat {
@@ -927,7 +927,7 @@ export default class OpinionWrapper extends HTMLElement {
           display: none;
         }
 
-        .meta.opinion .profile > span.pointer,
+        .meta.reply .profile > span.pointer,
         .meta  .profile > span.pointer {
           border: var(--modal-border);
           border-bottom: none;

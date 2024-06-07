@@ -241,9 +241,9 @@ export default class StoryWrapper extends HTMLElement {
   }
 
   getHeader = (story) => {
-    if (story === "opinion") {
+    if (story === "reply") {
       return `
-        <div class="meta opinion">
+        <div class="meta reply">
           <span class="time">
             <time class="published" datetime="${this.getAttribute('time')}">
               ${this.formatDateWithRelativeTime(this.getAttribute('time'))}
@@ -331,7 +331,7 @@ export default class StoryWrapper extends HTMLElement {
   }
 
   getContent = (story) => {
-    if (story === "opinion") {
+    if (story === "reply") {
       return this.getOpinionContent();
     }
     else {
@@ -344,7 +344,7 @@ export default class StoryWrapper extends HTMLElement {
   }
 
   getFooter = (story) => {
-    if (story === 'opinion') {
+    if (story === 'reply') {
       return /* html */`
         <div class="stats">
           <span class="stat write">
@@ -394,7 +394,7 @@ export default class StoryWrapper extends HTMLElement {
 
   getForm = () => {
     return `
-      <form-container type="opinion"></form-container>
+      <form-container type="reply"></form-container>
     `
   }
 
@@ -408,7 +408,7 @@ export default class StoryWrapper extends HTMLElement {
   }
 
   checkType = () => {
-    if (this.getAttribute('story') === 'opinion') {
+    if (this.getAttribute('story') === 'reply') {
       return 'padding: 15px 0 0 0;';
     }
     else {
@@ -530,7 +530,7 @@ export default class StoryWrapper extends HTMLElement {
         -webkit-background-clip: text;
       }
 
-      .meta a.opinion-link {
+      .meta a.reply-link {
         text-decoration: none;
         color: transparent;
         background-image: var(--alt-linear);
@@ -595,7 +595,7 @@ export default class StoryWrapper extends HTMLElement {
         -moz-border-radius: 1px;
       }
 
-      .meta.opinion .profile > span.pointer{
+      .meta.reply .profile > span.pointer{
         left: unset;
         right: 45%;
       }
@@ -1027,7 +1027,7 @@ export default class StoryWrapper extends HTMLElement {
           -webkit-appearance: none;
         }
 
-        .meta a.opinion-link,
+        .meta a.reply-link,
         .meta div.author-name > a,
         a,
         .stats > .stat {
@@ -1128,7 +1128,7 @@ export default class StoryWrapper extends HTMLElement {
           display: none;
         }
 
-        .meta.opinion .profile > span.pointer,
+        .meta.reply .profile > span.pointer,
         .meta  .profile > span.pointer {
           border: var(--modal-border);
           border-bottom: none;

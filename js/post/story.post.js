@@ -316,7 +316,7 @@ export default class StoryPost extends HTMLElement {
         -webkit-background-clip: text;
       }
 
-      .meta a.opinion-link {
+      .meta a.reply-link {
         text-decoration: none;
         color: transparent;
         background-image: var(--alt-linear);
@@ -381,7 +381,7 @@ export default class StoryPost extends HTMLElement {
         -moz-border-radius: 1px;
       }
 
-      .meta.opinion .profile > span.pointer{
+      .meta.reply .profile > span.pointer{
         left: unset;
         right: 45%;
       }
@@ -507,7 +507,7 @@ export default class StoryPost extends HTMLElement {
           -webkit-appearance: none;
         }
 
-        .meta a.opinion-link,
+        .meta a.reply-link,
         .meta div.author-name > a,
         a,
         .stats > .stat {
@@ -608,7 +608,7 @@ export default class StoryPost extends HTMLElement {
           display: none;
         }
 
-        .meta.opinion .profile > span.pointer,
+        .meta.reply .profile > span.pointer,
         .meta  .profile > span.pointer {
           border: var(--modal-border);
           border-bottom: none;

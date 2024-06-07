@@ -237,13 +237,13 @@ export default class AllStat extends HTMLElement {
 
   getOpinion = () => {
     let icon = '';
-    const lastOpinion = this.parseToNumber(this.getAttribute('opinions-last'));
-    const currentOpinion = this.parseToNumber(this.getAttribute('opinions'));
+    const lastOpinion = this.parseToNumber(this.getAttribute('replies-last'));
+    const currentOpinion = this.parseToNumber(this.getAttribute('replies'));
 
-    // console.log(`Last Opinion: ${lastOpinion}, Current Opinion: ${currentOpinion}`);
+    // console.log(`Last Reply: ${lastOpinion}, Current Reply: ${currentOpinion}`);
 
     const percentageChange = this.calculatePercentageChange(lastOpinion, currentOpinion);
-    // console.log(`Opinion Percentage Change: ${percentageChange}`);
+    // console.log(`Reply Percentage Change: ${percentageChange}`);
 
     // if percentageChange is negative, we need to make it positive
     const percentage = Math.abs(percentageChange);
@@ -277,7 +277,7 @@ export default class AllStat extends HTMLElement {
               ${this.formatNumber(currentOpinion)}
             </h2>
           </div>
-          <span class="desc">All opinions</span>
+          <span class="desc">All replies</span>
         </div>
         <div class="compared">
           ${icon}

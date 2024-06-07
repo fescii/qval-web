@@ -665,7 +665,7 @@ export default class AppUser extends HTMLElement {
 
   getActivity = () =>  {
     return /* html */`
-      <activity-container url="/user/activity" api-all="/api/v1/u/activity/all" api-stories="/api/v1/u/activity/stories" api-opinions="/api/v1/u/activity/opinions"
+      <activity-container url="/user/activity" api-all="/api/v1/u/activity/all" api-stories="/api/v1/u/activity/stories" api-replies="/api/v1/u/activity/replies"
         api-users="/api/v1/u/activity/users" api-saved="/api/v1/u/activity/saved">
       </activity-container>
     `;
@@ -673,7 +673,7 @@ export default class AppUser extends HTMLElement {
 
   getStats = () =>  {
     return /* html */`
-      <stat-container url="/user/stats" api="/api/v1/u/stats" api-stories="/api/v1/u/stats/stories" api-opinions="/api/v1/u/stats/opinions"
+      <stat-container url="/user/stats" api="/api/v1/u/stats" api-stories="/api/v1/u/stats/stories" api-replies="/api/v1/u/stats/replies"
         api-followers="/api/v1/u/stats/followers" api-subscribers="/api/v1/u/stats/subscribers">
       </stat-container>
     `;

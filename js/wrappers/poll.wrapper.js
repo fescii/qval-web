@@ -751,7 +751,7 @@ export default class PollWrapper extends HTMLElement {
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0189 2.86915V2.86915C12.3569 2.28315 11.3456 2.34449 10.7596 3.00649C10.7596 3.00649 7.84694 6.29649 6.83694 7.43849C5.8256 8.57982 6.56694 10.1565 6.56694 10.1565C6.56694 10.1565 8.23627 10.6852 9.23227 9.55982C10.2289 8.43449 13.1563 5.12849 13.1563 5.12849C13.7423 4.46649 13.6803 3.45515 13.0189 2.86915Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10.0061 3.86719L12.4028 5.98919" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          ${this.getOpinions()}
+          ${this.getReplies()}
           <span class="line"></span>
         </span>
         ${this.getLike(this.getAttribute('liked'))}
@@ -767,15 +767,15 @@ export default class PollWrapper extends HTMLElement {
 		`
   }
 
-  getOpinions = () => {
-    // Get total opinions and parse to integer
-    const opinions = this.getAttribute('opinions') || 0;
+  getReplies = () => {
+    // Get total replies and parse to integer
+    const replies = this.getAttribute('replies') || 0;
 
-    // Convert the opinions to a number
-    const totalOpinions = this.parseToNumber(opinions);
+    // Convert the replies to a number
+    const totalReplies = this.parseToNumber(replies);
 
     //  format the number
-    const opinionsFormatted = this.formatNumber(totalOpinions);
+    const opinionsFormatted = this.formatNumber(totalReplies);
 
     return /*html*/`
       <span class="numbers">

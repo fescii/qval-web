@@ -66,8 +66,8 @@ import ProfileSection from "./sections/profile.section.js";
 // Import stats
 import ActivityItem from "./stats/activity.item.js";
 import AllStat from "./stats/all.stat.js";
-import OpinionsStat from "./stats/opinions.stat.js";
-import StatOpinion from "./stats/stat.opinion.js";
+import RepliesStat from "./stats/replies.stat.js";
+import StatOpinion from "./stats/stat.reply.js";
 import StatStory from "./stats/stat.story.js";
 import StoriesStat from "./stats/stories.stat.js";
 import UsersStat from "./stats/users.stat.js";
@@ -153,8 +153,8 @@ const initApp = () => {
   // Register stats
   customElements.define("activity-item", ActivityItem);
   customElements.define("all-stat", AllStat);
-  customElements.define("opinions-stat", OpinionsStat);
-  customElements.define("stat-opinion", StatOpinion);
+  customElements.define("replies-stat", RepliesStat);
+  customElements.define("stat-reply", StatOpinion);
   customElements.define("stat-story", StatStory);
   customElements.define("stories-stat", StoriesStat);
   customElements.define("users-stat", UsersStat);

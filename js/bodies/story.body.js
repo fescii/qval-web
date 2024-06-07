@@ -369,7 +369,7 @@ export default class StoryBody extends HTMLElement {
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0189 2.86915V2.86915C12.3569 2.28315 11.3456 2.34449 10.7596 3.00649C10.7596 3.00649 7.84694 6.29649 6.83694 7.43849C5.8256 8.57982 6.56694 10.1565 6.56694 10.1565C6.56694 10.1565 8.23627 10.6852 9.23227 9.55982C10.2289 8.43449 13.1563 5.12849 13.1563 5.12849C13.7423 4.46649 13.6803 3.45515 13.0189 2.86915Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10.0061 3.86719L12.4028 5.98919" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          ${this.getOpinions()}
+          ${this.getReplies()}
           <span class="line"></span>
         </span>
         ${this.getLike(this.getAttribute('liked'))}
@@ -378,19 +378,19 @@ export default class StoryBody extends HTMLElement {
 		`
   }
 
-  getOpinions = () => {
-    // Get total opinions and parse to integer
-    const opinions = this.getAttribute('opinions') || 0;
+  getReplies = () => {
+    // Get total replies and parse to integer
+    const replies = this.getAttribute('replies') || 0;
 
-    // Convert the opinions to a number
-    const totalOpinions = this.parseToNumber(opinions);
+    // Convert the replies to a number
+    const totalReplies = this.parseToNumber(replies);
 
     //  format the number
-    const opinionsFormatted = this.formatNumber(totalOpinions);
+    const repliesFormatted = this.formatNumber(totalReplies);
 
     return /*html*/`
       <span class="numbers">
-        <span id="prev">${opinionsFormatted}</span>
+        <span id="prev">${repliesFormatted}</span>
       </span>
     `
   }
@@ -913,74 +913,6 @@ export default class StoryBody extends HTMLElement {
         .stats.actions > span.true svg,
         .stats.actions > span.active svg {
           color: var(--alt-color);
-        }
-
-        .stats.actions > span.action.share > .overlay {
-          display: none;
-          flex-flow: column;
-          z-index: 4;
-        }
-
-        .stats.actions > span.action.share > .overlay span.close {
-          display: none;
-        }
-
-        .stats.actions>span.action.share > .overlay.active {
-          display: flex;
-        }
-
-        .stats.actions > span.action.share .options {
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-          box-shadow: var(--card-box-shadow);
-          width: 240px;
-          padding: 8px 8px;
-          position: absolute;
-          bottom: calc(100% - 35px);
-          right: calc(50% - 100px);
-          background: var(--background);
-          border: var(--border-mobile);
-          border-radius: 20px;
-          -webkit-border-radius: 20px;
-          -moz-border-radius: 20px;
-          -ms-border-radius: 20px;
-          -o-border-radius: 20px;
-        }
-
-        .stats.actions > span.action.share .options > .option {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 5px;
-          padding: 8px 10px;
-          color: var(--text-color);
-          border-radius: 8px;
-          -webkit-border-radius: 8px;
-          -moz-border-radius: 8px;
-          -ms-border-radius: 8px;
-          -o-border-radius: 8px;
-        }
-
-        .stats.actions > span.action.share .options > .option:hover {
-          background: var(--hover-background);
-        }
-
-        .stats.actions > span.action.share .options > .option > span.text {
-          font-family: var(--font-text), sans-serif;
-          font-weight: 500;
-          font-size: 1.05rem;
-        }
-
-        .stats.actions > span.action.share .options > .option > svg {
-          width: 18px;
-          height: 18px;
-        }
-
-        .stats.actions > span.action.share .options > .option.code > svg,
-        .stats.actions > span.action.share .options > .option.more > svg {
-          width: 17px;
-          height: 17px;
         }
 
         div.body {

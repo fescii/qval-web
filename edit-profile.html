@@ -33,7 +33,7 @@
     import HeaderContainer from "./js/containers/header.container.js"
     import StoryBody from "./js/story.body.js";
 
-    import OpinionWrapper from "./js/opinion.component.js";
+    import OpinionWrapper from "./js/reply.component.js";
     import StoryWrapper from "./js/story.component.js";
     import PostWrapper from "./js/wrappers/post.wrapper.js";
     import PersonWrapper from "./js/author.component.js";
@@ -59,10 +59,10 @@
 
     import AllStat from "./js/stats/all.stat.js";
     import StoriesStat from "./js/stats/stories.stat.js";
-    import OpinionsStat from "./js/stats/opinions.stat.js";
+    import RepliesStat from "./js/stats/replies.stat.js";
     import UsersStat from "./js/stats/users.stat.js";
     import StatStory from "./js/stats/stat.story.js";
-    import StatOpinion from "./js/stats/stat.opinion.js";
+    import StatOpinion from "./js/stats/stat.reply.js";
     import ActivityItem from "./js/stats/activity.item.js"
 
     import FormName  from "./js/forms/name.form.js";
@@ -89,7 +89,7 @@
     customElements.define('header-container', HeaderContainer);
     customElements.define('story-body', StoryBody);
 
-    customElements.define('opinion-wrapper', OpinionWrapper);
+    customElements.define('reply-wrapper', OpinionWrapper);
     customElements.define('story-wrapper', StoryWrapper);
     customElements.define('post-wrapper', PostWrapper);
     customElements.define('person-wrapper', PersonWrapper);
@@ -116,10 +116,10 @@
 
     customElements.define('all-stat', AllStat);
     customElements.define('stories-stat', StoriesStat);
-    customElements.define('opinions-stat', OpinionsStat);
+    customElements.define('replies-stat', RepliesStat);
     customElements.define('users-stat', UsersStat);
     customElements.define('stat-story', StatStory);
-    customElements.define('stat-opinion', StatOpinion);
+    customElements.define('stat-reply', StatOpinion);
     customElements.define('activity-item', ActivityItem);
 
     customElements.define('name-form', FormName);
