@@ -257,7 +257,7 @@ export default class AppProfile extends HTMLElement {
           flex-flow: column;
           align-items: start;
           gap: 0;
-          width: 64%;
+          width: 63%;
         }
 
         .body {
@@ -269,7 +269,7 @@ export default class AppProfile extends HTMLElement {
 
         section.side {
           padding: 25px 0;
-          width: 34%;
+          width: 33%;
           display: flex;
           flex-flow: column;
           gap: 20px;

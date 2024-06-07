@@ -169,7 +169,7 @@ export default class AppHome extends HTMLElement {
           padding: 25px 0;
           margin: 0;
           background-color: transparent;
-          width: 32%;
+          width: 33%;
           height: max-content;
           display: flex;
           flex-flow: column;

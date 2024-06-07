@@ -314,7 +314,7 @@ export default class AppTopic extends HTMLElement {
           margin: 0;
           display: flex;
           justify-content: space-between;
-          gap: 0px;
+          gap: 30px;
         }
 
         section.main {
@@ -461,7 +461,7 @@ export default class AppTopic extends HTMLElement {
 
         section.side {
           padding: 25px 0;
-          width: 35%;
+          width: 33%;
           display: flex;
           flex-flow: column;
           gap: 20px;

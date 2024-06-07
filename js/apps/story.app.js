@@ -372,14 +372,14 @@ export default class AppStory extends HTMLElement {
           font-size: 16px;
           display: flex;
           width: 100%;
-          gap: 20px;
+          gap: 30px;
           min-height: 100vh;
           justify-content: space-between;
         }
 
         article.content {
           padding: 0;
-          width: 65%;
+          width: 63%;
           display: flex;
           flex-flow: column;
           gap: 0;
@@ -396,7 +396,7 @@ export default class AppStory extends HTMLElement {
           padding: 25px 0;
           margin: 0;
           background-color: transparent;
-          width: 32%;
+          width: 33%;
           height: max-content;
           display: flex;
           flex-flow: column;
