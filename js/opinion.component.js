@@ -216,7 +216,7 @@ export default class OpinionWrapper extends HTMLElement {
         <div class="author">
           <span class="sp">by</span>
           <div class="author-name">
-            <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
+            <a href="" class="link action-link">${this.getAttribute('author-username')}</a>
             ${this.getAuthor()}
           </div>
         </div>
@@ -235,7 +235,7 @@ export default class OpinionWrapper extends HTMLElement {
             </div>
             <div class="info">
               <p class="name">
-                <span class="text">${this.getAttribute('author-id')}</span>
+                <span class="text">${this.getAttribute('author-username')}</span>
                 ${this.checkVerified(this.getAttribute('author-verified'))}
               </p>
               <a href="" class="followers">

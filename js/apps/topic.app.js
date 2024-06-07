@@ -37,6 +37,7 @@ export default class AppTopic extends HTMLElement {
   }
 
   onpopEvent = () => {
+    const outerThis = this;
     // Update state on window.onpopstate
     window.onpopstate = event => {
       // This event will be triggered when the browser's back button is clicked

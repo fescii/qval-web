@@ -166,7 +166,7 @@ export default class StoryPost extends HTMLElement {
         <div class="author">
           <span class="sp">by</span>
           <div class="author-name">
-            <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
+            <a href="" class="link action-link">${this.getAttribute('author-username')}</a>
           </div>
         </div>
         <span class="time">

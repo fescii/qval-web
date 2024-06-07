@@ -1,4 +1,4 @@
-export default class QuickPost extends HTMLElement {
+export default class PollPost extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -47,6 +47,39 @@ export default class QuickPost extends HTMLElement {
     else {
       // Listen for checked radio button
       this.listenForChecked();
+    }
+
+    // Open poll post
+    this.openPollPost()
+  }
+
+  // Open quick post
+  openPollPost = () => {
+    // get url
+    let url = this.getAttribute('url');
+
+    url = url.trim().toLowerCase();
+
+
+    // Get the body
+    const body = document.querySelector('body');
+
+    // get current content
+    const content = this.shadowObj.querySelector('#content')
+
+    // Get full post
+    const post =  this.getFullPost();
+
+    if(body && content) {
+      content.addEventListener('click', event => {
+        // Updating History State
+        window.history.pushState(
+          { page: 'post', content: post},
+          url, url
+        );
+
+        body.innerHTML = post;
+      })
     }
   }
 
@@ -651,7 +684,7 @@ export default class QuickPost extends HTMLElement {
         <div class="author">
           <span class="sp">by</span>
           <div class="author-name">
-            <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
+            <a href="" class="link action-link">${this.getAttribute('author-username')}</a>
           </div>
         </div>
       </div>
@@ -804,7 +837,7 @@ export default class QuickPost extends HTMLElement {
 
   getContent = () => {
     return `
-      <div class="content">
+      <div class="content" id="content">
         ${this.innerHTML}
       </div>
     `
@@ -874,7 +907,7 @@ export default class QuickPost extends HTMLElement {
     `
   }
 
-  getLike = (liked) => {
+  getLike = liked => {
     if (liked === 'true') {
       return /*html*/`
         <span class="action like true">
@@ -973,6 +1006,23 @@ export default class QuickPost extends HTMLElement {
   getForm = () => {
     return `
       <form-container type="reply"></form-container>
+    `
+  }
+
+  getFullPost = () => {
+    return /* html */`
+      <app-post story="poll" tab="replies" url="${this.getAttribute('url')}" hash="${this.getAttribute('hash')}"
+        likes="${this.getAttribute('likes')}" replies="${this.getAttribute('replies')}"
+        replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}"
+        options='${this.getAttribute("options")}' voted="${this.getAttribute('voted')}" selected="${this.getAttribute('selected')}"
+        end-time="${this.getAttribute('end-time')}"
+        liked="${this.getAttribute('liked')}" views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+        author-username="${this.getAttribute('author-username')}" author-url="${this.getAttribute('author-url')}"
+        author-img="${this.getAttribute('author-img')}" author-verified="${this.getAttribute('author-verified')}" author-name="${this.getAttribute('author-name')}"
+        author-followers="${this.getAttribute('author-followers')}" author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-follow')}"
+        author-bio="${this.getAttribute('author-bio')}">
+        ${this.innerHTML}
+      </app-post>
     `
   }
 
@@ -1077,6 +1127,7 @@ export default class QuickPost extends HTMLElement {
 
       .content {
         display: flex;
+        cursor: pointer;
         flex-flow: column;
         color: var(--text-color);
         line-height: 1.4;

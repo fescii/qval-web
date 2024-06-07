@@ -29,6 +29,9 @@ export default class QuickPost extends HTMLElement {
 
     // Open read more
     this.openReadMore();
+
+    // Open full post
+    this.openQuickPost()
   }
 
   disableScroll() {
@@ -46,6 +49,43 @@ export default class QuickPost extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
+  }
+
+  // Open quick post
+  openQuickPost = () => {
+    // get url
+    let url = this.getAttribute('url');
+
+    url = url.trim().toLowerCase();
+
+    // Get the body
+    const body = document.querySelector('body');
+
+    // get current content
+    const content = this.shadowObj.querySelector('#content')
+
+    // Get full post
+    const post =  this.getFullPost();
+
+    if(body && content) {
+      content.addEventListener('click', event => {
+        // Replace the content with the current url and body content
+        // get window location
+        const pageUrl = window.location.href;
+        window.history.replaceState(
+          { page: 'page', content: body.innerHTML },
+          url, pageUrl
+        );
+
+        // Updating History State
+        window.history.pushState(
+          { page: 'page', content: post},
+          url, url
+        );
+
+        body.innerHTML = post;
+      })
+    }
   }
 
   // fn to like a post
@@ -269,6 +309,9 @@ export default class QuickPost extends HTMLElement {
         // prevent the propagation of the event
         e.stopPropagation();
 
+        // Prevent event from reaching any immidiate nodes.
+        e.stopImmediatePropagation()
+
         // Toggle the active class
         content.classList.remove('extra');
 
@@ -390,7 +433,7 @@ export default class QuickPost extends HTMLElement {
         <div class="author">
           <span class="sp">by</span>
           <div class="author-name">
-            <a href="" class="link action-link">${this.getAttribute('author-id')}</a>
+            <a href="" class="link action-link">${this.getAttribute('author-username')}</a>
           </div>
         </div>
       </div>
@@ -407,7 +450,7 @@ export default class QuickPost extends HTMLElement {
     // Check if content length is greater than 400
     if (contentLength > 400) {
       return /*html*/`
-        <div class="content extra">
+        <div class="content extra" id="content">
           ${content}
           <div class="read-more">
             <span class="action">view more</span>
@@ -420,7 +463,7 @@ export default class QuickPost extends HTMLElement {
     }
     else {
       return /*html*/`
-        <div class="content">
+        <div class="content" id="content">
           ${content}
         </div>
       `
@@ -593,6 +636,21 @@ export default class QuickPost extends HTMLElement {
     `
   }
 
+  getFullPost = () => {
+    return /* html */`
+      <app-post story="quick" tab="replies" url="${this.getAttribute('url')}" hash="${this.getAttribute('hash')}"
+        likes="${this.getAttribute('likes')}" replies="${this.getAttribute('replies')}"
+        replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}"
+        liked="${this.getAttribute('liked')}" views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+        author-username="${this.getAttribute('author-username')}" author-url="${this.getAttribute('author-url')}"
+        author-img="${this.getAttribute('author-img')}" author-verified="${this.getAttribute('author-verified')}" author-name="${this.getAttribute('author-name')}"
+        author-followers="${this.getAttribute('author-followers')}" author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-follow')}"
+        author-bio="${this.getAttribute('author-bio')}">
+        ${this.innerHTML}
+      </app-post>
+    `
+  }
+
   getStyles() {
     return /* css */`
     <style>
@@ -695,6 +753,7 @@ export default class QuickPost extends HTMLElement {
 
       .content {
         display: flex;
+        cursor: pointer;
         flex-flow: column;
         color: var(--text-color);
         line-height: 1.4;
@@ -703,7 +762,6 @@ export default class QuickPost extends HTMLElement {
         padding: 0;
       }
 
-      /* more content */
       .content.extra {
         max-height: 200px;
         overflow: hidden;
@@ -711,7 +769,6 @@ export default class QuickPost extends HTMLElement {
       }
 
       .content.extra .read-more {
-        /* border: var(--input-border); */
         position: absolute;
         bottom: -5px;
         right: 0;

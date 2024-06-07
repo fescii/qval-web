@@ -54,6 +54,11 @@ export default class PostWrapper extends HTMLElement {
     }, 2000)
   }
 
+   // fn to take number and return a string with commas
+   numberWithCommas = x => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   // fn to like a post
   likePost = () => {
     // Select like button
