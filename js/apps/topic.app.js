@@ -411,6 +411,12 @@ export default class AppTopic extends HTMLElement {
           font-size: 1rem;
         }
 
+        .foot > .author .code {
+          font-weight: 500;
+          font-family: var(--font-mono), monospace;
+          font-size: 0.9rem;
+        }
+
         .foot > .author .sp {
           font-family: var(--font-main), sans-serif;
           font-size: 1rem;
@@ -425,7 +431,7 @@ export default class AppTopic extends HTMLElement {
         .foot > .author .no {
           font-weight: 500;
           font-family: var(--font-main), sans-serif;
-          font-size: 1rem;
+          font-size: 0.9rem;
         }
 
         div.content-container {
@@ -494,7 +500,7 @@ export default class AppTopic extends HTMLElement {
 
           .foot {
             border: none;
-            border-bottom: var(--border-mobile);
+            border-bottom: none;
             position: sticky;
             top: 49px;
           }

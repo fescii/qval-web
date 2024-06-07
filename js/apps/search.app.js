@@ -555,10 +555,6 @@ export default class AppSearch extends HTMLElement {
 						cursor: default !important;
           }
 
-          form.search {
-            border-bottom: var(--border-mobile);
-          }
-
           form.search > .contents > input {
             padding: 10px 10px 10px 35px;
             width: 100%;
