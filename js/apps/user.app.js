@@ -21,7 +21,6 @@ export default class AppUser extends HTMLElement {
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 660px)');
 
-
     // Select the tab container and content container
     const current = this.getAttribute('current');
     const tabContainer = this.shadowObj.querySelector('section.tab');

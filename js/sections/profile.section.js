@@ -114,7 +114,7 @@ export default class ProfileSection extends HTMLElement {
 
   getTemplate() {
     // Show HTML Here
-    return `
+    return /* html */`
       ${this.getBody()}
       ${this.getStyles()}
     `;
@@ -171,25 +171,25 @@ export default class ProfileSection extends HTMLElement {
   }
 
   getStories = () => {
-    return `
+    return /* html */`
       <stories-feed stories="all" url="/U0A89BA6/stories"></stories-feed>
     `
   }
 
   getReplies = () => {
-    return `
+    return /* html */`
       <replies-feed opinions="all" url="/U0A89BA6/opinions"></replies-feed>
     `
   }
 
   getPeople = () => {
-    return `
+    return /* html */`
       <people-feed opinions="all" url="/U0A89BA6/followers"></people-feed>
     `
   }
 
   getLoader = () => {
-    return `
+    return /* html */`
 			<post-loader speed="300"></post-loader>
 		`
   }
@@ -239,6 +239,7 @@ export default class ProfileSection extends HTMLElement {
           font-size: 16px;
           padding: 0;
           width: 100%;
+          min-width: 100%;
           display: flex;
           flex-flow: column;
           gap: 0px;
@@ -268,6 +269,7 @@ export default class ProfileSection extends HTMLElement {
           gap: 0;
           z-index: 3;
           width: 100%;
+          min-width: 100%;
           position: sticky;
           top: 60px;
         }
@@ -364,7 +366,7 @@ export default class ProfileSection extends HTMLElement {
         @media screen and (max-width: 660px) {
           .tab-control {
             border-bottom: var(--border-mobile);
-            margin: 0 5px 0;
+            margin: 0;
             position: sticky;
             top: 50px;
           }

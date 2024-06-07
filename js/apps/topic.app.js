@@ -14,7 +14,20 @@ export default class AppTopic extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
+
+    // Watch for media query changes
+    const mql = window.matchMedia('(max-width: 660px)');
+    this.watchMediaQuery(mql);
+  }
+
+  // watch for mql changes
+  watchMediaQuery = mql => {
+    mql.addEventListener('change', () => {
+      // Re-render the component
+      this.render();
+    });
   }
 
   disableScroll() {

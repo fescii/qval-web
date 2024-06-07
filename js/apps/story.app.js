@@ -16,8 +16,10 @@ export default class AppStory extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // scroll to top of the page
+    window.scrollTo(0, 0);
 
+    // Get mql object
     const mql = window.matchMedia('(max-width: 660px)');
 
     // add listener for the media query

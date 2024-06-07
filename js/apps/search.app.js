@@ -26,6 +26,30 @@ export default class AppSearch extends HTMLElement {
     if (contentContainer) {
       this.activateTab(contentContainer);
     }
+
+    // Scroll to top of the page
+    window.scrollTo(0, 0);
+
+    // watch for mql changes
+    const mql = window.matchMedia('(max-width: 660px)');
+
+    this.watchMediaQuery(mql, contentContainer);
+  }
+
+  // watch for mql changes
+  watchMediaQuery = (mql, contentContainer) => {
+    mql.addEventListener('change', () => {
+      // Re-render the component
+      this.render();
+
+      // update active tab
+      this.updateActiveTab(this.getAttribute('tab'));
+
+      //activate tab
+      if (contentContainer) {
+        this.activateTab(contentContainer);
+      }
+    });
   }
 
   disableScroll() {
