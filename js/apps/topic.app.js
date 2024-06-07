@@ -408,7 +408,13 @@ export default class AppTopic extends HTMLElement {
           font-weight: 400;
           color: var(--text-color);
           font-family: var(--font-mono), monospace;
-          font-size: 0.9rem;
+          font-size: 1rem;
+        }
+
+        .foot > .author .sp {
+          font-family: var(--font-main), sans-serif;
+          font-size: 1rem;
+          margin: -2px 0 0 0;
         }
 
         .foot > .author .stories .text {
@@ -419,7 +425,7 @@ export default class AppTopic extends HTMLElement {
         .foot > .author .no {
           font-weight: 500;
           font-family: var(--font-main), sans-serif;
-          font-size: 0.9rem;
+          font-size: 1rem;
         }
 
         div.content-container {
