@@ -79,6 +79,8 @@ export default class HoverAuthor extends HTMLElement {
           // add mouse leave event listener
           overlayBtn.addEventListener('click', e => {
             e.preventDefault();
+            e.stopImmediatePropagation()
+            e.stopPropagation()
   
             // change the display of the content container
             contentContainer.style.display = 'none';
