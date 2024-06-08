@@ -190,10 +190,22 @@ export default class ProfileWrapper extends HTMLElement {
 
   getBio = () => {
     // Get bio content
-    const bio = this.getAttribute('bio') || 'The user has not added a bio yet';
+    let bio = this.getAttribute('bio') || 'The user has not added a bio yet';
 
-    // separate by new lines and wrap each line in a paragraph tag
-    const bioLines = bio.split('\n').map(line => `<p>${line}</p>`).join('');
+    /// trim white spaces
+    bio = bio.trim();
+
+    // separate by new lines
+    const bioArray = bio.split('\n');
+
+    // trim each line and ignore empty lines
+    const bioLines = bioArray.map(line => line.trim()).filter(line => line !== '').map(line => `<p>${line}</p>`).join('');
+
+    return /*html*/`
+      <div class="bio">
+        ${bioLines}
+      </div>
+    `
 
     return /*html*/`
       <div class="bio">

@@ -137,8 +137,7 @@ export default class AppPost extends HTMLElement {
 			<author-wrapper you="${this.getAttribute('author-you')}" username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
        followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
        verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
-      >
-       ${this.getAttribute('author-bio')}
+       bio="${this.getAttribute('author-bio')}">
       </author-wrapper>
 		`
   }

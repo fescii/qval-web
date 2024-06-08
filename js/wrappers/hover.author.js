@@ -25,6 +25,80 @@ export default class HoverAuthor extends HTMLElement {
     if (contentContainer) {
       this.mouseEvents(mql, contentContainer);
     }
+
+     // get url
+     let url = this.getAttribute('url');
+
+     url = url.trim().toLowerCase();
+ 
+     // Get the body
+     const body = document.querySelector('body');
+
+    // Open user profile
+    this.openUserProfile(url, body);
+  }
+
+  // Open user profile
+  openUserProfile = (url, body) => {
+    // get a.meta.link
+    const content = this.shadowObj.querySelector('a.meta.link');
+
+    if(body && content) {
+      content.addEventListener('click', event => {
+        event.preventDefault();
+
+        // scroll to the top of the page
+        window.scrollTo(0, 0);
+
+        // Get full post
+        const profile =  this.getProfile();
+  
+        // replace and push states
+        this.replaceAndPushStates(url, body, profile);
+
+        body.innerHTML = profile;
+      })
+    }
+  }
+
+  // Open user profile
+  activateView = (url, body) => {
+    // get a.action.view
+    const content = this.shadowObj.querySelector('.actions > a.action.view');
+
+    if(body && content) {
+      content.addEventListener('click', event => {
+        event.preventDefault();
+
+        // scroll to the top of the page
+        window.scrollTo(0, 0);
+
+        // Get full post
+        const profile =  this.getProfile();
+  
+        // replace and push states
+        this.replaceAndPushStates(url, body, profile);
+
+        body.innerHTML = profile;
+      })
+    }
+  }
+
+   // Replace and push states
+   replaceAndPushStates = (url, body, profile) => {
+    // Replace the content with the current url and body content
+    // get window location
+    const pageUrl = window.location.href;
+    window.history.replaceState(
+      { page: 'page', content: body.innerHTML },
+      url, pageUrl
+    );
+
+    // Updating History State
+    window.history.pushState(
+      { page: 'page', content: profile},
+      url, url
+    );
   }
 
   mouseEvents = (mql, contentContainer) => {
@@ -57,6 +131,8 @@ export default class HoverAuthor extends HTMLElement {
         // add click event listener
         metaLink.addEventListener('click', e => {
           e.preventDefault()
+          e.stopPropagation()
+          e.stopImmediatePropagation();
 
           // change the display of the content container
           contentContainer.style.display = 'flex';
@@ -70,9 +146,21 @@ export default class HoverAuthor extends HTMLElement {
 
   fetchContent = (mql, contentContainer) => {
     const outerThis = this;
+    // get url
+    let url = this.getAttribute('url');
+
+    url = url.trim().toLowerCase();
+
+    // Get the body
+    const body = document.querySelector('body');
     const content = this.getContent();
     setTimeout(() => {
+
+      // change the content of the content container
       contentContainer.innerHTML = content;
+
+      // Activate view
+      outerThis.activateView(url, body);
 
       if (mql) {
         const overlayBtn = this.shadowObj.querySelector('span.pointer');

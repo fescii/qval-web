@@ -170,14 +170,14 @@ export default class AppProfile extends HTMLElement {
   }
 
   getHighlights = () => {
+    let url = this.getAttribute('url');
+    url = url.trim().toLowerCase();
     return /* html */`
-      <highlights-container url="${this.getAttribute('highlights-url')}"
+      <highlights-container url="${url}/highlights" 
         followers="${this.getAttribute('followers')}" following="${this.getAttribute('following')}" 
-        stories="${this.getAttribute('stories')}" replies="${this.getAttribute('replies')}" 
-        topics="${this.getAttribute('topics')}" views="${this.getAttribute('views')}"
-        date-joined="${this.getAttribute('date-joined')}">
+        stories="6376" replies="19863"
+        topics="236" views="726398" date-joined="2022-01-03T13:00:00+03:00">
       </highlights-container>
-
     `
   }
 

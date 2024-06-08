@@ -57,7 +57,6 @@ export default class PersonWrapper extends HTMLElement {
     `
   }
 
-
   checkFollow = following => {
     if (following === 'true') {
       return /*html*/`

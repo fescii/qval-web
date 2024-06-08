@@ -265,7 +265,7 @@ export default class AuthorWrapper extends HTMLElement {
 
   getBio = () => {
     // Get bio content
-    let bio = this.innerHTML;
+    let bio = this.getAttribute('bio') || 'The user has not added their bio yet.'
 
     // trim white spaces
     bio = bio.trim();
