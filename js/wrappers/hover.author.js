@@ -3,6 +3,9 @@ export default class HoverAuthor extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // Check if user is the owner of the profile
+    this._you = true ? this.getAttribute('you') === 'true' : false;
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -309,7 +312,7 @@ export default class HoverAuthor extends HTMLElement {
   }
 
   getActions = () => {
-    // GET url
+    // get url
     let url = this.getAttribute('url');
 
     // trim white spaces and convert to lowercase
@@ -317,11 +320,23 @@ export default class HoverAuthor extends HTMLElement {
 
     return /*html*/`
       <div class="actions">
-        ${this.checkFollowing(this.getAttribute('user-follow'))}
+        ${this.checkYou(this._you)}
         <a href="${url}" class="action view">view</a>
         <span class="action support">donate</span>
       </div>
     `;
+  }
+
+  // check is the current user: you === true
+  checkYou = you => {
+    if (you) {
+      return /*html*/`
+        <a href="/profile" class="action you">You</a>
+      `
+    }
+    else {
+      return this.checkFollowing(this.getAttribute('user-follow'))
+    }
   }
 
   checkFollowing = following => {
@@ -344,6 +359,23 @@ export default class HoverAuthor extends HTMLElement {
         <hover-loader speed="300"></hover-loader>
       </div>
 		`
+  }
+
+  getProfile = () => {
+     // get url
+     let url = this.getAttribute('url');
+  
+     // trim white spaces and convert to lowercase
+     url = url.trim().toLowerCase();
+
+    return /* html */`
+      <app-profile you="${this.getAttribute('you')}" url="${url}" tab="stories"
+        stories-url="${url}/stories" replies-url="${url}/replies" followers-url="${url}/followers" following-url="${url}/following"
+        username="${this.getAttribute('username')}" picture="${this.getAttribute('picture')}" verified="${this.getAttribute('verified')}"
+        name="${this.getAttribute('name')}" followers="${this.getAttribute('followers')}"
+        following="${this.getAttribute('following')}" user-follow="${this.getAttribute('user-follow')}" bio="${this.getAttribute('bio')}">
+      <app-profile>
+    `
   }
 
   getStyles() {
@@ -657,19 +689,16 @@ export default class HoverAuthor extends HTMLElement {
           -webkit-border-radius: 10px;
           -moz-border-radius: 10px;
         }
+
+        .actions > .action.you {
+          text-transform: capitalize;
+        }
         
         .actions > .action.follow {
           border: none;
           padding: 2px 15px;
           font-weight: 500;
           background: var(--accent-linear);
-          color: var(--white-color);
-        }
-        
-        .actions > .action.view {
-          border: none;
-          padding: 2px 15px;
-          background: var(--action-linear);
           color: var(--white-color);
         }
 

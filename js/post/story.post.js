@@ -72,45 +72,45 @@ export default class StoryPost extends HTMLElement {
     }
   }
 
- // Get lapse time
- getLapseTime = isoDateStr => {
-  const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
-  let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // Get lapse time
+  getLapseTime = isoDateStr => {
+    const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
+    let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  // Convert posted time to the current timezone
-  const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
+    // Convert posted time to the current timezone
+    const date = new Date(dateIso.toLocaleString('en-US', { timeZone: userTimezone }));
 
-  // Get the current time
-  const currentTime = new Date();
+    // Get the current time
+    const currentTime = new Date();
 
-  // Get the difference in time
-  const timeDifference = currentTime - date;
+    // Get the difference in time
+    const timeDifference = currentTime - date;
 
-  // Get the seconds
-  const seconds = timeDifference / 1000;
+    // Get the seconds
+    const seconds = timeDifference / 1000;
 
-  // Check if seconds is less than 60: return Just now
-  if (seconds < 60) {
-    return 'Just now';
+    // Check if seconds is less than 60: return Just now
+    if (seconds < 60) {
+      return 'Just now';
+    }
+    // check if seconds is less than 86400: return time AM/PM
+    if (seconds < 86400) {
+      return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    }
+
+    // check if seconds is less than 604800: return day and time
+    if (seconds <= 604800) {
+      return date.toLocaleDateString('en-US', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true });
+    }
+
+    // Check if the date is in the current year:: return date and month short 2-digit year without time
+    if (date.getFullYear() === currentTime.getFullYear()) {
+      return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', });
+    }
+    else {
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
   }
-  // check if seconds is less than 86400: return time AM/PM
-  if (seconds < 86400) {
-    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-  }
-
-  // check if seconds is less than 604800: return day and time
-  if (seconds <= 604800) {
-    return date.toLocaleDateString('en-US', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true });
-  }
-
-  // Check if the date is in the current year:: return date and month short 2-digit year without time
-  if (date.getFullYear() === currentTime.getFullYear()) {
-    return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', });
-  }
-  else {
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  }
-}
 
   getTemplate() {
     // Show HTML Here
@@ -188,7 +188,7 @@ export default class StoryPost extends HTMLElement {
 
   getAuthorHover = () => {
     return /* html */`
-			<hover-author username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
+			<hover-author you="${this.getAttribute('author-you')}" username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
        followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
        verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
        bio="${this.getAttribute('author-bio')}">

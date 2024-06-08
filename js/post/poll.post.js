@@ -1096,7 +1096,7 @@ export default class PollPost extends HTMLElement {
 
   getAuthorHover = () => {
     return /* html */`
-			<hover-author username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
+			<hover-author you="${this.getAttribute('author-you')}" username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
        followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
        verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
        bio="${this.getAttribute('author-bio')}">

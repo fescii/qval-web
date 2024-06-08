@@ -3,6 +3,9 @@ export default class AuthorWrapper extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // Check if user is the owner of the profile
+    this._you = true ? this.getAttribute('you') === 'true' : false;
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -283,9 +286,21 @@ export default class AuthorWrapper extends HTMLElement {
   getActions() {
     return /*html*/`
       <div class="actions">
-        ${this.checkFollowing(this.getAttribute('user-follow'))}
+        ${this.checkYou(this._you)}
       </div>
     `;
+  }
+
+  // check is the current user: you === true
+  checkYou = you => {
+    if (you) {
+      return /*html*/`
+      <a href="/settings" class="action manage">manage</a>
+      `
+    }
+    else {
+      return this.checkFollowing(this.getAttribute('user-follow'))
+    }
   }
 
   checkFollowing = following => {
