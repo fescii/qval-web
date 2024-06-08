@@ -82,6 +82,7 @@ import ProfileWrapper from "./wrappers/profile.wrapper.js";
 import ShareWrapper from "./wrappers/share.wrapper.js";
 import UserWrapper from "./wrappers/user.wrapper.js";
 import TopicWrapper from "./wrappers/topic.wrapper.js";
+import HoverAuthor from "./wrappers/hover.author.js";
 
 // Import bodies
 import StoryBody from "./bodies/story.body.js";
@@ -169,6 +170,7 @@ const initApp = () => {
   customElements.define("share-wrapper", ShareWrapper);
   customElements.define("user-wrapper", UserWrapper);
   customElements.define("topic-wrapper", TopicWrapper);
+  customElements.define("hover-author", HoverAuthor);
 
   // Register bodies
   customElements.define("story-body", StoryBody);

@@ -1,4 +1,4 @@
-export default class AuthorWrapper extends HTMLElement {
+export default class HoverAuthor extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -16,9 +16,6 @@ export default class AuthorWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
-
-    this.fetchContent(contentContainer);
   }
 
   disableScroll() {
@@ -36,72 +33,6 @@ export default class AuthorWrapper extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
-  }
-
-  fetchContent = (contentContainer) => {
-    const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-      outerThis.expandCollapse();
-    }, 2000)
-  }
-
-  // Expand and collapse the author info
-  expandCollapse = () => {
-    // mql is a media query list
-    const mql = window.matchMedia('(max-width: 660px)');
-
-    // check if the screen is mobile
-    if (mql.matches) {
-      const contentContainer = this.shadowObj.querySelector('div.content-container');
-      const svg = this.shadowObj.querySelector('svg');
-
-      // check if the content container and svg exist
-      if (contentContainer && svg) {
-
-        // Select bio, stats, and actions
-        const bio = this.shadowObj.querySelector('.bio');
-        const stats = this.shadowObj.querySelector('.stats');
-        const actions = this.shadowObj.querySelector('.actions');
-
-        if (bio && stats && actions) {
-
-          // Add event listener to the svg
-          svg.addEventListener('click', () => {
-            // if the content container is expanded, collapse it
-            if (contentContainer.dataset.expanded === 'false') {
-              // add gap to the content container
-              contentContainer.style.gap = '8px';
-
-              // Set the height to max for bio, stats, and actions
-              stats.style.setProperty('max-height', 'max-content');
-              bio.style.setProperty('max-height', 'max-content');
-              actions.style.setProperty('max-height', 'max-content');
-
-              // Collapse the content container
-              svg.style.transform = 'rotate(180deg)';
-              contentContainer.dataset.expanded = 'true';
-            }
-            else {
-              // Remove gap from the content container
-              contentContainer.style.gap = '0';
-
-              // Set the height to 0 for bio, stats, and actions
-              actions.style.setProperty('max-height', '0');
-              bio.style.setProperty('max-height', '0');
-              stats.style.setProperty('max-height', '0');
-
-              // Expand the content container
-              svg.style.transform = 'rotate(0deg)';
-              contentContainer.dataset.expanded = 'false';
-            }
-          })
-        }
-      }
-    }
   }
 
   formatNumber = n => {
@@ -152,15 +83,18 @@ export default class AuthorWrapper extends HTMLElement {
 
   getBody = () => {
     return /* html */`
-      <div data-expanded="false" class="content-container">
-        ${this.getLoader()}
+      <div class="author">
+        ${this.getLink()}
+        <div data-expanded="false" class="content-container">
+          <span class="pointer"></span>
+          ${this.getContent()}
+        </div>
       </div>
     `
   }
 
   getContent = () => {
     return /* html */`
-      ${this.getSvg()}
 		  ${this.getHeader()}
       ${this.getStats()}
       ${this.getBio()}
@@ -168,29 +102,39 @@ export default class AuthorWrapper extends HTMLElement {
 		`
   }
 
-  getSvg = () => {
-    // check if screen is mobile using mql
-    const mql = window.matchMedia('(max-width: 660px)');
+  getLink = () => {
+    // Get username
+    let username = this.getAttribute('username');
 
-    // check if the screen is mobile
-    if (mql.matches) {
-      return /* html */`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-          <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path>
-        </svg>
+    // GET url
+    let url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
+    // trim white spaces to username and convert to uppercase
+    username = username.trim().toUpperCase();
+
+    return /* html */`
+        <a href="${url}" class="meta link">${username}</a>
       `
-    }
-    else {
-      return ''
-    }
   }
 
   getHeader = () => {
+    // Get username
+    let username = this.getAttribute('username');
+
+    // trim username and convert to uppercase
+    username = username.trim().toUpperCase();
+
     // Get name and check if it's greater than 20 characters
     const name = this.getAttribute('name');
 
     // GET url
-    const url = this.getAttribute('url');
+    let url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
 
     // Check if the name is greater than 20 characters: replace the rest with ...
     let displayName = name.length > 20 ? `${name.substring(0, 20)}..` : name;
@@ -198,15 +142,15 @@ export default class AuthorWrapper extends HTMLElement {
     return /* html */ `
       <div class="top">
         <div class="avatar">
-          <img src="${this.getAttribute('picture')}" alt="Author name">
+          <img src="${this.getAttribute('picture')}" alt="author name">
           ${this.checkVerified(this.getAttribute('verified'))}
         </div>
         <div class="name">
           <h4 class="name">
             <span class="name">${displayName}</span>
           </h4>
-          <a href="${url.toLowerCase()}" class="username">
-            <span class="text">${this.getAttribute('username')}</span>
+          <a href="${url}" class="username">
+            <span class="text">${username}</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
               <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
             </svg>
@@ -262,28 +206,33 @@ export default class AuthorWrapper extends HTMLElement {
 
   getBio = () => {
     // Get bio content
-    let bio = this.innerHTML;
+    let bio = this.getAttribute('bio') || 'The user has not added their bio yet.';
 
     // trim white spaces
     bio = bio.trim();
 
-    // separate by new lines
-    const bioArray = bio.split('\n');
-
-    // trim each line and ignore empty lines
-    const bioLines = bioArray.map(line => line.trim()).filter(line => line !== '').map(line => `<p>${line}</p>`).join('');
+    // Check if bio is greater than 100 characters: replace the rest with ...
+    let bioLines = bio.length > 94 ? `${bio.substring(0, 94)}...` : bio;
 
     return /*html*/`
       <div class="bio">
-        ${bioLines}
+        <p>${bioLines}</p>
       </div>
     `
   }
 
-  getActions() {
+  getActions = () => {
+    // GET url
+    let url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
     return /*html*/`
       <div class="actions">
+        <a href="${url}" class="action view">View</a>
         ${this.checkFollowing(this.getAttribute('user-follow'))}
+        <span class="action support">Support</span>
       </div>
     `;
   }
@@ -291,20 +240,14 @@ export default class AuthorWrapper extends HTMLElement {
   checkFollowing = following => {
     if (following === 'true') {
       return /*html*/`
-			  <a href="" class="action">Following</a>
+        <span class="action following">Following</span>
 			`
     }
     else {
       return /*html*/`
-			  <a href="" class="action follow">Follow</a>
+        <span class="action follow">Follow</span>
 			`
     }
-  }
-
-  getLoader = () => {
-    return `
-			<post-loader speed="300"></post-loader>
-		`
   }
 
   getStyles() {
@@ -349,36 +292,97 @@ export default class AuthorWrapper extends HTMLElement {
         }
 
         :host {
+          /*border: var(--border);*/
           font-size: 16px;
           padding: 0;
-          width: 100%;
           display: flex;
           flex-flow: column;
-          align-items: start;
-          gap: 0px;
+          gap: 0;
+          margin: 0 0 -1px 0;
         }
 
-        .content-container {
+        .author {
           position: relative;
-          width: 100%;
+          padding: 0;
+          height: 30px;
+          width: max-content;
           display: flex;
+          flex-flow: column;
+          justify-content: center;
+          gap: 0px;
+        }
+        
+        a.meta.link {
+          height: max-content;
+          display: flex;
+          align-items: center;
+          font-family: var(--font-mono),monospace;
+          gap: 5px;
+          font-size: 0.9rem;
+          line-height: 1.5;
+          text-decoration: none;
+          text-decoration: none;
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+        
+        .content-container {
+          border: var(--border);
+          position: absolute;
+          z-index: 4;
+          background-color: var(--background);
+          top: 0;
+          left: -30px;
+          top: calc(100% - 1px);
+          box-shadow: var(--card-box-shadow-alt);
+          padding: 10px;
+          width: 380px;
+          display: none;
           flex-flow: column;
           align-items: start;
           gap: 8px;
+          border-radius: 12px;
+          -webkit-border-radius: 12px;
+          -moz-border-radius: 12px;
         }
 
-        .content-container > svg {
-          display: none;
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
-
+        
+        .author:hover .content-container {
+          display: flex;
+          animation: fadeIn 500ms ease-in-out;
+        }
+        
+        .content-container > span.pointer {
+          position: absolute;
+          top: -5px;
+          left: 70px;
+          rotate: 45deg;
+          width: 10px;
+          height: 10px;
+          background: var(--background);
+          /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
+          border-left: var(--border);
+          border-top: var(--border);
+        }
+        
         .top {
           display: flex;
           width: 100%;
           flex-flow: row;
           align-items: center;
-          gap: 5px;
+          gap: 8px;
         }
-
+        
         .top > .avatar {
           position: relative;
           width: 45px;
@@ -387,7 +391,7 @@ export default class AuthorWrapper extends HTMLElement {
           -webkit-border-radius: 50%;
           -moz-border-radius: 50%;
         }
-
+        
         .top > .avatar > img {
           width: 100%;
           height: 100%;
@@ -397,7 +401,7 @@ export default class AuthorWrapper extends HTMLElement {
           -webkit-border-radius: 50%;
           -moz-border-radius: 50%;
         }
-
+        
         .top > .avatar > .icon {
           background: var(--background);
           position: absolute;
@@ -417,30 +421,31 @@ export default class AuthorWrapper extends HTMLElement {
           height: 15px;
           color: var(--accent-color);
         }
-
+        
         .top > .name {
           display: flex;
           justify-content: center;
           flex-flow: column;
           gap: 0;
         }
-
+        
         .top > .name > h4.name {
           margin: 0;
           display: flex;
           align-items: center;
           gap: 5px;
+          line-height: 1.2;
           color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
+          font-family: var(--font-main), sans-serif;
           font-size: 1.1rem;
           font-weight: 600;
         }
-
+        
         .top > .name > h4.name svg {
           color: var(--alt-color);
           margin: 5px 0 0 0;
         }
-
+        
         .top > .name > a.username {
           color: var(--gray-color);
           font-family: var(--font-mono), monospace;
@@ -469,7 +474,7 @@ export default class AuthorWrapper extends HTMLElement {
         .top > .name > a.username:hover svg {
           color: var(--accent-color);
         }
-
+        
         .stats {
           color: var(--gray-color);
           display: flex;
@@ -479,13 +484,17 @@ export default class AuthorWrapper extends HTMLElement {
           gap: 10px;
         }
 
+        .stats > span.sp {
+          margin: 0 0 -3px 0;
+        }
+        
         .stats > .stat {
           display: flex;
           flex-flow: row;
           align-items: center;
           gap: 5px;
         }
-
+        
         .stats > .stat > .label {
           color: var(--gray-color);
           font-family: var(--font-main), sans-serif;
@@ -493,106 +502,80 @@ export default class AuthorWrapper extends HTMLElement {
           font-size: 1rem;
           font-weight: 400;
         }
-
+        
         .stats > .stat > .number {
           color: var(--text-color);
           font-family: var(--font-main), sans-serif;
           font-size: 0.84rem;
           font-weight: 500;
+          margin: 0 0 -2px 0;
         }
-
+        
         .bio {
           display: flex;
           flex-flow: column;
           gap: 5px;
           color: var(--text-color);
           font-family: var(--font-text), sans-serif;
-          font-size: 1rem;
-          line-height: 1.4;
-          font-weight: 400;
         }
-
+        
         .bio > p {
-          all: inherit;
+          margin: 0;
+          font-size: 1rem;
+          font-weight: 400;
+          line-height: 1.4;
         }
-
+        
         .actions {
           display: flex;
+          font-family: var(--font-main), sans-serif;
           width: 100%;
           flex-flow: row;
           align-items: center;
-          gap: 10px;
-          margin: 5px 0;
+          gap: 20px;
+          margin: 5px 0 3px;
         }
-
-        .actions > a.action {
+        
+        .actions > .action {
           border: var(--action-border);
           text-decoration: none;
+          color: var(--text-color);
+          font-size: 0.9rem;
+          cursor: pointer;
           display: flex;
-          width: 100%;
+          width: max-content;
           flex-flow: row;
           align-items: center;
+          text-transform: lowercase;
           justify-content: center;
-          padding: 7px 20px;
-          border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -moz-border-radius: 10px;
-          color: var(--text-color);
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
+          padding: 1px 15px;
+          border-radius: 20px;
+          -webkit-border-radius: 20px;
+          -moz-border-radius: 20px;
         }
-
-        .actions > a.action.follow {
+        
+        .actions > .action.follow {
           border: none;
+          padding: 2px 15px;
+          font-weight: 500;
           background: var(--accent-linear);
           color: var(--white-color);
-           border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -moz-border-radius: 10px;
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
+        }
+        
+        .actions > .action.view {
+          border: none;
+          padding: 2px 15px;
+          background: var(--action-linear);
+          color: var(--white-color);
         }
 
         @media screen and (max-width: 660px) {
-          .content-container {
-            border-top: var(--border-mobile);
-            border-bottom: var(--border-mobile);
-            position: relative;
-            padding: 10px 0;
-            width: 100%;
-            max-height: max-content;
-            display: flex;
-            flex-flow: column;
-            align-items: start;
-            gap: 0;
-            transition: all 0.3s ease;
-            -webkit-transition: all 0.3s ease;
-            -moz-transition: all 0.3s ease;
-            -ms-transition: all 0.3s ease;
-            -o-transition: all 0.3s ease;
-          }
-
-          .content-container > .stats,
-          .content-container > .bio,
-          .content-container > .actions {
-            transition: all 0.5s ease;
-            max-height: 0;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-          }
-
           ::-webkit-scrollbar {
             -webkit-appearance: none;
           }
-
-          a,
-          .stats > .stat {
-            cursor: default !important;
-          }
-
           a,
           span.stat,
+          .actions > .action,
           span.action {
             cursor: default !important;
           }

@@ -767,7 +767,7 @@ export default class PollPost extends HTMLElement {
     return /*html*/`
       <div class="meta top-meta">
         <span class="by">by</span>
-        <a href="${authorUrl}" class="link author-link">${this.getAttribute('author-username')}</a>
+        ${this.getAuthorHover()}
         <span class="sp">•</span>
         <time class="time" datetime="${this.getAttribute('time')}">
           ${this.getLapseTime(this.getAttribute('time'))}
@@ -1092,6 +1092,16 @@ export default class PollPost extends HTMLElement {
     return `
       <form-container type="reply"></form-container>
     `
+  }
+
+  getAuthorHover = () => {
+    return /* html */`
+			<hover-author username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
+       followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
+       verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
+       bio="${this.getAttribute('author-bio')}">
+      </hover-author>
+		`
   }
 
   getFullPost = () => {
