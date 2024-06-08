@@ -245,6 +245,19 @@ export default class HoverLoader extends HTMLElement {
 				    /*opacity: 1;*/
 				  }
 				}
+
+        @media screen and (max-width:660px) {
+          :host {
+            font-size: 16px;
+            display: flex;
+            flex-flow: column;
+            padding: 5px 0 3px;
+            gap: 20px;
+            width: 100%;
+            min-width: 100%;
+            height: max-content;
+          }
+        }
 	    </style>
     `;
 	}

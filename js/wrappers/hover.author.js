@@ -27,7 +27,7 @@ export default class HoverAuthor extends HTMLElement {
   mouseEvents = (mql, contentContainer) => {
     const outerThis = this;
      // get meta link
-     const metaLink = this.shadowObj.querySelector('a.meta.link');
+     const metaLink = this.shadowObj.querySelector('div.author');
 
      if (metaLink) {
         // check if its not a mobile device
@@ -409,6 +409,7 @@ export default class HoverAuthor extends HTMLElement {
         a.meta.link {
           height: max-content;
           display: flex;
+          height: 30px;
           align-items: center;
           font-family: var(--font-mono),monospace;
           gap: 5px;
