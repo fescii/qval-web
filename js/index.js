@@ -57,6 +57,7 @@ import PostLoader from "./loaders/post.loader.js";
 import StoryLoader from "./loaders/story.loader.js";
 import TopicsLoader from "./loaders/topics.loader.js";
 import TopicLoader from "./loaders/topic.loader.js";
+import HoverLoader from "./loaders/hover.loader.js";
 
 
 // Import Sections
@@ -146,6 +147,7 @@ const initApp = () => {
   customElements.define("story-loader", StoryLoader);
   customElements.define("topics-loader", TopicsLoader);
   customElements.define("topic-loader", TopicLoader);
+  customElements.define("hover-loader", HoverLoader);
 
   // Register sections
   customElements.define("post-section", PostSection);

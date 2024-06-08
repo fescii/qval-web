@@ -368,7 +368,6 @@ section.content {
 
 /* author */
 .author {
-  /* border: var(--border); */
   position: relative;
   padding: 0;
   height: 30px;
@@ -403,10 +402,10 @@ a.meta.link {
   top: calc(100% - 1px);
   padding: 10px;
   width: 380px;
-  display: none;
+  display: flex;
   flex-flow: column;
   align-items: start;
-  gap: 8px;
+  gap: 0;
   border-radius: 12px;
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
@@ -424,10 +423,17 @@ a.meta.link {
   width: 10px;
   height: 10px;
   background: var(--background);
-  /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
   border-left: var(--border);
   border-top: var(--border);
 }
+
+.content-container > .overlay {
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  gap: 8px;
+}
+
 
 .top {
   display: flex;
@@ -645,56 +651,45 @@ a.meta.link {
     margin: 0;
   }
 
-  .share-buttons {
-    border-width: 2px;
-    padding: 5px 0;
-    width: 100%;
+  .content-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--modal-overlay);
+    min-width: 100dvw;
+    width: 100dvw;
+    height: 100dvh;
+    padding: 0;
+    width: max-content;
     display: flex;
     flex-flow: column;
-    align-items: center;
-    justify-content: start;
-    width: max-content;
-    gap: 10px;
-  }
-  
-  .share-buttons > .link {
-    width: 100%;
-    cursor: default !important;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    color: var(--text-color);
-    padding: 0;
-    margin: 0;
-    gap: 20px;
+    border-radius: 0;
   }
 
-  .share-buttons > .link > .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: max-content;
-    width: max-content;
-    min-height: max-content;
-    min-width: max-content;
-    max-height: max-content;
-    max-width: max-content;
-    padding: max-content;
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    background: var(--accent-linear);
-    color: var(--white-color);
-    font-size: 0.9rem;
-    font-weight: 500;
+  .content-container > .overlay {
+    position: absolute;
+    background-color: var(--background);
+    bottom: 0;
+    width: 100%;
+    gap: 10px;
+    padding: 15px 10px 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
-  
-  .share-buttons > .link > .text {
-    display: flex;
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: var(--font-main), sans-serif;
+
+  .content-container > span.pointer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100dvw;
+    height: 100dvh;
+    rotate: 0deg;
+    background-color: var(--modal-overlay);
   }
   
 }

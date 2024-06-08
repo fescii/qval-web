@@ -14,8 +14,81 @@ export default class HoverAuthor extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // Get the media query list
+    const mql = window.matchMedia('(max-width: 660px)');
 
+    const contentContainer = this.shadowObj.querySelector('div.content-container');
+
+    if (contentContainer) {
+      this.mouseEvents(mql, contentContainer);
+    }
+  }
+
+  mouseEvents = (mql, contentContainer) => {
+    const outerThis = this;
+     // get meta link
+     const metaLink = this.shadowObj.querySelector('a.meta.link');
+
+     if (metaLink) {
+        // check if its not a mobile device
+        if (!mql.matches) {
+          // add mouse enter event listener and mouse leave event listener
+          metaLink.addEventListener('mouseenter', () => {
+            // change the display of the content container
+            contentContainer.style.display = 'flex';
+
+          // Fetch content
+            outerThis.fetchContent(mql.matches, contentContainer);
+        });
+
+        // add mouse leave event listener
+        metaLink.addEventListener('mouseleave', () => {
+          // change the display of the content container
+          contentContainer.style.display = 'none';
+
+          // remove the content from the content container
+          contentContainer.innerHTML = outerThis.getLoader();
+        });
+      }
+      else {
+        // add click event listener
+        metaLink.addEventListener('click', e => {
+          e.preventDefault()
+
+          // change the display of the content container
+          contentContainer.style.display = 'flex';
+
+          // Fetch content
+          outerThis.fetchContent(mql.matches, contentContainer);
+        });
+      }
+    }
+  }
+
+  fetchContent = (mql, contentContainer) => {
+    const outerThis = this;
+    const content = this.getContent();
+    setTimeout(() => {
+      contentContainer.innerHTML = content;
+
+      if (mql) {
+        const overlayBtn = this.shadowObj.querySelector('span.pointer');
+        // if overlayBtn
+        if (overlayBtn) {
+  
+          // add mouse leave event listener
+          overlayBtn.addEventListener('click', e => {
+            e.preventDefault();
+  
+            // change the display of the content container
+            contentContainer.style.display = 'none';
+  
+            // remove the content from the content container
+            contentContainer.innerHTML = outerThis.getLoader();
+          });
+        };
+      }
+    }, 2000);
   }
 
   disableScroll() {
@@ -86,8 +159,7 @@ export default class HoverAuthor extends HTMLElement {
       <div class="author">
         ${this.getLink()}
         <div data-expanded="false" class="content-container">
-          <span class="pointer"></span>
-          ${this.getContent()}
+          ${this.getLoader()}
         </div>
       </div>
     `
@@ -95,10 +167,13 @@ export default class HoverAuthor extends HTMLElement {
 
   getContent = () => {
     return /* html */`
-		  ${this.getHeader()}
-      ${this.getStats()}
-      ${this.getBio()}
-      ${this.getActions()}
+      <span class="pointer"></span>
+      <div class="overlay">
+        ${this.getHeader()}
+        ${this.getStats()}
+        ${this.getBio()}
+        ${this.getActions()}
+      </div>
 		`
   }
 
@@ -205,18 +280,28 @@ export default class HoverAuthor extends HTMLElement {
   }
 
   getBio = () => {
+    //mql
+    const mql = window.matchMedia('(max-width: 660px)');
+
+  
     // Get bio content
     let bio = this.getAttribute('bio') || 'The user has not added their bio yet.';
 
     // trim white spaces
     bio = bio.trim();
 
-    // Check if bio is greater than 100 characters: replace the rest with ...
-    let bioLines = bio.length > 94 ? `${bio.substring(0, 94)}...` : bio;
+    if(mql.matches) {
+      // Check if bio is greater than 100 characters: replace the rest with ...
+      bio = bio.length > 150 ? `${bio.substring(0, 150)}...` : bio;
+    }
+    else {
+      // Check if bio is greater than 100 characters: replace the rest with ...
+      bio = bio.length > 85 ? `${bio.substring(0, 85)}...` : bio;
+    }
 
     return /*html*/`
       <div class="bio">
-        <p>${bioLines}</p>
+        <p>${bio}</p>
       </div>
     `
   }
@@ -230,9 +315,9 @@ export default class HoverAuthor extends HTMLElement {
 
     return /*html*/`
       <div class="actions">
-        <a href="${url}" class="action view">View</a>
         ${this.checkFollowing(this.getAttribute('user-follow'))}
-        <span class="action support">Support</span>
+        <a href="${url}" class="action view">view</a>
+        <span class="action support">donate</span>
       </div>
     `;
   }
@@ -248,6 +333,15 @@ export default class HoverAuthor extends HTMLElement {
         <span class="action follow">Follow</span>
 			`
     }
+  }
+
+  getLoader = () => {
+    return /*html*/`
+      <span class="pointer"></span>
+      <div class="overlay">
+        <hover-loader speed="300"></hover-loader>
+      </div>
+		`
   }
 
   getStyles() {
@@ -339,6 +433,7 @@ export default class HoverAuthor extends HTMLElement {
           box-shadow: var(--card-box-shadow-alt);
           padding: 10px;
           width: 380px;
+          height: max-content;
           display: none;
           flex-flow: column;
           align-items: start;
@@ -358,11 +453,10 @@ export default class HoverAuthor extends HTMLElement {
         }
         
         .author:hover .content-container {
-          display: flex;
           animation: fadeIn 500ms ease-in-out;
         }
         
-        .content-container > span.pointer {
+        .content-container  span.pointer {
           position: absolute;
           top: -5px;
           left: 70px;
@@ -370,9 +464,16 @@ export default class HoverAuthor extends HTMLElement {
           width: 10px;
           height: 10px;
           background: var(--background);
-          /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
           border-left: var(--border);
           border-top: var(--border);
+        }
+
+        .content-container > .overlay {
+          display: flex;
+          flex-flow: column;
+          align-items: start;
+          gap: 8px;
+          width: 100%;
         }
         
         .top {
@@ -549,9 +650,9 @@ export default class HoverAuthor extends HTMLElement {
           text-transform: lowercase;
           justify-content: center;
           padding: 1px 15px;
-          border-radius: 20px;
-          -webkit-border-radius: 20px;
-          -moz-border-radius: 20px;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
         }
         
         .actions > .action.follow {
@@ -573,6 +674,7 @@ export default class HoverAuthor extends HTMLElement {
           ::-webkit-scrollbar {
             -webkit-appearance: none;
           }
+
           a,
           span.stat,
           .actions > .action,
@@ -580,46 +682,57 @@ export default class HoverAuthor extends HTMLElement {
             cursor: default !important;
           }
 
-          .content-container > svg {
-            display: inline-block;
+          .content-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 100;
+            background-color: var(--modal-overlay);
+            min-width: 100dvw;
+            width: 100dvw;
+            height: 100dvh;
+            padding: 0;
+            width: max-content;
+            display: none;
+            flex-flow: column;
+            border-radius: 0;
+          }
+        
+          .content-container > .overlay {
             position: absolute;
-            top: 18px;
-            right: 5px;
-            color: var(--gray-color);
-            cursor: default !important;
-            width: 22px;
-            height: 22px;
-            transition: all 0.5s ease;
+            background-color: var(--background);
+            bottom: 0;
+            width: 100%;
+            gap: 10px;
+            z-index: 1000;
+            padding: 18px 10px 20px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+          }
+        
+          .content-container  span.pointer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            min-width: 100dvw;
+            min-height: 100dvh;
+            rotate: 0deg;
+            background-color: var(--modal-overlay);
           }
 
-          .top > .avatar {
-            width: 40px;
-            height: 40px;
+          .actions > .action {
+            padding: 2px 15px;
           }
-
-          .top > .name > h4.name {
-            color: var(--text-color);
-            font-family: var(--font-read), sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
+          
+          .actions > .action.follow{
+            padding: 3px 15px;
           }
-
-          .top > .name > h4.name svg {
-            color: var(--alt-color);
-            margin: 4px 0 0 0;
-            width: 15px;
-            height: 15px;
-          }
-
-          .top > .name > a.username {
-            color: var(--gray-color);
-            font-family: var(--font-mono), monospace;
-            font-size: 0.83rem;
-            font-weight: 500;
-            text-decoration: none;
-            display: flex;
-            gap: 2px;
-            align-items: center;
+          .actions > .action.view {
+            padding: 3px 20px;
           }
         }
       </style>
