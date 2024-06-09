@@ -15,6 +15,58 @@ export default class StoryPost extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
+     // get url
+     let url = this.getAttribute('url');
+
+     url = url.trim().toLowerCase();
+ 
+     // Get the body
+     const body = document.querySelector('body');
+
+
+     // Open Full post
+    this.openFullPost(url, body);
+  }
+
+  // Open Full post
+  openFullPost = (url, body) => {
+    // get h3 > a.link
+    const content = this.shadowObj.querySelector('h3 > a.link');
+
+    if(body && content) {
+      content.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // scroll to the top of the page
+        window.scrollTo(0, 0);
+
+        // Get full post
+        const post =  this.getFullPost();
+  
+        // replace and push states
+        this.replaceAndPushStates(url, body, post);
+
+        body.innerHTML = post;
+      })
+    }
+  }
+
+  // Replace and push states
+  replaceAndPushStates = (url, body, post) => {
+    // Replace the content with the current url and body content
+    // get window location
+    const pageUrl = window.location.href;
+    window.history.replaceState(
+      { page: 'page', content: body.innerHTML },
+      url, pageUrl
+    );
+
+    // Updating History State
+    window.history.pushState(
+      { page: 'page', content: post},
+      url, url
+    );
   }
 
   disableScroll() {
@@ -182,7 +234,6 @@ export default class StoryPost extends HTMLElement {
       ${this.getHeader()}
       ${this.getContent()}
       ${this.getFooter()}
-      <div class="form-container"></div>
     `;
   }
 
@@ -196,6 +247,21 @@ export default class StoryPost extends HTMLElement {
        verified="${this.getAttribute('author-verified')}" bio='${this.getAttribute("author-bio")}'>
       </hover-author>
 		`
+  }
+
+  getFullPost = () => {
+    return /* html */`
+      <app-story story="story" tab="replies" hash="${this.getAttribute('hash')}"  url="${this.getAttribute('url')}" topics="${this.getAttribute('topics')}"
+        story-title="${this.getAttribute('story-title')}" time="${this.getAttribute('time')}"
+        replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}"
+        likes="${this.getAttribute('likes')}" replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" views="${this.getAttribute('views')}"
+        author-you="${this.getAttribute('author-you')}"
+        author-username="${this.getAttribute('author-username')}" author-url="${this.getAttribute('author-url')}"
+        author-img="${this.getAttribute('author-img')}" author-verified="${this.getAttribute('author-verified')}" author-name="${this.getAttribute('author-name')}"
+        author-followers="${this.getAttribute('author-followers')}" author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-follow')}"
+        author-bio="${this.getAttribute('author-bio')}">
+      </app-story>
+    `
   }
 
   getStyles() {

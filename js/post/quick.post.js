@@ -688,6 +688,7 @@ export default class QuickPost extends HTMLElement {
         likes="${this.getAttribute('likes')}" replies="${this.getAttribute('replies')}"
         replies-url="${this.getAttribute('replies-url')}" likes-url="${this.getAttribute('likes-url')}"
         liked="${this.getAttribute('liked')}" views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+        author-you="${this.getAttribute('author-you')}"
         author-username="${this.getAttribute('author-username')}" author-url="${this.getAttribute('author-url')}"
         author-img="${this.getAttribute('author-img')}" author-verified="${this.getAttribute('author-verified')}" author-name="${this.getAttribute('author-name')}"
         author-followers="${this.getAttribute('author-followers')}" author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-follow')}"

@@ -295,7 +295,7 @@ export default class AuthorWrapper extends HTMLElement {
   checkYou = you => {
     if (you) {
       return /*html*/`
-      <a href="/settings" class="action manage">manage</a>
+      <a href="/profile" class="action manage">Manage</a>
       `
     }
     else {

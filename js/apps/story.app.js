@@ -45,7 +45,7 @@ export default class AppStory extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  getDate = (isoDateStr) => {
+  getDate = isoDateStr => {
     const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
     let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     // userTimezone.replace('%2F', '/')
@@ -110,15 +110,22 @@ export default class AppStory extends HTMLElement {
 
     // Show HTML Here
     return /* html */ `
-      <story-body topic="${formatted}"
-        story-title="${this.getAttribute('story-title')}"  url="${this.getAttribute('url')}" host="${this.getAttribute('host')}"
-        next-hash="${this.getAttribute('next-hash')}" next-title="${this.getAttribute('next-title')}" next-date="${this.getAttribute('next-date')}"
-        hash="${this.getAttribute('hash')}" replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
-        views="${this.getAttribute('views')}" time="${this.getAttribute('time')}">
+      <story-body topic="${formatted}" hash="${this.getAttribute('hash')}" url="${this.getAttribute('url')}"
+        story-title="${this.getAttribute('story-title')}" replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
+        views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
+        next-hash="P0AB236B6AB57" next-date="2024-03-13T13:00:00+03:00" next-url="/s/P0AB236B6AB57"
+        next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance">
         ${this.getStoryContent()}
       </story-body>
     `
   }
+
+  // fetchNextArticle = async () => {
+  //   const url = `https://jsonplaceholder.typicode.com/posts/${this.getAttribute('next-id')}`;
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+  //   return data;
+  // }
 
   getStoryContent = () => {
     return /*html*/`

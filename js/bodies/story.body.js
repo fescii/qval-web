@@ -490,7 +490,7 @@ export default class StoryBody extends HTMLElement {
     const url = this.getAttribute('url');
 
     // Get window host url including https/http part
-    const host = this.getAttribute('host');
+    let host = window.location.protocol + '//' + window.location.host;
 
     // combine the url with the host
     const shareUrl = `${host}${url}`;
