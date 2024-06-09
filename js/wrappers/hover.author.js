@@ -59,8 +59,8 @@ export default class HoverAuthor extends HTMLElement {
     }
   }
 
-   // Replace and push states
-   replaceAndPushStates = (url, body, profile) => {
+  // Replace and push states
+  replaceAndPushStates = (url, body, profile) => {
     // Replace the content with the current url and body content
     // get window location
     const pageUrl = window.location.href;
@@ -135,6 +135,9 @@ export default class HoverAuthor extends HTMLElement {
       // Activate view
       outerThis.activateView(url, body, profile);
 
+      // Activate username link
+      outerThis.activateUsernameLink(url, body, profile);
+
       if (mql) {
         const overlayBtn = outerThis.shadowObj.querySelector('span.pointer');
         // if overlayBtn
@@ -161,6 +164,23 @@ export default class HoverAuthor extends HTMLElement {
   activateView = (url, body, profile) => {
     // get a.action.view
     const content = this.shadowObj.querySelector('.actions > a.action.view');
+
+    if(body && content) {
+      content.addEventListener('click', event => {
+        event.preventDefault();
+  
+        // replace and push states
+        this.replaceAndPushStates(url, body, profile);
+
+        body.innerHTML = profile;
+      })
+    }
+  }
+
+  // Open user profile
+  activateUsernameLink = (url, body, profile) => {
+    // get div.name > a.username
+    const content = this.shadowObj.querySelector('.top > .name > a.username');
 
     if(body && content) {
       content.addEventListener('click', event => {
