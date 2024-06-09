@@ -32,29 +32,38 @@ export default class HoverAuthor extends HTMLElement {
     const contentContainer = this.shadowObj.querySelector('div.content-container');
 
     if (contentContainer) {
-      this.mouseEvents(url, mql, contentContainer);
+      this.mouseEvents(url, mql.matches, contentContainer);
     }
 
-    // Open user profile
-    this.openUserProfile(url, body);
+    // handle user click
+    this.handleUserClick(mql.matches, url, body, contentContainer);
   }
 
   // Open user profile
-  openUserProfile = (url, body) => {
+  handleUserClick = (mql, url, body, contentContainer) => {
+    const outerThis = this;
     // get a.meta.link
     const content = this.shadowObj.querySelector('a.meta.link');
 
-    if(body && content) {
+    // Get full post
+    const profile =  this.getProfile();
+
+    if(body && content) { 
       content.addEventListener('click', event => {
         event.preventDefault();
+        if (mql) {
+          // change the display of the content container
+          contentContainer.style.display = 'flex';
 
-        // Get full post
-        const profile =  this.getProfile();
-  
-        // replace and push states
-        this.replaceAndPushStates(url, body, profile);
+          // Fetch content
+          outerThis.fetchContent(url, mql, contentContainer);
+        }
+        else {
+          // replace and push states
+          this.replaceAndPushStates(url, body, profile);
 
-        body.innerHTML = profile;
+          body.innerHTML = profile;
+        }
       })
     }
   }
@@ -78,19 +87,20 @@ export default class HoverAuthor extends HTMLElement {
 
   mouseEvents = (url, mql, contentContainer) => {
     const outerThis = this;
-     // get meta link
-     const metaLink = this.shadowObj.querySelector('div.author');
+    // get meta link
+    const metaLink = this.shadowObj.querySelector('div.author');
 
-     if (metaLink) {
-        // check if its not a mobile device
-        if (!mql.matches) {
-          // add mouse enter event listener and mouse leave event listener
-          metaLink.addEventListener('mouseenter', () => {
-            // change the display of the content container
-            contentContainer.style.display = 'flex';
+    if (metaLink) {
+      // check if its not a mobile device
+      if (!mql) {
+        // add mouse enter event listener and mouse leave event listener
+        metaLink.addEventListener('mouseenter', () => {
+          
+          // change the display of the content container
+          contentContainer.style.display = 'flex';
 
           // Fetch content
-            outerThis.fetchContent(url, mql.matches, contentContainer);
+          outerThis.fetchContent(url, mql, contentContainer);
         });
 
         // add mouse leave event listener
@@ -113,7 +123,7 @@ export default class HoverAuthor extends HTMLElement {
           contentContainer.style.display = 'flex';
 
           // Fetch content
-          outerThis.fetchContent(url, mql.matches, contentContainer);
+          outerThis.fetchContent(url, mql, contentContainer);
         });
       }
     }
