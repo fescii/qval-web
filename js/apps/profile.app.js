@@ -16,6 +16,20 @@ export default class AppProfile extends HTMLElement {
     this.shadowObj.innerHTML = this.getTemplate();
   }
 
+  static get observedAttributes() {
+    return ['url', 'name', 'username', 'you', 'picture', 'verified', 'followers', 'following', 'user-follow', 'bio', 'tab', 'stories-url', 'replies-url', 'followers-url', 'following-url', 'search-url', 'auth-url'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    // console.log(`Attribute ${name} changed from ${oldValue} to ${newValue}`);
+    // if (oldValue !== newValue) {
+    //   // log the name of the attribute that changed
+    //   console.log(name);
+    // }
+
+    return;
+  }
+
   connectedCallback() {
     // Scroll to the top of the page
     window.scrollTo(0, 0);
@@ -90,7 +104,7 @@ export default class AppProfile extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  getDate = (isoDateStr) => {
+  getDate = isoDateStr => {
     const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
     let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     // userTimezone.replace('%2F', '/')
@@ -112,11 +126,13 @@ export default class AppProfile extends HTMLElement {
   }
 
   getBody = () => {
+    const authorContent = this.getAuthor();
+
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
         ${this.getTop()}
-        ${this.getAuthor()}
+        ${authorContent}
         ${this.getSection()}
       `;
     }
@@ -125,7 +141,7 @@ export default class AppProfile extends HTMLElement {
         <section class="main">
           ${this.getTop()}
           <div class="body">
-            ${this.getAuthor()}
+            ${authorContent}
             ${this.getSection()}
           </div>
         </section>
@@ -149,9 +165,14 @@ export default class AppProfile extends HTMLElement {
   }
 
   getAuthor = () => {
+    // get url
+    const url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    let formattedUrl = url.toLowerCase();
     return /* html */`
       <profile-wrapper name="${this.getAttribute('name')}" username="${this.getAttribute('username')}" you="${this._you}"
-        url="${this.getAttribute('url')}" picture="${this.getAttribute('picture')}" verified="${this.getAttribute('verified')}"
+        url="${formattedUrl}" picture="${this.getAttribute('picture')}" verified="${this.getAttribute('verified')}"
         followers="${this.getAttribute('followers')}" following="${this.getAttribute('following')}" user-follow="${this.getAttribute('user-follow')}"
         bio="${this.getAttribute('bio')}">
       </profile-wrapper>
@@ -170,10 +191,14 @@ export default class AppProfile extends HTMLElement {
   }
 
   getHighlights = () => {
-    let url = this.getAttribute('url');
-    url = url.trim().toLowerCase();
+    // get url
+    const url = this.getAttribute('url');
+  
+    // trim white spaces and convert to lowercase
+    let formattedUrl = url.toLowerCase();
+
     return /* html */`
-      <highlights-container url="${url}/highlights" 
+      <highlights-container url="${formattedUrl}/highlights" 
         followers="${this.getAttribute('followers')}" following="${this.getAttribute('following')}" 
         stories="6376" replies="19863"
         topics="236" views="726398" date-joined="2022-01-03T13:00:00+03:00">

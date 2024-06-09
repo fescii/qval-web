@@ -17,14 +17,9 @@ export default class HoverAuthor extends HTMLElement {
   }
 
   connectedCallback() {
+
     // Get the media query list
     const mql = window.matchMedia('(max-width: 660px)');
-
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
-
-    if (contentContainer) {
-      this.mouseEvents(mql, contentContainer);
-    }
 
      // get url
      let url = this.getAttribute('url');
@@ -33,6 +28,12 @@ export default class HoverAuthor extends HTMLElement {
  
      // Get the body
      const body = document.querySelector('body');
+
+    const contentContainer = this.shadowObj.querySelector('div.content-container');
+
+    if (contentContainer) {
+      this.mouseEvents(url, mql, contentContainer);
+    }
 
     // Open user profile
     this.openUserProfile(url, body);
@@ -46,32 +47,6 @@ export default class HoverAuthor extends HTMLElement {
     if(body && content) {
       content.addEventListener('click', event => {
         event.preventDefault();
-
-        // scroll to the top of the page
-        window.scrollTo(0, 0);
-
-        // Get full post
-        const profile =  this.getProfile();
-  
-        // replace and push states
-        this.replaceAndPushStates(url, body, profile);
-
-        body.innerHTML = profile;
-      })
-    }
-  }
-
-  // Open user profile
-  activateView = (url, body) => {
-    // get a.action.view
-    const content = this.shadowObj.querySelector('.actions > a.action.view');
-
-    if(body && content) {
-      content.addEventListener('click', event => {
-        event.preventDefault();
-
-        // scroll to the top of the page
-        window.scrollTo(0, 0);
 
         // Get full post
         const profile =  this.getProfile();
@@ -101,7 +76,7 @@ export default class HoverAuthor extends HTMLElement {
     );
   }
 
-  mouseEvents = (mql, contentContainer) => {
+  mouseEvents = (url, mql, contentContainer) => {
     const outerThis = this;
      // get meta link
      const metaLink = this.shadowObj.querySelector('div.author');
@@ -115,7 +90,7 @@ export default class HoverAuthor extends HTMLElement {
             contentContainer.style.display = 'flex';
 
           // Fetch content
-            outerThis.fetchContent(mql.matches, contentContainer);
+            outerThis.fetchContent(url, mql.matches, contentContainer);
         });
 
         // add mouse leave event listener
@@ -138,19 +113,14 @@ export default class HoverAuthor extends HTMLElement {
           contentContainer.style.display = 'flex';
 
           // Fetch content
-          outerThis.fetchContent(mql.matches, contentContainer);
+          outerThis.fetchContent(url, mql.matches, contentContainer);
         });
       }
     }
   }
 
-  fetchContent = (mql, contentContainer) => {
+  fetchContent = (url, mql, contentContainer) => {
     const outerThis = this;
-    // get url
-    let url = this.getAttribute('url');
-
-    url = url.trim().toLowerCase();
-
     // Get the body
     const body = document.querySelector('body');
     const content = this.getContent();
@@ -159,11 +129,14 @@ export default class HoverAuthor extends HTMLElement {
       // change the content of the content container
       contentContainer.innerHTML = content;
 
+      // Get full post
+      const profile =  outerThis.getProfile();
+
       // Activate view
-      outerThis.activateView(url, body);
+      outerThis.activateView(url, body, profile);
 
       if (mql) {
-        const overlayBtn = this.shadowObj.querySelector('span.pointer');
+        const overlayBtn = outerThis.shadowObj.querySelector('span.pointer');
         // if overlayBtn
         if (overlayBtn) {
   
@@ -182,6 +155,23 @@ export default class HoverAuthor extends HTMLElement {
         };
       }
     }, 2000);
+  }
+
+  // Open user profile
+  activateView = (url, body, profile) => {
+    // get a.action.view
+    const content = this.shadowObj.querySelector('.actions > a.action.view');
+
+    if(body && content) {
+      content.addEventListener('click', event => {
+        event.preventDefault();
+  
+        // replace and push states
+        this.replaceAndPushStates(url, body, profile);
+
+        body.innerHTML = profile;
+      })
+    }
   }
 
   disableScroll() {
@@ -462,7 +452,7 @@ export default class HoverAuthor extends HTMLElement {
         username="${this.getAttribute('username')}" picture="${this.getAttribute('picture')}" verified="${this.getAttribute('verified')}"
         name="${this.getAttribute('name')}" followers="${this.getAttribute('followers')}"
         following="${this.getAttribute('following')}" user-follow="${this.getAttribute('user-follow')}" bio="${this.getAttribute('bio')}">
-      <app-profile>
+      </app-profile>
     `
   }
 
