@@ -6,9 +6,23 @@ export default class AppStory extends HTMLElement {
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
-    this.topics = this.getAttribute('topics').split(',');
+    this.topics = this.getTopics();
 
     this.render();
+  }
+
+
+  getTopics = () => {
+    // get the topics
+    let topics = this.getAttribute('topics');
+
+    // Check if the topics is null
+    if (topics === null) {
+      return ['story'];
+    }
+
+    // Return the topics
+    return topics.split(',');
   }
 
   render() {
