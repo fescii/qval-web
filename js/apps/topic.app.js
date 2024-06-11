@@ -286,7 +286,7 @@ export default class AppTopic extends HTMLElement {
 
   getAuthor = () => {
     return /* html */`
-			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
+			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-picture')}" name="${this.getAttribute('author-name')}"
        followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
        verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
        bio="${this.getAttribute('author-bio')}">
@@ -304,7 +304,7 @@ export default class AppTopic extends HTMLElement {
       <div class="actions">
         ${this.checkSubscribed(this.getAttribute('subscribed'))}
         <a href="${url}/edit" class="action edit" id="edit-action">contribute</a>
-        ${this.checkFollow(this.getAttribute('user-follow'))}
+        ${this.checkFollow(this.getAttribute('topic-follow'))}
       </div>
     `
   }

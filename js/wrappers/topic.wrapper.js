@@ -14,7 +14,54 @@ export default class TopicWrapper extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+     // get url
+     let url = this.getAttribute('url');
+
+     url = url.trim().toLowerCase();
+ 
+     // Get the body
+     const body = document.querySelector('body');
+ 
+     this.handleActionClick(url, body);
+  }
+
+  // Open user profile
+  handleActionClick = (url, body) => {
+    const outerThis = this;
+    // get a.meta.link
+    const content = this.shadowObj.querySelector('a.action.view');
+
+    // Get full post
+    const topic =  this.getTopic();
+
+    if(body && content) { 
+      content.addEventListener('click', event => {
+        event.preventDefault();
+        
+        // replace and push states
+        outerThis.replaceAndPushStates(url, body, topic);
+
+        body.innerHTML = topic;
+      })
+    }
+  }
+
+
+  // Replace and push states
+  replaceAndPushStates = (url, body, topic) => {
+    // Replace the content with the current url and body content
+    // get window location
+    const pageUrl = window.location.href;
+    window.history.replaceState(
+      { page: 'page', content: body.innerHTML },
+      url, pageUrl
+    );
+
+    // Updating History State
+    window.history.pushState(
+      { page: 'page', content: topic},
+      url, url
+    );
   }
 
   formatNumber = n => {
@@ -63,7 +110,6 @@ export default class TopicWrapper extends HTMLElement {
     `;
   }
 
-
   getInfo = () => {
     // Get name and check if it's greater than 20 characters
     let name = this.getAttribute('name');
@@ -106,14 +152,14 @@ export default class TopicWrapper extends HTMLElement {
 
     if (following === 'true') {
       return /*html*/` 
-      <a href="${url.toLowerCase()}/contribute"class="action contribute">contribute</a>
+        <a href="${url.toLowerCase()}/contribute"class="action contribute">contribute</a>
         <a href="${url.toLowerCase()}" class="action view">view</a>
         <span class="action following">following</span>
 			`
     }
     else {
       return /*html*/`
-      <a href="${url.toLowerCase()}/contribute"class="action contribute">contribute</a>
+        <a href="${url.toLowerCase()}/contribute"class="action contribute">contribute</a>
         <a href="${url.toLowerCase()}" class="action view">view</a>
         <button class="action follow">follow</button>
 			`
@@ -148,6 +194,26 @@ export default class TopicWrapper extends HTMLElement {
       </div>
 		`
   }
+
+  getTopic = () => {
+    // get url
+    let url = this.getAttribute('url');
+ 
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
+   return /* html */`
+     <app-topic tab="article" hash="${this.getAttribute('hash')}" subscribers="${this.getAttribute('subscribers')}" followers="${this.getAttribute('followers')}" 
+      stories="${this.getAttribute('stories')}"
+      name="${this.getAttribute('name')}" url="${url}" stories-url="${url}/stories" subscribed="${this.getAttribute('subscribed')}" 
+      topic-follow="${this.getAttribute('topic-follow')}" contributers-url="${url}/contributers" followers-url="${url}/followers"
+      description="${this.getAttribute('description')}"
+      author-username="${this.getAttribute('author-username')}" author-picture="${this.getAttribute('author-img')}" author-verified="${this.getAttribute('author-verified')}"
+      author-name="${this.getAttribute('author-name')}" author-followers="${this.getAttribute('author-followers')}"
+      author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-user-follow')}" author-bio="${this.getAttribute('author-bio')}">
+    </app-topic>
+   `
+ }
 
 
   getStyles() {

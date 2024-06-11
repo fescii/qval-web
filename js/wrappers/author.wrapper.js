@@ -397,7 +397,7 @@ export default class AuthorWrapper extends HTMLElement {
     url = url.trim().toLowerCase();
 
    return /* html */`
-     <app-profile you="${this.getAttribute('you')}" url="${url}" tab="stories"
+     <app-profile tab="stories" you="${this.getAttribute('you')}" url="${url}" tab="stories"
        stories-url="${url}/stories" replies-url="${url}/replies" followers-url="${url}/followers" following-url="${url}/following"
        username="${this.getAttribute('username')}" picture="${this.getAttribute('picture')}" verified="${this.getAttribute('verified')}"
        name="${this.getAttribute('name')}" followers="${this.getAttribute('followers')}"

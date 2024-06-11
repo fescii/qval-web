@@ -108,7 +108,6 @@ export default class AppHome extends HTMLElement {
         </div>
         <div class="side">
           <topics-container url="/topics/popular"></topics-container>
-          ${this.getRelatedStories()}
           ${this.getInfo()}
         </div>
       `;
@@ -122,13 +121,6 @@ export default class AppHome extends HTMLElement {
         url="${this.getAttribute('url')}" search-url="${this.getAttribute('search-url')}">
       </header-wrapper>
     `
-  }
-
-  getRelatedStories = () => {
-    return /* html */`
-			<related-container type="top" limit="5" topics='top1, top2, top3'>
-      </related-container>
-		`
   }
 
   getInfo = () => {
