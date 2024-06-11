@@ -97,9 +97,12 @@ export default class ProfileSection extends HTMLElement {
             tab.classList.add('active');
             activeTab = tab;
 
+            // get current feed
+            const currentFeed = outerThis.getCurrentFeed(tab.dataset.element);
+
             // Updating History State
             window.history.pushState(
-              { tab: tab.dataset.element, content: feeds.innerHTML},
+              { tab: tab.dataset.element, content: currentFeed},
               tab.dataset.element, `${tab.getAttribute('url')}`
             );
 
@@ -195,6 +198,20 @@ export default class ProfileSection extends HTMLElement {
 
   updateDefault = contentContainer => {
     contentContainer.innerHTML = this.getContainer(this._active);
+  }
+
+  // get current feed
+  getCurrentFeed = tab => {
+    switch (tab) {
+      case "stories":
+        return this.getStories();
+      case "replies":
+        return this.getReplies();
+      case "followers":
+        return this.getPeople();
+      default:
+        return this.getStories();
+    }
   }
 
   getTemplate() {

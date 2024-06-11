@@ -76,7 +76,7 @@ export default class AppTopic extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  getDate = (isoDateStr) => {
+  getDate = isoDateStr => {
     const dateIso = new Date(isoDateStr); // ISO strings with timezone are automatically handled
     let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     // userTimezone.replace('%2F', '/')
@@ -141,7 +141,6 @@ export default class AppTopic extends HTMLElement {
       return /* html */`
         ${this.getTop()}
         ${this.getHeader()}
-        ${this.getFoot()}
         ${this.getAuthor()}
         <div class="content-container">
           ${this.getStories()}
@@ -153,7 +152,6 @@ export default class AppTopic extends HTMLElement {
         <section class="main">
           ${this.getTop()}
           ${this.getHeader()}
-          ${this.getFoot()}
           <div class="content-container">
             ${this.getStories()}
           </div>
@@ -184,16 +182,17 @@ export default class AppTopic extends HTMLElement {
     return /*html*/`
       <div class="head">
         <div class="text-content">
-          <h2 class="tag">${str}</h2>
+          <div class="topic-head">
+            <div class="topic">
+            <h2> ${str} </h2>
+            <p class="info">Discover, read, and contribute to stories about ${str}.</p>
+            </div>
+            ${this.getStats()}
+          </div>
           <div class="sub-text">
-            Discover, read, and contribute to stories about ${str}.
-            <br>
-            ${this.getAttribute('description')}
+            <p>${this.getAttribute('description')}</p>
           </div>
-          <div class="actions">
-            ${this.checkSubscribed(this.getAttribute('subscribed'))}
-            ${this.checkFollow(this.getAttribute('user-follow'))}
-          </div>
+          ${this.getActions()}
         </div>
       </div>
     `
@@ -215,27 +214,28 @@ export default class AppTopic extends HTMLElement {
     `
   }
 
-  getFoot = () => {
-    return `
-      <div class="foot">
-        ${this.getStats()}
-      </div>
-    `
-  }
-
   getStats = () => {
+
+    // Get followers
+    let followers = this.parseToNumber(this.getAttribute('followers'));
+
     // Get stories
     let stories = this.parseToNumber(this.getAttribute('stories'));
 
     // Format the number
     let formattedStories = this.formatNumber(stories);
-    return `
-      <div class="author">
-        <span class="code">${this.getAttribute('hash')}</span>
+    let formattedFollowers = this.formatNumber(followers);
+
+    return /*html*/`
+      <div class="stats">
+        <span class="followers">
+          <span class="no">${formattedFollowers}</span>
+          <span class="text">followers</span>
+        </span>
         <span class="sp">•</span>
         <span class="stories">
           <span class="no">${formattedStories}</span>
-          <span class="text">Stories</span>
+          <span class="text">stories</span>
         </span>
       </div>
     `
@@ -249,6 +249,18 @@ export default class AppTopic extends HTMLElement {
        bio="${this.getAttribute('author-bio')}">
       </author-wrapper>
 		`
+  }
+
+  getActions = () => {
+    return /* html */`
+      <div class="actions">
+        ${this.checkSubscribed(this.getAttribute('subscribed'))}
+        ${this.checkFollow(this.getAttribute('user-follow'))}
+        <span class="action edit" id="edit-action">
+          <span class="text">Edit</span>
+        </span>
+      </div>
+    `
   }
 
   checkFollow = subscribed => {
@@ -359,30 +371,77 @@ export default class AppTopic extends HTMLElement {
           display: flex;
           flex-flow: column;
           gap: 0;
-          padding: 0 0 15px 0;
+          padding: 0;
         }
 
         .text-content {
           display: flex;
           flex-flow: column;
-          gap: 0;
+          gap: 10px;
           color: var(--text-color);
         }
 
-        .text-content > .tag {
+        .text-content > .topic-head {
+          display: flex;
+          flex-flow: column;
+          gap: 10px;
+        }
+
+        .text-content > .topic-head .topic {
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+        }
+
+        .text-content > .topic-head .topic > h2 {
           font-size: 1.5rem;
-          font-weight: 600;
-          font-family: var(--font-main);
+          font-weight: 500;
+          font-family: var(--font-main), sans-serif;
           margin: 0;
-          background: var(--accent-linear);
-          background-clip: text;
-          background-size: 250% 250%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: gradient 10s ease infinite;
-          -webkit-animation: gradient 10s ease infinite;
-          -moz-animation: gradient 10s ease infinite;
-          -o-animation: gradient 10s ease infinite;
+          color: var(--text-color);
+        }
+
+        .text-content > .topic-head .topic > p.info {
+          margin: 0;
+          font-size: 0.9rem;
+          font-weight: 400;
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+          color: var(--text-color);
+        }
+
+        .stats {
+          padding: 0;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-weight: 400;
+          color: var(--text-color);
+          font-family: var(--font-mono), monospace;
+          font-size: 1rem;
+        }
+
+        .stats .sp {
+          font-family: var(--font-main), sans-serif;
+          font-size: 1rem;
+          margin: -2px 0 0 0;
+        }
+
+        .stats > span {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+        }
+
+        .stats > span > .text {
+          font-family: var(--font-main), sans-serif;
+          font-size: 1rem;
+        }
+
+        .stats > span >  .no {
+          font-weight: 500;
+          font-family: var(--font-main), sans-serif;
+          font-size: 0.9rem;
         }
 
         .text-content > .sub-text {
@@ -396,33 +455,31 @@ export default class AppTopic extends HTMLElement {
           width: 100%;
           display: flex;
           flex-flow: row;
-          gap: 50px;
-          margin: 20px 0 0 0;
+          gap: 20px;
+          margin: 0;
         }
 
         .text-content > .actions > .action {
           text-decoration: none;
-          color: var(--white-color);
+          padding: 3px 15px;
+          font-weight: 500;
           background: var(--accent-linear);
+          color: var(--white-color);
+          font-family: var(--font-text), sans-serif;
           cursor: pointer;
-          padding: 5px 20px;
-          width: 130px;
-          font-size: 1rem;
+          width: max-content;
+          font-size: 0.9rem;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 10px;
-          border-radius: 12px;
+          border-radius: 10px;
         }
 
-        .text-content > .actions > .action.follow {
-          background: var(--action-linear);
-
-        }
-
+        .text-content > .actions > .action.edit,
         .text-content > .actions > .action.following,
         .text-content > .actions > .action.subscribed {
-          padding: 4.5px 20px;
+          padding: 2.5px 10px;
           background: unset;
           border: var(--action-border);
           color: var(--gray-color);
@@ -438,41 +495,6 @@ export default class AppTopic extends HTMLElement {
           width: 100%;
           position: sticky;
           top: 58px;
-        }
-
-        .foot > .author {
-          border-top: var(--border);
-          padding: 10px 0;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          font-weight: 400;
-          color: var(--text-color);
-          font-family: var(--font-mono), monospace;
-          font-size: 1rem;
-        }
-
-        .foot > .author .code {
-          font-weight: 500;
-          font-family: var(--font-mono), monospace;
-          font-size: 0.9rem;
-        }
-
-        .foot > .author .sp {
-          font-family: var(--font-main), sans-serif;
-          font-size: 1rem;
-          margin: -2px 0 0 0;
-        }
-
-        .foot > .author .stories .text {
-          font-family: var(--font-main), sans-serif;
-          font-size: 1rem;
-        }
-
-        .foot > .author .no {
-          font-weight: 500;
-          font-family: var(--font-main), sans-serif;
-          font-size: 0.9rem;
         }
 
         div.content-container {

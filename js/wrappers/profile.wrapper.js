@@ -18,10 +18,6 @@ export default class ProfileWrapper extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
-
-    this.fetchContent(contentContainer);
   }
 
   disableScroll() {
@@ -39,16 +35,6 @@ export default class ProfileWrapper extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
-  }
-
-  fetchContent = contentContainer => {
-    // const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-    }, 2000)
   }
 
   formatNumber = n => {
@@ -92,17 +78,9 @@ export default class ProfileWrapper extends HTMLElement {
   getTemplate = () => {
     // Show HTML Here
     return `
-      ${this.getBody()}
+      ${this.getContent()}
       ${this.getStyles()}
     `;
-  }
-
-  getBody = () => {
-    return /* html */`
-      <div data-expanded="false" class="content-container">
-        ${this.getLoader()}
-      </div>
-    `
   }
 
   getContent = () => {
@@ -206,12 +184,6 @@ export default class ProfileWrapper extends HTMLElement {
         ${bioLines}
       </div>
     `
-
-    return /*html*/`
-      <div class="bio">
-        ${bioLines}
-      </div>
-    `
   }
 
   getActions = you => {
@@ -245,12 +217,6 @@ export default class ProfileWrapper extends HTMLElement {
 			  <a href="" class="action follow">Follow</a>
 			`
     }
-  }
-
-  getLoader = () => {
-    return `
-			<post-loader speed="300"></post-loader>
-		`
   }
 
   getStyles() {
@@ -303,19 +269,6 @@ export default class ProfileWrapper extends HTMLElement {
           flex-flow: column;
           align-items: start;
           gap: 0px;
-        }
-
-        .content-container {
-          position: relative;
-          width: 100%;
-          display: flex;
-          flex-flow: column;
-          align-items: start;
-          gap: 8px;
-        }
-
-        .content-container > svg {
-          display: none;
         }
 
         .top {

@@ -16,9 +16,12 @@ export default class PostWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
-
-    this.fetchContent(contentContainer);
+    // like post
+    this.likePost();
+    // open share overlay
+    this.openShare();
+    // scroll likes
+    this.scrollLikes();
   }
 
   disableScroll() {
@@ -38,24 +41,8 @@ export default class PostWrapper extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  fetchContent = (contentContainer) => {
-    const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getFull();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-      // like post
-      outerThis.likePost();
-      // open share overlay
-      outerThis.openShare();
-      // scroll likes
-      outerThis.scrollLikes();
-    }, 2000)
-  }
-
-   // fn to take number and return a string with commas
-   numberWithCommas = x => {
+  // fn to take number and return a string with commas
+  numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
@@ -329,7 +316,7 @@ export default class PostWrapper extends HTMLElement {
   getTemplate() {
     // Show HTML Here
     return `
-      ${this.getBody()}
+      ${this.getFull()}
       ${this.getStyles()}
     `;
   }
@@ -525,12 +512,6 @@ export default class PostWrapper extends HTMLElement {
     `
   }
 
-  getLoader = () => {
-    return `
-			<post-loader speed="300"></post-loader>
-		`
-  }
-
   getFull() {
     return `
       ${this.getContent()}
@@ -540,13 +521,6 @@ export default class PostWrapper extends HTMLElement {
     `;
   }
 
-  getBody() {
-    return `
-      <div class="content-container">
-        ${this.getLoader()}
-      </div>
-    `;
-  }
 
   getStyles() {
     return /* css */`

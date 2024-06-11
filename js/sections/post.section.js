@@ -97,9 +97,12 @@ export default class PostSection extends HTMLElement {
             tab.classList.add('active');
             activeTab = tab;
 
+            //get current feed
+            const currentFeed = outerThis.getCurrentFeed(tab.dataset.element);
+
             // Updating History State
             window.history.pushState(
-              { tab: tab.dataset.element, content: feeds.innerHTML},
+              { tab: tab.dataset.element, content: currentFeed},
               tab.dataset.element, `${tab.getAttribute('url')}`
             );
 
@@ -193,6 +196,18 @@ export default class PostSection extends HTMLElement {
 
   updateDefault = contentContainer => {
     contentContainer.innerHTML = this.getContainer(this._active);
+  }
+
+  // GET current feed
+  getCurrentFeed = tab => {
+    switch (tab) {
+      case "replies":
+        return this.getReplies();
+      case "likes":
+        return this.getLikes();
+      default:
+        return this.getReplies();
+    }
   }
 
   getTemplate() {

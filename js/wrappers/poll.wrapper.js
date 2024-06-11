@@ -23,11 +23,25 @@ export default class PollWrapper extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // like post
+    this.likePost();
+    // open share overlay
+    this.openShare();
+    // scroll likes
+    this.scrollLikes();
 
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
+    // Update poll expiry time per second
+    this.updatePollTime();
 
-    this.fetchContent(contentContainer);
+    // Check if user has voted
+    if (this._voted) {
+      // disable all inputs
+      this.disableInputs();
+    }
+    else {
+      // Listen for checked radio button
+      this.listenForChecked();
+    }
   }
 
   disableScroll() {
@@ -45,35 +59,6 @@ export default class PollWrapper extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
-  }
-
-  fetchContent = (contentContainer) => {
-    const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getFull();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-      // like post
-      outerThis.likePost();
-      // open share overlay
-      outerThis.openShare();
-      // scroll likes
-      outerThis.scrollLikes();
-
-      // Update poll expiry time per second
-      outerThis.updatePollTime();
-
-      // Check if user has voted
-      if (outerThis._voted) {
-        // disable all inputs
-        outerThis.disableInputs();
-      }
-      else {
-        // Listen for checked radio button
-        outerThis.listenForChecked();
-      }
-    }, 2000)
   }
 
   // fn to take number and return a string with commas
@@ -561,7 +546,7 @@ export default class PollWrapper extends HTMLElement {
   getTemplate() {
     // Show HTML Here
     return `
-      ${this.getBody()}
+      ${this.getFull()}
       ${this.getStyles()}
     `;
   }

@@ -124,9 +124,12 @@ export default class AppSearch extends HTMLElement {
               url = `${url}?q=${this._query}`;
             }
 
+            // get current feed
+            const currentFeed = outerThis.selectCurrentFeed(tab.dataset.element);
+
             // Updating History State
             window.history.pushState(
-              { tab: tab.dataset.element, content: contentContainer.innerHTML},
+              { tab: tab.dataset.element, content: currentFeed},
               tab.dataset.element, `${url}`
             );
 
@@ -220,6 +223,21 @@ export default class AppSearch extends HTMLElement {
 
   updateDefault = contentContainer => {
     contentContainer.innerHTML = this.getContainer(this._tab);
+  }
+
+  // select the content container inner element;
+  selectCurrentFeed = tab => {
+    // Select the current feed
+    switch (tab) {
+      case "stories":
+        return this.getStories();
+      case "topics":
+        return this.getTopics();
+      case "people":
+        return this.getPeople();
+      default:
+        break;
+    }
   }
 
   getTemplate = () => {
@@ -321,7 +339,6 @@ export default class AppSearch extends HTMLElement {
         return this.getStories();
     }
   }
-
 
   getStories = () => {
     return `

@@ -15,38 +15,13 @@ export default class FormContainer extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-
-    // Select the content container
-    const contentContainer = this.shadowObj.querySelector('div.container');
-
-    // Fetch the content
-    if (contentContainer) {
-      this.fetchContent(contentContainer);
-    }
-  }
-
-  fetchContent = contentContainer => {
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-    }, 1500)
   }
 
   getTemplate = () => {
     // Show HTML Here
     return `
-      ${this.getBody()}
+      ${this.getContent()}
       ${this.getStyles()}
-    `;
-  }
-
-  getBody = () => {
-    return /* html */`
-      <div class="container">
-        ${this.getLoader()}
-      </div>
     `;
   }
 
@@ -60,14 +35,6 @@ export default class FormContainer extends HTMLElement {
       </div>
     `;
   }
-
-  getLoader = () => {
-    return `
-			<post-loader speed="300"></post-loader>
-		`
-  }
-
-
 
   getStyles() {
     return /* css */`
@@ -125,17 +92,12 @@ export default class FormContainer extends HTMLElement {
           border-bottom: var(--border);
           background-color: var(--background);
           padding: 0;
-          display: block;
-          margin: 0;
-          padding: 0;
-          width: 100%;
-        }
-
-        div.container {
           display: flex;
           flex-flow: column;
+          margin: 0;
           gap: 10px;
           padding: 10px 0;
+          width: 100%;
         }
 
         p.title {
