@@ -19,7 +19,7 @@ export default class AuthorWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    outerThis.expandCollapse();
+    this.expandCollapse();
   }
 
   disableScroll() {
@@ -71,6 +71,9 @@ export default class AuthorWrapper extends HTMLElement {
               bio.style.setProperty('max-height', 'max-content');
               actions.style.setProperty('max-height', 'max-content');
 
+              actions.style.setProperty('padding', '5px 0 15px');
+              actions.style.setProperty('border-bottom', 'var(--border-mobile)');
+
               // Collapse the content container
               svg.style.transform = 'rotate(180deg)';
               contentContainer.dataset.expanded = 'true';
@@ -83,6 +86,9 @@ export default class AuthorWrapper extends HTMLElement {
               actions.style.setProperty('max-height', '0');
               bio.style.setProperty('max-height', '0');
               stats.style.setProperty('max-height', '0');
+
+              actions.style.setProperty('padding', '0');
+              actions.style.setProperty('border-bottom', 'none');
 
               // Expand the content container
               svg.style.transform = 'rotate(0deg)';
@@ -375,7 +381,6 @@ export default class AuthorWrapper extends HTMLElement {
 
         :host {
           font-size: 16px;
-          border-bottom: var(--border);
           padding: 0;
           width: 100%;
           display: flex;
@@ -395,14 +400,6 @@ export default class AuthorWrapper extends HTMLElement {
 
         .content-container > svg {
           display: none;
-        }
-
-        .spotlight > h2 {
-          font-size: 1.5rem;
-          font-weight: 500;
-          font-family: var(--font-text), sans-serif;
-          margin: 0;
-          color: var(--text-color);
         }
 
         .top {
@@ -555,13 +552,14 @@ export default class AuthorWrapper extends HTMLElement {
         }
 
         .actions {
+          border-bottom: var(--border);
           display: flex;
           font-family: var(--font-main), sans-serif;
           width: 100%;
           flex-flow: row;
           align-items: center;
           gap: 12px;
-          margin: 5px 0 15px;
+          padding: 5px 0 15px;
         }
         
         .actions > .action {
@@ -597,11 +595,15 @@ export default class AuthorWrapper extends HTMLElement {
         }
 
         @media screen and (max-width: 660px) {
+          :host {
+            font-size: 16px;
+            border-bottom: none;
+          }
+
           .content-container {
-            border-top: var(--border-mobile);
-            border-bottom: var(--border-mobile);
+            border: none;
             position: relative;
-            padding: 10px 0;
+            padding: 5px 0;
             width: 100%;
             max-height: max-content;
             display: flex;
@@ -619,10 +621,22 @@ export default class AuthorWrapper extends HTMLElement {
           .content-container > .bio,
           .content-container > .actions {
             transition: all 0.5s ease;
+            border: none;
             max-height: 0;
             margin: 0;
             padding: 0;
             overflow: hidden;
+          }
+
+          .top {
+            display: flex;
+            width: 100%;
+            flex-flow: row;
+            align-items: center;
+            padding: 12px 5px;
+            background: linear-gradient(90deg, #fcff9e 0%, #f09c4ecc 100%);
+            border-radius: 10px;
+            gap: 5px;
           }
 
           ::-webkit-scrollbar {
@@ -643,43 +657,13 @@ export default class AuthorWrapper extends HTMLElement {
           .content-container > svg {
             display: inline-block;
             position: absolute;
-            top: 18px;
+            top: 25px;
             right: 5px;
-            color: var(--gray-color);
+            color: var(--white-color);
             cursor: default !important;
             width: 22px;
             height: 22px;
             transition: all 0.5s ease;
-          }
-
-          .top > .avatar {
-            width: 40px;
-            height: 40px;
-          }
-
-          .top > .name > h4.name {
-            color: var(--text-color);
-            font-family: var(--font-read), sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-          }
-
-          .top > .name > h4.name svg {
-            color: var(--alt-color);
-            margin: 4px 0 0 0;
-            width: 15px;
-            height: 15px;
-          }
-
-          .top > .name > a.username {
-            color: var(--gray-color);
-            font-family: var(--font-mono), monospace;
-            font-size: 0.83rem;
-            font-weight: 500;
-            text-decoration: none;
-            display: flex;
-            gap: 2px;
-            align-items: center;
           }
         }
       </style>

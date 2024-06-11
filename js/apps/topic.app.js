@@ -141,6 +141,7 @@ export default class AppTopic extends HTMLElement {
       return /* html */`
         ${this.getTop()}
         ${this.getHeader()}
+        ${this.getAuthor()}
         ${this.getSection()}
       `;
     }
@@ -180,7 +181,7 @@ export default class AppTopic extends HTMLElement {
           <div class="topic-head">
             <div class="topic">
               <h2> ${str} </h2>
-              <p class="info">Discover, read, and contribute to stories about ${str}.</p>
+              <p class="info">Discover, read, and contribute to the topic.</p>
             </div>
             ${this.getStats()}
           </div>
@@ -442,7 +443,7 @@ export default class AppTopic extends HTMLElement {
           margin: 0;
           font-size: 0.9rem;
           font-style: italic;
-          font-weight: 500;
+          font-weight: 400;
           font-family: var(--font-text), sans-serif;
           margin: 0;
           color: var(--text-color);
@@ -578,6 +579,10 @@ export default class AppTopic extends HTMLElement {
             gap: 0;
 					}
 
+          .text-content > .actions {
+            border-bottom: none;
+          }
+
 					.action,
 					a {
 						cursor: default !important;
@@ -588,10 +593,6 @@ export default class AppTopic extends HTMLElement {
             flex-flow: column;
             gap: 0;
             width: 100%;
-          }
-
-          .text-content > .actions {
-            border-bottom: var(--border-mobile);
           }
 
           section.side {
