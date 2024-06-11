@@ -17,9 +17,78 @@ export default class AuthorWrapper extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // get url
+    let url = this.getAttribute('url');
+
+    url = url.trim().toLowerCase();
+
+    // Get the body
+    const body = document.querySelector('body');
 
     this.expandCollapse();
+
+    this.handleUserClick(url, body);
+    this.handleActionClick(url, body);
+  }
+
+  // Open user profile
+  handleUserClick = (url, body) => {
+    const outerThis = this;
+    // get a.meta.link
+    const content = this.shadowObj.querySelector('a#username');
+
+    // Get full post
+    const profile =  this.getProfile();
+
+    if(body && content) { 
+      content.addEventListener('click', event => {
+        event.preventDefault();
+        
+        // replace and push states
+        outerThis.replaceAndPushStates(url, body, profile);
+
+        body.innerHTML = profile;
+      })
+    }
+  }
+
+  // Open user profile
+  handleActionClick = (url, body) => {
+    const outerThis = this;
+    // get a.meta.link
+    const content = this.shadowObj.querySelector('a.action.view');
+
+    // Get full post
+    const profile =  this.getProfile();
+
+    if(body && content) { 
+      content.addEventListener('click', event => {
+        event.preventDefault();
+        
+        // replace and push states
+        outerThis.replaceAndPushStates(url, body, profile);
+
+        body.innerHTML = profile;
+      })
+    }
+  }
+
+
+  // Replace and push states
+  replaceAndPushStates = (url, body, profile) => {
+    // Replace the content with the current url and body content
+    // get window location
+    const pageUrl = window.location.href;
+    window.history.replaceState(
+      { page: 'page', content: body.innerHTML },
+      url, pageUrl
+    );
+
+    // Updating History State
+    window.history.pushState(
+      { page: 'page', content: profile},
+      url, url
+    );
   }
 
   disableScroll() {
@@ -201,7 +270,7 @@ export default class AuthorWrapper extends HTMLElement {
           <h4 class="name">
             <span class="name">${displayName}</span>
           </h4>
-          <a href="${url.toLowerCase()}" class="username">
+          <a href="${url.toLowerCase()}" class="username" id="username">
             <span class="text">${this.getAttribute('username')}</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
               <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
@@ -286,18 +355,6 @@ export default class AuthorWrapper extends HTMLElement {
 
   // check is the current user: you === true
   checkYou = you => {
-    if (you) {
-      return /*html*/`
-      <a href="/profile" class="action manage">Manage</a>
-      `
-    }
-    else {
-      return this.checkFollowing(this.getAttribute('user-follow'))
-    }
-  }
-
-  // check is the current user: you === true
-  checkYou = you => {
     // get url
     let url = this.getAttribute('url');
 
@@ -332,11 +389,22 @@ export default class AuthorWrapper extends HTMLElement {
     }
   }
 
-  getLoader = () => {
-    return `
-			<post-loader speed="300"></post-loader>
-		`
-  }
+  getProfile = () => {
+    // get url
+    let url = this.getAttribute('url');
+ 
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
+   return /* html */`
+     <app-profile you="${this.getAttribute('you')}" url="${url}" tab="stories"
+       stories-url="${url}/stories" replies-url="${url}/replies" followers-url="${url}/followers" following-url="${url}/following"
+       username="${this.getAttribute('username')}" picture="${this.getAttribute('picture')}" verified="${this.getAttribute('verified')}"
+       name="${this.getAttribute('name')}" followers="${this.getAttribute('followers')}"
+       following="${this.getAttribute('following')}" user-follow="${this.getAttribute('user-follow')}" bio="${this.getAttribute('bio')}">
+     </app-profile>
+   `
+ }
 
   getStyles() {
     return /* css */`
