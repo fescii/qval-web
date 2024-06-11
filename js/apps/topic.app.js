@@ -141,7 +141,6 @@ export default class AppTopic extends HTMLElement {
       return /* html */`
         ${this.getTop()}
         ${this.getHeader()}
-        ${this.getAuthor()}
         <div class="content-container">
           ${this.getStories()}
         </div>
@@ -252,30 +251,29 @@ export default class AppTopic extends HTMLElement {
   }
 
   getActions = () => {
+    // Get url
+    let url = this.getAttribute('url');
+
+    // trim the url and convert to lowercase
+    url = url.trim().toLowerCase();
     return /* html */`
       <div class="actions">
         ${this.checkSubscribed(this.getAttribute('subscribed'))}
+        <a href="${url}/edit" class="action edit" id="edit-action">contribute</a>
         ${this.checkFollow(this.getAttribute('user-follow'))}
-        <span class="action edit" id="edit-action">
-          <span class="text">Edit</span>
-        </span>
       </div>
     `
   }
 
-  checkFollow = subscribed => {
-    if (subscribed === 'true') {
+  checkFollow = following => {
+    if (following === 'true') {
       return /*html*/`
-			  <span class="action following" id="follow-action">
-          <span class="text">Following</span>
-        </span>
+			  <span class="action following" id="follow-action">following</span>
 			`
     }
     else {
       return /*html*/`
-			  <span class="action follow" id="follow-action">
-          <span class="text">Follow</span>
-        </span>
+			  <span class="action follow" id="follow-action">follow</span>
 			`
     }
   }
@@ -283,16 +281,12 @@ export default class AppTopic extends HTMLElement {
   checkSubscribed = subscribed => {
     if (subscribed === 'true') {
       return /*html*/`
-			  <span class="action subscribed" id="subscribe-action">
-          <span class="text">Subscribed</span>
-        </span>
+			  <span class="action subscribed" id="subscribe-action">subscribed</span>
 			`
     }
     else {
       return /*html*/`
-			  <span class="action subscribe" id="subscribe-action">
-          <span class="text">Subscribe</span>
-        </span>
+			  <span class="action subscribe" id="subscribe-action">subscribe</span>
 			`
     }
   }
@@ -377,14 +371,14 @@ export default class AppTopic extends HTMLElement {
         .text-content {
           display: flex;
           flex-flow: column;
-          gap: 10px;
+          gap: 0;
           color: var(--text-color);
         }
 
         .text-content > .topic-head {
           display: flex;
           flex-flow: column;
-          gap: 10px;
+          gap: 8px;
         }
 
         .text-content > .topic-head .topic {
@@ -445,9 +439,10 @@ export default class AppTopic extends HTMLElement {
         }
 
         .text-content > .sub-text {
+          margin: 8px 0 15px;
           font-size: 1rem;
           color: var(--text-color);
-          line-height: 1.5;
+          line-height: 1.4;
           font-family: var(--font-main);
         }
 
@@ -467,6 +462,7 @@ export default class AppTopic extends HTMLElement {
           color: var(--white-color);
           font-family: var(--font-text), sans-serif;
           cursor: pointer;
+          text-transform: lowercase;
           width: max-content;
           font-size: 0.9rem;
           display: flex;
@@ -483,18 +479,6 @@ export default class AppTopic extends HTMLElement {
           background: unset;
           border: var(--action-border);
           color: var(--gray-color);
-        }
-
-        .foot {
-          border-bottom: var(--border);
-          background-color: var(--background);
-          display: flex;
-          flex-flow: column;
-          gap: 0;
-          z-index: 3;
-          width: 100%;
-          position: sticky;
-          top: 58px;
         }
 
         div.content-container {
@@ -538,35 +522,6 @@ export default class AppTopic extends HTMLElement {
             justify-content: space-between;
             gap: 0;
 					}
-
-          .text-content > .actions {
-            margin-top: 10px;
-            padding: 0 0 15px 0;
-          }
-
-          .head {
-            padding: 0;
-          }
-
-          .text-content > .actions > .action.subscribed {
-            border-bottom: var(--border-mobile)
-          }
-
-          .foot > .author{
-            border-bottom: var(--border-mobile);
-          }
-
-          .foot > .author {
-            border: none;
-            border-top: var(--border-mobile);
-          }
-
-          .foot {
-            border: none;
-            border-bottom: none;
-            position: sticky;
-            top: 49px;
-          }
 
 					.action,
 					a {
