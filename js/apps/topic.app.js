@@ -179,8 +179,8 @@ export default class AppTopic extends HTMLElement {
         <div class="text-content">
           <div class="topic-head">
             <div class="topic">
-            <h2> ${str} </h2>
-            <p class="info">Discover, read, and contribute to stories about ${str}.</p>
+              <h2> ${str} </h2>
+              <p class="info">Discover, read, and contribute to stories about ${str}.</p>
             </div>
             ${this.getStats()}
           </div>
@@ -555,6 +555,16 @@ export default class AppTopic extends HTMLElement {
         section.side::-webkit-scrollbar {
           visibility: hidden;
           display: none;
+        }
+
+        @media screen and (max-width:900px) {
+          section.main {
+            width: 58%;
+          }
+
+          section.side {
+            width: 40%;
+          }
         }
 
 				@media screen and (max-width:660px) {

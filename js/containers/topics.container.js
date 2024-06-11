@@ -21,7 +21,7 @@ export default class TopicsContainer extends HTMLElement {
 	}
 
 	fetchTopics = (contentContainer) => {
-		const topicsLoader = this.shadowObj.querySelector('topics-loader');
+		const topicsLoader = this.shadowObj.querySelector('topic-loader');
 		const content = this.getTopics();
 		setTimeout(() => {
 			topicsLoader.remove();
@@ -39,89 +39,66 @@ export default class TopicsContainer extends HTMLElement {
 
 	getLoader = () => {
 		return `
-			<topics-loader speed="300"></topics-loader>
+			<topic-loader speed="300"></topic-loader>
 		`
 	}
 
 	getBody = () => {
 		// language=HTML
 		return /* html */`
+			<div class="title">
+				<h2>Most read topics</h2>
+				<p class="info">View, read, and contribute this topics.</p>
+			</div>
 			<div class="content">
 				${this.getLoader()}
 			</div>
     `;
 	}
 
-	getTopics = () => {
-		return /* html */`
-			<div class="title">
-				<h4 class="title">Topics</h4>
-				<span class="text">Trending topics</span>
-			</div>
-			<ul class="topics">
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">63</span>
-						<span class="text">Health Care</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">1.03k</span>
-						<span class="text">Spotify</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">3</span>
-						<span class="text">Good morning</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">117</span>
-						<span class="text">Sora</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">71</span>
-						<span class="text">Videotape</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">44</span>
-						<span class="text">Kendrick Lamar</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">9</span>
-						<span class="text">World War III</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">13</span>
-						<span class="text">Christian</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">5</span>
-						<span class="text">Nato</span>
-					</a>
-				</li>
-				<li class="topic">
-					<a href="" class="link">
-						<span class="no">73</span>
-						<span class="text">Programming</span>
-					</a>
-				</li>
-			</ul>
+  getTopics = () => {
+    return /*html*/`
+      <topic-wrapper hash="T0BC98H63AB1" name="health-care" description="Health care is the maintenance or improvement of health via the prevention, diagnosis, treatment, recovery, or cure of disease, illness, injury, and other physical and mental impairments in people."
+        user-follow="true" url="/t/T0BC98H63AB1"
+        subscribers="236" followers="9734">
+      </topic-wrapper>
+
+      <topic-wrapper hash="T0YZ92G78LM1" name="technology-is-the-key-to-many-solutions-but-not-definate" description="Technology is the application of scientific knowledge for practical purposes, especially in industry."
+        user-follow="false" url="/t/T0BC98H63AB1"
+        subscribers="987" followers="15632">
+      </topic-wrapper>
+
+      <topic-wrapper hash="T0JQ75H45FD2" name="sports" description="Sports involve physical exertion and skill in which an individual or team competes against another or others for entertainment."
+        user-follow="true" url="/t/T0BC98H63AB1"
+        subscribers="512" followers="8341">
+      </topic-wrapper>
+
+      <topic-wrapper hash="T0PL84D56GH3" name="education" description="Education is the process of facilitating learning, or the acquisition of knowledge, skills, values, beliefs, and habits."
+        user-follow="false" url="/t/T0BC98H63AB1"
+        subscribers="674" followers="12098">
+      </topic-wrapper>
+
+      <topic-wrapper hash="T0RK39J23NM4" name="science" description="Science is the pursuit and application of knowledge and understanding of the natural and social world following a systematic methodology based on evidence."
+        user-follow="true" url="/t/T0BC98H63AB1"
+        subscribers="856" followers="21045">
+      </topic-wrapper>
+
+      <topic-wrapper hash="T0XC49K76PO5" name="travel" description="Travel is the movement of people between distant geographical locations, either for leisure or business purposes."
+        user-follow="true" url="/t/T0BC98H63AB1"
+        subscribers="239" followers="4789">
+      </topic-wrapper>
+
+      <topic-wrapper hash="T0ML28P57QW6" name="music" description="Music is the art of arranging sounds in time to produce a composition through the elements of melody, harmony, rhythm, and timbre."
+        user-follow="false" url="/t/T0BC98H63AB1"
+        subscribers="319" followers="9453">
+      </topic-wrapper>
+
+      <topic-wrapper hash="T0HZ11L63VK7" name="art" description="Art is a diverse range of human activities involving the creation of visual, auditory, or performed artifacts, expressing the creator's imaginative or technical skill."
+        user-follow="true" url="/t/T0BC98H63AB1"
+        subscribers="728" followers="16349">
+      </topic-wrapper>
 		`
-	}
+  }
 
 	getStyles() {
 		return /* css */`
@@ -180,7 +157,7 @@ export default class TopicsContainer extends HTMLElement {
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
-				  gap: 10px;
+				  gap: 0px;
 				}
 
 				div.content {
@@ -191,87 +168,38 @@ export default class TopicsContainer extends HTMLElement {
 				  flex-wrap: wrap;
 				  align-items: center;
 				  justify-content: start;
-				  gap: 10px;
-				  width: 100%;
-				}
-
-				ul.topics {
-				  margin: 0;
-				  padding: 0;
-				  list-style-type: none;
-				  display: flex;
-				  flex-flow: row;
-				  flex-wrap: wrap;
-				  align-items: center;
-				  justify-content: start;
-				  gap: 10px;
+				  gap: 0;
 				  width: 100%;
 				}
 
 				.title {
-				  margin: 0 0 5px;
-				  padding: 0;
-				  width: 100%;
-				  display: flex;
-				  flex-flow: column;
-				  gap: 0;
-				}
+          display: flex;
+					width: 100%;
+          flex-flow: column;
+					padding: 5px 5px 8px;
+          gap: 0;
+					background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+					border-radius: 10px;
+        }
 
-				.title h4 {
-				  color: var(--title-color);
-				  font-size: 1.3rem;
-				  font-weight: 600;
-				  line-height: 1;
-					display: none;
-				}
+        .title > h2 {
+          font-size: 1.5rem;
+          font-weight: 500;
+          font-family: var(--font-text), sans-serif;
+          margin: 0;
+          color: var(--text-color);
+        }
 
-				.title > span {
-				  color: var(--text-color);
-					font-family: var(--font-main), sans-serif;
-				  font-size: 1rem;
-					font-weight: 500;
-				}
+        .title > p.info {
+          margin: 0;
+          font-size: 0.9rem;
+          font-style: italic;
+          font-weight: 400;
+          font-family: var(--font-text), sans-serif;
+          margin: 0;
+          color: var(--text-color);
+        }
 
-				ul.topics > li.topic {
-				  margin: 0;
-				  padding: 0;
-				  display: flex;
-				  flex-flow: row;
-				  flex-wrap: nowrap;
-				  width: max-content;
-				}
-
-				ul.topics > li.topic a.link {
-				  border: var(--topic-border);
-				  margin: 0;
-				  text-decoration: none;
-					font-family: var(--font-read), sans-serif;
-				  color: var(--gray-color);
-				  padding: 4px 10px;
-				  display: flex;
-					align-items: center;
-					justify-content: center;
-				  gap: 5px;
-				  flex-flow: row;
-				  flex-wrap: nowrap;
-				  width: max-content;
-				  border-radius: 50px;
-				  -webkit-border-radius: 50px;
-				  -moz-border-radius: 50px;
-				}
-
-				ul.topics > li.topic a.link > span.no {
-				  font-family: var(--font-mono), monospace;
-				  font-size: 0.89rem;
-				}
-
-				ul.topics > li.topic a.link:hover {
-				  color: transparent;
-				  background: var(--accent-linear);
-				  background-clip: text;
-				  -webkit-background-clip: text;
-					border: var(--topic-border-active);
-				}
 
 				@media screen and (max-width:660px) {
 					:host {

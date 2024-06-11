@@ -93,7 +93,7 @@ export default class TopicWrapper extends HTMLElement {
     let description = this.getAttribute('description');
 
     // Check if the description is greater than 100 characters: replace the rest with ...
-    let displayDescription = description.length > 112 ? `${description.substring(0, 112)}...` : description;
+    let displayDescription = description.length > 87 ? `${description.substring(0, 87)}...` : description;
 
     return /* html */ `
       <p class="description">${displayDescription}</p>
@@ -106,15 +106,15 @@ export default class TopicWrapper extends HTMLElement {
 
     if (following === 'true') {
       return /*html*/` 
+      <a href="${url.toLowerCase()}/contribute"class="action contribute">contribute</a>
         <a href="${url.toLowerCase()}" class="action view">view</a>
-        <a href="${url.toLowerCase()}/edit"class="action edit">write</a>
         <span class="action following">following</span>
 			`
     }
     else {
       return /*html*/`
+      <a href="${url.toLowerCase()}/contribute"class="action contribute">contribute</a>
         <a href="${url.toLowerCase()}" class="action view">view</a>
-        <a href="${url.toLowerCase()}/edit"class="action edit">write</a>
         <button class="action follow">follow</button>
 			`
     }
@@ -204,7 +204,7 @@ export default class TopicWrapper extends HTMLElement {
         :host {
           font-size: 16px;
           border-bottom: var(--border);
-          padding: 10px 0;
+          padding: 10px 0 15px;
           width: 100%;
           display: flex;
           align-items: center;
@@ -228,7 +228,7 @@ export default class TopicWrapper extends HTMLElement {
           align-items: center;
           color: var(--title-color);
           font-family: var(--font-main), sans-serif;
-          font-size: 1rem;
+          font-size: 1.1rem;
           line-height: 1.3;
           font-weight: 500;
           break-word: break-all;
@@ -246,9 +246,10 @@ export default class TopicWrapper extends HTMLElement {
           padding: 8px 0 0 0;
           align-items: center;
         }
+
         p.description {
           color: var(--text-color);
-          font-family: var(--font-text), sans-serif;
+          font-family: var(--font-main), sans-serif;
           font-size: 0.93rem;
           font-weight: 400;
           margin: 0;
@@ -282,14 +283,14 @@ export default class TopicWrapper extends HTMLElement {
           font-size: 0.9rem;
           line-height: 1.3;
           font-weight: 500;
-          font-family: var(--font-main), sans-serif;
+          font-family: var(--font-text), sans-serif;
           cursor: pointer;
           outline: none;
           border: none;
           text-transform: lowercase;
         }
         
-        div.actions > .action.edit,
+        div.actions > .action.contribute,
         div.actions > .action.view,
         div.actions > .action.following {
           padding: 2px 10px;
@@ -328,7 +329,7 @@ export default class TopicWrapper extends HTMLElement {
           color: var(--gray-color);
           font-family: var(--font-main), sans-serif;
           text-transform: lowercase;
-          font-size: 0.9rem;
+          font-size: 0.93rem;
           font-weight: 400;
         }
 

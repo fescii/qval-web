@@ -37,7 +37,11 @@ export default class TopicLoader extends HTMLElement {
             <span class="followers skeleton"></span>
           </span>
         </div>
-        <div class="action skeleton"></div>
+         <div class="actions">
+					<span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+				</div>
       </div>
       <div class="loader">
         <div class="head">
@@ -49,7 +53,11 @@ export default class TopicLoader extends HTMLElement {
             <span class="name skeleton"></span>
           </span>
         </div>
-        <div class="action skeleton"></div>
+         <div class="actions">
+					<span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+				</div>
       </div>
       <div class="loader">
         <div class="head">
@@ -61,7 +69,11 @@ export default class TopicLoader extends HTMLElement {
             <span class="followers skeleton"></span>
           </span>
         </div>
-        <div class="action skeleton"></div>
+         <div class="actions">
+					<span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+				</div>
       </div>
       <div class="loader">
         <div class="head">
@@ -73,7 +85,11 @@ export default class TopicLoader extends HTMLElement {
             <span class="name skeleton"></span>
           </span>
         </div>
-        <div class="action skeleton"></div>
+         <div class="actions">
+					<span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+				</div>
       </div>
       <div class="loader">
         <div class="head">
@@ -85,7 +101,11 @@ export default class TopicLoader extends HTMLElement {
             <span class="followers skeleton"></span>
           </span>
         </div>
-        <div class="action skeleton"></div>
+         <div class="actions">
+					<span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+				</div>
       </div>
       <div class="loader">
         <div class="head">
@@ -97,7 +117,11 @@ export default class TopicLoader extends HTMLElement {
             <span class="name skeleton"></span>
           </span>
         </div>
-        <div class="action skeleton"></div>
+        <div class="actions">
+					<span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+          <span class="action skeleton"></span>
+				</div>
       </div>
     `;
 	}
@@ -128,11 +152,8 @@ export default class TopicLoader extends HTMLElement {
 					display: flex;
 					width: 100%;
 					max-width: 100%;
-					flex-flow: row !important;
-					flex-wrap: nowrap;
+					flex-flow: column;
 					gap: 10px;
-					align-items: center;
-					justify-content: space-between;
 				}
 
 				.loader .skeleton {
@@ -146,7 +167,7 @@ export default class TopicLoader extends HTMLElement {
 				.loader > .head {
 					padding: 0;
 					margin: 0;
-					width: 60%;
+					width: 100%;
 					display: flex;
 					flex-flow: column;
 					align-items: start;
@@ -157,7 +178,7 @@ export default class TopicLoader extends HTMLElement {
 				.loader > .head > span.profile {
 					display: inline-block;
 					height: 8px;
-					width: 60%;
+					width: 90%;
 					border-radius: 50px;
 					-webkit-border-radius: 50px;
 					-moz-border-radius: 50px;
@@ -214,12 +235,18 @@ export default class TopicLoader extends HTMLElement {
 					-moz-border-radius: 3px;
 				}
 
-				.loader > .action {
+				.loader > .actions {
+					display: flex;
+					flex-flow: row;
+					gap: 20px;
+				}
+
+				.loader > .actions > .action {
 					display: inline-block;
 					margin: 0;
 					padding: 0;
 					width: 20%;
-					height: 15px;
+					height: 10px;
 					border-radius: 4px;
 					-webkit-border-radius: 4px;
 					-moz-border-radius: 4px;

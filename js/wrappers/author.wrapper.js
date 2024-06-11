@@ -19,9 +19,7 @@ export default class AuthorWrapper extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
-
-    this.fetchContent(contentContainer);
+    outerThis.expandCollapse();
   }
 
   disableScroll() {
@@ -39,17 +37,6 @@ export default class AuthorWrapper extends HTMLElement {
   enableScroll() {
     document.body.classList.remove("stop-scrolling");
     window.onscroll = function () { };
-  }
-
-  fetchContent = (contentContainer) => {
-    const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-      outerThis.expandCollapse();
-    }, 2000)
   }
 
   // Expand and collapse the author info
@@ -156,7 +143,7 @@ export default class AuthorWrapper extends HTMLElement {
   getBody = () => {
     return /* html */`
       <div data-expanded="false" class="content-container">
-        ${this.getLoader()}
+        ${this.getContent()}
       </div>
     `
   }
@@ -303,16 +290,39 @@ export default class AuthorWrapper extends HTMLElement {
     }
   }
 
-  checkFollowing = following => {
-    if (following === 'true') {
+  // check is the current user: you === true
+  checkYou = you => {
+    // get url
+    let url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
+    if (you) {
       return /*html*/`
-			  <a href="" class="action">Following</a>
-			`
+        <a href="/profile" class="action you">You</a>
+        <a href="${url}" class="action view">view</a>
+      `
     }
     else {
       return /*html*/`
-			  <a href="" class="action follow">Follow</a>
-			`
+        <a href="${url}" class="action view">view</a>
+        ${this.checkFollowing(this.getAttribute('user-follow'))}
+        <span class="action support">donate</span>
+      `
+    }
+  }
+
+  checkFollowing = following => {
+    if (following === 'true') {
+      return /*html*/`
+        <span class="action following">Following</span>
+      `
+    }
+    else {
+      return /*html*/`
+        <span class="action follow">Follow</span>
+      `
     }
   }
 
@@ -365,6 +375,7 @@ export default class AuthorWrapper extends HTMLElement {
 
         :host {
           font-size: 16px;
+          border-bottom: var(--border);
           padding: 0;
           width: 100%;
           display: flex;
@@ -386,11 +397,22 @@ export default class AuthorWrapper extends HTMLElement {
           display: none;
         }
 
+        .spotlight > h2 {
+          font-size: 1.5rem;
+          font-weight: 500;
+          font-family: var(--font-text), sans-serif;
+          margin: 0;
+          color: var(--text-color);
+        }
+
         .top {
           display: flex;
           width: 100%;
           flex-flow: row;
           align-items: center;
+          padding: 5px 5px 8px;
+          background: linear-gradient(90deg, #fcff9e 0%, #f09c4ecc 100%);
+          border-radius: 10px;
           gap: 5px;
         }
 
@@ -414,14 +436,15 @@ export default class AuthorWrapper extends HTMLElement {
         }
 
         .top > .avatar > .icon {
-          background: var(--background);
+          /* background: var(--background); */
+          background: #e3ffe7;
           position: absolute;
           bottom: -1px;
           right: -2px;
           width: 20px;
           height: 20px;
           z-index: 1;
-          display: flex;
+          display: none;
           align-items: center;
           justify-content: center;
           border-radius: 50%;
@@ -533,39 +556,44 @@ export default class AuthorWrapper extends HTMLElement {
 
         .actions {
           display: flex;
+          font-family: var(--font-main), sans-serif;
           width: 100%;
           flex-flow: row;
           align-items: center;
-          gap: 10px;
-          margin: 5px 0;
+          gap: 12px;
+          margin: 5px 0 15px;
         }
-
-        .actions > a.action {
+        
+        .actions > .action {
           border: var(--action-border);
-          text-decoration: none;
+          padding: 2.5px 15px;
+          background: none;
+          border: var(--border-mobile);
+          color: var(--gray-color);
+          font-weight: 500;
+          font-size: 0.9rem;
+          cursor: pointer;
           display: flex;
-          width: 100%;
+          width: max-content;
           flex-flow: row;
           align-items: center;
+          text-transform: lowercase;
           justify-content: center;
-          padding: 7px 20px;
           border-radius: 10px;
           -webkit-border-radius: 10px;
           -moz-border-radius: 10px;
-          color: var(--text-color);
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
         }
 
-        .actions > a.action.follow {
+        .actions > .action.you {
+          text-transform: capitalize;
+        }
+        
+        .actions > .action.follow {
           border: none;
+          padding: 3px 15px;
+          font-weight: 500;
           background: var(--accent-linear);
           color: var(--white-color);
-           border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -moz-border-radius: 10px;
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
         }
 
         @media screen and (max-width: 660px) {

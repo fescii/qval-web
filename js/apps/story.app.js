@@ -434,6 +434,16 @@ export default class AppStory extends HTMLElement {
           display: none;
         }
 
+        @media screen and (max-width:900px) {
+          article.content {
+            width: 58%;
+          }
+
+          section.side {
+            width: 40%;
+          }
+        }
+
 				@media screen and (max-width:660px) {
 					:host {
             font-size: 16px;
