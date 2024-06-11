@@ -58,13 +58,13 @@ export default class TopicWrapper extends HTMLElement {
   getTemplate() {
     // Show HTML Here
     return `
-      ${this.getUser()}
+      ${this.getInfo()}
       ${this.getStyles()}
     `;
   }
 
 
-  getUser = () => {
+  getInfo = () => {
     // Get name and check if it's greater than 20 characters
     let name = this.getAttribute('name');
 
@@ -74,32 +74,17 @@ export default class TopicWrapper extends HTMLElement {
     // Capitalize the first letter of the first word
     const formattedName = name.replace(/^\w/, c => c.toUpperCase());
 
-
-    // GET url
-    const url = this.getAttribute('url');
-
-    // Check if the name is greater than 20 characters: replace the rest with ...
-    let displayName = name.length > 20 ? `${name.substring(0, 20)}..` : name;
-
     return /* html */ `
       <div class="topic">
-        <div class="info">
-          <h4 class="name">
-            <span class="name">${formattedName}</span>
-          </h4>
-          <div class="hori">
-            <a href="${url.toLowerCase()}" class="hash">
-              <span class="text">${this.getAttribute('hash')}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
-              </svg>
-            </a>
-            ${this.checkFollowing(this.getAttribute('user-follow'))}
-          </div>
+        <h4 class="name">
+          <span class="name">${formattedName}</span>
+        </h4>
+        ${this.getDescription()}
+        ${this.getStats()}
+        <div class="actions">
+          ${this.checkFollowing(this.getAttribute('user-follow'))}
         </div>
       </div>
-      ${this.getDescription()}
-      ${this.getStats()}
     `
   }
 
@@ -116,13 +101,20 @@ export default class TopicWrapper extends HTMLElement {
   }
 
   checkFollowing = following => {
+    // GET url
+    const url = this.getAttribute('url');
+
     if (following === 'true') {
-      return /*html*/`
-        <button class="action following">following</button>
+      return /*html*/` 
+        <a href="${url.toLowerCase()}" class="action view">view</a>
+        <a href="${url.toLowerCase()}/edit"class="action edit">write</a>
+        <span class="action following">following</span>
 			`
     }
     else {
       return /*html*/`
+        <a href="${url.toLowerCase()}" class="action view">view</a>
+        <a href="${url.toLowerCase()}/edit"class="action edit">write</a>
         <button class="action follow">follow</button>
 			`
     }
@@ -223,37 +215,18 @@ export default class TopicWrapper extends HTMLElement {
         .topic {
           display: flex;
           width: 100%;
-          flex-flow: row;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0;
-          background-color: var(--que-background);
-          padding: 10px 8px;
-          border-radius: 12px;
-          -webkit-border-radius: 12px;
-          -moz-border-radius: 12px;
-        }
-        
-        .info {
+          padding: 0;
           display: flex;
           width: 100%;
           flex-flow: column;
           gap: 0;
         }
-
-        .info > .hori {
-          display: flex;
-          align-items: start;
-          justify-content: space-between;
-          flex-flow: row;
-          gap: 0;
-        }
         
-        .info > h4.name {
+        .topic > h4.name {
           margin: 0;
           display: flex;
           align-items: center;
-          color: var(--text-color);
+          color: var(--title-color);
           font-family: var(--font-main), sans-serif;
           font-size: 1rem;
           line-height: 1.3;
@@ -262,56 +235,47 @@ export default class TopicWrapper extends HTMLElement {
           word-wrap: break-word;
         }
         
-        .info > .hori > a.hash {
+        .topic > .hori > a.hash {
           color: var(--gray-color);
           font-family: var(--font-mono), monospace;
-          font-size: 0.8rem;
+          font-size: 0.9rem;
           font-weight: 500;
           text-decoration: none;
           display: flex;
           gap: 2px;
-          padding: 3px 0;
+          padding: 8px 0 0 0;
           align-items: center;
         }
-        
-        .info > .hori > a.hash svg {
-          color: var(--gray-color);
-          width: 15px;
-          height: 15px;
-          margin: 2px 0 0 0;
-        }
-        
-        .info > .hori > a.hash:hover {
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-        }
-        
-        .info > .hori > a.hash:hover svg {
-          color: var(--accent-color);
-        }
-
         p.description {
           color: var(--text-color);
-          font-family: var(--font-main), sans-serif;
-          font-size: 1rem;
+          font-family: var(--font-text), sans-serif;
+          font-size: 0.93rem;
           font-weight: 400;
           margin: 0;
           line-height: 1.3;
-          padding: 0 3px;
+          padding: 0;
+          margin: 5px 0;
+        }
+
+        div.actions {
+          display: flex;
+          flex-flow: row;
+          width: 100%;
+          gap: 10px;
+          margin: 10px 0 0 0;
+          padding: 0;
         }
         
-        button.action {
+        div.actions > .action {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 3px 5px;
+          padding: 2.5px 10px;
           height: max-content;
-          width: 100px;
-          border-radius: 12px;
-          -webkit-border-radius: 12px;
-          -moz-border-radius: 12px;
+          width: max-content;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
           background: var(--accent-linear);
           color: var(--white-color);
           font-weight: 500;
@@ -322,14 +286,17 @@ export default class TopicWrapper extends HTMLElement {
           cursor: pointer;
           outline: none;
           border: none;
-          text-transform: capitalize;
+          text-transform: lowercase;
         }
         
-        button.action.following {
+        div.actions > .action.edit,
+        div.actions > .action.view,
+        div.actions > .action.following {
+          padding: 2px 10px;
           background: none;
           border: var(--border-mobile);
-          color: var(--text-color);
-          font-weight: 400;
+          color: var(--gray-color);
+          font-weight: 500;
           font-size: 0.9rem;
         }
 
@@ -339,12 +306,14 @@ export default class TopicWrapper extends HTMLElement {
           width: 100%;
           flex-flow: row;
           align-items: center;
-          gap: 10px;
-          padding: 0 3px;
+          gap: 5px;
+          padding: 0;
+          margin: 5px 0;
         }
 
         .stats > span.sp {
           margin: 0 0 2px 0;
+          font-size: 0.8rem;
         }
 
         .stats > .stat {
@@ -359,14 +328,14 @@ export default class TopicWrapper extends HTMLElement {
           color: var(--gray-color);
           font-family: var(--font-main), sans-serif;
           text-transform: lowercase;
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           font-weight: 400;
         }
 
         .stats > .stat > .number {
           color: var(--text-color);
           font-family: var(--font-main), sans-serif;
-          font-size: 0.8rem;
+          font-size: 0.9rem;
           font-weight: 500;
         }     
 

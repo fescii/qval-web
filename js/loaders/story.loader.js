@@ -61,15 +61,6 @@ export default class StoryLoader extends HTMLElement {
 				</span>
 			  <div class="body skeleton"></div>
 		  </div>
-		  <div class="loader">
-		    <span class="head">
-					<span class="start skeleton"></span>
-					<span class="dot skeleton"></span>
-					<span class="end skeleton"></span>
-				</span>
-		    <span class="full skeleton"></span>
-		    <span class="full skeleton"></span>
-      </div>
     `;
 	}
 

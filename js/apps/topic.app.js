@@ -213,7 +213,6 @@ export default class AppTopic extends HTMLElement {
     return /* html */`
       <article class="article">
         <div class="section" id="section1">
-          <h4 class="section-title">Introduction</h4>
           <p>Health is a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.</p>
            <p> The enjoyment of the highest attainable standard of health is one of the fundamental rights of every human being without distinction</p>
             <blockquote>

@@ -44,7 +44,7 @@ export default class TopicSection extends HTMLElement {
 
   fetchContent = (contentContainer, tabContainer) => {
     const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
+    const storyLoader = this.shadowObj.querySelector('story-loader');
     const content = this.getContent(this._active);
     setTimeout(() => {
       storyLoader.remove();
@@ -283,7 +283,7 @@ export default class TopicSection extends HTMLElement {
 
   getLoader = () => {
     return /* html */`
-			<post-loader speed="300"></post-loader>
+			<story-loader speed="300"></story-loader>
 		`
   }
 
