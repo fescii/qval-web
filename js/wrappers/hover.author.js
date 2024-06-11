@@ -420,30 +420,33 @@ export default class HoverAuthor extends HTMLElement {
   }
 
   getActions = () => {
-    // get url
-    let url = this.getAttribute('url');
-
-    // trim white spaces and convert to lowercase
-    url = url.trim().toLowerCase();
-
     return /*html*/`
       <div class="actions">
         ${this.checkYou(this._you)}
-        <a href="${url}" class="action view">view</a>
-        <span class="action support">donate</span>
       </div>
     `;
   }
 
   // check is the current user: you === true
   checkYou = you => {
+    // get url
+    let url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
     if (you) {
       return /*html*/`
         <a href="/profile" class="action you">You</a>
+        <a href="${url}" class="action view">view</a>
       `
     }
     else {
-      return this.checkFollowing(this.getAttribute('user-follow'))
+      return /*html*/`
+        <a href="${url}" class="action view">view</a>
+        ${this.checkFollowing(this.getAttribute('user-follow'))}
+        <span class="action support">donate</span>
+      `
     }
   }
 
@@ -823,6 +826,7 @@ export default class HoverAuthor extends HTMLElement {
           }
 
           .content-container {
+            border: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -853,6 +857,7 @@ export default class HoverAuthor extends HTMLElement {
           }
         
           .content-container  span.pointer {
+            border: none;
             position: absolute;
             top: 0;
             left: 0;
