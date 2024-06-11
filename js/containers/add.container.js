@@ -31,7 +31,7 @@ export default class FormContainer extends HTMLElement {
       <div class="options">
         <a href="/create/article" class="option article">Article</a>
         <a href="/create/post" class="option post">Post</a>
-        <a href="/create/poll" class="option poll">Poll</a>
+        <a href="/create/topic" class="option topic">Topic</a>
       </div>
     `;
   }
