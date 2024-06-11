@@ -141,9 +141,7 @@ export default class AppTopic extends HTMLElement {
       return /* html */`
         ${this.getTop()}
         ${this.getHeader()}
-        <div class="content-container">
-          ${this.getStories()}
-        </div>
+        ${this.getSection()}
       `;
     }
     else {
@@ -151,9 +149,7 @@ export default class AppTopic extends HTMLElement {
         <section class="main">
           ${this.getTop()}
           ${this.getHeader()}
-          <div class="content-container">
-            ${this.getStories()}
-          </div>
+          ${this.getSection()}
         </section>
 
         <section class="side">
@@ -211,6 +207,54 @@ export default class AppTopic extends HTMLElement {
        feedback="/about/feedback" request="/about/request" code="/about/code" donate="/about/donate" contact="/about/contact" company="https://github.com/aduki-hub">
       </info-container>
     `
+  }
+
+  getArticle = () => {
+    return /* html */`
+      <article class="article">
+        <div class="section" id="section1">
+          <h4 class="section-title">Introduction</h4>
+          <p>Health is a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.</p>
+           <p> The enjoyment of the highest attainable standard of health is one of the fundamental rights of every human being without distinction</p>
+            <blockquote>
+              Health is a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.
+            </blockquote>
+           <p> It covers the following</p>
+           <ul>
+              <li>Health</li>
+              <li>Mental Health</li>
+              <li>Physical Health</li>
+            </ul>
+        </div>
+        <div class="section" id="section2">
+          <h4 class="section-title">Health</h4>
+          <p>Health is a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity.</p>
+           <p> The enjoyment of the highest attainable standard of health is one of the fundamental rights of every human being without distinction</p>
+           <p> It covers all aspects of health, including physical, mental, and social well-being.</p>
+        </div>
+        <div class="section" id="section3">
+          <h4 class="section-title">Mental Health</h4>
+          <p>Mental health is a state of well-being in which an individual realizes his or her own abilities, can cope with the normal stresses of life, can work productively and is able to make a contribution to his or her community.</p>
+          <p> Mental health is fundamental to our collective and individual ability as humans to think, emote, interact with each other, earn a living and enjoy life.</p>
+        </div>
+        <div class="section" id="section4">
+          <h4 class="section-title">Physical Health</h4>
+          <p>Physical health is critical for overall well-being and is the most visible of the various dimensions of health, which also include social, intellectual, emotional, spiritual and environmental health.</p>
+          <p> Physical health is a necessary component for mental health and vice versa.</p>
+        </div>
+      </article>
+    `
+  }
+
+  getSection = () => {
+    return /* html */`
+      <topic-section url="${this.getAttribute('url')}" active="${this.getAttribute('tab')}" section-title="Profile" username="${this.getAttribute('username')}"
+        stories-url="${this.getAttribute('stories-url')}" contributers-url="${this.getAttribute('contributers-url')}"
+        followers-url="${this.getAttribute('followers-url')}">
+        ${this.getArticle()}
+      </topic-section>
+    `
+
   }
 
   getStats = () => {
@@ -372,7 +416,7 @@ export default class AppTopic extends HTMLElement {
           display: flex;
           flex-flow: column;
           gap: 0;
-          color: var(--text-color);
+          color: var(--title-color);
         }
 
         .text-content > .topic-head {
@@ -392,14 +436,15 @@ export default class AppTopic extends HTMLElement {
           font-weight: 500;
           font-family: var(--font-main), sans-serif;
           margin: 0;
-          color: var(--text-color);
+          color: var(--title-color);
         }
 
         .text-content > .topic-head .topic > p.info {
           margin: 0;
           font-size: 0.9rem;
-          font-weight: 400;
-          font-family: var(--font-main), sans-serif;
+          font-style: italic;
+          font-weight: 500;
+          font-family: var(--font-text), sans-serif;
           margin: 0;
           color: var(--text-color);
         }
@@ -447,10 +492,12 @@ export default class AppTopic extends HTMLElement {
         }
 
         .text-content > .actions {
+          border-bottom: var(--border);
           width: 100%;
           display: flex;
           flex-flow: row;
           gap: 20px;
+          padding: 3px 0 15px 0;
           margin: 0;
         }
 
@@ -482,7 +529,6 @@ export default class AppTopic extends HTMLElement {
         }
 
         div.content-container {
-          /* border: 1px solid #6b7280; */
           margin: 0;
           padding: 0;
           display: flex;
@@ -533,6 +579,10 @@ export default class AppTopic extends HTMLElement {
             flex-flow: column;
             gap: 0;
             width: 100%;
+          }
+
+          .text-content > .actions {
+            border-bottom: var(--border-mobile);
           }
 
           section.side {

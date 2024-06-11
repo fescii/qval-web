@@ -1,4 +1,4 @@
-export default class ProfileSection extends HTMLElement {
+export default class TopicSection extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -19,9 +19,10 @@ export default class ProfileSection extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
+    const contentContainer = this.shadowObj.querySelector('div.feeds');
+    const tabContainer = this.shadowObj.querySelector('ul#tab');
 
-    this.fetchContent(contentContainer);
+    this.fetchContent(contentContainer, tabContainer);
   }
 
   disableScroll() {
@@ -41,43 +42,38 @@ export default class ProfileSection extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  fetchContent = contentContainer => {
+  fetchContent = (contentContainer, tabContainer) => {
     const outerThis = this;
     const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent();
+    const content = this.getContent(this._active);
     setTimeout(() => {
       storyLoader.remove();
       contentContainer.insertAdjacentHTML('beforeend', content);
-      outerThis.updateActiveTab(outerThis.getAttribute('active'));
-      outerThis.activateTab(contentContainer);
+      outerThis.updateActiveTab(tabContainer);
+      outerThis.activateTab(contentContainer, tabContainer);
     }, 2000)
   }
 
-  updateActiveTab = active => {
+  updateActiveTab = tabContainer => {
     // Select tab with active class
-    const tab = this.shadowObj.querySelector(`ul#tab > li.${active}`);
+    const tab = tabContainer.querySelector(`ul#tab > li.${this._active}`);
 
     if (tab) {
       tab.classList.add('active');
     }
     else {
       // Select the stories tab
-      const storiesTab = this.shadowObj.querySelector("ul#tab > li.stories");
+      const storiesTab = tabContainer.querySelector("ul#tab > li.article");
       storiesTab.classList.add('active');
     }
   }
 
-  activateTab = contentContainer => {
+  activateTab = (contentContainer, tabContainer) => {
     const outerThis = this;
-    const tab = this.shadowObj.querySelector('ul#tab');
-
-    if (tab && contentContainer) {
-      const line = tab.querySelector('span.line');
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
-
-      // Get feeds container
-      const feeds = contentContainer.querySelector('.feeds');
+    if (tabContainer && contentContainer) {
+      const line = tabContainer.querySelector('span.line');
+      const tabItems = tabContainer.querySelectorAll('li.tab-item');
+      let activeTab = tabContainer.querySelector('li.tab-item.active');
 
       tabItems.forEach(tab => {
         tab.addEventListener('click', e => {
@@ -110,14 +106,15 @@ export default class ProfileSection extends HTMLElement {
             outerThis.setAttribute('active', tab.dataset.element);
 
             switch (tab.dataset.element) {
+              case "article":
+                contentContainer.innerHTML = outerThis.getArticle();
+                break;
               case "stories":
-                feeds.innerHTML = outerThis.getStories();
+                contentContainer.innerHTML = outerThis.getStories();
                 break;
-              case "replies":
-                feeds.innerHTML = outerThis.getReplies();
+              case "contributors":
+                contentContainer.innerHTML = outerThis.getPeople();
                 break;
-              case "followers":
-                feeds.innerHTML = outerThis.getPeople();
               default:
                 break;
             }
@@ -152,7 +149,7 @@ export default class ProfileSection extends HTMLElement {
               // update line 
               line.style.left = `${tab.offsetLeft + tabWidth}px`;
 
-              outerThis.updateState(event.state, feeds);
+              outerThis.updateState(event.state, contentContainer);
 
               //Update active attribute
               outerThis.setAttribute('active', event.state.tab);
@@ -173,7 +170,7 @@ export default class ProfileSection extends HTMLElement {
             // Update line
             line.style.left = `${currentTab.offsetLeft + tabWidth}px`;
 
-            outerThis.updateDefault(feeds);
+            outerThis.updateDefault(contentContainer);
 
             // Update active attribute
             outerThis.setAttribute('active', this._active);
@@ -197,20 +194,20 @@ export default class ProfileSection extends HTMLElement {
   }
 
   updateDefault = contentContainer => {
-    contentContainer.innerHTML = this.getContainer(this._active);
+    contentContainer.innerHTML = this.getContent(this._active);
   }
 
   // get current feed
   getCurrentFeed = tab => {
     switch (tab) {
+      case "article":
+        return this.getArticle();
       case "stories":
         return this.getStories();
-      case "replies":
-        return this.getReplies();
-      case "followers":
+      case "contributors":
         return this.getPeople();
       default:
-        return this.getStories();
+        return this.getArticle();
     }
   }
 
@@ -224,19 +221,11 @@ export default class ProfileSection extends HTMLElement {
 
   getBody = () => {
     return /* html */`
-      <div class="content-container">
+      ${this.getTab()}
+      <div class="feeds">
         ${this.getLoader()}
       </div>
     `
-  }
-
-  getContent = () => {
-    return /* html */`
-      ${this.getTab()}
-      <div class="feeds">
-        ${this.getContainer()}
-      </div>
-		`
   }
 
   getTab = () => {
@@ -248,14 +237,14 @@ export default class ProfileSection extends HTMLElement {
     return /* html */`
       <div class="tab-control">
         <ul id="tab" class="tab">
+          <li url="${url}/article" data-element="article" class="tab-item article">
+            <span class="text">Article</span>
+          </li>
           <li url="${url}/stories" data-element="stories" class="tab-item stories">
             <span class="text">Stories</span>
           </li>
-          <li url="${url}/replies" data-element="replies" class="tab-item replies">
-            <span class="text">Replies</span>
-          </li>
-          <li url="${url}/followers" data-element="followers" class="tab-item followers">
-            <span class="text">Followers</span>
+          <li url="${url}/contributors" data-element="contributors" class="tab-item contributors">
+            <span class="text">Contributors</span>
           </li>
           <span class="line"></span>
         </ul>
@@ -263,29 +252,26 @@ export default class ProfileSection extends HTMLElement {
     `
   }
 
-  getContainer = active => {
-    // Switch active tab
+  getContent = active => {
     switch (active) {
+      case "article":
+        return this.getArticle();
       case "stories":
         return this.getStories();
-      case "replies":
-        return this.getReplies();
-      case "followers":
+      case "contributors":
         return this.getPeople();
       default:
-        return this.getStories();
+        return this.getArticle();
     }
+  }
+
+  getArticle = () => {
+    return this.innerHTML;
   }
 
   getStories = () => {
     return /* html */`
       <stories-feed stories="all" url="/U0A89BA6/stories"></stories-feed>
-    `
-  }
-
-  getReplies = () => {
-    return /* html */`
-      <replies-feed replies="all" url="/U0A89BA6/replies"></replies-feed>
     `
   }
 
@@ -349,18 +335,10 @@ export default class ProfileSection extends HTMLElement {
           min-width: 100%;
           display: flex;
           flex-flow: column;
-          gap: 0px;
-        }
-
-        div.content-container {
-          position: relative;
-          width: 100%;
-          display: flex;
-          flex-flow: column;
           gap: 0;
         }
 
-        div.content-container > .feeds {
+        .feeds {
           width: 100%;
           display: flex;
           flex-flow: column;
@@ -382,7 +360,6 @@ export default class ProfileSection extends HTMLElement {
         }
 
         .tab-control > .author {
-          /* border-top: var(--border); */
           border-bottom: var(--border);
           padding: 10px 0;
           display: flex;
@@ -443,7 +420,6 @@ export default class ProfileSection extends HTMLElement {
 
         .tab-control > ul.tab > li.active {
           font-size: 0.95rem;
-          /*padding: 6px 10px 10px 10px;*/
         }
 
         .tab-control > ul.tab > li.active > .text {
@@ -468,6 +444,113 @@ export default class ProfileSection extends HTMLElement {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           transition: all 300ms ease-in-out;
+        }
+
+        article.article {
+          margin: 15px 0;
+          display: flex;
+          flex-flow: column;
+          color: var(--read-color);
+          font-family: var(--font-read), sans-serif;
+          gap: 10px;
+          font-size: 1rem;
+          font-weight: 400;
+        }
+
+        article.article * {
+          font-size: 1.05rem;
+          line-height: 1.4;
+          color: inherit;
+          font-family: inherit;
+        }
+
+        article.article .section {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-flow: column;
+        }
+
+        article.article > .section h4.section-title {
+          padding: 0 !important;
+          font-size: 1.3rem !important;
+          font-weight: 500;
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        article.article h6,
+        article.article h5,
+        article.article h4,
+        article.article h3,
+        article.article h1 {
+          padding: 0 !important;
+          font-size: 1.25rem !important;
+          color: var(--title-color);
+          font-weight: 500;
+          line-height: 1.5;
+          margin: 5px 0;
+        }
+
+        article.article p {
+          margin: 5px 0;
+          line-height: 1.5;
+        }
+
+        article.article a {
+          text-decoration: none;
+          cursor: pointer;
+          color: var(--anchor-color) !important;
+        }
+
+        article.article a:hover {
+          text-decoration: underline;
+        }
+
+        article.article blockquote {
+          margin: 10px 0;
+          padding: 5px 15px;
+          font-style: italic;
+          border-left: 2px solid var(--gray-color);
+          background: var(--background);
+          color: var(--text-color);
+          font-weight: 400;
+        }
+
+        article.article blockquote:before {
+          content: open-quote;
+          color: var(--gray-color);
+          font-size: 1.5rem;
+          line-height: 1;
+          margin: 0 0 0 -5px;
+        }
+
+        article.article blockquote:after {
+          content: close-quote;
+          color: var(--gray-color);
+          font-size: 1.5rem;
+          line-height: 1;
+          margin: 0 0 0 -5px;
+        }
+
+        article.article hr {
+          border: none;
+          background-color: var(--gray-color);
+          height: 1px;
+          margin: 10px 0;
+        }
+
+        article.article b,
+        article.article strong {
+          font-weight: 500;
+
+        }
+
+        article.article ul,
+        article.article ol {
+          margin: 5px 0 15px 20px;
+          padding: 0 0 0 15px;
+          color: inherit;
         }
 
         @media screen and (max-width: 660px) {

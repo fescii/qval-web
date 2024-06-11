@@ -64,6 +64,7 @@ import HoverLoader from "./loaders/hover.loader.js";
 // Import Sections
 import PostSection from "./sections/post.section.js";
 import ProfileSection from "./sections/profile.section.js";
+import TopicSection from "./sections/topic.section.js";
 
 // Import stats
 import ActivityItem from "./stats/activity.item.js";
@@ -154,6 +155,7 @@ const initApp = () => {
   // Register sections
   customElements.define("post-section", PostSection);
   customElements.define("profile-section", ProfileSection);
+  customElements.define("topic-section", TopicSection);
 
   // Register stats
   customElements.define("activity-item", ActivityItem);
