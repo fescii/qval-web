@@ -26,7 +26,7 @@ export default class TopicLoader extends HTMLElement {
 	}
 
 	getBody() {
-		return `
+		return /*html*/`
       <div class="loader">
         <div class="head">
           <span class="profile skeleton"></span>

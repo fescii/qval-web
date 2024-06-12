@@ -3,6 +3,10 @@ export default class UserWrapper extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // get you
+    this._you = this.getAttribute('you') === 'true';
+
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -63,7 +67,6 @@ export default class UserWrapper extends HTMLElement {
     `;
   }
 
-
   getUser = () => {
     // Get name and check if it's greater than 20 characters
     const name = this.getAttribute('name');
@@ -93,10 +96,35 @@ export default class UserWrapper extends HTMLElement {
             </a>
           </div>
         </div>
-        ${this.checkFollowing(this.getAttribute('user-follow'))}
       </div>
+      ${this.getBio()}
       ${this.getStats()}
+      <div class="actions">
+        ${this.checkYou(this._you)}
+      </div>
     `
+  }
+
+  getBio = () => {
+    // get bio
+    let bio = this.getAttribute('bio');
+
+    console.log(bio);
+
+    bio = bio.trim();
+
+    // check if bio is empty
+    if (bio === '') {
+      return '';
+    }
+    else {
+      // check if bio is greater than 70 characters
+      let displayBio = bio.length > 70 ? `${bio.substring(0, 70)}..` : bio;
+
+      return /*html*/`
+        <p class="bio">${displayBio}</p>
+      `
+    }
   }
 
   checkVerified = verified => {
@@ -114,16 +142,40 @@ export default class UserWrapper extends HTMLElement {
     }
   }
 
-  checkFollowing = following => {
-    if (following === 'true') {
+  // check is the current user: you === true
+  checkYou = you => {
+    // get url
+    let url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
+    if (you) {
       return /*html*/`
-        <button class="action following">following</button>
-			`
+        <span  class="action you">You</span>
+        <a href="${url}" class="action view">view</a>
+        <a href="/profile" class="action view">manage</a>
+      `
     }
     else {
       return /*html*/`
-        <button class="action follow">follow</button>
-			`
+        <a href="${url}" class="action view">view</a>
+        ${this.checkFollowing(this.getAttribute('user-follow'))}
+        <span class="action support">donate</span>
+      `
+    }
+  }
+
+  checkFollowing = following => {
+    if (following === 'true') {
+      return /*html*/`
+        <span class="action following">Following</span>
+      `
+    }
+    else {
+      return /*html*/`
+        <span class="action follow">Follow</span>
+      `
     }
   }
 
@@ -222,9 +274,8 @@ export default class UserWrapper extends HTMLElement {
         .author {
           display: flex;
           width: 100%;
-          flex-flow: row;
-          align-items: center;
-          justify-content: space-between;
+          flex-flow: column;
+          align-items: start;
         }
         
         .author-info {
@@ -320,37 +371,6 @@ export default class UserWrapper extends HTMLElement {
         .author-info > .name > a.username:hover svg {
           color: var(--accent-color);
         }
-        
-        button.action {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 4px 10px;
-          height: max-content;
-          width: 120px;
-          border-radius: 12px;
-          -webkit-border-radius: 12px;
-          -moz-border-radius: 12px;
-          background: var(--action-linear);
-          color: var(--white-color);
-          font-weight: 500;
-          font-size: 0.9rem;
-          line-height: 1.3;
-          font-weight: 500;
-          font-family: var(--font-main), sans-serif;
-          cursor: pointer;
-          outline: none;
-          border: none;
-          text-transform: capitalize;
-        }
-        
-        button.action.following {
-          background: none;
-          border: var(--border-mobile);
-          color: var(--text-color);
-          font-weight: 400;
-          font-size: 0.9rem;
-        }
 
         .stats {
           color: var(--gray-color);
@@ -381,7 +401,50 @@ export default class UserWrapper extends HTMLElement {
           font-family: var(--font-main), sans-serif;
           font-size: 0.8rem;
           font-weight: 500;
-        }     
+        }
+        
+        .actions {
+          display: flex;
+          font-family: var(--font-main), sans-serif;
+          width: 100%;
+          flex-flow: row;
+          align-items: center;
+          gap: 12px;
+          padding: 0;
+        }
+        
+        .actions > .action {
+          border: var(--action-border);
+          padding: 2.5px 15px;
+          background: none;
+          border: var(--border-mobile);
+          color: var(--gray-color);
+          font-weight: 500;
+          font-size: 0.9rem;
+          cursor: pointer;
+          display: flex;
+          width: max-content;
+          flex-flow: row;
+          align-items: center;
+          text-transform: lowercase;
+          text-align: center;
+          justify-content: center;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+        }
+
+        .actions > .action.you {
+          text-transform: capitalize;
+        }
+        
+        .actions > .action.follow {
+          border: none;
+          padding: 3px 15px;
+          font-weight: 500;
+          background: var(--accent-linear);
+          color: var(--white-color);
+        }
 
         @media screen and (max-width:660px) {
           :host {
@@ -389,7 +452,7 @@ export default class UserWrapper extends HTMLElement {
             border-bottom: var(--border-mobile);
           }
 
-          button.action,
+          .actions > .action,
           a {
             cursor: default !important;
           }
