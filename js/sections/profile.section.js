@@ -17,11 +17,17 @@ export default class ProfileSection extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // Get the content container
+    const contentContainer = this.shadowObj.querySelector('div.feeds');
+    
+    // Get the tabContainer
+    const tabContainer = this.shadowObj.querySelector('ul#tab');
 
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
-
-    this.fetchContent(contentContainer);
+    // if content container and tab container exists
+    if (contentContainer && tabContainer) {
+      this.updateActiveTab(this._active);
+      this.activateTab(contentContainer, tabContainer);
+    }
   }
 
   disableScroll() {
@@ -41,18 +47,6 @@ export default class ProfileSection extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  fetchContent = contentContainer => {
-    const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-      outerThis.updateActiveTab(outerThis.getAttribute('active'));
-      outerThis.activateTab(contentContainer);
-    }, 2000)
-  }
-
   updateActiveTab = active => {
     // Select tab with active class
     const tab = this.shadowObj.querySelector(`ul#tab > li.${active}`);
@@ -67,17 +61,13 @@ export default class ProfileSection extends HTMLElement {
     }
   }
 
-  activateTab = contentContainer => {
+  activateTab = (contentContainer, tabContainer) => {
     const outerThis = this;
-    const tab = this.shadowObj.querySelector('ul#tab');
 
-    if (tab && contentContainer) {
-      const line = tab.querySelector('span.line');
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
-
-      // Get feeds container
-      const feeds = contentContainer.querySelector('.feeds');
+    if (tabContainer && contentContainer) {
+      const line = tabContainer.querySelector('span.line');
+      const tabItems = tabContainer.querySelectorAll('li.tab-item');
+      let activeTab = tabContainer.querySelector('li.tab-item.active');
 
       tabItems.forEach(tab => {
         tab.addEventListener('click', e => {
@@ -111,13 +101,13 @@ export default class ProfileSection extends HTMLElement {
 
             switch (tab.dataset.element) {
               case "stories":
-                feeds.innerHTML = outerThis.getStories();
+                contentContainer.innerHTML = outerThis.getStories();
                 break;
               case "replies":
-                feeds.innerHTML = outerThis.getReplies();
+                contentContainer.innerHTML = outerThis.getReplies();
                 break;
               case "followers":
-                feeds.innerHTML = outerThis.getPeople();
+                contentContainer.innerHTML = outerThis.getPeople();
               default:
                 break;
             }
@@ -152,7 +142,7 @@ export default class ProfileSection extends HTMLElement {
               // update line 
               line.style.left = `${tab.offsetLeft + tabWidth}px`;
 
-              outerThis.updateState(event.state, feeds);
+              outerThis.updateState(event.state, contentContainer);
 
               //Update active attribute
               outerThis.setAttribute('active', event.state.tab);
@@ -160,8 +150,8 @@ export default class ProfileSection extends HTMLElement {
           }
         }
         else {
-           // Select li with class name as current and content Container
-           const currentTab = outerThis.shadowObj.querySelector(`ul#tab > li.tab-item.${this._active}`);
+          // Select li with class name as current and content Container
+          const currentTab = tabContainer.querySelector(`li.tab-item.${this._active}`);
           if (currentTab) {
             activeTab.classList.remove('active');
             activeTab = currentTab;
@@ -173,7 +163,7 @@ export default class ProfileSection extends HTMLElement {
             // Update line
             line.style.left = `${currentTab.offsetLeft + tabWidth}px`;
 
-            outerThis.updateDefault(feeds);
+            outerThis.updateDefault(contentContainer);
 
             // Update active attribute
             outerThis.setAttribute('active', this._active);
@@ -225,16 +215,16 @@ export default class ProfileSection extends HTMLElement {
   getBody = () => {
     return /* html */`
       <div class="content-container">
-        ${this.getLoader()}
+        ${this.getTab()}
+        ${this.getContent()}
       </div>
     `
   }
 
   getContent = () => {
     return /* html */`
-      ${this.getTab()}
       <div class="feeds">
-        ${this.getContainer()}
+        ${this.getContainer(this._active)}
       </div>
 		`
   }
@@ -293,12 +283,6 @@ export default class ProfileSection extends HTMLElement {
     return /* html */`
       <people-feed replies="all" url="/U0A89BA6/followers"></people-feed>
     `
-  }
-
-  getLoader = () => {
-    return /* html */`
-			<post-loader speed="300"></post-loader>
-		`
   }
 
   getStyles() {

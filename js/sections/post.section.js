@@ -17,11 +17,16 @@ export default class PostSection extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    // Select content container
+    const contentContainer = this.shadowObj.querySelector('div.feeds');
+    // Select the tabContainer
+    const tabContainer = this.shadowObj.querySelector('ul#tab');
 
-    const contentContainer = this.shadowObj.querySelector('div.content-container');
-
-    this.fetchContent(contentContainer);
+    // If contentContainer and tabContainer exists
+    if (contentContainer && tabContainer) {
+      this.updateActiveTab(this._active);
+      this.activateTab(contentContainer, tabContainer);
+    }
   }
 
   disableScroll() {
@@ -41,18 +46,6 @@ export default class PostSection extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  fetchContent = contentContainer => {
-    const outerThis = this;
-    const storyLoader = this.shadowObj.querySelector('post-loader');
-    const content = this.getContent();
-    setTimeout(() => {
-      storyLoader.remove();
-      contentContainer.insertAdjacentHTML('beforeend', content);
-      outerThis.updateActiveTab(outerThis.getAttribute('active'));
-      outerThis.activateTab(contentContainer);
-    }, 2000)
-  }
-
   updateActiveTab = active => {
     // Select tab with active class
     const tab = this.shadowObj.querySelector(`ul#tab > li.${active}`);
@@ -67,17 +60,13 @@ export default class PostSection extends HTMLElement {
     }
   }
 
-  activateTab = contentContainer => {
+  activateTab = (contentContainer, tabContainer) => {
     const outerThis = this;
-    const tab = this.shadowObj.querySelector('ul#tab');
 
-    if (tab && contentContainer) {
-      const line = tab.querySelector('span.line');
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
-
-      // Get feeds container
-      const feeds = contentContainer.querySelector('.feeds');
+    if (tabContainer && contentContainer) {
+      const line = tabContainer.querySelector('span.line');
+      const tabItems = tabContainer.querySelectorAll('li.tab-item');
+      let activeTab = tabContainer.querySelector('li.tab-item.active');
 
       tabItems.forEach(tab => {
         tab.addEventListener('click', e => {
@@ -111,10 +100,10 @@ export default class PostSection extends HTMLElement {
 
             switch (tab.dataset.element) {
               case "replies":
-                feeds.innerHTML = outerThis.getReplies();
+                contentContainer.innerHTML = outerThis.getReplies();
                 break;
               case "likes":
-                feeds.innerHTML = outerThis.getLikes();
+                contentContainer.innerHTML = outerThis.getLikes();
               default:
                 break;
             }
@@ -149,7 +138,7 @@ export default class PostSection extends HTMLElement {
               // Update the line
               line.style.left = `${tab.offsetLeft + tabWidth}px`;
 
-              outerThis.updateState(event.state, feeds);
+              outerThis.updateState(event.state, contentContainer);
 
               // Update active attribute
               outerThis.setAttribute('active', event.state.tab);
@@ -171,7 +160,7 @@ export default class PostSection extends HTMLElement {
             line.style.left = `${currentTab.offsetLeft + tabWidth}px`;
 
 
-            outerThis.updateDefault(feeds);
+            outerThis.updateDefault(contentContainer);
 
             // Update active attribute
             outerThis.setAttribute('active', currentTab.dataset.element);
@@ -198,7 +187,6 @@ export default class PostSection extends HTMLElement {
     contentContainer.innerHTML = this.getContainer(this._active);
   }
 
-  // GET current feed
   getCurrentFeed = tab => {
     switch (tab) {
       case "replies":
@@ -221,7 +209,7 @@ export default class PostSection extends HTMLElement {
   getBody = () => {
     return /* html */`
       <div class="content-container">
-        ${this.getLoader()}
+        ${this.getContent()}
       </div>
     `
   }

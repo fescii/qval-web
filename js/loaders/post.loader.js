@@ -66,10 +66,9 @@ export default class PostLoader extends HTMLElement {
 
 	      :host {
         	font-size: 16px;
-				  /*border: var(--input-border);*/
 				  display: flex;
 				  flex-flow: column;
-					padding: 0;
+					padding: 5px 0;
 				  gap: 0;
 				  width: 100%;
 					min-width: 100%;
