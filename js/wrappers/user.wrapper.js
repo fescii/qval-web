@@ -20,9 +20,12 @@ export default class UserWrapper extends HTMLElement {
 
   // observe the attributes on change
   attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue !== newValue) {
-      // console.log('Attribute changed: ', name, newValue);
-    }
+    // if (oldValue !== newValue) {
+    //   // console.log('Attribute changed: ', name, newValue);
+    // }
+    // else {
+    //   console.log('Attribute not changed: ', name, newValue);
+    // }
   }
 
   render() {
@@ -31,7 +34,6 @@ export default class UserWrapper extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-    console.log(this.getAttribute('name'));
   }
 
   formatNumber = n => {
@@ -112,8 +114,8 @@ export default class UserWrapper extends HTMLElement {
             </a>
           </div>
         </div>
-        ${this.getBio()}
       </div>
+      ${this.getBio()}
       ${this.getStats()}
       <div class="actions">
         ${this.checkYou(this._you)}
@@ -123,9 +125,7 @@ export default class UserWrapper extends HTMLElement {
 
   getBio = () => {
     // get bio
-    let bio = this.getAttribute('bio');
-
-    console.log(bio);
+    let bio = this.getAttribute('bio') || '';
 
     bio = bio.trim();
 
@@ -223,7 +223,6 @@ export default class UserWrapper extends HTMLElement {
       </div>
 		`
   }
-
 
   getStyles() {
     return /* css */`
@@ -386,6 +385,15 @@ export default class UserWrapper extends HTMLElement {
         
         .author-info > .name > a.username:hover svg {
           color: var(--accent-color);
+        }
+
+        p.bio {
+          color: var(--gray-color);
+          font-family: var(--font-main), sans-serif;
+          font-size: 0.9rem;
+          font-weight: 400;
+          width: 100%;
+          text-align: start;
         }
 
         .stats {

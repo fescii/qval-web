@@ -37,7 +37,7 @@ export default class TopicLoader extends HTMLElement {
             <span class="followers skeleton"></span>
           </span>
         </div>
-         <div class="actions">
+        <div class="actions">
 					<span class="action skeleton"></span>
           <span class="action skeleton"></span>
           <span class="action skeleton"></span>
