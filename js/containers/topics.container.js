@@ -162,7 +162,7 @@ export default class TopicsContainer extends HTMLElement {
 				  padding: 0;
 				  display: flex;
 				  flex-flow: column;
-				  gap: 0px;
+				  gap: 8px;
 				}
 
 				div.content {
