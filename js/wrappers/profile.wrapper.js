@@ -210,7 +210,7 @@ export default class ProfileWrapper extends HTMLElement {
   checkFollowing = following => {
     if (following === 'true') {
       return /*html*/`
-			  <span class="action">Following</span>
+			  <span class="action following">Following</span>
 			`
     }
     else {
@@ -453,6 +453,7 @@ export default class ProfileWrapper extends HTMLElement {
           font-family: var(--font-text), sans-serif;
           cursor: pointer;
           width: max-content;
+          text-transform: lowercase;
           font-size: 0.9rem;
           display: flex;
           align-items: center;
@@ -467,6 +468,7 @@ export default class ProfileWrapper extends HTMLElement {
 
         .actions > .action.edit,
         .actions > .action.you,
+        .actions > .action.donate,
         .actions > .action.following,
         .actions > .action.settings {
           padding: 3.5px 18px;
