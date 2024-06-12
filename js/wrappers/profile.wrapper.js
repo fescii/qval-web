@@ -201,7 +201,7 @@ export default class ProfileWrapper extends HTMLElement {
       return /*html*/`
         <div class="actions">
           ${this.checkFollowing(this.getAttribute('user-follow'))}
-          <span class="action">Soon</span>
+          <span class="action donate">Donate</span>
         </div>
       `
     }
@@ -210,12 +210,12 @@ export default class ProfileWrapper extends HTMLElement {
   checkFollowing = following => {
     if (following === 'true') {
       return /*html*/`
-			  <a href="" class="action">Following</a>
+			  <span class="action">Following</span>
 			`
     }
     else {
       return /*html*/`
-			  <a href="" class="action follow">Follow</a>
+			  <span class="action follow">Follow</span>
 			`
     }
   }
