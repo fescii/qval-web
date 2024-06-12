@@ -1,3 +1,18 @@
+/* For screens over 1200 pixels */
+@media (min-width: 1200px) {
+  html {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   html {
     width: 100%;
@@ -5,7 +20,6 @@
   }
 
   body {
-    /* border: 1px solid blue; */
     padding: 0 15px 30px 15px;
     width: 100%;
     max-width: 100%;

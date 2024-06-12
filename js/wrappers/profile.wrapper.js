@@ -191,8 +191,9 @@ export default class ProfileWrapper extends HTMLElement {
     if (this._you) {
       return /*html*/`
         <div class="actions">
-          <a href="/user/edit/profile" class="action">Edit profile</a>
-          <a href="/user/stats" class="action">Your stats</a>
+          <span class="action you">You</span>
+          <a href="/profile" class="action edit">Edit</a>
+          <a href="/settings" class="action settings">Settings</a>
         </div>
       `
     }
@@ -435,42 +436,43 @@ export default class ProfileWrapper extends HTMLElement {
 
         .actions {
           border-bottom: var(--border);
-          display: flex;
           width: 100%;
-          margin: 0;
-          padding: 10px 0 15px;
+          display: flex;
           flex-flow: row;
-          align-items: center;
-          justify-content: space-between;
-          gap: 30px;
+          gap: 20px;
+          padding: 3px 0 15px 0;
+          margin: 0;
         }
 
         .actions > .action {
-          border: var(--action-border);
           text-decoration: none;
-          display: flex;
-          width: calc(50% - 30px);
-          flex-flow: row;
-          align-items: center;
-          justify-content: center;
-          padding: 6px 25px;
-          border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -moz-border-radius: 10px;
-          color: var(--text-color);
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
-        }
-
-        .actions > .action.follow {
-          border: none;
+          padding: 4px 18px;
+          font-weight: 500;
           background: var(--accent-linear);
           color: var(--white-color);
-           border-radius: 10px;
-          -webkit-border-radius: 10px;
-          -moz-border-radius: 10px;
-          -ms-border-radius: 10px;
-          -o-border-radius: 10px;
+          font-family: var(--font-text), sans-serif;
+          cursor: pointer;
+          width: max-content;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          border-radius: 10px;
+        }
+
+        .actions > .action.you {
+          text-transform: capitalize;
+        }
+
+        .actions > .action.edit,
+        .actions > .action.you,
+        .actions > .action.following,
+        .actions > .action.settings {
+          padding: 3.5px 18px;
+          background: unset;
+          border: var(--action-border);
+          color: var(--gray-color);
         }
 
         @media screen and (max-width: 660px) {
