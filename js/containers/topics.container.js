@@ -183,7 +183,7 @@ export default class TopicsContainer extends HTMLElement {
           flex-flow: column;
 					padding: 5px 5px 8px;
           gap: 0;
-					background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+					background: var(--light-linear);
 					border-radius: 10px;
         }
 

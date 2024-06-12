@@ -15,14 +15,15 @@
 
 @media screen and (max-width: 1200px) {
   html {
-    width: 100%;
-    min-width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 20px;
   }
 
   body {
-    padding: 0 15px 30px 15px;
     width: 100%;
     max-width: 100%;
+    padding: 0 15px 30px 15px;
   }
 }
 

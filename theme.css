@@ -88,6 +88,7 @@ Author URL: https://femar.co.ke
   --modal-overlay: #1d2534b3;
   
   --action-linear: linear-gradient(#53595f, #627ea0);
+  --light-linear: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
   --error-linear: linear-gradient(103.53deg, #fa6436 -6.72%, #ec4b19 109.77%);
   --second-linear: linear-gradient(0deg,#df791a 0%, #f09c4e 100%);
   --poll-linear: linear-gradient(0deg, #df791ace 0%, #f09c4ecc 100%);

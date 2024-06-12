@@ -15,7 +15,7 @@ export default class AuthorWrapper extends HTMLElement {
   render() {
     this.shadowObj.innerHTML = this.getTemplate();
   }
-
+  
   connectedCallback() {
     // get url
     let url = this.getAttribute('url');

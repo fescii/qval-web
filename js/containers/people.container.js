@@ -59,26 +59,26 @@ export default class PeopleContainer extends HTMLElement {
   getPeople = () => {
     return /*html*/`
 			<user-wrapper username="U0BC98H63AB1" name="John Doe" picture="/img/img.jpg" verified="true" user-follow="true"
-				url="/u/U0BC98H63AB1" following="236" followers="9734"
+				url="/u/U0BC98H63AB1" following="236" followers="9734" you="false"
 				bio="I'm John Doe, a passionate software developer with a love for coding and problem-solving.">
 			</user-wrapper>
 
-			<user-wrapper username="U0BC98H63BCA" name="Janet Doe" picture="/img/img3.png"
+			<user-wrapper username="U0BC98H63BCA" name="Janet Doe" picture="/img/img3.png" you="true"
 				verified="false" user-follow="false" url="/u/U0BC98H63AB1" following="736" followers="5134"
 				bio="Hi, I'm Janet Doe, a nature enthusiast and aspiring photographer.">
 			</user-wrapper>
 
-			<user-wrapper username="U0BC9BAC53H4" name="Yosemite Sam" picture="/img/img2.png"
+			<user-wrapper username="U0BC9BAC53H4" name="Yosemite Sam" picture="/img/img2.png" you="false"
 				verified="true" user-follow="true" url="/u/U0BC98H63AB1" following="36" followers="234"
 				bio="Yosemite Sam here! I'm a cowboy with a passion for adventure and the great outdoors.">
 			</user-wrapper>
 
-			<user-wrapper username="U0PHAB693NBA" name="Farghon Legon" picture="/img/img3.png"
+			<user-wrapper username="U0PHAB693NBA" name="Farghon Legon" picture="/img/img3.png" you="false"
 				verified="false" user-follow="true" url="/u/U0BC98H63AB1" following="36" followers="9734"
 				bio="Hey there, I'm Farghon Legon. I'm an artist by heart and a dreamer by soul.">
 			</user-wrapper>
 
-			<user-wrapper username="U0DAB69B79NH" name="Porky Pig" picture="/img/img4.png"
+			<user-wrapper username="U0DAB69B79NH" name="Porky Pig" picture="/img/img4.png" you="false"
 				verified="false" user-follow="false" url="/u/U0BC98H63AB1" following="6723" followers="79734"
 				bio="Oink! I'm Porky Pig, always up for some fun and mischief.">
 			</user-wrapper>
@@ -163,7 +163,7 @@ export default class PeopleContainer extends HTMLElement {
           flex-flow: column;
 					padding: 5px 5px 8px;
           gap: 0;
-					background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+					background: var(--light-linear);
 					border-radius: 10px;
         }
 
