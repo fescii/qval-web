@@ -128,7 +128,7 @@ export default class TopicWrapper extends HTMLElement {
         ${this.getDescription()}
         ${this.getStats()}
         <div class="actions">
-          ${this.checkFollowing(this.getAttribute('user-follow'))}
+          ${this.checkFollowing(this.getAttribute('topic-follow'))}
         </div>
       </div>
     `

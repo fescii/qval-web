@@ -15,16 +15,16 @@ export default class TopicsFeed extends HTMLElement {
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
-    const contentContainer = this.shadowObj.querySelector('.people-list');
+    const contentContainer = this.shadowObj.querySelector('.topics-list');
 
-    this.fetchPeople(contentContainer);
+    this.fetchTopics(contentContainer);
   }
 
-  fetchPeople = (contentContainer) => {
-    const peopleLoader = this.shadowObj.querySelector('topic-loader');
+  fetchTopics = (contentContainer) => {
+    const topicsLoader = this.shadowObj.querySelector('topic-loader');
     const content = this.getTopics();
     setTimeout(() => {
-      peopleLoader.remove();
+      topicsLoader.remove();
       contentContainer.insertAdjacentHTML('beforeend', content);
     }, 2000)
   }
@@ -46,7 +46,7 @@ export default class TopicsFeed extends HTMLElement {
   getBody = () => {
     // language=HTML
     return `
-			<div class="people-list">
+			<div class="topics-list">
 				${this.getLoader()}
 			</div>
     `;
@@ -91,7 +91,7 @@ export default class TopicsFeed extends HTMLElement {
       </topic-wrapper>
 
       <topic-wrapper hash="T0RK39J23NM4" name="science" description="Science is the pursuit and application of knowledge and understanding of the natural and social world following a systematic methodology based on evidence."
-         topic-follow="true" subscribed="false" url="/t/T0BC98H63AB1"
+        topic-follow="true" subscribed="false" url="/t/T0BC98H63AB1"
         subscribers="856" followers="21045"  stories="15624"
         author-username="U0A43PBAH6A" author-you="true" author-url="/u/U0A43PBAH6A"
         author-img="/img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
@@ -216,7 +216,7 @@ export default class TopicsFeed extends HTMLElement {
           width: 100%;
         }
 
-				.people-list {
+				.topics-list {
 					background-color: var(--background);
 					padding: 0;
 					display: flex;
