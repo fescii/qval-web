@@ -21,7 +21,7 @@ export default class HighlightsContainer extends HTMLElement {
 	}
 
 	fetchTopics = (contentContainer) => {
-		const topicsLoader = this.shadowObj.querySelector('info-loader');
+		const topicsLoader = this.shadowObj.querySelector('post-loader');
 		const content = this.getHighlights();
 		setTimeout(() => {
 			topicsLoader.remove();
@@ -90,7 +90,7 @@ export default class HighlightsContainer extends HTMLElement {
 
 	getLoader = () => {
 		return `
-			<info-loader speed="300"></info-loader>
+			<post-loader speed="300"></post-loader>
 		`
 	}
 

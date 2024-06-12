@@ -85,38 +85,6 @@ export default class TopicLoader extends HTMLElement {
             <span class="name skeleton"></span>
           </span>
         </div>
-         <div class="actions">
-					<span class="action skeleton"></span>
-          <span class="action skeleton"></span>
-          <span class="action skeleton"></span>
-				</div>
-      </div>
-      <div class="loader">
-        <div class="head">
-          <span class="profile skeleton"></span>
-          <span class="name skeleton"></span>
-          <span class="info">
-            <span class="name skeleton"></span>
-            <span class="dot skeleton"></span>
-            <span class="followers skeleton"></span>
-          </span>
-        </div>
-         <div class="actions">
-					<span class="action skeleton"></span>
-          <span class="action skeleton"></span>
-          <span class="action skeleton"></span>
-				</div>
-      </div>
-      <div class="loader">
-        <div class="head">
-          <span class="profile skeleton"></span>
-          <span class="name skeleton"></span>
-          <span class="info">
-            <span class="followers skeleton"></span>
-            <span class="dot skeleton"></span>
-            <span class="name skeleton"></span>
-          </span>
-        </div>
         <div class="actions">
 					<span class="action skeleton"></span>
           <span class="action skeleton"></span>
@@ -141,7 +109,7 @@ export default class TopicLoader extends HTMLElement {
         	font-size: 16px;
 					display: flex;
 					flex-flow: column;
-					padding: 15px 0;
+					padding: 20px 0 15px;
 					gap: 20px;
 					width: 100%;
 					max-width: 100%;
