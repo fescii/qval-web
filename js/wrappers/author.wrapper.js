@@ -363,8 +363,9 @@ export default class AuthorWrapper extends HTMLElement {
 
     if (you) {
       return /*html*/`
-        <a href="/profile" class="action you">You</a>
+        <span  class="action you">You</span>
         <a href="${url}" class="action view">view</a>
+        <a href="/profile" class="action view">manage</a>
       `
     }
     else {
