@@ -13,12 +13,25 @@ export default class UserWrapper extends HTMLElement {
     this.render();
   }
 
+  // attributes to observe
+  static get observedAttributes() {
+    return ["username", "picture", "name", "followers", "following", "user-follow", "verified", "url", "bio"];
+  }
+
+  // observe the attributes on change
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue) {
+      // console.log('Attribute changed: ', name, newValue);
+    }
+  }
+
   render() {
     this.shadowObj.innerHTML = this.getTemplate();
   }
 
   connectedCallback() {
     // console.log('We are inside connectedCallback');
+    console.log(this.getAttribute('name'));
   }
 
   formatNumber = n => {
@@ -72,7 +85,10 @@ export default class UserWrapper extends HTMLElement {
     const name = this.getAttribute('name');
 
     // GET url
-    const url = this.getAttribute('url');
+    let url = this.getAttribute('url');
+
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
 
     // Check if the name is greater than 20 characters: replace the rest with ...
     let displayName = name.length > 20 ? `${name.substring(0, 20)}..` : name;
@@ -88,7 +104,7 @@ export default class UserWrapper extends HTMLElement {
             <h4 class="name">
               <span class="name">${displayName}</span>
             </h4>
-            <a href="${url.toLowerCase()}" class="username">
+            <a href="${url}" class="username">
               <span class="text">${this.getAttribute('username')}</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
                 <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
@@ -96,8 +112,8 @@ export default class UserWrapper extends HTMLElement {
             </a>
           </div>
         </div>
+        ${this.getBio()}
       </div>
-      ${this.getBio()}
       ${this.getStats()}
       <div class="actions">
         ${this.checkYou(this._you)}
