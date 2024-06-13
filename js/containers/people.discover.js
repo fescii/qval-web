@@ -237,9 +237,9 @@ export default class DiscoverPeople extends HTMLElement {
 
 				.people-list {
 					background-color: var(--background);
-					padding: 0;
 					display: flex;
 					flex-flow: row;
+					padding: 0 50px 0 0;
 					gap: 20px;
 					width: 100%;
           max-width: 100%;
