@@ -14,20 +14,58 @@ export default class DiscoverPeople extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    	// get mql
+		const mql = window.matchMedia('(min-width: 660px)');
+
     const contentContainer = this.shadowObj.querySelector('.people-list');
 
-    this.fetchPeople(contentContainer);
+		if (contentContainer) {
+			this.fetchPeople(contentContainer, mql.matches);
+		}
   }
 
-  fetchPeople = (contentContainer) => {
+  fetchPeople = (contentContainer, mql) => {
+		const outerThis = this;
     const peopleLoader = this.shadowObj.querySelector('authors-loader');
     const content = this.getPeople();
     setTimeout(() => {
       peopleLoader.remove();
       contentContainer.insertAdjacentHTML('beforeend', content);
+			contentContainer.insertAdjacentHTML('beforeend', this.getControls(mql));
+
+			outerThis.activateControls(contentContainer);
     }, 2000)
   }
+
+	// Activate controls
+	activateControls = contentContainer => {
+		// select all controls
+		const letfControl = this.shadowObj.querySelector('.control.left');
+		const rightControl = this.shadowObj.querySelector('.control.right');
+
+		// If left control and right control exists
+		if (letfControl && rightControl) {
+
+			// add event listener to left control
+			letfControl.addEventListener('click', () => {
+				// Scroll by 200px smoothly
+				contentContainer.scrollTo({
+					left: contentContainer.scrollLeft - 300,
+					behavior: 'smooth'
+				})
+			})
+
+			// add event listener to right control
+			rightControl.addEventListener('click', () => {
+				// Scroll by 200px smoothly
+				contentContainer.scrollTo({
+					left: contentContainer.scrollLeft + 300,
+					behavior: 'smooth'
+				})
+			})
+			
+		}
+	}
 
   getTemplate = () => {
     // Show HTML Here
@@ -51,6 +89,28 @@ export default class DiscoverPeople extends HTMLElement {
 			</div>
     `;
   }
+
+	getControls = mql => {
+		// Check if mql is desktop
+		if (mql) {
+			return /*html*/`
+				<div class="left control">
+					<span>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+							<path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
+						</svg>
+					</span>
+				</div>
+				<div class="right control">
+					<span>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+							<path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"></path>
+						</svg>
+					</span>
+				</div>
+			`
+		}
+	}
 
   getPeople = () => {
     return /*html*/`
@@ -146,6 +206,7 @@ export default class DiscoverPeople extends HTMLElement {
         	font-size: 16px;
 				  background-color: var(--background);
 				  padding: 15px 0 0 0;
+					position: relative;
 				  display: flex;
 				  flex-flow: column;
 				  gap: 5px;
@@ -154,7 +215,6 @@ export default class DiscoverPeople extends HTMLElement {
 				}
 
         .title {
-					/* border: 1px solid red; */
 				  padding: 0 0 10px 3px;
 				  display: flex;
 				  flex-flow: column;
@@ -192,6 +252,47 @@ export default class DiscoverPeople extends HTMLElement {
 					display: none !important;
 					visibility: hidden;
 					-webkit-appearance: none;
+				}
+
+				.control {
+					position: absolute;
+					z-index: 3;
+					opacity: 0;
+					top: 50%;
+					left: 0;
+					transform: translateY(-50%);
+					width: 40px;
+					height: 100%;
+					pointer-events: none;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: var(--controls-gradient-left);
+					transition: all 0.3s ease-in-out;
+				}
+
+				.control.right {
+					left: unset;
+					right: 0;
+					background: var(--controls-gradient-right);
+				}
+
+				.people-list:hover .control {
+					opacity: 1;
+					pointer-events: all;
+				}
+
+				.control > span {
+					cursor: pointer;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: var(--accent-linear);
+					color: var(--white-color);
+					border-radius: 50%;
+					width: 30px;
+					height: 30px;
+					transition: background-color 0.3s;
 				}
 
 				@media screen and (max-width:660px) {

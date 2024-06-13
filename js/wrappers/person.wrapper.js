@@ -246,12 +246,12 @@ export default class PersonWrapper extends HTMLElement {
         }
 
         .head > .image > .icon {
-          background: var(--background);
+          background: var(--user-background);
           position: absolute;
           bottom: 0px;
           right: -3px;
-          width: 25px;
-          height: 25px;
+          width: 28px;
+          height: 28px;
           z-index: 1;
           display: flex;
           align-items: center;
@@ -260,8 +260,8 @@ export default class PersonWrapper extends HTMLElement {
         }
         
         .head > .image > .icon svg {
-          width: 18px;
-          height: 18px;
+          width: 20px;
+          height: 20px;
           color: var(--accent-color);
         }
 
