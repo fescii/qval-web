@@ -54,21 +54,39 @@ export default class DiscoverPeople extends HTMLElement {
 
   getPeople = () => {
     return /*html*/`
-			<person-wrapper username="U0A43PBAHS13" url="/u/U0A43PBAHS13"
-			 picture="img/img.jpg" verified="true" name="Fredrick Ochieng" user-follow="true">
-      </person-wrapper>
-      <person-wrapper username="U0A43PVB23BA" url="/u/U0A43PVB23BA"
-				picture="img/img.jpg" verified="true" name="Fredrick Ochieng" user-follow="false">
-      </person-wrapper>
-      <person-wrapper username="U0N36AA43PBA" url="/u/U0N36AA43PBA"
-				picture="img/img.jpg" verified="false" name="Fredrick Ochieng" user-follow="false">
-      </person-wrapper>
-			<person-wrapper username="U0HA23A43PBA" url="/u/U0HA23A43PBA"
-				picture="img/img.jpg" verified="true" name="Fredrick Ochieng"
-				followers="23" user-follow="false">
+			<person-wrapper username="U0BC98H63AB1" name="John Doe" picture="/img/img.jpg" verified="true" user-follow="true"
+				url="/u/U0BC98H63AB1" following="236" followers="9734" you="false"
+				bio="I'm John Doe, a passionate software developer with a love for coding and problem-solving.">
 			</person-wrapper>
-			<person-wrapper username="U0PNBA43P2BA" url="/u/U0PNBA43P2BA"
-				picture="img/img.jpg" verified="true" name="Fredrick Ochieng" user-follow="false">
+
+			<person-wrapper username="U0BC98H63BCA" name="Janet Doe" picture="/img/img3.png" you="true"
+				verified="false" user-follow="false" url="/u/U0BC98H63AB1" following="736" followers="5134"
+				bio="Hi, I'm Janet Doe, a nature enthusiast and aspiring photographer.">
+			</person-wrapper>
+
+			<person-wrapper username="U0BC9BAC53H4" name="Yosemite Sam" picture="/img/img2.png" you="false"
+				verified="true" user-follow="true" url="/u/U0BC98H63AB1" following="36" followers="234"
+				bio="Yosemite Sam here! I'm a cowboy with a passion for adventure and the great outdoors.">
+			</person-wrapper>
+
+			<person-wrapper username="U0PHAB693NBA" name="Farghon Legon" picture="/img/img3.png" you="false"
+				verified="false" user-follow="true" url="/u/U0BC98H63AB1" following="36" followers="9734"
+				bio="Hey there, I'm Farghon Legon. I'm an artist by heart and a dreamer by soul.">
+			</person-wrapper>
+
+			<person-wrapper username="U0DAB69B79NH" name="Porky Pig" picture="/img/img4.png" you="false"
+				verified="false" user-follow="false" url="/u/U0BC98H63AB1" following="6723" followers="79734"
+				bio="Oink! I'm Porky Pig, always up for some fun and mischief.">
+			</person-wrapper>
+
+			<person-wrapper username="U0BCCA53HP1" name="Bugs Bunny" picture="/img/img5.png" you="false"
+				verified="true" user-follow="false" url="/u/U0BC98H63AB1" following="836" followers="1034"
+				bio="What's up, doc? I'm Bugs Bunny, the carrot-loving mischief-maker.">
+			</person-wrapper>
+
+			<person-wrapper username="U0PC98H63AB8" name="Marvin Martian" picture="/img/img.jpg" you="false"
+				verified="false" user-follow="true" url="/u/U0BC98H63AB1" following="6" followers="934"
+				bio="Greetings, earthlings! I'm Marvin Martian, on a mission to conquer the universe.">
 			</person-wrapper>
 		`
   }
