@@ -85,7 +85,6 @@ export default class PersonWrapper extends HTMLElement {
     }
   }
 
-
   getStyles() {
     return /* css */`
       <style>
@@ -262,9 +261,9 @@ export default class PersonWrapper extends HTMLElement {
           padding: 4px 10px;
           height: max-content;
           width: 120px;
-          border-radius: 12px;
-          -webkit-border-radius: 12px;
-          -moz-border-radius: 12px;
+          border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
           background-color: var(--action-background);
           color: var(--white-color);
           font-weight: 500;
