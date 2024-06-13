@@ -14,17 +14,28 @@ export default class TopicsContainer extends HTMLElement {
 	}
 
 	connectedCallback() {
+		// mql for media query: mobile
+		const mql = window.matchMedia('(max-width: 660px)');
+	
 		// console.log('We are inside connectedCallback');
 		const contentContainer = this.shadowObj.querySelector('div.content');
 
-		this.fetchTopics(contentContainer);
+		// if contentContainer exists
+		if (contentContainer) {
+			this.fetchTopics(contentContainer, mql.matches);
+		}
 	}
 
-	fetchTopics = (contentContainer) => {
+	fetchTopics = (contentContainer, mql) => {
 		const topicsLoader = this.shadowObj.querySelector('topic-loader');
 		const content = this.getTopics();
+		const title = this.getTitle();
 		setTimeout(() => {
 			topicsLoader.remove();
+			// If mql is true
+			if (mql) {
+				contentContainer.insertAdjacentHTML('beforeend', title);
+			}
 			contentContainer.insertAdjacentHTML('beforeend', content);
 		}, 2000)
 	}
@@ -44,16 +55,32 @@ export default class TopicsContainer extends HTMLElement {
 	}
 
 	getBody = () => {
-		// language=HTML
-		return /* html */`
+		// get mql for media query: desktop
+		const mql = window.matchMedia('(min-width: 660px)');
+		if (mql.matches) {
+			return /* html */`
+				${this.getTitle()}
+				<div class="content">
+					${this.getLoader()}
+				</div>
+			`;
+		}
+		else {
+			return /* html */`
+				<div class="content">
+					${this.getLoader()}
+				</div>
+			`;
+		}
+	}
+
+	getTitle = () => {
+		return /*html*/`
 			<div class="title">
 				<h2>Most read topics</h2>
 				<p class="info">Many people read stories about these topics.</p>
 			</div>
-			<div class="content">
-				${this.getLoader()}
-			</div>
-    `;
+		`
 	}
 
   getTopics = () => {

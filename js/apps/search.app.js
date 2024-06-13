@@ -25,12 +25,14 @@ export default class AppSearch extends HTMLElement {
   connectedCallback() {
     // Activate tab
     const contentContainer = this.shadowObj.querySelector('div.content-container');
+    const tabContainer = this.shadowObj.querySelector('ul#tab');
 
     // update active tab
-    this.updateActiveTab(this.getAttribute('tab'));
-    
-    if (contentContainer) {
-      this.activateTab(contentContainer);
+    this.updateActiveTab(this._tab);
+
+
+    if (contentContainer && tabContainer) {
+      this.activateTab(contentContainer, tabContainer);
     }
 
     // Scroll to top of the page
@@ -89,123 +91,130 @@ export default class AppSearch extends HTMLElement {
     }
   }
 
-  activateTab = contentContainer => {
+  activateTab = (contentContainer, tabContainer) => {
     const outerThis = this;
-    const tab = this.shadowObj.querySelector('ul#tab');
 
-    if (tab && contentContainer) {
-      const line = tab.querySelector('span.line');
-      const tabItems = tab.querySelectorAll('li.tab-item');
-      let activeTab = tab.querySelector('li.tab-item.active');
+    const line = tabContainer.querySelector('span.line');
+    const tabItems = tabContainer.querySelectorAll('li.tab-item');
+    let activeTab = tabContainer.querySelector('li.tab-item.active');
 
-      tabItems.forEach(tab => {
-        tab.addEventListener('click', e => {
-          e.preventDefault()
-          e.stopPropagation()
+    tabItems.forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
 
-          // Calculate half tab width - 10px
-          const tabWidth = (tab.offsetWidth/2) - 20;
+        // Calculate half tab width - 10px
+        const tabWidth = (tab.offsetWidth / 2) - 20;
 
-          line.style.left = `${tab.offsetLeft + tabWidth}px`;
+        line.style.left = `${tab.offsetLeft + tabWidth}px`;
 
-          if (tab.dataset.element === activeTab.dataset.element) {
-            return;
+        if (tab.dataset.element === activeTab.dataset.element) {
+          return;
+        }
+        else {
+          activeTab.classList.remove('active');
+          tab.classList.add('active');
+          activeTab = tab;
+
+          // update tab attribute  and this._tab
+          this._tab = tab.dataset.element;
+
+          // get tab url attribute
+          let url = tab.getAttribute('url');
+
+          // check if this._query is empty or null, if not update url
+          if (this._query !== '' && this._query !== null && this._query !== 'null') {
+            url = `${url}/$?q=${this._query}`;
           }
-          else {
+
+          console.log('URL: ', url);
+
+          // get current feed
+          const currentFeed = outerThis.selectCurrentFeed(tab.dataset.element);
+
+          // Updating History State
+          window.history.pushState(
+            { tab: tab.dataset.element, content: currentFeed },
+            tab.dataset.element, `${url}`
+          );
+
+          switch (tab.dataset.element) {
+            case "stories":
+              contentContainer.innerHTML = outerThis.getStories();
+              break;
+            case "topics":
+              contentContainer.innerHTML = outerThis.getTopics();
+              break;
+            case "people":
+              contentContainer.innerHTML = outerThis.getPeople();
+            default:
+              break;
+          }
+        }
+      })
+    });
+
+    // Update state on window.onpopstate
+    window.onpopstate = event => {
+      // This event will be triggered when the browser's back button is clicked
+
+      // console.log(event.state);
+      if (event.state) {
+        if (event.state.page) {
+          outerThis.updatePage(event.state.content)
+        }
+        else if (event.state.tab) {
+
+          // Select the state tab
+          const tab = outerThis.shadowObj.querySelector(`ul#tab > li.${event.state.tab}`);
+
+          if (tab) {
             activeTab.classList.remove('active');
+
             tab.classList.add('active');
             activeTab = tab;
 
-            // get tab url attribute
-            let url = tab.getAttribute('url');
-
-            // check if this._query is empty or null, if not update url
-            if (this._query !== '' && this._query !== null && this._query !== 'null') {
-              url = `${url}?q=${this._query}`;
-            }
-
-            // get current feed
-            const currentFeed = outerThis.selectCurrentFeed(tab.dataset.element);
-
-            // Updating History State
-            window.history.pushState(
-              { tab: tab.dataset.element, content: currentFeed},
-              tab.dataset.element, `${url}`
-            );
-
-            switch (tab.dataset.element) {
-              case "stories":
-                contentContainer.innerHTML = outerThis.getStories();
-                break;
-              case "topics":
-                contentContainer.innerHTML = outerThis.getTopics();
-                break;
-              case "people":
-                contentContainer.innerHTML = outerThis.getPeople();
-              default:
-                break;
-            }
-
-          }
-        })
-      });
-
-      // Update state on window.onpopstate
-      window.onpopstate = event => {
-        // This event will be triggered when the browser's back button is clicked
-
-        // console.log(event.state);
-        if (event.state) {
-          if (event.state.page) {
-            outerThis.updatePage(event.state.content)
-          }
-          else if (event.state.tab) {
-
-            // Select the state tab
-            const tab = outerThis.shadowObj.querySelector(`ul#tab > li.${event.state.tab}`);
-
-            if (tab) {
-              activeTab.classList.remove('active');
-
-              tab.classList.add('active');
-              activeTab = tab;
-
-              // Calculate half tab width - 10px
-              const tabWidth = (tab.offsetWidth/2) - 20;
-
-              // Update the line
-              line.style.left = `${tab.offsetLeft + tabWidth}px`;
-
-              outerThis.updateState(event.state, contentContainer);
-
-              // Update active attribute
-              outerThis.setAttribute('tab', event.state.tab);
-            }
-          }
-        }
-        else {
-          // Select li with class name as current and content Container
-          const currentTab = outerThis.shadowObj.querySelector(`ul#tab > li.tab-item.${this._tab}`);
-          if (currentTab) {
-            activeTab.classList.remove('active');
-            activeTab = currentTab;
-            currentTab.classList.add('active');
+            // update tab attribute  and this._tab
+            outerThis._tab = event.state.tab;
 
             // Calculate half tab width - 10px
-            const tabWidth = (currentTab.offsetWidth/2) - 20;
+            const tabWidth = (tab.offsetWidth / 2) - 20;
 
-            // update line position
-            line.style.left = `${currentTab.offsetLeft + tabWidth}px`;
+            // Update the line
+            line.style.left = `${tab.offsetLeft + tabWidth}px`;
 
+            outerThis.updateState(event.state, contentContainer);
 
-            outerThis.updateDefault(contentContainer);
-
-            // Update active attribute
-            outerThis.setAttribute('tab', currentTab.dataset.element);
+            // Update tab
+            outerThis._tab = tab.dataset.element;
           }
         }
-      };
-    }
+      }
+      else {
+        // Select li with class name as current and content Container
+        const currentTab = outerThis.shadowObj.querySelector(`ul#tab > li.tab-item.${this.getAttribute('tab')}`);
+        if (currentTab) {
+          activeTab.classList.remove('active');
+          activeTab = currentTab;
+          currentTab.classList.add('active');
+
+          // update tab attribute  and this._tab
+          outerThis._tab = currentTab.dataset.element;
+
+          console.log('Current Tab: ', currentTab.dataset.element);
+
+          // Calculate half tab width - 10px
+          const tabWidth = (currentTab.offsetWidth / 2) - 20;
+
+          line.style.left = `${currentTab.offsetLeft + tabWidth}px`;
+
+          outerThis.updateDefault(contentContainer);
+
+          // Update active attribute
+          outerThis._tab = currentTab.dataset.element;
+        }
+      }
+    };
   }
 
   updatePage = content => {
@@ -216,7 +225,7 @@ export default class AppSearch extends HTMLElement {
     body.innerHTML = content;
   }
 
-  updateState = (state, contentContainer)=> {
+  updateState = (state, contentContainer) => {
     // populate content
     contentContainer.innerHTML = state.content;
   }
@@ -225,7 +234,6 @@ export default class AppSearch extends HTMLElement {
     contentContainer.innerHTML = this.getContainer(this._tab);
   }
 
-  // select the content container inner element;
   selectCurrentFeed = tab => {
     // Select the current feed
     switch (tab) {
@@ -279,7 +287,6 @@ export default class AppSearch extends HTMLElement {
   }
 
   getBody = () => {
-    const tab = this.getAttribute('tab');
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
@@ -287,7 +294,7 @@ export default class AppSearch extends HTMLElement {
         ${this.getForm()}
         ${this.getTab()}
         <div class="content-container">
-          ${this.getContainer(tab)}
+          ${this.getContainer(this._tab)}
         </div>
       `;
     }
@@ -298,7 +305,7 @@ export default class AppSearch extends HTMLElement {
           ${this.getForm()}
           ${this.getTab()}
           <div class="content-container">
-            ${this.getContainer(tab)}
+            ${this.getContainer(this._tab)}
           </div>
         </section>
 
@@ -332,9 +339,9 @@ export default class AppSearch extends HTMLElement {
       case "stories":
         return this.getStories();
       case "people":
-        return this.getReplies();
-      case "topic":
         return this.getPeople();
+      case "topic":
+        return this.getTopics();
       default:
         return this.getStories();
     }
