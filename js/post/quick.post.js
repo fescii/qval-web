@@ -14,7 +14,7 @@ export default class QuickPost extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log('We are inside connectedCallback');
+    const shareButton = this.shadowObj.querySelector('.action.share');
 
     this.openForm();
 
@@ -24,14 +24,16 @@ export default class QuickPost extends HTMLElement {
     // activate the like button
     this.likePost();
 
-    // Open share overlay
-    this.openShare();
-
     // Open read more
     this.openReadMore();
 
-    // Open full post
-    this.openQuickPost()
+    if (shareButton) {
+      // Open share overlay
+      this.openShare(shareButton);
+
+      // Open full post
+      this.openQuickPost(shareButton)
+    }
   }
 
   disableScroll() {
@@ -52,7 +54,9 @@ export default class QuickPost extends HTMLElement {
   }
 
   // Open quick post
-  openQuickPost = () => {
+  openQuickPost = (shareButton) => {
+    const overlay = shareButton.querySelector('.overlay');
+
     // get url
     let url = this.getAttribute('url');
 
@@ -68,8 +72,11 @@ export default class QuickPost extends HTMLElement {
       content.addEventListener('click', event => {
         event.preventDefault();
 
-        // scroll to the top of the page
-        window.scrollTo(0, 0);
+        // check if overlay is active
+        if (overlay.classList.contains('active')) {
+          overlay.classList.remove('active');
+          return;
+        }
 
         // Get full post
         const post =  this.getFullPost();
@@ -292,55 +299,50 @@ export default class QuickPost extends HTMLElement {
   }
 
   // fn to open the share overlay
-  openShare = () => {
-    // Get share button
-    const shareButton = this.shadowObj.querySelector('.action.share');
+  openShare = (shareButton) => {
+    // Get overlay
+    const overlay = shareButton.querySelector('.overlay');
 
-    // Check if the overlay exists
-    if (shareButton) {
-      // Get overlay
-      const overlay = shareButton.querySelector('.overlay');
+    // Select close button
+    const closeButton = shareButton.querySelector('.close');
 
-      // Select close button
-      const closeButton = shareButton.querySelector('.close');
+    // Add event listener to the close button
+    closeButton.addEventListener('click', e => {
+      // prevent the default action
+      e.preventDefault()
 
-      // Add event listener to the close button
-      closeButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
+      // prevent the propagation of the event
+      e.stopPropagation();
 
-        // prevent the propagation of the event
+      // Remove the active class
+      overlay.classList.remove('active');
+    });
+
+    // Add event listener to the share button
+    shareButton.addEventListener('click', e => {
+      // prevent the default action
+      e.preventDefault()
+
+      // prevent the propagation of the event
+      e.stopPropagation();
+
+      // Toggle the overlay
+      overlay.classList.add('active');
+
+      // add event to run once when the overlay is active: when user click outside the overlay
+      document.body.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopImmediatePropagation()
         e.stopPropagation();
 
-        // Remove the active class
-        overlay.classList.remove('active');
-      });
+        // Check if the target is not the overlay
+        if (!overlay.contains(e.target)) {
 
-      // Add event listener to the share button
-      shareButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Toggle the overlay
-        overlay.classList.add('active');
-
-        // add event to run once when the overlay is active: when user click outside the overlay
-        document.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // Check if the target is not the overlay
-          if (!overlay.contains(e.target)) {
-
-            // Remove the active class
-            overlay.classList.remove('active');
-          }
-        }, { once: true });
-      });
-    }
+          // Remove the active class
+          overlay.classList.remove('active');
+        }
+      }, { once: true });
+    });
   }
 
   // Open read more

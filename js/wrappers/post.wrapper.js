@@ -235,7 +235,7 @@ export default class PostWrapper extends HTMLElement {
         overlay.classList.add('active');
 
         // add event to run once when the overlay is active: when user click outside the overlay
-        document.addEventListener('click', e => {
+        document.body.addEventListener('click', e => {
           e.preventDefault();
           e.stopPropagation();
 
