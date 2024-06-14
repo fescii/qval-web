@@ -1200,6 +1200,7 @@ export default class AppUser extends HTMLElement {
         section.content > div.content-container {
           display: flex;
           flex-flow: column;
+          position: relative;
           padding: 0;
           margin: 0;
           width: 100%;
@@ -1320,8 +1321,8 @@ export default class AppUser extends HTMLElement {
             position: absolute;
             right: 10px;
             top: 18px;
-            width: 20px;
-            height: 20px;
+            width: 23px;
+            height: 23px;
             margin: 0 0 0 -5px;
           }
 
