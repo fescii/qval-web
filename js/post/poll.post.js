@@ -41,6 +41,9 @@ export default class PollPost extends HTMLElement {
 
       // Open poll post
       this.openPollPost(shareButton);
+
+      // Click poll container
+      this.clickPollContainer(shareButton);
     }
 
     // Update poll expiry time per second
@@ -55,9 +58,6 @@ export default class PollPost extends HTMLElement {
       // Listen for checked radio button
       this.listenForChecked();
     }
-
-    // Click poll container
-    this.clickPollContainer();
   }
 
   // Open quick post
@@ -79,6 +79,8 @@ export default class PollPost extends HTMLElement {
     if(body && content) {
       content.addEventListener('click', event => {
         event.preventDefault();
+
+        console.log('overlay:', overlay);
 
         // check if overlay is active
         if (overlay.classList.contains('active')) {
@@ -115,7 +117,9 @@ export default class PollPost extends HTMLElement {
     );
   }
 
-  clickPollContainer = () => {
+  clickPollContainer = shareButton => {
+    // get share overlay
+    const overlay = shareButton.querySelector('.overlay');
     // get url
     let url = this.getAttribute('url');
 
@@ -144,6 +148,13 @@ export default class PollPost extends HTMLElement {
         if (this._voted || new Date(Date.now()) > this._endTime) {
           // Get full post
           const post =  this.getFullPost();
+
+          // check if overlay is active
+          if (overlay.classList.contains('active')) {
+            // remove the active class
+            overlay.classList.remove('active');
+            return;
+          }
 
           // replace and push states
           this.replaceAndPushStates(url, body, post);
