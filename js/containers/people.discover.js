@@ -205,7 +205,8 @@ export default class DiscoverPeople extends HTMLElement {
 	      :host {
         	font-size: 16px;
 				  background-color: var(--background);
-				  padding: 15px 0 0 0;
+					border-bottom: var(--border);
+				  padding: 15px 0;
 					position: relative;
 				  display: flex;
 				  flex-flow: column;
@@ -297,9 +298,9 @@ export default class DiscoverPeople extends HTMLElement {
 
 				@media screen and (max-width:660px) {
 					:host {
-        font-size: 16px;
+        		font-size: 16px;
 						padding: 15px 0;
-						position: static;
+						border-bottom: var(--border-mobile);
 					}
 
 					a {

@@ -80,8 +80,6 @@ export default class PollPost extends HTMLElement {
       content.addEventListener('click', event => {
         event.preventDefault();
 
-        console.log('overlay:', overlay);
-
         // check if overlay is active
         if (overlay.classList.contains('active')) {
           // remove the active class
