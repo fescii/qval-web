@@ -441,6 +441,9 @@ export default class PostWrapper extends HTMLElement {
     // remove all html tags from the content
     content = content.replace(/<[^>]*>?/gm, '');
 
+    // trim all white spaces from the content
+    content = content.trim();
+
     // shorten the content to 85 characters
     content = content.length > 85 ? content.substring(0, 85) : content;
 
