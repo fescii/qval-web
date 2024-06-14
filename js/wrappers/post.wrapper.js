@@ -18,8 +18,7 @@ export default class PostWrapper extends HTMLElement {
 
     // like post
     this.likePost();
-    // open share overlay
-    this.openShare();
+
     // scroll likes
     this.scrollLikes();
   }
@@ -198,58 +197,6 @@ export default class PostWrapper extends HTMLElement {
     animateScroll();
   }
 
-  // fn to open the share overlay
-  openShare = () => {
-    // Get share button
-    const shareButton = this.shadowObj.querySelector('.action.share');
-
-    // Check if the overlay exists
-    if (shareButton) {
-      // Get overlay
-      const overlay = shareButton.querySelector('.overlay');
-
-      // Select close button
-      const closeButton = shareButton.querySelector('.close');
-
-      // Add event listener to the close button
-      closeButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Remove the active class
-        overlay.classList.remove('active');
-      });
-
-      // Add event listener to the share button
-      shareButton.addEventListener('click', e => {
-        // prevent the default action
-        e.preventDefault()
-
-        // prevent the propagation of the event
-        e.stopPropagation();
-
-        // Toggle the overlay
-        overlay.classList.add('active');
-
-        // add event to run once when the overlay is active: when user click outside the overlay
-        document.body.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // Check if the target is not the overlay
-          if (!overlay.contains(e.target)) {
-
-            // Remove the active class
-            overlay.classList.remove('active');
-          }
-        }, { once: true });
-      });
-    }
-  }
-
   formatNumber = n => {
     if (n >= 0 && n <= 999) {
       return n.toString();
@@ -366,13 +313,6 @@ export default class PostWrapper extends HTMLElement {
         </span>
         ${this.getLike(this.getAttribute('liked'))}
         ${this.getViews()}
-        <span class="action share">
-          <span class="icon">
-            <span class="sp">•</span>
-            <span class="sp">•</span>
-          </span>
-          ${this.getShare()}
-        </span>
       </div>
 		`
   }
@@ -484,607 +424,456 @@ export default class PostWrapper extends HTMLElement {
     }
   }
 
-  getShare = () => {
+  getAuthor = () => {
     return /* html */`
-      <div class="overlay">
-        <span class="close"></span>
-        <span class="options">
-          <span class="option link">
-            <span class="text">Copy link</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
-              <path d="M580.3 267.2c56.2-56.2 56.2-147.3 0-203.5C526.8 10.2 440.9 7.3 383.9 57.2l-6.1 5.4c-10 8.7-11 23.9-2.3 33.9s23.9 11 33.9 2.3l6.1-5.4c38-33.2 95.2-31.3 130.9 4.4c37.4 37.4 37.4 98.1 0 135.6L433.1 346.6c-37.4 37.4-98.2 37.4-135.6 0c-35.7-35.7-37.6-92.9-4.4-130.9l4.7-5.4c8.7-10 7.7-25.1-2.3-33.9s-25.1-7.7-33.9 2.3l-4.7 5.4c-49.8 57-46.9 142.9 6.6 196.4c56.2 56.2 147.3 56.2 203.5 0L580.3 267.2zM59.7 244.8C3.5 301 3.5 392.1 59.7 448.2c53.6 53.6 139.5 56.4 196.5 6.5l6.1-5.4c10-8.7 11-23.9 2.3-33.9s-23.9-11-33.9-2.3l-6.1 5.4c-38 33.2-95.2 31.3-130.9-4.4c-37.4-37.4-37.4-98.1 0-135.6L207 165.4c37.4-37.4 98.1-37.4 135.6 0c35.7 35.7 37.6 92.9 4.4 130.9l-5.4 6.1c-8.7 10-7.7 25.1 2.3 33.9s25.1 7.7 33.9-2.3l5.4-6.1c49.9-57 47-142.9-6.5-196.5c-56.2-56.2-147.3-56.2-203.5 0L59.7 244.8z" />
-            </svg>
-          </span>
-          <span class="option more">
-            <span class="text">Share options</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"  fill="currentColor">
-            <path d="M15 3a3 3 0 0 1-5.175 2.066l-3.92 2.179a2.994 2.994 0 0 1 0 1.51l3.92 2.179a3 3 0 1 1-.73 1.31l-3.92-2.178a3 3 0 1 1 0-4.133l3.92-2.178A3 3 0 1 1 15 3Zm-1.5 10a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 13.5 13Zm-9-5a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 4.5 8Zm9-5a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 13.5 3Z"></path>
-            </svg>
-          </span>
-          <span class="option code">
-            <span class="text">Embed code</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"></path>
-            </svg>
-          </span>
-        </span>
-      </div>
+			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-picture')}" name="${this.getAttribute('author-name')}"
+       followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
+       verified="${this.getAttribute('author-verified')}" url="${this.getAttribute('author-url')}"
+       bio="${this.getAttribute('author-bio')}">
+      </author-wrapper>
+		`
+  }
+
+  getShare = () => {
+    // get content of the story
+    let content = this.innerHTML;
+
+    // remove all html tags from the content
+    content = content.replace(/<[^>]*>?/gm, '');
+
+    // shorten the content to 85 characters
+    content = content.length > 85 ? content.substring(0, 85) : content;
+
+    // Get url to share
+    const url = this.getAttribute('url');
+
+    // Get window host url including https/http part
+    let host = window.location.protocol + '//' + window.location.host;
+
+    // combine the url with the host
+    const shareUrl = `${host}${url}`;
+
+    return /* html */`
+      <share-wrapper url="${shareUrl.toLowerCase()}" summery="${content}"></share-wrapper>
     `
   }
 
-  getFull() {
+  getFull = () => {
+    // check mql for mobile view
+    const mql = window.matchMedia('(max-width: 660px)');
     return `
       ${this.getContent()}
+      ${this.getAuthorContainer(mql.matches)}
+      ${this.getShare()}
       ${this.getMeta()}
       ${this.getStats()}
       <form-container type="post"></form-container>
     `;
   }
 
+  getAuthorContainer = mql => {
+    return mql ? this.getAuthor() : '';
+  }
+
 
   getStyles() {
     return /* css */`
-    <style>
-      *,
-      *:after,
-      *:before {
-        box-sizing: border-box !important;
-        font-family: inherit;
-        -webkit-box-sizing: border-box !important;
-      }
-
-      *:focus {
-        outline: inherit !important;
-      }
-
-      *::-webkit-scrollbar {
-        -webkit-appearance: none;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-      }
-
-      p,
-      ul,
-      ol {
-        padding: 0;
-        margin: 0;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      :host {
-        font-size: 16px;
-        /* border: 1px solid #6b7280;*/
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        width: 100%;
-        height: max-content;
-      }
-
-      .content-container {
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        width: 100%;
-        height: max-content;
-      }
-
-      .content {
-        display: flex;
-        flex-flow: column;
-        color: var(--text-color);
-        line-height: 1.5;
-        gap: 0;
-        margin: 0;
-        padding: 0;
-      }
-
-      .content p {
-        margin: 5px 0 0 0;
-        padding: 0;
-        line-height: 1.5;
-        font-size: 1.05rem;
-        font-family: var(--font-text), sans-serif;
-      }
-
-      .content a {
-        cursor: pointer;
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .content a:hover {
-        text-decoration-color: var(--anchor-active) !important;
-        text-decoration: underline;
-        -moz-text-decoration-color: var(--anchor-active) !important;
-      }
-
-      .content ul,
-      .content ol {
-        margin: 10px 0 0 20px;
-        line-height: 1.4;
-        color: var(--font-text);
-        font-family: var(--font-text), sans-serif;
-      }
-
-      .content ul a,
-      .content ol a {
-        background: unset;
-        color: var(--font-text);
-        font-weight: 500;
-        text-decoration-color: var(--anchor) !important;
-        text-decoration: underline;
-        -moz-text-decoration-color: var(--anchor) !important;
-      }
-
-      .content ul a:hover,
-      .content ol a:hover {
-        text-decoration-color: #4b5563bd !important;
-        -moz-text-decoration-color: #4b5563bd !important;
-      }
-
-      .meta {
-        border-bottom: var(--border);
-        border-top: var(--border);
-        margin: 10px 0 0;
-        padding: 12px 0;
-        display: flex;
-        position: relative;
-        color: var(--text-color);
-        align-items: center;
-        font-family: var(--font-text), sans-serif;
-        gap: 5px;
-        font-size: 1rem;
-        font-weight: 600;
-      }
-
-      .stats.actions {
-        /* border: var(--input-border); */
-        padding: 5px 0 0 0;
-        margin: 0 0 15px 0;
-        display: flex;
-        align-items: center;
-        gap: 0;
-      }
-
-      .stats.actions > span.write.action {
-        cursor: pointer;
-        position: relative;
-        display: flex;
-        align-items: center;
-        font-family: var(--font-text) sans-serif;
-        font-size: 0.95rem;
-        justify-content: start;
-        gap: 5px;
-        padding: 5px 5px;
-        height: 30px;
-        border-radius: 50px;
-        font-weight: 500;
-        font-size: 1rem;
-        color: var(--gray-color);
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
-      }
-
-      .stats.actions > span.write.action > svg {
-        width: 19px;
-        height: 19px;
-        margin: -2px 0 0 0;
-      }
-
-      .stats.actions > span.write.action span.line {
-        background: var(--accent-linear);
-        position: absolute;
-        top: 30px;
-        left: 13px;
-        display: none;
-        width: 3px;
-        height: 20px;
-        border-radius: 5px;
-      }
-
-      .stats.actions > span.write.action.open span.line {
-        display: inline-block;
-      }
-
-      .stats.actions > span.write.action.open {
-        color: var(--accent-color);
-      }
-
-      .stats.actions > span.write.action.open > span.numbers {
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .stats.actions > span.stat,
-      .stats.actions > span.action {
-        /* border: var(--input-border); */
-        min-height: 35px;
-        height: 30px;
-        width: max-content;
-        position: relative;
-        padding: 5px 10px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        font-size: 1rem;
-        font-weight: 400;
-        /* color: var(--action-color); */
-        color: var(--gray-color);
-        border-radius: 50px;
-        -webkit-border-radius: 50px;
-        -moz-border-radius: 50px;
-        -ms-border-radius: 50px;
-        -o-border-radius: 50px;
-      }
-
-      .stats.actions > span.stat.views {
-        gap: 2px;
-      }
-
-      .stats.actions > span.stat.views {
-        padding: 5px 5px;
-      }
-
-      .stats.actions > span:first-of-type {
-        margin: 0 0 0 -7px;
-      }
-
-      .stats.actions > span.action.share {
-        /* border: var(--input-border); */
-        min-height: 35px;
-        height: 35px;
-        width: 35px;
-        max-width: 35px;
-        padding: 0;
-      }
-
-      .stats.actions > span.play:hover,
-      .stats.actions > span.stat:hover,
-      .stats.actions > span.action:hover {
-        background: var(--hover-background);
-      }
-
-      .stats.actions > span.stat.views:hover {
-        background: inherit;
-      }
-
-      .stats.actions span.numbers {
-        /* border: var(--input-border); */
-        font-family: var(--font-main), sans-serif;
-        font-size: 1rem;
-        font-weight: 500;
-      }
-
-      .stats.actions > span {
-        /* border: var(--input-border); */
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 3px;
-        font-size: 1rem;
-        font-weight: 400;
-        /* color: var(--gray-color); */
-      }
-
-      .stats.actions > .stat > .numbers,
-      .stats.actions > .action > .numbers {
-        height: 21px;
-        min-height: 21px;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        overflow-y: scroll;
-        scroll-snap-type: y mandatory;
-        scroll-behavior: smooth;
-        scrollbar-width: none;
-        gap: 0;
-        align-items: start;
-        justify-content: start;
-        flex-flow: column;
-        transition: height 0.5s ease, min-height 0.5s ease; /* Specify the properties to transition */
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        will-change: transform;
-      }
-
-      .stats.actions > span > .numbers::-webkit-scrollbar {
-        display: none !important;
-        visibility: hidden;
-      }
-
-      .stats.actions > span > .numbers > span {
-        /* border: 1px solid red; */
-        scroll-snap-align: start;
-         transition: height 0.5s ease, min-height 0.5s ease; /* Specify the properties to transition */
-        line-height: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 21px;
-        min-height: 21px;
-        padding: 3px 0;
-        margin: 0;
-        font-family: var(--font-main), sans-serif;
-        font-size: 0.95rem;
-      }
-
-      .stats.actions > span.true > .numbers > span,
-      .stats.actions > span.active > .numbers > span {
-        color: transparent;
-        background: var(--second-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .stats.actions > span.up > .numbers > span {
-        color: transparent;
-        background: var(--accent-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .stats.actions > span.down > .numbers > span {
-        color: transparent;
-        background: var(--error-linear);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .stats.actions > span.action.share {
-        min-width: 45px;
-      }
-
-      .stats.actions > span.action.share > .icon {
-        display: flex;
-        gap: 0;
-      }
-      .stats.actions > span.action.share > .icon > span.sp {
-        display: inline-block;
-        font-size: 1.2rem;
-        margin: 0 0 2px 0;
-        /* color: var(--gray-color); */
-      }
-
-      .stats.actions > span svg {
-        color: inherit;
-        width: 16px;
-        height: 16px;
-      }
-
-      .stats.actions > span.action.like svg {
-        margin: -1px 0 0 0;
-        width: 16px;
-        height: 16px;
-        transition: transform 0.5s ease;
-      }
-
-      .stats.actions > span.stat.views svg {
-        color: inherit;
-        width: 16px;
-        height: 16px;
-      }
-
-      .stats.actions > span.stat.up svg {
-        color: var(--accent-color);
-      }
-
-      .stats.actions > span.stat.down svg {
-        color: var(--error-color);
-      }
-
-      .stats.actions > span.true svg,
-      .stats.actions > span.active svg {
-        color: var(--alt-color);
-      }
-
-      .stats.actions > span.action.share > .overlay {
-        display: none;
-        flex-flow: column;
-        z-index: 4;
-      }
-
-      .stats.actions > span.action.share > .overlay span.close {
-        display: none;
-      }
-
-      .stats.actions>span.action.share > .overlay.active {
-        display: flex;
-      }
-
-      .stats.actions > span.action.share .options {
-        display: flex;
-        flex-flow: column;
-        gap: 0;
-        box-shadow: var(--card-box-shadow);
-        width: 240px;
-        padding: 8px 8px;
-        position: absolute;
-        bottom: calc(100% - 35px);
-        right: calc(50% - 100px);
-        background: var(--background);
-        border: var(--border-mobile);
-        border-radius: 20px;
-        -webkit-border-radius: 20px;
-        -moz-border-radius: 20px;
-        -ms-border-radius: 20px;
-        -o-border-radius: 20px;
-      }
-
-      .stats.actions > span.action.share .options > .option {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 5px;
-        padding: 8px 10px;
-        color: var(--text-color);
-        border-radius: 8px;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        -ms-border-radius: 8px;
-        -o-border-radius: 8px;
-      }
-
-      .stats.actions > span.action.share .options > .option:hover {
-        background: var(--hover-background);
-      }
-
-      .stats.actions > span.action.share .options > .option > span.text {
-        font-family: var(--font-text), sans-serif;
-        font-weight: 500;
-        font-size: 1.05rem;
-      }
-
-      .stats.actions > span.action.share .options > .option > svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      .stats.actions > span.action.share .options > .option.code > svg,
-      .stats.actions > span.action.share .options > .option.more > svg {
-        width: 17px;
-        height: 17px;
-      }
-
-      @media screen and (max-width: 660px) {
-        :host {
-          margin: 0 0 15px;
+      <style>
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box !important;
+          font-family: inherit;
+          -webkit-box-sizing: border-box !important;
         }
 
-        ::-webkit-scrollbar {
+        *:focus {
+          outline: inherit !important;
+        }
+
+        *::-webkit-scrollbar {
           -webkit-appearance: none;
         }
 
-        .meta {
-          border-bottom: var(--border-mobile);
-          border-top: var(--border-mobile);
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
+        }
+
+        p,
+        ul,
+        ol {
+          padding: 0;
+          margin: 0;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        :host {
+          font-size: 16px;
+          /* border: 1px solid #6b7280;*/
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+          width: 100%;
+          height: max-content;
+        }
+
+        .content-container {
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+          width: 100%;
+          height: max-content;
+        }
+
+        .content {
+          display: flex;
+          flex-flow: column;
+          color: var(--text-color);
+          line-height: 1.5;
+          gap: 0;
+          margin: 0 0 15px;
+          padding: 0;
+        }
+
+        .content p {
           margin: 5px 0 0 0;
+          padding: 0;
+          line-height: 1.5;
+          font-size: 1.05rem;
+          font-family: var(--font-text), sans-serif;
+        }
+
+        .content a {
+          cursor: pointer;
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .content a:hover {
+          text-decoration-color: var(--anchor-active) !important;
+          text-decoration: underline;
+          -moz-text-decoration-color: var(--anchor-active) !important;
+        }
+
+        .content ul,
+        .content ol {
+          margin: 10px 0 0 20px;
+          line-height: 1.4;
+          color: var(--font-text);
+          font-family: var(--font-text), sans-serif;
+        }
+
+        .content ul a,
+        .content ol a {
+          background: unset;
+          color: var(--font-text);
+          font-weight: 500;
+          text-decoration-color: var(--anchor) !important;
+          text-decoration: underline;
+          -moz-text-decoration-color: var(--anchor) !important;
+        }
+
+        .content ul a:hover,
+        .content ol a:hover {
+          text-decoration-color: #4b5563bd !important;
+          -moz-text-decoration-color: #4b5563bd !important;
+        }
+
+        .meta {
+          border-bottom: var(--border);
+          border-top: none;
+          margin: 0;
           padding: 12px 0;
           display: flex;
           position: relative;
           color: var(--text-color);
           align-items: center;
           font-family: var(--font-text), sans-serif;
-          font-size: 0.95rem;
           gap: 5px;
+          font-size: 1rem;
+          font-weight: 600;
+        }
+
+        .stats.actions {
+          /* border: var(--input-border); */
+          padding: 5px 0 0 0;
+          margin: 0 0 15px 0;
+          display: flex;
+          align-items: center;
+          gap: 0;
+        }
+
+        .stats.actions > span.write.action {
+          cursor: pointer;
+          position: relative;
+          display: flex;
+          align-items: center;
+          font-family: var(--font-text) sans-serif;
+          font-size: 0.95rem;
+          justify-content: start;
+          gap: 5px;
+          padding: 5px 5px;
+          height: 30px;
+          border-radius: 50px;
           font-weight: 500;
+          font-size: 1rem;
+          color: var(--gray-color);
+          -webkit-border-radius: 50px;
+          -moz-border-radius: 50px;
+          -ms-border-radius: 50px;
+          -o-border-radius: 50px;
         }
 
-        .stats {
-          padding: 10px 0;
+        .stats.actions > span.write.action > svg {
+          width: 19px;
+          height: 19px;
+          margin: -2px 0 0 0;
         }
 
-        a,
-        .stats > .stat {
-          cursor: default !important;
+        .stats.actions > span.write.action span.line {
+          background: var(--accent-linear);
+          position: absolute;
+          top: 30px;
+          left: 13px;
+          display: none;
+          width: 3px;
+          height: 20px;
+          border-radius: 5px;
         }
 
-        a,
-        span.stat,
-        span.action {
-          cursor: default !important;
+        .stats.actions > span.write.action.open span.line {
+          display: inline-block;
+        }
+
+        .stats.actions > span.write.action.open {
+          color: var(--accent-color);
+        }
+
+        .stats.actions > span.write.action.open > span.numbers {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .stats.actions > span.stat,
+        .stats.actions > span.action {
+          /* border: var(--input-border); */
+          min-height: 35px;
+          height: 30px;
+          width: max-content;
+          position: relative;
+          padding: 5px 10px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          font-size: 1rem;
+          font-weight: 400;
+          /* color: var(--action-color); */
+          color: var(--gray-color);
+          border-radius: 50px;
+          -webkit-border-radius: 50px;
+          -moz-border-radius: 50px;
+          -ms-border-radius: 50px;
+          -o-border-radius: 50px;
+        }
+
+        .stats.actions > span.stat.views {
+          gap: 2px;
+        }
+
+        .stats.actions > span.stat.views {
+          padding: 5px 5px;
+        }
+
+        .stats.actions > span:first-of-type {
+          margin: 0 0 0 -7px;
         }
 
         .stats.actions > span.play:hover,
         .stats.actions > span.stat:hover,
         .stats.actions > span.action:hover {
-          background: none;
+          background: var(--hover-background);
         }
 
-        .stats.actions > span.action.share > .overlay {
-          position: fixed;
-          background-color: var(--modal-overlay);
-          z-index: 100;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          display: none;
+        .stats.actions > span.stat.views:hover {
+          background: inherit;
         }
 
-        .stats.actions > span.action.share > .overlay span.close {
+        .stats.actions span.numbers {
+          /* border: var(--input-border); */
+          font-family: var(--font-main), sans-serif;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+
+        .stats.actions > span {
+          /* border: var(--input-border); */
+          padding: 0;
           display: flex;
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-        }
-
-        .stats.actions > span.action.share .options {
-          display: flex;
-          flex-flow: row;
           align-items: center;
-          justify-content: space-around;
-          z-index: 1;
-          gap: 0;
-          box-shadow: var(--card-box-shadow);
-          width: 100%;
-          padding: 15px 8px;
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          left: 0;
-          background: var(--background);
-          border: var(--border-mobile);
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-
-        .stats.actions > span.action.share .options > .option {
-          display: flex;
-          flex-flow: column-reverse;
-          align-items: center;
-          justify-content: space-between;
-          gap: 5px;
-          padding: 10px;
-        }
-
-        .stats.actions > span.action.share .options > .option > svg {
-          width: 30px;
-          height: 30px;
-        }
-
-        .stats.actions > span.action.share .options > .option.code > svg {
-          width: 29px;
-          height: 29px;
-        }
-
-        .stats.actions > span.action.share .options > .option.more > svg {
-          width: 27px;
-          height: 27px;
-        }
-
-        .stats.actions > span.action.share .options > .option > span.text {
-          font-family: var(--font-read), sans-serif;
+          justify-content: center;
+          gap: 3px;
+          font-size: 1rem;
           font-weight: 400;
-          font-size: 0.8rem;
+          /* color: var(--gray-color); */
         }
-      }
-    </style>
+
+        .stats.actions > .stat > .numbers,
+        .stats.actions > .action > .numbers {
+          height: 21px;
+          min-height: 21px;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          overflow-y: scroll;
+          scroll-snap-type: y mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+          gap: 0;
+          align-items: start;
+          justify-content: start;
+          flex-flow: column;
+          transition: height 0.5s ease, min-height 0.5s ease; /* Specify the properties to transition */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          will-change: transform;
+        }
+
+        .stats.actions > span > .numbers::-webkit-scrollbar {
+          display: none !important;
+          visibility: hidden;
+        }
+
+        .stats.actions > span > .numbers > span {
+          /* border: 1px solid red; */
+          scroll-snap-align: start;
+          transition: height 0.5s ease, min-height 0.5s ease; /* Specify the properties to transition */
+          line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 21px;
+          min-height: 21px;
+          padding: 3px 0;
+          margin: 0;
+          font-family: var(--font-main), sans-serif;
+          font-size: 0.95rem;
+        }
+
+        .stats.actions > span.true > .numbers > span,
+        .stats.actions > span.active > .numbers > span {
+          color: transparent;
+          background: var(--second-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .stats.actions > span.up > .numbers > span {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .stats.actions > span.down > .numbers > span {
+          color: transparent;
+          background: var(--error-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        .stats.actions > span svg {
+          color: inherit;
+          width: 16px;
+          height: 16px;
+        }
+
+        .stats.actions > span.action.like svg {
+          margin: -1px 0 0 0;
+          width: 16px;
+          height: 16px;
+          transition: transform 0.5s ease;
+        }
+
+        .stats.actions > span.stat.views svg {
+          color: inherit;
+          width: 16px;
+          height: 16px;
+        }
+
+        .stats.actions > span.stat.up svg {
+          color: var(--accent-color);
+        }
+
+        .stats.actions > span.stat.down svg {
+          color: var(--error-color);
+        }
+
+        .stats.actions > span.true svg,
+        .stats.actions > span.active svg {
+          color: var(--alt-color);
+        }
+
+        @media screen and (max-width: 660px) {
+          :host {
+            margin: 0 0 15px;
+          }
+
+          ::-webkit-scrollbar {
+            -webkit-appearance: none;
+          }
+
+          .meta {
+            border-bottom: var(--border-mobile);
+            margin: 5px 0 0 0;
+            padding: 12px 0;
+            display: flex;
+            position: relative;
+            color: var(--text-color);
+            align-items: center;
+            font-family: var(--font-text), sans-serif;
+            font-size: 0.95rem;
+            gap: 5px;
+            font-weight: 500;
+          }
+
+          .stats {
+            padding: 10px 0;
+          }
+
+          a,
+          .stats > .stat {
+            cursor: default !important;
+          }
+
+          a,
+          span.stat,
+          span.action {
+            cursor: default !important;
+          }
+
+          .stats.actions > span.play:hover,
+          .stats.actions > span.stat:hover,
+          .stats.actions > span.action:hover {
+            background: none;
+          }
+        }
+      </style>
     `;
   }
 }

@@ -70,7 +70,6 @@ export default class AppPost extends HTMLElement {
       return /* html */`
         ${this.getTop()}
         ${this.getPost(story)}
-        ${this.getAuthor()}
         ${this.getSection()}
       `;
     }
@@ -91,24 +90,35 @@ export default class AppPost extends HTMLElement {
   }
 
   getPost = story => {
+    // get url from the story
+    let url = this.getAttribute('url');
+    // trim and convert to lowercase
+    url = url.trim().toLowerCase();
+  
     switch (story) {
       case 'poll':
         return /*html */`
-          <poll-wrapper upvotes="${this.getAttribute('upvotes')}" hash="${this.getAttribute('hash')}"
+          <poll-wrapper hash="${this.getAttribute('hash')}" upvotes="${this.getAttribute('upvotes')}" url="${url}"
             replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
             views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
-            author-username="${this.getAttribute('author-username')}"
             options='${this.getAttribute("options")}' voted="${this.getAttribute('voted')}" selected="${this.getAttribute('selected')}"
-            end-time="${this.getAttribute('end-time')}">
+            end-time="${this.getAttribute('end-time')}"
+            author-username="${this.getAttribute('author-username')}" author-picture="${this.getAttribute('author-img')}" author-name="${this.getAttribute('author-name')}"
+            author-followers="${this.getAttribute('author-followers')}" author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-follow')}"
+            author-verified="${this.getAttribute('author-verified')}" author-url="${this.getAttribute('author-url')}"
+            author-bio="${this.getAttribute('author-bio')}">
             ${this.innerHTML}
           </poll-wrapper>
         `
       default:
         return /* html */`
-          <post-wrapper upvotes="${this.getAttribute('upvotes')}" id="${this.getAttribute('id')}"
+          <post-wrapper hash="${this.getAttribute('hash')}" upvotes="${this.getAttribute('upvotes')}" url="${url}"
             replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
             views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
-            author-username="${this.getAttribute('author-username')}">
+            author-username="${this.getAttribute('author-username')}" author-picture="${this.getAttribute('author-img')}" author-name="${this.getAttribute('author-name')}"
+            author-followers="${this.getAttribute('author-followers')}" author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-follow')}"
+            author-verified="${this.getAttribute('author-verified')}" author-url="${this.getAttribute('author-url')}"
+            author-bio="${this.getAttribute('author-bio')}">
             ${this.innerHTML}
           </post-wrapper>
         `
