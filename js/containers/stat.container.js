@@ -151,21 +151,6 @@ export default class StatContainer extends HTMLElement {
   }
 
   getHeader = () => {
-    // mql
-    const mql = window.matchMedia('(max-width: 660px)');
-
-    // check if the media query is true
-    if (!mql.matches) {
-      return /* html */`
-        <div class="top">
-          <h4 class="title">Your stats</h4>
-          <p class="desc">
-            Your stats are a summary of your interactions on the platform. You can view your stories, replies and likes/upvotes.
-          </p>
-        </div>
-      `;
-    }
-
     return /* html */`
         <div class="top">
           <p class="desc">

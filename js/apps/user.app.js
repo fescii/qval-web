@@ -326,7 +326,6 @@ export default class AppUser extends HTMLElement {
     this.populateContent(state.tab, contentContainer);
   }
 
-  // watch for mql changes
   watchMediaQuery = mql => {
     const outerThis = this;
     mql.addEventListener('change', () => {
@@ -346,7 +345,6 @@ export default class AppUser extends HTMLElement {
     });
   }
 
-  // Update current
   updateCurrentText = tab => {
     // Select the top h3
     const top = this.shadowObj.querySelector('.top-nav > h3.name');
@@ -530,8 +528,8 @@ export default class AppUser extends HTMLElement {
     if (mql.matches) {
       return /* html */`
       <main class="profile">
+        ${this.getTop()}
         <section class="content">
-          ${this.getTop()}
           ${this.getTab()}
           ${this.getLoader()}
         </section>
@@ -540,48 +538,15 @@ export default class AppUser extends HTMLElement {
     }
     else {
       return /* html */`
-        ${this.getHeader()}
         <main class="profile">
           ${this.getTab()}
           <section class="content">
+            ${this.getTop()}
             ${this.getLoader()}
           </section>
         </main>
       `;
     }
-  }
-
-  getHeader = () => {
-
-    // Get name and check if it's greater than 20 characters
-    const name = this.getAttribute('user-name');
-
-    // Check if the name is greater than 20 characters: replace the rest with ...
-    let displayName =  name.length > 18 ? `${name.substring(0, 18)}..` : name;
-
-
-    return /* html */`
-      <section class="top remains">
-        <svg class="header-back-btn" title="Go back" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-          <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
-        </svg>
-        <div class="profile">
-          <img src="${this.getAttribute('user-image')}" alt="profile image" class="profile-image">
-        </div>
-        <div class="name">
-          <h4 class="name">
-            <span class="name">${displayName}</span>
-            ${this.checkVerified(this.getAttribute('verified'))}
-          </h4>
-          <a href="${this.getAttribute('user-url')}" class="username">
-            <span class="text">${this.getAttribute('user-hash')}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
-            </svg>
-          </a>
-        </div>
-      </section>
-    `
   }
 
   checkVerified = verified => {
@@ -599,14 +564,23 @@ export default class AppUser extends HTMLElement {
 
   getTop = () => {
     return /* html */ `
-      <div class="top-nav remains">
-        <svg class="top-back-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-          <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
-        </svg>
-        <h3 class="name">Settings</h3>
-      </div>
+      <header-wrapper section="Your stats" type="user"
+        user-url="${this.getAttribute('url')}" auth-url="${this.getAttribute('auth-url')}"
+        url="${this.getAttribute('url')}" search-url="${this.getAttribute('search-url')}">
+      </header-wrapper>
     `
   }
+
+  // getTop = () => {
+  //   return /* html */ `
+  //     <div class="top-nav remains">
+  //       <svg class="top-back-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+  //         <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
+  //       </svg>
+  //       <h3 class="name">Settings</h3>
+  //     </div>
+  //   `
+  // }
 
   getFormName = () =>  {
     // Get name and split it into first and last name if there two spaces combine the rest
@@ -751,21 +725,10 @@ export default class AppUser extends HTMLElement {
     `
   }
 
-  checkHeaderMobile = mql => {
-    if (mql.matches) {
-      return this.getHeader();
-    }
-
-    return '';
-  }
-
   getTab = () =>  {
-    // Check if the header is mobile
-    const mql = window.matchMedia('(max-width: 660px)');
-
     return /* html */`
       <section class="tab remains">
-        ${this.checkHeaderMobile(mql)}
+        ${this.getHeader()}
         <ul class="tab public">
           <li url="/user/stats" class="tab-item stats" data-name="stats">
             <span class="line"></span>
@@ -903,6 +866,39 @@ export default class AppUser extends HTMLElement {
     `;
   }
 
+  getHeader = () => {
+
+    // Get name and check if it's greater than 20 characters
+    const name = this.getAttribute('user-name');
+
+    // Check if the name is greater than 20 characters: replace the rest with ...
+    let displayName =  name.length > 18 ? `${name.substring(0, 18)}..` : name;
+
+
+    return /* html */`
+      <div class="header remains">
+        <svg class="top-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+        <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
+        </svg>
+        <div class="profile">
+          <img src="${this.getAttribute('user-image')}" alt="profile image" class="profile-image">
+        </div>
+        <div class="name">
+          <h4 class="name">
+            <span class="name">${displayName}</span>
+            ${this.checkVerified(this.getAttribute('verified'))}
+          </h4>
+          <a href="${this.getAttribute('user-url')}" class="username">
+            <span class="text">${this.getAttribute('user-hash')}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+              <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    `
+  }
+
   getStyles() {
     return /* css */`
 	    <style>
@@ -1037,113 +1033,6 @@ export default class AppUser extends HTMLElement {
           }
         }
 
-        section.top {
-          /* border-bottom: var(--border); */
-          display: flex;
-          background-color: var(--background);
-          width: 100%;
-          gap: 0;
-          padding: 7px 0;
-          height: 64px;
-          max-height: 64px;
-          margin: 0;
-          display: flex;
-          align-items: center;
-          z-index: 100;
-          position: sticky;
-          top: 0;
-        }
-
-        section.top > svg {
-          cursor: pointer;
-          color: var(--title-color);
-          width: 38px;
-          height: 38px;
-          margin: 0 0 0 -5px;
-          transition: color 0.3s ease;
-        }
-
-        section.top > svg:hover {
-          color: var(--accent-color);
-        }
-
-        section.top > .profile {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 35px;
-          height: 35px;
-          min-width: 40px;
-          min-height: 40px;
-          overflow: hidden;
-          border-radius: 50%;
-          -webkit-border-radius: 50%;
-          -moz-border-radius: 50%;
-          -ms-border-radius: 50%;
-          -o-border-radius: 50%;
-        }
-
-        section.top > .profile > img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        section.top > .name {
-          margin: 0 0 0 5px;
-          display: flex;
-          justify-content: center;
-          flex-flow: column;
-          gap: 0;
-        }
-
-        section.top > .name > h4.name {
-          margin: 0;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          color: var(--title-color);
-          font-family: var(--font-read), sans-serif;
-          font-size: 1rem;
-          font-weight: 500;
-        }
-
-        section.top > .name > h4.name svg {
-          color: var(--alt-color);
-          margin: 2px 0 0 0;
-          width: 15px;
-          height: 15px;
-        }
-
-        section.top > .name > a.username {
-          color: var(--gray-color);
-          font-family: var(--font-mono), monospace;
-          font-size: 0.8rem;
-          font-weight: 500;
-          text-decoration: none;
-          display: flex;
-          gap: 2px;
-          align-items: center;
-        }
-
-        section.top > .name > a.username svg {
-          color: var(--gray-color);
-          width: 15px;
-          height: 15px;
-          margin: 1px 0 0 0;
-        }
-
-        section.top > .name > a.username:hover {
-          color: transparent;
-          background: var(--accent-linear);
-          background-clip: text;
-          -webkit-background-clip: text;
-        }
-
-        section.top > .name > a.username:hover svg {
-          color: var(--accent-color);
-        }
-
         section.back {
           display: flex;
           width: 100%;
@@ -1154,7 +1043,6 @@ export default class AppUser extends HTMLElement {
         }
 
         section.back > .back-btn {
-          /* border: 1px solid #53595f;*/
           display: flex;
           align-items: center;
           width: max-content;
@@ -1175,25 +1063,24 @@ export default class AppUser extends HTMLElement {
         }
 
         main.profile {
-          padding: 15px 0;
+          padding: 0;
           margin: 0;
           display: flex;
           justify-content: space-between;
-          gap: 0;
-          min-height: 60vh;
+          gap: 30px;
+          min-height: 100vh;
         }
 
         section.tab {
-          /* border: 1px solid #53595f;*/
-          padding: 0;
+          padding: 12px 0;
           width: 25%;
           display: flex;
           flex-flow: column;
+          position: sticky;
+          top: 0;
           gap: 10px;
           height: max-content;
-          position: sticky;
-          top: 70px;
-          max-height: 100%;
+          max-height: 100vh;
           overflow-y: auto;
           scrollbar-width: none;
           -ms-overflow-style: none;
@@ -1202,6 +1089,110 @@ export default class AppUser extends HTMLElement {
         section.tab::-webkit-scrollbar {
           display: none;
           visibility: hidden;
+        }
+
+        section.tab > div.header {
+          display: flex;
+          background-color: var(--background);
+          width: 100%;
+          gap: 0;
+          padding: 7px 0;
+          height: 64px;
+          max-height: 64px;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+        }
+
+        section.tab > div.header > svg {
+          cursor: pointer;
+          width: 35px;
+          height: 35px;
+          margin: 0 0 0 -8px;
+        }
+
+        section.tab > div.header > svg:hover {
+          color: var(--accent-color);
+        }
+
+        section.tab > div.header > .profile {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 35px;
+          height: 35px;
+          min-width: 40px;
+          min-height: 40px;
+          overflow: hidden;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+        }
+
+        section.tab > div.header > .profile > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        section.tab > div.header > .name {
+          margin: 0 0 0 5px;
+          display: flex;
+          justify-content: center;
+          flex-flow: column;
+          gap: 0;
+        }
+
+        section.tab > div.header > .name > h4.name {
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: var(--title-color);
+          font-family: var(--font-main), sans-serif;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+
+        section.tab > div.header > .name > h4.name svg {
+          color: var(--alt-color);
+          margin: 2px 0 0 0;
+          width: 15px;
+          height: 15px;
+        }
+
+        section.tab > div.header > .name > a.username {
+          color: var(--gray-color);
+          font-family: var(--font-mono), monospace;
+          font-size: 0.8rem;
+          font-weight: 500;
+          text-decoration: none;
+          display: flex;
+          gap: 2px;
+          align-items: center;
+        }
+
+        section.tab > div.header > .name > a.username svg {
+          color: var(--gray-color);
+          width: 15px;
+          height: 15px;
+          margin: 1px 0 0 0;
+        }
+
+        section.tab > div.header > .name > a.username:hover {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        section.tab > div.header > .name > a.username:hover svg {
+          color: var(--accent-color);
         }
 
         section.tab > ul.tab {
@@ -1290,7 +1281,7 @@ export default class AppUser extends HTMLElement {
           flex-flow: column;
           align-items: start;
           padding: ;
-          gap: 35px;
+          gap: 0;
           width: 70%;
         }
 
@@ -1353,7 +1344,7 @@ export default class AppUser extends HTMLElement {
             display: flex;
           }
 
-          section.top {
+          section.tab > div.header {
             padding: 7px 0;
             height: 55px;
             max-height: 55px;
@@ -1364,7 +1355,7 @@ export default class AppUser extends HTMLElement {
             cursor: default !important;
           }
 
-          section.top > svg {
+          section.tab > div.header > svg {
             cursor: default !important;
             width: 38px;
             height: 38px;
