@@ -538,11 +538,12 @@ export default class PostWrapper extends HTMLElement {
         .content {
           display: flex;
           flex-flow: column;
+          border-bottom: var(--border);
           color: var(--text-color);
           line-height: 1.5;
           gap: 0;
-          margin: 0 0 15px;
-          padding: 0;
+          margin: 0;
+          padding: 0 0 15px 0;
         }
 
         .content p {
@@ -836,6 +837,11 @@ export default class PostWrapper extends HTMLElement {
 
           ::-webkit-scrollbar {
             -webkit-appearance: none;
+          }
+
+          .content {
+            border-bottom: var(--border-mobile);
+            margin: 0 0 15px;
           }
 
           .meta {

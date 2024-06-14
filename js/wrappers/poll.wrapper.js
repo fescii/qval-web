@@ -997,6 +997,8 @@ export default class PollWrapper extends HTMLElement {
 
         .poll {
           padding: 10px 0 15px 0;
+          margin: 0;
+          border-bottom: var(--border);
           display: flex;
           flex-flow: column;
           gap: 15px;
@@ -1035,7 +1037,6 @@ export default class PollWrapper extends HTMLElement {
         }
 
         .poll > .poll-options > .poll-option label span.text {
-          /* border: var(--border-mobile); */
           position: absolute;
           left: 0;
           top: 0;
@@ -1149,7 +1150,6 @@ export default class PollWrapper extends HTMLElement {
         }
 
         .stats.actions {
-          /* border: var(--input-border); */
           padding: 5px 0 0 0;
           margin: 0 0 15px 0;
           display: flex;
@@ -1290,7 +1290,7 @@ export default class PollWrapper extends HTMLElement {
           align-items: start;
           justify-content: start;
           flex-flow: column;
-          transition: height 0.5s ease, min-height 0.5s ease; /* Specify the properties to transition */
+          transition: height 0.5s ease, min-height 0.5s ease; 
           -ms-overflow-style: none;
           scrollbar-width: none;
           will-change: transform;
@@ -1302,9 +1302,8 @@ export default class PollWrapper extends HTMLElement {
         }
 
         .stats.actions > span > .numbers > span {
-          /* border: 1px solid red; */
           scroll-snap-align: start;
-          transition: height 0.5s ease, min-height 0.5s ease; /* Specify the properties to transition */
+          transition: height 0.5s ease, min-height 0.5s ease;
           line-height: 1;
           display: flex;
           align-items: center;
@@ -1392,6 +1391,12 @@ export default class PollWrapper extends HTMLElement {
             font-size: 0.95rem;
             gap: 5px;
             font-weight: 600;
+          }
+
+          .poll {
+            padding: 10px 0 10px 0;
+            margin: 0 0 15px;
+            border-bottom: var(--border-mobile);
           }
 
           .stats {
