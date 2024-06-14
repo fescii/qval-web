@@ -1309,6 +1309,16 @@ export default class AppUser extends HTMLElement {
             position: unset;
           }
 
+          section.tab > div.header > .name {
+            margin: 0 0 0 5px;
+            display: flex;
+            justify-content: center;
+            flex-flow: column;
+            gap: 0;
+            width: calc(100% - 90px);
+            max-width: calc(100% - 90px);
+          }
+
           section.tab > div.header {
             padding: 10px 0;
             border-bottom: var(--border-mobile);
