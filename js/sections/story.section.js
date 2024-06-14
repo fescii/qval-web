@@ -16,14 +16,10 @@ export default class StorySection extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    const contentContainer = this.shadowObj.querySelector('.content-container');
+    // const contentContainer = this.shadowObj.querySelector('.content-container');
 
-    // scroll window to the top
-    window.scrollTo(0, 0);
-
-    this.fetchStoryContent(contentContainer);
+    // this.fetchStoryContent(contentContainer);
   }
-
 
   fetchStoryContent = (contentContainer) => {
     // Scroll to the top of the page
@@ -302,12 +298,14 @@ export default class StorySection extends HTMLElement {
   }
 
   getContent = () => {
+    // check mql for mobile view
+    const mql = window.matchMedia('(max-width: 660px)');
     return `
       ${this.getHeader()}
       <article class="article">
         ${this.innerHTML}
       </article>
-      ${this.getNextArticle()}
+      ${this.getAuthorContainer(mql.matches)}
       ${this.getMeta()}
       ${this.getShare()}
       ${this.getStats()}
@@ -324,16 +322,8 @@ export default class StorySection extends HTMLElement {
     `
   }
 
-  getNextArticle = () => {
-    return /* html */`
-      <div class="next-article">
-        <a href="/s/${this.getAttribute('next-hash').toLowerCase()}" class="article">
-          <span class="title">Next article</span>
-          <span class="text">${this.getAttribute('next-title')}</span>
-          <span class="date">${this.getDate(this.getAttribute('next-date'))}</span>
-        </a>
-      </div>
-    `
+  getAuthorContainer = mql => {
+    return mql ? this.getAuthor() : '';
   }
 
   getMeta = () => {
@@ -485,6 +475,16 @@ export default class StorySection extends HTMLElement {
     }
   }
 
+  getAuthor = () => {
+    return /* html */`
+			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-picture')}" name="${this.getAttribute('author-name')}"
+       followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
+       verified="${this.getAttribute('author-verified')}" url="${this.getAttribute('author-url')}"
+       bio="${this.getAttribute('author-bio')}">
+      </author-wrapper>
+		`
+  }
+
   getShare = () => {
     // Get url to share
     const url = this.getAttribute('url');
@@ -601,43 +601,6 @@ export default class StorySection extends HTMLElement {
           line-height: 1.5;
           font-family: var(--font-main), sans-serif;
           color: var(--title-color);
-        }
-
-        .next-article {
-          padding: 10px 0;
-          margin: 0;
-        }
-
-        .next-article > a {
-          background-color: var(--que-background);
-          padding: 15px 20px;
-          display: flex;
-          flex-flow: column;
-          align-items: flex-end;
-          text-align: end;
-          font-size: 1rem;
-          font-family: var(--font-read), sans-serif;
-          gap: 10px;
-          color: var(--gray-color);
-          border-radius: 5px;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-        }
-
-        .next-article > a > span.text {
-          color: var(--read-color);
-          font-weight: 500;
-        }
-
-        .next-article > a > span.date {
-          font-weight: 500;
-          font-size: 0.8rem;
-          font-family: var(--font-main), sans-serif;
-        }
-
-        .next-article > a > span.title {
-          font-weight: 400;
-          font-size: 0.9rem;
         }
 
         .meta {
@@ -1020,43 +983,9 @@ export default class StorySection extends HTMLElement {
             cursor: default !important;
           }
 
-          .next-article {
-            padding: 0;
-            margin: 5px 0 20px;
-          }
-
-          .next-article > a {
-            border: none;
-            font-size: 0.9rem;
-            font-family: var(--font-read), sans-serif;
-            gap: 10px;
-            background-color: var(--que-background);
-            color: var(--gray-color);
-            border-radius: 5px;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-          }
-
-          .next-article > a > span.text {
-            color: var(--read-color);
-            font-weight: 500;
-            font-size: 0.9rem;
-          }
-
-          .next-article > a > span.date {
-            font-weight: 500;
-            font-size: 0.8rem;
-            font-family: var(--font-main), sans-serif;
-          }
-
-          .next-article > a > span.title {
-            font-weight: 500;
-            font-size: 0.85rem;
-          }
-
           .meta {
             border-bottom: var(--border-mobile);
-            border-top: var(--border-mobile);
+            border-top: none;
             margin: 5px 0 0 0;
             padding: 12px 0;
             display: flex;

@@ -87,7 +87,6 @@ export default class AppStory extends HTMLElement {
         ${this.getTop()}
         <div class="content">
           ${this.getStoryBody()}
-          ${this.getAuthor()}
           ${this.getSection()}
         </div>
       `;
@@ -127,8 +126,10 @@ export default class AppStory extends HTMLElement {
       <story-section topic="${formatted}" hash="${this.getAttribute('hash')}" url="${this.getAttribute('url')}"
         story-title="${this.getAttribute('story-title')}" replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
         views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
-        next-hash="P0AB236B6AB57" next-date="2024-03-13T13:00:00+03:00" next-url="/s/P0AB236B6AB57"
-        next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance">
+        author-username="${this.getAttribute('author-username')}" author-picture="${this.getAttribute('author-img')}" author-name="${this.getAttribute('author-name')}"
+        author-followers="${this.getAttribute('author-followers')}" author-following="${this.getAttribute('author-following')}" author-follow="${this.getAttribute('author-follow')}"
+        author-verified="${this.getAttribute('author-verified')}" author-url="${this.getAttribute('author-url')}"
+        author-bio="${this.getAttribute('author-bio')}">
         ${this.getStoryContent()}
       </story-section>
     `
@@ -308,7 +309,7 @@ export default class AppStory extends HTMLElement {
     return /* html */`
 			<author-wrapper username="${this.getAttribute('author-username')}" picture="${this.getAttribute('author-img')}" name="${this.getAttribute('author-name')}"
        followers="${this.getAttribute('author-followers')}" following="${this.getAttribute('author-following')}" user-follow="${this.getAttribute('author-follow')}"
-       verified="${this.getAttribute('author-verified')}" url="/u/${this.getAttribute('author-username').toLowerCase()}"
+       verified="${this.getAttribute('author-verified')}" url="${this.getAttribute('author-url')}"
        bio="${this.getAttribute('author-bio')}">
       </author-wrapper>
 		`

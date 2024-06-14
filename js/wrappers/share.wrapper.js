@@ -352,6 +352,10 @@ export default class ShareWrapper extends HTMLElement {
             -webkit-appearance: none;
           }
 
+          :host {
+            border-bottom: var(--border-mobile);
+          }
+
           a,
           .share-buttons > span.copy {
             cursor: default !important;
