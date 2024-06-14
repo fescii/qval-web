@@ -100,9 +100,6 @@ export default class ShareWrapper extends HTMLElement {
   getContent = () => {
     return /* html */`
       <div class="share">
-        <p class="title">
-          Share this story on.
-        </p>
         ${this.getShareOptions()}
       </div>
 		`
@@ -239,17 +236,13 @@ export default class ShareWrapper extends HTMLElement {
 
         :host {
           font-size: 16px;
-          /* border-top: var(--border);
-          border-bottom: var(--border); */
-          background: var(--que-background);
-          padding: 10px 10px;
-          margin: 10px 0;
+          padding: 15px 0;
+          border-bottom: var(--border);
+          margin: 0;
           width: 100%;
           display: flex;
           flex-flow: column;
           gap: 0;
-          border-radius: 8px;
-          -webkit-border-radius: 8px;
         }
 
         .title {

@@ -65,6 +65,7 @@ import HoverLoader from "./loaders/hover.loader.js";
 import PostSection from "./sections/post.section.js";
 import ProfileSection from "./sections/profile.section.js";
 import TopicSection from "./sections/topic.section.js";
+import StorySection from "./sections/story.section.js";
 
 // Import stats
 import ActivityItem from "./stats/activity.item.js";
@@ -86,9 +87,6 @@ import ShareWrapper from "./wrappers/share.wrapper.js";
 import UserWrapper from "./wrappers/user.wrapper.js";
 import TopicWrapper from "./wrappers/topic.wrapper.js";
 import HoverAuthor from "./wrappers/hover.author.js";
-
-// Import bodies
-import StoryBody from "./bodies/story.body.js";
 
 
 const initApp = () => {
@@ -156,6 +154,7 @@ const initApp = () => {
   customElements.define("post-section", PostSection);
   customElements.define("profile-section", ProfileSection);
   customElements.define("topic-section", TopicSection);
+  customElements.define("story-section", StorySection);
 
   // Register stats
   customElements.define("activity-item", ActivityItem);
@@ -177,9 +176,6 @@ const initApp = () => {
   customElements.define("user-wrapper", UserWrapper);
   customElements.define("topic-wrapper", TopicWrapper);
   customElements.define("hover-author", HoverAuthor);
-
-  // Register bodies
-  customElements.define("story-body", StoryBody);
 }
 
 export default initApp;

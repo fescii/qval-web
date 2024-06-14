@@ -85,20 +85,20 @@ export default class AppStory extends HTMLElement {
     if (mql.matches) {
       return /* html */`
         ${this.getTop()}
-        <article class="content">
+        <div class="content">
           ${this.getStoryBody()}
           ${this.getAuthor()}
           ${this.getSection()}
-        </article>
+        </div>
       `;
     }
     else {
       return /* html */`
-        <article class="content">
+        <div class="content">
           ${this.getTop()}
           ${this.getStoryBody()}
           ${this.getSection()}
-        </article>
+        </div>
 
         <section class="side">
           ${this.getAuthor()}
@@ -124,13 +124,13 @@ export default class AppStory extends HTMLElement {
 
     // Show HTML Here
     return /* html */ `
-      <story-body topic="${formatted}" hash="${this.getAttribute('hash')}" url="${this.getAttribute('url')}"
+      <story-section topic="${formatted}" hash="${this.getAttribute('hash')}" url="${this.getAttribute('url')}"
         story-title="${this.getAttribute('story-title')}" replies="${this.getAttribute('replies')}" liked="${this.getAttribute('liked')}" likes="${this.getAttribute('likes')}"
         views="${this.getAttribute('views')}" time="${this.getAttribute('time')}"
         next-hash="P0AB236B6AB57" next-date="2024-03-13T13:00:00+03:00" next-url="/s/P0AB236B6AB57"
         next-title="Behind the scenes of Vercel's infrastructure: Achieving optimal scalability and performance">
         ${this.getStoryContent()}
-      </story-body>
+      </story-section>
     `
   }
 
@@ -397,7 +397,7 @@ export default class AppStory extends HTMLElement {
           justify-content: space-between;
         }
 
-        article.content {
+        div.content {
           padding: 0;
           width: 63%;
           display: flex;
@@ -406,7 +406,7 @@ export default class AppStory extends HTMLElement {
         }
 
         /* Responses */
-        article.content section.responses {
+        div.content section.responses {
           display: flex;
           flex-flow: column;
           gap: 0;
@@ -435,7 +435,7 @@ export default class AppStory extends HTMLElement {
         }
 
         @media screen and (max-width:900px) {
-          article.content {
+          div.content {
             width: 58%;
           }
 
@@ -454,11 +454,11 @@ export default class AppStory extends HTMLElement {
             gap: 0;
 					}
 
-          article.content .head {
+          div.content .head {
             margin: 10px 0 0 0;
           }
 
-          article.content {
+          div.content {
             /* border: 1px solid #000000; */
             padding: 0;
             width: 100%;

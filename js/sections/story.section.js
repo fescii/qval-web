@@ -1,4 +1,4 @@
-export default class StoryBody extends HTMLElement {
+export default class StorySection extends HTMLElement {
   constructor() {
     // We are not even going to touch this.
     super();
@@ -296,7 +296,7 @@ export default class StoryBody extends HTMLElement {
   getTemplate() {
     // Show HTML Here
     return `
-      ${this.getBody()}
+      ${this.getContent()}
       ${this.getStyles()}
     `;
   }
@@ -304,11 +304,12 @@ export default class StoryBody extends HTMLElement {
   getContent = () => {
     return `
       ${this.getHeader()}
-      <div class="body">
+      <article class="article">
         ${this.innerHTML}
-      </div>
+      </article>
       ${this.getNextArticle()}
       ${this.getMeta()}
+      ${this.getShare()}
       ${this.getStats()}
       <form-container type="post"></form-container>
     `;
@@ -319,7 +320,6 @@ export default class StoryBody extends HTMLElement {
       <div class="head">
         <span class="topic">${this.getAttribute('topic')}</span>
         <h1 class="story-title">${this.getAttribute('story-title')}</h1>
-        ${this.getShare()}
       </div>
     `
   }
@@ -504,14 +504,6 @@ export default class StoryBody extends HTMLElement {
     `
   }
 
-  getBody() {
-    return /*html*/`
-      <div class="content-container">
-        ${this.getLoader()}
-      </div>
-    `;
-  }
-
   getLoader = () => {
     return `
 			<story-loader speed="300"></story-loader>
@@ -579,23 +571,17 @@ export default class StoryBody extends HTMLElement {
           gap: 0;
         }
 
-        .content-container {
-          margin: 0;
-          display: flex;
-          flex-flow: column;
-        }
-
-        .content-container > div.head {
+        div.head {
           display: flex;
           flex-flow: column;
           gap: 0;
-          margin: 5px 0;
+          margin: 0;
         }
 
-        .content-container > div.head > .topic {
+        div.head > .topic {
           width: max-content;
           color: var(--white-color);
-          margin: 0;
+          margin: 5px 0;
           padding: 3px 10px 4px 10px;
           box-shadow: 0 0 0 1px #ffffff25, 0 2px 2px #0000000a, 0 8px 16px -4px #0000000a;
           background: var(--accent-linear);
@@ -607,21 +593,22 @@ export default class StoryBody extends HTMLElement {
           -moz-border-radius: 50px;
         }
 
-        .content-container > div.head > h1.story-title {
-          margin: 15px 0 0;
+        div.head > h1.story-title {
+          margin: 0;
           padding: 0;
           font-weight: 700;
           font-size: 1.7rem;
           line-height: 1.5;
+          font-family: var(--font-main), sans-serif;
           color: var(--title-color);
         }
 
-        .content-container > .next-article {
+        .next-article {
           padding: 10px 0;
           margin: 0;
         }
 
-        .content-container .next-article > a {
+        .next-article > a {
           background-color: var(--que-background);
           padding: 15px 20px;
           display: flex;
@@ -637,18 +624,18 @@ export default class StoryBody extends HTMLElement {
           -moz-border-radius: 5px;
         }
 
-        .content-container .next-article > a > span.text {
+        .next-article > a > span.text {
           color: var(--read-color);
           font-weight: 500;
         }
 
-        .content-container .next-article > a > span.date {
+        .next-article > a > span.date {
           font-weight: 500;
           font-size: 0.8rem;
           font-family: var(--font-main), sans-serif;
         }
 
-        .content-container .next-article > a > span.title {
+        .next-article > a > span.title {
           font-weight: 400;
           font-size: 0.9rem;
         }
@@ -732,7 +719,6 @@ export default class StoryBody extends HTMLElement {
 
         .stats.actions > span.stat,
         .stats.actions > span.action {
-          /* border: var(--input-border); */
           min-height: 35px;
           height: 30px;
           width: max-content;
@@ -745,7 +731,6 @@ export default class StoryBody extends HTMLElement {
           gap: 5px;
           font-size: 1rem;
           font-weight: 400;
-          /* color: var(--action-color); */
           color: var(--gray-color);
           border-radius: 50px;
           -webkit-border-radius: 50px;
@@ -767,7 +752,6 @@ export default class StoryBody extends HTMLElement {
         }
 
         .stats.actions > span.action.share {
-          /* border: var(--input-border); */
           min-height: 35px;
           height: 35px;
           width: 35px;
@@ -793,7 +777,6 @@ export default class StoryBody extends HTMLElement {
         }
 
         .stats.actions > span {
-          /* border: var(--input-border); */
           padding: 0;
           display: flex;
           align-items: center;
@@ -801,7 +784,6 @@ export default class StoryBody extends HTMLElement {
           gap: 3px;
           font-size: 1rem;
           font-weight: 400;
-          /* color: var(--gray-color); */
         }
 
         .stats.actions > .stat > .numbers,
@@ -831,9 +813,8 @@ export default class StoryBody extends HTMLElement {
         }
 
         .stats.actions > span > .numbers > span {
-          /* border: 1px solid red; */
           scroll-snap-align: start;
-          transition: height 0.5s ease, min-height 0.5s ease; /* Specify the properties to transition */
+          transition: height 0.5s ease, min-height 0.5s ease;
           line-height: 1;
           display: flex;
           align-items: center;
@@ -915,79 +896,69 @@ export default class StoryBody extends HTMLElement {
           color: var(--alt-color);
         }
 
-        div.body {
-          /* border: 1px solid #000000; */
-          margin: 0;
+        article.article {
+          margin: 3px 0 15px;
           display: flex;
           flex-flow: column;
           color: var(--read-color);
           font-family: var(--font-read), sans-serif;
-          gap: 0;
-          font-size: 1.125rem;
+          gap: 15px;
+          font-size: 1rem;
           font-weight: 400;
         }
 
-        div.body * {
+        article.article * {
           font-size: 1.05rem;
-          line-height: 1.5;
+          line-height: 1.4;
           color: inherit;
           font-family: inherit;
-          transition: all 300ms ease-in-out;
-          -webkit-transition: all 300ms ease-in-out;
-          -moz-transition: all 300ms ease-in-out;
-          -ms-transition: all 300ms ease-in-out;
-          -o-transition: all 300ms ease-in-out;
         }
 
-        div.body .section {
-          /* border: 1px solid #000000; */
-          margin: 10px 0 0 0;
+        article.article .section {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-flow: column;
         }
 
-        div.body h2.title {
-          /* border: var(--input-border-focus); */
+        article.article > .section h2.title {
           padding: 0 !important;
           font-size: 1.3rem !important;
+          color: var(--title-color);
+          font-weight: 500;
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        article.article h6,
+        article.article h5,
+        article.article h4,
+        article.article h3,
+        article.article h1 {
+          padding: 0 !important;
+          font-size: 1.3rem !important;
+          color: var(--title-color);
           font-weight: 500;
           line-height: 1.5;
           margin: 5px 0;
         }
 
-        div.body h6,
-        div.body h5,
-        div.body h4,
-        div.body h3,
-        div.body h1 {
-          /* border: var(--input-border-focus); */
-          padding: 0 !important;
-          font-size: 1.25rem !important;
-          color: var(--title-color);
-          font-weight: 500;
-          line-height: 1.5;
-          margin: 15px 0 5px 0;
-        }
-
-        div.body p {
-          margin: 15px 0;
+        article.article p {
+          margin: 5px 0;
           line-height: 1.5;
         }
 
-        div.body p:first-of-type {
-          margin: 0 0 15px 0;
-        }
-
-        div.body a {
+        article.article a {
           text-decoration: none;
           cursor: pointer;
           color: var(--anchor-color) !important;
         }
 
-        div.body a:hover {
-          /* text-decoration-color: var(--anchor-active) !important; */
+        article.article a:hover {
           text-decoration: underline;
         }
 
-        div.body blockquote {
+        article.article blockquote {
           margin: 10px 0;
           padding: 5px 15px;
           font-style: italic;
@@ -997,7 +968,7 @@ export default class StoryBody extends HTMLElement {
           font-weight: 400;
         }
 
-        div.body blockquote:before {
+        article.article blockquote:before {
           content: open-quote;
           color: var(--gray-color);
           font-size: 1.5rem;
@@ -1005,7 +976,7 @@ export default class StoryBody extends HTMLElement {
           margin: 0 0 0 -5px;
         }
 
-        div.body blockquote:after {
+        article.article blockquote:after {
           content: close-quote;
           color: var(--gray-color);
           font-size: 1.5rem;
@@ -1013,21 +984,21 @@ export default class StoryBody extends HTMLElement {
           margin: 0 0 0 -5px;
         }
 
-        div.body hr {
+        article.article hr {
           border: none;
           background-color: var(--gray-color);
           height: 1px;
           margin: 10px 0;
         }
 
-        div.body b,
-        div.body strong {
+        article.article b,
+        article.article strong {
           font-weight: 500;
 
         }
 
-        div.body ul,
-        div.body ol {
+        article.article ul,
+        article.article ol {
           margin: 5px 0 15px 20px;
           padding: 0 0 0 15px;
           color: inherit;
@@ -1038,7 +1009,7 @@ export default class StoryBody extends HTMLElement {
             margin: 0 0 15px;
           }
 
-          .content-container * {
+          * {
             font-size: 1rem;
             line-height: 1.4;
             color: inherit;
@@ -1049,12 +1020,12 @@ export default class StoryBody extends HTMLElement {
             cursor: default !important;
           }
 
-          .content-container > .next-article {
+          .next-article {
             padding: 0;
             margin: 5px 0 20px;
           }
 
-          .content-container .next-article > a {
+          .next-article > a {
             border: none;
             font-size: 0.9rem;
             font-family: var(--font-read), sans-serif;
@@ -1066,19 +1037,19 @@ export default class StoryBody extends HTMLElement {
             -moz-border-radius: 5px;
           }
 
-          .content-container .next-article > a > span.text {
+          .next-article > a > span.text {
             color: var(--read-color);
             font-weight: 500;
             font-size: 0.9rem;
           }
 
-          .content-container .next-article > a > span.date {
+          .next-article > a > span.date {
             font-weight: 500;
             font-size: 0.8rem;
             font-family: var(--font-main), sans-serif;
           }
 
-          .content-container .next-article > a > span.title {
+          .next-article > a > span.title {
             font-weight: 500;
             font-size: 0.85rem;
           }
