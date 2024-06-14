@@ -300,7 +300,6 @@ export default class StatContainer extends HTMLElement {
         }
 
         .actions > ul.tab > li.tab-item {
-          /* border: var(--border); */
           color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
           font-weight: 400;
@@ -381,6 +380,11 @@ export default class StatContainer extends HTMLElement {
           .actions {
             position: sticky;
             top: 50px;
+          }
+
+          a,
+          .actions > ul.tab > li.tab-item {
+            cursor: default !important;
           }
         }
 

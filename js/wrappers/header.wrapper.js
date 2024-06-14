@@ -261,9 +261,13 @@ export default class HeaderWrapper extends HTMLElement {
 
         nav.nav > .left svg {
           cursor: pointer;
-          width: 24px;
-          height: 24px;
-          margin: 0;
+          width: 28px;
+          height: 28px;
+          margin: 0 0 0 -3px;
+        }
+
+        nav.nav > .left > svg:hover {
+          color: var(--accent-color);
         }
 
         nav.nav > .links {
@@ -332,6 +336,11 @@ export default class HeaderWrapper extends HTMLElement {
         }
 
         @media screen and (max-width: 660px) {
+          :host {
+            font-size: 16px;
+            margin: 0;
+          }
+
           nav.nav {
             border-bottom: var(--border-mobile);
             height: 50px;

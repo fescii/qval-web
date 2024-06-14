@@ -353,7 +353,6 @@ export default class AuthorWrapper extends HTMLElement {
     `;
   }
 
-  // check is the current user: you === true
   checkYou = you => {
     // get url
     let url = this.getAttribute('url');

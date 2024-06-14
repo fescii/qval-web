@@ -3,7 +3,7 @@ export default class AppUser extends HTMLElement {
     // We are not even going to touch this.
     super();
 
-    this._status = true;
+    this._open = false;
 
     this._current = this.getAttribute('current') || 'stats';
 
@@ -27,6 +27,9 @@ export default class AppUser extends HTMLElement {
     const tabContainer = this.shadowObj.querySelector('section.tab');
     const contentContainer = this.shadowObj.querySelector('div.content-container');
 
+    // select the button
+    const btn = this.shadowObj.querySelector('section.tab > div.header > svg');
+
     // select the header-wrapper
     const headerWrapper = this.shadowObj.querySelector('header-wrapper');
 
@@ -36,15 +39,84 @@ export default class AppUser extends HTMLElement {
     // get tab where class is this._current
     const currentTab = tabContainer.querySelector(`li.${this._current}`);
 
-    if (currentTab && headerWrapper && tabContainer && contentContainer) {
+    if (currentTab && headerWrapper && tabContainer && contentContainer && btn) {
       // Update the header-wrapper section attribute
       this.updateCurrentText(currentTab, headerWrapper);
 
       // Activate the tab
-      this.activateTab(headerWrapper, tabContainer, contentContainer);
+      this.activateTab(mql.matches, headerWrapper, tabContainer, contentContainer);
+
+      // activate the button
+      this.activateBtn(mql.matches, contentContainer, tabContainer, btn);
 
       // populate the current contents
       this.populateCurrent(tabContainer, contentContainer);
+    }
+  }
+
+  activateBtn = (mql, contentContainer, tabContainer, btn) => {
+
+    // select all tabs
+    const tabs = tabContainer.querySelectorAll('ul.tab');
+
+    // if button is available
+    if (btn && tabs) {
+      // add event listener to button
+      btn.addEventListener('click', () => {
+        
+        // check for mobile view
+        if (mql) {
+          // open tabs
+          this.openCloseTabs(tabs, btn, contentContainer, tabContainer);
+        }
+        else {
+          // go back in history if history is available or go to home
+          if (window.history.length > 1) {
+            window.history.back();
+          }
+        }
+      });
+    }
+  }
+
+  openCloseTabs = (tabs, btn, contentContainer, tabContainer) => {
+    // Check if open is true
+    if (this._open) {
+      // add gap to the tab container
+      tabContainer.style.setProperty('gap', '0');
+
+      // close all tabs
+      tabs.forEach(tab => {
+        // set max-height to zero
+        tab.style.setProperty('max-height', '0');
+      });
+
+      // display content container to flex
+      contentContainer.style.setProperty('display', 'flex');
+
+      // rotate the button
+      btn.style.setProperty('transform', 'rotate(0deg)');
+
+      // Update open to false
+      this._open = false;
+    }
+    else {
+      // add gap to the tab container
+      tabContainer.style.setProperty('gap', '10px');
+
+      tabs.forEach(tab => {
+        // set max-height to max-content
+        tab.style.setProperty('max-height', 'max-content');
+      });
+
+      // display content container to none
+      contentContainer.style.setProperty('display', 'none');
+
+      // rotate the button
+      btn.style.setProperty('transform', 'rotate(180deg)');
+
+      // Update open to true
+      this._open = true;
     }
   }
 
@@ -59,95 +131,105 @@ export default class AppUser extends HTMLElement {
     }
   }
 
-  activateTab = (headerWrapper, tabContainer, contentContainer) => {
+  activateTab = (mql, headerWrapper, tabContainer, contentContainer) => {
     const outerThis = this;
-    // Activate the tab
-    if (tabContainer && contentContainer) {
-      const tabItems = tabContainer.querySelectorAll('li.tab-item');
-      let activeTab = tabContainer.querySelector('li.tab-item.active');
 
-      tabItems.forEach(tab => {
-        tab.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
+    // select all tab
+    const tabSections = tabContainer.querySelectorAll('ul.tab');
 
-          // stop immediate propagation
-          e.stopImmediatePropagation();
+    // select btn 
+    let btn = tabContainer.querySelector('div.header > svg');
 
-          if (tab.dataset.name !== activeTab.dataset.name) {
+    const tabItems = tabContainer.querySelectorAll('li.tab-item');
+    let activeTab = tabContainer.querySelector('li.tab-item.active');
+
+    tabItems.forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // stop immediate propagation
+        e.stopImmediatePropagation();
+
+        // Check for mobile view
+        if (mql) {
+          // Open all tabs
+          outerThis.openCloseTabs(tabSections, btn, contentContainer, tabContainer);
+        }
+
+        if (tab.dataset.name !== activeTab.dataset.name) {
+          activeTab.classList.remove('active');
+
+          // Update current attribute
+          this.setAttribute('current', tab.dataset.name);
+
+          // update current text
+          this.updateCurrentText(tab, headerWrapper);
+
+          // Add loader
+          contentContainer.innerHTML = this.getLoader();
+
+          tab.classList.add('active');
+          activeTab = tab;
+
+          // Change content
+          this.changeContent(tab, contentContainer);
+        }
+      })
+    });
+
+    // Update state on window.onpopstate
+    window.onpopstate = event => {
+      // This event will be triggered when the browser's back button is clicked
+
+      // console.log(event.state);
+      if (event.state) {
+        if (event.state.page) {
+          outerThis.updatePage(event.state.content)
+        }
+        else if (event.state.tab) {
+          // Select the state tab
+          const tab = tabContainer.querySelector(`li.${event.state.tab}`);
+
+          if (tab) {
             activeTab.classList.remove('active');
+
+            //Update status
+            this._status = false;
 
             // Update current attribute
             this.setAttribute('current', tab.dataset.name);
 
-            // update current text
             this.updateCurrentText(tab, headerWrapper);
-
-            // Add loader
-            contentContainer.innerHTML = this.getLoader();
 
             tab.classList.add('active');
             activeTab = tab;
 
-            // Change content
-            this.changeContent(tab, contentContainer);
-          }
-        })
-      });
-
-      // Update state on window.onpopstate
-      window.onpopstate = event => {
-        // This event will be triggered when the browser's back button is clicked
-
-        // console.log(event.state);
-        if (event.state) {
-          if (event.state.page) {
-            outerThis.updatePage(event.state.content)
-          }
-          else if (event.state.tab) {
-            // Select the state tab
-            const tab = tabContainer.querySelector(`li.${event.state.tab}`);
-
-            if (tab) {
-              activeTab.classList.remove('active');
-
-              //Update status
-              this._status = false;
-
-              // Update current attribute
-              this.setAttribute('current', tab.dataset.name);
-
-              this.updateCurrentText(tab, headerWrapper);
-
-              tab.classList.add('active');
-              activeTab = tab;
-
-              // Remove any child elements of the content container which is not section
-              const children = Array.from(contentContainer.children);
-              if (children) {
-                children.forEach(child => {
-                  if (!child.classList.contains('remains')) {
-                    child.remove();
-                  }
-                })
-              }
-
-              outerThis.updateState(event.state, contentContainer);
+            // Remove any child elements of the content container which is not section
+            const children = Array.from(contentContainer.children);
+            if (children) {
+              children.forEach(child => {
+                if (!child.classList.contains('remains')) {
+                  child.remove();
+                }
+              })
             }
+
+            outerThis.updateState(event.state, contentContainer);
           }
         }
-        else {
-          // Select li with class name as current and content Container
-          const currentTab = tabContainer.querySelector(`section.tab li.${outerThis._current}`);
-          if (currentTab) {
-            activeTab.classList.remove('active');
-            activeTab = currentTab;
-            currentTab.classList.add('active');
-            outerThis.populateContent(outerThis._current, contentContainer);
-          }
+      }
+      else {
+        // Select li with class name as current and content Container
+        const currentTab = tabContainer.querySelector(`section.tab li.${outerThis._current}`);
+        if (currentTab) {
+          activeTab.classList.remove('active');
+          activeTab = currentTab;
+          currentTab.classList.add('active');
+          outerThis.populateContent(outerThis._current, contentContainer);
         }
-      };
-    }
+      }
+    };
   }
 
   updatePage = content => {
@@ -166,12 +248,14 @@ export default class AppUser extends HTMLElement {
   watchMediaQuery = mql => {
     const outerThis = this;
     mql.addEventListener('change', () => {
-
+      // select the button
+    
       outerThis.render();
 
       // update the current tab
       outerThis.updateCurrent(outerThis._current);
 
+      const btn = outerThis.shadowObj.querySelector('section.tab > div.header > svg');
       const tabContainer = outerThis.shadowObj.querySelector('section.tab');
       const contentContainer = outerThis.shadowObj.querySelector('div.content-container');
 
@@ -179,7 +263,10 @@ export default class AppUser extends HTMLElement {
       outerThis.populateCurrent(tabContainer, contentContainer);
 
       // Activate the tab
-      outerThis.activateTab(tabContainer, contentContainer);
+      outerThis.activateTab(mql.matches, tabContainer, contentContainer);
+
+      // activate the button
+      this.activateBtn(mql.matches, contentContainer, tabContainer, btn);
     });
   }
 
@@ -378,9 +465,11 @@ export default class AppUser extends HTMLElement {
   checkVerified = verified => {
     if (verified === 'true') {
       return /*html*/`
-			  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
-          <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
-        </svg>
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+            <path  d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+          </svg>
+        </div>
 			`
     }
     else {
@@ -682,27 +771,18 @@ export default class AppUser extends HTMLElement {
   }
 
   getHeader = () => {
-
     // Get name and check if it's greater than 20 characters
-    const name = this.getAttribute('user-name');
-
-    // Check if the name is greater than 20 characters: replace the rest with ...
-    let displayName =  name.length > 18 ? `${name.substring(0, 18)}..` : name;
-
+    const name = this.getAttribute('user-name')
 
     return /* html */`
       <div class="header remains">
-        <svg class="top-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-        <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
-        </svg>
+        ${this.getIcon()}
         <div class="profile">
           <img src="${this.getAttribute('user-image')}" alt="profile image" class="profile-image">
+          ${this.checkVerified(this.getAttribute('verified'))}
         </div>
         <div class="name">
-          <h4 class="name">
-            <span class="name">${displayName}</span>
-            ${this.checkVerified(this.getAttribute('verified'))}
-          </h4>
+          <h4 class="name">${name}</h4>
           <a href="${this.getAttribute('user-url')}" class="username">
             <span class="text">${this.getAttribute('user-hash')}</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -712,6 +792,26 @@ export default class AppUser extends HTMLElement {
         </div>
       </div>
     `
+  }
+
+  getIcon = () => {
+    // check for mobile
+    const isMobile = window.matchMedia('(max-width: 660px)').matches;
+
+    if (isMobile) {
+      return /* html */`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path>
+        </svg>
+      `
+    }
+    else {
+      return /* html */`
+        <svg class="top-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
+        </svg>
+      `
+    }
   }
 
   getStyles() {
@@ -848,35 +948,6 @@ export default class AppUser extends HTMLElement {
           }
         }
 
-        section.back {
-          display: flex;
-          width: 100%;
-          gap: 0;
-          padding: 0;
-          margin: 10px 0 5px 0;
-          align-items: center;
-        }
-
-        section.back > .back-btn {
-          display: flex;
-          align-items: center;
-          width: max-content;
-          gap: 0;
-        }
-
-        section.back > .back-btn > svg {
-          color: var(--text-color);
-          width: 30px;
-          height: 30px;
-          margin: 0 0 0 -8px;
-        }
-
-        section.back > .back-btn > span.text {
-          font-size: 1.2rem;
-          color: var(--text-color);
-          font-weight: 600;
-        }
-
         main.profile {
           padding: 0;
           margin: 0;
@@ -913,14 +984,13 @@ export default class AppUser extends HTMLElement {
           background-color: var(--background);
           gap: 0;
           padding: 22px 0 5px 0;
-          height: 70px;
           max-height: max-content;
           margin: 0;
           display: flex;
           align-items: center;
           position: sticky;
           top: 0;
-          z-index: 100;
+          z-index: 5;
         }
 
         section.tab > div.header > svg {
@@ -938,12 +1008,12 @@ export default class AppUser extends HTMLElement {
           display: flex;
           align-items: center;
           justify-content: center;
+          position: relative;
           margin: 0 3px 0 0;
-          width: 35px;
-          height: 35px;
+          width: 40px;
+          height: 40px;
           min-width: 40px;
           min-height: 40px;
-          overflow: hidden;
           border-radius: 50%;
           -webkit-border-radius: 50%;
           -moz-border-radius: 50%;
@@ -954,7 +1024,33 @@ export default class AppUser extends HTMLElement {
         section.tab > div.header > .profile > img {
           width: 100%;
           height: 100%;
+          overflow: hidden;
           object-fit: cover;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+        }
+
+        section.tab > div.header > .profile > .icon {
+          background: var(--background);
+          position: absolute;
+          bottom: -1px;
+          right: -3px;
+          width: 21px;
+          height: 21px;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+        }
+        
+        section.tab > div.header > .profile > .icon > svg {
+          width: 14px;
+          height: 14px;
+          color: var(--alt-color);
         }
 
         section.tab > div.header > .name {
@@ -963,24 +1059,24 @@ export default class AppUser extends HTMLElement {
           justify-content: center;
           flex-flow: column;
           gap: 0;
+          width: calc(100% - 75px);
+          max-width: calc(100% - 75px);
         }
 
         section.tab > div.header > .name > h4.name {
           margin: 0;
           display: flex;
           align-items: center;
+          width: 100%;
+          max-width: 100%;
           gap: 5px;
           color: var(--title-color);
           font-family: var(--font-main), sans-serif;
           font-size: 1rem;
           font-weight: 500;
-        }
-
-        section.tab > div.header > .name > h4.name svg {
-          color: var(--alt-color);
-          margin: 2px 0 0 0;
-          width: 15px;
-          height: 15px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         section.tab > div.header > .name > a.username {
@@ -988,6 +1084,7 @@ export default class AppUser extends HTMLElement {
           font-family: var(--font-mono), monospace;
           font-size: 0.8rem;
           font-weight: 500;
+          width: max-content;
           text-decoration: none;
           display: flex;
           gap: 2px;
@@ -1087,7 +1184,6 @@ export default class AppUser extends HTMLElement {
           background: var(--tab-background);
         }
         section.tab > ul.tab > li.tab-item.active > a.tab-link {
-          /* border: 1px solid #6b7280; */
           background-color: var(--tab-background);
         }
 
@@ -1122,7 +1218,6 @@ export default class AppUser extends HTMLElement {
         }
 
         div.coming-soon > .title {
-          /* border: 1px solid #6b7280; */
           color: var(--text-color);
           font-family: var(--title-text), sans-serif;
           font-size: 1.25rem;
@@ -1159,48 +1254,39 @@ export default class AppUser extends HTMLElement {
         }
 
 
+				@media screen and (max-width:900px) {
+          section.tab {
+            padding: 0;
+            width: 33%;
+          }
+          section.content {
+            width: 62%;
+          }
+        }
+
 				@media screen and (max-width:660px) {
 					:host {
             font-size: 16px;
 					}
 
-          section.back {
-            display: flex;
-          }
-
-          section.tab > div.header {
-            padding: 7px 0;
-            height: 55px;
-            max-height: 55px;
-            display: none;
-          }
-
-          .top-nav svg {
+          svg {
             cursor: default !important;
-          }
-
-          section.tab > div.header > svg {
-            cursor: default !important;
-            width: 38px;
-            height: 38px;
-            margin: 0 0 0 -8px;
           }
 
           main.profile {
-            padding: 10px 0;
+            padding: 0;
             width: 100%;
             margin: 0;
             display: flex;
             flex-flow: column;
             justify-content: start;
-            gap: 20px;
+            gap: 0;
             min-height: max-content;
             height: max-content;
             max-height: max-content;
           }
 
            section.content {
-            /* border: 1px solid #6b7280; */
             display: flex;
             flex-flow: column;
             align-items: start;
@@ -1214,22 +1300,44 @@ export default class AppUser extends HTMLElement {
             padding: 0;
             width: 100%;
             min-width: 100%;
-            display: none;
+            max-height: max-content;
+            display: flex;
             flex-flow: column;
-            gap: 10px;
+            gap: 0;
             height: max-content;
             position: unset;
           }
 
+          section.tab > div.header {
+            padding: 10px 0;
+            border-bottom: var(--border-mobile);
+            display: flex;
+            position: relative;
+          }
+
+          section.tab > div.header > svg {
+            transition: all 0.3s ease-in-out;
+            position: absolute;
+            right: 10px;
+            top: 18px;
+            width: 20px;
+            height: 20px;
+            margin: 0 0 0 -5px;
+          }
+
           section.tab > ul.tab {
             border-top: var(--border-mobile);
-            list-style-type: none;
-            width: 100%;
-            padding: 0;
+            transition: all 0.5s ease;
+            border: none;
+            max-height: 0;
             margin: 0;
-            display: flex;
-            flex-flow: column;
-            gap: 0;
+            padding: 0;
+            overflow: hidden;
+          }
+
+          section.tab > ul.tab > li.tab-item,
+          a {
+            cursor: default !important;
           }
 
 				}
