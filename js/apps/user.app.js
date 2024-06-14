@@ -5,7 +5,7 @@ export default class AppUser extends HTMLElement {
 
     this._status = true;
 
-    this._current = this.getAttribute('current');
+    this._current = this.getAttribute('current') || 'stats';
 
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
@@ -21,42 +21,46 @@ export default class AppUser extends HTMLElement {
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 660px)');
 
-    // Select the tab container and content container
-    const current = this.getAttribute('current');
+    // update the current tab
+    this.updateCurrent(this._current);
+
     const tabContainer = this.shadowObj.querySelector('section.tab');
-    const contentContainer = this.shadowObj.querySelector('section.content');
+    const contentContainer = this.shadowObj.querySelector('div.content-container');
+
+    // select the header-wrapper
+    const headerWrapper = this.shadowObj.querySelector('header-wrapper');
 
     // Watch for media query changes
     this.watchMediaQuery(mql)
 
     // get tab where class is this._current
-    const currentTab = tabContainer.querySelector(`li.${current}`);
+    const currentTab = tabContainer.querySelector(`li.${this._current}`);
 
-    if (currentTab) {
-      this.updateCurrentText(currentTab);
+    if (currentTab && headerWrapper && tabContainer && contentContainer) {
+      // Update the header-wrapper section attribute
+      this.updateCurrentText(currentTab, headerWrapper);
+
+      // Activate the tab
+      this.activateTab(headerWrapper, tabContainer, contentContainer);
+
+      // populate the current contents
+      this.populateCurrent(tabContainer, contentContainer);
     }
-
-    // Populate the current tab
-    if (current && tabContainer && contentContainer) {
-      this.populateCurrent(mql.matches, current, tabContainer, contentContainer);
-    }
-
-    // Activate the tab
-    this.activateTab(mql);
   }
 
-  activateTab = mql => {
+  updateCurrent = current => {
+    // select current tab
+    const tab = this.shadowObj.querySelector(`section.tab li.${current}`);
+
+    // if tab is available
+    if (tab) {
+      // add active class to tab
+      tab.classList.add('active');
+    }
+  }
+
+  activateTab = (headerWrapper, tabContainer, contentContainer) => {
     const outerThis = this;
-
-    // Select the tab container and content container
-    const current = this.getAttribute('current');
-    const tabContainer = this.shadowObj.querySelector('section.tab');
-    const contentContainer = this.shadowObj.querySelector('section.content');
-
-    // Select section top and back button
-    const top = this.shadowObj.querySelector('section.top');
-    const back = this.shadowObj.querySelector('div.top-nav');
-
     // Activate the tab
     if (tabContainer && contentContainer) {
       const tabItems = tabContainer.querySelectorAll('li.tab-item');
@@ -67,127 +71,29 @@ export default class AppUser extends HTMLElement {
           e.preventDefault();
           e.stopPropagation();
 
-          if (activeTab) {
-            if (tab.dataset.name !== activeTab.dataset.name) {
-              if (this._status) {
-                activeTab.classList.remove('active');
+          // stop immediate propagation
+          e.stopImmediatePropagation();
 
-                //Update status
-                this._status = false;
+          if (tab.dataset.name !== activeTab.dataset.name) {
+            activeTab.classList.remove('active');
 
-                // Update current attribute
-                this.setAttribute('current', tab.dataset.name);
+            // Update current attribute
+            this.setAttribute('current', tab.dataset.name);
 
-                this.updateCurrentText(tab)
+            // update current text
+            this.updateCurrentText(tab, headerWrapper);
 
-                // Remove all child elements of the content container
-                // Except the section element
-                const children = Array.from(contentContainer.children);
+            // Add loader
+            contentContainer.innerHTML = this.getLoader();
 
-                if (children) {
-                  children.forEach(child => {
-                    if (!child.classList.contains('remains')) {
-                      child.remove();
-                    }
-                  })
-                }
+            tab.classList.add('active');
+            activeTab = tab;
 
-                // Add loader
-                contentContainer.insertAdjacentHTML('beforeend', this.getLoader());
-
-                tab.classList.add('active');
-                activeTab = tab;
-
-                // Change content
-                this.changeContent(mql.matches, tab, tabContainer, contentContainer);
-
-                // Check if this is mobile view
-                if (mql.matches) {
-                  tabContainer.style.display = 'none';
-
-                  if (back) {
-                    back.style.display = 'flex';
-                  }
-
-                  // Select all child elements of the content container and display flex
-                  // except the section elements
-                  const children = Array.from(contentContainer.children);
-                  if (children) {
-                    children.forEach(child => {
-                      if (child.classList.contains('tab')) {
-                        child.style.display = 'none';
-                      }
-                      else {
-                        child.style.display = 'flex';
-                      }
-                    })
-                  }
-                }
-              }
-            }
-            else {
-              // Check if this is mobile view
-              if (mql.matches) {
-
-                if (back) {
-                  back.style.display = 'flex';
-                }
-
-                // Select all child elements of the content container and display flex
-                const children = Array.from(contentContainer.children);
-                if (children) {
-                  children.forEach(child => {
-                    if (child.classList.contains('.tab')) {
-                      child.style.display = 'none';
-                    }
-                    else {
-                      child.style.display = 'flex';
-                    }
-                  })
-                }
-
-                tabContainer.style.display = 'none';
-              }
-            }
+            // Change content
+            this.changeContent(tab, contentContainer);
           }
         })
-      })
-
-      if (back) {
-        // Add event listener to back button
-        const backBtn = back.querySelector('svg.top-back-btn');
-        if (backBtn) {
-          backBtn.addEventListener('click', e => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            // Check if this is mobile view
-            if (mql.matches) {
-
-              // Set the top to display flex and back to display none
-              top.style.display = 'flex';
-              back.style.display = 'none';
-
-
-              // Select all child elements of the content container and display none
-              // only ones which are not section elements
-              const children = Array.from(contentContainer.children);
-              if (children) {
-                children.forEach(child => {
-                  if (child.classList.contains('tab')) {
-                    child.style.display = 'flex';
-                  }
-                  else {
-                    child.style.display = 'none';
-                  }
-                })
-              }
-
-              tabContainer.style.display = 'flex';
-            }
-          })
-        }
-      }
+      });
 
       // Update state on window.onpopstate
       window.onpopstate = event => {
@@ -199,7 +105,6 @@ export default class AppUser extends HTMLElement {
             outerThis.updatePage(event.state.content)
           }
           else if (event.state.tab) {
-
             // Select the state tab
             const tab = tabContainer.querySelector(`li.${event.state.tab}`);
 
@@ -212,7 +117,7 @@ export default class AppUser extends HTMLElement {
               // Update current attribute
               this.setAttribute('current', tab.dataset.name);
 
-              this.updateCurrentText(tab);
+              this.updateCurrentText(tab, headerWrapper);
 
               tab.classList.add('active');
               activeTab = tab;
@@ -227,89 +132,21 @@ export default class AppUser extends HTMLElement {
                 })
               }
 
-              //Check if this is mobile view
-              if (mql.matches) {
-                tabContainer.style.display = 'none';
-
-                // Set back to display flex and top to display none
-                top.style.display = 'none';
-                back.style.display = 'flex';
-
-                // Select all child elements of the content container and display flex
-                // except the section elements
-                const children = Array.from(contentContainer.children);
-                if (children) {
-                  children.forEach(child => {
-                    if (!child.classList.contains('remains')) {
-                      child.style.display = 'flex';
-                    }
-                  })
-                }
-              }
-
               outerThis.updateState(event.state, contentContainer);
             }
           }
         }
         else {
-          // Remove any child elements of the content container which is not section
-          const children = Array.from(contentContainer.children);
-          if (children) {
-            children.forEach(child => {
-              if (!child.classList.contains('remains')) {
-                child.remove();
-              }
-            })
-          }
-
           // Select li with class name as current and content Container
-          const currentTab = tabContainer.querySelector(`section.tab li.${current}`);
+          const currentTab = tabContainer.querySelector(`section.tab li.${outerThis._current}`);
           if (currentTab) {
             activeTab.classList.remove('active');
             activeTab = currentTab;
             currentTab.classList.add('active');
-            outerThis.populateContent(current, contentContainer);
+            outerThis.populateContent(outerThis._current, contentContainer);
           }
         }
       };
-
-      // Select svg.header-back-btn
-      const headerBackBtn = this.shadowObj.querySelector('svg.header-back-btn');
-      if (headerBackBtn) {
-        // handle click to navigate through the history state
-        headerBackBtn.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // Check if this is mobile view
-          if (mql.matches) {
-            // Set the top to display flex and back to display none
-            back.style.display = 'none';
-
-            // Select all child elements of the content container and display none
-            // only ones which are not section elements
-            const children = Array.from(contentContainer.children);
-            if (children) {
-              children.forEach(child => {
-                if (child.classList.contains('tab')) {
-                  child.style.display = 'none';
-                }
-                else {
-                  child.style.display = 'flex';
-                }
-              })
-            }
-
-            // tabContainer.style.display = 'flex';
-          }
-
-          // Prevent navigation to outside origin domain
-          if (window.history.length > 1) {
-            // Navigate to the previous page
-            window.history.back();
-          }
-        })
-      }
     }
   }
 
@@ -332,31 +169,26 @@ export default class AppUser extends HTMLElement {
 
       outerThis.render();
 
-      const tabContainer = outerThis.shadowObj.querySelector('section.tab');
-      const contentContainer = outerThis.shadowObj.querySelector('section.content');
+      // update the current tab
+      outerThis.updateCurrent(outerThis._current);
 
-      const current = outerThis.getAttribute('current');
+      const tabContainer = outerThis.shadowObj.querySelector('section.tab');
+      const contentContainer = outerThis.shadowObj.querySelector('div.content-container');
 
       // Populate the current contents
-      outerThis.populateCurrent(mql.matches, current, tabContainer, contentContainer);
+      outerThis.populateCurrent(tabContainer, contentContainer);
 
       // Activate the tab
-      outerThis.activateTab(mql);
+      outerThis.activateTab(tabContainer, contentContainer);
     });
   }
 
-  updateCurrentText = tab => {
-    // Select the top h3
-    const top = this.shadowObj.querySelector('.top-nav > h3.name');
-
+  updateCurrentText = (tab, headerWrapper) => {
     // Get the span.text from tab
     const text = tab.querySelector('span.text');
 
-    // console.log(top);
-
-    if (top && text) {
-      top.textContent = text.textContent;
-    }
+    // change section attribute of header-wrapper
+    headerWrapper.setAttribute('section', text.textContent);
   }
 
   disableScroll() {
@@ -376,16 +208,13 @@ export default class AppUser extends HTMLElement {
     window.onscroll = function () { };
   }
 
-  changeContent = (mql, tab, tabContainer, contentContainer) =>  {
+  changeContent = (tab, contentContainer) =>  {
     const outerThis = this;
 
     // Select loader
     const loader = this.shadowObj.querySelector('#loader-container');
 
     setTimeout(() => {
-      if (mql) {
-        tabContainer.style.display = 'none';
-      }
       if (loader) {
         loader.remove();
       }
@@ -393,23 +222,19 @@ export default class AppUser extends HTMLElement {
       // Populate Content
       outerThis.populateContent(tab.dataset.name, contentContainer);
 
-
       // Updating History State
       window.history.pushState(
         { tab: tab.dataset.name },
         tab.dataset.name, `${tab.getAttribute('url')}`
       );
-
-      // Update the status to true
-      this._status = true;
     }, 3000);
   }
 
-  populateCurrent = (mql, current, tabContainer, contentContainer) =>  {
+  populateCurrent = (tabContainer, contentContainer) =>  {
     const outerThis = this;
 
     // Select li with class name as current and content Container
-    const currentItem = this.shadowObj.querySelector(`section.tab li.${current}`);
+    const currentItem = tabContainer.querySelector(`li.${this._current}`);
 
     // If selection is available
     if(currentItem) {
@@ -420,15 +245,12 @@ export default class AppUser extends HTMLElement {
 
       // Set timeout to remove loader
       setTimeout(() => {
-        if (mql) {
-          tabContainer.style.display = 'none';
-        }
         if(loader) {
           loader.remove();
         }
 
         // Populate Content
-        outerThis.populateContent(current, contentContainer);
+        outerThis.populateContent(outerThis._current, contentContainer);
       }, 3000)
     }
   }
@@ -436,46 +258,46 @@ export default class AppUser extends HTMLElement {
   populateContent = (name, contentContainer) => {
     switch (name) {
       case 'stats':
-        contentContainer.insertAdjacentHTML('beforeend', this.getStats());
+        contentContainer.innerHTML = this.getStats()
         break;
       case 'form-name':
-        contentContainer.insertAdjacentHTML('beforeend', this.getFormName());
+        contentContainer.innerHTML = this.getFormName()
         break;
       case 'form-bio':
-        contentContainer.insertAdjacentHTML('beforeend', this.getFormBio());
+        contentContainer.innerHTML = this.getFormBio()
         break;
       case 'form-profile':
-        contentContainer.insertAdjacentHTML('beforeend', this.getFormProfile());
+        contentContainer.innerHTML = this.getFormProfile()
         break;
       case 'form-socials':
-        contentContainer.insertAdjacentHTML('beforeend', this.getFormSocial());
+        contentContainer.innerHTML = this.getFormSocial()
         break;
       case 'form-email':
-        contentContainer.insertAdjacentHTML('beforeend', this.getFormEmail());
+        contentContainer.innerHTML = this.getFormEmail()
         break;
       case 'privacy':
-        contentContainer.insertAdjacentHTML('beforeend', this.getSoonPrivacy());
+        contentContainer.innerHTML = this.getSoonPrivacy()
         break;
       case 'form-password':
-        contentContainer.insertAdjacentHTML('beforeend', this.getFormPassword());
+        contentContainer.innerHTML = this.getFormPassword()
         break;
       case 'topics':
-        contentContainer.insertAdjacentHTML('beforeend', this.getSoon());
+        contentContainer.innerHTML = this.getSoon()
         break;
       case 'activity':
-        contentContainer.insertAdjacentHTML('beforeend', this.getActivity());
+        contentContainer.innerHTML = this.getActivity()
         break;
       case 'notifications':
-        contentContainer.insertAdjacentHTML('beforeend', this.getSoonNotifications());
+        contentContainer.innerHTML = this.getSoonNotifications()
         break;
       case 'typography':
-        contentContainer.insertAdjacentHTML('beforeend', this.getSoon());
+        contentContainer.innerHTML = this.getSoon()
         break;
       case 'theme':
-        contentContainer.insertAdjacentHTML('beforeend', this.getSoon());
+        contentContainer.innerHTML = this.getSoon()
         break;
       default:
-        contentContainer.insertAdjacentHTML('beforeend', this.getStats());
+        contentContainer.innerHTML = this.getStats()
         break;
     }
   }
@@ -527,13 +349,15 @@ export default class AppUser extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     if (mql.matches) {
       return /* html */`
-      <main class="profile">
-        ${this.getTop()}
-        <section class="content">
-          ${this.getTab()}
-          ${this.getLoader()}
-        </section>
-      </main>
+        <main class="profile">
+          ${this.getTop()}
+          <section class="content">
+            ${this.getTab()}
+            <div class="content-container">
+              ${this.getLoader()}
+            </div>
+          </section>
+        </main>
       `;
     }
     else {
@@ -542,7 +366,9 @@ export default class AppUser extends HTMLElement {
           ${this.getTab()}
           <section class="content">
             ${this.getTop()}
-            ${this.getLoader()}
+            <div class="content-container">
+              ${this.getLoader()}
+            </div>
           </section>
         </main>
       `;
@@ -570,17 +396,6 @@ export default class AppUser extends HTMLElement {
       </header-wrapper>
     `
   }
-
-  // getTop = () => {
-  //   return /* html */ `
-  //     <div class="top-nav remains">
-  //       <svg class="top-back-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-  //         <path d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"></path>
-  //       </svg>
-  //       <h3 class="name">Settings</h3>
-  //     </div>
-  //   `
-  // }
 
   getFormName = () =>  {
     // Get name and split it into first and last name if there two spaces combine the rest
@@ -1072,9 +887,10 @@ export default class AppUser extends HTMLElement {
         }
 
         section.tab {
-          padding: 12px 0;
+          padding: 0;
           width: 25%;
           display: flex;
+          background-color: var(--background);
           flex-flow: column;
           position: sticky;
           top: 0;
@@ -1093,12 +909,12 @@ export default class AppUser extends HTMLElement {
 
         section.tab > div.header {
           display: flex;
-          background-color: var(--background);
           width: 100%;
+          background-color: var(--background);
           gap: 0;
-          padding: 7px 0;
-          height: 64px;
-          max-height: 64px;
+          padding: 22px 0 5px 0;
+          height: 70px;
+          max-height: max-content;
           margin: 0;
           display: flex;
           align-items: center;
@@ -1111,7 +927,7 @@ export default class AppUser extends HTMLElement {
           cursor: pointer;
           width: 35px;
           height: 35px;
-          margin: 0 0 0 -8px;
+          margin: 0 0 0 -5px;
         }
 
         section.tab > div.header > svg:hover {
@@ -1122,6 +938,7 @@ export default class AppUser extends HTMLElement {
           display: flex;
           align-items: center;
           justify-content: center;
+          margin: 0 3px 0 0;
           width: 35px;
           height: 35px;
           min-width: 40px;
@@ -1275,7 +1092,6 @@ export default class AppUser extends HTMLElement {
         }
 
         section.content {
-          /* border: 1px solid #6b7280; */
           display: flex;
           position: relative;
           flex-flow: column;
@@ -1285,8 +1101,16 @@ export default class AppUser extends HTMLElement {
           width: 70%;
         }
 
+        section.content > div.content-container {
+          display: flex;
+          flex-flow: column;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          min-height: 70vh;
+        }
+
         div.coming-soon {
-          /* border: 1px solid #6b7280; */
           display: flex;
           flex-flow: column;
           align-items: center;

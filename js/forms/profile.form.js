@@ -70,10 +70,8 @@ export default class FormProfile extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(max-width: 660px)');
-
     return /* html */`
-      ${this.getHeader(mql)}
+      ${this.getHeader()}
       <form class="fields picture">
         <div class="image-preview">
           <label for="profile-image">
@@ -92,28 +90,14 @@ export default class FormProfile extends HTMLElement {
     `;
   }
 
-  getHeader = mql => {
-    if (!mql.matches) {
-      return /* html */`
-        <div class="top">
-          <h4 class="title">Your profile</h4>
-          <p class="desc">
-            Your profile picture is how people will recognize you on the platform. You can use a photo of yourself or an
-            avatar.
-            The image should be square and at least 200x200 pixels in size.
-          </p>
-        </div>
-      `;
-    }
-
+  getHeader = () => {
     return /* html */`
-        <div class="top">
-          <p class="desc">
-            Your profile picture is how people will recognize you on the platform. You can use a photo of yourself or an
-            avatar.
-            The image should be square and at least 200x200 pixels in size.
-          </p>
-        </div>
+      <div class="top">
+        <p class="desc">
+          Your profile picture is how people will recognize you on the platform. You can use a photo of yourself or an avatar.
+          The image should be square and at least 200x200 pixels in size.
+        </p>
+      </div>
     `;
   }
 

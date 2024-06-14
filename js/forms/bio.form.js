@@ -43,10 +43,8 @@ export default class FormBio extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(max-width: 660px)');
-
     return /* html */`
-      ${this.getHeader(mql)}
+      ${this.getHeader()}
       <form class="fields bio" id="bio-form">
         <div class="field your-bio">
           <div class="input-group your-bio">
@@ -66,19 +64,7 @@ export default class FormBio extends HTMLElement {
     `;
   }
 
-  getHeader = mql => {
-    if(!mql.matches) {
-      return /* html */`
-        <div class="top">
-          <h4 class="title">Your bio</h4>
-          <p class="desc">
-            Your bio is a brief summary of yourself. It should be no more than 160 characters in length.
-            Use this space to highlight your interests, skills, or any other relevant information about yourself.
-          </p>
-        </div>
-      `;
-    }
-
+  getHeader = () => {
     return /* html */`
       <div class="top">
         <p class="desc">

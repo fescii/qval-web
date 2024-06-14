@@ -43,9 +43,8 @@ export default class FormEmail extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(min-width: 660px)');
     return /* html */`
-      ${this.getHeader(mql)}
+      ${this.getHeader()}
       <form class="fields email" id="email-form">
         <div class="field email">
           <div class="input-group email">
@@ -63,24 +62,13 @@ export default class FormEmail extends HTMLElement {
     `;
   }
 
-  getHeader = mql => {
-    if (!mql.matches) {
-      return /* html */`
-        <div class="top">
-          <h4 class="title">Your email</h4>
-          <p class="desc">
-            Your email is how you will recover your account in case you forget your password. You can also use it to log in, reset your password, and receive notifications.
-          </p>
-        </div>
-      `;
-    }
-
+  getHeader = () => {
     return /* html */`
-        <div class="top">
-          <p class="desc">
-            Your email is how you will recover your account in case you forget your password. You can also use it to log in, reset your password, and receive notifications.
-          </p>
-        </div>
+      <div class="top">
+        <p class="desc">
+          Your email is how you will recover your account in case you forget your password. You can also use it to log in, reset your password, and receive notifications.
+        </p>
+      </div>
     `;
   }
 

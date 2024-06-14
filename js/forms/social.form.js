@@ -43,9 +43,8 @@ export default class FormName extends HTMLElement {
   }
 
   getBody = () => {
-    const mql = window.matchMedia('(max-width: 660px)');
     return /* html */`
-      ${this.getHeader(mql)}
+      ${this.getHeader()}
       <form class="fields initial" id="social-form">
         <div class="field bio">
           <div class="input-group email">
@@ -108,26 +107,13 @@ export default class FormName extends HTMLElement {
     `;
   }
 
-  getHeader = mql => {
-    if (!mql.matches) {
-      return /* html */`
-        <div class="top">
-          <h4 class="title">Your socials</h4>
-          <p class="desc">
-            Your socials are how people will connect with you outside the platform. You can add your email, twitter, linkedin, and x
-            accounts.
-          </p>
-        </div>
-      `;
-    }
-
+  getHeader = () => {
     return /* html */`
-        <div class="top">
-          <p class="desc">
-            Your socials are how people will connect with you outside the platform. You can add your email, twitter, linkedin, and x
-            accounts.
-          </p>
-        </div>
+      <div class="top">
+        <p class="desc">
+          Your socials are how people will connect with you outside the platform. You can add your email, twitter, linkedin, and x accounts.
+        </p>
+      </div>
     `;
   }
 
