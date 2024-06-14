@@ -153,70 +153,69 @@ export default class StoriesContainer extends HTMLElement {
 
   getStyles() {
     return /* css */`
-    <style>
-      *,
-      *:after,
-      *:before {
-        box-sizing: border-box !important;
-        font-family: inherit;
-        -webkit-box-sizing: border-box !important;
-      }
+      <style>
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box !important;
+          font-family: inherit;
+          -webkit-box-sizing: border-box !important;
+        }
 
-      *:focus {
-        outline: inherit !important;
-      }
+        *:focus {
+          outline: inherit !important;
+        }
 
-      *::-webkit-scrollbar {
-        width: 3px;
-      }
+        *::-webkit-scrollbar {
+          width: 3px;
+        }
 
-      *::-webkit-scrollbar-track {
-        background: var(--scroll-bar-background);
-      }
+        *::-webkit-scrollbar-track {
+          background: var(--scroll-bar-background);
+        }
 
-      *::-webkit-scrollbar-thumb {
-        width: 3px;
-        background: var(--scroll-bar-linear);
-        border-radius: 50px;
-      }
+        *::-webkit-scrollbar-thumb {
+          width: 3px;
+          background: var(--scroll-bar-linear);
+          border-radius: 50px;
+        }
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-      }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
+        }
 
-      p,
-      ul,
-      ol {
-        padding: 0;
-        margin: 0;
-      }
+        p,
+        ul,
+        ol {
+          padding: 0;
+          margin: 0;
+        }
 
-      a {
-        text-decoration: none;
-      }
+        a {
+          text-decoration: none;
+        }
 
-      :host {
-        font-size: 16px;
-				width: 100%;
-      }
+        :host {
+          font-size: 16px;
+          width: 100%;
+        }
 
-			div.stories {
-			  /* border: 1px solid #000000; */
-			  padding: 0;
-			  width: 100%;
-			  display: flex;
-			  flex-flow: column;
-			  gap: 0;
-			}
+        div.stories {
+          padding: 0;
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          gap: 0;
+        }
 
-    </style>
+      </style>
     `;
   }
 }

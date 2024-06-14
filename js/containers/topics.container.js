@@ -236,7 +236,7 @@ export default class TopicsContainer extends HTMLElement {
 				@media screen and (max-width:660px) {
 					:host {
         		font-size: 16px;
-						padding: 15px 0;
+						padding: 15px 0 0 0;
 					}
 
 					::-webkit-scrollbar {
