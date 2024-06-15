@@ -73,8 +73,6 @@ export default class AuthorWrapper extends HTMLElement {
     }
   }
 
-
-  // Replace and push states
   replaceAndPushStates = (url, body, profile) => {
     // Replace the content with the current url and body content
     // get window location

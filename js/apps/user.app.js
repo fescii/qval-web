@@ -27,6 +27,14 @@ export default class AppUser extends HTMLElement {
     const tabContainer = this.shadowObj.querySelector('section.tab');
     const contentContainer = this.shadowObj.querySelector('div.content-container');
 
+    // get url
+    let url = this.getAttribute('user-url');
+
+    url = url.trim().toLowerCase();
+
+    // Get the body
+    const body = document.querySelector('body');
+
     // select the button
     const btn = this.shadowObj.querySelector('section.tab > div.header > svg');
 
@@ -52,6 +60,48 @@ export default class AppUser extends HTMLElement {
       // populate the current contents
       this.populateCurrent(tabContainer, contentContainer);
     }
+
+    if (url && body) {
+      // Open user profile
+      this.handleUserClick(url, body);
+    }
+  }
+
+  // Open user profile
+  handleUserClick = (url, body) => {
+    const outerThis = this;
+    // get a.meta.link
+    const content = this.shadowObj.querySelector('section.tab > div.header > .name > a.username');
+
+    // Get full post
+    const profile =  this.getProfile();
+
+    if(body && content) { 
+      content.addEventListener('click', event => {
+        event.preventDefault();
+        
+        // replace and push states
+        outerThis.replaceAndPushStates(url, body, profile);
+
+        body.innerHTML = profile;
+      })
+    }
+  }
+
+  replaceAndPushStates = (url, body, profile) => {
+    // Replace the content with the current url and body content
+    // get window location
+    const pageUrl = window.location.href;
+    window.history.replaceState(
+      { page: 'page', content: body.innerHTML },
+      url, pageUrl
+    );
+
+    // Updating History State
+    window.history.pushState(
+      { page: 'page', content: profile},
+      url, url
+    );
   }
 
   activateBtn = (mql, contentContainer, tabContainer, btn) => {
@@ -523,7 +573,7 @@ export default class AppUser extends HTMLElement {
   getFormProfile = () =>  {
     return /* html */`
       <profile-form method="PATCH" url="/user/edit/profile" api-url="/api/v1/u/edit/profile"
-        profile-image="${this.getAttribute('user-image')}">
+        profile-image="${this.getAttribute('user-picture')}">
       </profile-form>
     `;
   }
@@ -785,13 +835,13 @@ export default class AppUser extends HTMLElement {
       <div class="header remains">
         ${this.getIcon()}
         <div class="profile">
-          <img src="${this.getAttribute('user-image')}" alt="profile image" class="profile-image">
+          <img src="${this.getAttribute('user-picture')}" alt="profile image" class="profile-image">
           ${this.checkVerified(this.getAttribute('verified'))}
         </div>
         <div class="name">
           <h4 class="name">${name}</h4>
           <a href="${this.getAttribute('user-url')}" class="username">
-            <span class="text">${this.getAttribute('user-hash')}</span>
+            <span class="text">${this.getAttribute('user-username')}</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
               <path d="M4.53 4.75A.75.75 0 0 1 5.28 4h6.01a.75.75 0 0 1 .75.75v6.01a.75.75 0 0 1-1.5 0v-4.2l-5.26 5.261a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L9.48 5.5h-4.2a.75.75 0 0 1-.75-.75Z" />
             </svg>
@@ -820,6 +870,23 @@ export default class AppUser extends HTMLElement {
       `
     }
   }
+
+  getProfile = () => {
+    // get url
+    let url = this.getAttribute('user-url');
+ 
+    // trim white spaces and convert to lowercase
+    url = url.trim().toLowerCase();
+
+   return /* html */`
+     <app-profile tab="stories" you="${this.getAttribute('user-you')}" url="${url}" tab="stories"
+       stories-url="${url}/stories" replies-url="${url}/replies" followers-url="${url}/followers" following-url="${url}/following"
+       username="${this.getAttribute('user-username')}" picture="${this.getAttribute('user-picture')}" verified="${this.getAttribute('user-verified')}"
+       name="${this.getAttribute('user-name')}" followers="${this.getAttribute('user-followers')}"
+       following="${this.getAttribute('user-following')}" user-follow="${this.getAttribute('user-follow')}" bio="${this.getAttribute('user-bio')}">
+     </app-profile>
+   `
+ }
 
   getStyles() {
     return /* css */`
@@ -1103,6 +1170,10 @@ export default class AppUser extends HTMLElement {
           background: var(--accent-linear);
           background-clip: text;
           -webkit-background-clip: text;
+        }
+
+        section.tab > div.header > .name > a.username:hover svg {
+          color: var(--accent-color);
         }
 
         section.tab > ul.tab {
