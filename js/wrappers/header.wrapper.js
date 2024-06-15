@@ -3,6 +3,9 @@ export default class HeaderWrapper extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    // check if the user is authenticated
+    this._authenticated = false;
+
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
@@ -45,12 +48,16 @@ export default class HeaderWrapper extends HTMLElement {
     btn.addEventListener('click', () => {
       // check window history is greater or equal to 1
       if (window.history.length >= 1) {
-        // go back
-        window.history.back();
-      }
-      else {
-        // redirect to home
-        window.location.href = '/home.html';
+        // check if the history has state
+        if (window.history.state) {
+          // go back
+          window.history.back();
+          // console.log(window.history.state);
+        }
+        else {
+          // redirect to home
+          window.location.href = '/home.html';
+        }
       }
     });
   }
@@ -94,7 +101,7 @@ export default class HeaderWrapper extends HTMLElement {
     const mql = window.matchMedia('(max-width: 660px)');
     return /* html */ `
       ${this.getTitle(this.getAttribute('type'), mql.matches)}
-      ${this.getTopIcons(true)}
+      ${this.getTopIcons(this._authenticated)}
     `
   }
 
@@ -379,8 +386,32 @@ export default class HeaderWrapper extends HTMLElement {
             padding: 10px 0;
           }
 
+
           nav.nav > .left {
             gap: 5px;
+            width: calc(100% - 130px);
+          }
+
+          nav.nav > .left h3 {
+            margin: 0;
+            font-family: var(--font-main), sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+          }
+
+          nav.nav > .links {
+            width: 130px;
+            padding: 0;
+          }
+
+          nav.nav > .links > a.link.signin {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
 
           ::-webkit-scrollbar {
@@ -388,6 +419,7 @@ export default class HeaderWrapper extends HTMLElement {
           }
 
           a,
+          nav.nav > .left svg,
           .stats > .stat {
             cursor: default !important;
           }
