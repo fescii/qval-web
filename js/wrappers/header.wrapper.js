@@ -31,7 +31,28 @@ export default class HeaderWrapper extends HTMLElement {
     }
   }
 
-  connectedCallback() {w
+  connectedCallback() {
+    // select the back svg
+    const back = this.shadowObj.querySelector('nav.nav > .left svg');
+
+    if (back) {
+      // activate the back button
+      this.activateBackButton(back);
+    }
+  }
+
+  activateBackButton = btn => {
+    btn.addEventListener('click', () => {
+      // check window history is greater or equal to 1
+      if (window.history.length >= 1) {
+        // go back
+        window.history.back();
+      }
+      else {
+        // redirect to home
+        window.location.href = '/home.html';
+      }
+    });
   }
 
   disableScroll() {
