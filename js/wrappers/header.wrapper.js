@@ -31,11 +31,7 @@ export default class HeaderWrapper extends HTMLElement {
     }
   }
 
-  connectedCallback() {
-
-    // const contentContainer = this.shadowObj.querySelector('nav.nav');
-
-    // this.fetchContent(contentContainer);
+  connectedCallback() {w
   }
 
   disableScroll() {
@@ -73,8 +69,10 @@ export default class HeaderWrapper extends HTMLElement {
   }
 
   getContent  = title => {
+    // mql to check for mobile
+    const mql = window.matchMedia('(max-width: 660px)');
     return /* html */ `
-      ${this.getTitle(this.getAttribute('type'))}
+      ${this.getTitle(this.getAttribute('type'), mql.matches)}
       ${this.getTopIcons(true)}
     `
   }
@@ -129,7 +127,7 @@ export default class HeaderWrapper extends HTMLElement {
   }
 
   // Check if the type is home
-  getTitle = type => {
+  getTitle = (type, mql) => {
     const section = this.getAttribute('section');
 
     switch (type) {
@@ -140,11 +138,23 @@ export default class HeaderWrapper extends HTMLElement {
           </div>
         `
       case 'user':
-        return /*html*/`
-          <div class="left user">
-            <h3 class="name">${section}</h3>
-          </div>
-        `
+        if (mql) {
+          return /*html*/`
+            <div class="left user">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path>
+              </svg>
+              <h3 class="name">${section}</h3>
+            </div>
+          `
+        }
+        else {
+          return /*html*/`
+            <div class="left user">
+              <h3 class="name">${section}</h3>
+            </div>
+          `
+        }
       default:
         return /*html*/`
           <div class="left">
@@ -346,6 +356,10 @@ export default class HeaderWrapper extends HTMLElement {
             height: 50px;
             max-height: 50px;
             padding: 10px 0;
+          }
+
+          nav.nav > .left {
+            gap: 5px;
           }
 
           ::-webkit-scrollbar {

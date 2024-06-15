@@ -200,6 +200,7 @@ export default class AppUser extends HTMLElement {
             // Update current attribute
             this.setAttribute('current', tab.dataset.name);
 
+            // Update current text
             this.updateCurrentText(tab, headerWrapper);
 
             tab.classList.add('active');
@@ -224,8 +225,14 @@ export default class AppUser extends HTMLElement {
         const currentTab = tabContainer.querySelector(`section.tab li.${outerThis._current}`);
         if (currentTab) {
           activeTab.classList.remove('active');
+
+          // Update status
           activeTab = currentTab;
           currentTab.classList.add('active');
+
+          //update current text
+          outerThis.updateCurrentText(currentTab, headerWrapper);
+
           outerThis.populateContent(outerThis._current, contentContainer);
         }
       }
@@ -1010,10 +1017,10 @@ export default class AppUser extends HTMLElement {
           justify-content: center;
           position: relative;
           margin: 0 3px 0 0;
-          width: 40px;
-          height: 40px;
-          min-width: 40px;
-          min-height: 40px;
+          width: 45px;
+          height: 45px;
+          min-width: 45px;
+          min-height: 45px;
           border-radius: 50%;
           -webkit-border-radius: 50%;
           -moz-border-radius: 50%;
@@ -1038,8 +1045,8 @@ export default class AppUser extends HTMLElement {
           position: absolute;
           bottom: -1px;
           right: -3px;
-          width: 21px;
-          height: 21px;
+          width: 23px;
+          height: 23px;
           z-index: 1;
           display: flex;
           align-items: center;
@@ -1048,8 +1055,8 @@ export default class AppUser extends HTMLElement {
         }
         
         section.tab > div.header > .profile > .icon > svg {
-          width: 14px;
-          height: 14px;
+          width: 17px;
+          height: 17px;
           color: var(--alt-color);
         }
 
@@ -1058,9 +1065,9 @@ export default class AppUser extends HTMLElement {
           display: flex;
           justify-content: center;
           flex-flow: column;
-          gap: 0;
-          width: calc(100% - 75px);
-          max-width: calc(100% - 75px);
+          gap: 3px;
+          width: calc(100% - 80px);
+          max-width: calc(100% - 80px);
         }
 
         section.tab > div.header > .name > h4.name {
@@ -1082,7 +1089,7 @@ export default class AppUser extends HTMLElement {
         section.tab > div.header > .name > a.username {
           color: var(--gray-color);
           font-family: var(--font-mono), monospace;
-          font-size: 0.8rem;
+          font-size: 0.9rem;
           font-weight: 500;
           width: max-content;
           text-decoration: none;
@@ -1091,22 +1098,11 @@ export default class AppUser extends HTMLElement {
           align-items: center;
         }
 
-        section.tab > div.header > .name > a.username svg {
-          color: var(--gray-color);
-          width: 15px;
-          height: 15px;
-          margin: 1px 0 0 0;
-        }
-
         section.tab > div.header > .name > a.username:hover {
           color: transparent;
           background: var(--accent-linear);
           background-clip: text;
           -webkit-background-clip: text;
-        }
-
-        section.tab > div.header > .name > a.username:hover svg {
-          color: var(--accent-color);
         }
 
         section.tab > ul.tab {
