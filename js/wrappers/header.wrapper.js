@@ -138,7 +138,7 @@ export default class HeaderWrapper extends HTMLElement {
     else {
       return /* html */ `
         <div class="links">
-          <a href="${this.getAttribute('auth-url').toLowerCase()}?next=${this.getAttribute('url').toLowerCase()}" class="link signin">
+          <a href="/join/login?next=${this.getAttribute('url')}" class="link signin">
             <span class="text">Sign in</span>
           </a>
           <a href="" class="link search">

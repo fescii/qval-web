@@ -195,10 +195,12 @@ export default class AppTopic extends HTMLElement {
   }
 
   getTop = () => {
+    //get url from the attribute
+    let url = this.getAttribute('url');
+    // trim and convert to lowercase
+    url = url.trim().toLowerCase();
     return /* html */ `
-      <header-wrapper section="Topic" type="topic"
-        user-url="${this.getAttribute('user-url')}">
-      </header-wrapper>
+      <header-wrapper section="Topic" type="topic" url="${url}"></header-wrapper>
     `
   }
 

@@ -16,9 +16,9 @@ export default class StorySection extends HTMLElement {
   connectedCallback() {
     // console.log('We are inside connectedCallback');
 
-    // const contentContainer = this.shadowObj.querySelector('.content-container');
-
-    // this.fetchStoryContent(contentContainer);
+    // Add event listeners
+    this.likePost();
+    this.scrollLikes();
   }
 
   fetchStoryContent = (contentContainer) => {
@@ -42,7 +42,7 @@ export default class StorySection extends HTMLElement {
   // fn to like a post
   likePost = () => {
     // Select like button
-    const likeButton = this.shadowObj.querySelector('.action.like');
+    const likeButton = this.shadowObj.querySelector('span.action.like');
 
     // If like button, add event listener
     if (likeButton) {
