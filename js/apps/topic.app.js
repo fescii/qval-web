@@ -581,6 +581,11 @@ export default class AppTopic extends HTMLElement {
             gap: 0;
 					}
 
+          
+          .text-content > .topic-head {
+            padding: 15px 0 0 0;
+          }
+
           .text-content > .actions {
             border-bottom: none;
           }

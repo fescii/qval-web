@@ -843,8 +843,8 @@ export default class PostWrapper extends HTMLElement {
           }
 
           .content {
-            border-bottom: var(--border-mobile);
-            margin: 0 0 15px;
+            border: none;
+            margin: 0;
           }
 
           .meta {

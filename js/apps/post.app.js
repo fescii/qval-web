@@ -267,7 +267,7 @@ export default class AppPost extends HTMLElement {
 					:host {
             font-size: 16px;
 					}
-
+        
           .container {
             display: flex;
             flex-flow: column;
