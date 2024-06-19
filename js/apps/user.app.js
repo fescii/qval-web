@@ -1417,6 +1417,17 @@ export default class AppUser extends HTMLElement {
           a {
             cursor: default !important;
           }
+          
+          div.coming-soon {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 0 20px 0;
+            width: 100%;
+            min-height: max-content;
+            height: 100%;
+          }
 
 				}
 	    </style>
