@@ -1,16 +1,14 @@
 /* For screens over 1600 pixels */
-@media (min-width: 1400px) {
+@media (min-width: 1401px) {
   html {
-    /* border: 10px solid red; */
-    width: 100%;
-    max-width: 100%;
-    min-width: 100%;
+    width: 1400px;
+    max-width: 1400px;
+    min-width: 1400px;
     margin: 0;
     padding:0 10%;
   }
 
   body {
-    /* border: 1px solid blue; */
     min-height: 100vh;
     padding: 0;
   }
@@ -19,6 +17,7 @@
 /* For screens up to 1400 pixels */
 @media (max-width: 1400px) {
   html {
+    /* border: 1px solid red; */
     width: 100%;
     max-width: 100%;
     margin: 0;
@@ -26,9 +25,10 @@
   }
 
   body {
-    width: 96%;
-    max-width: 96%;
-    padding: 0 2%;
+    /* border: 1px solid red; */
+    width: 90%;
+    max-width: 90%;
+    padding: 0 5%;
   }
 }
 
@@ -42,9 +42,9 @@
   }
 
   body {
-    width: 96%;
-    max-width: 96%;
-    padding: 0 2%;
+    width: 92%;
+    max-width: 92%;
+    padding: 0 3%;
   }
 }
 
@@ -74,7 +74,16 @@
   body {
     width: 100%;
     max-width: 100%;
-    padding: 0 15px 30px 15px;
+    padding: 0 15px;
+  }
+
+  body > main.main > section.landing > .content-one > .text {
+    width: 90%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
   }
 }
 
@@ -83,8 +92,54 @@
     font-size: 16px;
   }
   body {
-    /* border: 1px solid blue; */
-    padding: 0 10px 30px 10px;
+    padding: 0 10px;
+  }
+
+  body > main.main > section.landing > .content-one > .text {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* Toast Message */
+  body > .toast {
+    position: fixed;
+    bottom: 10px;
+    right: 50%;
+    transform: translateX(50%);
+    background: var(--accent-linear);
+    color: var(--white-color);
+    padding: 8px 15px 8px 10px;
+    width: max-content;
+    max-width: 95%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    transition: all 0.3s ease;
+  }
+
+  body > .toast.false {
+    background: var(--error-linear);
+  }
+
+  body > .toast > p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+
+  body > .toast > svg {
+    height: 17px;
+    width: 17px;
   }
 
   footer.footer > .copy {
@@ -99,11 +154,6 @@
     flex-flow: column;
   }
 
-  header.header > ul > li.link.theme > .options span.option,
-  header.header>ul>li.link span.link-item,
-  a {
-    cursor: default !important;
-  }
 }
 
 @media screen and (max-width:500px) {

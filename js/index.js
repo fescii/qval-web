@@ -105,6 +105,7 @@ const initApp = () => {
   customElements.define("activity-container", ActivityContainer);
   customElements.define("form-container", FormContainer);
   customElements.define("highlights-container", HighlightsContainer);
+  
   customElements.define("info-container", InfoContainer);
   customElements.define("logon-container", LogonContainer);
   customElements.define("people-container", PeopleContainer);

@@ -17,25 +17,9 @@
   <meta property="og:title" content="Qval | Explore">
   <meta property="og:image" content="">
   <meta property="og:url" content="https://">
-
-  <script type="module">
-    // initApp from "./js/index"
-    import iniApp from "./js/index.js";
-
-    // Start the app
-    iniApp();
-  </script>
 </head>
 
 <body>
-  <!-- <header-container id="U0AB236B6" create-account="/join" create-content="/create" user-profile="/u/U0AB236B6"
-    user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics" stories-popular="/stories/popular"
-    stories-recent="/stories/recent" stories-curated="/stories/curated" discover="/discover" home="/home"
-    journals="/journals" authors="/authors" github="https://github.com/fescii" supabase="/link" resource-apis="/apis"
-    resource-feature="/feature-request" resource-shop="/shop" resource-guide="/guides" resource-newsletter="/newsletter"
-    resource-rss="/rss">
-  </header-container> -->
-
   <main class="test">
     <section class="content">
       <div class="share">
@@ -139,15 +123,37 @@
           </span>
         </div>
       </div>
-     
-      <discover-people  url="/people/discover"></discover-people>
-
     </section>
     <section class="side">
-      <author-wrapper username="U0A43PBAH6A" picture="/img/img2.png" name="Fredrick Ochieng" followers="7623"
-        following="263" user-follow="false" verified="true" url="/u/u0a43pbah6a"
-        bio="I am a student at the East African University, I am a software developer and a tech enthusiast. I love to write about technology and software development.">
-      </author-wrapper>
+      <div class="head">
+        <div class="title">
+          <h3 class="name">Updates</h3>
+        </div>
+        <div class="tab-control">
+          <ul id="tab" class="tab">
+            <li url="/replies" data-element="all" class="tab-item all active">
+              <span class="text">All</span>
+            </li>
+            <li url="/likes" data-element="unread" class="tab-item unread">
+              <span class="text">Unread</span>
+            </li>
+            <li url="/likes" data-element="read" class="tab-item read">
+              <span class="text">Read</span>
+            </li>
+            <li url="/likes" data-element="requests" class="tab-item requests">
+              <span class="text">Explore</span>
+            </li>
+            <span class="line"></span>
+          </ul>
+        </div>
+      </div>
+      <div class="feeds">
+        <div class="update">
+          <div class="avatar">
+            <img src="${this.getAttribute('picture')}" alt="author name">
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 

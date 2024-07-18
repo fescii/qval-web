@@ -356,7 +356,6 @@ export default class PostSection extends HTMLElement {
         }
 
         .tab-control > .author {
-          /* border-top: var(--border); */
           border-bottom: var(--border);
           padding: 10px 0;
           display: flex;

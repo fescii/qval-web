@@ -16,28 +16,46 @@
     content="https://getopas.pythonanywhere.com/media/articles/2023/01/23/debian-11-ubuntu-2104-wallpaper-split.webp.300x0_q85.jpg">
   <meta property="og:url"
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
-
-  <script type="module">
-    // initApp from "./js/index"
-    import iniApp from "./js/index.js";
-      
-    // Start the app
-    iniApp();
-  </script>
 </head>
 
+<script type="module">
+  // initApp from "./js/index"
+  import HeaderContainer from './js/containers/header.container.js'
+
+  // Start the app
+  customElements.define('header-container', HeaderContainer)
+</script>
+
 <body>
-
-  <app-story hash="P0AB236B6BA17" url="/s/P0AB236B6HA89B" topics="engineering, programming, technology" story-title="Making the Web. Faster." time="2024-03-13T13:00:00+03:00"
-    tab="replies" replies-url="/s/P0AB236B6BA17/replies" likes-url="/s/P0AB236B6BA17/likes"
-    replies="673" liked="false" likes="972" views="6473"
-    author-username="U0A43PBAH6A1" author-url="/u/u0a43pbah6a1" author-you="true" author-img="/img/img2.png" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
-    author-following="263" author-follow="false" author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
-      I love to write about technology and software development."
-    >
-  </app-story>
-
-  <!-- <footer class="footer">
+  <header-container join="/join"></header-container>
+  <main class="main">
+    <section class="landing">
+			<div class="content-one">
+				<div class="text">
+					<h2 class="title">
+            Inspire, inform, and interact.
+            <br/>
+            Share stories, polls, and connect with authors.
+          </h2>
+					<p class="decription">
+						Dive into dynamic discussions with our intuitive poll feature, allowing you to gauge opinions and spark meaningful conversations.
+            Contribute to topic articles, adding your unique perspective to ongoing debates and discussions.
+					</p>
+          <p class="short">
+            Your contributions not only enrich the community but also help foster a culture of shared learning and growth.
+          </p>
+					<div class="actions">
+						<a href="" class="action explore">
+							<span class="text">Get started</span>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M13.8055 5.31595C13.6935 5.25395 13.5715 5.22595 13.4515 5.22595C13.1835 5.22595 12.9265 5.36895 12.7905 5.61995C12.5945 5.98495 12.7295 6.43995 13.0945 6.63595C14.9757 7.65095 17.8054 9.64262 18.56 11.2502L4.5 11.2502C4.086 11.2502 3.75 11.5862 3.75 12.0002C3.75 12.4142 4.086 12.7502 4.5 12.7502L18.5584 12.7502C17.8014 14.3594 14.9743 16.3498 13.0945 17.365C12.7295 17.562 12.5945 18.016 12.7905 18.381C12.9875 18.745 13.4445 18.88 13.8055 18.685C14.4665 18.33 20.2505 15.1209 20.2505 11.998C20.2505 8.87895 14.4665 5.67095 13.8055 5.31595Z" fill="black"/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+  </main>
+  <footer class="footer">
     <section class="newsletter">
       <div class="title">Join Our Newsletter</div>
       <div class="text">
@@ -85,7 +103,7 @@
         <a href="#" id="copyright">2024 aduki,Inc</a>
       </div>
     </div>
-  </footer> -->
+  </footer>
 </body>
 
 </html>
