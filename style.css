@@ -163,8 +163,7 @@ body > main.main > section.landing {
 }
 
 body > main.main > section.landing > .content-one {
-  /* border: 2px solid #fc0000; */
-  padding: 50px 0;
+  padding: 25px 0 50px;
   width: 100%;
   min-width: 100%;
   display: flex;
@@ -199,7 +198,7 @@ body > main.main > section.landing > .content-one > .text h2.title {
 }
 
 body > main.main > section.landing > .content-one > .text p {
-  margin: 0;
+  margin: 5px 0;
   font-family: var(--font-main);
   font-size: 1.25rem;
   text-align: center;
@@ -216,7 +215,7 @@ body > main.main > section.landing > .content-one > .text p.short {
 }
 
 body > main.main > section.landing > .content-one > .text  .actions {
-  margin: 30px 0 0 0;
+  margin: 25px 0 0 0;
   display: flex;
   flex-flow: row;
   align-items: center;
@@ -235,6 +234,7 @@ body > main.main > section.landing > .content-one > .text  .actions > .action {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  font-weight: 600;
   border-radius: 17px;
   cursor: pointer;
   transition: all 0.3s linear;
