@@ -571,12 +571,11 @@ body > main.main > section.share > div.content >  div.info a {
 /*Footer*/
 footer.footer {
   border-top: var(--border);
-  padding-top: 20px;
+  padding: 35px 0;
   display: flex;
   flex-flow: column;
   align-items: center;
   gap: 20px;
-  padding-bottom: 30px;
   font-family: var(--font-text), sans-serif;
 }
 
@@ -591,7 +590,7 @@ footer.footer > section {
 footer.footer > section > .title {
   color: var(--text-color);
   font-family: var(--font-text), sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
@@ -687,7 +686,7 @@ footer.footer > section.newsletter > form > input[type="submit"] {
   position: absolute;
   cursor: pointer;
   font-family: var(--font-main);
-  right: 30px;
+  right: 20px;
   top: 14px;
   font-size: 1rem;
   padding: 5px 15px;
