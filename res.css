@@ -87,6 +87,105 @@
   }
 }
 
+@media screen and (max-width:950px)  {
+
+  body > main.main > section.content {
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width:800px)  {
+
+  body > main.main > section.content > div.content {
+    border-radius: 15px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 5px;
+  }
+
+  body > main.main > section.content > div.content div.info-side {
+    margin: 5px 0;
+    padding: 20px 10px;
+    border-radius: 15px;
+    background: var(--accent-linear);
+    width: 100%;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body > main.main > section.content.connect > div.content div.info-side {
+    margin: 5px 0;
+    padding: 20px 10px;
+    border-radius: 15px;
+    background: var(--second-linear);
+    width: 100%;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body > main.main > section.content > div.content > .svg {
+    max-height: auto;
+    min-width: 100%;
+    width: 100%;
+    display: none;
+  }
+  
+  body > main.main > section.content > div.content > .svg > img {
+    max-height: 300px;
+    width: auto;
+  }
+
+  body > main.main > section.content.discuss > div.content > .svg {
+    order: -1;
+  }
+  
+  body > main.main > section.content.share > div.content div.info-side > h2.title,
+  body > main.main > section.content > div.content div.info-side > h2.title {
+    margin: 0;
+    font-family: var(--font-text);
+    text-align: center;
+    line-height: 1.2;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white-color);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.137);
+  }
+  
+  body > main.main > section.content > div.content div.info-side > p {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-text);
+    color: var(--white-color);
+    text-align: center;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  body > main.main > section.content > div.content div.info-side > .actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 50px;
+    padding: 10px 0 0;
+  }
+
+  body > main.main > section.content.discuss > div.content div.info-side > .actions {
+    display: none;
+  }
+}
+
 @media screen and (max-width:660px) {
   html {
     font-size: 16px;
@@ -95,8 +194,18 @@
     padding: 0 10px;
   }
 
+  body > main.main > section.share {
+    padding: 20px 0 35px;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+  }
+
   body > main.main > section.landing > .content-one {
-    padding: 25px 0;
+    padding: 40px 0 10px;
     width: 100%;
     min-width: 100%;
     display: flex;
@@ -118,11 +227,11 @@
   }
 
   body > main.main > section.landing > .content-one > .text h2.title {
-    margin: 0 0 10px;
+    margin: 0;
     font-family: var(--font-text);
     text-align: center;
     line-height: 1.2;
-    font-size: 1.5rem;
+    font-size: 2.3rem;
     font-weight: 700;
     color: var(--title-color);
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.137);
@@ -148,13 +257,52 @@
   }
 
   body > main.main > section.landing > .content-one > .text  .actions {
-    margin: 10px 0 0 0;
+    margin: 0;
     display: flex;
     flex-flow: row;
     align-items: center;
     justify-content: center;
     gap: 0;
   }
+
+  main.main > section.landing > .container {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+  }
+  
+  main.main > section.landing > .container .columns {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  main.main > section.landing > .container .columns .column {
+    height: 100%;
+    width: max-content;
+    padding: 30px;
+  }
+
+  main.main > section.landing > .container .columns .column img {
+    height: auto;
+    width: 100%;
+    padding: 0;
+    object-fit: contain;
+  }
+
+  main.main > section.landing > .container .columns .column .box > h3 {
+    margin: 10px 0;
+    padding: 0;
+    font-family: var(--font-main);
+    color: var(--title-color);
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  
   
 
   /* Toast Message */
