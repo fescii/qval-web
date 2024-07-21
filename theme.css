@@ -43,6 +43,7 @@ Author URL: https://femar.co.ke
   --scroll-bar-background: #ddddd7;
   --scroll-bar-linear: linear-gradient(#53595f, #627ea0);
 
+  --section-border: 2px solid #0066c5cb;
   --input-border: 1px solid #6b72805e;
   --input-border-focus: 1px solid #18a5669a;
   --input-border-error: 1px solid #ec4a1965;
