@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="res.css">
+  <link rel="stylesheet" href="/ckeditor5/ckeditor5.css">
 
   <meta name="description"
     content="If you’re looking for a Linux distribution, you’ve likely seen recommendations for..">
@@ -21,9 +22,17 @@
 <script type="module">
   // initApp from "./js/index"
   import EditTopic from './js/containers/edit.topic.js'
+  import TopicTitle from './js/containers/title.topic.js'
+  import TopicSlug from './js/containers/slug.topic.js'
+  import TopicSummary from './js/containers/summary.topic.js'
+  import TextEditor from './js/containers/editor.js'
 
   // Start the app
   customElements.define('edit-topic', EditTopic)
+  customElements.define('topic-title', TopicTitle)
+  customElements.define('topic-slug', TopicSlug)
+  customElements.define('topic-summary', TopicSummary)
+  customElements.define('text-editor', TextEditor);
 </script>
 
 <body>

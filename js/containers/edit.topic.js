@@ -20,12 +20,28 @@ export default class EditTopic extends HTMLElement {
     this.shadowObj.innerHTML = this.getTemplate();
   }
 
-
   connectedCallback() {
     this.enableScroll();
 
     // Check if the display is greater than 600px using mql
     const mql = window.matchMedia('(max-width: 660px)');
+
+    // select section > content
+    const contentContainer = this.shadowObj.querySelector('section.content');
+    if(contentContainer) {
+      // fetch content
+      this.fetchContent(contentContainer);
+    }
+  }
+
+  fetchContent = contentContainer => {
+    // insert loader
+    contentContainer.innerHTML = this.getLoader();
+    // select the loader
+    setTimeout(() => {
+      // set the content
+      contentContainer.innerHTML = this.getEditor();
+    }, 1500);
   }
 
   disconnectedCallback() {
@@ -106,8 +122,7 @@ export default class EditTopic extends HTMLElement {
             </div>
           </section>
           <section class="content">
-            <div class="content-container">
-            </div>
+            ${this.getLoader()}
           </section>
         </main>
       `;
@@ -172,7 +187,7 @@ export default class EditTopic extends HTMLElement {
       <div class="head">
         <h3>Sections</h3>
         <div class="actions">
-          <span class="icon">
+          <span class="icon" title="Add section">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
               <path d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"></path>
             </svg>
@@ -341,6 +356,29 @@ export default class EditTopic extends HTMLElement {
     `;
   }
 
+  getTitle = () => {
+    return /* html */`
+      <topic-title name="Health Care"></topic-title>
+    `;
+  }
+
+  getSlug = () => {
+    return /* html */`
+      <topic-slug slug="health-care"></topic-slug>
+    `;
+  }
+
+  getSummary = () => {
+    return /* html */`
+      <topic-summary summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></topic-summary>
+    `;
+  }
+
+  getEditor = () => {
+    return /* html */`
+      <text-editor></text-editor>
+    `;
+  }
 
   getStyles() {
     return /* css */`
@@ -452,6 +490,7 @@ export default class EditTopic extends HTMLElement {
           border-bottom: var(--border);
           position: sticky;
           top: 0;
+          z-index: 10;
         }
 
         div.header > div.title {
@@ -469,7 +508,7 @@ export default class EditTopic extends HTMLElement {
           border-radius: 50%;
           cursor: pointer;
           color: var(--text-color);
-          margin: 0 0 0 -5px;
+          margin: 0 0 0 -3px;
         }
 
         div.header > div.title > span.icon:hover {
@@ -574,6 +613,7 @@ export default class EditTopic extends HTMLElement {
           font-weight: 500;
           background: var(--accent-linear);
           outline: none;
+          cursor: pointer;
           width: max-content;
           padding: 3px 10px 4px 10px;
           height: max-content;
@@ -595,7 +635,9 @@ export default class EditTopic extends HTMLElement {
         }
 
         section.content {
-          width: 63%;
+          width: 65%;
+          padding: 9px 0;
+          position: relative;
           display: flex;
           background-color: var(--background);
           flex-flow: column;
@@ -618,7 +660,7 @@ export default class EditTopic extends HTMLElement {
           background-color: var(--background);
           justify-content: space-between;
           align-items: center;
-          padding: 18px 0 5px;
+          padding: 15px 0 10px;
           border-bottom: var(--border);
         }
 
@@ -751,7 +793,7 @@ export default class EditTopic extends HTMLElement {
           overflow: hidden;
           color: var(--text-color);
           font-family: var(--font-main), sans-serif;
-          font-weight: 500;
+          font-weight: 400;
         }
 
         section.sections > div.container > div.sections > div.section > div.info > span.description {

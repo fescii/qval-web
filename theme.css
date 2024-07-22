@@ -83,6 +83,7 @@ Author URL: https://femar.co.ke
   --label-color: #3f4246;
   --highlight-color: #494d52;
   --read-color: #333333;
+  --editor-color: #333333;
   --title-color: #1f2937;
   --alt-color: #ff932f;
   --error-color: #ec4b19;
@@ -169,7 +170,9 @@ Author URL: https://femar.co.ke
   --stage-no-linear: linear-gradient(0deg, #18a565 0%, #21d029 100%);
 }
 
-[data-theme="dark"] {
+/* add prefers dark */
+@media (prefers-color-scheme: dark) {
+  :root {
   --background: #000000;
 
   --tab-background: #3a3c456d;
@@ -218,7 +221,8 @@ Author URL: https://femar.co.ke
   --text-color: #b9babc;
   --add-color: #afb0b4;
   --highlight-color: #d1d2d4;
-  --read-color: #b5b3b3;
+  --read-color: #d3d3d3;
+  --editor-color: #e2e2e2;
   --title-color: #d8d8d9;
   --alt-color: #eb831f;
   --error-color: #d94317;
@@ -301,6 +305,7 @@ Author URL: https://femar.co.ke
   --stage-done-linear: linear-gradient(#606265, #1f1f20);
   --stage-active-linear: linear-gradient(0deg, #cb6a0a 0%, #dc8c3e 100%);
   --stage-no-linear: linear-gradient(0deg, #148a55 0%, #1dbb25 100%);
+  }
 }
 
 *,
