@@ -12,7 +12,6 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#4285f4" />
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#4285f4" />
 
-
   <meta name="description"
     content="If you’re looking for a Linux distribution, you’ve likely seen recommendations for..">
   <meta property="og:title" content="Debian Vs Ubuntu Linux: Which one should you choose?">
@@ -22,90 +21,37 @@
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
 
   <script type="module">
-    import AppHome from "./js/apps/home.app.js";
-    import AppPost from "./js/apps/post.app.js";
-    import AppSearch from "./js/apps/search.app.js";
-    import AppProfile from "./js/apps/profile.app.js";
-    import AppStory from "./js/apps/story.app.js";
-     import AppTopic from "./js/apps/topic.app.js";
-
-    import HeaderContainer from "./js/containers/header.container.js"
-    import StoryBody from "./js/story.body.js";
-
-    import OpinionWrapper from "./js/opinion.component.js";
-    import StoryWrapper from "./js/story.component.js";
-    import PostWrapper from "./js/wrappers/post.wrapper.js";
-    import PersonWrapper from "./js/author.component.js";
-    import UserWrapper from "./js/person.component.js"
-
-    import StoryLoader from "./js/loaders/story.loader.js";
-    import PostLoader from "./js/loaders/post.loader.js";
-    import PeopleLoader from "./js/loaders/people.loader.js";
-    import TopicsLoader from "./js/loaders/topics.loader.js";
-
-    import StoryFeed from "./js/feeds/stories.feed.js";
-    import OpinionFeed from "./js/feeds/opinions.feed.js";
-    import PeopleFeed from "./js/feeds/people.feed.js"
-
-    import PeopleContainer from "./js/containers/people.container.js";
-    import StoriesContainer from "./js/containers/stories-container.js"
-    import TrendingContainer from "./js/containers/trending.container.js"
-    import TopicsContainer from "./js/containers/topics.container.js";
-    import FormContainer from "./js/containers/form.container.js";
-    import AddContainer from "./js/containers/add.container.js";
-
-    import DiscoverPeople from "./js/containers/people.discover.js"
-
-
-    customElements.define('app-home', AppHome);
-    customElements.define('app-post', AppPost);
-    customElements.define('app-search', AppSearch);
-    customElements.define('app-profile', AppProfile);
-    customElements.define('app-story', AppStory);
-    customElements.define('app-topic', AppTopic);
-
-    customElements.define('header-container', HeaderContainer);
-    customElements.define('story-body', StoryBody);
-
-    customElements.define('opinion-wrapper', OpinionWrapper);
-    customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('post-wrapper', PostWrapper);
-    customElements.define('person-wrapper', PersonWrapper);
-    customElements.define('user-wrapper', UserWrapper);
-
-
-    customElements.define('story-loader', StoryLoader);
-    customElements.define('post-loader', PostLoader);
-
-    customElements.define('people-loader', PeopleLoader);
-    customElements.define('topics-loader', TopicsLoader);
-    customElements.define('stories-feed', StoryFeed);
-    customElements.define('opinions-feed', OpinionFeed);
-    customElements.define('people-feed', PeopleFeed)
-
-    customElements.define('people-container', PeopleContainer);
-    customElements.define('stories-container', StoriesContainer);
-    customElements.define('trending-container', TrendingContainer);
-    customElements.define('topics-container', TopicsContainer);
-    customElements.define('form-container', FormContainer);
-    customElements.define('add-container', AddContainer);
-
-    customElements.define('discover-people', DiscoverPeople);
+    // initApp from "./js/index"
+    import iniApp from "./js/index.js";
+  
+    // Start the app
+    iniApp();
   </script>
 </head>
 
 <body>
-  <header-container id="U0AB236B6" create-account="/join" create-content="/create"
-    user-profile="/u/U0AB236B6" user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics"
-    stories-popular="/stories/popular" stories-recent="/stories/recent" stories-curated="/stories/curated"
-    discover="/discover" home="/home" journals="/journals" authors="/authors" github="https://github.com/fescii"
-    supabase="/link" resource-apis="/apis" resource-feature="/feature-request" resource-shop="/shop"
-    resource-guide="/guides" resource-newsletter="/newsletter" resource-rss="/rss">
-  </header-container>
+  <!-- <app-profile you="false" url="/u/u0a43pbah6a1" tab="stories"
+    stories-url="/u/u0a43pbah6a1/stories" replies-url="/u/u0a43pbah6a1/replies"
+    followers-url="/u/u0a43pbah6a1/followers" following-url="/u/u0a43pbah6a1/following"
+    username="U0A43PBAH6A1" picture="img/img.jpg" verified="true" name="Fredrick Ochieng" followers="7623"
+    following="263" user-follow="false" bio="I am a student at the east african university, I am a software developer and a tech enthusiast.
+      I love to write about technology and software development."
+    >
+  </app-profile> -->
 
-  <app-profile upvotes="9" stories="609" join-date="2022-01-03T13:00:00+03:00"
-    id="U0A43PBA" img="img/img.jpg" name="Fredrick Ochieng"
-    bio="Student At The East African University" followers="23" following="206" u-follow="true">
+  <!-- <app-profile you="true" url="/u/u0a43pbah6a" tab="stories"
+        stories-url="/u/u0a43pbah6a/stories" replies-url="/u/u0a43pbah6a/replies" 
+        followers-url="/u/u0a43pbah6a/followers" following-url="/u/u0a43pbah6a/following"
+        username="U0A43PBAH6A" picture="/img/img.jpg" verified="true"
+        name="Fredrick Ochieng" followers="7623"
+        following="263" user-follow="false" bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+          I love to write about technology and software development.">
+</app-profile> -->
+
+  <app-profile tab="stories" you="false" url="/u/u0bc98h63ab1" stories-url="/u/u0bc98h63ab1/stories" replies-url="/u/u0bc98h63ab1/replies"
+    followers-url="/u/u0bc98h63ab1/followers" following-url="/u/u0bc98h63ab1/following" username="U0BC9BAC53H4" picture="/img/img2.png" 
+    verified="true" name="Yosemite Sam" followers="234" following="36" user-follow="true" 
+    bio="Yosemite Sam here! I'm a cowboy with a passion for adventure and the great outdoors.">
   </app-profile>
 </body>
 

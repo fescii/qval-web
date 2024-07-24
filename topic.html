@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Blog title</title>
+  <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="res.css">
 
@@ -21,89 +22,31 @@
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
 
   <script type="module">
-    import AppHome from "./js/apps/home.app.js";
-    import AppPost from "./js/apps/post.app.js";
-    import AppSearch from "./js/apps/search.app.js";
-    import AppProfile from "./js/apps/profile.app.js";
-    import AppStory from "./js/apps/story.app.js";
-     import AppTopic from "./js/apps/topic.app.js";
-
-    import HeaderContainer from "./js/containers/header.container.js"
-    import StoryBody from "./js/story.body.js";
-
-    import OpinionWrapper from "./js/opinion.component.js";
-    import StoryWrapper from "./js/story.component.js";
-    import PostWrapper from "./js/wrappers/post.wrapper.js";
-    import PersonWrapper from "./js/author.component.js";
-    import UserWrapper from "./js/person.component.js"
-
-    import StoryLoader from "./js/loaders/story.loader.js";
-    import PostLoader from "./js/loaders/post.loader.js";
-    import PeopleLoader from "./js/loaders/people.loader.js";
-    import TopicsLoader from "./js/loaders/topics.loader.js";
-
-    import StoryFeed from "./js/feeds/stories.feed.js";
-    import OpinionFeed from "./js/feeds/opinions.feed.js";
-    import PeopleFeed from "./js/feeds/people.feed.js"
-
-    import PeopleContainer from "./js/containers/people.container.js";
-    import StoriesContainer from "./js/containers/stories-container.js"
-    import TrendingContainer from "./js/containers/trending.container.js"
-    import TopicsContainer from "./js/containers/topics.container.js";
-    import FormContainer from "./js/containers/form.container.js";
-    import AddContainer from "./js/containers/add.container.js";
-
-    import DiscoverPeople from "./js/containers/people.discover.js"
-
-
-    customElements.define('app-home', AppHome);
-    customElements.define('app-post', AppPost);
-    customElements.define('app-search', AppSearch);
-    customElements.define('app-profile', AppProfile);
-    customElements.define('app-story', AppStory);
-    customElements.define('app-topic', AppTopic);
-
-    customElements.define('header-container', HeaderContainer);
-    customElements.define('story-body', StoryBody);
-
-    customElements.define('opinion-wrapper', OpinionWrapper);
-    customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('post-wrapper', PostWrapper);
-    customElements.define('person-wrapper', PersonWrapper);
-    customElements.define('user-wrapper', UserWrapper);
-
-
-    customElements.define('story-loader', StoryLoader);
-    customElements.define('post-loader', PostLoader);
-
-    customElements.define('people-loader', PeopleLoader);
-    customElements.define('topics-loader', TopicsLoader);
-    customElements.define('stories-feed', StoryFeed);
-    customElements.define('opinions-feed', OpinionFeed);
-    customElements.define('people-feed', PeopleFeed)
-
-    customElements.define('people-container', PeopleContainer);
-    customElements.define('stories-container', StoriesContainer);
-    customElements.define('trending-container', TrendingContainer);
-    customElements.define('topics-container', TopicsContainer);
-    customElements.define('form-container', FormContainer);
-    customElements.define('add-container', AddContainer);
-
-    customElements.define('discover-people', DiscoverPeople);
+    // initApp from "./js/index"
+    import iniApp from "./js/index.js";
+  
+    // Start the app
+    iniApp();
   </script>
 </head>
 
 <body>
-  <header-container id="U0AB236B6" create-account="/join" create-content="/create"
+  <!-- <header-container id="U0AB236B6" create-account="/join" create-content="/create"
     user-profile="/u/U0AB236B6" user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics"
     stories-popular="/stories/popular" stories-recent="/stories/recent" stories-curated="/stories/curated"
     discover="/discover" home="/home" journals="/journals" authors="/authors" github="https://github.com/fescii"
     supabase="/link" resource-apis="/apis" resource-feature="/feature-request" resource-shop="/shop"
     resource-guide="/guides" resource-newsletter="/newsletter" resource-rss="/rss">
-  </header-container>
+  </header-container> -->
 
-  <app-topic subscribers="901" stories="609" id="T0A43PBA"
-    name="health care" url="/topics/T0A43PBA"  subscribed="true">
+  <app-topic tab="article" subscribers="901" followers="73369" stories="67259" hash="T0A43PBA69HAB"  subscribed="false" 
+    name="health care" url="/t/T0A43PBA69HAB" stories-url="/t/T0A43PBA69HAB/stories"
+    contributers-url="/t/T0A43PBA69HAB/contributers" followers-url="/t/T0A43PBA69HAB/followers"
+    description="Health care is the maintenance or improvement of health via the prevention, diagnosis, treatment, recovery, or cure of disease, illness, injury, and other physical and mental impairments in people."
+    author-username="U0A43PBAH6A"
+    author-picture="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
+    author-following="263" author-follow="false" author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+      I love to write about technology and software development.">
   </app-topic>
 </body>
 

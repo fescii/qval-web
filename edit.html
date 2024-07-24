@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog title</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="res.css">
+  <link rel="stylesheet" href="/ckeditor5/ckeditor5.css">
+
+  <meta name="description"
+    content="If you’re looking for a Linux distribution, you’ve likely seen recommendations for..">
+  <meta property="og:title" content="Debian Vs Ubuntu Linux: Which one should you choose?">
+  <meta property="og:image"
+    content="https://getopas.pythonanywhere.com/media/articles/2023/01/23/debian-11-ubuntu-2104-wallpaper-split.webp.300x0_q85.jpg">
+  <meta property="og:url"
+    content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
+</head>
+
+<script type="module">
+  // initApp from "./js/index"
+  import EditTopic from './js/containers/edit.topic.js'
+  import TopicTitle from './js/containers/title.topic.js'
+  import TopicSlug from './js/containers/slug.topic.js'
+  import TopicSummary from './js/containers/summary.topic.js'
+  import TextEditor from './js/containers/editor.js'
+
+  // Start the app
+  customElements.define('edit-topic', EditTopic)
+  customElements.define('topic-title', TopicTitle)
+  customElements.define('topic-slug', TopicSlug)
+  customElements.define('topic-summary', TopicSummary)
+  customElements.define('text-editor', TextEditor);
+</script>
+
+<body>
+  <edit-topic name="This is a topic title"></edit-topic>
+</body>
+
+</html>

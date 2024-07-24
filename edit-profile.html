@@ -22,133 +22,22 @@
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
 
   <script type="module">
-    import AppHome from "./js/apps/home.app.js";
-    import AppPost from "./js/apps/post.app.js";
-    import AppSearch from "./js/apps/search.app.js";
-    import AppProfile from "./js/apps/profile.app.js";
-    import AppStory from "./js/apps/story.app.js";
-    import AppTopic from "./js/apps/topic.app.js";
-    import AppUser from "./js/apps/user.app.js";
-
-    import HeaderContainer from "./js/containers/header.container.js"
-    import StoryBody from "./js/story.body.js";
-
-    import OpinionWrapper from "./js/opinion.component.js";
-    import StoryWrapper from "./js/story.component.js";
-    import PostWrapper from "./js/wrappers/post.wrapper.js";
-    import PersonWrapper from "./js/author.component.js";
-    import UserWrapper from "./js/person.component.js"
-
-    import StoryLoader from "./js/loaders/story.loader.js";
-    import PostLoader from "./js/loaders/post.loader.js";
-    import PeopleLoader from "./js/loaders/people.loader.js";
-    import TopicsLoader from "./js/loaders/topics.loader.js";
-
-    import StoryFeed from "./js/feeds/stories.feed.js";
-    import OpinionFeed from "./js/feeds/opinions.feed.js";
-    import PeopleFeed from "./js/feeds/people.feed.js"
-
-    import PeopleContainer from "./js/containers/people.container.js";
-    import StoriesContainer from "./js/containers/stories-container.js"
-    import TrendingContainer from "./js/containers/trending.container.js"
-    import TopicsContainer from "./js/containers/topics.container.js";
-    import FormContainer from "./js/containers/form.container.js";
-    import AddContainer from "./js/containers/add.container.js";
-
-    import DiscoverPeople from "./js/containers/people.discover.js"
-
-    import AllStat from "./js/stats/all.stat.js";
-    import StoriesStat from "./js/stats/stories.stat.js";
-    import OpinionsStat from "./js/stats/opinions.stat.js";
-    import UsersStat from "./js/stats/users.stat.js";
-    import StatStory from "./js/stats/stat.story.js";
-    import StatOpinion from "./js/stats/stat.opinion.js";
-    import ActivityItem from "./js/stats/activity.item.js"
-
-    import FormName  from "./js/forms/name.form.js";
-    import FormBio from "./js/forms/bio.form.js";
-    import FormProfile from "./js/forms/profile.form.js";
-    import FormSocial from "./js/forms/social.form.js";
-    import FormEmail from "./js/forms/email.form.js";
-    import FormPassword from "./js/forms/password.form.js";
-
-    import ActivityContainer from "./js/containers/activity.container.js";
-    import StatContainer from "./js/containers/stat.container.js";
-    import ActivityFeed from "./js/feeds/activity.feed.js";
-    import StatFeed from "./js/feeds/stat.feed.js";
-
-
-    customElements.define('app-home', AppHome);
-    customElements.define('app-post', AppPost);
-    customElements.define('app-search', AppSearch);
-    customElements.define('app-profile', AppProfile);
-    customElements.define('app-story', AppStory);
-    customElements.define('app-topic', AppTopic);
-    customElements.define('app-user', AppUser);
-
-    customElements.define('header-container', HeaderContainer);
-    customElements.define('story-body', StoryBody);
-
-    customElements.define('opinion-wrapper', OpinionWrapper);
-    customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('post-wrapper', PostWrapper);
-    customElements.define('person-wrapper', PersonWrapper);
-    customElements.define('user-wrapper', UserWrapper);
-
-
-    customElements.define('story-loader', StoryLoader);
-    customElements.define('post-loader', PostLoader);
-
-    customElements.define('people-loader', PeopleLoader);
-    customElements.define('topics-loader', TopicsLoader);
-    customElements.define('stories-feed', StoryFeed);
-    customElements.define('opinions-feed', OpinionFeed);
-    customElements.define('people-feed', PeopleFeed)
-
-    customElements.define('people-container', PeopleContainer);
-    customElements.define('stories-container', StoriesContainer);
-    customElements.define('trending-container', TrendingContainer);
-    customElements.define('topics-container', TopicsContainer);
-    customElements.define('form-container', FormContainer);
-    customElements.define('add-container', AddContainer);
-
-    customElements.define('discover-people', DiscoverPeople);
-
-    customElements.define('all-stat', AllStat);
-    customElements.define('stories-stat', StoriesStat);
-    customElements.define('opinions-stat', OpinionsStat);
-    customElements.define('users-stat', UsersStat);
-    customElements.define('stat-story', StatStory);
-    customElements.define('stat-opinion', StatOpinion);
-    customElements.define('activity-item', ActivityItem);
-
-    customElements.define('name-form', FormName);
-    customElements.define('bio-form', FormBio);
-    customElements.define('profile-form', FormProfile);
-    customElements.define('social-form', FormSocial);
-    customElements.define('email-form', FormEmail);
-    customElements.define('password-form', FormPassword);
-
-    customElements.define('activity-container', ActivityContainer);
-    customElements.define('stat-container', StatContainer);
-    customElements.define('activity-feed', ActivityFeed);
-    customElements.define('stat-feed', StatFeed);
+    // initApp from "./js/index"
+    import iniApp from "./js/index.js";
+      
+    // Start the app
+    iniApp();
   </script>
 </head>
 
 <body>
-  <header-container id="U0AB236B6" create-account="/join" create-content="/create"
-    user-profile="/u/U0AB236B6" user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics"
-    stories-popular="/stories/popular" stories-recent="/stories/recent" stories-curated="/stories/curated"
-    discover="/discover" home="/home" journals="/journals" authors="/authors" github="https://github.com/fescii"
-    supabase="/link" resource-apis="/apis" resource-feature="/feature-request" resource-shop="/shop"
-    resource-guide="/guides" resource-newsletter="/newsletter" resource-rss="/rss">
-  </header-container>
-
-  <app-user current="stats" user-hash="U0AB236B6" user-image="img/img.jpg"  user-bio="Software Engineer" user-name="Fredrick Ochieng" date-joined="2024-03-13T13:00:00+03:00"
-    user-link="https://fescii.github.io" user-email="isfescii@gmail.com" user-x="fescii" user-threads="fescii" user-linkedin="null">
+  <app-user home-url="home.html" current="stats" verified="true" user-picture="/img/img2.png" date-joined="2024-03-13T13:00:00+03:00"
+    user-link="https://fescii.github.io" user-email="isfescii@gmail.com" user-x="fescii" user-threads="fescii" user-linkedin="null"
+    user-username="U0A43PBAH6A" user-you="false" user-url="/u/U0A43PBAH6A"
+    user-img="/img/img.jpg" user-verified="true" user-name="Fredrick Ochieng" user-followers="7623"
+    user-following="263" user-follow="false" user-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+    I love to write about technology and software development.">
   </app-user>
-
 </body>
 
 </html>

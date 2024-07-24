@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Blog title</title>
+  <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="res.css">
 
@@ -21,99 +22,43 @@
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
 
   <script type="module">
-    import AppHome from "./js/apps/home.app.js";
-    import AppPost from "./js/apps/post.app.js";
-    import AppSearch from "./js/apps/search.app.js";
-    import AppProfile from "./js/apps/profile.app.js";
-    import AppStory from "./js/apps/story.app.js";
-    import AppTopic from "./js/apps/topic.app.js";
-
-    import HeaderContainer from "./js/containers/header.container.js"
-    import StoryBody from "./js/story.body.js";
-
-    import OpinionWrapper from "./js/opinion.component.js";
-    import StoryWrapper from "./js/story.component.js";
-    import PostWrapper from "./js/wrappers/post.wrapper.js";
-    import PersonWrapper from "./js/author.component.js";
-    import UserWrapper from "./js/person.component.js"
-
-    import StoryLoader from "./js/loaders/story.loader.js";
-    import PostLoader from "./js/loaders/post.loader.js";
-    import PeopleLoader from "./js/loaders/people.loader.js";
-    import TopicsLoader from "./js/loaders/topics.loader.js";
-
-    import StoryFeed from "./js/feeds/stories.feed.js";
-    import OpinionFeed from "./js/feeds/opinions.feed.js";
-    import PeopleFeed from "./js/feeds/people.feed.js"
-
-    import PeopleContainer from "./js/containers/people.container.js";
-    import StoriesContainer from "./js/containers/stories-container.js"
-    import TrendingContainer from "./js/containers/trending.container.js"
-    import TopicsContainer from "./js/containers/topics.container.js";
-    import FormContainer from "./js/containers/form.container.js";
-    import AddContainer from "./js/containers/add.container.js";
-
-    import DiscoverPeople from "./js/containers/people.discover.js"
-
-
-    customElements.define('app-home', AppHome);
-    customElements.define('app-post', AppPost);
-    customElements.define('app-search', AppSearch);
-    customElements.define('app-profile', AppProfile);
-    customElements.define('app-story', AppStory);
-    customElements.define('app-topic', AppTopic);
-
-    customElements.define('header-container', HeaderContainer);
-    customElements.define('story-body', StoryBody);
-
-    customElements.define('opinion-wrapper', OpinionWrapper);
-    customElements.define('story-wrapper', StoryWrapper);
-    customElements.define('post-wrapper', PostWrapper);
-    customElements.define('person-wrapper', PersonWrapper);
-    customElements.define('user-wrapper', UserWrapper);
-
-
-    customElements.define('story-loader', StoryLoader);
-    customElements.define('post-loader', PostLoader);
-
-    customElements.define('people-loader', PeopleLoader);
-    customElements.define('topics-loader', TopicsLoader);
-    customElements.define('stories-feed', StoryFeed);
-    customElements.define('opinions-feed', OpinionFeed);
-    customElements.define('people-feed', PeopleFeed)
-
-    customElements.define('people-container', PeopleContainer);
-    customElements.define('stories-container', StoriesContainer);
-    customElements.define('trending-container', TrendingContainer);
-    customElements.define('topics-container', TopicsContainer);
-    customElements.define('form-container', FormContainer);
-    customElements.define('add-container', AddContainer);
-
-    customElements.define('discover-people', DiscoverPeople);
+    // initApp from "./js/index"
+    import iniApp from "./js/index.js";
+    
+    // Start the app
+    iniApp();
   </script>
 </head>
 
 <body>
 
-  <header-container id="U0AB236B6" create-account="/join" create-content="/create"
-    user-profile="/u/U0AB236B6" user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics"
-    stories-popular="/stories/popular" stories-recent="/stories/recent" stories-curated="/stories/curated"
-    discover="/discover" home="/home" journals="/journals" authors="/authors" github="https://github.com/fescii"
-    supabase="/link" resource-apis="/apis" resource-feature="/feature-request" resource-shop="/shop"
-    resource-guide="/guides" resource-newsletter="/newsletter" resource-rss="/rss">
-  </header-container>
-
-  <app-post url="/p/P0A43PBA"
-    upvotes="9" id="P0A43PBA" upvoted="true" views="609" time="2022-01-03T13:00:00+03:00" author-id="U0A43PBA"
-    author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
-    author-bio="Student At The East African University" author-followers="23" following="true"
-    author-about="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi. Facilis nulla optio quas quod veniam nam voluptas!"
-    content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
-          Facilis nulla optio quas quod veniam nam voluptas!
-          Aut, voluptas ratione! Corporis, enim accusantium possimus minima eum illo atque dolorum provident nisi.
-          Facilis nulla optio quas quod veniam nam voluptas!"
-    >
+  <app-post story="quick" style="display: none;" tab="replies" url="/s/P0A43PBA64AB" hash="P0A43PBA64AB"likes="1479" replies="3872"
+    liked="false" views="4369" time="2022-01-03T13:00:00+03:00"
+    replies-url="/p/P0A43PBA64AB/replies" likes-url="/p/P0A43PBA64AB/likes"
+    author-username="U0A43PHBAH6A" author-you="true" author-img="img/img.jpg" author-verified="true" author-name="Fredrick Ochieng"
+    author-followers="7623" author-following="263" author-follow="false"
+    author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+    I love to write about technology and software development.
+    I am also passionate about open-source software and I am a contributor to various open-source projects.">
+    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+    <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+    'Content here, content here', making it look like readable English.</p>
+    <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+    <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
   </app-post>
+
+
+  <!-- <app-post story="poll" style="display: none;" tab="replies" url="/s/P0A43PBA64AB" hash="P0A43PBA64AB"likes="1479" replies="3872"
+    liked="false" views="4369" time="2022-01-03T13:00:00+03:00"
+    voted="true" selected="three" end-time="2024-06-12T23:56:23+03:00"
+    replies-url="/p/P0A43PBA64AB/replies" likes-url="/p/P0A43PBA64AB/likes"
+    options='[{"name":"one","text":"Java","votes":367},{"name":"two","text":"Python","votes":986},{"name":"three","text":"JavaScript","votes":879},{"name":"four","text":"C#","votes":117}]'
+    author-username="U0A43PBAH6A" author-you="true" author-url="/u/U0A43PBAH6A"
+    author-img="/img/img5.png" author-verified="true" author-name="Fredrick Ochieng" author-followers="7623"
+    author-following="263" author-follow="false" author-bio="I am a student at the East African University, I am a software developer and a tech enthusiast.
+      I love to write about technology and software development.">
+      <p>Which is the best programming language?</p>
+  </app-post> -->
 
   <!-- <footer class="footer">
     <section class="newsletter">
@@ -164,123 +109,6 @@
       </div>
     </div>
   </footer> -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const stickyPositions = document.querySelectorAll('#sticky-position');
-      window.addEventListener('scroll', () => {
-        if (stickyPositions) {
-          stickyPositions.forEach(stickyPosition => {
-            const positionRect = stickyPosition.getBoundingClientRect();
-            if (positionRect.top <= 70) {
-              stickyPosition.classList.add('sticky');
-            }
-            else {
-              stickyPosition.classList.remove('sticky');
-            }
-          })
-        }
-      })
-
-      const replyTextarea = document.querySelector('textarea#reply');
-      if (replyTextarea) {
-        replyTextarea.addEventListener('input', () => {
-          replyTextarea.style.height = 'auto';
-          const height = replyTextarea.scrollHeight;
-          if (height <= 60) {
-            replyTextarea.style.height = `38px`;
-          }
-          else if (height <= 100) {
-            replyTextarea.style.height = `${height + 10}px`;
-          }
-          else {
-            replyTextarea.style.height = `100px`;
-          }
-        });
-      }
-
-
-      // Mobile Switcher
-      const mobileCheckbox = document.querySelector('header.header .nav input.nav-input');
-      const mobileOptions = document.querySelector('header.header ul.left');
-
-      if (mobileCheckbox && mobileOptions) {
-        mobileCheckbox.addEventListener('change', (event) => {
-          if (event.currentTarget.checked) {
-            // console.log(mobileOptions);
-            mobileOptions.style.setProperty('left', 0);
-          }
-          else {
-            mobileOptions.style.setProperty('left', '-115%');
-          }
-        })
-      }
-
-      const mql = window.matchMedia('(max-width: 600px)');
-
-      if (mql.matches) {
-        const expandableHeaderLinks = document.querySelectorAll('header.header > ul > li.link.options-link');
-        let activeLink = document.querySelector('header.header > ul > li.link.options-link.active');
-        if (expandableHeaderLinks) {
-          expandableHeaderLinks.forEach(link => {
-            // const options = link.querySelector('div.drop-down');
-            link.addEventListener('click', event => {
-              // event.preventDefault();
-
-              if (activeLink) {
-                if (activeLink.dataset.name !== link.dataset.name) {
-                  activeLink.classList.remove('active');
-                }
-              }
-
-              let isActive = event.target.classList.contains('active');
-
-              // console.log(isActive);
-              link.classList.toggle('active');
-              activeLink = link;
-            })
-          });
-        }
-
-        const articleInfo = document.querySelector('main.main > section.side');
-        const footerBtn = document.querySelector(' main.main > section.side > span.open-details-mobile');
-
-        if (articleInfo && footerBtn) {
-          const btnTextContent = footerBtn.querySelector('span.text');
-          footerBtn.addEventListener('click', event => {
-            event.preventDefault();
-
-            const isOpened = articleInfo.classList.contains('opened');
-
-            if (isOpened) {
-              btnTextContent.textContent = 'View details'
-              articleInfo.classList.remove('opened');
-            }
-            else {
-              btnTextContent.textContent = 'Hide details'
-              articleInfo.classList.add('opened');
-            }
-          })
-        }
-      }
-
-      // Get Theme switcher
-
-      const themeSwitcher = document.querySelector('header.header > ul > li.link.theme > .options');
-
-      if (themeSwitcher) {
-        themeSwitcher.addEventListener('click', () => {
-          if (themeSwitcher.classList.contains('dark')) {
-            themeSwitcher.classList.remove('dark');
-            themeSwitcher.classList.add('light');
-          }
-          else {
-            themeSwitcher.classList.remove('light');
-            themeSwitcher.classList.add('dark');
-          }
-        })
-      }
-    })
-  </script>
 </body>
 
 </html>

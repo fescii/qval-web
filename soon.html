@@ -16,27 +16,39 @@
     content="https://getopas.pythonanywhere.com/media/articles/2023/01/23/debian-11-ubuntu-2104-wallpaper-split.webp.300x0_q85.jpg">
   <meta property="og:url"
     content="https://getopas.pythonanywhere.com/@femar/debian-vs-ubuntu-linux-which-one-should-you-choose-1-23">
-
-  <script type="module">
-    // initApp from "./js/index"
-    import iniApp from "./js/index.js";
-  
-    // Start the app
-    iniApp();
-  </script>
 </head>
 
-<body>
-  <!-- <header-container id="U0AB236B6" create-account="/join" create-content="/create" user-profile="/u/U0AB236B6"
-    user-img="img/img.jpg" user-analytics="/u/U0AB236B6/analytics" stories-popular="/stories/popular"
-    stories-recent="/stories/recent" stories-curated="/stories/curated" discover="/discover" home="/home"
-    journals="/journals" authors="/authors" github="https://github.com/fescii" supabase="/link" resource-apis="/apis"
-    resource-feature="/feature-request" resource-shop="/shop" resource-guide="/guides" resource-newsletter="/newsletter"
-    resource-rss="/rss">
-  </header-container> -->
+<script type="module">
+  // initApp from "./js/index"
+  import HeaderContainer from './js/containers/header.container.js'
 
-  <app-home url="/home"></app-home>
-  <!--<footer class="footer">
+  // Start the app
+  customElements.define('header-container', HeaderContainer)
+</script>
+
+<body>
+  <header-container join="/join" apk="/app/app.apk"></header-container>
+  <main class="main">
+    <div class="about-top">
+			<p class="head">Soon</p>
+      <h1 class="title">This page is not yet available<br />You can contribute</span>.
+        <br>
+      </h1>
+      <p class="text">
+        We invite passionate developers, designers, writers, and tech enthusiasts to join our growing community of contributors. Your expertise and creativity can help us enhance our platform, improve our documentation, and create a more robust user experience.
+      </p>
+    </div>
+		<section class="explore">
+      <div class="section people">
+				<div class="more">
+					<span class="looking">Want to contribute?</span>
+					<h2 class="title">Whether you’re a seasoned professional or just starting out, your contributions are valuable to us. Together, we can make a significant impact and drive the evolution of our platform.</h2>
+					<a href="mailto:isfescii@gmail.com" class="browse">Send us an email</a>
+				</div>
+			</div> 
+		</section>
+  </main>
+  <footer class="footer">
     <section class="newsletter">
       <div class="title">Join Our Newsletter</div>
       <div class="text">
@@ -84,8 +96,7 @@
         <a href="#" id="copyright">2024 aduki,Inc</a>
       </div>
     </div>
-  </footer> -->
-
+  </footer>
 </body>
 
 </html>
