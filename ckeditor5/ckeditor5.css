@@ -1840,15 +1840,16 @@ a.ck.ck-button-bold {
   border-bottom-right-radius:0
 }
 .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
-  border:solid var(--ck-color-base-border);
-  border-width:1px 1px 0
+  border: none;
+  border-bottom: 1px solid var(--ck-color-base-border);
+  border-width: 1px 1px 0
 }
 .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content.ck-sticky-panel__content_sticky {
-  border-bottom-width:1px
+  border-bottom-width: 1px
 }
 .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content .ck-menu-bar {
   border:0;
-  border-bottom:1px solid var(--ck-color-base-border)
+  border-bottom: 1px solid var(--ck-color-base-border)
 }
 .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content .ck-toolbar {
   border:0
@@ -5567,7 +5568,8 @@ a.ck.ck-button:not(.ck-button_with-text) {
   flex-basis:100%
 }
 .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
-  flex-wrap:nowrap
+  flex-wrap:nowrap;
+  border-bottom: var(--border);
 }
 .ck.ck-toolbar.ck-toolbar_vertical>.ck-toolbar__items {
   flex-direction:column

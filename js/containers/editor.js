@@ -5,7 +5,7 @@ import { ClassicEditor, AccessibilityHelp, Autoformat,
 	TextTransformation, TodoList, Underline, Undo 
 } from '/ckeditor5/ckeditor5.js';
 const editorConfig = {
-	height: '400px',
+	height: '450px',
   width: '100%',
 	toolbar: {
 		items: [
@@ -51,12 +51,6 @@ const editorConfig = {
 				model: 'paragraph',
 				title: 'Paragraph',
 				class: 'ck-heading_paragraph'
-			},
-			{
-				model: 'heading1',
-				view: 'h1',
-				title: 'Heading 1',
-				class: 'ck-heading_heading1'
 			},
 			{
 				model: 'heading2',
@@ -106,73 +100,154 @@ export default class TextEditor extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.initQuill();
+    this.initEditor();
   }
 
   render() {
-    this.shadowRoot.innerHTML = /*html*/`
-			<link rel="stylesheet" href="/ckeditor5/ckeditor5.css">
-			<style>
-				::-webkit-scrollbar {
-					width: 3px;
-				}
-				:host {
-					display: block;
-					width: 100%;
-					min-height: calc(100dvh - 70px);
-					height: max-content;
-					display: flex;
-					flex-direction: column;
-					justify-content: flex-start;
-				}
-				#editor {
-					height: 400px;
-					max-height: 400px;
-					overflow-y: auto;
-				}
-				.ck.ck-editor__main > .ck-editor__editable {
-					color: var(--editor-color);
-				}
-				.ck.ck-editor__main > .ck-editor__editable a {
-					color: var(--anchor-color);
-				}
-				.ck-editor__editable_inline:not(.ck-comment__input *) {
-					height: 400px;
-					overflow-y: auto;
-				}
-				.ck-body-wrapper {
-					display: none
-					opacity: 0
-					visibility: hidden
-				}
-				.ck.ck-reset.ck-editor {
-					display: -webkit-box;
-					display: -moz-box;
-					display: -ms-flexbox;
-					display: -webkit-flex;
-					display: flex;
-					-webkit-flex-direction: column;
-					-moz-flex-direction: column;
-					-ms-flex-direction: column;
-					flex-direction: column;
-				}
-				.ck-focused, .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
-        	border: none;
-        	border: none;
-					outline: none !important;
-					-moz-outline: none !important;
-					-webkit-outline: none !important;
-					-ms-outline: none !important;
-					-webkit-box-shadow: none;
-					-moz-box-shadow: none;
-					box-shadow: none
-				}
-			</style>
-      <div id="editor"></div>
+    this.shadowRoot.innerHTML = this.getTemplate();
+  }
+
+	getTemplate = () => {
+		return /*html*/`
+			${this.getHeader()}
+			<div id="editor"></div>
+			${this.getStyles()}
+		`;
+	}
+
+	getHeader = () => {
+    return /* html */`
+      <div class="top">
+        <p class="desc">
+					Once you are done, click on the save button.
+        </p>
+				<input type="text" class="title" placeholder="Section title - (optional) -" value="${this.getAttribute('title') || ''}">
+      </div>
     `;
   }
 
-  initQuill() {
+  initEditor() {
     this.editor = ClassicEditor.create(this.shadowRoot.getElementById('editor'), editorConfig)
   }
+
+	getStyles = () => {
+		return /*css*/`
+		<link rel="stylesheet" href="/ckeditor5/ckeditor5.css">
+		<style>
+			::-webkit-scrollbar {
+				width: 3px;
+			}
+
+			:host {
+				display: block;
+				width: 100%;
+				min-height: calc(100dvh - 70px);
+				height: max-content;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+			}
+
+			.top {
+				display: flex;
+				flex-flow: column;
+				gap: 5px;
+				padding: 0 0 20px;
+				width: 100%;
+			}
+
+			.top > h4.title {
+				border-bottom: var(--border-mobile);
+				display: flex;
+				align-items: center;
+				color: var(--editor-color);
+				font-size: 1.3rem;
+				font-weight: 500;
+				margin: 0;
+				padding: 0 0 6px 0;
+			}
+
+			.top > .desc {
+				margin: 0;
+				padding: 10px 0;
+				color: var(--editor-color);
+				font-size: 1rem;
+				font-family: var(--font-main), sans-serif;
+			}
+
+			.top > input {
+				border: var(--input-border);
+				background-color: var(--background) !important;
+				font-size: 1.3rem;
+				font-weight: 500;
+				width: 95%;
+				height: max-content;
+				outline: none;
+				padding: 10px 12px;
+				border-radius: 12px;
+				color: var(--editor-color);
+			}
+			
+			.top > input:-webkit-autofill,
+			.top > input:-webkit-autofill:hover, 
+			.top > input:-webkit-autofill:focus {
+				-webkit-box-shadow: 0 0 0px 1000px var(--background) inset;
+				-webkit-text-fill-color: var(--text-color) !important;
+				transition: background-color 5000s ease-in-out 0s;
+				color: var(--text-color) !important;
+			}
+			
+			.top > input:autofill {
+				filter: none;
+				color: var(--text-color) !important;
+			}
+
+			.top > input:focus {
+				border: var(--input-border-focus);
+			}
+
+			#editor {
+				height: 450px;
+				overflow-y: auto;
+				height: calc(100% - 70px);
+			}
+			.ck.ck-editor__main > .ck-editor__editable {
+				color: var(--editor-color);
+			}
+			.ck.ck-editor__main > .ck-editor__editable a {
+				color: var(--anchor-color);
+			}
+			.ck-editor__editable_inline:not(.ck-comment__input *) {
+				height: 420px;
+				overflow-y: auto;
+			}
+			.ck-body-wrapper {
+				display: none
+				opacity: 0
+				visibility: hidden
+			}
+			.ck.ck-reset.ck-editor {
+				display: -webkit-box;
+				display: -moz-box;
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex-direction: column;
+				-moz-flex-direction: column;
+				-ms-flex-direction: column;
+				flex-direction: column;
+			}
+			.ck-focused, .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+				border: none;
+				border: none;
+				outline: none !important;
+				-moz-outline: none !important;
+				-webkit-outline: none !important;
+				-ms-outline: none !important;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none
+			}
+		</style>`;
+	}
 }

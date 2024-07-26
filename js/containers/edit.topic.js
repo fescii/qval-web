@@ -32,6 +32,9 @@ export default class EditTopic extends HTMLElement {
       // fetch content
       this.fetchContent(contentContainer);
     }
+
+    // activate tab
+    this.activateTab();
   }
 
   fetchContent = contentContainer => {
@@ -42,6 +45,52 @@ export default class EditTopic extends HTMLElement {
       // set the content
       contentContainer.innerHTML = this.getEditor();
     }, 1500);
+  }
+
+  activateTab = () => {
+    const outerThis = this;
+    const tab = this.shadowObj.querySelector('ul#tab');
+    const contentContainer = this.shadowObj.querySelector('section.sections > div.container');
+
+    if (tab && contentContainer) {
+      const line = tab.querySelector('span.line');
+      const tabItems = tab.querySelectorAll('li.tab-item');
+      let activeTab = tab.querySelector('li.tab-item.active');
+
+      tabItems.forEach((tab, index) => {
+        tab.addEventListener('click', e => {
+          e.preventDefault()
+          e.stopPropagation()
+
+          // Calculate half tab width - 10px
+          const tabWidth = (tab.offsetWidth / 2) - 20;
+
+          line.style.left = `${tab.offsetLeft + tabWidth}px`;
+
+          if (tab.dataset.element === activeTab.dataset.element) {
+            return;
+          }
+          else {
+            contentContainer.innerHTML = outerThis.getButtonLoader();
+            activeTab.classList.remove('active');
+            tab.classList.add('active');
+            activeTab = tab;
+            const tabElement = tab.dataset.element;
+            setTimeout(() => {
+              if (tabElement === 'info') {
+                contentContainer.innerHTML = outerThis.getBaseSection();
+              }
+              else if (tabElement === 'sections') {
+                contentContainer.innerHTML = outerThis.getSections();
+              }
+              else if (tabElement === 'drafts') {
+                contentContainer.innerHTML = outerThis.getDrafts();
+              }
+            }, 1500);
+          }
+        })
+      })
+    }
   }
 
   disconnectedCallback() {
@@ -94,6 +143,14 @@ export default class EditTopic extends HTMLElement {
     `
   }
 
+  getButtonLoader() {
+    return `
+      <span id="btn-loader">
+				<span class="loader"></span>
+			</span>
+    `
+  }
+
   getTemplate = () => {
     // Show HTML Here
     return `
@@ -117,8 +174,6 @@ export default class EditTopic extends HTMLElement {
             ${this.getSectionsHead()}
             <div class="container">
               ${this.getBaseSection()}
-              ${this.getSections()}
-              ${this.getSectionsActions()}
             </div>
           </section>
           <section class="content">
@@ -185,14 +240,7 @@ export default class EditTopic extends HTMLElement {
   getSectionsHead = () =>  {
     return /* html */`
       <div class="head">
-        <h3>Sections</h3>
-        <div class="actions">
-          <span class="icon" title="Add section">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"></path>
-            </svg>
-          </span>
-        </div>
+        ${this.getTab()}
       </div>
     `;
   }
@@ -345,6 +393,39 @@ export default class EditTopic extends HTMLElement {
           </div>
         </div>
       </div>
+      ${this.getSectionsActions()}
+    `;
+  }
+
+  getDrafts = () => {
+    return /* html */`
+      <div class="drafts">
+        <div class="draft">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
+              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 7H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 16C3 13.643 3 12.4645 3.73223 11.7322C4.46447 11 5.64298 11 8 11H16C18.357 11 19.5355 11 20.2678 11.7322C21 12.4645 21 13.643 21 16C21 18.357 21 19.5355 20.2678 20.2678C19.5355 21 18.357 21 16 21H8C5.64298 21 4.46447 21 3.73223 20.2678C3 19.5355 3 18.357 3 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <div class="info">
+            <h4>Draft 1</h4>
+            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
+          </div>
+        </div>
+        <div class="draft">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
+              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 7H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 16C3 13.643 3 12.4645 3.73223 11.7322C4.46447 11 5.64298 11 8 11H16C18.357 11 19.5355 11 20.2678 11.7322C21 12.4645 21 13.643 21 16C21 18.357 21 19.5355 20.2678 20.2678C19.5355 21 18.357 21 16 21H8C5.64298 21 4.46447 21 3.73223 20.2678C3 19.5355 3 18.357 3 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <div class="info">
+            <h4>Draft 1</h4>
+            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
+          </div>
+      </div>
     `;
   }
 
@@ -353,6 +434,23 @@ export default class EditTopic extends HTMLElement {
       <div class="actions">
         <button class="add-section">Add Section</button>
       </div>
+    `;
+  }
+
+  getTab = () => {
+    return /* html */`
+      <ul id="tab" class="tab">
+        <li data-element="info" class="tab-item all active">
+          <span class="text">Info</span>
+        </li>
+        <li data-element="sections" class="tab-item sections">
+          <span class="text">Sections</span>
+        </li>
+        <li data-element="drafts" class="tab-item replies">
+          <span class="text">Drafts</span>
+        </li>
+        <span class="line"></span>
+      </ul>
     `;
   }
 
@@ -476,6 +574,46 @@ export default class EditTopic extends HTMLElement {
           100% {
             background-position: 100% 0, 100% 100%, 0 100%, 0 0
           }
+        }
+
+        #btn-loader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          min-height: 100px;
+          z-index: 5;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: inherit;
+        }
+
+        #btn-loader > .loader-alt {
+          width: 25px;
+          aspect-ratio: 1;
+          --_g: no-repeat radial-gradient(farthest-side, #18A565 94%, #0000);
+          --_g1: no-repeat radial-gradient(farthest-side, #21D029 94%, #0000);
+          --_g2: no-repeat radial-gradient(farthest-side, #df791a 94%, #0000);
+          --_g3: no-repeat radial-gradient(farthest-side, #f09c4e 94%, #0000);
+          background:    var(--_g) 0 0,    var(--_g1) 100% 0,    var(--_g2) 100% 100%,    var(--_g3) 0 100%;
+          background-size: 30% 30%;
+          animation: l38 .9s infinite ease-in-out;
+          -webkit-animation: l38 .9s infinite ease-in-out;
+        }
+
+        #btn-loader > .loader {
+          width: 25px;
+          aspect-ratio: 1;
+          --_g: no-repeat radial-gradient(farthest-side, #ffffff 94%, #0000);
+          --_g1: no-repeat radial-gradient(farthest-side, #ffffff 94%, #0000);
+          --_g2: no-repeat radial-gradient(farthest-side, #df791a 94%, #0000);
+          --_g3: no-repeat radial-gradient(farthest-side, #f09c4e 94%, #0000);
+          background:    var(--_g) 0 0,    var(--_g1) 100% 0,    var(--_g2) 100% 100%,    var(--_g3) 0 100%;
+          background-size: 30% 30%;
+          animation: l38 .9s infinite ease-in-out;
+          -webkit-animation: l38 .9s infinite ease-in-out;
         }
 
         div.header {
@@ -631,7 +769,7 @@ export default class EditTopic extends HTMLElement {
           flex-flow: row;
           justify-content: space-between;
           gap: 30px;
-          min-height: 100vh;
+          min-height: calc(100vh - 60px);
         }
 
         section.content {
@@ -646,6 +784,7 @@ export default class EditTopic extends HTMLElement {
         section.sections {
           padding: 0;
           width: 30%;
+          gap: 10px;
           height: max-content;
           display: flex;
           background-color: var(--background);
@@ -657,51 +796,100 @@ export default class EditTopic extends HTMLElement {
         section.sections > div.head {
           display: flex;
           flex-flow: row;
-          background-color: var(--background);
+          position: sticky;
+          top: 60px;
+          width: 100%;
+          margin: 0 0 0px;
+          background: var(--background);
           justify-content: space-between;
           align-items: center;
-          padding: 15px 0 10px;
+          padding: 0;
+          z-index: 3;
           border-bottom: var(--border);
         }
 
-        section.sections > div.head > h3 {
-          font-size: 1rem;
-          color: var(--text-color);
-          font-family: var(--font-main), sans-serif;
-          font-weight: 600;
-        }
-
-        section.sections > div.head > div.actions {
+        section.sections > div.head > ul.tab {
+          height: max-content;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          list-style-type: none;
           display: flex;
-          flex-flow: row;
-          gap: 10px;
-          padding: 0 5px;
+          gap: 0;
+          align-items: center;
+          max-width: 100%;
+          overflow-x: scroll;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
 
-        section.sections > div.head > div.actions > span.icon {
+        section.sections > div.head > ul.tab::-webkit-scrollbar {
+          display: none !important;
+          visibility: hidden;
+        }
+
+        section.sections > div.head > ul.tab > li.tab-item {
+          color: var(--gray-color);
+          font-family: var(--font-text), sans-serif;
+          font-weight: 400;
+          padding: 6px 20px 8px 0;
+          margin: 0;
           display: flex;
           align-items: center;
-          justify-content: center;
           cursor: pointer;
-          color: var(--text-color);
+          overflow: visible;
+          font-size: 0.95rem;
         }
 
-        section.sections > div.head > div.actions > span.icon:hover {
-          color: var(--accent-color);
+        section.sections > div.head > ul.tab > li.tab-item > .text {
+          font-weight: 500;
+          font-size: 1rem;
         }
 
-        section.sections > div.head > div.actions > span.icon > svg {
-          width: 18px;
-          height: 18px;
+        section.sections > div.head > ul.tab > li.tab-item:hover > .text {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+        }
+
+        section.sections > div.head > ul.tab > li.active {
+          font-size: 0.95rem;
+        }
+
+        section.sections > div.head > ul.tab > li.active > .text {
+          color: transparent;
+          background: var(--accent-linear);
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: var(--font-read);
+        }
+
+        section.sections > div.head > ul.tab span.line {
+          position: absolute;
+          z-index: 1;
+          background: var(--accent-linear);
+          display: inline-block;
+          bottom: -2.5px;
+          left: 5px;
+          width: 20px;
+          min-height: 5px;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          transition: all 300ms ease-in-out;
         }
 
         section.sections > div.container {
           display: flex;
           flex-flow: column;
+          position: relative;
           gap: 10px;
-          padding: 10px 5px 30px 0;
+          padding: 10px 5px 10px 0;
           overflow-y: auto;
-          height: 100%;
+          height: calc(100vh - 90px);
+          min-height: 120px;
           scrollbar-width: thin;
         }
 
@@ -743,12 +931,14 @@ export default class EditTopic extends HTMLElement {
           font-weight: 400;
         }
 
+        section.sections > div.container > div.drafts,
         section.sections > div.container > div.sections {
           display: flex;
           flex-flow: column;
           gap: 10px;
         }
 
+        section.sections > div.container > div.drafts > div.draft,
         section.sections > div.container > div.sections > div.section {
           display: flex;
           flex-flow: row;
@@ -760,14 +950,17 @@ export default class EditTopic extends HTMLElement {
           border: var(--border);
         }
 
+        section.sections > div.container > div.drafts > div.draft:hover,
         section.sections > div.container > div.sections > div.section:hover {
           background-color: var(--hover-background);
         }
 
+        section.sections > div.container > div.drafts > div.draft.active,
         section.sections > div.container > div.sections > div.section.active {
           border: var(--section-border);
         }
 
+        section.sections > div.container > div.drafts > div.draft > span.icon,
         section.sections > div.container > div.sections > div.section > span.icon {
           display: flex;
           align-items: center;
@@ -775,11 +968,13 @@ export default class EditTopic extends HTMLElement {
           color: var(--text-color);
         }
 
+        section.sections > div.container > div.drafts > div.draft > span.icon > svg,
         section.sections > div.container > div.sections > div.section > span.icon > svg {
           width: 20px;
           height: 20px;
         }
 
+        section.sections > div.container > div.drafts > div.draft > div.info,
         section.sections > div.container > div.sections > div.section > div.info {
           display: flex;
           flex-flow: column;
@@ -787,6 +982,7 @@ export default class EditTopic extends HTMLElement {
           overflow: hidden;
         }
 
+        section.sections > div.container > div.drafts > div.draft > div.info > h4,
         section.sections > div.container > div.sections > div.section > div.info > h4 {
           font-size: 1rem;
           margin: 0;
@@ -796,6 +992,7 @@ export default class EditTopic extends HTMLElement {
           font-weight: 400;
         }
 
+        section.sections > div.container > div.drafts > div.draft > div.info > span.description,
         section.sections > div.container > div.sections > div.section > div.info > span.description {
           font-size: 0.85rem;
           color: var(--gray-color);
@@ -821,8 +1018,9 @@ export default class EditTopic extends HTMLElement {
           font-weight: 500;
           background: var(--accent-linear);
           outline: none;
+          cursor: pointer;
           width: max-content;
-          padding: 3px 10px 4px 10px;
+          padding: 4px 12px 5px 12px;
           height: max-content;
           display: flex;
           align-items: center;
