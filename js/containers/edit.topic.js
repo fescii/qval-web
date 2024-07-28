@@ -474,7 +474,8 @@ export default class EditTopic extends HTMLElement {
 
   getEditor = () => {
     return /* html */`
-      <text-editor></text-editor>
+      <text-editor modify="true" author="true" draft="true">
+      </text-editor>
     `;
   }
 
@@ -746,12 +747,13 @@ export default class EditTopic extends HTMLElement {
 
         div.header > div.action > button.publish {
           font-size: 0.9rem;
-          color: var(--white-color);
+          border: var(--border);
+          color: var(--gray-color);
           font-family: var(--font-text), sans-serif;
           font-weight: 500;
-          background: var(--accent-linear);
           outline: none;
           cursor: pointer;
+          background: transparent;
           width: max-content;
           padding: 3px 10px 4px 10px;
           height: max-content;
@@ -759,7 +761,10 @@ export default class EditTopic extends HTMLElement {
           align-items: center;
           justify-content: center;
           border-radius: 10px;
-          border: none;
+        }
+
+        div.header > div.action > button.publish:hover {
+          color: var(--accent-color);
         }
 
         main.main {

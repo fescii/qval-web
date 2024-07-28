@@ -107,6 +107,10 @@ export default class TextEditor extends HTMLElement {
     this.shadowRoot.innerHTML = this.getTemplate();
   }
 
+	convertToBool = str => {
+		return str === 'true' ? true : false;
+	}
+
 	getTemplate = () => {
 		return /*html*/`
 			${this.getHeader()}
@@ -118,9 +122,7 @@ export default class TextEditor extends HTMLElement {
 	getHeader = () => {
     return /* html */`
       <div class="top">
-        <p class="desc">
-					Once you are done, click on the save button.
-        </p>
+        ${this.checkDraft(this.getAttribute('draft'), this.getAttribute('modify'), this.getAttribute('author'))}
 				<input type="text" class="title" placeholder="Section title - (optional) -" value="${this.getAttribute('title') || ''}">
       </div>
     `;
@@ -129,6 +131,30 @@ export default class TextEditor extends HTMLElement {
   initEditor() {
     this.editor = ClassicEditor.create(this.shadowRoot.getElementById('editor'), editorConfig)
   }
+
+	checkDraft = (draft, modify, author) => {
+		if (this.convertToBool(draft) && modify === 'true') {
+			return /*html*/`
+				<div class="actions">
+					<button class="approve">Approve</button>
+					<button class="save">Save</button>
+					<!--<button class="discard">discard</button>-->
+				</div>
+			`;
+		}
+		else if (this.convertToBool(author)) {
+			return /*html*/`
+				<div class="actions">
+					<button class="save">Save</button>
+				</div>
+			`;
+		}
+		else {
+			return /*html*/`
+				<p class="desc"> You are not authorized to modify this section/draft. Any changes will not be saved. </p>
+			`;
+		}
+	}
 
 	getStyles = () => {
 		return /*css*/`
@@ -167,6 +193,42 @@ export default class TextEditor extends HTMLElement {
 				padding: 0 0 6px 0;
 			}
 
+			.top > div.actions {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				gap: 20px;
+				padding: 0 0 10px;
+				margin: 0 0 10px;
+				border-bottom: var(--border);
+			}
+
+			.top > div.actions > button {
+				font-size: 0.9rem;
+				color: var(--white-color);
+				font-family: var(--font-text), sans-serif;
+				font-weight: 500;
+				background: var(--accent-linear);
+				outline: none;
+				cursor: pointer;
+				width: max-content;
+				padding: 3px 10px 4px 10px;
+				height: max-content;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 10px;
+				border: none;
+			}
+
+			.top > div.actions > button.discard {
+				background: var(--error-linear);
+			}
+
+			.top > div.actions > button.approve {
+				background: var(--action-linear);
+			}
+
 			.top > .desc {
 				margin: 0;
 				padding: 10px 0;
@@ -178,12 +240,12 @@ export default class TextEditor extends HTMLElement {
 			.top > input {
 				border: var(--input-border);
 				background-color: var(--background) !important;
-				font-size: 1.3rem;
+				font-size: 1.2rem;
 				font-weight: 500;
 				width: 95%;
 				height: max-content;
 				outline: none;
-				padding: 10px 12px;
+				padding: 8px 12px;
 				border-radius: 12px;
 				color: var(--editor-color);
 			}
