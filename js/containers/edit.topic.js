@@ -3,12 +3,104 @@ export default class EditTopic extends HTMLElement {
     // We are not even going to touch this.
     super();
 
+    this.sections = [],
+    this.drafts = [],
+
     this.setTitle(this.getAttribute('name'));
 
     // let's create our shadow root
     this.shadowObj = this.attachShadow({ mode: "open" });
 
+    // populate sections
+    this.populateSections();
+    // this.populateDrafts();
+
     this.render();
+  }
+
+  populateSections = () => {
+    this.sections = [
+      {
+        order: 1, id: 1, title: 'This is a section title', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        order: 2, id: 2, title: null, content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        order: 3, id: 3, title: 'This is a section title', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        order: 4, id: 4, title: 'This is a section title', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        order: 5, id: 5, title: 'This is a section title', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        order: 6, id: 6, title: 'This is a section title', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        order: 7, id: 7, title: 'This is a section title', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        order: 8, id: 8, title: 'This is a section title', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+    ]
+  }
+
+  populateDrafts = () => {
+    this.drafts = [
+      {
+        id: 1, title: null, content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        id: 2, title: 'Draft 2', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        id: 3, title: 'Draft 3', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        id: 4, title: 'Draft 4', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        id: 5, title: 'Draft 5', content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        id: 6, title: null, content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph. </p>`
+      },
+      {
+        id: 7, title: null, content: `
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero <a href="#">link</a> ultricies. Donec</p>
+        <p> This is an example of a paragraph.</p>`
+      }
+    ]
   }
 
   setTitle = name => {
@@ -28,13 +120,19 @@ export default class EditTopic extends HTMLElement {
 
     // select section > content
     const contentContainer = this.shadowObj.querySelector('section.content');
-    if(contentContainer) {
+
+    // select section > sections
+    const sectionsContainer = this.shadowObj.querySelector('section.sections');
+    if(contentContainer && sectionsContainer) {
       // fetch content
       this.fetchContent(contentContainer);
-    }
 
-    // activate tab
-    this.activateTab();
+      // activate tab
+      this.activateTab(sectionsContainer, contentContainer);
+
+      // activate base section
+      this.activateBaseSection(sectionsContainer, contentContainer);
+    }
   }
 
   fetchContent = contentContainer => {
@@ -43,16 +141,16 @@ export default class EditTopic extends HTMLElement {
     // select the loader
     setTimeout(() => {
       // set the content
-      contentContainer.innerHTML = this.getEditor();
+      contentContainer.innerHTML = this.getNewSection();
     }, 1500);
   }
 
-  activateTab = () => {
+  activateTab = (content, mainContainer) => {
     const outerThis = this;
     const tab = this.shadowObj.querySelector('ul#tab');
-    const contentContainer = this.shadowObj.querySelector('section.sections > div.container');
 
-    if (tab && contentContainer) {
+    if (tab && content && mainContainer) {
+      const contentContainer = content.querySelector('div.container');
       const line = tab.querySelector('span.line');
       const tabItems = tab.querySelectorAll('li.tab-item');
       let activeTab = tab.querySelector('li.tab-item.active');
@@ -79,9 +177,13 @@ export default class EditTopic extends HTMLElement {
             setTimeout(() => {
               if (tabElement === 'info') {
                 contentContainer.innerHTML = outerThis.getBaseSection();
+                // activate base section
+                outerThis.activateBaseSection(content, mainContainer);
               }
               else if (tabElement === 'sections') {
                 contentContainer.innerHTML = outerThis.getSections();
+                // activate sections
+                outerThis.activateSections(content, mainContainer);
               }
               else if (tabElement === 'drafts') {
                 contentContainer.innerHTML = outerThis.getDrafts();
@@ -91,6 +193,66 @@ export default class EditTopic extends HTMLElement {
         })
       })
     }
+  }
+
+  convertToNumber = str => {
+		let num = parseInt(str);
+		return isNaN(num) ? 0 : num;
+	}
+
+  activateBaseSection = (container, mainContainer) => {
+    const baseSections = container.querySelectorAll('div.base');
+
+    baseSections.forEach(section => {
+      section.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const activeSection = container.querySelector('div.base.active');
+        if (activeSection) {
+          activeSection.classList.remove('active');
+        }
+
+        section.classList.add('active');
+
+        // set content based on the data-element
+        const element = section.dataset.element;
+        if (element === 'title') {
+          mainContainer.innerHTML = this.getTitle();
+        }
+        else if (element === 'summary') {
+          mainContainer.innerHTML = this.getSummary();
+        }
+        else if (element === 'slug') {
+          mainContainer.innerHTML = this.getSlug();
+        }
+      })
+    })
+  }
+
+  activateSections = (container, mainContainer) => {
+    const sections = container.querySelectorAll('div.section');
+
+    sections.forEach(section => {
+      section.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const activeSection = container.querySelector('div.section.active');
+        if (activeSection) {
+          activeSection.classList.remove('active');
+        }
+
+        section.classList.add('active');
+
+        // set content based on the data-id
+        const id = this.convertToNumber(section.dataset.id);
+        const sectionData = this.sections.find(section => section.id === id);
+        if (sectionData) {
+          mainContainer.innerHTML = this.getEditor(sectionData);
+        }
+      })
+    })
   }
 
   disconnectedCallback() {
@@ -135,6 +297,10 @@ export default class EditTopic extends HTMLElement {
     window.onscroll = function () { };
   }
 
+  removeHTMLTags = str => {
+    return str.replace(/<[^>]*>?/gm, '');
+  }
+
   getLoader() {
     return /*html*/`
       <div id="loader-container">
@@ -144,7 +310,7 @@ export default class EditTopic extends HTMLElement {
   }
 
   getButtonLoader() {
-    return `
+    return /*html*/`
       <span id="btn-loader">
 				<span class="loader"></span>
 			</span>
@@ -168,9 +334,9 @@ export default class EditTopic extends HTMLElement {
     }
     else {
       return /* html */`
-        ${this.getTop()}
         <main class="main">
           <section class="sections">
+            ${this.getTop()}
             ${this.getSectionsHead()}
             <div class="container">
               ${this.getBaseSection()}
@@ -204,35 +370,6 @@ export default class EditTopic extends HTMLElement {
             </span>
           </div>
         </div>
-        ${this.getAuthors()}
-        ${this.getAction()}
-      </div>
-    `
-  }
-
-  getAuthors = () => {
-    return /* html */ `
-      <div class="authors">
-        <div class="container">
-          <div class="author one">
-            <img src="/img/img2.png" alt="author" />
-          </div>
-          <div class="author two">
-            <img src="/img/img3.png" alt="author" />
-          </div>
-          <div class="author three">
-            <img src="/img/img5.png" alt="author" />
-          </div>
-        </div>
-        <a class="more" href="#">+2</a>
-      </div>
-    `
-  }
-
-  getAction = () => {
-    return /* html */ `
-      <div class="action">
-        <button class="publish">Publish</button>
       </div>
     `
   }
@@ -247,173 +384,75 @@ export default class EditTopic extends HTMLElement {
 
   getBaseSection = () => {
     return /* html */`
-      <div class="base title">
+      <div class="base title" data-element="title">
         <h4>Edit title</h4>
       </div>
-      <div class="base summary">
+      <div class="base summary" data-element="summary">
         <h4>Edit summary</h4>
       </div>
-      <div class="base slug">
+      <div class="base slug" data-element="slug">
         <h4>Edit slug</h4>
       </div>
     `;
   }
 
   getSections = () => {
+    if (!this.sections || this.sections.length === 0) {
+      return /* html */`
+        <div class="sections">
+          <div class="empty">
+            <h4>No sections available</h4>
+            <span class="description">Once created, sections will appear here</span>
+          </div>
+        </div>
+        ${this.getSectionsActions()}
+      `;
+    }
+
+    const sections = this.sections.map(section => {
+      let description = section.title ? section.title.substring(0, 50) : this.removeHTMLTags(section.content).substring(0, 50);
+      return /* html */`
+        <div class="section" data-id="${section.id}">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
+              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 7H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 16C3 13.643 3 12.4645 3.73223 11.7322C4.46447 11 5.64298 11 8 11H16C18.357 11 19.5355 11 20.2678 11.7322C21 12.4645 21 13.643 21 16C21 18.357 21 19.5355 20.2678 20.2678C19.5355 21 18.357 21 16 21H8C5.64298 21 4.46447 21 3.73223 20.2678C3 19.5355 3 18.357 3 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <div class="info">
+            <h4>Section ${section.order}</h4>
+            <span class="description">${description}</span>
+          </div>
+        </div>
+      `;
+    })
+
+
     return /* html */`
       <div class="sections">
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur bring me some tea</span>
-          </div>
-        </div>
-        <div class="section active">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
-        <div class="section">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 12C3 9.64298 3 8.46447 3.73223 7.73223C4.46447 7 5.64298 7 8 7H16C18.357 7 19.5355 7 20.2678 7.73223C21 8.46447 21 9.64298 21 12C21 14.357 21 15.5355 20.2678 16.2678C19.5355 17 18.357 17 16 17H8C5.64298 17 4.46447 17 3.73223 16.2678C3 15.5355 3 14.357 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Section 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
-          </div>
-        </div>
+        ${sections.join('')}
       </div>
       ${this.getSectionsActions()}
     `;
   }
 
   getDrafts = () => {
-    return /* html */`
-      <div class="drafts">
-        <div class="draft">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
-              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 7H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 16C3 13.643 3 12.4645 3.73223 11.7322C4.46447 11 5.64298 11 8 11H16C18.357 11 19.5355 11 20.2678 11.7322C21 12.4645 21 13.643 21 16C21 18.357 21 19.5355 20.2678 20.2678C19.5355 21 18.357 21 16 21H8C5.64298 21 4.46447 21 3.73223 20.2678C3 19.5355 3 18.357 3 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <div class="info">
-            <h4>Draft 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
+    if (!this.drafts || this.drafts.length === 0) {
+      return /* html */`
+        <div class="drafts">
+          <div class="empty">
+            <h4>No drafts available</h4>
+            <span class="description">Future drafts will appear here</span>
           </div>
         </div>
-        <div class="draft">
+      `;
+    }
+
+    const drafts = this.drafts.map(draft => {
+      let description = draft.title ? draft.title.substring(0, 50) : this.removeHTMLTags(draft.content).substring(0, 50);
+      return /* html */`
+        <div class="draft" data-id="${draft.id}">
           <span class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
               <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -422,9 +461,17 @@ export default class EditTopic extends HTMLElement {
             </svg>
           </span>
           <div class="info">
-            <h4>Draft 1</h4>
-            <span class="description">Lorem ipsum dolor sit amet, consectetur...</span>
+            <h4>Draft ${draft.id}</h4>
+            <span class="description">${description}</span>
           </div>
+        </div>
+      `;
+    })
+
+
+    return /* html */`
+      <div class="drafts">
+        ${drafts.join('')}
       </div>
     `;
   }
@@ -456,26 +503,33 @@ export default class EditTopic extends HTMLElement {
 
   getTitle = () => {
     return /* html */`
-      <topic-title name="Health Care"></topic-title>
+      <topic-title name="${this.getAttribute('title')}" api-url="${this.getAttribute('api-title')}"></topic-title>
     `;
   }
 
   getSlug = () => {
     return /* html */`
-      <topic-slug slug="health-care"></topic-slug>
+      <topic-slug slug="${this.getAttribute('slug')}" api-url="${this.getAttribute('api-slug')}"></topic-slug>
     `;
   }
 
   getSummary = () => {
     return /* html */`
-      <topic-summary summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></topic-summary>
+      <topic-summary summary="${this.getAttribute('summary')}" api-url="${this.getAttribute('api-summary')}"></topic-summary>
     `;
   }
 
-  getEditor = () => {
+  getEditor = data => {
     return /* html */`
-      <text-editor modify="true" author="true" draft="true">
+      <text-editor modify="true" author="true" draft="true" authorized="true" api-url="${this.getAttribute('api-section')}" section="${data ? data.id : ''}" order="${data ? data.order : ''}" section-title="${data === null ? '' : data.title }">
+        ${data ? data.content : ''}
       </text-editor>
+    `;
+  }
+
+  getNewSection = () => {
+    return /* html */`
+      <text-editor new="true" section="true" authorized="true" api-url="${this.getAttribute('api-section')}">
     `;
   }
 
@@ -901,6 +955,29 @@ export default class EditTopic extends HTMLElement {
         section.sections > div.container::-webkit-scrollbar {
           width: 3px;
           background-color: var(--scroll-bar-background);
+        }
+
+        section.sections > div.container .empty {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          color: var(--text-color);
+          gap: 5px;
+          padding: 20px;
+          border-radius: 10px;
+        }
+
+        section.sections > div.container .empty > h4 {
+          font-size: 1rem;
+          margin: 0;
+          font-family: var(--font-main), sans-serif;
+          font-weight: 500;
+        }
+
+        section.sections > div.container .empty > span.description {
+          font-size: 0.85rem;
+          color: var(--gray-color);
+          font-family: var(--font-text), sans-serif;
         }
 
         section.sections > div.container::-webkit-scrollbar-thumb {
