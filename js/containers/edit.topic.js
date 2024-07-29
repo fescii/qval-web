@@ -141,7 +141,7 @@ export default class EditTopic extends HTMLElement {
     // select the loader
     setTimeout(() => {
       // set the content
-      contentContainer.innerHTML = this.getNewSection();
+      contentContainer.innerHTML = this.getLanding();
     }, 1500);
   }
 
@@ -182,8 +182,9 @@ export default class EditTopic extends HTMLElement {
               }
               else if (tabElement === 'sections') {
                 contentContainer.innerHTML = outerThis.getSections();
-                // activate sections
+                // activate sections & add section
                 outerThis.activateSections(content, mainContainer);
+                outerThis.activateAddSection(content, mainContainer);
               }
               else if (tabElement === 'drafts') {
                 contentContainer.innerHTML = outerThis.getDrafts();
@@ -253,6 +254,23 @@ export default class EditTopic extends HTMLElement {
         }
       })
     })
+  }
+
+  activateAddSection = (container, mainContainer) => {
+    const addSection = container.querySelector('button.add-section');
+
+    addSection.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const activeSection = container.querySelector('div.section.active');
+      if (activeSection) {
+        activeSection.classList.remove('active');
+      }
+
+      // set content based on the data-id
+      mainContainer.innerHTML = this.getNewSection();
+    });
   }
 
   disconnectedCallback() {
@@ -382,6 +400,15 @@ export default class EditTopic extends HTMLElement {
     `;
   }
 
+  getLanding = () => {
+    return /* html */`
+      <div class="landing">
+        <h4>Start by selecting a section/info/draft</h4>
+        <span class="description">Once selected, you can edit the content</span>
+      </div>
+    `;
+  }
+
   getBaseSection = () => {
     return /* html */`
       <div class="base title" data-element="title">
@@ -443,7 +470,7 @@ export default class EditTopic extends HTMLElement {
         <div class="drafts">
           <div class="empty">
             <h4>No drafts available</h4>
-            <span class="description">Future drafts will appear here</span>
+            <span class="description">When added they will appear here</span>
           </div>
         </div>
       `;
@@ -635,7 +662,6 @@ export default class EditTopic extends HTMLElement {
           position: absolute;
           top: 0;
           left: 0;
-          bottom: 0;
           right: 0;
           min-height: 100px;
           z-index: 5;
@@ -659,7 +685,7 @@ export default class EditTopic extends HTMLElement {
         }
 
         #btn-loader > .loader {
-          width: 25px;
+          width: 28px;
           aspect-ratio: 1;
           --_g: no-repeat radial-gradient(farthest-side, #ffffff 94%, #0000);
           --_g1: no-repeat radial-gradient(farthest-side, #ffffff 94%, #0000);
@@ -669,6 +695,30 @@ export default class EditTopic extends HTMLElement {
           background-size: 30% 30%;
           animation: l38 .9s infinite ease-in-out;
           -webkit-animation: l38 .9s infinite ease-in-out;
+        }
+
+        div.landing {
+          width: 100%;
+          min-height: 120px;
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        div.landing > h4 {
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--title-color);
+          font-family: var(--font-main), sans-serif;
+          margin: 0;
+        }
+
+        div.landing > span.description {
+          font-size: 0.9rem;
+          color: var(--gray-color);
+          font-family: var(--font-text), sans-serif;
+          margin: 0;
         }
 
         div.header {
