@@ -270,6 +270,50 @@ export default class EditTopic extends HTMLElement {
 
       // set content based on the data-id
       mainContainer.innerHTML = this.getNewSection();
+
+      // add new section and activate it
+      const sections = container.querySelector('div.sections');
+
+      // create a new section
+      // get the last section's order
+      const lastOrder = this.sections[this.sections.length - 1].order;
+      const newSection = /*html*/`
+        <div class="section active new" data-id="${lastOrder + 1}">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
+              <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 7H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 16C3 13.643 3 12.4645 3.73223 11.7322C4.46447 11 5.64298 11 8 11H16C18.357 11 19.5355 11 20.2678 11.7322C21 12.4645 21 13.643 21 16C21 18.357 21 19.5355 20.2678 20.2678C19.5355 21 18.357 21 16 21H8C5.64298 21 4.46447 21 3.73223 20.2678C3 19.5355 3 18.357 3 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <div class="info">
+            <h4>Section ${lastOrder + 1}</h4>
+            <span class="description">Added a new section</span>
+          </div>
+        </div>
+      `
+
+      // insert the new section
+      sections.insertAdjacentHTML('beforeend', newSection);
+
+      // activate the new section: on click
+      const newSectionElement = sections.querySelector('div.section.new');
+      newSectionElement.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const activeSection = container.querySelector('div.section.active');
+        if (activeSection) {
+          activeSection.classList.remove('active');
+        }
+
+        newSectionElement.classList.add('active');
+
+        // set content based on the data-id
+        // get data from sections if index out of bounds return null
+        const data = this.sections.find(section => section.order === lastOrder + 1) || null;
+        mainContainer.innerHTML = this.getEditor(data);
+      })
     });
   }
 
@@ -439,7 +483,7 @@ export default class EditTopic extends HTMLElement {
     const sections = this.sections.map(section => {
       let description = section.title ? section.title.substring(0, 50) : this.removeHTMLTags(section.content).substring(0, 50);
       return /* html */`
-        <div class="section" data-id="${section.id}">
+        <div class="section" data-id="${section.order}">
           <span class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none">
               <path d="M3 3H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
