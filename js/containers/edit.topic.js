@@ -598,9 +598,9 @@ export default class EditTopic extends HTMLElement {
     `;
   }
 
-  getNewSection = () => {
+  getNewSection = order => {
     return /* html */`
-      <text-editor new="true" section="true" authorized="true" api-url="${this.getAttribute('api-section')}">
+      <text-editor order="${order}" new="true" section="true" authorized="true" api-url="${this.getAttribute('api-section')}">
     `;
   }
 
