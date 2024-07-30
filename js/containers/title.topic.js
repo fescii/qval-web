@@ -180,13 +180,17 @@ export default class TopicTitle extends HTMLElement {
   }
 
   getBody = () => {
+    let name = this.getAttribute('name') || '';
+    if (name === null || name === 'null') {
+      name = '';
+    }
     return /* html */`
       ${this.getHeader()}
       <form class="fields name" id="name-form">
         <div class="field name">
           <div class="input-group name">
             <label for="name" class="center">Topic name</label>
-            <input type="text" name="name" value="${this.getAttribute('name')}" id="name" placeholder="Enter topic name" />
+            <input type="text" name="name" value="${name}" id="name" placeholder="Enter topic name" />
             <span class="status">Name is required</span>
           </div>
         </div>

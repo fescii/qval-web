@@ -121,17 +121,23 @@ export default class EditTopic extends HTMLElement {
     // select section > content
     const contentContainer = this.shadowObj.querySelector('section.content');
 
+    // select tabs
+    const tabContainer = this.shadowObj.querySelector('ul#tab');
+
     // select section > sections
     const sectionsContainer = this.shadowObj.querySelector('section.sections');
-    if(contentContainer && sectionsContainer) {
+    if(contentContainer && sectionsContainer && tabContainer) {
       // fetch content
       this.fetchContent(contentContainer);
 
       // activate tab
       this.activateTab(sectionsContainer, contentContainer);
 
-      // activate base section
-      this.activateBaseSection(sectionsContainer, contentContainer);
+      // activate sections
+      this.activateSections(sectionsContainer, contentContainer);
+
+      // activate current tab
+      this.activateCurrentTab(tabContainer);
     }
   }
 
@@ -200,6 +206,21 @@ export default class EditTopic extends HTMLElement {
 		let num = parseInt(str);
 		return isNaN(num) ? 0 : num;
 	}
+
+  activateCurrentTab = tabContainer => {
+    // set the current tab
+    const tab = tabContainer.querySelector('li.tab-item.active');
+
+    if(tab) {
+      // adjust line position
+      const line = tabContainer.querySelector('span.line');
+
+      // Calculate half tab width - 10px
+      const tabWidth = (tab.offsetWidth / 2) - 20;
+
+      line.style.left = `${tab.offsetLeft + tabWidth}px`;
+    }
+  }
 
   activateBaseSection = (container, mainContainer) => {
     const baseSections = container.querySelectorAll('div.base');
@@ -401,7 +422,7 @@ export default class EditTopic extends HTMLElement {
             ${this.getTop()}
             ${this.getSectionsHead()}
             <div class="container">
-              ${this.getBaseSection()}
+              ${this.getSections()}
             </div>
           </section>
           <section class="content">
@@ -456,13 +477,13 @@ export default class EditTopic extends HTMLElement {
   getBaseSection = () => {
     return /* html */`
       <div class="base title" data-element="title">
-        <h4>Edit title</h4>
+        <h4>Title</h4>
       </div>
       <div class="base summary" data-element="summary">
-        <h4>Edit summary</h4>
+        <h4>Summary</h4>
       </div>
       <div class="base slug" data-element="slug">
-        <h4>Edit slug</h4>
+        <h4>Slug</h4>
       </div>
     `;
   }
@@ -558,11 +579,11 @@ export default class EditTopic extends HTMLElement {
   getTab = () => {
     return /* html */`
       <ul id="tab" class="tab">
-        <li data-element="info" class="tab-item all active">
-          <span class="text">Info</span>
-        </li>
-        <li data-element="sections" class="tab-item sections">
+        <li data-element="sections" class="tab-item sections active">
           <span class="text">Sections</span>
+        </li>
+        <li data-element="info" class="tab-item all">
+          <span class="text">Info</span>
         </li>
         <li data-element="drafts" class="tab-item replies">
           <span class="text">Drafts</span>
@@ -574,7 +595,7 @@ export default class EditTopic extends HTMLElement {
 
   getTitle = () => {
     return /* html */`
-      <topic-title name="${this.getAttribute('title')}" api-url="${this.getAttribute('api-title')}"></topic-title>
+      <topic-title name="${this.getAttribute('topic-title')}" api-url="${this.getAttribute('api-title') || ''}"></topic-title>
     `;
   }
 

@@ -190,13 +190,17 @@ export default class TopicSummary extends HTMLElement {
   }
 
   getBody = () => {
+    let summary = this.getAttribute('summary') || '';
+    if(summary.length === undefined || summary === 'null' || summary === null) {
+      summary = '';
+    }
     return /* html */`
       ${this.getHeader()}
       <form class="fields summary" id="summary-form">
         <div class="field your-summary">
           <div class="input-group your-summary">
             <label for="summary" class="center">Topic summary</label>
-            <textarea name="summary" id="summary" cols="30" rows="10" required>${this.getAttribute('summary')}</textarea>
+            <textarea name="summary" id="summary" cols="30" rows="10" required>${summary}</textarea>
             <span class="status">summary is required</span>
           </div>
         </div>

@@ -219,13 +219,17 @@ export default class TopicSlug extends HTMLElement {
   }
 
   getBody = () => {
+    let slug = this.getAttribute('slug') || '';
+    if (slug === 'undefined' || slug === 'null' || slug === null) {
+      slug = '';
+    }
     return /* html */`
       ${this.getHeader()}
       <form class="fields slug" id="slug-form">
         <div class="field slug">
           <div class="input-group slug">
             <label for="slug" class="center">Topic slug</label>
-            <input type="text" name="slug" value="${this.getAttribute('slug')}" id="slug" placeholder="Enter topic slug" />
+            <input type="text" name="slug" value="${slug}" id="slug" placeholder="Enter topic slug" />
             <span class="status">slug is required</span>
           </div>
         </div>
